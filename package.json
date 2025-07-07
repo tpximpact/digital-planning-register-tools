@@ -1,4 +1,37 @@
 {
   "name": "dpr-api",
-  "packageManager": "yarn@4.9.2"
+  "packageManager": "yarn@4.9.2",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": [
+    "product/*",
+    "lib/*"
+  ],
+  "scripts": {
+    "build": "yarn run compile",
+    "compile": "tsc",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "format": "eslint --fix && prettier -c --write ."
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.3.1",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.30.1",
+    "@next/eslint-plugin-next": "^15.3.5",
+    "@types/node": "^24.0.10",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@typescript-eslint/eslint-plugin": "^8.36.0",
+    "@typescript-eslint/parser": "^8.36.0",
+    "eslint": "^9.30.1",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "globals": "^16.3.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.8.3"
+  }
 }
