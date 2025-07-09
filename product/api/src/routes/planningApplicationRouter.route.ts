@@ -9,7 +9,17 @@ import {AddPlanningApplicationSchema, validateIdSchema} from '../schemas';
 
 const router = express.Router();
 
+/**
+ * @openapi
+ * /api/@next/planning_applications:
+ *   get:
+ *     description: Welcome to swagger-jsdoc!
+ *     responses:
+ *       200:
+ *         description: Returns a mysterious string.
+ */
 router.get('/', PlanningApplicationController.getAllPlanningApplications);
+
 router.get(
   '/:id',
   validateRequestRouteParameterMiddleware(validateIdSchema),

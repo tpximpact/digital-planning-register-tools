@@ -1,6 +1,7 @@
 import express, {NextFunction, Request, Response} from 'express';
 import {StatusCodes} from 'http-status-codes';
 
+import docsRouter from './docsRouter.route';
 import planningApplicationRouter from './planningApplicationRouter.route';
 
 const router = express.Router();
@@ -27,5 +28,7 @@ router.get(
 );
 
 router.use('/api/@next/planning_applications', planningApplicationRouter);
+
+router.use('/docs', docsRouter);
 
 export default router;

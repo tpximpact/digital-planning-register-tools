@@ -1,0 +1,26 @@
+{
+  "name": "@product/open-api",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    },
+    "./openApi.yml": "./dist/openApi.yml"
+  },
+  "scripts": {
+    "build": "ts-node scripts/build.ts",
+    "generate": "yarn build && npx tsc && cp openApi.yml dist/openApi.yml"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4",
+    "js-yaml": "^4.1.0",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "@types/node": "^24.0.12",
+    "typescript": "^5.8.3"
+  }
+}
