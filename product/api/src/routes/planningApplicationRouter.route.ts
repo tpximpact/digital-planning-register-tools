@@ -15,13 +15,6 @@ router.get(
   validateRequestRouteParameterMiddleware(validateIdSchema),
   PlanningApplicationController.getById,
 );
-
-router.get(
-  '/:id',
-  validateRequestRouteParameterMiddleware(validateIdSchema),
-  PlanningApplicationController.getById,
-);
-
 router.post(
   '/',
   validateRequestBodyMiddleware(AddPlanningApplicationSchema),
