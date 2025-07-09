@@ -1,3 +1,6 @@
+import {ApplicationNotFoundError} from '../errors';
+import {Applications} from '../models';
+
 class SearchService {
   constructor() {
     this.getAllApplications = this.getAllApplications.bind(this);
@@ -6,15 +9,19 @@ class SearchService {
   async getAllApplications(): Promise<Array<{id: number; name: string}>> {
     const filter = {};
 
-    // throw new ApplicationNotFoundError(
-    //   `Application not found with reference: blerg`,
-    // );
+    return await Applications.find(filter).exec();
+  }
 
-    return Promise.resolve([
-      {id: 1, name: 'Application 1'},
-      {id: 2, name: 'Application 2'},
-      {id: 3, name: 'Application 3'},
-    ]);
+  async getApplicationById(id: number) {
+    const foundApplication = await Applications.findById(id);
+
+    if (!foundApplication) {
+      throw new ApplicationNotFoundError(
+        `Application not found with id: ${id}`,
+      );
+    }
+
+    return foundApplication;
   }
 }
 

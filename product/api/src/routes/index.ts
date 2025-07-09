@@ -2,7 +2,7 @@ import express, {NextFunction, Request, Response} from 'express';
 import {StatusCodes} from 'http-status-codes';
 
 import searchRouter from './search.route';
-// import studentRouter from './student.route';
+import showRouter from './show.route';
 
 const router = express.Router();
 
@@ -28,6 +28,6 @@ router.get(
 );
 
 router.use('/api/@next/search', searchRouter);
-// router.use('/api/students', studentRouter);
+router.use('/api/@next/show', showRouter);
 
 export default router;
