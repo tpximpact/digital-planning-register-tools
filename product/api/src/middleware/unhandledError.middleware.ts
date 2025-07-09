@@ -3,7 +3,7 @@ import {Request, Response, NextFunction} from 'express';
 import {StatusCodes} from 'http-status-codes';
 
 import config from '../config';
-import {ApplicationNotFoundError} from '../errors';
+import {PlanningApplicationNotFoundError} from '../errors';
 
 export const unhandledErrorMiddleware = (
   err: any,
@@ -16,7 +16,7 @@ export const unhandledErrorMiddleware = (
   let message = 'An error has occured, please try again later.';
   let details: any = undefined;
 
-  if (err instanceof ApplicationNotFoundError) {
+  if (err instanceof PlanningApplicationNotFoundError) {
     statusCode = StatusCodes.NOT_FOUND;
     type = 'Resource not found error';
     message = err.message;

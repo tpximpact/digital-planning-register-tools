@@ -1,1 +1,1 @@
-export {ApplicationNotFoundError} from './application-not-found.error';
+export {PlanningApplicationNotFoundError} from './planning-application-not-found.error';

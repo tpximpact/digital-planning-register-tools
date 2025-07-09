@@ -1,2 +1,1 @@
-export {default as SearchController} from './search.controller';
-export {default as ShowController} from './show.controller';
+export {default as PlanningApplicationController} from './PlanningApplicationController.controller';

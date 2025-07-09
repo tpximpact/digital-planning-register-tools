@@ -1,1 +1,1 @@
-export {default as Applications} from './application.model';
+export {default as Applications} from './planningApplication.model';

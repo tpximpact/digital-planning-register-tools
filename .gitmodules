@@ -1,0 +1,3 @@
+[submodule "lib/odp-schema-repo"]
+	path = lib/odp-schema-repo
+	url = git@github.com:theopensystemslab/digital-planning-data-schemas.git

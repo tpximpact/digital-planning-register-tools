@@ -1,1 +1,1 @@
-export {default as SearchService} from './search.service';
+export {default as PlanningApplicationService} from './PlanningApplication.service';
