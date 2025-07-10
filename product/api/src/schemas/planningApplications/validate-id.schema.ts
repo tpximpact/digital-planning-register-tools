@@ -19,7 +19,7 @@ ajvInstance.addFormat('uuid-or-string', {
   },
 });
 
-export interface ValidateIdSchema {
+interface ValidateIdSchema {
   id: string;
 }
 

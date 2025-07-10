@@ -1,12 +1,7 @@
 import Ajv, {JSONSchemaType, ValidateFunction} from 'ajv';
 import addFormats from 'ajv-formats';
 
-export interface PlanningApplication {
-  id: number;
-  name: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
+import {PlanningApplication} from '../../models/planningApplication.model';
 
 const ajvInstance = new Ajv({
   allErrors: true,
