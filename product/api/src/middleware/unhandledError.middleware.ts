@@ -7,9 +7,9 @@ import {PlanningApplicationNotFoundError} from '../errors';
 
 export const unhandledErrorMiddleware = (
   err: any,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ) => {
   let statusCode = StatusCodes.INTERNAL_SERVER_ERROR;
   let type = 'Server error';

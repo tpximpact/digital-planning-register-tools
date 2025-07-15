@@ -3,8 +3,8 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
-    "noEmit": false,
-    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo"
+    "noEmit": false
   },
-  "include": ["src/index.ts"]
+  "exclude": ["src/data"],
+  "include": ["src/**/*", "src/openApi.yml"]
 }

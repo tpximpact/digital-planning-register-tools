@@ -2623,7 +2623,7 @@ __metadata:
     nodemon: "npm:^3.1.10"
     supertest: "npm:^7.1.3"
     swagger-ui-express: "npm:^5.0.1"
-    ts-node: "npm:^10.9.2"
+    tsx: "npm:^4.20.3"
     vitest: "npm:^3.2.4"
   languageName: unknown
   linkType: soft
@@ -2635,7 +2635,7 @@ __metadata:
     "@types/js-yaml": "npm:^4"
     "@types/node": "npm:^24.0.12"
     js-yaml: "npm:^4.1.0"
-    ts-node: "npm:^10.9.2"
+    tsx: "npm:^4.20.3"
     typescript: "npm:^5.8.3"
   languageName: unknown
   linkType: soft
@@ -6418,6 +6418,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^5.2.0"
     eslint-plugin-unused-imports: "npm:^4.1.4"
     globals: "npm:^16.3.0"
+    husky: "npm:^9.1.7"
     knip: "npm:^5.61.3"
     prettier: "npm:^3.6.2"
     syncpack: "npm:^13.0.4"
@@ -6762,7 +6763,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.25.0":
+"esbuild@npm:^0.25.0, esbuild@npm:~0.25.0":
   version: 0.25.6
   resolution: "esbuild@npm:0.25.6"
   dependencies:
@@ -7798,6 +7799,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"get-tsconfig@npm:^4.7.5":
+  version: 4.10.1
+  resolution: "get-tsconfig@npm:4.10.1"
+  dependencies:
+    resolve-pkg-maps: "npm:^1.0.0"
+  checksum: 10/04d63f47fdecaefbd1f73ec02949be4ec4db7d6d9fbc8d4e81f9a4bb1c6f876e48943712f2f9236643d3e4d61d9a7b06da08564d08b034631ebe3f5605bef237
+  languageName: node
+  linkType: hard
+
 "glob-parent@npm:^5.1.2, glob-parent@npm:~5.1.2":
   version: 5.1.2
   resolution: "glob-parent@npm:5.1.2"
@@ -8182,6 +8192,15 @@ __metadata:
   dependencies:
     ms: "npm:^2.0.0"
   checksum: 10/9c7a74a2827f9294c009266c82031030eae811ca87b0da3dceb8d6071b9bde22c9f3daef0469c3c533cc67a97d8a167cd9fc0389350e5f415f61a79b171ded16
+  languageName: node
+  linkType: hard
+
+"husky@npm:^9.1.7":
+  version: 9.1.7
+  resolution: "husky@npm:9.1.7"
+  bin:
+    husky: bin.js
+  checksum: 10/c2412753f15695db369634ba70f50f5c0b7e5cb13b673d0826c411ec1bd9ddef08c1dad89ea154f57da2521d2605bd64308af748749b27d08c5f563bcd89975f
   languageName: node
   linkType: hard
 
@@ -11243,6 +11262,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"resolve-pkg-maps@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "resolve-pkg-maps@npm:1.0.0"
+  checksum: 10/0763150adf303040c304009231314d1e84c6e5ebfa2d82b7d94e96a6e82bacd1dcc0b58ae257315f3c8adb89a91d8d0f12928241cba2df1680fbe6f60bf99b0e
+  languageName: node
+  linkType: hard
+
 "resolve@npm:^1.22.3, resolve@npm:^1.22.4":
   version: 1.22.10
   resolution: "resolve@npm:1.22.10"
@@ -12790,6 +12816,22 @@ __metadata:
   peerDependencies:
     typescript: ">=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta"
   checksum: 10/ea036bec1dd024e309939ffd49fda7a351c0e87a1b8eb049570dd119d447250e2c56e0e6c00554e8205760e7417793fdebff752a46e573fbe07d4f375502a5b2
+  languageName: node
+  linkType: hard
+
+"tsx@npm:^4.20.3":
+  version: 4.20.3
+  resolution: "tsx@npm:4.20.3"
+  dependencies:
+    esbuild: "npm:~0.25.0"
+    fsevents: "npm:~2.3.3"
+    get-tsconfig: "npm:^4.7.5"
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    tsx: dist/cli.mjs
+  checksum: 10/62f40d06a41deebd51690b086f4387d842a826542639b6a26fd6cf09158c6b44956ca9d9088146330ab0622587b2329981cc3584b89025040f3aa100c50ac13c
   languageName: node
   linkType: hard
 

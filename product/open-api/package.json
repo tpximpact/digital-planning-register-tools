@@ -11,13 +11,15 @@
     "./openApi.yml": "./dist/openApi.yml"
   },
   "scripts": {
-    "build": "ts-node scripts/build.ts",
-    "generate": "yarn build && npx tsc && cp openApi.yml dist/openApi.yml"
+    "typecheck": "tsc --noEmit",
+    "config": "tsc --showConfig",
+    "generate": "tsx src/index.ts",
+    "build": "tsx src/index.ts && tsc && cp src/openApi.yml dist/openApi.yml"
   },
   "devDependencies": {
     "@types/js-yaml": "^4",
     "js-yaml": "^4.1.0",
-    "ts-node": "^10.9.2"
+    "tsx": "^4.20.3"
   },
   "dependencies": {
     "@types/node": "^24.0.12",

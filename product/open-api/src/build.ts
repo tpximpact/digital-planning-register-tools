@@ -1,15 +1,5 @@
-#!/usr/bin/env ts-node
-
 import fs from 'fs';
 import path from 'path';
-
-// Allow CLI args for src and out dirs
-const srcDir = path.resolve(
-  process.argv[2] || path.join(__dirname, '..', 'src', 'data'),
-);
-const outPath = path.resolve(
-  process.argv[3] || path.join(__dirname, '..', 'openApi.yml'),
-);
 
 function getSortedFiles(dir: string): string[] {
   return fs
@@ -38,7 +28,7 @@ function readFileContent(filePath: string): string {
   }
 }
 
-function combineFiles() {
+export function combineFiles(srcDir: string, outPath: string): void {
   if (!fs.existsSync(srcDir)) {
     console.error('Source directory does not exist:', srcDir);
     process.exit(1);
@@ -57,11 +47,3 @@ function combineFiles() {
   fs.writeFileSync(outPath, combined, 'utf-8');
   console.log('Combined file written to:', outPath);
 }
-
-// Show help if requested
-if (process.argv.includes('--help')) {
-  console.log('Usage: ts-node build.ts [srcDir] [outFile]');
-  process.exit(0);
-}
-
-combineFiles();

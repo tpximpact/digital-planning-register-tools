@@ -3,9 +3,16 @@ import path from 'path';
 
 import yaml from 'js-yaml';
 
+import {combineFiles} from './build';
+
+const srcDir = path.join(__dirname, 'data');
+const outPath = path.join(__dirname, 'openApi.yml');
+
+combineFiles(srcDir, outPath);
+
 // In CommonJS, __dirname is available by default.
 // In TypeScript with "module": "commonjs", you can use __dirname directly.
-const openApiPath = path.join(__dirname, '..', 'openApi.yml');
+const openApiPath = path.join(__dirname, 'openApi.yml');
 
 // Load and parse the YAML file
 let openApiDoc: any;

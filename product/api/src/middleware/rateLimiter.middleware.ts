@@ -18,6 +18,6 @@ export const rateLimiter = rateLimit({
   max: config.rateLimit, // limit each IP to 100 requests per 1-minute window.
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-  handler: (req: Request, res: Response, next: NextFunction) =>
+  handler: (_req: Request, res: Response, _next: NextFunction) =>
     res.status(StatusCodes.TOO_MANY_REQUESTS).json(response),
 });

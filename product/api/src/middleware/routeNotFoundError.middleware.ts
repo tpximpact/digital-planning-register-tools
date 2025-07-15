@@ -4,7 +4,7 @@ import {StatusCodes} from 'http-status-codes';
 export const routeNotFoundErrorMiddleware = (
   req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ) => {
   res.status(StatusCodes.NOT_FOUND).json({
     message: 'Path not found',
