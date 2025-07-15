@@ -1,6 +1,6 @@
 import {describe, it, expect} from 'vitest';
 
-import router from './docsRouter.route';
+import router from './docsRouter.route.js';
 
 describe('docsRouter', () => {
   it('should have a GET / route', () => {

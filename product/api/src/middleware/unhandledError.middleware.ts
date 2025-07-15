@@ -1,15 +1,16 @@
 import Ajv from 'ajv';
-import {Request, Response, NextFunction} from 'express';
 import {StatusCodes} from 'http-status-codes';
 
-import config from '../config';
-import {PlanningApplicationNotFoundError} from '../errors';
+import config from '../config/index.js';
+import {PlanningApplicationNotFoundError} from '../errors/index.js';
+
+import type {Request, Response, NextFunction} from 'express';
 
 export const unhandledErrorMiddleware = (
   err: any,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ) => {
   let statusCode = StatusCodes.INTERNAL_SERVER_ERROR;
   let type = 'Server error';
@@ -20,11 +21,7 @@ export const unhandledErrorMiddleware = (
     statusCode = StatusCodes.NOT_FOUND;
     type = 'Resource not found error';
     message = err.message;
-  } else if (
-    err instanceof Ajv.ValidationError &&
-    err.errors &&
-    err.errors.length
-  ) {
+  } else if (err instanceof Ajv.ValidationError && err.errors?.length) {
     statusCode = StatusCodes.UNPROCESSABLE_ENTITY;
     type = 'Validation error';
     message = 'Invalid request';

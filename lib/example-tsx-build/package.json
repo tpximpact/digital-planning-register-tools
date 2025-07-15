@@ -1,0 +1,17 @@
+{
+  "name": "@lib/example-tsx-build",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/output.json",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "generate": "tsx src/build.ts",
+    "config": "tsc --showConfig"
+  },
+  "devDependencies": {
+    "@lib/example-ts-build": "workspace:^",
+    "@lib/example-ts-utils": "workspace:^",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}

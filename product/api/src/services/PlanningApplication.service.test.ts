@@ -1,9 +1,9 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
 
-import {PlanningApplicationNotFoundError} from '../errors';
-import {Applications} from '../models';
+import {PlanningApplicationNotFoundError} from '../errors/index.js';
+import {Applications} from '../models/index.js';
 
-import PlanningApplicationService from './PlanningApplication.service';
+import PlanningApplicationService from './PlanningApplication.service.js';
 
 vi.mock('../models', () => {
   const mockApps = [
@@ -27,9 +27,8 @@ describe('PlanningApplicationService', () => {
     vi.clearAllMocks();
   });
 
-  it('getAllPlanningApplications returns all applications', async () => {
-    const result =
-      await PlanningApplicationService.getAllPlanningApplications();
+  it('getAllPlanningApplications returns all applications', () => {
+    const result = PlanningApplicationService.getAllPlanningApplications();
     expect(Applications.find).toHaveBeenCalled();
     expect(result).toEqual([
       {id: 1, name: 'App1'},
@@ -37,15 +36,14 @@ describe('PlanningApplicationService', () => {
     ]);
   });
 
-  it('getPlanningApplicationById returns the correct application', async () => {
-    const result =
-      await PlanningApplicationService.getPlanningApplicationById(1);
+  it('getPlanningApplicationById returns the correct application', () => {
+    const result = PlanningApplicationService.getPlanningApplicationById(1);
     expect(Applications.findById).toHaveBeenCalledWith(1);
     expect(result).toEqual({id: 1, name: 'App1'});
   });
 
-  it('getPlanningApplicationById throws if not found', async () => {
-    await expect(
+  it('getPlanningApplicationById throws if not found', () => {
+    expect(
       PlanningApplicationService.getPlanningApplicationById(999),
     ).rejects.toBeInstanceOf(PlanningApplicationNotFoundError);
   });

@@ -1,6 +1,6 @@
 import {describe, it, expect} from 'vitest';
 
-import router from './planningApplicationRouter.route';
+import router from './planningApplicationRouter.route.js';
 
 describe('planningApplicationRouter', () => {
   it('should have a GET / route', () => {
@@ -17,7 +17,9 @@ describe('planningApplicationRouter', () => {
         layer.route && layer.route.path === '/:id' && layer.route.methods.get,
     );
     expect(route).toBeDefined();
-    if (!route || !route.route) throw new Error('Route not found');
+    if (!route?.route) {
+      throw new Error('Route not found');
+    }
     const stack = route.route.stack;
     // Should have at least two handlers: validation and controller
     expect(stack.length).toBeGreaterThanOrEqual(2);
@@ -31,7 +33,9 @@ describe('planningApplicationRouter', () => {
         layer.route && layer.route.path === '/' && layer.route.methods.post,
     );
     expect(route).toBeDefined();
-    if (!route || !route.route) throw new Error('Route not found');
+    if (!route?.route) {
+      throw new Error('Route not found');
+    }
     const stack = route.route.stack;
     // Should have at least two handlers: validation and controller
     expect(stack.length).toBeGreaterThanOrEqual(2);

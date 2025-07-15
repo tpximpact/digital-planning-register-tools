@@ -1,58 +1,62 @@
 // @ts-check
 
-import path from 'node:path';
-import {fileURLToPath} from 'node:url';
-
-import {fixupPluginRules} from '@eslint/compat';
-import {FlatCompat} from '@eslint/eslintrc';
-import js from '@eslint/js';
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
+import eslint from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
-import reactHooks from 'eslint-plugin-react-hooks';
-import unusedImportsPlugin from 'eslint-plugin-unused-imports';
+import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
-
-const baseConfig = [
-  ...compat.extends(
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-  ),
+const baseConfig = tseslint.config(
+  {
+    languageOptions: {globals: {...globals.node, ...globals.es2022}},
+  },
+  {
+    name: 'eslint recommended',
+    extends: [eslint.configs.recommended],
+  },
+  {
+    name: 'tseslint recommended',
+    extends: [tseslint.configs.recommendedTypeChecked],
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+        allowDefaultProject: ['eslint.config.mjs'],
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint.plugin,
+      '@typescript-eslint/parser': tseslint.parser,
+    },
+    // rules that require type checking
+    rules: {
+      '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
+      '@typescript-eslint/consistent-type-exports': 'error',
+      '@typescript-eslint/prefer-nullish-coalescing': 'warn',
+      '@typescript-eslint/prefer-optional-chain': 'warn',
+      '@typescript-eslint/strict-boolean-expressions': 'error',
+      '@typescript-eslint/switch-exhaustiveness-check': 'error',
+    },
+  },
+  {
+    name: 'Disable type-aware linting on JS files',
+    files: ['**/*.{js,mjs,cjs}'],
+    extends: [tseslint.configs.disableTypeChecked],
+  },
+  {
+    name: 'Configure type-aware rules',
+    files: ['**/*.{ts,mts,cts}'],
+    rules: {
+      '@typescript-eslint/consistent-type-exports': 'error',
+      '@typescript-eslint/consistent-type-imports': 'error',
+    },
+  },
   {
     plugins: {
-      '@typescript-eslint': typescriptEslint,
-      'react-hooks': fixupPluginRules(reactHooks),
-      import: fixupPluginRules(importPlugin),
-      'unused-imports': fixupPluginRules(unusedImportsPlugin),
+      'unused-imports': unusedImports,
     },
-
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-      },
-
-      parser: tsParser,
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-    },
-
     rules: {
-      'no-empty': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/ban-types': 'off',
-      '@typescript-eslint/no-empty-object-type': [
-        'off',
-        {allowEmptyObject: true},
-      ],
-      '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'warn',
@@ -63,6 +67,37 @@ const baseConfig = [
           argsIgnorePattern: '^_',
         },
       ],
+    },
+  },
+  {
+    // config for eslint-plugin-import only
+    ...importPlugin.flatConfigs.recommended,
+    ...importPlugin.flatConfigs.typescript,
+    settings: {
+      'import/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx'],
+      },
+      'import/resolver': {
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
+        typescript: {
+          // use an array of glob patterns
+          project: [
+            'tsconfig.json',
+            'product/*/tsconfig.json',
+            'lib/*/tsconfig.json',
+          ],
+
+          noWarnOnMultipleProjects: true, // suppresses the warning
+        },
+      },
+    },
+    rules: {
+      'import/no-unresolved': 'error',
+      'import/first': 'error',
+      'import/newline-after-import': 'error',
+      'import/no-duplicates': 'error',
       'import/order': [
         'error',
         {
@@ -80,39 +115,82 @@ const baseConfig = [
           alphabetize: {order: 'asc', caseInsensitive: true},
         },
       ],
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'error',
+      // 'import/extensions': [
+      //   'error',
+      //   'ignorePackages',
+      //   {
+      //     js: 'always',
+      //     jsx: 'always',
+      //     ts: 'always',
+      //     tsx: 'always',
+      //     mjs: 'always',
+      //     cjs: 'always',
+      //   },
+      // ],
     },
   },
   {
-    ignores: [
-      '**/next-sitemap.config.js',
-      '**/next.config.js',
-      '**/.next/**',
-      '**/out/**',
-      '**/dist/**',
-      '**/public/sw.js',
-      '**/public/workbox-*.js',
-      '**/archive/**',
-    ],
-  },
-];
+    name: 'Default rules',
+    rules: {
+      // '@typescript-eslint/no-empty-object-type': [
+      //   'off',
+      //   {allowEmptyObject: true},
+      // ],
 
-const nextJsConfig = compat.extends('plugin:@next/next/recommended');
+      // Core
+      'no-var': 'error',
+      'prefer-const': 'error',
+      eqeqeq: ['error', 'always'],
+      curly: 'error',
+      'no-console': 'warn',
+      'no-fallthrough': 'error',
 
-const nextJsApps = ['product/nextjsapp'];
+      // TypeScript
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {argsIgnorePattern: '^_', varsIgnorePattern: '^_'},
+      ],
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {prefer: 'type-imports'},
+      ],
+      '@typescript-eslint/no-inferrable-types': 'warn',
 
-const nextJsConfigs = nextJsApps.map(appPath => ({
-  files: [`${appPath}/**/*.{js,jsx,ts,tsx}`],
-  ...nextJsConfig[0],
-  settings: {
-    next: {
-      rootDir: appPath,
+      '@typescript-eslint/no-non-null-assertion': 'warn',
+      '@typescript-eslint/no-empty-function': 'warn',
+      '@typescript-eslint/no-empty-interface': 'warn',
     },
   },
-  rules: {
-    '@next/next/no-html-link-for-pages': ['error', `${appPath}/pages`],
+  {
+    name: 'temporary disable for my sanity',
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      // '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+    },
   },
+);
+
+const browserApps = ['lib/example-ts-app', 'product/api'];
+
+const browserConfigs = browserApps.map(appPath => ({
+  files: [`${appPath}/**/*.{js,mjs,cjs,ts,mts,cts}`],
+  // add global variables for browser environment
+  name: 'browser global variables',
+  languageOptions: {globals: globals.browser},
 }));
 
-export default [...baseConfig, ...nextJsConfigs];
+export default [
+  // Ignore all dist folders everywhere in the monorepo
+  {
+    name: 'Ignore all dist folders everywhere in the monorepo',
+    ignores: ['**/dist/**', '**/node_modules/**'],
+  },
+  ...baseConfig,
+  ...browserConfigs,
+];

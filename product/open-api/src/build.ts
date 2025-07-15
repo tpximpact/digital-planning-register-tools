@@ -4,11 +4,9 @@ import fs from 'fs';
 import path from 'path';
 
 // Allow CLI args for src and out dirs
-const srcDir = path.resolve(
-  process.argv[2] || path.join(__dirname, '..', 'src', 'data'),
-);
+const srcDir = path.resolve(process.argv[2] ?? path.join(__dirname, 'data'));
 const outPath = path.resolve(
-  process.argv[3] || path.join(__dirname, '..', 'openApi.yml'),
+  process.argv[3] ?? path.join(__dirname, '..', 'dist', 'openApi.yml'),
 );
 
 function getSortedFiles(dir: string): string[] {
@@ -18,7 +16,9 @@ function getSortedFiles(dir: string): string[] {
     .sort((a, b) => {
       const numA = parseInt(a, 10);
       const numB = parseInt(b, 10);
-      if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+      if (!isNaN(numA) && !isNaN(numB)) {
+        return numA - numB;
+      }
       return a.localeCompare(b);
     });
 }

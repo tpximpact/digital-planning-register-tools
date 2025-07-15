@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+
+    "paths": {
+      "@lib/example-ts-build": ["../example-ts-build"],
+      "@lib/example-ts-utils": ["../example-ts-utils"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "references": [
+    {"path": "../example-ts-build"},
+    {"path": "../example-ts-utils"}
+  ]
+}

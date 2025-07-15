@@ -1,19 +1,42 @@
 # dpr-api
 
-## Setup
+## Monorepo
 
 ```
-<!-- clone the repo -->
-
-git submodule update --init --recursive
-
 yarn install
 ```
 
-## Update all submodules to their latest remote commits with:
+## Commands
 
-```
-git submodule update --remote --merge
+```sh
+# Check types in all projects
+yarn run typecheck
+
+# Lint
+yarn run lint
+
+# Lint and fix all projects
+yarn run lint-fix
+
+# Lint just code
+yarn run lint:code
+
+# Lint just formatting
+yarn run lint:format
+
+
+
+# Link and fix and prettify all projects
+yarn run format
+
+# Ensure that multiple packages requiring the same dependency define the same version, so that every package requires eg. react@16.4.2, instead of a combination of react@16.4.2, react@0.15.9, and react@16.0.0.
+yarn run sync-packages
+
+# Find unused dependencies, exports and files in projects
+yarn run knip
+
+# Find unused dependencies, exports and files in projects and Fix
+yarn run knip:fix
 ```
 
 ## Product
@@ -75,3 +98,11 @@ Add to packages using
 ```json
     "@odp/schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",
 ```
+
+## Typescript and package setup
+
+Base config for eslint/typescript is:
+
+- typescript
+- not transpiled into js at all
+- packages can be imported, as ts into one another

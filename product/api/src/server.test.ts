@@ -10,7 +10,7 @@ vi.mock('path', () => ({
 }));
 vi.mock('./src', () => ({
   app: {
-    listen: vi.fn((port, cb) => cb && cb()),
+    listen: vi.fn((_port, cb) => cb?.()),
   },
 }));
 vi.mock('./src/config', () => ({
@@ -24,7 +24,7 @@ describe('server', () => {
 
   it('loads environment variables with dotenv', async () => {
     const dotenv = (await import('dotenv')).default;
-    await import('./server');
+    await import('./server.js');
     expect(dotenv.config).toHaveBeenCalledWith({path: '/mocked/path/.env'});
   });
 });

@@ -1,1 +1,1 @@
-export {default as PlanningApplicationService} from './PlanningApplication.service';
+export {default as PlanningApplicationService} from './PlanningApplication.service.js';

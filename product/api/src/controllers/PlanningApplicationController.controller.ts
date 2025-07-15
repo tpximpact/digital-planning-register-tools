@@ -1,7 +1,8 @@
-import {Request, Response, NextFunction} from 'express';
 import {StatusCodes} from 'http-status-codes';
 
-import {PlanningApplicationService} from '../services';
+import {PlanningApplicationService} from '../services/index.js';
+
+import type {Request, Response, NextFunction} from 'express';
 
 class PlanningApplicationController {
   constructor() {
@@ -11,35 +12,30 @@ class PlanningApplicationController {
     this.add = this.add.bind(this);
   }
 
-  async getAllPlanningApplications(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) {
+  getAllPlanningApplications(_req: Request, res: Response, next: NextFunction) {
     try {
       const applications =
-        await PlanningApplicationService.getAllPlanningApplications();
+        PlanningApplicationService.getAllPlanningApplications();
       res.status(StatusCodes.OK).json(applications);
     } catch (err) {
       return next(err);
     }
   }
 
-  async getById(req: Request, res: Response, next: NextFunction) {
+  getById(req: Request, res: Response, next: NextFunction) {
     try {
       const {id} = req.params;
 
-      const application =
-        await PlanningApplicationService.getPlanningApplicationById(
-          parseInt(id),
-        );
+      const application = PlanningApplicationService.getPlanningApplicationById(
+        parseInt(id),
+      );
       res.status(StatusCodes.OK).json(application);
     } catch (err) {
       return next(err);
     }
   }
 
-  async add(req: Request, res: Response, next: NextFunction) {
+  add(req: Request, res: Response, next: NextFunction) {
     try {
       const {name} = req.body;
 

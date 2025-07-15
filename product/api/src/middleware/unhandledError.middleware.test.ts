@@ -2,9 +2,9 @@ import Ajv from 'ajv';
 import {StatusCodes} from 'http-status-codes';
 import {describe, it, expect, vi, beforeEach} from 'vitest';
 
-import {PlanningApplicationNotFoundError} from '../errors';
+import {PlanningApplicationNotFoundError} from '../errors/index.js';
 
-import {unhandledErrorMiddleware} from './unhandledError.middleware';
+import {unhandledErrorMiddleware} from './unhandledError.middleware.js';
 
 // Mock config to control environment
 vi.mock('../config', () => ({
@@ -95,7 +95,7 @@ describe('unhandledErrorMiddleware', () => {
     }));
     // Need to re-import the middleware after mocking config
     const {unhandledErrorMiddleware: prodMiddleware} = await import(
-      './unhandledError.middleware'
+      './unhandledError.middleware.js'
     );
     const err = new Error('Prod error');
     prodMiddleware(err, req, res, next);

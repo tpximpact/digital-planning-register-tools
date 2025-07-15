@@ -1,7 +1,8 @@
-import {Request, Response, NextFunction} from 'express';
 import {describe, it, expect, vi, beforeEach} from 'vitest';
 
 import router from './';
+
+import type {Request, Response, NextFunction} from 'express';
 
 describe('routes/index', () => {
   let req: Partial<Request>;
@@ -26,7 +27,7 @@ describe('routes/index', () => {
     );
     expect(route).toBeDefined();
 
-    if (!route || !route.route) {
+    if (!route?.route) {
       throw new Error('Route not found');
     }
 
@@ -47,7 +48,7 @@ describe('routes/index', () => {
     );
     expect(route).toBeDefined();
 
-    if (!route || !route.route) {
+    if (!route?.route) {
       throw new Error('Route not found');
     }
 

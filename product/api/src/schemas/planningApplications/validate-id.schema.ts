@@ -1,5 +1,7 @@
-import Ajv, {JSONSchemaType, ValidateFunction} from 'ajv';
+import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
+
+import type {JSONSchemaType, ValidateFunction} from 'ajv';
 
 const ajvInstance = new Ajv({
   allErrors: true,

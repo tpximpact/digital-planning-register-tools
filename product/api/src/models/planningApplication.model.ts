@@ -19,10 +19,10 @@ class PlanningApplications {
     this.findById = this.findById.bind(this);
   }
 
-  find(filter: Partial<PlanningApplication>) {
+  find(_filter: Partial<PlanningApplication>) {
     // Simulate an async API
     return {
-      exec: async (): Promise<PlanningApplication[]> => {
+      exec: (): PlanningApplication[] => {
         // For now, ignore filter and return all
         return applications;
       },

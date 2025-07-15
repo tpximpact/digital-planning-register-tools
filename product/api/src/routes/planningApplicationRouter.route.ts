@@ -1,11 +1,14 @@
 import express from 'express';
 
-import {PlanningApplicationController} from '../controllers';
+import {PlanningApplicationController} from '../controllers/index.js';
 import {
   validateRequestBodyMiddleware,
   validateRequestRouteParameterMiddleware,
-} from '../middleware';
-import {AddPlanningApplicationSchema, validateIdSchema} from '../schemas';
+} from '../middleware/index.js';
+import {
+  AddPlanningApplicationSchema,
+  validateIdSchema,
+} from '../schemas/index.js';
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 import {describe, it, expect} from 'vitest';
 
-import PlanningApplications from './planningApplication.model';
+import PlanningApplications from './planningApplication.model.js';
 
 describe('PlanningApplications model', () => {
   it('getAll should return all applications', () => {

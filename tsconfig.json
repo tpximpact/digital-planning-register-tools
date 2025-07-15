@@ -1,30 +1,44 @@
 {
+  /* https://www.totaltypescript.com/tsconfig-cheat-sheet */
   "compilerOptions": {
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "composite": true,
-    "forceConsistentCasingInFileNames": true,
-    "lib": ["ES2023"],
-    "module": "commonjs",
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "pretty": true,
-    "sourceMap": true,
-    "stripInternal": true,
-    "strict": true,
-    "target": "ES2022",
-    "rootDir": ".",
-    "outDir": "dist",
-    "resolveJsonModule": true,
+    /* Base Options: */
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "esModuleInterop": true
+    "target": "ES2024",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+
+    /* Strictness */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* If NOT transpiling with TypeScript: */
+    "module": "preserve",
+    "noEmit": true,
+
+    /* If your code doesn't run in the DOM: */
+    "lib": ["es2022"],
+
+    /* It has no local dependencies*/
+    "composite": true
   },
-  "include": [
-    "eslint.config.mjs",
-    "prettier.config.mjs",
-    "product/**/*.ts",
-    "lib/**/*.ts"
+  "include": ["product/**/*.ts", "lib/**/*.ts", "product/api/src/server.ts"],
+  "exclude": ["node_modules", "**/dist", "**/dist/**/*"],
+  "references": [
+    {"path": "./lib/example-ts-app"},
+    {"path": "./lib/example-ts-build"}
+    // {"path": "./lib/example-ts-utils"} /* excluded because nothing is built in this package */
+    // {"path": "./lib/example-tsx-build"} /* excluded because nothing is built in this package its a script that must be run manually */
+    // {"path": "./product/api"}
+    // {"path": "./product/open-api"}
   ],
-  "exclude": ["node_modules", "dist"]
+  "files": []
 }

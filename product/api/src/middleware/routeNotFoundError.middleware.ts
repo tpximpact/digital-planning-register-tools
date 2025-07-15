@@ -1,10 +1,11 @@
-import {NextFunction, Request, Response} from 'express';
 import {StatusCodes} from 'http-status-codes';
+
+import type {NextFunction, Request, Response} from 'express';
 
 export const routeNotFoundErrorMiddleware = (
   req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ) => {
   res.status(StatusCodes.NOT_FOUND).json({
     message: 'Path not found',

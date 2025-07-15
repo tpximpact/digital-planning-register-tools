@@ -1,8 +1,9 @@
-import {ApiResponse} from '@odp/schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse';
-import {Request, Response, NextFunction} from 'express';
 import {StatusCodes} from 'http-status-codes';
 
-import config from '../config';
+import config from '../config/index.js';
+
+import type {ApiResponse} from '@odp/schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.js';
+import type {Request, Response, NextFunction} from 'express';
 
 export const authenticationMiddleware = (
   req: Request,
