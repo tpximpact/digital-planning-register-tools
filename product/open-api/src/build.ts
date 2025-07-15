@@ -47,3 +47,8 @@ export function combineFiles(srcDir: string, outPath: string): void {
   fs.writeFileSync(outPath, combined, 'utf-8');
   console.log('Combined file written to:', outPath);
 }
+
+const srcDir = path.join(__dirname, 'data');
+const outPath = path.join(__dirname, 'openApi.yml');
+
+combineFiles(srcDir, outPath);

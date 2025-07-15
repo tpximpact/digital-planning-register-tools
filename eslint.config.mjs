@@ -94,6 +94,7 @@ const baseConfig = [
       '**/public/sw.js',
       '**/public/workbox-*.js',
       '**/archive/**',
+      '**/coverage/**',
     ],
   },
 ];

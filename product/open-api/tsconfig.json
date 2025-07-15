@@ -6,5 +6,5 @@
     "noEmit": false
   },
   "exclude": ["src/data"],
-  "include": ["src/**/*", "src/openApi.yml"]
+  "include": ["src/index.ts"]
 }

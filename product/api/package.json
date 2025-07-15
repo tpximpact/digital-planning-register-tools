@@ -8,7 +8,7 @@
     "generate": "tsc",
     "config": "tsc --showConfig",
     "start": "node server.ts",
-    "dev": "tsx --watch server.ts",
+    "dev": "tsx --watch --env-file=.env server.ts",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "performance": "artillery run performance.yml"
