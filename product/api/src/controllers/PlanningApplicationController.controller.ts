@@ -43,20 +43,21 @@ class PlanningApplicationController {
     try {
       const {name} = req.body;
 
-      // Fake add: push to in-memory array (replace with your model/service as needed)
-      const newApplication = {
-        id: Date.now(), // simple unique id for demo
-        name,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
+      // // Fake add: push to in-memory array (replace with your model/service as needed)
+      // const newApplication = {
+      //   id: Date.now(), // simple unique id for demo
+      //   name,
+      //   createdAt: new Date(),
+      //   updatedAt: new Date(),
+      // };
 
       // This assumes you have an in-memory array or a service to handle this
       // For example, if using ApplicationsModel from earlier:
-      // ApplicationsModel.add(newApplication);
+      const newApplication = await PlanningApplicationService.add({name});
+      res.status(StatusCodes.CREATED).json(newApplication);
 
       // For demonstration, just return the new application
-      res.status(StatusCodes.CREATED).json(newApplication);
+      // res.status(StatusCodes.CREATED).json(newApplication);
     } catch (err) {
       return next(err);
     }

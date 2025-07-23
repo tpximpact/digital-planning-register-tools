@@ -28,6 +28,10 @@ class PlanningApplicationService {
 
     return foundApplication;
   }
+
+  async add(appData: {name: string}) {
+    return await Applications.add(appData);
+  }
 }
 
 export default new PlanningApplicationService();

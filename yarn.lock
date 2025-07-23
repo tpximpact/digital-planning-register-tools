@@ -973,6 +973,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@electric-sql/pglite@npm:^0.3.5":
+  version: 0.3.5
+  resolution: "@electric-sql/pglite@npm:0.3.5"
+  checksum: 10/ac4f07ba2737768440fed8a4ac23b864a9d40115518a82b4de5cd166a5d8d18a5b010c762d8092701b0afb1da2540012498a28f17991d060ca8c55b45348e241
+  languageName: node
+  linkType: hard
+
 "@emnapi/core@npm:^1.4.3":
   version: 1.4.4
   resolution: "@emnapi/core@npm:1.4.4"
@@ -2604,6 +2611,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@product/api@workspace:product/api"
   dependencies:
+    "@electric-sql/pglite": "npm:^0.3.5"
     "@odp/schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz"
     "@product/open-api": "workspace:^"
     "@types/cors": "npm:^2"

@@ -6,18 +6,19 @@ import {
   routeNotFoundErrorMiddleware,
   unhandledErrorMiddleware,
 } from './middleware';
+import {setupDatabase} from './models/planningApplication.model';
 import router from './routes';
 
-const app = express();
+export const createApp = async () => {
+  await setupDatabase();
 
-app.use(rateLimiter);
-app.use(express.json());
-app.use(cors());
+  const app = express();
+  app.use(rateLimiter);
+  app.use(express.json());
+  app.use(cors());
+  app.use(router);
+  app.use(routeNotFoundErrorMiddleware);
+  app.use(unhandledErrorMiddleware);
 
-// Mount the routes
-app.use(router);
-
-app.use(routeNotFoundErrorMiddleware);
-app.use(unhandledErrorMiddleware);
-
-export {app};
+  return app;
+};

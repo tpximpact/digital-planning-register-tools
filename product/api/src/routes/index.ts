@@ -30,7 +30,7 @@ router.get(
 );
 
 router.use(
-  '/api/@next/planning_applications',
+  '/api/@next/planningApplications',
   authenticationMiddleware,
   planningApplicationRouter,
 );

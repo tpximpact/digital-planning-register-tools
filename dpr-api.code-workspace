@@ -1,0 +1,23 @@
+{
+  "folders": [
+    {
+      "name": "Product",
+      "path": "product",
+    },
+    {
+      "name": "Open API",
+      "path": "product/open-api",
+    },
+    {
+      "name": "API",
+      "path": "product/api",
+    },
+    {
+      "name": "Lib",
+      "path": "lib",
+    },
+  ],
+  "settings": {
+    // workspace-specific settings here
+  },
+}

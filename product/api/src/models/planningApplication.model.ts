@@ -1,41 +1,65 @@
+import {PGlite} from '@electric-sql/pglite';
 export interface PlanningApplication {
   id: number;
   name: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
+const db = new PGlite();
 
-// Example in-memory store (for development/testing)
-const applications: PlanningApplication[] = [
-  {id: 1, name: 'Application 1', createdAt: new Date(), updatedAt: new Date()},
-  {id: 2, name: 'Application 2', createdAt: new Date(), updatedAt: new Date()},
-  {id: 3, name: 'Application 3', createdAt: new Date(), updatedAt: new Date()},
-];
+export async function setupDatabase() {
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS planning_applications (
+      id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      "createdAt" TIMESTAMP,
+      "updatedAt" TIMESTAMP
+    );
+  `);
+  // Uncomment the following lines to seed the database with initial data
+  const {rows} = await db.query<PlanningApplication>(
+    `SELECT * FROM planning_applications LIMIT 1;`,
+  );
 
-class PlanningApplications {
-  constructor() {
-    this.find = this.find.bind(this);
-    this.getAll = this.getAll.bind(this);
-    this.findById = this.findById.bind(this);
+  if (rows.length === 0) {
+    console.log('Database is empty. Seeding with initial data...');
+    await db.exec(`
+      INSERT INTO planning_applications (name, "createdAt", "updatedAt") VALUES ('Application 1', '2025-07-23T14:54:49.000Z', '2025-07-23T14:54:49.000Z');
+      INSERT INTO planning_applications (name, "createdAt", "updatedAt") VALUES ('Application 2', '2025-07-23T14:54:49.000Z', '2025-07-23T14:54:49.000Z');
+      INSERT INTO planning_applications (name, "createdAt", "updatedAt") VALUES ('Application 3', '2025-07-23T14:54:49.000Z', '2025-07-23T14:54:49.000Z');
+    `);
+  } else {
+    console.log('Database already contains data. Skipping seed.');
   }
 
-  find(_filter: Partial<PlanningApplication>) {
-    // Simulate an async API
-    return {
-      exec: async (): Promise<PlanningApplication[]> => {
-        // For now, ignore filter and return all
-        return applications;
-      },
-    };
-  }
-
-  getAll(): PlanningApplication[] {
-    return applications;
-  }
-
-  findById(id: number): PlanningApplication | undefined {
-    return applications.find(app => app.id === id);
-  }
+  console.log('Database setup complete.');
 }
+export const Applications = {
+  find: (_filter: Partial<PlanningApplication>) => ({
+    exec: async (): Promise<PlanningApplication[]> => {
+      const {rows} = await db.query<PlanningApplication>(
+        'SELECT * FROM planning_applications ORDER BY id;',
+      );
+      return rows;
+    },
+  }),
 
-export default new PlanningApplications();
+  findById: async (id: number): Promise<PlanningApplication | undefined> => {
+    const {rows} = await db.query<PlanningApplication>(
+      'SELECT * FROM planning_applications WHERE id = $1;',
+      [id],
+    );
+    return rows[0];
+  },
+
+  /**
+   * Adds a new application to the database.
+   */
+  add: async (appData: {name: string}): Promise<PlanningApplication> => {
+    const {rows} = await db.query<PlanningApplication>(
+      'INSERT INTO planning_applications (name, "createdAt", "updatedAt") VALUES ($1, $2, $3) RETURNING *;',
+      [appData.name, new Date(), new Date()],
+    );
+    return rows[0];
+  },
+};
