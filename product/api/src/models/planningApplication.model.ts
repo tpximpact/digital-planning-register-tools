@@ -5,7 +5,7 @@ export interface PlanningApplication {
   createdAt?: Date;
   updatedAt?: Date;
 }
-const db = new PGlite();
+const db = new PGlite('memory://');
 
 export async function setupDatabase() {
   await db.exec(`
