@@ -48,7 +48,8 @@ export function combineFiles(srcDir: string, outPath: string): void {
   console.log('Combined file written to:', outPath);
 }
 
+const __dirname = import.meta.dirname;
 const srcDir = path.join(__dirname, 'data');
-const outPath = path.join(__dirname, 'openApi.yml');
+const outPath = path.join(__dirname, 'src', 'openApi.yml');
 
 combineFiles(srcDir, outPath);

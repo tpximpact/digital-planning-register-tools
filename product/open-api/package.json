@@ -2,6 +2,7 @@
   "name": "@product/open-api",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "main": "dist/index.js",
   "exports": {
     ".": {
@@ -13,9 +14,9 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "config": "tsc --showConfig",
-    "generate": "tsx src/index.ts",
-    "build": "tsx src/build.ts && tsc && cp src/openApi.yml dist/openApi.yml",
-    "start": "node dist/index.js"
+    "generate": "yarn run clean && yarn run build && tsc && cp src/openApi.yml dist/openApi.yml",
+    "build": "tsx build.ts",
+    "clean": "rm -rf dist && rm tsconfig.tsbuildinfo"
   },
   "devDependencies": {
     "@types/js-yaml": "^4",

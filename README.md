@@ -96,5 +96,5 @@ yarn install
 Add to packages using
 
 ```json
-    "@odp/schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",
+    "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",
 ```

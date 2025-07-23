@@ -3,12 +3,11 @@ import path from 'path';
 
 import yaml from 'js-yaml';
 
-// In CommonJS, __dirname is available by default.
-// In TypeScript with "module": "commonjs", you can use __dirname directly.
+const __dirname = import.meta.dirname;
 const openApiPath = path.join(__dirname, 'openApi.yml');
 
 // Load and parse the YAML file
-let openApiDoc: any;
+let openApiDoc;
 try {
   openApiDoc = yaml.load(fs.readFileSync(openApiPath, 'utf8'));
 } catch (e) {
