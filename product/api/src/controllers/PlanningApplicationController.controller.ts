@@ -2,7 +2,6 @@ import {StatusCodes} from 'http-status-codes';
 
 import {PlanningApplicationService} from '../services/index.js';
 
-import type {ValidateIdSchema} from '../schemas/planningApplications/validate-id.schema.js';
 import type {Request, Response, NextFunction} from 'express';
 
 class PlanningApplicationController {

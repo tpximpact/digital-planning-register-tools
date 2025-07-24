@@ -8,9 +8,15 @@ import planningApplicationRouter from './planningApplicationRouter.route.js';
 
 import type {NextFunction, Request, Response} from 'express';
 
+export interface HealthCheckData {
+  uptime: number;
+  message: string;
+  date: Date;
+}
+
 const router = express.Router();
 
-router.get('/', (req: Request, res: Response, next: NextFunction) => {
+router.get('/', (_req: Request, res: Response, _next: NextFunction) => {
   res.status(StatusCodes.OK).json({
     message: 'Mock ODP compliant endpoint',
   });
@@ -19,7 +25,7 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
 router.get(
   '/healthcheck',
   (_req: Request, res: Response, next: NextFunction) => {
-    const data = {
+    const data: HealthCheckData = {
       uptime: process.uptime(),
       message: 'Ok',
       date: new Date(),

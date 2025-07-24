@@ -11,7 +11,7 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "config": "tsc --showConfig",
-    "lint:code": "DEBUG=eslint-import-resolver-typescript eslint .",
+    "lint:code": "eslint .",
     "lint:format": "prettier -c .",
     "lint": "eslint . && prettier -c .",
     "lint-fix": "eslint . --fix",
