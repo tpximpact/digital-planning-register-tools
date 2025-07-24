@@ -26,9 +26,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Install wait-on
-        run: yarn global add wait-on
-
       - name: Build the project
         run: yarn workspace @product/api run generate
 
@@ -36,7 +33,7 @@ jobs:
         run: yarn workspace @product/api run start &
 
       - name: Wait for API to be ready
-        run: npx wait-on http://localhost:4000
+        run: yarn dlx wait-on http://localhost:4000
 
       - name: Execute load tests
         uses: artilleryio/action-cli@v1
