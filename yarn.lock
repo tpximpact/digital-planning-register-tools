@@ -1978,18 +1978,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"digital-planning-data-schemas@file:../../digital-planning-data-schemas-0.7.5.tgz::locator=%40product%2Fapi%40workspace%3Aproduct%2Fapi":
-  version: 0.7.5
-  resolution: "digital-planning-data-schemas@file:../../digital-planning-data-schemas-0.7.5.tgz#../../digital-planning-data-schemas-0.7.5.tgz::hash=fa5b4f&locator=%40product%2Fapi%40workspace%3Aproduct%2Fapi"
-  dependencies:
-    ajv: "npm:^8.17.1"
-    ajv-formats: "npm:^2.1.1"
-    ts-json-schema-generator: "npm:^2.3.0"
-    ts-node: "npm:^10.9.2"
-  checksum: 10/8e1b59cd8924ee41c9bed0c99ffc10d03ca6fa57006102a309d4158c0ad537260b0f07af9fd646d6555b2c1bd873be0e8ef2335dc853b589094d3facfee7a25b
-  languageName: node
-  linkType: hard
-
 "@opentelemetry/api-logs@npm:0.41.2":
   version: 0.41.2
   resolution: "@opentelemetry/api-logs@npm:0.41.2"
@@ -2604,7 +2592,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@product/api@workspace:product/api"
   dependencies:
-    "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz"
     "@product/open-api": "workspace:^"
     "@types/cors": "npm:^2"
     "@types/express": "npm:^5"
@@ -2616,6 +2603,7 @@ __metadata:
     artillery: "npm:^2.0.23"
     cors: "npm:^2.8.5"
     cross-env: "npm:^7.0.3"
+    digital-planning-data-schemas: "file:../../digital-planning-data-schemas-0.7.5.tgz"
     dotenv: "npm:^17.0.1"
     express: "npm:^5.1.0"
     express-rate-limit: "npm:^7.5.1"
@@ -6315,6 +6303,18 @@ __metadata:
   version: 5.2.0
   resolution: "diff@npm:5.2.0"
   checksum: 10/01b7b440f83a997350a988e9d2f558366c0f90f15be19f4aa7f1bb3109a4e153dfc3b9fbf78e14ea725717017407eeaa2271e3896374a0181e8f52445740846d
+  languageName: node
+  linkType: hard
+
+"digital-planning-data-schemas@file:../../digital-planning-data-schemas-0.7.5.tgz::locator=%40product%2Fapi%40workspace%3Aproduct%2Fapi":
+  version: 0.7.5
+  resolution: "digital-planning-data-schemas@file:../../digital-planning-data-schemas-0.7.5.tgz#../../digital-planning-data-schemas-0.7.5.tgz::hash=fa5b4f&locator=%40product%2Fapi%40workspace%3Aproduct%2Fapi"
+  dependencies:
+    ajv: "npm:^8.17.1"
+    ajv-formats: "npm:^2.1.1"
+    ts-json-schema-generator: "npm:^2.3.0"
+    ts-node: "npm:^10.9.2"
+  checksum: 10/acac7e61b4607c8ba6bebf30b5ca33763924b16add21dcd8e903e498c2fea9f2da7743688d990023d9ff7742984697b59012869d51d85a8c2601e9fc02ec0742
   languageName: node
   linkType: hard
 

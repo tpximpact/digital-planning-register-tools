@@ -16,7 +16,6 @@
     "clean": "rm -rf dist && rm tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",
     "@product/open-api": "workspace:^",
     "@types/supertest": "^6.0.3",
     "@types/swagger-ui-express": "^4.1.8",
@@ -24,6 +23,7 @@
     "ajv-formats": "^3.0.1",
     "artillery": "^2.0.23",
     "cors": "^2.8.5",
+    "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",
     "dotenv": "^17.0.1",
     "express": "^5.1.0",
     "express-rate-limit": "^7.5.1",
