@@ -1,9 +1,10 @@
 import Ajv from 'ajv';
-import {Request, Response, NextFunction} from 'express';
 import {StatusCodes} from 'http-status-codes';
 
-import config from '../config';
-import {PlanningApplicationNotFoundError} from '../errors';
+import config from '../config/index.js';
+import {PlanningApplicationNotFoundError} from '../errors/index.js';
+
+import type {Request, Response, NextFunction} from 'express';
 
 export const unhandledErrorMiddleware = (
   err: any,

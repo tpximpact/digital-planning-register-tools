@@ -1,8 +1,9 @@
-import {ApiResponse} from '@odp/schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse';
-import {Request, Response, NextFunction} from 'express';
 import {StatusCodes} from 'http-status-codes';
 
-import config from '../config';
+import config from '../config/index.js';
+
+import type {ApiResponse} from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.d.ts';
+import type {Request, Response, NextFunction} from 'express';
 
 export const authenticationMiddleware = (
   req: Request,
@@ -11,12 +12,14 @@ export const authenticationMiddleware = (
 ) => {
   // Allow all requests in development
   if (config.environment === 'development') {
-    return next();
+    next();
+    return;
   }
 
   const apiKey = req.headers['x-api-key'];
   if (apiKey === config.apiKey) {
-    return next();
+    next();
+    return;
   }
 
   const response: ApiResponse<null> = {

@@ -1,9 +1,10 @@
-import {ApiResponse} from '@odp/schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse';
-import {Request, Response, NextFunction} from 'express';
 import rateLimit from 'express-rate-limit';
 import {StatusCodes} from 'http-status-codes';
 
-import config from '../config';
+import config from '../config/index.js';
+
+import type {ApiResponse} from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.d.ts';
+import type {Request, Response, NextFunction} from 'express';
 
 const response: ApiResponse<null> = {
   data: null,

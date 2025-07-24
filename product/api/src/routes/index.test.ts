@@ -1,7 +1,8 @@
-import {Request, Response, NextFunction} from 'express';
 import {describe, it, expect, vi, beforeEach} from 'vitest';
 
-import router from './';
+import router from './index.js';
+
+import type {Request, Response, NextFunction} from 'express';
 
 describe('routes/index', () => {
   let req: Partial<Request>;
@@ -26,12 +27,13 @@ describe('routes/index', () => {
     );
     expect(route).toBeDefined();
 
-    if (!route || !route.route) {
-      throw new Error('Route not found');
+    const handler = route?.route?.stack[0]?.handle;
+    if (!handler) {
+      throw new Error('Route handler not found');
     }
 
     // Call the handler
-    route.route.stack[0].handle(req as Request, res as Response, next);
+    handler(req as Request, res as Response, next);
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
       message: 'Mock ODP compliant endpoint',
@@ -47,12 +49,13 @@ describe('routes/index', () => {
     );
     expect(route).toBeDefined();
 
-    if (!route || !route.route) {
-      throw new Error('Route not found');
+    const handler = route?.route?.stack[0]?.handle;
+    if (!handler) {
+      throw new Error('Route handler not found');
     }
 
     // Call the handler
-    route.route.stack[0].handle(req as Request, res as Response, next);
+    handler(req as Request, res as Response, next);
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.send).toHaveBeenCalledWith(
       expect.objectContaining({

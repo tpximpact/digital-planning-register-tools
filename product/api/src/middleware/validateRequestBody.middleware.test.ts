@@ -1,7 +1,7 @@
 import {ValidationError} from 'ajv';
 import {describe, it, expect, vi, beforeEach} from 'vitest';
 
-import {validateRequestBodyMiddleware} from './validateRequestBody.middleware';
+import {validateRequestBodyMiddleware} from './validateRequestBody.middleware.js';
 
 describe('validateRequestBodyMiddleware', () => {
   const req = {body: {foo: 'bar'}} as any;
@@ -32,7 +32,7 @@ describe('validateRequestBodyMiddleware', () => {
 
     expect(ajvInstance).toHaveBeenCalledWith(req.body);
     expect(next).toHaveBeenCalledTimes(1);
-    const errorArg = next.mock.calls[0][0];
+    const errorArg = next.mock.calls[0]?.[0];
     expect(errorArg).toBeInstanceOf(ValidationError);
     expect(errorArg.errors).toEqual(ajvInstance.errors);
   });
@@ -46,7 +46,7 @@ describe('validateRequestBodyMiddleware', () => {
 
     expect(ajvInstance).toHaveBeenCalledWith(req.body);
     expect(next).toHaveBeenCalledTimes(1);
-    const errorArg = next.mock.calls[0][0];
+    const errorArg = next.mock.calls[0]?.[0];
     expect(errorArg).toBeInstanceOf(ValidationError);
     expect(errorArg.errors).toEqual([]); // Should default to empty array
   });

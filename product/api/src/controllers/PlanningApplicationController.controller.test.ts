@@ -1,9 +1,10 @@
-import {Request, Response, NextFunction} from 'express';
 import {describe, it, expect, vi, beforeEach} from 'vitest';
 
-import {PlanningApplicationService} from '../services';
+import {PlanningApplicationService} from '../services/index.js';
 
-import PlanningApplicationController from './PlanningApplicationController.controller';
+import PlanningApplicationController from './PlanningApplicationController.controller.js';
+
+import type {Request, Response, NextFunction} from 'express';
 
 vi.mock('../services', () => ({
   PlanningApplicationService: {

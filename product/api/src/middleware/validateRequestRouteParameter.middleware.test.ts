@@ -1,7 +1,7 @@
 import {ValidationError} from 'ajv';
 import {describe, it, expect, vi, beforeEach} from 'vitest';
 
-import {validateRequestRouteParameterMiddleware} from './validateRequestRouteParameter.middleware';
+import {validateRequestRouteParameterMiddleware} from './validateRequestRouteParameter.middleware.js';
 
 describe('validateRequestRouteParameterMiddleware', () => {
   const req = {params: {id: '123'}} as any;
@@ -32,7 +32,7 @@ describe('validateRequestRouteParameterMiddleware', () => {
 
     expect(ajvInstance).toHaveBeenCalledWith(req.params);
     expect(next).toHaveBeenCalledTimes(1);
-    const errorArg = next.mock.calls[0][0];
+    const errorArg = next.mock.calls[0]?.[0];
     expect(errorArg).toBeInstanceOf(ValidationError);
     expect(errorArg.errors).toEqual(ajvInstance.errors);
   });
@@ -46,7 +46,7 @@ describe('validateRequestRouteParameterMiddleware', () => {
 
     expect(ajvInstance).toHaveBeenCalledWith(req.params);
     expect(next).toHaveBeenCalledTimes(1);
-    const errorArg = next.mock.calls[0][0];
+    const errorArg = next.mock.calls[0]?.[0];
     expect(errorArg).toBeInstanceOf(ValidationError);
     expect(errorArg.errors).toEqual([]); // Should default to empty array
   });

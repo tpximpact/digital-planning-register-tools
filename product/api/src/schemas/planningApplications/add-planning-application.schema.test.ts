@@ -1,6 +1,6 @@
 import {describe, it, expect} from 'vitest';
 
-import validate from './add-planning-application.schema';
+import validate from './add-planning-application.schema.js';
 
 describe('add-planning-application.schema', () => {
   it('validates a valid name', () => {
@@ -13,7 +13,7 @@ describe('add-planning-application.schema', () => {
     const valid = validate({});
     expect(valid).toBe(false);
     expect(validate.errors).not.toBeNull();
-    expect(validate.errors?.[0].message).toMatch(
+    expect(validate.errors?.[0]?.message).toMatch(
       /must have required property 'name'/,
     );
   });
@@ -22,7 +22,7 @@ describe('add-planning-application.schema', () => {
     const valid = validate({name: 'A'});
     expect(valid).toBe(false);
     expect(validate.errors).not.toBeNull();
-    expect(validate.errors?.[0].message).toMatch(
+    expect(validate.errors?.[0]?.message).toMatch(
       /must NOT have fewer than 2 characters/,
     );
   });
@@ -32,7 +32,7 @@ describe('add-planning-application.schema', () => {
     const valid = validate({name: longName});
     expect(valid).toBe(false);
     expect(validate.errors).not.toBeNull();
-    expect(validate.errors?.[0].message).toMatch(
+    expect(validate.errors?.[0]?.message).toMatch(
       /must NOT have more than 200 characters/,
     );
   });
@@ -41,14 +41,14 @@ describe('add-planning-application.schema', () => {
     const valid = validate({name: 123});
     expect(valid).toBe(false);
     expect(validate.errors).not.toBeNull();
-    expect(validate.errors?.[0].message).toMatch(/must be string/);
+    expect(validate.errors?.[0]?.message).toMatch(/must be string/);
   });
 
   it('fails for additional properties', () => {
     const valid = validate({name: 'Valid Name', extra: 'not allowed'});
     expect(valid).toBe(false);
     expect(validate.errors).not.toBeNull();
-    expect(validate.errors?.[0].message).toMatch(
+    expect(validate.errors?.[0]?.message).toMatch(
       /must NOT have additional properties/,
     );
   });

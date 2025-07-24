@@ -1,7 +1,7 @@
 import supertest from 'supertest';
 import {describe, expect, it} from 'vitest';
 
-import {app} from '../src';
+import {app} from '../index.js';
 describe('GET /healthcheck', () => {
   it('should return message', async () => {
     const response = await supertest(app).get('/healthcheck');

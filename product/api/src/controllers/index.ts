@@ -1,1 +1,1 @@
-export {default as PlanningApplicationController} from './PlanningApplicationController.controller';
+export {default as PlanningApplicationController} from './PlanningApplicationController.controller.js';

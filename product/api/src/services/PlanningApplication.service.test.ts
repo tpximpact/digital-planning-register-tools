@@ -1,9 +1,9 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
 
-import {PlanningApplicationNotFoundError} from '../errors';
-import {Applications} from '../models';
+import {PlanningApplicationNotFoundError} from '../errors/index.js';
+import {Applications} from '../models/index.js';
 
-import PlanningApplicationService from './PlanningApplication.service';
+import PlanningApplicationService from './PlanningApplication.service.js';
 
 vi.mock('../models', () => {
   const mockApps = [

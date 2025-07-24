@@ -1,7 +1,7 @@
 import {StatusCodes} from 'http-status-codes';
 import {describe, it, expect, vi} from 'vitest';
 
-import {routeNotFoundErrorMiddleware} from './routeNotFoundError.middleware';
+import {routeNotFoundErrorMiddleware} from './routeNotFoundError.middleware.js';
 
 describe('routeNotFoundErrorMiddleware', () => {
   it('should respond with 404 and correct message', () => {

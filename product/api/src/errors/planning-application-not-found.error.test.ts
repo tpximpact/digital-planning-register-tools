@@ -1,6 +1,6 @@
 import {describe, it, expect} from 'vitest';
 
-import {PlanningApplicationNotFoundError} from './planning-application-not-found.error';
+import {PlanningApplicationNotFoundError} from './planning-application-not-found.error.js';
 
 describe('PlanningApplicationNotFoundError', () => {
   it('should set the correct name and message', () => {

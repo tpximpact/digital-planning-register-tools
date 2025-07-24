@@ -1,12 +1,13 @@
-import Ajv, {JSONSchemaType, ValidateFunction} from 'ajv';
+import {Ajv} from 'ajv';
 import addFormats from 'ajv-formats';
 
-import {PlanningApplication} from '../../models/planningApplication.model';
+import type {PlanningApplication} from '../../models/planningApplication.model.js';
+import type {JSONSchemaType, ValidateFunction} from 'ajv';
 
 const ajvInstance = new Ajv({
   allErrors: true,
 });
-addFormats(ajvInstance);
+addFormats.default(ajvInstance);
 
 type AddPlanningApplication = Omit<
   PlanningApplication,

@@ -1,7 +1,9 @@
-import {Request, Response, NextFunction} from 'express';
 import {StatusCodes} from 'http-status-codes';
 
-import {PlanningApplicationService} from '../services';
+import {PlanningApplicationService} from '../services/index.js';
+
+import type {ValidateIdSchema} from '../schemas/planningApplications/validate-id.schema.js';
+import type {Request, Response, NextFunction} from 'express';
 
 class PlanningApplicationController {
   constructor() {
@@ -21,13 +23,19 @@ class PlanningApplicationController {
         await PlanningApplicationService.getAllPlanningApplications();
       res.status(StatusCodes.OK).json(applications);
     } catch (err) {
-      return next(err);
+      next(err);
+      return;
     }
   }
 
   async getById(req: Request, res: Response, next: NextFunction) {
     try {
-      const {id} = req.params;
+      const id = req.params.id;
+
+      if (id === undefined || id === '') {
+        next();
+        return;
+      }
 
       const application =
         await PlanningApplicationService.getPlanningApplicationById(
@@ -35,7 +43,8 @@ class PlanningApplicationController {
         );
       res.status(StatusCodes.OK).json(application);
     } catch (err) {
-      return next(err);
+      next(err);
+      return;
     }
   }
 
@@ -58,7 +67,8 @@ class PlanningApplicationController {
       // For demonstration, just return the new application
       res.status(StatusCodes.CREATED).json(newApplication);
     } catch (err) {
-      return next(err);
+      next(err);
+      return;
     }
   }
 }

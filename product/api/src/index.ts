@@ -5,8 +5,8 @@ import {
   rateLimiter,
   routeNotFoundErrorMiddleware,
   unhandledErrorMiddleware,
-} from './middleware';
-import router from './routes';
+} from './middleware/index.js';
+import router from './routes/index.js';
 
 const app = express();
 

@@ -1,6 +1,6 @@
 import {describe, it, expect} from 'vitest';
 
-import validate from './validate-id.schema';
+import validate from './validate-id.schema.js';
 
 describe('validate-id.schema', () => {
   it('validates a valid uuid', () => {
@@ -19,14 +19,14 @@ describe('validate-id.schema', () => {
     const valid = validate({id: ''});
     expect(valid).toBe(false);
     expect(validate.errors).not.toBeNull();
-    expect(validate.errors?.[0].message).toMatch(/must match format/);
+    expect(validate.errors?.[0]?.message).toMatch(/must match format/);
   });
 
   it('fails for missing id', () => {
     const valid = validate({});
     expect(valid).toBe(false);
     expect(validate.errors).not.toBeNull();
-    expect(validate.errors?.[0].message).toMatch(
+    expect(validate.errors?.[0]?.message).toMatch(
       /must have required property 'id'/,
     );
   });
@@ -35,6 +35,6 @@ describe('validate-id.schema', () => {
     const valid = validate({id: 123});
     expect(valid).toBe(false);
     expect(validate.errors).not.toBeNull();
-    expect(validate.errors?.[0].message).toMatch(/must be string/);
+    expect(validate.errors?.[0]?.message).toMatch(/must be string/);
   });
 });

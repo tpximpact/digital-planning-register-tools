@@ -1,6 +1,6 @@
 import {describe, it, expect} from 'vitest';
 
-import {app} from './';
+import {app} from './index.js';
 
 describe('app', () => {
   it('should be an express application', () => {

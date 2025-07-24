@@ -1,5 +1,5 @@
-import {PlanningApplicationNotFoundError} from '../errors';
-import {Applications} from '../models';
+import {PlanningApplicationNotFoundError} from '../errors/index.js';
+import {Applications} from '../models/index.js';
 
 class PlanningApplicationService {
   constructor() {
@@ -9,9 +9,7 @@ class PlanningApplicationService {
       this.getPlanningApplicationById.bind(this);
   }
 
-  async getAllPlanningApplications(): Promise<
-    Array<{id: number; name: string}>
-  > {
+  async getAllPlanningApplications(): Promise<{id: number; name: string}[]> {
     const filter = {};
 
     return await Applications.find(filter).exec();
