@@ -26,6 +26,9 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Install wait-on
+        run: yarn global add wait-on
+
       - name: Build the project
         run: yarn workspace @product/api run generate
 
