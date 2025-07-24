@@ -49,6 +49,6 @@ export function combineFiles(srcDir: string, outPath: string): void {
 }
 
 const srcDir = path.join(__dirname, 'data');
-const outPath = path.join(__dirname, 'openApi.yml');
+const outPath = path.join(__dirname, 'src', 'openApi.yml');
 
 combineFiles(srcDir, outPath);
