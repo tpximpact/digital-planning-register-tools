@@ -35,6 +35,6 @@ router.use(
   planningApplicationRouter,
 );
 
-router.use('/docs', docsRouter);
+// router.use('/docs', docsRouter);
 
 export default router;
