@@ -21,7 +21,7 @@ jobs:
           node-version: lts/jod
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install
 
       - name: Execute load tests
         uses: artilleryio/action-cli@v1
