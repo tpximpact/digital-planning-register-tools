@@ -1,4 +1,4 @@
-import openApiDoc from '@product/open-api';
+// import openApiDoc from '@product/open-api';
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 
@@ -12,6 +12,7 @@ const uiOptions = {
 };
 
 router.use('/', swaggerUi.serve);
-router.get('/', swaggerUi.setup(openApiDoc, uiOptions));
+// openApiDoc
+router.get('/', swaggerUi.setup({}, uiOptions));
 
 export default router;
