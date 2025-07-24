@@ -16,7 +16,7 @@
     "clean": "rm -rf dist && rm tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@odp/schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",
+    "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",
     "@product/open-api": "workspace:^",
     "@types/supertest": "^6.0.3",
     "@types/swagger-ui-express": "^4.1.8",
