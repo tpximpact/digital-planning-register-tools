@@ -43,11 +43,49 @@ yarn run knip:fix
 
 Anything that is DPR specific
 
+```sh
+yarn run typecheck
+yarn run lint:code
+yarn run lint:format
+yarn run lint
+yarn run lint-fix
+yarn run format
+yarn run sync-packages
+yarn run knip
+yarn run knip:fix
+yarn run prepare
+```
+
 ### API
 
 The api designed to mock an ODP compliant endpoint. For development use, designed to be used by DPR when developing and others for examples on how the API should be implemented.
 
-`yarn workspace @product/api run dev`
+```sh
+
+yarn workspace @product/api run typecheck
+yarn workspace @product/api run config
+yarn workspace @product/api run config:prod
+yarn workspace @product/api run generate
+yarn workspace @product/api run dev
+yarn workspace @product/api run start
+yarn workspace @product/api run test
+yarn workspace @product/api run coverage
+yarn workspace @product/api run performance
+yarn workspace @product/api run clean
+
+```
+
+### Open API
+
+```sh
+
+yarn workspace @product/open-api run typecheck
+yarn workspace @product/open-api run config
+yarn workspace @product/open-api run generate
+yarn workspace @product/open-api run build
+yarn workspace @product/open-api run clean
+
+```
 
 ## Lib
 

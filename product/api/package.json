@@ -5,13 +5,15 @@
   "main": "index.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "generate": "tsc",
     "config": "tsc --showConfig",
-    "start": "node server.ts",
+    "config:prod": "tsc --project tsconfig.prod.json --showConfig",
+    "generate": "tsc --project tsconfig.prod.json",
     "dev": "tsx --watch --env-file=.env server.ts",
+    "start": "node --env-file=.env.test dist/server.js",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "performance": "artillery run performance.yml"
+    "performance": "artillery run performance.yml",
+    "clean": "rm -rf dist && rm tsconfig.tsbuildinfo"
   },
   "dependencies": {
     "@odp/schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",
@@ -36,6 +38,7 @@
     "@vitest/coverage-v8": "3.2.4",
     "cross-env": "^7.0.3",
     "nodemon": "^3.1.10",
-    "tsx": "^4.20.3"
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
   }
 }
