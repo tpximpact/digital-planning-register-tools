@@ -30,6 +30,7 @@ jobs:
         uses: artilleryio/action-cli@v1
         with:
           command: run performance.yml
+          working-directory: ./product/api
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
