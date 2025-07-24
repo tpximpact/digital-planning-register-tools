@@ -1,5 +1,5 @@
 import {PlanningApplicationNotFoundError} from '../errors';
-import {Applications} from '../models';
+import {PlanningApplications} from '../models';
 
 class PlanningApplicationService {
   constructor() {
@@ -14,11 +14,11 @@ class PlanningApplicationService {
   > {
     const filter = {};
 
-    return await Applications.find(filter).exec();
+    return await PlanningApplications.find(filter).exec();
   }
 
   async getPlanningApplicationById(id: number) {
-    const foundApplication = await Applications.findById(id);
+    const foundApplication = await PlanningApplications.findById(id);
 
     if (!foundApplication) {
       throw new PlanningApplicationNotFoundError(
@@ -30,7 +30,7 @@ class PlanningApplicationService {
   }
 
   async add(appData: {name: string}) {
-    return await Applications.add(appData);
+    return await PlanningApplications.add(appData);
   }
 }
 

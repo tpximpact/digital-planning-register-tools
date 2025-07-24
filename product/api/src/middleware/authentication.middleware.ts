@@ -14,10 +14,10 @@ export const authenticationMiddleware = (
     return next();
   }
 
-  const apiKey = req.headers['x-api-key'];
-  if (apiKey === config.apiKey) {
-    return next();
-  }
+  // const apiKey = req.headers['x-api-key'];
+  // if (apiKey === config.apiKey) {
+  //   return next();
+  // }
 
   const response: ApiResponse<null> = {
     data: null,

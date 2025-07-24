@@ -34,7 +34,7 @@ export async function setupDatabase() {
 
   console.log('Database setup complete.');
 }
-export const Applications = {
+export const PlanningApplications = {
   find: (_filter: Partial<PlanningApplication>) => ({
     exec: async (): Promise<PlanningApplication[]> => {
       const {rows} = await db.query<PlanningApplication>(
