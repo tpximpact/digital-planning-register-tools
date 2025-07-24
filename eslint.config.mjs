@@ -1,9 +1,13 @@
 // @ts-check
 
 import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import globals from 'globals';
 import {importX} from 'eslint-plugin-import-x';
+import globals from 'globals';
+import tseslint, {
+  parser as tsParser,
+  configs as tsConfigs,
+  plugin as tsPlugin,
+} from 'typescript-eslint';
 
 // packages that run in the browser
 const browserApps = ['product/api'];
@@ -17,75 +21,15 @@ const browserConfigs = browserApps.map(appPath => ({
   languageOptions: {globals: globals.browser},
 }));
 
-const esmConfigs = esmApps.map(appPath => ({
-  name: `esm configs for ${appPath}`,
-  files: [`${appPath}/**/*.{ts,mts,cts}`],
-  extends: [importX.flatConfigs.recommended, importX.flatConfigs.typescript],
-  plugins: {
-    //   //   '@typescript-eslint': tseslint.plugin,
-    '@typescript-eslint/parser': tseslint.parser,
-  },
-  // {
-  //   files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
-  languageOptions: {
-    parser: tseslint.parser,
-    // ecmaVersion: 'latest',
-    // sourceType: 'module',
-    parserOptions: {
-      projectService: true,
-      tsconfigRootDir: import.meta.dirname,
+const esmConfigs = tseslint.config(
+  esmApps.map(appPath => ({
+    name: `esm configs for ${appPath}`,
+    files: [`${appPath}/**/*.{ts,mts,cts}`],
+    rules: {
+      'import-x/no-nodejs-modules': 'warn',
     },
-  },
-  // },
-  // settings: {
-  //   //   'import/parsers': {
-  //   //     '@typescript-eslint/parser': ['.ts', '.tsx'],
-  //   //   },
-  //   'import/resolver': {
-  //     // typescript: true,
-  //     typescript: {
-  //       noWarnOnMultipleProjects: true, // suppresses the warning
-
-  //       // alwaysTryTypes: true, // Always try to resolve types under `<root>@types` directory even if it doesn't contain any source code, like `@types/unist`
-  //       //       bun: true, // Resolve Bun modules (https://github.com/import-js/eslint-import-resolver-typescript#bun)
-  //       //       // Choose from one of the "project" configs below or omit to use <root>/tsconfig.json or <root>/jsconfig.json by default
-  //       //       // Use <root>/path/to/folder/tsconfig.json or <root>/path/to/folder/jsconfig.json
-  //       project: `${appPath}/tsconfig.json`,
-  //       //       // Multiple tsconfigs (Useful for monorepos, but discouraged in favor of `references` supported)
-  //       //       // Use a glob pattern
-  //       //       project: 'packages/*/{ts,js}config.json',
-  //       //       // Use an array
-  //       //       project: [
-  //       //         'packages/module-a/tsconfig.json',
-  //       //         'packages/module-b/jsconfig.json',
-  //       //       ],
-  //       //       // Use an array of glob patterns
-  //       //       project: ['packages/*/tsconfig.json', 'other-packages/*/jsconfig.json'],
-  //     },
-  //   },
-  // },
-  rules: {
-    // 'import-x/no-dynamic-require': 'warn',
-    // 'import-x/no-nodejs-modules': 'warn',
-    'import-x/order': [
-      'error',
-      {
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-          'object',
-          'type',
-        ],
-        'newlines-between': 'always',
-        alphabetize: {order: 'asc', caseInsensitive: true},
-      },
-    ],
-  },
-}));
+  })),
+);
 
 const config = tseslint.config(
   {
@@ -102,17 +46,62 @@ const config = tseslint.config(
   {
     name: 'tseslint recommended',
     extends: [
-      tseslint.configs.strictTypeChecked,
-      tseslint.configs.stylisticTypeChecked,
-      {
-        languageOptions: {
-          parserOptions: {
-            projectService: true,
-            tsconfigRootDir: import.meta.dirname,
-          },
+      tsConfigs.strictTypeChecked,
+      tsConfigs.stylisticTypeChecked,
+      importX.flatConfigs.recommended,
+      importX.flatConfigs.typescript,
+    ],
+    plugins: {
+      '@typescript-eslint/parser': tsParser,
+      '@typescript-eslint': tsPlugin,
+    },
+    languageOptions: {
+      parser: tsParser,
+      // ecmaVersion: 'latest',
+      // sourceType: 'module',
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    settings: {
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
         },
       },
-    ],
+    },
+    rules: {
+      '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/consistent-type-exports': 'error',
+      '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
+      '@typescript-eslint/prefer-nullish-coalescing': 'warn',
+      '@typescript-eslint/prefer-optional-chain': 'warn',
+      '@typescript-eslint/strict-boolean-expressions': 'error',
+      '@typescript-eslint/switch-exhaustiveness-check': 'error',
+      'import-x/no-dynamic-require': 'warn',
+      'import-x/no-amd': 'error',
+      'import-x/no-commonjs': 'error',
+      'import-x/no-import-module-exports': 'error',
+      'import-x/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+      'import-x/order': [
+        'error',
+        {
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+            'object',
+            'type',
+          ],
+          'newlines-between': 'always',
+          alphabetize: {order: 'asc', caseInsensitive: true},
+        },
+      ],
+    },
   },
   ...browserConfigs,
   ...esmConfigs,
@@ -130,5 +119,4 @@ const config = tseslint.config(
   },
 );
 
-console.log(config);
 export default config;

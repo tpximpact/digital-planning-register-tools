@@ -6283,13 +6283,13 @@ __metadata:
 
 "digital-planning-data-schemas@file:../../digital-planning-data-schemas-0.7.5.tgz::locator=%40product%2Fapi%40workspace%3Aproduct%2Fapi":
   version: 0.7.5
-  resolution: "digital-planning-data-schemas@file:../../digital-planning-data-schemas-0.7.5.tgz#../../digital-planning-data-schemas-0.7.5.tgz::hash=fa5b4f&locator=%40product%2Fapi%40workspace%3Aproduct%2Fapi"
+  resolution: "digital-planning-data-schemas@file:../../digital-planning-data-schemas-0.7.5.tgz#../../digital-planning-data-schemas-0.7.5.tgz::hash=73afd2&locator=%40product%2Fapi%40workspace%3Aproduct%2Fapi"
   dependencies:
     ajv: "npm:^8.17.1"
     ajv-formats: "npm:^2.1.1"
     ts-json-schema-generator: "npm:^2.3.0"
     ts-node: "npm:^10.9.2"
-  checksum: 10/acac7e61b4607c8ba6bebf30b5ca33763924b16add21dcd8e903e498c2fea9f2da7743688d990023d9ff7742984697b59012869d51d85a8c2601e9fc02ec0742
+  checksum: 10/3efdf83402aa0c7e584db0eff0faf5fff937a46a0b384ff1416b3b053f4a4a89cd43ed5d00cb29f9335f5570d635f10b3e3caac802ee5083bf5c8884d926cdb5
   languageName: node
   linkType: hard
 

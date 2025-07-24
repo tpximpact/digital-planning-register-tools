@@ -30,7 +30,12 @@
     "lib": ["es2022"],
 
     /* Don't emit by default*/
-    "noEmit": true
+    "noEmit": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@product/open-api": ["product/open-api"]
+    }
   },
   "include": [
     "eslint.config.mjs",
