@@ -1,0 +1,44 @@
+name: Run tests
+
+on:
+  pull_request:
+    branches:
+      - '**' # Run on all branches for pull requests
+  push:
+    branches:
+      - main # Run only on the main branch for pushes
+
+jobs:
+  setup:
+    name: Setup and Cache Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/jod
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint code
+        run: yarn run lint
+
+      - name: Typecheck code
+        run: yarn run typecheck
+
+      - name: Test code
+        run: yarn workspace @product/api run test
+
+      - name: Test code coverage
+        run: yarn workspace @product/api run coverage
+
+      - name: 'Report Coverage'
+        # Set if: always() to also generate the report if tests are failing
+        # Only works if you set `reportOnFailure: true` in your vite config as specified above
+        if: always()
+        uses: davelosert/vitest-coverage-report-action@v2

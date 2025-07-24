@@ -1,0 +1,36 @@
+name: Run performance tests
+
+on:
+  push:
+    branches:
+      - main
+      - hn/add-ci
+
+jobs:
+  artillery:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/jod
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Execute load tests
+        uses: artilleryio/action-cli@v1
+        with:
+          command: run performance.yml
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: artillery-report
+          path: ./report.json # reference the generated report in the file system
