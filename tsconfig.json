@@ -24,7 +24,8 @@
     "eslint.config.mjs",
     "prettier.config.mjs",
     "product/**/*.ts",
-    "lib/**/*.ts"
+    "lib/**/*.ts",
+    "vitest.config.ts"
   ],
   "exclude": ["node_modules", "dist", "coverage"]
 }

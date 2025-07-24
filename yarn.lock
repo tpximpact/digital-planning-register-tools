@@ -2597,7 +2597,6 @@ __metadata:
     "@types/express": "npm:^5"
     "@types/supertest": "npm:^6.0.3"
     "@types/swagger-ui-express": "npm:^4.1.8"
-    "@vitest/coverage-v8": "npm:3.2.4"
     ajv: "npm:^8.17.1"
     ajv-formats: "npm:^3.0.1"
     artillery: "npm:^2.0.23"
@@ -2613,7 +2612,6 @@ __metadata:
     swagger-ui-express: "npm:^5.0.1"
     tsx: "npm:^4.20.3"
     typescript: "npm:^5.8.3"
-    vitest: "npm:^3.2.4"
   languageName: unknown
   linkType: soft
 
@@ -6403,6 +6401,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dotenv@npm:^17.2.0":
+  version: 17.2.0
+  resolution: "dotenv@npm:17.2.0"
+  checksum: 10/73d57d7ed8ae46e45c0b1dea382de3f180e71d20a3a4e10a13a3d5271a08639166e6647bb6dc0fa160ea440a55e85ff9be233150d9037d268c823cb72859d87f
+  languageName: node
+  linkType: hard
+
 "dpr-api@workspace:.":
   version: 0.0.0-use.local
   resolution: "dpr-api@workspace:."
@@ -6414,6 +6419,8 @@ __metadata:
     "@types/node": "npm:^24.0.12"
     "@typescript-eslint/eslint-plugin": "npm:^8.36.0"
     "@typescript-eslint/parser": "npm:^8.36.0"
+    "@vitest/coverage-v8": "npm:3.2.4"
+    dotenv: "npm:^17.2.0"
     eslint: "npm:^9.30.1"
     eslint-plugin-import: "npm:^2.32.0"
     eslint-plugin-react-hooks: "npm:^5.2.0"
@@ -6424,6 +6431,7 @@ __metadata:
     prettier: "npm:^3.6.2"
     syncpack: "npm:^13.0.4"
     typescript: "npm:^5.8.3"
+    vitest: "npm:^3.2.4"
   languageName: unknown
   linkType: soft
 

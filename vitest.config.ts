@@ -1,11 +1,18 @@
 import {loadEnv} from 'vite';
 import {defineConfig} from 'vitest/config';
 
-export default defineConfig(({mode}) => ({
+export default defineConfig({
   test: {
-    // mode defines what ".env.{mode}" file to choose if exists
-    env: loadEnv(mode, process.cwd(), ''),
-
+    projects: [
+      {
+        // add "extends: true" to inherit the options from the root config
+        extends: true,
+        test: {
+          env: loadEnv('test', `${process.cwd()}/product/api`, ''),
+          name: '@product/api',
+        },
+      },
+    ],
     coverage: {
       reporter: ['text', 'json-summary', 'json'],
       reportOnFailure: true,
@@ -17,4 +24,4 @@ export default defineConfig(({mode}) => ({
       },
     },
   },
-}));
+});

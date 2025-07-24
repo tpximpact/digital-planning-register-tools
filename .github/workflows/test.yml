@@ -35,15 +35,13 @@ jobs:
         run: yarn run typecheck
 
       - name: Test code
-        run: yarn workspace @product/api run test
+        run: yarn test
 
       - name: Test code coverage
-        run: yarn workspace @product/api run coverage
+        run: yarn coverage
 
       - name: 'Report Coverage'
         # Set if: always() to also generate the report if tests are failing
         # Only works if you set `reportOnFailure: true` in your vite config as specified above
         if: always()
         uses: davelosert/vitest-coverage-report-action@v2
-        with:
-          working-directory: './packages/api'
