@@ -40,6 +40,15 @@ jobs:
       - name: Test code coverage
         run: yarn coverage
 
+      - name: check for
+        run: pwd
+
+      - name: check for
+        run: ls -lah
+
+      - name: check for
+        run: ls -lah coverage/
+
       - name: 'Report Coverage'
         # Set if: always() to also generate the report if tests are failing
         # Only works if you set `reportOnFailure: true` in your vite config as specified above
