@@ -1,10 +1,10 @@
 name: Run performance tests
 
-on:
-  push:
-    branches:
-      - main
-      - hn/add-ci
+# on:
+#   push:
+#     branches:
+#       - main
+#       - hn/add-ci
 
 jobs:
   artillery:
