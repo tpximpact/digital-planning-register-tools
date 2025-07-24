@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "typecheck": "tsc --noEmit",
+    "config": "tsc --showConfig",
     "lint:code": "eslint .",
     "lint:format": "prettier -c .",
     "lint": "eslint . && prettier -c .",
