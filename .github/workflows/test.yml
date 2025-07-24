@@ -23,7 +23,7 @@ jobs:
           node-version: lts/jod
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install
 
       - name: Lint code
         run: yarn run lint
