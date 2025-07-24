@@ -1,0 +1,20 @@
+[
+  {
+    "reference": "123",
+    "address": "10 Downing Street, Westminster",
+    "postcode": "SW1A 2AA",
+    "description": "Erection of a single storey rear extension."
+  },
+  {
+    "reference": "456",
+    "address": "The Shard, 32 London Bridge St",
+    "postcode": "SE1 9SG",
+    "description": "Installation of new windows on the 72nd floor."
+  },
+  {
+    "reference": "789",
+    "address": "Buckingham Palace, London",
+    "postcode": "SW1A 1AA",
+    "description": "Consent to replace the roof of the East Wing."
+  }
+]

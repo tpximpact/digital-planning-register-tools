@@ -1,0 +1,8 @@
+Table planningApplications {
+  reference varchar [primary key]
+  address text
+  postcode text
+  description text
+  created_at timestamp
+  updated_at timestamp
+}

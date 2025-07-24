@@ -32,11 +32,15 @@
     "vitest": "^3.2.4"
   },
   "devDependencies": {
+    "@dbml/cli": "^3.13.9",
     "@types/cors": "^2",
     "@types/express": "^5",
+    "@types/node": "^24.1.0",
+    "@types/pg": "^8.15.4",
     "@vitest/coverage-v8": "3.2.4",
     "cross-env": "^7.0.3",
     "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   }
