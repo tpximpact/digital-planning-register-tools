@@ -18,7 +18,13 @@
     "outDir": "dist",
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+
+    // set baseUrl and paths for module resolution
+    "baseUrl": ".", // Make sure this is set!
+    "paths": {
+      "@product/open-api": ["product/open-api"] // Adjust if your entry file is different
+    }
   },
   "include": [
     "eslint.config.mjs",
