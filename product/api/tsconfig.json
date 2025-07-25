@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
+    "baseUrl": ".",
 
     /* If your code runs in the DOM: */
     "lib": ["es2022", "dom", "dom.iterable"],

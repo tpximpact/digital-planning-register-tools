@@ -3,7 +3,7 @@ import {StatusCodes} from 'http-status-codes';
 
 import {authenticationMiddleware} from '../middleware';
 
-import docsRouter from './docsRouter.route';
+// import docsRouter from './docsRouter.route';
 import planningApplicationRouter from './planningApplicationRouter.route';
 
 const router = express.Router();
@@ -35,6 +35,6 @@ router.use(
   planningApplicationRouter,
 );
 
-router.use('/docs', docsRouter);
+// router.use('/docs', docsRouter);
 
 export default router;

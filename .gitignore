@@ -20,4 +20,4 @@ dist/
 
 .env*
 !.env.test
-tsconfig.tsbuildinfo
+tsconfig*.tsbuildinfo

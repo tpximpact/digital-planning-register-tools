@@ -18,13 +18,21 @@
     "outDir": "dist",
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+
+    // set baseUrl and paths for module resolution
+    "baseUrl": ".", // Make sure this is set!
+    "paths": {
+      "@product/open-api": ["product/open-api/src/index.ts"] // Adjust if your entry file is different
+    }
   },
   "include": [
     "eslint.config.mjs",
     "prettier.config.mjs",
     "product/**/*.ts",
-    "lib/**/*.ts"
+    "lib/**/*.ts",
+    "vitest.config.ts"
   ],
   "exclude": ["node_modules", "dist", "coverage"]
+  // "references": [{"path": "./product/api"}, {"path": "./product/open-api"}]
 }

@@ -1,4 +1,4 @@
-import {ApiResponse} from '@odp/schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse';
+import {ApiResponse} from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse';
 import {Request, Response, NextFunction} from 'express';
 import {StatusCodes} from 'http-status-codes';
 
