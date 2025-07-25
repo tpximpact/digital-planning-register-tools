@@ -1,0 +1,32 @@
+[
+  {
+    "reference": "101112",
+    "address": "The British Museum, Great Russell St",
+    "postcode": "WC1B 3DG",
+    "description": "Installation of a new exhibition space on the ground floor."
+  },
+  {
+    "reference": "131415",
+    "address": "Trafalgar Square, London",
+    "postcode": "WC2N 5DN",
+    "description": "Renovation of the fountains and surrounding area."
+  },
+  {
+    "reference": "161718",
+    "address": "The London Eye, South Bank",
+    "postcode": "SE1 7PB",
+    "description": "Maintenance and upgrade of the observation wheel."
+  },
+  {
+    "reference": "192021",
+    "address": "St Paul's Cathedral, St Paul's Churchyard",
+    "postcode": "EC4M 8AD",
+    "description": "Restoration of the dome and surrounding structures."
+  },
+  {
+    "reference": "222324",
+    "address": "The Tower of London, St Katharine's & Wapping",
+    "postcode": "EC3N 4AB",
+    "description": "Installation of new security systems and visitor facilities."
+  }
+]
