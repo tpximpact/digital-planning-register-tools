@@ -10,7 +10,15 @@ class PlanningApplicationService {
   }
 
   async getAllPlanningApplications(): Promise<
-    Array<{id: number; name: string}>
+    Array<{
+      id: number;
+      reference: string;
+      address: string;
+      postcode: string;
+      description: string;
+      created_at: Date;
+      updated_at: Date;
+    }>
   > {
     const filter = {};
 
@@ -27,10 +35,6 @@ class PlanningApplicationService {
     }
 
     return foundApplication;
-  }
-
-  async add(appData: {name: string}) {
-    return await PlanningApplications.add(appData);
   }
 }
 
