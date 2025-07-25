@@ -36,6 +36,16 @@ class PlanningApplicationService {
 
     return foundApplication;
   }
+
+  async add(application: {
+    reference: string;
+    address: string;
+    postcode: string;
+    description: string;
+  }) {
+    const newApplication = await PlanningApplications.add(application);
+    return newApplication;
+  }
 }
 
 export default new PlanningApplicationService();

@@ -1,22 +1,24 @@
+import * as fs from 'fs';
+import * as path from 'path';
+
 import {db} from '.';
 
+/**
+ * Creates the database schema by reading and executing the schema.sql file.
+ */
 export async function setupDatabase() {
-  console.log('Setting up database schema...');
+  console.log('Setting up database schema from schema.sql file...');
 
-  await db.exec(`
-    CREATE TABLE IF NOT EXISTS planning_applications (
-      id SERIAL PRIMARY KEY,
-      reference VARCHAR(50) UNIQUE NOT NULL,
-      address TEXT,
-      postcode TEXT,
-      description TEXT,
-      created_at TIMESTAMP,
-      updated_at TIMESTAMP
-    );
+  const schemaFilePath = path.resolve(process.cwd(), 'src', 'db', 'schema.sql');
 
-    CREATE INDEX IF NOT EXISTS idx_postcode ON planning_applications (postcode);
-    CREATE INDEX IF NOT EXISTS idx_address_gin ON planning_applications USING GIN (to_tsvector('english', address));
-  `);
+  if (!fs.existsSync(schemaFilePath)) {
+    console.error('FATAL: schema.sql file not found at', schemaFilePath);
+    throw new Error('Schema file is missing.');
+  }
 
-  console.log('Database setup complete.');
+  const schemaSql = fs.readFileSync(schemaFilePath, 'utf-8');
+
+  await db.exec(schemaSql);
+
+  console.log('Schema setup complete.');
 }

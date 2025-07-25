@@ -1,5 +1,6 @@
-Table planningApplications {
-  reference varchar [primary key]
+Table planning_applications {
+  id integer [pk, increment]
+  reference varchar(50) [unique, not null]
   address text
   postcode text
   description text

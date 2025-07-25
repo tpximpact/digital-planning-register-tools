@@ -26,4 +26,25 @@ export const PlanningApplications = {
     );
     return rows[0];
   },
+  add: async (appData: {
+    reference: string;
+    address: string;
+    postcode: string;
+    description: string;
+  }): Promise<PlanningApplication> => {
+    const {rows} = await db.query<PlanningApplication>(
+      `INSERT INTO planning_applications (reference, address, postcode, description, created_at, updated_at)
+       VALUES ($1, $2, $3, $4, $5, $6)
+       RETURNING *;`,
+      [
+        appData.reference,
+        appData.address,
+        appData.postcode,
+        appData.description,
+        new Date(),
+        new Date(),
+      ],
+    );
+    return rows[0];
+  },
 };

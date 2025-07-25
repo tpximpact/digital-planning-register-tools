@@ -41,7 +41,7 @@ class PlanningApplicationController {
 
   async add(req: Request, res: Response, next: NextFunction) {
     try {
-      const {name} = req.body;
+      const {reference, description, address, postcode} = req.body;
 
       // // Fake add: push to in-memory array (replace with your model/service as needed)
       // const newApplication = {
@@ -53,7 +53,12 @@ class PlanningApplicationController {
 
       // This assumes you have an in-memory array or a service to handle this
       // For example, if using ApplicationsModel from earlier:
-      const newApplication = await PlanningApplicationService.add({name});
+      const newApplication = await PlanningApplicationService.add({
+        reference,
+        description,
+        address,
+        postcode,
+      });
       res.status(StatusCodes.CREATED).json(newApplication);
 
       // For demonstration, just return the new application

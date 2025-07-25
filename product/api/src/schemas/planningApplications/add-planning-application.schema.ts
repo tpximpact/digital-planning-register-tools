@@ -10,19 +10,35 @@ addFormats(ajvInstance);
 
 type AddPlanningApplication = Omit<
   PlanningApplication,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'created_at' | 'updated_at'
 >;
 
 const schema: JSONSchemaType<AddPlanningApplication> = {
   type: 'object',
   properties: {
-    name: {
+    reference: {
       type: 'string',
-      minLength: 2,
-      maxLength: 200,
+      minLength: 3,
+      maxLength: 50,
+    },
+    address: {
+      type: 'string',
+      minLength: 5,
+      maxLength: 500,
+    },
+    postcode: {
+      type: 'string',
+      minLength: 5,
+      maxLength: 10,
+      pattern: '^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][A-Z]{2}$',
+    },
+    description: {
+      type: 'string',
+      minLength: 10,
+      maxLength: 2000,
     },
   },
-  required: ['name'],
+  required: ['reference', 'address', 'postcode', 'description'],
   additionalProperties: false,
 };
 
