@@ -48,8 +48,8 @@ export async function seedDatabase(db: PGlite) {
         const safeDescription = app.description.replace(/'/g, "''");
 
         insertSql += `
-          INSERT INTO planning_applications (reference, address, postcode, description, created_at, updated_at)
-          VALUES ('${app.reference}', '${safeAddress}', '${app.postcode}', '${safeDescription}', '${createdAt}', '${updatedAt}');
+          INSERT INTO planning_applications (reference, address, postcode, description, consultation_start_date, consultation_end_date, latitude, longitude, radius, created_at, updated_at)
+          VALUES ('${app.reference}', '${safeAddress}', '${app.postcode}', '${safeDescription}', '${app.consultation_start_date}', '${app.consultation_end_date}', '${app.latitude}', '${app.longitude}', '${app.radius}', '${createdAt}', '${updatedAt}');
         `;
       }
     } else {

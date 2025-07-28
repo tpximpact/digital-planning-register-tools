@@ -1,9 +1,14 @@
 Table planning_applications {
   id integer [pk, increment]
-  reference varchar(50) [unique, not null]
+  reference varchar(50) [unique]
   address text
   postcode text
   description text
-  created_at timestamp
+  created_at timestamp 
   updated_at timestamp
+  consultation_start_date timestamp
+  consultation_end_date timestamp
+  latitude float
+  longitude float
+  radius integer
 }

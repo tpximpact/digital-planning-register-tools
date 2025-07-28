@@ -41,7 +41,17 @@ class PlanningApplicationController {
 
   async add(req: Request, res: Response, next: NextFunction) {
     try {
-      const {reference, description, address, postcode} = req.body;
+      const {
+        reference,
+        description,
+        address,
+        postcode,
+        consultation_start_date,
+        consultation_end_date,
+        latitude,
+        longitude,
+        radius,
+      } = req.body;
 
       // // Fake add: push to in-memory array (replace with your model/service as needed)
       // const newApplication = {
@@ -58,6 +68,11 @@ class PlanningApplicationController {
         description,
         address,
         postcode,
+        consultation_start_date,
+        consultation_end_date,
+        latitude,
+        longitude,
+        radius,
       });
       res.status(StatusCodes.CREATED).json(newApplication);
 

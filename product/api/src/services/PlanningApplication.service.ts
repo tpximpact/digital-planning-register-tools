@@ -1,5 +1,9 @@
 import {PlanningApplicationNotFoundError} from '../errors';
-import {PlanningApplications} from '../models';
+import {
+  PlanningApplications,
+  PlanningApplication,
+  NewApplicationData,
+} from '../models';
 
 class PlanningApplicationService {
   constructor() {
@@ -7,25 +11,15 @@ class PlanningApplicationService {
       this.getAllPlanningApplications.bind(this);
     this.getPlanningApplicationById =
       this.getPlanningApplicationById.bind(this);
+    this.add = this.add.bind(this);
   }
 
-  async getAllPlanningApplications(): Promise<
-    Array<{
-      id: number;
-      reference: string;
-      address: string;
-      postcode: string;
-      description: string;
-      created_at: Date;
-      updated_at: Date;
-    }>
-  > {
+  async getAllPlanningApplications(): Promise<PlanningApplication[]> {
     const filter = {};
-
     return await PlanningApplications.find(filter).exec();
   }
 
-  async getPlanningApplicationById(id: number) {
+  async getPlanningApplicationById(id: number): Promise<PlanningApplication> {
     const foundApplication = await PlanningApplications.findById(id);
 
     if (!foundApplication) {
@@ -37,12 +31,7 @@ class PlanningApplicationService {
     return foundApplication;
   }
 
-  async add(application: {
-    reference: string;
-    address: string;
-    postcode: string;
-    description: string;
-  }) {
+  async add(application: NewApplicationData): Promise<PlanningApplication> {
     const newApplication = await PlanningApplications.add(application);
     return newApplication;
   }
