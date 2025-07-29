@@ -1,0 +1,12 @@
+{
+  "extends": "config/typescript/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@libs": ["../../packages/libs/src/index.ts"],
+      "@libs/*": ["../../packages/libs/src/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "data"]
+}

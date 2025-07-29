@@ -18,39 +18,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - name: Setup bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: lts/jod
+          bun-version: latest
 
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Install dependencies
-        run: yarn install
+      - name: Install packages
+        run: bun install
 
       - name: Lint code
-        run: yarn run lint
+        run: bun run lint
 
-      - name: Typecheck code
-        run: yarn run typecheck
+      - name: Build code
+        run: bun run build
 
-      - name: Test code
-        run: yarn test
+      - name: Test
+        run: bun run test
 
-      - name: Test code coverage
-        run: yarn coverage
-
-      - name: check for
-        run: pwd
-
-      - name: check for
-        run: ls -lah
-
-      - name: check for
-        run: ls -lah coverage/
-
-      - name: 'Report Coverage'
-        # Set if: always() to also generate the report if tests are failing
-        # Only works if you set `reportOnFailure: true` in your vite config as specified above
-        if: always()
-        uses: davelosert/vitest-coverage-report-action@v2
+      - name: Coverage
+        run: bun run coverage
