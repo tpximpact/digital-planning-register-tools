@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "JavaScript DOM",
+  "extends": "./base.json",
+  "compilerOptions": {
+    // Environment setup, support latest features & stop errors for featres not supported by typescript but supported by bun
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "target": "ES2022",
+    "module": "NodeNext",
+    "jsx": "react-jsx",
+    "allowJs": true,
+
+    // Bundler mode
+    "moduleResolution": "Bundler"
+
+    // possible things to consider to add in if we get bugs later
+
+    // Generate .d.ts files for every TypeScript or JavaScript file inside your project. These .d.ts files are type definition files which describe the external API of your module. With .d.ts files, tools like TypeScript can provide intellisense and accurate types for un-typed code.
+    // "declaration": true,
+    // Generates a source map for .d.ts files which map back to the original .ts source file. This will allow editors such as VS Code to go to the original .ts file when using features like Go to Definition.
+    // You should strongly consider turning this on if you’re using project references.
+    // "declarationMap": true,
+
+    // Tells TypeScript to save information about the project graph from the last compilation to files stored on disk. This creates a series of .tsbuildinfo files in the same folder as your compilation output. They are not used by your JavaScript at runtime and can be safely deleted. You can read more about the flag in the 3.4 release notes.
+    // "incremental": false,
+    // While you can use TypeScript to produce JavaScript code from TypeScript code, it’s also common to use other transpilers such as Babel to do this. However, other transpilers only operate on a single file at a time, which means they can’t apply code transforms that depend on understanding the full type system. This restriction also applies to TypeScript’s ts.transpileModule API which is used by some build tools.
+    // These limitations can cause runtime problems with some TypeScript features like const enums and namespaces. Setting the isolatedModules flag tells TypeScript to warn you if you write certain code that can’t be correctly interpreted by a single-file transpilation process.
+    // It does not change the behavior of your code, or otherwise change the behavior of TypeScript’s checking and emitting process.
+    // "isolatedModules": true,
+  }
+}

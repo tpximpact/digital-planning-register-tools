@@ -1,0 +1,17 @@
+telemetry = false
+
+[run]
+elide-lines = 0
+
+
+[test]
+coverageReporter  = ["text", "lcov"]
+
+# to set different thresholds for lines and functions
+coverageThreshold = { lines = 0.9, functions = 0.9, statements = 0.9 }
+
+# Multiple patterns
+coveragePathIgnorePatterns = [
+  "**/*.spec.ts",
+  "**/*.test.ts",
+]

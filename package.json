@@ -1,0 +1,35 @@
+{
+  "name": "dpr-tools",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "typecheck": "bun scripts/run typecheck",
+    "typeconfig": "bun scripts/run typeconfig",
+    "seed": "bun scripts/run seed",
+    "dev": "bun scripts/run dev",
+    "test": "bun scripts/run test",
+    "test:unit": "bun scripts/run test:unit",
+    "coverage": "bun scripts/run coverage",
+    "test:e2e": "bun scripts/run test:e2e",
+    "build": "bun scripts/run build",
+    "start": "bun scripts/run start",
+    "serve": "bun scripts/run serve",
+    "clean": "bun scripts/run clean",
+    "docker": "bun scripts/run docker",
+    "lint": "eslint .",
+    "format": "eslint . --fix",
+    "workspace": "bun scripts/workspace"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0",
+    "eslint": "^9.32.0"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "handlers/*",
+    "converters/*",
+    "playground/*"
+  ]
+}
