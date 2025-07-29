@@ -1,4 +1,0 @@
-# .husky/pre-commit
-yarn run lint
-yarn run typecheck
-yarn workspace @product/api run test
