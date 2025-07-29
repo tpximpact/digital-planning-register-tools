@@ -1,0 +1,27 @@
+{
+  "name": "components",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "NODE_ENV=production storybook build -o dist",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^4.0.1",
+    "@storybook/addon-docs": "^9.0.18",
+    "@storybook/addon-onboarding": "^9.0.18",
+    "@storybook/blocks": "^8.6.14",
+    "@storybook/experimental-addon-test": "^8.6.14",
+    "@storybook/react": "^9.0.18",
+    "@storybook/test": "^8.6.14",
+    "@types/bun": "latest",
+    "config": "workspace:*",
+    "storybook": "^9.0.18",
+    "vite-tsconfig-paths": "^5.1.4"
+  },
+  "dependencies": {
+    "@storybook/react-vite": "^9.0.18",
+    "govuk-frontend": "^5.11.1"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "test-api-types",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "config": "workspace:*"
+  },
+  "dependencies": {
+    "@elysiajs/eden": "^1.3.2",
+    "@apps/server-api": "workspace:*"
+  }
+}

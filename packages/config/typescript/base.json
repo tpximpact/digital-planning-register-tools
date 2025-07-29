@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
+  "compilerOptions": {
+    // Environment setup, support latest features & stop errors for featres not supported by typescript but supported by bun
+    "lib": ["ESNext"],
+    "target": "ESNext",
+    "module": "Preserve",
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "allowJs": true,
+
+    // Bundler mode
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+
+    // Best practices
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+
+    // Some stricter flags (disabled by default)
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false,
+
+    // Extras we've added to bun's defaults
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+    "resolveJsonModule": true,
+
+    // paths
+    "baseUrl": "../../../",
+    "paths": {
+      "@apps/server-api": ["apps/server-api/src/index.ts"],
+      "@apps/server-api/*": ["apps/server-api/src/*"],
+      "@apps/client-api": ["apps/client-api/src/index.ts"],
+      "@apps/client-api/*": ["apps/client-api/src/*"],
+      "@ui": ["packages/ui/src/index.ts"],
+      "@ui/*": ["packages/ui/src/*"],
+      "@ui/components": ["packages/ui/src/components/index.ts"],
+      "@ui/layouts": ["packages/ui/src/layouts/index.ts"]
+    }
+  },
+
+  "exclude": ["coverage", "node_modules"]
+}

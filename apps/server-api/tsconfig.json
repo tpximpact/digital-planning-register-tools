@@ -1,0 +1,24 @@
+{
+  "extends": "config/typescript/dom.json",
+  "compilerOptions": {
+    // Environment setup, support latest features & stop errors for featres not supported by typescript but supported by bun
+    "module": "ESNext",
+    "jsx": "react",
+
+    "baseUrl": ".",
+    "paths": {
+      "@apps/server-api": ["src/index.ts"],
+      "@apps/server-api/*": ["src/*"],
+      "@apps/client-api": ["../client-api/src/index.ts"],
+      "@apps/client-api/*": ["../client-api/src/*"],
+      "@ui": ["../../packages/ui/src/index.ts"],
+      "@ui/*": ["../../packages/ui/src/*"],
+      "@libs": ["../../packages/libs/src/index.ts"],
+      "@libs/*": ["../../packages/libs/src/*"],
+      "@ui/components": ["../../packages/ui/src/components/index.ts"],
+      "@ui/layouts": ["../../packages/ui/src/layouts/index.ts"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

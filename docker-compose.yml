@@ -1,0 +1,51 @@
+services:
+  server-api:
+    # command: ["tail", "-f", "/dev/null"]
+    build:
+      context: .
+      dockerfile: apps/server-api/Dockerfile
+      tags:
+        - dpr-tools:server-api
+    image: dpr-tools:server-api
+    ports:
+      - "4000:3000"
+    environment:
+      - PORT=3000
+    restart: unless-stopped
+    networks:
+      - dpr-tools
+
+  client-api:
+    # command: ["tail", "-f", "/dev/null"]
+    build:
+      context: .
+      dockerfile: apps/client-api/Dockerfile
+      tags:
+        - dpr-tools:client-api
+    image: dpr-tools:client-api
+    ports:
+      - "3001:3000"
+    environment:
+      - PORT=3000
+    restart: unless-stopped
+    networks:
+      - dpr-tools
+
+  next-example:
+    # command: ["tail", "-f", "/dev/null"]
+    build:
+      context: .
+      dockerfile: apps/next-example/Dockerfile
+      tags:
+        - dpr-tools:next-example
+    image: dpr-tools:next-example
+    ports:
+      - "3002:3000"
+    environment:
+      - PORT=3000
+    restart: unless-stopped
+    networks:
+      - dpr-tools
+
+networks:
+  dpr-tools:
