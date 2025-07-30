@@ -4,54 +4,72 @@
     "address": "The British Museum, Great Russell St",
     "postcode": "WC1B 3DG",
     "description": "Installation of a new exhibition space on the ground floor.",
-    "consultation_start_date": "2023-10-12",
-    "consultation_end_date": "2023-10-26",
+    "consultation_start_date": "2023-10-12T09:00:00Z",
+    "consultation_end_date": "2023-10-26T23:59:59Z",
+    "assessment_decision_date": "2023-11-15T10:00:00Z",
     "latitude": 51.5194,
     "longitude": -0.127,
-    "radius": 800
+    "radius": 800,
+    "processStage": "assessment",
+    "applicationStatus": "determined",
+    "assessmentDecision": "granted"
   },
   {
     "reference": "131415",
     "address": "Trafalgar Square, London",
     "postcode": "WC2N 5DN",
     "description": "Renovation of the fountains and surrounding area.",
-    "consultation_start_date": "2023-10-15",
-    "consultation_end_date": "2023-10-30",
+    "consultation_start_date": "2023-10-15T09:00:00Z",
+    "consultation_end_date": "2023-10-30T23:59:59Z",
+    "assessment_decision_date": "2023-11-20T11:00:00Z",
     "latitude": 51.5085,
     "longitude": -0.128,
-    "radius": 600
+    "radius": 600,
+    "processStage": "assessment",
+    "applicationStatus": "determined",
+    "assessmentDecision": "refused"
   },
   {
     "reference": "161718",
     "address": "The London Eye, South Bank",
     "postcode": "SE1 7PB",
     "description": "Maintenance and upgrade of the observation wheel.",
-    "consultation_start_date": "2023-10-18",
-    "consultation_end_date": "2023-11-02",
+    "consultation_start_date": "2023-10-18T09:00:00Z",
+    "consultation_end_date": "2023-11-02T23:59:59Z",
     "latitude": 51.5033,
     "longitude": -0.1195,
-    "radius": 500
+    "radius": 500,
+    "processStage": "assessment",
+    "applicationStatus": "undetermined",
+    "assessmentDecision": null
   },
   {
     "reference": "192021",
     "address": "St Paul's Cathedral, St Paul's Churchyard",
     "postcode": "EC4M 8AD",
     "description": "Restoration of the dome and surrounding structures.",
-    "consultation_start_date": "2023-10-20",
-    "consultation_end_date": "2023-11-04",
+    "consultation_start_date": "2023-10-20T09:00:00Z",
+    "consultation_end_date": "2023-11-04T23:59:59Z",
+    "assessment_decision_date": "2023-12-01T15:00:00Z",
     "latitude": 51.5138,
     "longitude": -0.0984,
-    "radius": 700
+    "radius": 700,
+    "processStage": "appeal",
+    "applicationStatus": "determined",
+    "assessmentDecision": "refused"
   },
   {
     "reference": "222324",
     "address": "The Tower of London, St Katharine's & Wapping",
     "postcode": "EC3N 4AB",
     "description": "Installation of new security systems and visitor facilities.",
-    "consultation_start_date": "2023-10-22",
-    "consultation_end_date": "2023-11-06",
+    "consultation_start_date": "2023-10-22T09:00:00Z",
+    "consultation_end_date": "2023-11-06T23:59:59Z",
     "latitude": 51.5081,
     "longitude": -0.0759,
-    "radius": 900
+    "radius": 900,
+    "processStage": "validation",
+    "applicationStatus": "withdrawn",
+    "assessmentDecision": null
   }
 ]

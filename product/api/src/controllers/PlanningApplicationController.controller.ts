@@ -28,7 +28,6 @@ class PlanningApplicationController {
   async getById(req: Request, res: Response, next: NextFunction) {
     try {
       const {id} = req.params;
-
       const application =
         await PlanningApplicationService.getPlanningApplicationById(
           parseInt(id),
@@ -41,43 +40,11 @@ class PlanningApplicationController {
 
   async add(req: Request, res: Response, next: NextFunction) {
     try {
-      const {
-        reference,
-        description,
-        address,
-        postcode,
-        consultation_start_date,
-        consultation_end_date,
-        latitude,
-        longitude,
-        radius,
-      } = req.body;
+      const rawData = req.body;
 
-      // // Fake add: push to in-memory array (replace with your model/service as needed)
-      // const newApplication = {
-      //   id: Date.now(), // simple unique id for demo
-      //   name,
-      //   createdAt: new Date(),
-      //   updatedAt: new Date(),
-      // };
+      const newApplication = await PlanningApplicationService.add(rawData);
 
-      // This assumes you have an in-memory array or a service to handle this
-      // For example, if using ApplicationsModel from earlier:
-      const newApplication = await PlanningApplicationService.add({
-        reference,
-        description,
-        address,
-        postcode,
-        consultation_start_date,
-        consultation_end_date,
-        latitude,
-        longitude,
-        radius,
-      });
       res.status(StatusCodes.CREATED).json(newApplication);
-
-      // For demonstration, just return the new application
-      // res.status(StatusCodes.CREATED).json(newApplication);
     } catch (err) {
       return next(err);
     }

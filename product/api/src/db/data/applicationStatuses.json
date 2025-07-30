@@ -1,0 +1,6 @@
+[
+  {"id": 1, "status": "returned"},
+  {"id": 2, "status": "withdrawn"},
+  {"id": 3, "status": "determined"},
+  {"id": 4, "status": "undetermined"}
+]

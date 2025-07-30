@@ -1,14 +1,40 @@
 Table planning_applications {
   id integer [pk, increment]
-  reference varchar(50) [unique]
+  reference varchar(50) [unique, not null]
   address text
   postcode text
   description text
-  created_at timestamp 
-  updated_at timestamp
-  consultation_start_date timestamp
-  consultation_end_date timestamp
   latitude float
   longitude float
   radius integer
+  created_at timestamp
+  updated_at timestamp
+  consultation_start_date timestamp
+  consultation_end_date timestamp
+  application_decision_date timestamp
+  assessment_decision_date timestamp
+  appeal_decision_date timestamp
+  assessment_decision_id integer
+  process_stage_id integer [not null]
+  application_status_id integer [not null]
 }
+
+Table assessment_decisions {
+  id integer [pk, increment]
+  // 'granted' or 'refused'
+  decision varchar(20) [unique, not null]
+}
+
+Table process_stages {
+  id integer [pk, increment]
+  stage varchar(30) [unique, not null]
+}
+
+Table application_statuses {
+  id integer [pk, increment]
+  status varchar(30) [unique, not null]
+}
+
+Ref: planning_applications.assessment_decision_id > assessment_decisions.id
+Ref: planning_applications.process_stage_id > process_stages.id
+Ref: planning_applications.application_status_id > application_statuses.id

@@ -1,0 +1,8 @@
+[
+  {"id": 1, "stage": "submission"},
+  {"id": 2, "stage": "validation"},
+  {"id": 3, "stage": "consultation"},
+  {"id": 4, "stage": "assessment"},
+  {"id": 5, "stage": "appeal"},
+  {"id": 6, "stage": "highCourtAppeal"}
+]

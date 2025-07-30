@@ -4,32 +4,42 @@
     "address": "10 Downing Street, Westminster",
     "postcode": "SW1A 2AA",
     "description": "Erection of a single storey rear extension.",
-    "consultation_start_date": "2023-10-01",
-    "consultation_end_date": "2023-10-15",
+    "consultation_start_date": "2023-10-01T09:00:00Z",
+    "consultation_end_date": "2023-10-22T23:59:59Z",
     "latitude": 51.5034,
     "longitude": -0.1276,
-    "radius": 1000
+    "radius": 1000,
+    "processStage": "assessment",
+    "applicationStatus": "undetermined",
+    "assessmentDecision": null
   },
   {
     "reference": "456",
     "address": "The Shard, 32 London Bridge St",
     "postcode": "SE1 9SG",
     "description": "Installation of new windows on the 72nd floor.",
-    "consultation_start_date": "2023-10-05",
-    "consultation_end_date": "2023-10-20",
+    "consultation_start_date": "2023-10-05T09:00:00Z",
+    "consultation_end_date": "2023-11-05T23:59:59Z",
     "latitude": 51.5045,
     "longitude": -0.0865,
-    "radius": 500
+    "radius": 500,
+    "processStage": "consultation",
+    "applicationStatus": "undetermined",
+    "assessmentDecision": null
   },
   {
     "reference": "789",
     "address": "Buckingham Palace, London",
     "postcode": "SW1A 1AA",
     "description": "Consent to replace the roof of the East Wing.",
-    "consultation_start_date": "2023-10-10",
-    "consultation_end_date": "2023-10-25",
+    "consultation_start_date": "2023-09-01T09:00:00Z",
+    "consultation_end_date": "2023-09-22T23:59:59Z",
+    "assessment_decision_date": "2023-10-20T14:00:00Z",
     "latitude": 51.5014,
     "longitude": -0.1419,
-    "radius": 1500
+    "radius": 1500,
+    "processStage": "assessment",
+    "applicationStatus": "determined",
+    "assessmentDecision": "granted"
   }
 ]
