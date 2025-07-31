@@ -5,6 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "bun run --watch src/index.ts",
+    "test": "bun run test:unit && bun run coverage",
+    "test:unit": "bun test ",
+    "coverage": "bun test --coverage",
     "build": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile server ./src/index.ts",
     "start": "NODE_ENV=production bun src/index.ts",
     "serve": "bun run build && ./server",

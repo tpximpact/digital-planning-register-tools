@@ -6,6 +6,10 @@
   "scripts": {
     "get-package-name": "bun run scripts/get-package-name.ts",
     "dev": "bun scripts/run dev",
+    "test": "bun scripts/run test",
+    "test:unit": "bun scripts/run test:unit",
+    "coverage": "bun scripts/run coverage",
+    "test:e2e": "bun scripts/run test:e2e",
     "build": "bun scripts/run build",
     "start": "bun scripts/run start",
     "serve": "bun scripts/run serve",

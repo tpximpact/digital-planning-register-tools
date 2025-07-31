@@ -1,0 +1,42 @@
+name: Run tests
+
+on:
+  pull_request:
+    branches:
+      - '**' # Run on all branches for pull requests
+  push:
+    branches:
+      - main # Run only on the main branch for pushes
+
+jobs:
+  setup:
+    name: Setup and Cache Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install packages
+        run: bun install
+
+      - name: Lint code
+        run: bun run lint
+
+      - name: Build code
+        run: bun run build
+
+      - name: Test
+        run: bun run test
+
+      # - name: 'Report Coverage'
+      #   # Set if: always() to also generate the report if tests are failing
+      #   # Only works if you set `reportOnFailure: true` in your vite config as specified above
+      #   if: always()
+      #   uses: davelosert/vitest-coverage-report-action@v2
