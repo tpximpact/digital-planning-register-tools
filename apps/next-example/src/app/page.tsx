@@ -1,15 +1,18 @@
-import { ExampleComponent } from "@ui/components";
-import { serverApi } from "@libs";
+import { ExampleComponent } from '@ui/components'
+import { serverApi } from '@libs'
+import { Suspense } from 'react'
 
 export default async function Home() {
-  const { data } = await serverApi.get();
+  const { data } = await serverApi.get()
   return (
     <main>
       <h1>Example next.js app</h1>
-      <code>{data}</code>
+      <Suspense fallback={<div>Loading...</div>}>
+        <code>{data}</code>
+      </Suspense>
       <ExampleComponent
-        name={"from the ui package to the next-example package"}
+        name={'from the ui package to the next-example package'}
       />
     </main>
-  );
+  )
 }
