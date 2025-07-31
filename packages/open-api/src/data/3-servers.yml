@@ -1,0 +1,61 @@
+# ============================================================
+#                  SERVER DEFINITIONS
+# ============================================================
+servers:
+  - url: http://southwark.bops.localhost:3000/api/v2
+    description: Local BOPS dev
+  - url: '{protocol}://{localPlanningAuthority}.bops{environment}.{tld}{port}/api/{version}/{basePath}'
+    description: The production API server
+    variables:
+      protocol:
+        enum:
+          - 'https'
+          - 'http'
+        default: 'https'
+        description: |
+          The protocol can be either `https` or `http`.
+          This is used to differentiate between secure and non-secure connections.
+          The default is `https`, which is the secure protocol.
+      localPlanningAuthority:
+        # note! no enum here means it is an open value
+        default: camden
+        description: |
+          The local planning authority (LPA) is the council responsible for planning in a specific area.
+          This is used to differentiate between different LPAs.
+          The default is `camden`, which is the Camden LPA.
+      environment:
+        enum:
+          - '-staging'
+          - ''
+        default: '-staging'
+        description: |
+          The environment can be either `-staging` or empty.
+          This is used to differentiate between the local, staging and production environments.
+          The default is `-staging`, which is the staging environment.
+      version:
+        enum:
+          - 'v1'
+          - 'v2'
+        default: 'v2'
+        description: |
+          The API version. This is used to differentiate between different versions of the API.
+          The default is `v2`, which is the latest version.
+      tld:
+        enum:
+          - 'services'
+          - 'localhost'
+        default: 'services'
+        description: |
+          The top-level domain (TLD) can be either `services` or `local`.
+          This is used to differentiate between the public and local versions of the API.
+      port:
+        default: ''
+        description: |
+          The port is optional and can be used to specify a custom port for the API.
+          If not specified, it defaults to an empty string.
+          **NB** You will need to prefix the port with a colon if you specify it, e.g. `:3000`.
+      basePath:
+        default: ''
+        description: |
+          The base path is optional and can be used to specify a sub-path for the API.
+          If not specified, it defaults to an empty string.

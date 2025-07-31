@@ -1,0 +1,27 @@
+{
+  "name": "open-api",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    },
+    "./openApi.yml": "./dist/openApi.yml"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "config": "tsc --showConfig",
+    "generate": "bun src/index.ts",
+    "build": "bun src/build.ts && tsc && cp src/openApi.yml dist/openApi.yml",
+    "start": "bun dist/index.js"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4",
+    "js-yaml": "^4.1.0"
+  },
+  "dependencies": {
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,6 @@
+# ============================================================
+#                  EXTERNAL DOCUMENTATION
+# ============================================================
+externalDocs:
+  description: Digital planning data schema repo
+  url: https://github.com/theopensystemslab/digital-planning-data-schemas
