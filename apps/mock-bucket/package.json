@@ -7,18 +7,13 @@
     "dev": "bun run create-data && docker compose up -d && bun run import-data",
     "start": "bun run create-data && docker compose up -d && bun run import-data",
     "serve": "bun run create-data && docker compose up -d && bun run import-data",
-    "create-data": "bun run scripts/create-data.ts",
-    "import-data": "bun run scripts/import-data.ts"
+    "create-data": "bun run src/create-data.ts",
+    "import-data": "bun run src/import-data.ts"
   },
   "dependencies": {
-    "@azure/storage-blob": "^12.28.0",
-    "duckdb": "^1.3.2",
-    "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "@azure/storage-blob": "^12.28.0"
   },
   "devDependencies": {
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
     "@types/bun": "latest",
     "config": "workspace:*"
   }

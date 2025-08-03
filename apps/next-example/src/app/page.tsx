@@ -8,7 +8,7 @@ export default async function Home() {
     <main>
       <h1>Example next.js app</h1>
       <Suspense fallback={<div>Loading...</div>}>
-        <code>{data}</code>
+        <code>{JSON.stringify(data)}</code>
       </Suspense>
       <ExampleComponent
         name={'from the ui package to the next-example package'}

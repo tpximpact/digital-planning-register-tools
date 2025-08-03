@@ -3,8 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@apps/server-api": ["src/index.ts"],
-      "@apps/server-api/*": ["src/*"],
+      "@apps/server-api": ["../server-api/src/index.ts"],
+      "@apps/server-api/*": ["../server-api/src/*"],
       "@libs": ["../../packages/libs/src/index.ts"],
       "@libs/*": ["../../packages/libs/src/*"],
       "@dev-libs": ["../../packages/dev-libs/src/index.ts"],
