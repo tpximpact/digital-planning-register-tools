@@ -7,23 +7,27 @@ import { planningApplications } from './modules/planningApplications/@next/plann
 import { appSetup } from './modules/app/app.controller'
 import { authentication, getInfo, handleErrors } from './middleware'
 import config from './config'
+import { swaggerConfig } from './modules/swagger'
 
 const app = new Elysia()
   .use(getInfo)
   .use(cors({ origin: true }))
+  .use(swagger(swaggerConfig))
+  .use(appSetup)
   .use(
     authentication({
       enabled: config.authentication,
       debug: config.debug
     })
   )
-  .use(swagger())
+  .use(planningApplications({ path: '/api/@next' }))
+  // commented out because of type inheritance issues with Elysia just need to add parse: ['application/json'], for each route for now
   // This is a workaround for ensuring all routes are parsed as JSON see https://github.com/elysiajs/elysia-swagger/issues/215
-  .group('', { parse: ['application/json'] }, (group) =>
-    group.use(appSetup).group('/api/@next', (app) => {
-      return app.use(planningApplications())
-    })
-  )
+  // .group('', { parse: ['application/json'] }, (group) =>
+  //   group.use(appSetup).group('/api/@next', (app) => {
+  //     return app.use(planningApplications())
+  //   })
+  // )
   .use(handleErrors)
 
 export { app }

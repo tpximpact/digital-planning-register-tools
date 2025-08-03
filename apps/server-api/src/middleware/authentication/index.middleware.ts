@@ -1,13 +1,13 @@
-import { Elysia, type PreContext } from 'elysia'
+import { Elysia } from 'elysia'
 import type { DprAuthenticationOptions } from './types'
 import {
   checkAuthentication,
   parseAuthenticationHeader,
   validAuthentication
 } from './auth'
-import { getPath } from './utils'
 import { DprAuthenticationError } from '@apps/server-api/errors'
 import { buildApiErrorResponse } from '../handleErrors/utils'
+import { getPathFromRequest } from '@apps/server-api/libs'
 
 const defaultOptions: DprAuthenticationOptions = {
   enabled: true,
@@ -19,11 +19,14 @@ const defaultOptions: DprAuthenticationOptions = {
  * @param context
  * @returns
  */
-const pathAllowed = (context: PreContext): boolean => {
-  const allowedPaths = ['/', '/healthcheck', '/test']
-  const reqPath = getPath(context.request)
-  // Allow if exact match or if path contains '/public/'
-  return allowedPaths.some((s) => reqPath === s) || reqPath.includes('/public/')
+const pathAllowed = (reqPath: string): boolean => {
+  // allows /, /docs, /healthcheck and /public/ paths without authentication
+  const allowedPaths = ['/docs', '/healthcheck']
+  return (
+    reqPath === '/' ||
+    allowedPaths.some((s) => reqPath.startsWith(s)) ||
+    reqPath.includes('/public/')
+  )
 }
 
 /**
@@ -63,14 +66,17 @@ export function authentication(
     })
     .onRequest((context) => {
       if (options.enabled) {
-        const reqPath = getPath(context.request)
-        if (!pathAllowed(context)) {
+        const reqPath = getPathFromRequest(context.request)
+        if (!pathAllowed(reqPath)) {
           if (options.debug) {
             console.log(`[auth] Path ${reqPath} requires authentication`)
           }
           const authHeader = context.request.headers.get('Authorization')
           if (!authHeader || !authHeader.toLowerCase().startsWith('basic ')) {
-            throw new DprAuthenticationError('Invalid header', realm)
+            throw new DprAuthenticationError(
+              'Invalid authorisation header',
+              realm
+            )
           }
           const credentials = parseAuthenticationHeader(authHeader)
           if (!checkAuthentication(credentials, authMap)) {

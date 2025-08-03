@@ -1,5 +1,6 @@
 import type { DprApiError } from '@apps/server-api/errors'
-import type { NullApiResponse } from '@apps/server-api/modules/app/app.schema'
+import type { NullApiResponse } from '@apps/server-api/schemas'
+
 import type { StatusMap } from 'elysia'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 

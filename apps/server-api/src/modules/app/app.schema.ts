@@ -1,54 +1,37 @@
-import type { Static, TSchema } from 'elysia'
+import { ApiResponseSchema } from '@apps/server-api/schemas'
+import type { Static } from 'elysia'
 import { t } from 'elysia'
-import { StatusCodes, ReasonPhrases } from 'http-status-codes'
 
-// Status schema
-export const ApiStatusSchema = t.Object({
-  code: t.Enum(StatusCodes),
-  message: t.Enum(ReasonPhrases),
-  detail: t.Optional(t.String())
+/**
+ * Schema for the default API response.
+ */
+export const DefaultResponseSchema = ApiResponseSchema(t.Null(), {
+  description: `Successful response`
+})
+export type DefaultResponse = Static<typeof DefaultResponseSchema>
+/**
+ * Schema for the healthcheck response.
+ */
+export const HealthcheckSchema = t.Object({
+  uptime: t.Number(),
+  // date: t.Date()
+  date: t.String({ format: 'date-time' })
+})
+export const HealthcheckResponseSchema = ApiResponseSchema(HealthcheckSchema, {
+  description: `Successful response`
 })
 
-// Generic ApiResponse schema factory
-export const ApiPaginatedResponseSchema = <T extends TSchema>(DataSchema: T) =>
-  t.Object({
-    data: t.Union([DataSchema, t.Null()]),
-    pagination: t.Optional(t.Union([PaginationSchema, CursorPaginationSchema])),
-    status: t.Optional(ApiStatusSchema)
+/**
+ * This is the schema for the required headers for almost all the API endpoints
+ */
+export const apiRequiredHeaders = t.Object({
+  'x-client': t.String({
+    description:
+      'Who is requesting the data, ensures the correct data is returned',
+    example: 'cavyshire-borough-council'
+  }),
+  'x-service': t.String({
+    description: 'What is requesting the data, mostly for diagnostic purposes',
+    example: 'open-api-spec'
   })
-
-export const ApiResponseSchema = <T extends TSchema>(DataSchema: T) =>
-  t.Object({
-    data: t.Union([DataSchema, t.Null()]),
-    status: t.Optional(ApiStatusSchema)
-  })
-
-export const NullApiResponseSchema = ApiResponseSchema(t.Null())
-export type NullApiResponse = Static<typeof NullApiResponseSchema>
-
-// Example usage:
-// const MyDataSchema = t.Object({ foo: t.String() })
-// export const MyApiResponseSchema = ApiResponseSchema(MyDataSchema)
-// export type MyApiResponse = Static<typeof MyApiResponseSchema>
-
-// Pagination schema
-export const PaginationSchema = t.Object({
-  resultsPerPage: t.Number(),
-  currentPage: t.Number(),
-  totalPages: t.Number(),
-  totalResults: t.Number(),
-  totalAvailableItems: t.Optional(t.Number())
 })
-
-export type Pagination = Static<typeof PaginationSchema>
-
-// CursorPagination schema
-export const CursorPaginationSchema = t.Object({
-  resultsPerPage: t.Number(),
-  nextCursor: t.Union([t.String(), t.Null()]),
-  prevCursor: t.Union([t.String(), t.Null()]),
-  totalResults: t.Number(),
-  totalAvailableItems: t.Optional(t.Number())
-})
-
-export type CursorPagination = Static<typeof CursorPaginationSchema>

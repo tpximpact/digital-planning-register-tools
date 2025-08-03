@@ -21,10 +21,3 @@ export function strSafeEqual(
     Buffer.concat([expectedBuffer, Buffer.alloc(maxLength, 0)], maxLength)
   )
 }
-
-/**
- * Get pathname from request url
- */
-export function getPath(request: Request) {
-  return new URL(request.url).pathname
-}

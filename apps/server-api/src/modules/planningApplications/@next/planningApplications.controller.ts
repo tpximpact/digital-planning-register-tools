@@ -1,12 +1,18 @@
-import { Elysia, t } from 'elysia'
-import PlanningApplicationService from '../PlanningApplication.service'
+import { Elysia } from 'elysia'
+import { PostSubmissionPlanningApplicationSchema } from '@apps/server-api/schemas'
+import { PlanningApplicationService } from '@apps/server-api/services'
 import {
-  PlanningApplicationSchema,
-  PlanningApplicationResponseSchema,
-  PlanningApplicationPaginatedResponseSchema
-} from '../PlanningApplication.schema'
+  PlanningApplicationParamsSchema,
+  PlanningApplicationsQuerySchema,
+  PlanningApplicationsResponseSchema
+} from './planningApplications.schema'
+import { apiRequiredHeaders } from '../../app/app.schema'
+import {
+  OkResponseObject,
+  BadRequestResponseObject
+} from '@apps/server-api/libs'
 
-const defaultPath = '/planningApplications'
+const defaultPath = 'planningApplications'
 
 interface PlanningApplicationsOptions<
   Path extends string = typeof defaultPath
@@ -26,71 +32,84 @@ export const planningApplications = <Path extends string = typeof defaultPath>({
   const app = new Elysia({
     name: 'planningApplications',
     prefix: path,
-    tags: ['Planning Applications']
+    detail: {
+      tags: ['Planning Applications']
+    }
   })
     .model({
-      planningApplication: PlanningApplicationSchema,
-      planningApplicationResponse: PlanningApplicationResponseSchema,
-      planningApplicationPaginatedResponse:
-        PlanningApplicationPaginatedResponseSchema
+      // Schemas for schemas section
+      PostSubmissionPlanningApplication: PostSubmissionPlanningApplicationSchema
     })
     .get(
-      '/',
+      `/public/${defaultPath}`,
       async ({ set }) => {
-        console.log('Planning Applications > /')
         try {
           const applications =
             await PlanningApplicationService.getAllPlanningApplications()
-
           return {
-            status: 'success',
-            data: applications
+            data: applications,
+            status: OkResponseObject
           }
-        } catch (error) {
-          console.error(error)
-          set.status = 500
-          return { status: 'error', message: 'Internal Server Error' }
+        } catch {
+          set.status = BadRequestResponseObject.code
+          return {
+            data: null,
+            status: {
+              ...BadRequestResponseObject,
+              detail: 'Unable to fetch planning applications'
+            }
+          }
         }
       },
       {
-        // response: 'apiResponse',
-        // response: {
-        //   200: t.Object({
-        //     status: t.String(),
-        //     data: t.Array(PlanningApplicationSchema)
-        //   }),
-        //   500: t.Object({
-        //     status: t.String(),
-        //     message: t.String()
-        //   })
-        // },
+        headers: apiRequiredHeaders,
+        parse: ['application/json'],
+        query: PlanningApplicationsQuerySchema,
+        response: {
+          200: PlanningApplicationsResponseSchema
+        },
         detail: {
-          summary: 'Get all planning applications',
-          description: 'Retrieve a list of all planning applications'
+          security: [], // Remove this to make endpoint public
+          summary: 'Get all private planning applications',
+          description: 'Retrieve a list of all private planning applications'
         }
       }
     )
     .get(
-      '/:id',
-      ({ params: { id } }) => {
-        console.log(`Planning Applications > /${id}`)
+      `/public/${defaultPath}/:id`,
+      ({ set, params: { id } }) => {
         if (isNaN(Number(id))) {
           throw new Error('Invalid ID')
         }
 
-        const application =
-          PlanningApplicationService.getPlanningApplicationById(id)
-        return application
+        try {
+          const application =
+            PlanningApplicationService.getPlanningApplicationById(id)
+          return {
+            data: application,
+            status: OkResponseObject
+          }
+        } catch {
+          set.status = BadRequestResponseObject.code
+          return {
+            data: null,
+            status: {
+              ...BadRequestResponseObject,
+              detail: 'Unable to fetch planning applications'
+            }
+          }
+        }
       },
       {
-        params: t.Object({
-          id: t.Number()
-        }),
-        transform({ params }) {
-          const id = +params.id
+        headers: apiRequiredHeaders,
+        parse: ['application/json'],
+        params: PlanningApplicationParamsSchema,
 
-          if (!Number.isNaN(id)) params.id = id
-        },
+        // transform({ params }) {
+        //   const id = +params.id
+
+        //   if (!Number.isNaN(id)) params.id = id
+        // },
         detail: {
           summary: 'Get planning application by ID',
           description: 'Retrieve a specific planning application by its ID'

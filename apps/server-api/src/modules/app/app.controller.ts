@@ -1,19 +1,26 @@
 import { Elysia, t } from 'elysia'
-import { ApiResponseSchema } from './app.schema'
-import { ReasonPhrases, StatusCodes } from 'http-status-codes'
+
+import {
+  ApiResponseSchema,
+  ApiPaginatedResponseSchema
+} from '@apps/server-api/schemas'
+import { DefaultResponseSchema, HealthcheckResponseSchema } from './app.schema'
+import { OkResponseObject } from '@apps/server-api/libs'
 
 export const appSetup = new Elysia({
   name: 'appSetup',
   tags: ['Internal']
 })
   .model({
-    apiResponse: ApiResponseSchema(t.Null()),
-    apiPaginatedResponse: ApiResponseSchema(t.Null()),
-    healthcheckResponse: ApiResponseSchema(
-      t.Object({
-        uptime: t.Number(),
-        date: t.Date()
-      })
+    // Sets up the schemas section to show what we would like an apiResponse to be
+    ApiResponse: ApiResponseSchema(t.Union([t.Any(), t.Null()]), {
+      description: 'Default API response schema'
+    }),
+    ApiPaginatedResponse: ApiPaginatedResponseSchema(
+      t.Union([t.Any(), t.Null()]),
+      {
+        description: 'Default API paginated response schema'
+      }
     )
   })
   .get(
@@ -22,14 +29,17 @@ export const appSetup = new Elysia({
       return {
         data: null,
         status: {
-          code: StatusCodes.OK,
-          message: ReasonPhrases.OK,
-          details: 'Mock ODP compliant endpoint'
+          ...OkResponseObject,
+          detail: 'ODP compliant API'
         }
       }
     },
     {
-      response: 'apiResponse'
+      detail: {
+        security: []
+      },
+      parse: ['application/json'],
+      response: DefaultResponseSchema
     }
   )
   .get(
@@ -38,15 +48,18 @@ export const appSetup = new Elysia({
       return {
         data: {
           uptime: process.uptime(),
-          date: new Date()
+          date: new Date().toISOString()
         },
         status: {
-          code: StatusCodes.OK,
-          message: ReasonPhrases.OK
+          ...OkResponseObject
         }
       }
     },
     {
-      response: 'healthcheckResponse'
+      detail: {
+        security: []
+      },
+      parse: ['application/json'],
+      response: HealthcheckResponseSchema
     }
   )

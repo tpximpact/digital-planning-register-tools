@@ -1,20 +1,25 @@
-import type { PlanningApplication } from './PlanningApplication.schema'
+import type { PostSubmissionPlanningApplication } from '../schemas'
 
 // Example in-memory store (for development/testing)
-const applications: PlanningApplication[] = [
+const applications: PostSubmissionPlanningApplication[] = [
   {
     id: 1,
     name: 'Application 1',
-    createdAt: new Date(),
-    updatedAt: new Date()
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
   },
   {
     id: 2,
     name: 'Application 2',
-    createdAt: new Date(),
-    updatedAt: new Date()
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
   },
-  { id: 3, name: 'Application 3', createdAt: new Date(), updatedAt: new Date() }
+  {
+    id: 3,
+    name: 'Application 3',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  }
 ]
 
 class PlanningApplicationModel {
@@ -23,10 +28,10 @@ class PlanningApplicationModel {
     this.findById = this.findById.bind(this)
   }
 
-  find(_filter: Partial<PlanningApplication>) {
+  find(_filter: Partial<PostSubmissionPlanningApplication>) {
     // Simulate an async API
     return {
-      exec: async (): Promise<PlanningApplication[]> => {
+      exec: async (): Promise<PostSubmissionPlanningApplication[]> => {
         return new Promise((resolve) => {
           setTimeout(() => {
             // For now, ignore filter and return all
@@ -37,7 +42,9 @@ class PlanningApplicationModel {
     }
   }
 
-  async findById(id: number): Promise<PlanningApplication | undefined> {
+  async findById(
+    id: number
+  ): Promise<PostSubmissionPlanningApplication | undefined> {
     // Simulate an async API with a delay
     return new Promise((resolve, reject) => {
       setTimeout(() => {
