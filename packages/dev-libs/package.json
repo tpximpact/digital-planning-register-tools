@@ -1,0 +1,12 @@
+{
+  "name": "dev-libs",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "config": "workspace:*"
+  },
+  "dependencies": {
+    "@apps/server-api": "workspace:*"
+  }
+}

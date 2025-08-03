@@ -1,21 +1,9 @@
 import type { PostSubmissionPlanningApplication } from '../schemas'
-
-function generateFakeApplications(
-  count = 50
-): PostSubmissionPlanningApplication[] {
-  const now = new Date().toISOString()
-  return Array.from({ length: count }, (_, i) => ({
-    id: i + 1,
-    name: `Application ${i + 1}`,
-    createdAt: now,
-    updatedAt: now
-    // Add other fields as needed for your schema
-  }))
-}
+import { generateApplications } from '@dev-libs'
 
 // Example in-memory store (for development/testing)
 const applications: PostSubmissionPlanningApplication[] = []
-applications.push(...generateFakeApplications(50))
+applications.push(...generateApplications(50))
 
 class PlanningApplicationModel {
   constructor() {

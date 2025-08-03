@@ -87,3 +87,7 @@ but if we get any issues (unlikely) we can switch to
   "moduleResolution": "node10"
 }
 ```
+
+## mock-bucket
+
+Download https://azure.microsoft.com/en-us/products/storage/storage-explorer/#Download-4
