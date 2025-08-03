@@ -3,6 +3,7 @@ import { ApiResponseSchema } from './app.schema'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 
 export const appSetup = new Elysia({
+  name: 'appSetup',
   tags: ['Internal']
 })
   .model({
@@ -18,7 +19,6 @@ export const appSetup = new Elysia({
   .get(
     '/',
     () => {
-      console.log('App > /')
       return {
         data: null,
         status: {
@@ -35,7 +35,6 @@ export const appSetup = new Elysia({
   .get(
     '/healthcheck',
     () => {
-      console.log('App > /healthcheck')
       return {
         data: {
           uptime: process.uptime(),

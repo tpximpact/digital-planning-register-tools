@@ -1,5 +1,8 @@
+import { env } from '@libs/env'
+
 interface Config {
   environment: string
+  debug: boolean
   port: number
   rateLimitMax: number
   rateLimitDuration: number
@@ -7,17 +10,18 @@ interface Config {
 }
 
 const config: Config = {
-  environment: process.env.NODE_ENV || 'development',
-  port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,
-  rateLimitMax: process.env.RATE_LIMIT_MAX
-    ? parseInt(process.env.RATE_LIMIT_MAX, 10)
-    : 10,
-  rateLimitDuration: process.env.RATE_LIMIT_DURATION
-    ? parseInt(process.env.RATE_LIMIT_DURATION, 10)
+  environment: env?.NODE_ENV || env?.ENV || 'development',
+  debug:
+    env?.DEBUG === 'true' ||
+    env?.NODE_ENV === 'development' ||
+    env?.ENV === 'development',
+  port: env?.PORT ? parseInt(env.PORT, 10) : 3000,
+  rateLimitMax: env?.RATE_LIMIT_MAX ? parseInt(env.RATE_LIMIT_MAX, 10) : 10,
+  rateLimitDuration: env?.RATE_LIMIT_DURATION
+    ? parseInt(env.RATE_LIMIT_DURATION, 10)
     : 60000,
   authentication:
-    process.env.AUTHENTICATION === 'true' ||
-    process.env.NODE_ENV === 'development'
+    env?.AUTHENTICATION === 'true' || env?.NODE_ENV === 'development'
       ? true
       : false
 }

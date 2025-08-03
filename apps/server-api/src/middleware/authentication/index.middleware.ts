@@ -1,13 +1,13 @@
 import { Elysia, type PreContext } from 'elysia'
-import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 import type { DprAuthenticationOptions } from './types'
 import {
   checkAuthentication,
   parseAuthenticationHeader,
   validAuthentication
 } from './auth'
-import { DprAuthenticationError } from './error'
 import { getPath } from './utils'
+import { DprAuthenticationError } from '@apps/server-api/errors'
+import { buildApiErrorResponse } from '../handleErrors/utils'
 
 const defaultOptions: DprAuthenticationOptions = {
   enabled: true,
@@ -38,7 +38,9 @@ export function authentication(
   }
 
   if (options.debug) {
-    console.log(`Authentication options: ${JSON.stringify(options)}`)
+    console.info(
+      `[authentication] Authentication options: ${JSON.stringify(options)}`
+    )
   }
 
   const realm = 'DPR API Authentication'
@@ -51,10 +53,11 @@ export function authentication(
     .state('dprAuthenticated', false as boolean | null)
     .error({ DPR_AUTHENTICATION_ERROR: DprAuthenticationError })
     .onError({ as: 'global' }, ({ code, error }) => {
+      // Normally we'd handle this in error handle middleware but this one needs an extra check so we catch it here instead
       if (code === 'DPR_AUTHENTICATION_ERROR' && error.realm === realm) {
-        return new Response(ReasonPhrases.UNAUTHORIZED, {
-          status: StatusCodes.UNAUTHORIZED,
-          headers: { 'WWW-Authenticate': `Basic realm="${realm}"` }
+        const response = buildApiErrorResponse(error)
+        return Response.json(response, {
+          status: response.status?.code
         })
       }
     })

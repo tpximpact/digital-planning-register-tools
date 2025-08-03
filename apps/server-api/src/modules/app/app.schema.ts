@@ -23,6 +23,9 @@ export const ApiResponseSchema = <T extends TSchema>(DataSchema: T) =>
     status: t.Optional(ApiStatusSchema)
   })
 
+export const NullApiResponseSchema = ApiResponseSchema(t.Null())
+export type NullApiResponse = Static<typeof NullApiResponseSchema>
+
 // Example usage:
 // const MyDataSchema = t.Object({ foo: t.String() })
 // export const MyApiResponseSchema = ApiResponseSchema(MyDataSchema)

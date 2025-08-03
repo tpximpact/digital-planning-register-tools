@@ -1,8 +1,9 @@
-import cli from "next/dist/cli/next-start";
+import cli from 'next/dist/cli/next-start'
+import { env } from '@libs/env'
 
-const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+const port = env?.PORT ? parseInt(env.PORT, 10) : 3000
 
 cli.nextStart({
   port,
-  hostname: process.env.HOSTNAME || "0.0.0.0",
-});
+  hostname: env?.HOSTNAME || '0.0.0.0'
+})

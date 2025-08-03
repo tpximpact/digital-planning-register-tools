@@ -24,6 +24,7 @@ export const planningApplications = <Path extends string = typeof defaultPath>({
   path = defaultPath as Path
 }: PlanningApplicationsOptions<Path> = {}) => {
   const app = new Elysia({
+    name: 'planningApplications',
     prefix: path,
     tags: ['Planning Applications']
   })

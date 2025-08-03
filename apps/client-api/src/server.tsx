@@ -1,7 +1,8 @@
 import { serve } from 'bun'
 import index from './index.html'
+import { env } from '@libs/env'
 
-const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000
+const port = env?.PORT ? parseInt(env.PORT, 10) : 3000
 
 const server = serve({
   routes: {
@@ -31,7 +32,7 @@ const server = serve({
     }
   },
 
-  development: process.env.NODE_ENV !== 'production' && {
+  development: env?.NODE_ENV !== 'production' && {
     // Enable browser hot reloading in development
     hmr: true,
 
