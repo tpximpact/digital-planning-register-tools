@@ -1,26 +1,21 @@
 import type { PostSubmissionPlanningApplication } from '../schemas'
 
+function generateFakeApplications(
+  count = 50
+): PostSubmissionPlanningApplication[] {
+  const now = new Date().toISOString()
+  return Array.from({ length: count }, (_, i) => ({
+    id: i + 1,
+    name: `Application ${i + 1}`,
+    createdAt: now,
+    updatedAt: now
+    // Add other fields as needed for your schema
+  }))
+}
+
 // Example in-memory store (for development/testing)
-const applications: PostSubmissionPlanningApplication[] = [
-  {
-    id: 1,
-    name: 'Application 1',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  },
-  {
-    id: 2,
-    name: 'Application 2',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  },
-  {
-    id: 3,
-    name: 'Application 3',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  }
-]
+const applications: PostSubmissionPlanningApplication[] = []
+applications.push(...generateFakeApplications(50))
 
 class PlanningApplicationModel {
   constructor() {
@@ -28,14 +23,20 @@ class PlanningApplicationModel {
     this.findById = this.findById.bind(this)
   }
 
-  find(_filter: Partial<PostSubmissionPlanningApplication>) {
+  find(
+    _filter: Partial<PostSubmissionPlanningApplication>,
+    page = 1,
+    resultsPerPage = 10
+  ) {
     // Simulate an async API
     return {
       exec: async (): Promise<PostSubmissionPlanningApplication[]> => {
         return new Promise((resolve) => {
           setTimeout(() => {
-            // For now, ignore filter and return all
-            resolve(applications)
+            // For now, ignore filter and paginate all
+            const start = (page - 1) * resultsPerPage
+            const end = start + resultsPerPage
+            resolve(applications.slice(start, end))
           }, 100) // 100ms delay
         })
       }

@@ -72,9 +72,7 @@ export const ApiPaginatedResponseSchema = <T extends TSchema>(
   t.Object(
     {
       data: t.Union([DataSchema, t.Null()]),
-      pagination: t.Optional(
-        t.Union([OffsetPaginationSchema, CursorPaginationSchema])
-      ),
+      pagination: t.Union([OffsetPaginationSchema, CursorPaginationSchema]),
       status: t.Optional(ApiStatusSchema)
     },
     options

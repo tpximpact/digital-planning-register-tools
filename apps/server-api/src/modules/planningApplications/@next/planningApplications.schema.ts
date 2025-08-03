@@ -1,5 +1,6 @@
 import {
   ApiResponseSchema,
+  ApiPaginatedResponseSchema,
   PostSubmissionPlanningApplicationSchema
 } from '@apps/server-api/schemas'
 import { t, type Static } from 'elysia'
@@ -7,7 +8,7 @@ import { t, type Static } from 'elysia'
 /**
  * Schema for the /planningApplications API response.
  */
-export const PlanningApplicationsResponseSchema = ApiResponseSchema(
+export const PlanningApplicationsResponseSchema = ApiPaginatedResponseSchema(
   t.Array(PostSubmissionPlanningApplicationSchema),
   {
     description: `Successful response`
@@ -20,12 +21,26 @@ export type PlanningApplicationsResponse = Static<
 /**
  * Schema for the /planningApplications queries.
  */
-export const PlanningApplicationsQuerySchema = t.Optional(
-  t.Object({
-    page: t.Optional(t.Number({ default: 1 })),
-    resultsPerPage: t.Optional(t.Number({ default: 10 }))
-  })
+export const PlanningApplicationsQuerySchema = t.Object({
+  page: t.Optional(t.Number({ default: 1 })),
+  resultsPerPage: t.Optional(t.Number({ default: 10 }))
+})
+export type PlanningApplicationsQuery = Static<
+  typeof PlanningApplicationsQuerySchema
+>
+
+/**
+ * Schema for the /planningApplications API response.
+ */
+export const PlanningApplicationResponseSchema = ApiResponseSchema(
+  PostSubmissionPlanningApplicationSchema,
+  {
+    description: `Successful response`
+  }
 )
+export type PlanningApplicationResponse = Static<
+  typeof PlanningApplicationResponseSchema
+>
 
 /**
  * Schema for the /planningApplication params.

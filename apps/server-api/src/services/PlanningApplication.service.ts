@@ -1,18 +1,42 @@
 import { PlanningApplicationModel } from '../models'
-import type { PostSubmissionPlanningApplication } from '../schemas'
+import type { PlanningApplicationsQuery } from '../modules/planningApplications/@next/planningApplications.schema'
+import type {
+  OffsetPagination,
+  PostSubmissionPlanningApplication
+} from '../schemas'
 
 class PlanningApplicationService {
   constructor() {
-    this.getAllPlanningApplications = this.getAllPlanningApplications.bind(this)
+    this.getPlanningApplicationsOffsetPaginated =
+      this.getPlanningApplicationsOffsetPaginated.bind(this)
     this.getPlanningApplicationById = this.getPlanningApplicationById.bind(this)
   }
 
-  async getAllPlanningApplications(): Promise<
-    PostSubmissionPlanningApplication[]
-  > {
+  async getPlanningApplicationsOffsetPaginated(
+    query: PlanningApplicationsQuery
+  ): Promise<{
+    pagination: OffsetPagination
+    applications: PostSubmissionPlanningApplication[]
+  }> {
     const filter = {}
 
-    return await PlanningApplicationModel.find(filter).exec()
+    const page = query.page || 1
+    const resultsPerPage = query.resultsPerPage || 10
+
+    const applications = await PlanningApplicationModel.find(
+      filter,
+      page,
+      resultsPerPage
+    ).exec()
+
+    const pagination: OffsetPagination = {
+      resultsPerPage,
+      currentPage: page,
+      totalPages: Math.ceil(applications.length / resultsPerPage),
+      totalResults: applications.length,
+      totalAvailableItems: applications.length
+    }
+    return { pagination, applications }
   }
 
   async getPlanningApplicationById(

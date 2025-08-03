@@ -1,8 +1,12 @@
-import { Elysia } from 'elysia'
-import { PostSubmissionPlanningApplicationSchema } from '@apps/server-api/schemas'
+import { Elysia, t } from 'elysia'
+import {
+  ApiResponseSchema,
+  PostSubmissionPlanningApplicationSchema
+} from '@apps/server-api/schemas'
 import { PlanningApplicationService } from '@apps/server-api/services'
 import {
   PlanningApplicationParamsSchema,
+  PlanningApplicationResponseSchema,
   PlanningApplicationsQuerySchema,
   PlanningApplicationsResponseSchema
 } from './planningApplications.schema'
@@ -42,12 +46,15 @@ export const planningApplications = <Path extends string = typeof defaultPath>({
     })
     .get(
       `/public/${defaultPath}`,
-      async ({ set }) => {
+      async ({ set, query }) => {
         try {
-          const applications =
-            await PlanningApplicationService.getAllPlanningApplications()
+          const { pagination, applications: data } =
+            await PlanningApplicationService.getPlanningApplicationsOffsetPaginated(
+              query
+            )
           return {
-            data: applications,
+            data,
+            pagination,
             status: OkResponseObject
           }
         } catch {
@@ -66,7 +73,13 @@ export const planningApplications = <Path extends string = typeof defaultPath>({
         parse: ['application/json'],
         query: PlanningApplicationsQuerySchema,
         response: {
-          200: PlanningApplicationsResponseSchema
+          200: PlanningApplicationsResponseSchema,
+          400: ApiResponseSchema(t.Null(), {
+            description: 'Bad Request'
+          }),
+          500: ApiResponseSchema(t.Null(), {
+            description: 'Internal Server Error'
+          })
         },
         detail: {
           security: [], // Remove this to make endpoint public
@@ -77,14 +90,14 @@ export const planningApplications = <Path extends string = typeof defaultPath>({
     )
     .get(
       `/public/${defaultPath}/:id`,
-      ({ set, params: { id } }) => {
+      async ({ set, params: { id } }) => {
         if (isNaN(Number(id))) {
           throw new Error('Invalid ID')
         }
 
         try {
           const application =
-            PlanningApplicationService.getPlanningApplicationById(id)
+            await PlanningApplicationService.getPlanningApplicationById(id)
           return {
             data: application,
             status: OkResponseObject
@@ -95,7 +108,7 @@ export const planningApplications = <Path extends string = typeof defaultPath>({
             data: null,
             status: {
               ...BadRequestResponseObject,
-              detail: 'Unable to fetch planning applications'
+              detail: 'Unable to fetch planning application'
             }
           }
         }
@@ -104,7 +117,15 @@ export const planningApplications = <Path extends string = typeof defaultPath>({
         headers: apiRequiredHeaders,
         parse: ['application/json'],
         params: PlanningApplicationParamsSchema,
-
+        response: {
+          200: PlanningApplicationResponseSchema,
+          400: ApiResponseSchema(t.Null(), {
+            description: 'Bad Request'
+          }),
+          500: ApiResponseSchema(t.Null(), {
+            description: 'Internal Server Error'
+          })
+        },
         // transform({ params }) {
         //   const id = +params.id
 

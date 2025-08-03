@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "storybook dev -p 6006",
+    "dev": "storybook dev --no-open -p 6006",
     "build": "NODE_ENV=production storybook build -o dist",
     "clean": "rm -rf dist"
   },
