@@ -11,7 +11,7 @@
     "build": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile server ./src/server.ts",
     "start": "NODE_ENV=production bun src/server.ts",
     "serve": "bun run build && ./server",
-    "clean": "rm server && rm .*.bun-build",
+    "clean": "rm server && rm .*.bun-build && rm -rf logs",
     "docker": "cd ../.. && docker build -t dpr-tools:server-api -f ./apps/server-api/Dockerfile ."
   },
   "dependencies": {

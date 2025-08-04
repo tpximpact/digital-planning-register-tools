@@ -3,7 +3,15 @@
   "compilerOptions": {
     // Environment setup, support latest features & stop errors for featres not supported by typescript but supported by bun
     "target": "ESNext",
-    "module": "Preserve"
+    "module": "Preserve",
+
+    "baseUrl": ".",
+    "paths": {
+      "@apps/server-api": ["../../apps/server-api/src/index.ts"],
+      "@apps/server-api/*": ["../../apps/server-api/src/*"],
+      "@libs": ["../../packages/libs/src/index.ts"],
+      "@libs/*": ["../../packages/libs/src/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", ".storybook"]

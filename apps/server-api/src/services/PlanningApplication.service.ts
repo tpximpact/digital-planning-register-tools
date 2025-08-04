@@ -27,7 +27,7 @@ class PlanningApplicationService {
       filter,
       page,
       resultsPerPage
-    ).exec()
+    )
 
     const pagination: OffsetPagination = {
       resultsPerPage,

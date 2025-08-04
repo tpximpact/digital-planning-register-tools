@@ -8,7 +8,7 @@ services:
         - dpr-tools:server-api
     image: dpr-tools:server-api
     ports:
-      - "4000:3000"
+      - '4000:3000'
     environment:
       - PORT=3000
     restart: unless-stopped
@@ -24,7 +24,7 @@ services:
         - dpr-tools:client-api
     image: dpr-tools:client-api
     ports:
-      - "3001:3000"
+      - '3001:3000'
     environment:
       - PORT=3000
     restart: unless-stopped
@@ -40,12 +40,28 @@ services:
         - dpr-tools:next-example
     image: dpr-tools:next-example
     ports:
-      - "3002:3000"
+      - '3002:3000'
     environment:
       - PORT=3000
     restart: unless-stopped
     networks:
       - dpr-tools
+
+  mock-bucket:
+    image: mcr.microsoft.com/azure-storage/azurite
+    hostname: azurite
+    restart: always
+    ports:
+      - '10000:10000'
+      - '10001:10001'
+      - '10002:10002'
+    volumes:
+      - azurite-data:/data
+    networks:
+      - dpr-tools
+
+volumes:
+  azurite-data:
 
 networks:
   dpr-tools:

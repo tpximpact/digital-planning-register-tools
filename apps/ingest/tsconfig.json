@@ -6,11 +6,9 @@
       "@apps/server-api": ["../server-api/src/index.ts"],
       "@apps/server-api/*": ["../server-api/src/*"],
       "@libs": ["../../packages/libs/src/index.ts"],
-      "@libs/*": ["../../packages/libs/src/*"],
-      "@dev-libs": ["../../packages/dev-libs/src/index.ts"],
-      "@dev-libs/*": ["../../packages/dev-libs/src/*"]
+      "@libs/*": ["../../packages/libs/src/*"]
     }
   },
   "include": ["src"],
-  "exclude": ["node_modules", "data"]
+  "exclude": ["node_modules"]
 }

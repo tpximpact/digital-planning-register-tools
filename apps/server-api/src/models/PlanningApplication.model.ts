@@ -1,5 +1,5 @@
 import type { PostSubmissionPlanningApplication } from '../schemas'
-import { generateApplications } from '@dev-libs'
+import { generateApplications } from '@libs'
 
 // Example in-memory store (for development/testing)
 const applications: PostSubmissionPlanningApplication[] = []
