@@ -16,7 +16,9 @@
       "@libs": ["../../packages/libs/src/index.ts"],
       "@libs/*": ["../../packages/libs/src/*"],
       "@ui/components": ["../../packages/ui/src/components/index.ts"],
-      "@ui/layouts": ["../../packages/ui/src/layouts/index.ts"]
+      "@ui/layouts": ["../../packages/ui/src/layouts/index.ts"],
+      "@open-api": ["../../packages/open-api/src/index.ts"],
+      "@open-api/*": ["../../packages/open-api/src/*"]
     }
   },
   "include": ["src"],

@@ -1,10 +1,5 @@
 {
-  "extends": "../config/typescript/base.json",
-  "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
-    "noEmit": false
-  },
-  "exclude": ["src/data"],
-  "include": ["src/index.ts"]
+  "extends": "config/typescript/base.json",
+  "include": ["src"],
+  "exclude": ["src/data"]
 }

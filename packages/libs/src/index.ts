@@ -6,3 +6,4 @@ export {
   connectDuckDBToMinio,
   queryMinioParquet
 } from './object-store'
+export { openApiDoc } from './open-api-yaml'

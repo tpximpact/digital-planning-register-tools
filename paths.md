@@ -19,7 +19,9 @@ Nb you may have to change the paths to fix any relevant links etc
     "@ui": ["../../packages/ui/src/index.ts"],
     "@ui/*": ["../../packages/ui/src/*"],
     "@ui/components": ["../../packages/ui/src/components/index.ts"],
-    "@ui/layouts": ["../../packages/ui/src/layouts/index.ts"]
+    "@ui/layouts": ["../../packages/ui/src/layouts/index.ts"],
+    "@open-api": ["../../packages/open-api/src/index.ts"],
+    "@open-api/*": ["../../packages/open-api/src/*"]
   }
 }
 ```

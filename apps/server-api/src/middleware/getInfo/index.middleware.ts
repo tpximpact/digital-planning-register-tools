@@ -17,7 +17,8 @@ export const getInfo = new Elysia()
     if (
       reqPath === '/' ||
       reqPath.startsWith('/docs') ||
-      reqPath === '/healthcheck'
+      reqPath === '/healthcheck' ||
+      reqPath === '/swagger'
     ) {
       return
     }

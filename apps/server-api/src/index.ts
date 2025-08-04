@@ -8,6 +8,7 @@ import { appSetup } from './modules/app/app.controller'
 import { authentication, getInfo, handleErrors } from './middleware'
 import config from './config'
 import { swaggerConfig } from './modules/swagger'
+import { openApiDoc } from '@libs'
 
 const app = new Elysia()
   .use(getInfo)
@@ -28,6 +29,9 @@ const app = new Elysia()
   //     return app.use(planningApplications())
   //   })
   // )
+  .get('/swagger', () => {
+    return openApiDoc
+  })
   .use(handleErrors)
 
 export { app }

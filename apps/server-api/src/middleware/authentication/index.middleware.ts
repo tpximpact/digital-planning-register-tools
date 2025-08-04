@@ -21,7 +21,7 @@ const defaultOptions: DprAuthenticationOptions = {
  */
 const pathAllowed = (reqPath: string): boolean => {
   // allows /, /docs, /healthcheck and /public/ paths without authentication
-  const allowedPaths = ['/docs', '/healthcheck']
+  const allowedPaths = ['/docs', '/healthcheck', '/swagger']
   return (
     reqPath === '/' ||
     allowedPaths.some((s) => reqPath.startsWith(s)) ||
