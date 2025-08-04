@@ -16,17 +16,17 @@ bun install
 
 bun run dev
 
+bun run seed
+
 http://localhost:4000
 # http://localhost:3000
 http://localhost:3001
 
-bun add --filter='components' govuk-frontend
 
-bun run --filter '*' dev
-
-./workspace.sh --filter='@apps/server-api' dev
-
-./workspace.sh --filter='@apps/client-api' dev
+# to run in individual packages
+bun workspace components bun add govuk-frontend
+bun workspace @apps/server-api bun run dev
+bun workspace @apps/client-api bun run dev
 
 ```
 
@@ -47,9 +47,8 @@ bun run --elide-lines 0 --filter='@apps/dpr-api'  config
 # or https://bun.com/docs/runtime/bunfig#bun-run
 bun run --filter='@apps/dpr-api' -c=bunfig.toml config
 
-# or
-./run.sh --filter='@apps/dpr-api' config
-
+# or use our script
+bun workspace @apps/server-api bun run config
 ```
 
 ---

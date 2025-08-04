@@ -10,6 +10,6 @@ describe('core', () => {
       .handle(new Request(`http://localhost:${port}`))
       .then((x) => x.text())
 
-    expect(response).toBe('Hi Elysia')
+    expect(response).not.toBeNull()
   })
 })

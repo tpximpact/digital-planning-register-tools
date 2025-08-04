@@ -10,7 +10,11 @@
       "@apps/server-api": ["../../apps/server-api/src/index.ts"],
       "@apps/server-api/*": ["../../apps/server-api/src/*"],
       "@libs": ["../../packages/libs/src/index.ts"],
-      "@libs/*": ["../../packages/libs/src/*"]
+      "@libs/*": ["../../packages/libs/src/*"],
+      "@ui": ["src/index.ts"],
+      "@ui/*": ["src/*"],
+      "@ui/components": ["src/components/index.ts"],
+      "@ui/layouts": ["src/layouts/index.ts"]
     }
   },
   "include": ["src"],

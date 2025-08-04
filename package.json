@@ -17,7 +17,8 @@
     "clean": "bun scripts/run clean",
     "docker": "bun scripts/run docker",
     "lint": "eslint .",
-    "format": "eslint . --fix"
+    "format": "eslint . --fix",
+    "workspace": "bun scripts/workspace"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -28,8 +29,5 @@
   "workspaces": [
     "packages/*",
     "apps/*"
-  ],
-  "dependencies": {
-    "duckdb": "^1.3.2"
-  }
+  ]
 }
