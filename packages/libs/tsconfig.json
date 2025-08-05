@@ -1,5 +1,20 @@
 {
   "extends": "config/typescript/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@apps/server-api": ["../../apps/server-api/src/index.ts"],
+      "@apps/server-api/*": ["../../apps/server-api/src/*"],
+      "@apps/client-api": ["../../apps/client-api/src/index.ts"],
+      "@apps/client-api/*": ["../../apps/client-api/src/*"],
+      "@ui": ["../ui/src/index.ts"],
+      "@ui/*": ["../ui/src/*"],
+      "@ui/components": ["../ui/src/components/index.ts"],
+      "@ui/layouts": ["../ui/src/layouts/index.ts"],
+      "@open-api": ["../open-api/src/index.ts"],
+      "@open-api/*": ["../open-api/src/*"]
+    }
+  },
   "include": ["src"],
   "exclude": ["node_modules"]
 }
