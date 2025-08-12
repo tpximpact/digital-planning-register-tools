@@ -9,6 +9,16 @@ import { authentication, getInfo, handleErrors } from './middleware'
 import config from './config'
 import { swaggerConfig } from './modules/swagger'
 
+// import appJson from 'digital-planning-data-schemas/schemas/application.json'
+// import type { SiteAddress } from 'digital-planning-data-schemas/types/shared/Addresses.ts'
+// const address: SiteAddress = {
+//   title: 'Site Address',
+//   x: 1,
+//   y: 2,
+//   latitude: 51.5074,
+//   longitude: -0.1278
+// }
+
 const app = new Elysia()
   .use(getInfo)
   .use(cors({ origin: true }))

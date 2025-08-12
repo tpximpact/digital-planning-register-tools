@@ -1,9 +1,11 @@
 {
-  "name": "@apps/mock-bucket",
+  "name": "@dpr/mock-bucket",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
+    "typecheck": "tsc --noEmit",
+    "typeconfig": "tsc --showConfig",
     "dev": "./src/dev.sh",
     "seed": "bun run create-data && bun run import-data",
     "create-data": "bun run src/create-data.ts",
@@ -14,6 +16,7 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "config": "workspace:*"
+    "@dpr/config": "workspace:*",
+    "typescript": "^5"
   }
 }

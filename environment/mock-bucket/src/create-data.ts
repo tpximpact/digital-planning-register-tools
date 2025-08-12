@@ -1,4 +1,4 @@
-import { generateApplications } from '@libs'
+import { generateApplications } from '@dpr/libs'
 import * as fs from 'fs'
 import * as path from 'path'
 

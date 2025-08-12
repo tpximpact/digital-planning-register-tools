@@ -1,7 +1,7 @@
 #!/bin/sh
 
 docker run --rm --name object-init \
-  --network dpr-tools \
+  --network dpr-network \
   --env-file .env.development \
   --entrypoint /bin/sh \
   minio/mc:latest -c \

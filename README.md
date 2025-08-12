@@ -14,19 +14,37 @@ This repository is a monorepo. The structure is as follows
 ```bash
 bun install
 
+docker compose up -d
 bun run dev
 
 bun run seed
 
+# view the API at
 http://localhost:4000
-# http://localhost:3000
-http://localhost:3001
 
+# view admin at
+http://localhost:3000
+
+# view storybook at
+http://localhost:6006
 
 # to run in individual packages
 bun workspace components bun add govuk-frontend
 bun workspace @dpr/api bun run dev
 bun workspace @dpr/api bun run dev
+
+#
+bun run typecheck
+
+```
+
+## Admin
+
+You may need .env instead of .env.development
+
+```
+bun run workspace @dpr/admin bun run db:studio
+bunx drizzle-kit generate --custom --name=seed-clients
 
 ```
 
@@ -94,3 +112,9 @@ Download https://azure.microsoft.com/en-us/products/storage/storage-explorer/#Do
 ## Script naming conventions
 
 - `seed` - will run seed scripts, initialisations etc called immediatley after dev, startr or serve
+
+## Experimental environment
+
+```sh
+docker compose -f environment/docker-compose.yml up -d
+```

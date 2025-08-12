@@ -3,18 +3,27 @@
 import eslint from '@eslint/js'
 import globals from 'globals'
 import tseslint, { configs as tsConfigs } from 'typescript-eslint'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
 
 // base apps - cli scripts w typescript etc
 // const baseApps = ['']
 
 // packages that run in the browser
-const browserApps = ['apps/api']
+const browserApps = ['apps/api', 'packages/react-app', 'apps/admin']
 
 // packages that use react
-// const reactApps = ['apps/react-app', 'apps/next-example']
+const reactApps = ['packages/react-app', 'apps/admin']
 
 // packages that use nextjs
-// const nextApps = ['apps/next-example']
+// const nextApps = ['apps/admin']
+
+const reactConfigs = reactApps.map((appPath) => ({
+  files: [`${appPath}/**/*.{js,mjs,cjs,ts,mts,cts}`],
+  // add global variables for browser environment
+  name: `browser configs for ${appPath}`,
+  // --- Accessibility Rules ---
+  extends: [jsxA11y.flatConfigs.recommended]
+}))
 
 const browserConfigs = browserApps.map((appPath) => ({
   files: [`${appPath}/**/*.{js,mjs,cjs,ts,mts,cts}`],
@@ -59,7 +68,8 @@ const config = tseslint.config(
       ]
     }
   },
-  ...browserConfigs
+  ...browserConfigs,
+  ...reactConfigs
 )
 
 export default config

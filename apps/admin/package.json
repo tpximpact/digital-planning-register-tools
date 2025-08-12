@@ -1,0 +1,41 @@
+{
+  "name": "@dpr/admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "typeconfig": "tsc --showConfig",
+    "dev": "bun run scripts/dev.ts",
+    "seed": "bun run db:generate && bun run db:migrate",
+    "build": "next build && cp -r .next/static .next/standalone/apps/admin/.next/static && cp -r public .next/standalone/apps/admin/public",
+    "start": "NODE_ENV=production bun run scripts/start.ts",
+    "serve": "bun run build && NODE_ENV=production bun run .next/standalone/apps/admin/server.js",
+    "clean": "rm -rf .next",
+    "docker": "cd ../.. && docker build -t dpr-tools:admin -f ./apps/admin/Dockerfile .",
+    "lint": "next lint",
+    "db:generate": "drizzle-kit generate --config=drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config=drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config=drizzle.config.ts",
+    "db:push": "drizzle-kit push --config=drizzle.config.ts"
+  },
+  "dependencies": {
+    "@dpr/libs": "workspace:*",
+    "@dpr/ui": "workspace:*",
+    "drizzle-orm": "^0.44.4",
+    "drizzle-typebox": "^0.3.3",
+    "next": "15.4.4",
+    "pg": "^8.16.3",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@dpr/config": "workspace:*",
+    "@electric-sql/pglite-socket": "^0.0.12",
+    "@types/node": "^20",
+    "@types/pg": "^8.15.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.3",
+    "typescript": "^5"
+  }
+}
