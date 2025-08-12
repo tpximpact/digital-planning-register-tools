@@ -1,6 +1,6 @@
-import { type PostSubmissionPlanningApplication } from '@apps/server-api/schemas'
+import { type PostSubmissionPlanningApplication } from '@dpr/api/schemas'
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
-import { env } from '@libs'
+import { env } from '@dpr/libs'
 
 const MINIO_ENDPOINT = 'http://localhost:9000'
 const MINIO_BUCKET = 'public-applications'

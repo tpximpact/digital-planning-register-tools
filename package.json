@@ -30,6 +30,7 @@
     "apps/*",
     "handlers/*",
     "converters/*",
-    "playground/*"
+    "playground/*",
+    "environment/*"
   ]
 }

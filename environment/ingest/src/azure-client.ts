@@ -1,5 +1,5 @@
 import { BlobServiceClient } from '@azure/storage-blob'
-import { env } from '@libs'
+import { env } from '@dpr/libs'
 
 const AZURITE_BLOB_URL = env?.AZURE_BLOB_URL
 const AZURITE_ACCOUNT = env?.AZURE_ACCOUNT

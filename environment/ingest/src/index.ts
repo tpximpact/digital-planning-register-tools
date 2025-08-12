@@ -4,7 +4,7 @@ import { Value } from '@sinclair/typebox/value'
 import {
   PostSubmissionPlanningApplicationSchema,
   type PostSubmissionPlanningApplication
-} from '@apps/server-api/schemas'
+} from '@dpr/api/schemas'
 import { uploadToMinio } from './store-client'
 
 // Function to validate schema

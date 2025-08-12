@@ -41,8 +41,9 @@ const folders = await Promise.all([
   readdir('apps').then(mapPrefix('apps')),
   readdir('packages').then(mapPrefix('packages')),
   readdir('handlers').then(mapPrefix('handlers')),
-  readdir('converters').then(mapPrefix('converters')),
-  readdir('playground').then(mapPrefix('playground'))
+  readdir('converters').then(mapPrefix('converters'))
+  // readdir('playground').then(mapPrefix('playground'))
+  // readdir('environment').then(mapPrefix('environment'))
 ]).then((x) => x.reduce((x, y) => [...x, ...y], []))
 
 const paths = await Promise.all(

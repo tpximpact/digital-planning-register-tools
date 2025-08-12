@@ -1,5 +1,5 @@
 import { BlobServiceClient } from '@azure/storage-blob'
-import { env } from '@libs'
+import { env } from '@dpr/libs'
 import * as fs from 'fs'
 import * as path from 'path'
 

@@ -1,5 +1,5 @@
 {
-  "name": "test-api-types",
+  "name": "@dpr/client-api-consumer",
   "version": "0.0.0",
   "private": true,
   "type": "module",

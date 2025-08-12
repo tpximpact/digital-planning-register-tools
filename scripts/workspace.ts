@@ -59,6 +59,10 @@ async function getWorkspacePackages() {
     ...(await readdir('playground')).map((folder) => ({
       prefix: 'playground',
       folder
+    })),
+    ...(await readdir('environment')).map((folder) => ({
+      prefix: 'environment',
+      folder
     }))
   ]
 

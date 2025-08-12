@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "config": "workspace:*"
+    "@dpr/config": "workspace:*",
+    "typescript": "^5"
   }
 }
