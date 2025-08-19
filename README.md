@@ -48,6 +48,20 @@ bunx drizzle-kit generate --custom --name=seed-clients
 
 ```
 
+### Database migrations:
+
+If you want to make changes to the client table in the database, for example adding a new column, follow the instructions below:
+
+Make changes to the clients pgTable in `apps/admin/src/db/client.ts`. Run the following commands:
+
+- `bun workspace @dpr/admin bunx drizzle-kit generate`
+
+  This will generate a new migration file in `apps/admin/migrations`
+
+- `bun workspace @dpr/admin bunx drizzle-kit migrate`
+
+  This will apply the new migration to the database table
+
 ## Deploy
 
 ```bash
