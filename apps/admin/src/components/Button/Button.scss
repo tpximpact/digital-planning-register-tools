@@ -1,0 +1,36 @@
+$dpr-information-button-colour: govuk-colour('blue');
+$dpr-information-button-text-colour: govuk-colour('white');
+$dpr-information-button-hover-colour: govuk-shade(
+  $dpr-information-button-colour,
+  10%
+);
+$dpr-information-button-shadow-colour: govuk-shade(
+  $dpr-information-button-colour,
+  40%
+);
+
+// Because the shadow (s0) is visually 'part of' the button, we need to reduce
+// the height of the button to compensate by adjusting its padding (s1) and
+// increase the bottom margin to include it (s2).
+// $button-shadow-size: $govuk-border-width-form-element;
+
+.govuk-button.dpr-button--information {
+  background-color: $dpr-information-button-colour;
+  // box-shadow: 0 $button-shadow-size 0 $dpr-information-button-shadow-colour;
+
+  &,
+  &:link,
+  &:visited,
+  &:active,
+  &:hover {
+    color: $dpr-information-button-text-colour;
+  }
+
+  &:hover {
+    background-color: $dpr-information-button-hover-colour;
+
+    &[disabled] {
+      background-color: $dpr-information-button-colour;
+    }
+  }
+}
