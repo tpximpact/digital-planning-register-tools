@@ -1,0 +1,10 @@
+@use 'sass:meta';
+@use 'typography';
+
+$sizes: ('s', 'm', 'l', 'xl');
+
+@each $size in $sizes {
+  .dpr-heading__#{$size} {
+    @extend %govuk-heading-#{$size};
+  }
+}

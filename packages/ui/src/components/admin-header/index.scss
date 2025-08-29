@@ -1,0 +1,21 @@
+@use 'sass:meta';
+@use 'global' as *;
+@use 'govuk-base' as *;
+@use 'grid';
+
+.dpr-header {
+  background-color: govuk-colour('black');
+
+  &__wrapper {
+    @include grid.apply-width-container;
+  }
+
+  &__title {
+    color: govuk-colour('white');
+    @include govuk-media-query($media-type: print) {
+      color: $govuk-print-text-colour;
+    }
+    @include govuk-responsive-margin(6, 'top');
+  }
+}
+@include grid.apply(dpr-header);

@@ -1,0 +1,7 @@
+@mixin debug($title: 'DEBUG', $debug: false) {
+  @if $debug {
+    @debug '\a\a==========\av START #{$title}\a';
+    @content;
+    @debug '\a\a ^ END #{$title}\a==========\a';
+  }
+}

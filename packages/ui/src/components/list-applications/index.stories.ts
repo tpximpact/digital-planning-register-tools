@@ -1,6 +1,6 @@
-import '@dpr/ui/global.css'
-
 import type { Meta, StoryObj } from '@storybook/react'
+
+import '../../styles/index.css'
 
 import { ListApplications, type ListApplicationsProps } from '.'
 

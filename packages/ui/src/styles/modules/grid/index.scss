@@ -1,0 +1,36 @@
+@use 'global' as *;
+@use 'govuk-base' as *;
+
+// allows you to namespace the govuk styles to the component
+@mixin apply($selector: dpr-grid) {
+  .#{$selector}__grid-row {
+    @include govuk-clearfix;
+    margin-right: -($govuk-gutter-half);
+    margin-left: -($govuk-gutter-half);
+  }
+
+  @each $width in map-keys($govuk-grid-widths) {
+    .#{$selector}__grid-column-#{$width} {
+      @include govuk-grid-column($width);
+    }
+  }
+
+  // These *must* be defined in a separate loop as they have the same
+  // specificity as the non-breakpoint specific classes, so need to appear after
+  // them in the outputted CSS
+  @each $width in map-keys($govuk-grid-widths) {
+    .#{$selector}__grid-column-#{$width}-from-desktop {
+      @include govuk-grid-column($width, $at: desktop);
+    }
+  }
+}
+
+@mixin apply-width-container($selector: null, $width: $govuk-page-width) {
+  @if $selector != null {
+    #{$selector} {
+      @include govuk-width-container($width: $width);
+    }
+  } @else {
+    @include govuk-width-container($width: $width);
+  }
+}

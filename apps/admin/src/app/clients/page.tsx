@@ -1,8 +1,8 @@
 import { ClientsTable } from '../../components/ClientsTable'
 import type { Client } from '../../types/types'
 import { getClients } from './actions'
-import { Button } from '../../components/Button/Button'
-import { BackButton } from '../../components/BackButton/BackButton'
+import { GovukPageLayout } from '@dpr/ui/layouts'
+import { GovukHeading, GovukButton } from '@dpr/ui/components'
 
 export default async function ClientsPage() {
   let clients: Client[] = []
@@ -16,37 +16,32 @@ export default async function ClientsPage() {
   }
 
   return (
-    <div className="govuk-width-container">
-      <BackButton baseUrl="/" />
-      <main className="govuk-main-wrapper govuk-main-wrapper--l">
-        <header className="govuk-header">
-          <h1 className="govuk-heading-l">All clients</h1>
-        </header>
-        <div>
-          <Button element="link" href="/clients/add">
-            Add New Client
-          </Button>
+    <GovukPageLayout backLink="/">
+      <GovukHeading size={'l'} tag={'h2'}>
+        Clients
+      </GovukHeading>
+      <GovukButton tag="a" href="/clients/add">
+        Add New Client
+      </GovukButton>
+
+      {fetchError && (
+        <div role="alert">
+          <p className="govuk-body">{fetchError}</p>
         </div>
+      )}
 
-        {fetchError && (
-          <div role="alert">
-            <p className="govuk-body">{fetchError}</p>
-          </div>
-        )}
-
-        {!fetchError && (
-          <>
-            {clients.length > 0 ? (
-              <ClientsTable clients={clients} />
-            ) : (
-              <div>
-                <h2>No clients found</h2>
-                <p>Get started by adding your first client.</p>
-              </div>
-            )}
-          </>
-        )}
-      </main>
-    </div>
+      {!fetchError && (
+        <>
+          {clients.length > 0 ? (
+            <ClientsTable clients={clients} />
+          ) : (
+            <div>
+              <h2>No clients found</h2>
+              <p>Get started by adding your first client.</p>
+            </div>
+          )}
+        </>
+      )}
+    </GovukPageLayout>
   )
 }

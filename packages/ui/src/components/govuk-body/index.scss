@@ -1,0 +1,13 @@
+@use 'sass:meta';
+@use 'typography';
+
+$sizes: ('s', 'm', 'l', 'lede');
+
+@each $size in $sizes {
+  .dpr-body__#{$size} {
+    @if $size == 'lede' {
+      $size: 'l';
+    }
+    @extend %govuk-body-#{$size};
+  }
+}

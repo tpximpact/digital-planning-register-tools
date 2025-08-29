@@ -1,0 +1,57 @@
+// By adding a path to `packages/ui/src/styles/packages` in loadPaths
+// we can 'trick' sass into allowing us to use @import but without throwing
+// 100 deprecated warnings as it thinks govuk is an external package. That
+// means we can benefit from the govuk library but without all the errors
+// that come with it! 🎉
+
+// In this module we're only interested in those base/reset styles from govuk
+// which turns out to not be a lot, things like govuk-link etc should be done as components anyway
+
+@use 'sass:meta';
+
+@use '../../modules/global' as *;
+
+// 'Base' includes everything from settings, tools and helpers. Nothing
+// in the base outputs any CSS.
+@import 'govuk-frontend/dist/govuk/base';
+
+// Basic content styles for typography, links etc. Approximately 10% of
+// the CSS output if you include everything.
+
+// @import 'govuk-frontend/dist/govuk/core/index';
+// @import 'govuk-frontend/dist/govuk/core/govuk-frontend-properties';
+@import 'govuk-frontend/dist/govuk/core/links';
+@import 'govuk-frontend/dist/govuk/core/lists';
+@import 'govuk-frontend/dist/govuk/core/typography';
+@import 'govuk-frontend/dist/govuk/core/section-break';
+@import 'govuk-frontend/dist/govuk/core/global-styles';
+
+// Objects include things like the page template, grid and form groups.
+// Approximately 5% of the CSS output if you include everything.
+
+// @import 'govuk-frontend/dist/govuk/objects/index';
+// @import 'govuk-frontend/dist/govuk/objects/button-group';
+// @import 'govuk-frontend/dist/govuk/objects/form-group';
+// @import 'govuk-frontend/dist/govuk/objects/grid';
+// @import 'govuk-frontend/dist/govuk/objects/main-wrapper';
+// @import 'govuk-frontend/dist/govuk/objects/template';
+// @import 'govuk-frontend/dist/govuk/objects/width-container';
+
+// Utilities, for example govuk-clearfix or govuk-visually-hidden.
+// Approximately 1% of the CSS output if you include everything.
+
+// @import 'govuk-frontend/dist/govuk/utilities/index';
+// @import 'govuk-frontend/dist/govuk/utilities/clearfix';
+// @import 'govuk-frontend/dist/govuk/utilities/visually-hidden';
+
+// Overrides, used to adjust things like the amount of spacing on an
+// element. Override classes always include `-!-` in the class name.
+// Approximately 15% of the CSS output if you include everything.
+
+// @import 'govuk-frontend/dist/govuk/overrides/index';
+// @import 'govuk-frontend/dist/govuk/overrides/display';
+// @import 'govuk-frontend/dist/govuk/overrides/spacing';
+// @import 'govuk-frontend/dist/govuk/overrides/text-align';
+// @import 'govuk-frontend/dist/govuk/overrides/typography';
+// @import 'govuk-frontend/dist/govuk/overrides/width';
+//

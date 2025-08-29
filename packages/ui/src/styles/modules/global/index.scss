@@ -1,0 +1,17 @@
+@use 'sass:meta';
+
+// forward (export) vars/mixins to be used everywhere
+@forward 'vars' as global-*;
+@forward 'mixins' as global-*;
+@forward 'functions' as global-*;
+@forward 'vars-govuk'; // no prefix on govuk vars
+
+// use them here as a little demo
+@use 'vars';
+@use 'mixins';
+@use 'functions';
+
+// @include mixins.debug('🌏 GLOBAL MODULE 🌏', vars.$debug) {
+//   @debug '\a\ainside the global module the $debug value is: #{vars.$debug}';
+//   @debug meta.module-variables('vars');
+// }

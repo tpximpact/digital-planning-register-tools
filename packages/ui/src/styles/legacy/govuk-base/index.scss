@@ -1,0 +1,14 @@
+// this module is designed to just export helpers into our plugins
+// whilst still preventing those deprecated errors!
+
+@use 'global' as *;
+
+@import 'govuk-frontend/dist/govuk/base';
+
+@include govuk-exports('govuk/objects/width-container') {
+  // trick govuk into thinking its exported the css already
+  // that way it render css we dont want it to
+}
+@import 'govuk-frontend/dist/govuk/objects/width-container';
+
+$govuk-rebrand-template-background-colour: $_govuk-rebrand-template-background-colour;
