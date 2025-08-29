@@ -1,0 +1,5 @@
+@use 'sass:meta';
+
+@use '../../modules/global' as *;
+@import 'govuk-frontend/dist/govuk/base';
+@import 'govuk-frontend/dist/govuk/components/service-navigation/index';

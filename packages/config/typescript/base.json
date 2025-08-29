@@ -40,11 +40,11 @@
       "@dpr/api/schemas": ["apps/api/src/schemas/index.ts"],
       // packages
       "@dpr/config": ["packages/config/*"],
-      "@dpr/libs": ["packages/libs/src/index.ts"],
-      "@dpr/ui": ["packages/ui/src/index.ts"],
-      "@dpr/ui/global.css": ["packages/ui/src/global.css"],
-      "@dpr/ui/components": ["packages/ui/src/components/index.ts"],
-      "@dpr/ui/layouts": ["packages/ui/src/layouts/index.ts"]
+      "@dpr/libs": ["packages/libs/src/index.ts"]
+      // "@dpr/ui/styles/*": ["packages/ui/dist/styles/*"]
+      // "@dpr/ui": ["packages/ui/src/index.ts"],
+      // "@dpr/ui/components": ["packages/ui/src/components/index.ts"],
+      // "@dpr/ui/layouts": ["packages/ui/src/layouts/index.ts"]
     }
   },
 

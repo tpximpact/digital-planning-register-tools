@@ -1,17 +1,13 @@
-import { Button } from '../components/Button/Button'
+import { GovukPageLayout } from '@dpr/ui/layouts'
+import { GovukHeading, GovukBody } from '@dpr/ui/components'
 
 export default async function Home() {
   return (
-    <div className="govuk-width-container">
-      <main className="govuk-main-wrapper govuk-main-wrapper--l">
-        <h1 className="govuk-heading-l">Admin Dashboard</h1>
-        <p className="govuk-body">
-          Welcome to the admin dashboard. Click below to view the client table.
-        </p>
-        <Button element="link" href="/clients" className="govuk-link">
-          View all clients
-        </Button>
-      </main>
-    </div>
+    <GovukPageLayout>
+      <GovukHeading size={'l'} tag={'h2'}>
+        Admin Dashboard
+      </GovukHeading>
+      <GovukBody>Welcome to the admin dashboard.</GovukBody>
+    </GovukPageLayout>
   )
 }

@@ -1,0 +1,18 @@
+@use 'sass:map';
+@use 'global' as *;
+
+@use 'govuk-base' as *;
+@use 'grid';
+@use 'govuk-back-link';
+@use 'govuk-main-wrapper';
+
+@include grid.apply-width-container('.govuk-width-container');
+@include grid.apply-width-container(
+  '.govuk-no-width-container',
+  map.get($govuk-breakpoints, 'desktop')
+);
+.govuk-no-width-container {
+  max-width: 100%;
+  margin-right: $govuk-gutter-half;
+  margin-left: $govuk-gutter-half;
+}

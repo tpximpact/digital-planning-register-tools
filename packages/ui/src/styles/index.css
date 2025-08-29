@@ -1,0 +1,134 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:root {
+  --govuk-frontend-version: "5.11.2";
+  --govuk-breakpoint-mobile: 20rem;
+  --govuk-frontend-breakpoint-mobile: var(--govuk-breakpoint-mobile);
+  --govuk-breakpoint-tablet: 40.0625rem;
+  --govuk-frontend-breakpoint-tablet: var(--govuk-breakpoint-tablet);
+  --govuk-breakpoint-desktop: 48.0625rem;
+  --govuk-frontend-breakpoint-desktop: var(--govuk-breakpoint-desktop);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.govuk-template {
+  background-color: #f3f2f1;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+.govuk-template--rebranded {
+  background-color: #f4f8fb;
+}
+
+@supports (position: -webkit-sticky) or (position: sticky) {
+  .govuk-template {
+    scroll-padding-top: 60px;
+  }
+  .govuk-template:not(:has(.govuk-exit-this-page)) {
+    scroll-padding-top: 0;
+  }
+}
+@media screen {
+  .govuk-template {
+    overflow-y: scroll;
+  }
+}
+
+.govuk-template__body {
+  margin: 0;
+  background-color: #ffffff;
+}
+

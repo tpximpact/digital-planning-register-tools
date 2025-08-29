@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation'
 import { getClientById } from '../actions'
-import { BackButton } from 'apps/admin/src/components/BackButton/BackButton'
-import { Button } from 'apps/admin/src/components/Button/Button'
-
+import { GovukPageLayout } from '@dpr/ui/layouts'
+import { GovukHeading, GovukButton } from '@dpr/ui/components'
 export default async function ClientDetailPage({
   params
 }: {
@@ -18,34 +17,33 @@ export default async function ClientDetailPage({
   const baseUrl = `/clients/`
 
   return (
-    <div className="govuk-width-container">
-      <BackButton baseUrl={baseUrl} />
-      <main className="govuk-main-wrapper govuk-main-wrapper--l">
-        <h1 className="govuk-heading-l">Client Details</h1>
-        <div>
-          <p className="govuk-body">
-            <strong>ID:</strong> {client.id}
-          </p>
-          <p className="govuk-body">
-            <strong>Name:</strong> {client.name}
-          </p>
-          <p className="govuk-body">
-            <strong>Endpoint:</strong> {client.endpoint}
-          </p>
-        </div>
-        <div className="govuk-button-group">
-          <Button element="link" href={`/clients/${client.id}/edit`}>
-            Edit Client
-          </Button>
-          <Button
-            variant="warning"
-            element="link"
-            href={`/clients/${client.id}/delete`}
-          >
-            Delete Client
-          </Button>
-        </div>
-      </main>
-    </div>
+    <GovukPageLayout backLink={baseUrl}>
+      <GovukHeading size={'l'} tag={'h2'}>
+        Client details
+      </GovukHeading>
+      <div>
+        <p className="govuk-body">
+          <strong>ID:</strong> {client.id}
+        </p>
+        <p className="govuk-body">
+          <strong>Name:</strong> {client.name}
+        </p>
+        <p className="govuk-body">
+          <strong>Endpoint:</strong> {client.endpoint}
+        </p>
+      </div>
+      <div className="govuk-button-group">
+        <GovukButton tag="a" href={`/clients/${client.id}/edit`}>
+          Edit Client
+        </GovukButton>
+        <GovukButton
+          variant="warning"
+          tag="a"
+          href={`/clients/${client.id}/delete`}
+        >
+          Delete Client
+        </GovukButton>
+      </div>
+    </GovukPageLayout>
   )
 }

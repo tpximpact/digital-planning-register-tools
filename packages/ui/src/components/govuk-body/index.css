@@ -1,0 +1,211 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dpr-body__l, .dpr-body__lede {
+  color: #0b0c0c;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.1111111111;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+@media print {
+  .dpr-body__l, .dpr-body__lede {
+    color: #000000;
+  }
+}
+@media print {
+  .dpr-body__l, .dpr-body__lede {
+    font-family: sans-serif;
+  }
+}
+@media (min-width: 40.0625em) {
+  .dpr-body__l, .dpr-body__lede {
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+}
+@media print {
+  .dpr-body__l, .dpr-body__lede {
+    font-size: 18pt;
+    line-height: 1.15;
+  }
+}
+@media (min-width: 40.0625em) {
+  .dpr-body__l, .dpr-body__lede {
+    margin-bottom: 30px;
+  }
+}
+
+.dpr-body__m {
+  color: #0b0c0c;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.25;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+@media print {
+  .dpr-body__m {
+    color: #000000;
+  }
+}
+@media print {
+  .dpr-body__m {
+    font-family: sans-serif;
+  }
+}
+@media (min-width: 40.0625em) {
+  .dpr-body__m {
+    font-size: 1.1875rem;
+    line-height: 1.3157894737;
+  }
+}
+@media print {
+  .dpr-body__m {
+    font-size: 14pt;
+    line-height: 1.15;
+  }
+}
+@media (min-width: 40.0625em) {
+  .dpr-body__m {
+    margin-bottom: 20px;
+  }
+}
+
+.dpr-body__s {
+  color: #0b0c0c;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.1428571429;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+@media print {
+  .dpr-body__s {
+    color: #000000;
+  }
+}
+@media print {
+  .dpr-body__s {
+    font-family: sans-serif;
+  }
+}
+@media (min-width: 40.0625em) {
+  .dpr-body__s {
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+}
+@media print {
+  .dpr-body__s {
+    font-size: 14pt;
+    line-height: 1.2;
+  }
+}
+@media (min-width: 40.0625em) {
+  .dpr-body__s {
+    margin-bottom: 20px;
+  }
+}

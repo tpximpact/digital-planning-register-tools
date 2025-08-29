@@ -1,0 +1,128 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.govuk-skip-link {
+  text-decoration: underline;
+  text-decoration-thickness: max(1px, .0625rem);
+  text-underline-offset: 0.1578em;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.1428571429;
+  display: block;
+  padding: 10px 15px;
+}
+.govuk-skip-link:not(:active):not(:focus):not(.\:focus) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.govuk-skip-link:link, .govuk-skip-link:visited {
+  color: #0b0c0c;
+}
+@media print {
+  .govuk-skip-link:link, .govuk-skip-link:visited {
+    color: #000000;
+  }
+}
+.govuk-skip-link:hover {
+  color: rgba(11, 12, 12, 0.99);
+}
+.govuk-skip-link:active, .govuk-skip-link:focus {
+  color: #0b0c0c;
+}
+@media print {
+  .govuk-skip-link:active, .govuk-skip-link:focus {
+    color: #000000;
+  }
+}
+@media print {
+  .govuk-skip-link {
+    font-family: sans-serif;
+  }
+}
+@media (min-width: 40.0625em) {
+  .govuk-skip-link {
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+}
+@media print {
+  .govuk-skip-link {
+    font-size: 14pt;
+    line-height: 1.2;
+  }
+}
+@supports (padding: max(calc(0px))) {
+  .govuk-skip-link {
+    padding-right: max(15px, calc(15px + env(safe-area-inset-right)));
+    padding-left: max(15px, calc(15px + env(safe-area-inset-left)));
+  }
+}
+.govuk-skip-link:focus {
+  outline: 3px solid #ffdd00;
+  outline-offset: 0;
+  background-color: #ffdd00;
+}
+
+.govuk-skip-link-focused-element:focus {
+  outline: none;
+}
+
