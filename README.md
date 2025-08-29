@@ -12,6 +12,9 @@ This repository is a monorepo. The structure is as follows
 ## Run locally
 
 ```bash
+# make sure you have latest bun version!
+bun upgrade
+
 bun install
 
 docker compose up -d
