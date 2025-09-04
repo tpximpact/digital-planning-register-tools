@@ -10,18 +10,23 @@ const { data } = await client.get()
 
 // response: 1895
 // .id({ id: 1 })
-const { data: applicationsData } = await client.api[
-  '@next'
-].public.planningApplications.get({
-  headers: {
-    'x-client': 'cavyshire',
-    'x-service': 'client-api-consumer'
-  },
-  query: {}
-})
+const { data: applications, error: searchError } =
+  await client.api.handlers.bops[
+    '@next'
+  ].public.planningApplications.search.get({
+    headers: {
+      'x-client': 'cavyshire',
+      'x-service': 'client-api-consumer'
+    },
+    query: {}
+  })
+if (searchError) console.error('Search Error:', searchError.value)
+else console.log('Search Result:', applications)
 
-const { data: id } = await client.api['@next'].public
-  .planningApplications({ id: 1 })
+const { data: application, error: showError } = await client.api.handlers.bops[
+  '@next'
+].public
+  .planningApplications({ reference: '1' })
   .get({
     headers: {
       'x-client': 'cavyshire',
@@ -30,6 +35,9 @@ const { data: id } = await client.api['@next'].public
     query: {}
   })
 
+if (showError) console.error('Show Error:', showError.value)
+else console.log('Single Application Result:', application)
+
 // // response: { id: 1895, name: 'Skadi' }
 // const { data: nendoroid } = await client.mirror.post({
 //   id: 1895,
@@ -37,6 +45,6 @@ const { data: id } = await client.api['@next'].public
 // })
 
 console.log(data)
-console.log(applicationsData)
-console.log(id)
+console.log(applications)
+console.log(application)
 // console.log(nendoroid)

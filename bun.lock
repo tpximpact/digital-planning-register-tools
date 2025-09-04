@@ -36,6 +36,7 @@
       "name": "@dpr/api",
       "version": "0.0.0",
       "dependencies": {
+        "@dpr/bops-handlers": "workspace:*",
         "@dpr/libs": "workspace:*",
         "@elysiajs/cors": "^1.3.3",
         "@elysiajs/swagger": "^1.3.1",
@@ -100,6 +101,23 @@
       "devDependencies": {
         "@dpr/config": "workspace:*",
         "@types/bun": "latest",
+        "typescript": "^5",
+      },
+    },
+    "handlers/bops": {
+      "name": "@dpr/bops-handlers",
+      "version": "0.0.0",
+      "dependencies": {
+        "@dpr/libs": "workspace:*",
+        "@elysiajs/cors": "^1.3.3",
+        "@elysiajs/swagger": "^1.3.1",
+        "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",
+        "elysia": "latest",
+        "elysia-rate-limit": "^4.4.0",
+        "http-status-codes": "^2.3.0",
+      },
+      "devDependencies": {
+        "@dpr/config": "workspace:*",
         "typescript": "^5",
       },
     },
@@ -345,6 +363,8 @@
     "@dpr/admin": ["@dpr/admin@workspace:apps/admin"],
 
     "@dpr/api": ["@dpr/api@workspace:apps/api"],
+
+    "@dpr/bops-handlers": ["@dpr/bops-handlers@workspace:handlers/bops"],
 
     "@dpr/client-api-consumer": ["@dpr/client-api-consumer@workspace:playground/client-api-consumer"],
 
