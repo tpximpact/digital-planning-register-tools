@@ -2,12 +2,11 @@ import { Elysia } from 'elysia'
 import { swagger } from '@elysiajs/swagger'
 import { cors } from '@elysiajs/cors'
 
-import { planningApplications } from './modules/planningApplications/@next/planningApplications.controller'
-
 import { appSetup } from './modules/app/app.controller'
 import { authentication, getInfo, handleErrors } from './middleware'
 import config from './config'
 import { swaggerConfig } from './modules/swagger'
+import { bopsHandlers } from '@dpr/bops-handlers'
 
 // import appJson from 'digital-planning-data-schemas/schemas/application.json'
 // import type { SiteAddress } from 'digital-planning-data-schemas/types/shared/Addresses.ts'
@@ -30,15 +29,20 @@ const app = new Elysia()
       debug: config.debug
     })
   )
-  .use(planningApplications({ path: '/api/@next' }))
-  // commented out because of type inheritance issues with Elysia just need to add parse: ['application/json'], for each route for now
-  // This is a workaround for ensuring all routes are parsed as JSON see https://github.com/elysiajs/elysia-swagger/issues/215
-  // .group('', { parse: ['application/json'] }, (group) =>
-  //   group.use(appSetup).group('/api/@next', (app) => {
-  //     return app.use(planningApplications())
-  //   })
-  // )
+  .group('/api/handlers/bops/@next/public/planningApplications', (app) =>
+    app.use(bopsHandlers)
+  )
+
   .use(handleErrors)
+
+// .use(planningApplications({ path: '/api/@next' }))
+// commented out because of type inheritance issues with Elysia just need to add parse: ['application/json'], for each route for now
+// This is a workaround for ensuring all routes are parsed as JSON see https://github.com/elysiajs/elysia-swagger/issues/215
+// .group('', { parse: ['application/json'] }, (group) =>
+//   group.use(appSetup).group('/api/@next', (app) => {
+//     return app.use(planningApplications())
+//   })
+// )
 
 export { app }
 export type App = typeof app

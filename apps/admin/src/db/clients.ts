@@ -4,6 +4,7 @@ import { createSelectSchema } from 'drizzle-typebox'
 export const clients = pgTable('clients', {
   id: serial().primaryKey(),
   name: varchar().notNull(),
+  slug: varchar(),
   endpoint: varchar().notNull(),
   lastPolledAt: timestamp({ mode: 'date' }),
   updatedAt: timestamp({ mode: 'date' })
