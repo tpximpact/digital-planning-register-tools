@@ -40,7 +40,8 @@
       "@dpr/api/schemas": ["apps/api/src/schemas/index.ts"],
       // packages
       "@dpr/config": ["packages/config/*"],
-      "@dpr/libs": ["packages/libs/src/index.ts"]
+      "@dpr/libs": ["packages/libs/src/index.ts"],
+      "@dpr/odp-schemas": ["packages/odp-schemas/src/index.ts"]
       // "@dpr/ui/styles/*": ["packages/ui/dist/styles/*"]
       // "@dpr/ui": ["packages/ui/src/index.ts"],
       // "@dpr/ui/components": ["packages/ui/src/components/index.ts"],
