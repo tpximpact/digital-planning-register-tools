@@ -42,6 +42,11 @@ export async function getClientById(id: Client['id']) {
   })
 }
 
+export async function getClientBySlug(slug: string) {
+  return db.query.clients.findFirst({
+    where: eq(clients.slug, slug)
+  })
+}
 export async function updateClient(id: Client['id'], formData: FormData) {
   const name = formData.get('name') as string
   const endpoint = formData.get('endpoint') as string
