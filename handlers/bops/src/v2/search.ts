@@ -1,8 +1,11 @@
+import type { ApiResponse } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.js'
 import { handleBopsGetRequest } from '../requests'
+import type { SearchParamsApplication } from '../types'
 
-// TODO: Use proper types here instead of any
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export async function search(client: string, searchParams?: any): Promise<any> {
+export async function search<T>(
+  client: string,
+  searchParams?: SearchParamsApplication
+): Promise<ApiResponse<T> | null> {
   let url = `public/planning_applications/search`
 
   if (searchParams) {
@@ -88,15 +91,31 @@ export async function search(client: string, searchParams?: any): Promise<any> {
 
     url = `${url}?${params.toString()}`
   }
-  const request = await handleBopsGetRequest(client, url)
-  const applications = request.data || []
-  const pagination = request.pagination || {}
+  try {
+    const request = await handleBopsGetRequest<ApiResponse<T>>(client, url)
+    const applications = request.data || []
+    const pagination = request.pagination || {}
 
-  return {
-    ...request,
-    data: {
-      applications,
-      pagination
+    return {
+      ...request,
+      data: {
+        applications,
+        pagination
+      }
+    } as ApiResponse<T>
+  } catch (error) {
+    console.error('Error fetching application data:', error)
+    let detail = 'Unknown error'
+    if (error instanceof Error) {
+      detail = error.message
+    }
+    return {
+      data: null,
+      status: {
+        code: 500,
+        message: 'Internal server error',
+        detail
+      }
     }
   }
 }

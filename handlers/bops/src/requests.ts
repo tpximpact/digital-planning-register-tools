@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// TODO: Use proper types here instead of any
-
 interface ClientConfig {
   endpoint: string
 }
@@ -51,10 +48,10 @@ async function getCouncilConfig(council: string): Promise<ClientConfig | null> {
  * Handles a GET request to a back-office planning system .
  * It determines the correct API URL and key for the client and makes the request.
  */
-export async function handleBopsGetRequest(
+export async function handleBopsGetRequest<T>(
   client: string,
   url: string
-): Promise<any> {
+): Promise<T> {
   let apiUrl: string | undefined
 
   const dbConfig = await getCouncilConfig(client)
@@ -105,5 +102,5 @@ export async function handleBopsGetRequest(
       code: response.status,
       message: response.statusText
     }
-  }
+  } as T
 }

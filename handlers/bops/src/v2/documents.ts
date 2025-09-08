@@ -1,11 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { ApiResponse } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.js'
 import { handleBopsGetRequest } from '../requests'
+import type { SearchParamsDocuments } from '../types'
 
-export async function documents(
+export async function documents<T>(
   client: string,
   reference: string,
-  searchParams?: any
-): Promise<any> {
+  searchParams?: SearchParamsDocuments
+): Promise<ApiResponse<T> | null> {
   let url = `public/planning_applications/${reference}/documents`
 
   if (searchParams) {
@@ -34,18 +35,20 @@ export async function documents(
   }
 
   try {
-    const request = await handleBopsGetRequest(client, url)
+    const request = await handleBopsGetRequest<ApiResponse<T>>(client, url)
     return request
   } catch (error) {
-    console.error('Error fetching documents:', error)
-    const err = error as any
+    console.error('Error fetching application documents:', error)
+    let detail = 'Unknown error'
+    if (error instanceof Error) {
+      detail = error.message
+    }
     return {
       data: null,
       status: {
-        code: err.status || 500,
-        message: err.statusText || 'Internal server error',
-        detail:
-          err.detail || (err instanceof Error ? err.message : 'Unknown error')
+        code: 500,
+        message: 'Internal server error',
+        detail
       }
     }
   }

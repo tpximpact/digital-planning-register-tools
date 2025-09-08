@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// TODO: Use proper types here instead of any
-
+import type { ApiResponse } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.js'
 import { handleBopsGetRequest } from '../requests'
+import type { SearchParamsComments } from '../types'
 
-export async function specialistComments(
+export async function specialistComments<T>(
   client: string,
   reference: string,
-  searchParams?: any
-): Promise<any> {
+  searchParams?: SearchParamsComments
+): Promise<ApiResponse<T> | null> {
   let url = `public/planning_applications/${reference}/comments/specialist`
 
   if (searchParams) {
@@ -36,19 +35,21 @@ export async function specialistComments(
   }
 
   try {
-    const request = await handleBopsGetRequest(client, url)
+    const request = await handleBopsGetRequest<ApiResponse<T>>(client, url)
 
     return request
   } catch (error) {
     console.error('Error fetching specialist comments:', error)
-    const err = error as any
+    let detail = 'Unknown error'
+    if (error instanceof Error) {
+      detail = error.message
+    }
     return {
       data: null,
       status: {
-        code: err.status || 500,
-        message: err.statusText || 'Internal server error',
-        detail:
-          err.detail || (err instanceof Error ? err.message : 'Unknown error')
+        code: 500,
+        message: 'Internal server error',
+        detail
       }
     }
   }

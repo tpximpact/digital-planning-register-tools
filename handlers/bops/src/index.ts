@@ -8,12 +8,11 @@ import { documents } from './v2/documents'
 import { publicComments } from './v2/publicComments'
 import { specialistComments } from './v2/specialistComments'
 import { applicationSubmission } from './v2/applicationSubmission'
-
-interface ApiResponse {
-  data: any
-  pagination?: any
-  status: any
-}
+import type {
+  SearchParamsApplication,
+  SearchParamsComments,
+  SearchParamsDocuments
+} from './types'
 
 export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
   .get(
@@ -22,15 +21,18 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
       const client = headers['x-client']
 
       try {
-        const apiResponse = (await search(client, query)) as ApiResponse
+        const apiResponse = await search(
+          client,
+          query as SearchParamsApplication
+        )
 
-        if (!apiResponse.data) {
-          return { data: [], pagination: apiResponse.pagination }
+        if (!apiResponse || !apiResponse.data) {
+          return { data: [], pagination: apiResponse?.pagination }
         }
 
         return {
-          data: apiResponse.data.applications,
-          pagination: apiResponse.pagination
+          data: apiResponse?.data,
+          pagination: apiResponse?.pagination
         }
       } catch (e: any) {
         console.error('[bops-handlers] An error occurred in /search:', e)
@@ -78,16 +80,13 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
       const client = headers['x-client']
 
       try {
-        const apiResponse = (await show(
-          client,
-          params.reference
-        )) as ApiResponse
+        const apiResponse = await show(client, params.reference)
 
-        if (!apiResponse.data) {
+        if (!apiResponse?.data) {
           return error(404, 'Application not found')
         }
 
-        return apiResponse.data
+        return apiResponse?.data
       } catch (e: any) {
         return error(
           e.status || 500,
@@ -115,13 +114,20 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
     async ({ params, query, headers, error }) => {
       try {
         const client = headers['x-client']
-        const apiResponse = (await documents(
+        const apiResponse = await documents(
           client,
           params.reference,
-          query
-        )) as ApiResponse
+          query as SearchParamsDocuments
+        )
 
-        return apiResponse
+        if (!apiResponse || !apiResponse.data) {
+          return { data: [], pagination: apiResponse?.pagination }
+        }
+
+        return {
+          data: apiResponse?.data,
+          pagination: apiResponse?.pagination
+        }
       } catch (e: any) {
         return error(
           e.status || 500,
@@ -156,20 +162,24 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
   )
   .get(
     '/:reference/comments/public',
-    async ({ params, headers, error }) => {
+    async ({ params, query, headers, error }) => {
       const client = headers['x-client']
 
       try {
-        const apiResponse = (await publicComments(
+        const apiResponse = await publicComments(
           client,
-          params.reference
-        )) as ApiResponse
+          params.reference,
+          query as SearchParamsComments
+        )
 
-        if (!apiResponse.data) {
-          return error(404, 'Application not found')
+        if (!apiResponse || !apiResponse.data) {
+          return { data: [], pagination: apiResponse?.pagination }
         }
 
-        return apiResponse.data
+        return {
+          data: apiResponse?.data,
+          pagination: apiResponse?.pagination
+        }
       } catch (e: any) {
         return error(
           e.status || 500,
@@ -208,13 +218,20 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
     async ({ params, query, headers, error }) => {
       try {
         const client = headers['x-client']
-        const apiResponse = (await specialistComments(
+        const apiResponse = await specialistComments(
           client,
           params.reference,
-          query
-        )) as ApiResponse
+          query as SearchParamsComments
+        )
 
-        return apiResponse
+        if (!apiResponse || !apiResponse.data) {
+          return { data: [], pagination: apiResponse?.pagination }
+        }
+
+        return {
+          data: apiResponse?.data,
+          pagination: apiResponse?.pagination
+        }
       } catch (e: any) {
         return error(
           e.status || 500,
@@ -253,12 +270,12 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
       const client = headers['x-client']
 
       try {
-        const apiResponse = (await applicationSubmission(
+        const apiResponse = await applicationSubmission(
           client,
           params.reference
-        )) as ApiResponse
+        )
 
-        if (!apiResponse.data) {
+        if (!apiResponse?.data) {
           return error(404, 'Application not found')
         }
 
