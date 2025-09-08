@@ -57,10 +57,12 @@ export async function handleBopsGetRequest<T>(
   const dbConfig = await getCouncilConfig(client)
   if (dbConfig) {
     apiUrl = dbConfig.endpoint
+    console.log(`Using API URL from DB for client ${client}: ${apiUrl}`)
   } else {
     const normalisedName = normaliseClientForEnv(client)
     const envUrlVar = `${normalisedName}_BOPS_API_URL}`
     apiUrl = process.env[envUrlVar]
+    console.log(`Using API URL from .env for client ${client}: ${apiUrl}`)
   }
 
   if (!apiUrl) {
@@ -77,7 +79,6 @@ export async function handleBopsGetRequest<T>(
   }
 
   const fullUrl = `${apiUrl}${url}`
-  console.log(`[handleBopsGetRequest] Fetching from: ${fullUrl}`)
 
   const response = await fetch(fullUrl, {
     method: 'GET',
