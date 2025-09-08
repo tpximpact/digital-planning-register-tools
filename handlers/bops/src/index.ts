@@ -4,6 +4,10 @@
 import { Elysia, t } from 'elysia'
 import { search } from './v2/search'
 import { show } from './v2/show'
+import { documents } from './v2/documents'
+import { publicComments } from './v2/publicComments'
+import { specialistComments } from './v2/specialistComments'
+import { applicationSubmission } from './v2/applicationSubmission'
 
 interface ApiResponse {
   data: any
@@ -37,6 +41,23 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
       }
     },
     {
+      query: t.Object({
+        page: t.Optional(t.Numeric({ default: 1 })),
+        maxresults: t.Optional(t.Numeric({ default: 10 })),
+        q: t.Optional(t.String()),
+        sortBy: t.Optional(t.String()),
+        orderBy: t.Optional(t.String()),
+        reference: t.Optional(t.String()),
+        description: t.Optional(t.String()),
+        applicationType: t.Optional(t.String()),
+        applicationStatus: t.Optional(t.String()),
+        councilDecision: t.Optional(t.String())
+        // unsure about these date types, leaving commented out for now
+        // dateType: t.Optional(t.String()),
+        // dateRange: t.Optional(t.String()),
+        // dateRangeFrom: t.Optional(t.String()),
+        // dateRangeTo: t.Optional(t.String())
+      }),
       headers: t.Object({
         'x-client': t.String({
           description:
@@ -71,6 +92,158 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
         return error(
           e.status || 500,
           e.detail || 'Failed to retrieve application'
+        )
+      }
+    },
+    {
+      headers: t.Object({
+        'x-client': t.String({
+          description:
+            'Who is requesting the data, ensures the correct data is returned',
+          example: 'cavyshire-borough-council'
+        }),
+        'x-service': t.String({
+          description:
+            'What is requesting the data, mostly for diagnostic purposes',
+          example: 'open-api-spec'
+        })
+      })
+    }
+  )
+  .get(
+    '/:reference/documents',
+    async ({ params, headers, error }) => {
+      const client = headers['x-client']
+
+      try {
+        const apiResponse = (await documents(
+          client,
+          params.reference
+        )) as ApiResponse
+
+        if (!apiResponse.data) {
+          return error(404, 'Application not found')
+        }
+
+        return apiResponse.data
+      } catch (e: any) {
+        return error(
+          e.status || 500,
+          e.detail || 'Failed to retrieve application documents'
+        )
+      }
+    },
+    {
+      headers: t.Object({
+        'x-client': t.String({
+          description:
+            'Who is requesting the data, ensures the correct data is returned',
+          example: 'cavyshire-borough-council'
+        }),
+        'x-service': t.String({
+          description:
+            'What is requesting the data, mostly for diagnostic purposes',
+          example: 'open-api-spec'
+        })
+      })
+    }
+  )
+  .get(
+    '/:reference/comments/public',
+    async ({ params, headers, error }) => {
+      const client = headers['x-client']
+
+      try {
+        const apiResponse = (await publicComments(
+          client,
+          params.reference
+        )) as ApiResponse
+
+        if (!apiResponse.data) {
+          return error(404, 'Application not found')
+        }
+
+        return apiResponse.data
+      } catch (e: any) {
+        return error(
+          e.status || 500,
+          e.detail || 'Failed to retrieve public comments'
+        )
+      }
+    },
+    {
+      headers: t.Object({
+        'x-client': t.String({
+          description:
+            'Who is requesting the data, ensures the correct data is returned',
+          example: 'cavyshire-borough-council'
+        }),
+        'x-service': t.String({
+          description:
+            'What is requesting the data, mostly for diagnostic purposes',
+          example: 'open-api-spec'
+        })
+      })
+    }
+  )
+  .get(
+    '/:reference/comments/specialist',
+    async ({ params, headers, error }) => {
+      const client = headers['x-client']
+
+      try {
+        const apiResponse = (await specialistComments(
+          client,
+          params.reference
+        )) as ApiResponse
+
+        if (!apiResponse.data) {
+          return error(404, 'Application not found')
+        }
+
+        return apiResponse.data
+      } catch (e: any) {
+        return error(
+          e.status || 500,
+          e.detail || 'Failed to retrieve specialist comments'
+        )
+      }
+    },
+    {
+      headers: t.Object({
+        'x-client': t.String({
+          description:
+            'Who is requesting the data, ensures the correct data is returned',
+          example: 'cavyshire-borough-council'
+        }),
+        'x-service': t.String({
+          description:
+            'What is requesting the data, mostly for diagnostic purposes',
+          example: 'open-api-spec'
+        })
+      })
+    }
+  )
+  .get(
+    '/:reference/submission',
+    async ({ params, headers, error }) => {
+      const client = headers['x-client']
+
+      try {
+        const apiResponse = (await applicationSubmission(
+          client,
+          params.reference
+        )) as ApiResponse
+
+        if (!apiResponse.data) {
+          return error(404, 'Application not found')
+        }
+
+        return apiResponse.data
+      } catch (e: any) {
+        return error(
+          e.status || 500,
+          e.detail || 'Failed to retrieve application submission details'
         )
       }
     },
