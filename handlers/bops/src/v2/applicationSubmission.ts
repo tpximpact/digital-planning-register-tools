@@ -10,7 +10,7 @@ export async function applicationSubmission(
   try {
     const request = await handleBopsGetRequest(
       client,
-      `public/planning_applications/${reference}/submission`
+      `planning_applications/${reference}/submission`
     )
 
     return request

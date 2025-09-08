@@ -112,24 +112,20 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
   )
   .get(
     '/:reference/documents',
-    async ({ params, headers, error }) => {
-      const client = headers['x-client']
-
+    async ({ params, query, headers, error }) => {
       try {
+        const client = headers['x-client']
         const apiResponse = (await documents(
           client,
-          params.reference
+          params.reference,
+          query
         )) as ApiResponse
 
-        if (!apiResponse.data) {
-          return error(404, 'Application not found')
-        }
-
-        return apiResponse.data
+        return apiResponse
       } catch (e: any) {
         return error(
           e.status || 500,
-          e.detail || 'Failed to retrieve application documents'
+          e.detail || 'Failed to retrieve documents'
         )
       }
     },
@@ -145,6 +141,16 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
             'What is requesting the data, mostly for diagnostic purposes',
           example: 'open-api-spec'
         })
+      }),
+      query: t.Object({
+        page: t.Optional(t.Numeric()),
+        resultsPerPage: t.Optional(t.Numeric()),
+        name: t.Optional(t.String()),
+        sortBy: t.Optional(t.String()),
+        orderBy: t.Optional(t.String()),
+        type: t.Optional(t.String()),
+        publishedAtFrom: t.Optional(t.String()),
+        publishedAtTo: t.Optional(t.String())
       })
     }
   )
@@ -183,25 +189,32 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
             'What is requesting the data, mostly for diagnostic purposes',
           example: 'open-api-spec'
         })
+      }),
+      query: t.Object({
+        page: t.Optional(t.Numeric()),
+        resultsPerPage: t.Optional(t.Numeric()),
+        query: t.Optional(t.String()),
+        sortBy: t.Optional(t.String()),
+        orderBy: t.Optional(t.String()),
+        sentiment: t.Optional(t.String()),
+        topic: t.Optional(t.String()),
+        publishedAtFrom: t.Optional(t.String()),
+        publishedAtTo: t.Optional(t.String())
       })
     }
   )
   .get(
     '/:reference/comments/specialist',
-    async ({ params, headers, error }) => {
-      const client = headers['x-client']
-
+    async ({ params, query, headers, error }) => {
       try {
+        const client = headers['x-client']
         const apiResponse = (await specialistComments(
           client,
-          params.reference
+          params.reference,
+          query
         )) as ApiResponse
 
-        if (!apiResponse.data) {
-          return error(404, 'Application not found')
-        }
-
-        return apiResponse.data
+        return apiResponse
       } catch (e: any) {
         return error(
           e.status || 500,
@@ -221,6 +234,16 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
             'What is requesting the data, mostly for diagnostic purposes',
           example: 'open-api-spec'
         })
+      }),
+      query: t.Object({
+        page: t.Optional(t.Numeric()),
+        resultsPerPage: t.Optional(t.Numeric()),
+        query: t.Optional(t.String()),
+        sortBy: t.Optional(t.String()),
+        orderBy: t.Optional(t.String()),
+        sentiment: t.Optional(t.String()),
+        publishedAtFrom: t.Optional(t.String()),
+        publishedAtTo: t.Optional(t.String())
       })
     }
   )
