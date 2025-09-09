@@ -1,0 +1,39 @@
+{
+  "pagination": {
+    "resultsPerPage": 10,
+    "currentPage": 1,
+    "totalPages": 1,
+    "totalResults": 4,
+    "totalAvailableItems": 4
+  },
+  "summary": {
+    "totalComments": 4,
+    "sentiment": { "supportive": 2, "objection": 1, "neutral": 1 }
+  },
+  "comments": [
+    {
+      "id": 613,
+      "sentiment": "supportive",
+      "comment": "* Design, size or height of new buildings or extensions: few ",
+      "receivedAt": "2025-07-04T09:42:52Z"
+    },
+    {
+      "id": 612,
+      "sentiment": "supportive",
+      "comment": "* Impacts on natural light: geerrth ",
+      "receivedAt": "2025-07-04T08:50:45Z"
+    },
+    {
+      "id": 611,
+      "sentiment": "objection",
+      "comment": "Use and function of the proposed development: This is in CAZ, don't give the office away.  ",
+      "receivedAt": "2025-07-03T14:53:49Z"
+    },
+    {
+      "id": 610,
+      "sentiment": "neutral",
+      "comment": "* Design, size or height of new buildings or extensions: Looks a bit big to me  \r\n* Impacts on natural light: The sunlight in my back garden! Nooooooo! ",
+      "receivedAt": "2025-07-03T14:52:28Z"
+    }
+  ]
+}
