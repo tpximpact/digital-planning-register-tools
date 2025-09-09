@@ -46,7 +46,7 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
       query: t.Object({
         page: t.Optional(t.Numeric({ default: 1 })),
         maxresults: t.Optional(t.Numeric({ default: 10 })),
-        q: t.Optional(t.String()),
+        query: t.Optional(t.String()),
         sortBy: t.Optional(t.String()),
         orderBy: t.Optional(t.String()),
         reference: t.Optional(t.String()),
