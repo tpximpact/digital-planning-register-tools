@@ -1,0 +1,24 @@
+{
+  "name": "@dpr/converter-bops",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "typeconfig": "tsc --showConfig",
+    "dev": "bun run --watch src/index.ts",
+    "test": "bun test "
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@dpr/config": "workspace:*"
+  },
+  "dependencies": {
+    "@sinclair/typebox": "^0.34.41",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "dayjs": "^1.11.18",
+    "typescript": "^5",
+    "@dpr/odp-schemas": "workspace:*"
+  }
+}

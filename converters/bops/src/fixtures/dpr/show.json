@@ -1,0 +1,129 @@
+{
+  "data": {
+    "applicationStatusSummary": "Determined",
+    "applicationDecisionSummary": "Granted",
+    "applicationType": "pp.full.minor",
+    "data": {
+      "application": {
+        "reference": "25-00176-FULL",
+        "stage": "assessment",
+        "status": "determined",
+        "publishedAt": "2025-07-03T14:46:02Z"
+      },
+      "localPlanningAuthority": {
+        "publicCommentsAcceptedUntilDecision": false
+      },
+      "submission": { "submittedAt": "2025-07-03T14:23:53Z" },
+      "validation": {
+        "receivedAt": "2025-07-03T14:23:53Z",
+        "validatedAt": "2025-07-03T14:23:53Z",
+        "isValid": true
+      },
+      "consultation": {
+        "startDate": "2025-07-03",
+        "endDate": "2025-07-25",
+        "siteNotice": true
+      },
+      "assessment": {
+        "planningOfficerDecision": "granted",
+        "planningOfficerDecisionDate": "2025-08-04T15:26:53Z",
+        "decisionNotice": {
+          "url": "https://camden.bops-staging.services/api/v1/planning_applications/25-00176-FULL/decision_notice.pdf"
+        }
+      },
+      "caseOfficer": { "name": "Camden Officer" }
+    },
+    "submission": {
+      "data": {
+        "applicant": {
+          "type": "individual",
+          "address": { "sameAsSiteAddress": true },
+          "ownership": {
+            "owners": [],
+            "interest": "owner.sole",
+            "certificate": "a",
+            "declaration": { "accurate": true },
+            "agriculturalTenants": false
+          },
+          "agent": {
+            "address": {
+              "town": "London",
+              "line1": "38A Southhampton Road",
+              "line2": "",
+              "county": "",
+              "country": "",
+              "postcode": "NW5 4JR"
+            }
+          }
+        },
+        "property": {
+          "address": {
+            "singleLine": "5–6, UNDERHILL STREET, LONDON, NW1 7HS",
+            "title": "5–6, UNDERHILL STREET, LONDON, NW1 7HS",
+            "x": 0,
+            "y": 0,
+            "latitude": "51.5378008",
+            "longitude": "-0.1427892",
+            "uprn": "000005088268",
+            "usrn": "",
+            "pao": "",
+            "street": "",
+            "town": "",
+            "postcode": "",
+            "source": "Ordnance Survey"
+          },
+          "boundary": {
+            "site": {
+              "type": "Feature",
+              "geometry": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                  [
+                    [
+                      [-0.142522, 51.537472],
+                      [-0.142379, 51.537524],
+                      [-0.142786, 51.537874],
+                      [-0.142802, 51.537867],
+                      [-0.142813, 51.537877],
+                      [-0.143013, 51.537798],
+                      [-0.142983, 51.537766],
+                      [-0.142917, 51.537791],
+                      [-0.142866, 51.537744],
+                      [-0.142797, 51.537709],
+                      [-0.142522, 51.537472]
+                    ]
+                  ]
+                ]
+              },
+              "properties": {
+                "name": "",
+                "entity": 12000510848,
+                "prefix": "title-boundary",
+                "dataset": "title-boundary",
+                "end-date": "",
+                "typology": "geography",
+                "reference": "36702504",
+                "entry-date": "2024-05-06",
+                "start-date": "2003-09-08",
+                "planx_user_action": "Accepted the title boundary",
+                "organisation-entity": "13"
+              }
+            },
+            "area": ""
+          }
+        },
+        "proposal": {
+          "description": "Change of use of ground floor front office (Class E) unit to residential (Class C3) for the provision of two self-contained residential units."
+        }
+      }
+    },
+    "metadata": {
+      "organisation": "BOPS",
+      "id": "25-00176-FULL",
+      "generatedAt": "2025-07-03T14:46:02Z",
+      "submittedAt": "2025-07-03T14:23:53Z",
+      "schema": "https://theopensystemslab.github.io/digital-planning-data-schemas/@next/schemas/postSubmissionApplication.json"
+    }
+  },
+  "status": { "code": 200, "message": "" }
+}

@@ -1,0 +1,42 @@
+{
+  "data": {
+    "comments": [
+      {
+        "id": 613,
+        "comment": "* Design, size or height of new buildings or extensions: few ",
+        "receivedDate": "2025-07-04T09:42:52Z",
+        "sentiment": "supportive"
+      },
+      {
+        "id": 612,
+        "comment": "* Impacts on natural light: geerrth ",
+        "receivedDate": "2025-07-04T08:50:45Z",
+        "sentiment": "supportive"
+      },
+      {
+        "id": 611,
+        "comment": "Use and function of the proposed development: This is in CAZ, don't give the office away.  ",
+        "receivedDate": "2025-07-03T14:53:49Z",
+        "sentiment": "objection"
+      },
+      {
+        "id": 610,
+        "comment": "* Design, size or height of new buildings or extensions: Looks a bit big to me  \r\n* Impacts on natural light: The sunlight in my back garden! Nooooooo! ",
+        "receivedDate": "2025-07-03T14:52:28Z",
+        "sentiment": "neutral"
+      }
+    ],
+    "summary": {
+      "totalComments": 4,
+      "sentiment": { "supportive": 2, "objection": 1, "neutral": 1 }
+    }
+  },
+  "status": { "code": 200, "message": "" },
+  "pagination": {
+    "resultsPerPage": 10,
+    "currentPage": 1,
+    "totalPages": 1,
+    "totalResults": 4,
+    "totalAvailableItems": 4
+  }
+}

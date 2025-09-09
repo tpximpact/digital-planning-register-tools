@@ -1,0 +1,3052 @@
+{
+  "application": {
+    "type": {
+      "value": "pp.full.minor",
+      "description": "planning_permission"
+    },
+    "reference": "25-00176-FULL",
+    "fullReference": "CMD-25-00176-FULL",
+    "targetDate": "2025-08-07",
+    "expiryDate": "2025-08-28",
+    "receivedAt": "2025-07-03T15:23:53.264+01:00",
+    "validAt": "2025-07-03T15:23:53.264+01:00",
+    "publishedAt": "2025-07-03T15:46:02.342+01:00",
+    "determinedAt": "2025-08-04T16:26:53.630+01:00",
+    "decision": "granted",
+    "status": "determined",
+    "consultation": {
+      "startDate": "2025-07-03",
+      "endDate": "2025-07-25",
+      "publicUrl": "https://camden.bops-applicants-staging.services/planning_applications/25-00176-FULL",
+      "publishedComments": [
+        {
+          "comment": "* Design, size or height of new buildings or extensions: Looks a bit big to me  \r\n* Impacts on natural light: The sunlight in my back garden! Nooooooo! ",
+          "receivedAt": "2025-07-03T15:52:28.266+01:00",
+          "summaryTag": "neutral"
+        },
+        {
+          "comment": "Use and function of the proposed development: This is in CAZ, don't give the office away.  ",
+          "receivedAt": "2025-07-03T15:53:49.030+01:00",
+          "summaryTag": "objection"
+        },
+        {
+          "comment": "* Impacts on natural light: geerrth ",
+          "receivedAt": "2025-07-04T09:50:45.939+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "* Design, size or height of new buildings or extensions: few ",
+          "receivedAt": "2025-07-04T10:42:52.200+01:00",
+          "summaryTag": "supportive"
+        }
+      ],
+      "consulteeComments": [
+        {
+          "comment": "The original factory building at 5-6 Underhill Street was partially destroyed by enemy action during WWII and rebuilt in 1946. The site is located within Camden Town Conservation Area.\r\n\r\nIn 1988 consent was granted for external alterations to the building (plus small extension). This is the building we find today.\r\n\r\nUnderhill Street façade (ref 8701306)\r\n\r\nThe current proposal seeks to return the Underhill Street elevation to an arrangement of four windows at ground floor level as previously granted in 1988.\r\n\r\nTo ensure the building retains an architecturally coherent appearance there should be a condition attached to any consent requiring the new windows to match the existing windows in style i.e. have an ‘Art Deco’ metal Crittall-like appearance.\r\n\r\nProviding the design of the proposed windows is in keeping, the elevational changes are considered not to harm the contribution made by this building to the character and appearance of the streetscape and hence the conservation area.\r\n",
+          "receivedAt": "2025-07-03T15:55:27.525+01:00"
+        },
+        {
+          "comment": "Secure cycle parking via condition and car-free via s106. ",
+          "receivedAt": "2025-07-03T15:56:58.839+01:00"
+        }
+      ]
+    },
+    "pressNotice": {
+      "required": true,
+      "reason": "Conservation area",
+      "publishedAt": "2025-07-03T00:00:00.000+01:00"
+    }
+  },
+  "submission": {
+    "data": {
+      "user": {
+        "role": "agent"
+      },
+      "property": {
+        "EPC": {
+          "known": "The property does not have one"
+        },
+        "type": {
+          "value": "commercial.office.workspace",
+          "description": "Office / Work Studio"
+        },
+        "ward": "Camden Town",
+        "region": "London",
+        "address": {
+          "x": 528901,
+          "y": 183734,
+          "pao": "5",
+          "town": "LONDON",
+          "uprn": "000005088268",
+          "usrn": "20400732",
+          "title": "5-6, UNDERHILL STREET, LONDON",
+          "paoEnd": "6",
+          "source": "Ordnance Survey",
+          "street": "UNDERHILL STREET",
+          "latitude": 51.5378008,
+          "postcode": "NW1 7HS",
+          "longitude": -0.1427892,
+          "singleLine": "5-6, UNDERHILL STREET, LONDON, CAMDEN, NW1 7HS"
+        },
+        "parking": {
+          "cycles": {
+            "count": 12
+          }
+        },
+        "boundary": {
+          "area": {
+            "hectares": 0.059833000000000004,
+            "squareMetres": 598.33
+          },
+          "site": {
+            "type": "Feature",
+            "geometry": {
+              "type": "MultiPolygon",
+              "coordinates": [
+                [
+                  [
+                    [-0.142522, 51.537472],
+                    [-0.142379, 51.537524],
+                    [-0.142786, 51.537874],
+                    [-0.142802, 51.537867],
+                    [-0.142813, 51.537877],
+                    [-0.143013, 51.537798],
+                    [-0.142983, 51.537766],
+                    [-0.142917, 51.537791],
+                    [-0.142866, 51.537744],
+                    [-0.142797, 51.537709],
+                    [-0.142522, 51.537472]
+                  ]
+                ]
+              ]
+            },
+            "properties": {
+              "name": "",
+              "entity": 12000510848,
+              "prefix": "title-boundary",
+              "dataset": "title-boundary",
+              "end-date": "",
+              "typology": "geography",
+              "reference": "36702504",
+              "entry-date": "2024-05-06",
+              "start-date": "2003-09-08",
+              "organisation-entity": "13"
+            }
+          }
+        },
+        "planning": {
+          "sources": [
+            "https://api.editor.planx.dev/gis/camden?geom=MULTIPOLYGON+%28%28%28-0.142522+51.537472%2C+-0.142379+51.537524%2C+-0.142786+51.537874%2C+-0.142802+51.537867%2C+-0.142813+51.537877%2C+-0.143013+51.537798%2C+-0.142983+51.537766%2C+-0.142917+51.537791%2C+-0.142866+51.537744%2C+-0.142797+51.537709%2C+-0.142522+51.537472%29%29%29&vals=archaeologicalPriorityArea%2CarticleFour%2CarticleFour.caz%2Cbattlefield%2CbrownfieldSite%2Cdesignated.AONB%2Cdesignated.conservationArea%2CgreenBelt%2Cdesignated.nationalPark%2Cdesignated.nationalPark.broads%2Cdesignated.WHS%2Cflood%2Clisted%2Cmonument%2Cnature.ASNW%2Cnature.ramsarSite%2Cnature.SAC%2Cnature.SPA%2Cnature.SSSI%2CregisteredPark%2Croad.classified%2Ctpo&analytics=false&sessionId=76001621-b2b3-44a6-b84b-f7dc8c5d50f0",
+            "https://api.editor.planx.dev/roads?usrn=20400732"
+          ],
+          "designations": [
+            {
+              "value": "tpo",
+              "intersects": false,
+              "description": "Tree Preservation Order (TPO) or zone"
+            },
+            {
+              "value": "flood",
+              "intersects": false,
+              "description": "Flood risk"
+            },
+            {
+              "value": "listed",
+              "intersects": false,
+              "description": "Listed building"
+            },
+            {
+              "value": "monument",
+              "intersects": false,
+              "description": "Site of a Scheduled Monument"
+            },
+            {
+              "value": "greenBelt",
+              "intersects": false,
+              "description": "Green belt"
+            },
+            {
+              "value": "designated",
+              "entities": [],
+              "intersects": true,
+              "description": "Designated land"
+            },
+            {
+              "value": "nature.SAC",
+              "intersects": false,
+              "description": "Special Area of Conservation (SAC)"
+            },
+            {
+              "value": "nature.SPA",
+              "intersects": false,
+              "description": "Special Protection Area (SPA)"
+            },
+            {
+              "value": "articleFour",
+              "entities": [
+                {
+                  "name": "Basements",
+                  "source": {
+                    "url": "https://www.planning.data.gov.uk/entity/7010002613",
+                    "text": "Planning Data"
+                  }
+                },
+                {
+                  "name": "Commercial, Business, and Service (Use Class E) to residential (Use Class C3) (in CAZ)",
+                  "source": {
+                    "url": "https://www.planning.data.gov.uk/entity/7010002614",
+                    "text": "Planning Data"
+                  }
+                }
+              ],
+              "intersects": true,
+              "description": "Article 4 direction area"
+            },
+            {
+              "value": "battlefield",
+              "intersects": false,
+              "description": "Historic battlefield"
+            },
+            {
+              "value": "nature.ASNW",
+              "intersects": false,
+              "description": "Ancient Semi-Natural Woodland (ASNW)"
+            },
+            {
+              "value": "nature.SSSI",
+              "intersects": false,
+              "description": "Site of Special Scientific Interest (SSSI)"
+            },
+            {
+              "value": "brownfieldSite",
+              "intersects": false,
+              "description": "Brownfield site"
+            },
+            {
+              "value": "designated.WHS",
+              "intersects": false,
+              "description": "UNESCO World Heritage Site (WHS)"
+            },
+            {
+              "value": "registeredPark",
+              "intersects": false,
+              "description": "Registered parks and gardens"
+            },
+            {
+              "value": "designated.AONB",
+              "intersects": false,
+              "description": "Area of Outstanding Natural Beauty (AONB)"
+            },
+            {
+              "value": "road.classified",
+              "intersects": false,
+              "description": "Classified road"
+            },
+            {
+              "value": "nature.ramsarSite",
+              "intersects": false,
+              "description": "Ramsar site"
+            },
+            {
+              "value": "designated.nationalPark",
+              "intersects": false,
+              "description": "National Park"
+            },
+            {
+              "value": "archaeologicalPriorityArea",
+              "intersects": false,
+              "description": "Archaeological Priority Area"
+            },
+            {
+              "value": "designated.conservationArea",
+              "entities": [
+                {
+                  "name": "Camden Town",
+                  "source": {
+                    "url": "https://www.planning.data.gov.uk/entity/44009658",
+                    "text": "Planning Data"
+                  }
+                }
+              ],
+              "intersects": true,
+              "description": "Conservation area"
+            },
+            {
+              "value": "designated.nationalPark.broads",
+              "intersects": false,
+              "description": "National Park - Broads"
+            },
+            {
+              "value": "road.classified",
+              "intersects": false,
+              "description": "Classified road"
+            }
+          ]
+        },
+        "materials": {
+          "window": "wood"
+        },
+        "titleNumber": {
+          "known": "Yes",
+          "number": "48374"
+        },
+        "localAuthorityDistrict": ["Camden"]
+      },
+      "proposal": {
+        "date": {
+          "start": "2026-02-01",
+          "completion": "2027-02-01"
+        },
+        "parking": {
+          "cycles": {
+            "count": 12,
+            "difference": 0
+          }
+        },
+        "boundary": {
+          "area": {
+            "squareMetres": 598.33
+          },
+          "site": {
+            "type": "Feature",
+            "geometry": {
+              "type": "MultiPolygon",
+              "coordinates": [
+                [
+                  [
+                    [-0.142522, 51.537472],
+                    [-0.142379, 51.537524],
+                    [-0.142786, 51.537874],
+                    [-0.142802, 51.537867],
+                    [-0.142813, 51.537877],
+                    [-0.143013, 51.537798],
+                    [-0.142983, 51.537766],
+                    [-0.142917, 51.537791],
+                    [-0.142866, 51.537744],
+                    [-0.142797, 51.537709],
+                    [-0.142522, 51.537472]
+                  ]
+                ]
+              ]
+            },
+            "properties": {
+              "name": "",
+              "entity": 12000510848,
+              "prefix": "title-boundary",
+              "dataset": "title-boundary",
+              "end-date": "",
+              "typology": "geography",
+              "reference": "36702504",
+              "entry-date": "2024-05-06",
+              "start-date": "2003-09-08",
+              "planx_user_action": "Accepted the title boundary",
+              "organisation-entity": "13"
+            }
+          }
+        },
+        "materials": {
+          "window": "aluminium "
+        },
+        "description": "Change of use of ground floor front office (Class E) unit to residential (Class C3) for the provision of two self-contained residential units.",
+        "projectType": [
+          {
+            "value": "changeOfUse",
+            "description": "Change the use of a building"
+          }
+        ]
+      },
+      "applicant": {
+        "name": {
+          "last": "Kirsch",
+          "first": "Simon"
+        },
+        "type": "individual",
+        "agent": {
+          "name": {
+            "last": "Abbott",
+            "first": "Richard"
+          },
+          "email": "REDACTED",
+          "phone": {
+            "primary": "REDACTED"
+          },
+          "address": {
+            "town": "London",
+            "line1": "38A Southhampton Road",
+            "line2": "",
+            "county": "",
+            "country": "",
+            "postcode": "NW5 4JR"
+          },
+          "company": {
+            "name": "RCA Consulting "
+          }
+        },
+        "email": "REDACTED",
+        "phone": {
+          "primary": "REDACTED"
+        },
+        "address": {
+          "sameAsSiteAddress": true
+        },
+        "ownership": {
+          "owners": [],
+          "interest": "owner.sole",
+          "certificate": "a",
+          "declaration": {
+            "accurate": true
+          },
+          "agriculturalTenants": false
+        },
+        "siteContact": {
+          "role": "agent"
+        }
+      },
+      "application": {
+        "fee": "REDACTED",
+        "type": {
+          "value": "pp.full.minor",
+          "description": "Planning Permission - Minor application"
+        },
+        "declaration": {
+          "accurate": true,
+          "connection": {
+            "value": "none"
+          }
+        }
+      }
+    },
+    "files": [
+      {
+        "name": "https://api.editor.planx.dev/file/private/cue5btwj/CIL%20FORM%20.pdf",
+        "type": [
+          {
+            "value": "relevantInformation",
+            "description": "Information the applicant considers relevant to the application"
+          }
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/ofc3luo1/PLD%2024%20102932%20%20Underhill%20Marketing%20Report.pdf",
+        "type": [
+          {
+            "value": "necessaryInformation",
+            "description": "Information the authority considers necessary for the application"
+          }
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/8t8sr0ht/PLD%2024%20102931%20%20Underhill%20Sales%20Brochure%201.pdf",
+        "type": [
+          {
+            "value": "necessaryInformation",
+            "description": "Information the authority considers necessary for the application"
+          }
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/5r7gbbis/PLD%2024%20102930%20%20Underhill%20Comparative%20Lettings.pdf",
+        "type": [
+          {
+            "value": "necessaryInformation",
+            "description": "Information the authority considers necessary for the application"
+          }
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/jlnw1ww5/PLD%2024%20102929%20%20Underhill%20Sales%20Brochure%202.pdf",
+        "type": [
+          {
+            "value": "necessaryInformation",
+            "description": "Information the authority considers necessary for the application"
+          }
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/f7lkrh6c/PLD%2024%20102928%20%20Design%20and%20Access%20Statement.pdf",
+        "type": [
+          {
+            "value": "necessaryInformation",
+            "description": "Information the authority considers necessary for the application"
+          }
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/2acp8do0/PLD%2024%20102927%20%20Existing%20and%20Proposed%20Front%20Elevation.pdf",
+        "type": [
+          {
+            "value": "necessaryInformation",
+            "description": "Information the authority considers necessary for the application"
+          }
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/yr3hc2vm/PLD%2024%20102926%20%20Proposed%20Ground%20Floor%20Plan%20-%20Studio%20Plans.pdf",
+        "type": [
+          {
+            "value": "necessaryInformation",
+            "description": "Information the authority considers necessary for the application"
+          }
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/p9bmovoo/PLD%2024%20102925%20%20Existing%20Upper%20Floor%20Plans.pdf",
+        "type": [
+          {
+            "value": "necessaryInformation",
+            "description": "Information the authority considers necessary for the application"
+          }
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/w0j4ef43/PLD%2024%20102924%20%20Proposed%20Ground%20Floor%20Plan.pdf",
+        "type": [
+          {
+            "value": "necessaryInformation",
+            "description": "Information the authority considers necessary for the application"
+          }
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/kffvibm3/PLD%2024%20102923%20%20Existing%20Ground%20Floor%20Plan.pdf",
+        "type": [
+          {
+            "value": "necessaryInformation",
+            "description": "Information the authority considers necessary for the application"
+          }
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/yjfiebbs/PLD%2024%20102922%20Location%20Plan%282%29.pdf",
+        "type": [
+          {
+            "value": "necessaryInformation",
+            "description": "Information the authority considers necessary for the application"
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "id": "76001621-b2b3-44a6-b84b-f7dc8c5d50f0",
+      "schema": "https://theopensystemslab.github.io/digital-planning-data-schemas/v0.7.5/schemas/application.json",
+      "source": "PlanX",
+      "service": {
+        "fee": {
+          "payable": [
+            {
+              "policyRefs": [
+                {
+                  "url": "https://www.legislation.gov.uk/uksi/2023/1197/",
+                  "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) (Amendment) Regulations 2023"
+                }
+              ]
+            }
+          ],
+          "category": {
+            "one": [],
+            "ten": [],
+            "two": [],
+            "five": [],
+            "four": [],
+            "nine": [],
+            "eight": [],
+            "three": [],
+            "eleven": {
+              "one": []
+            },
+            "twelve": {
+              "one": [],
+              "two": []
+            },
+            "fourteen": [],
+            "thirteen": [],
+            "sixAndSeven": []
+          },
+          "calculated": [
+            {
+              "policyRefs": [
+                {
+                  "url": "https://www.legislation.gov.uk/uksi/2023/1197/",
+                  "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) (Amendment) Regulations 2023"
+                }
+              ],
+              "description": "<p>Each category of development has its own associated fee. The application fee is calculated from one or more categories of development, depending on the works involved in the project.</p><p>For example, the application fee for a project that includes new build shops and changes of use will be made up of whichever of the two fees is highest.</p>"
+            }
+          ]
+        },
+        "url": "https://editor.planx.uk/camden/camden-apply-for-planning-permission-minor-application-test/published",
+        "files": {
+          "optional": [],
+          "required": [
+            {
+              "value": "necessaryInformation",
+              "description": "Information the authority considers necessary for the application"
+            },
+            {
+              "value": "relevantInformation",
+              "description": "Information the applicant considers relevant to the application"
+            }
+          ],
+          "recommended": [
+            {
+              "value": "relevantInformation",
+              "description": "Information the applicant considers relevant to the application"
+            }
+          ]
+        },
+        "flowId": "727f5046-0eee-46a1-9895-e29efd241fa3"
+      },
+      "submittedAt": "2025-07-03T14:23:43.356Z",
+      "organisation": "CMD"
+    },
+    "responses": [
+      {
+        "metadata": {
+          "sectionName": "The property"
+        },
+        "question": "Help us improve this service",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The property",
+          "autoAnswered": true
+        },
+        "question": "Is the property in Camden?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The property"
+        },
+        "question": "Which of these best describes the use of the property?",
+        "responses": [
+          {
+            "value": "Commercial"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The property"
+        },
+        "question": "What type of commercial property is it?",
+        "responses": [
+          {
+            "value": "Office"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The property",
+          "autoAnswered": true
+        },
+        "question": "Is the property type missing?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The property",
+          "autoAnswered": true
+        },
+        "question": "Has the user already provided the site area?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "About you",
+          "autoAnswered": true
+        },
+        "question": "What type of application is it?",
+        "responses": [
+          {
+            "value": "Apply for planning permission"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "About you"
+        },
+        "question": "Are you applying on behalf of someone else?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "About you"
+        },
+        "question": "Are you a professional planning agent?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "About you"
+        },
+        "question": "Your contact details",
+        "responses": [
+          {
+            "value": "REDACTED"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "About you"
+        },
+        "question": "Your contact address",
+        "responses": [
+          {
+            "value": "38A Southhampton Road, London, NW5 4JR"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "About you"
+        },
+        "question": "We may need to visit the site to assess the application. If we do, who should we contact to arrange the visit?",
+        "responses": [
+          {
+            "value": "Me, the agent"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "About you"
+        },
+        "question": "Applicant's contact details",
+        "responses": [
+          {
+            "value": "REDACTED"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "About you"
+        },
+        "question": "Is the applicant's contact address the same as the property address?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "About you"
+        },
+        "question": "Which of these best describes the applicant?",
+        "responses": [
+          {
+            "value": "Private individual"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "About you"
+        },
+        "question": "Can a planning officer see the works from public land?",
+        "responses": [
+          {
+            "value": "No, to see the works you'd have to come onto the property"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "About you",
+          "autoAnswered": true
+        },
+        "question": "What type of application is this?",
+        "responses": [
+          {
+            "value": "Planning Permission"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "About you",
+          "autoAnswered": true
+        },
+        "question": "Which of these best describes you?",
+        "responses": [
+          {
+            "value": "I'm acting on the applicant's behalf"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/13",
+              "text": "Article 13 of the Town and Country Planning (Development Management Procedure) (England) Order 2015"
+            }
+          ],
+          "sectionName": "About you"
+        },
+        "question": "Is the applicant the owner of the land?",
+        "responses": [
+          {
+            "value": "Yes, sole owner"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/13",
+              "text": "Article 13 of the Town and Country Planning (Development Management Procedure) (England) Order 2015"
+            }
+          ],
+          "sectionName": "About you"
+        },
+        "question": "Does the land have any agricultural tenants?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/13",
+              "text": "Article 13 of the Town and Country Planning (Development Management Procedure) (England) Order 2015"
+            }
+          ],
+          "sectionName": "About you"
+        },
+        "question": "Certificate of ownership declaration - Certificate A",
+        "responses": [
+          {
+            "value": "The applicant certifies the above"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is this an application for a minor development?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/2",
+              "text": "https://www.legislation.gov.uk/uksi/2015/595/article/2"
+            }
+          ],
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "What type of application are you submitting?",
+        "responses": [
+          {
+            "value": "Minor development"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is the property a flat?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "What does the project involve?",
+        "responses": [
+          {
+            "value": "Change the use of an existing building to residential use (including subdivision of existing residential units)"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/ukpga/2004/34/section/258",
+              "text": "https://www.legislation.gov.uk/ukpga/2004/34/section/258"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "What type of residential unit is proposed?",
+        "responses": [
+          {
+            "value": "Residential units designed for single households",
+            "metadata": {
+              "flags": ["Community infrastructure levy / Liable"]
+            }
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/ukpga/2004/34/section/258",
+              "text": "https://www.legislation.gov.uk/ukpga/2004/34/section/258"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "What is the existing use of the relevant buildings?",
+        "responses": [
+          {
+            "value": "Other types of use"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is it only a flat journey?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Have works started?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/2",
+              "text": "https://www.legislation.gov.uk/uksi/2015/595/article/2"
+            }
+          ],
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "What type of development are you applying for?",
+        "responses": [
+          {
+            "value": "Minor development"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Do we already know that the project introduces new materials?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Does the project introduce any external materials?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "[Material 1] Type",
+        "responses": [
+          {
+            "value": "window"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "[Material 1] Existing material description",
+        "responses": [
+          {
+            "value": "wood"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "[Material 1] Proposed material description",
+        "responses": [
+          {
+            "value": "aluminium "
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Do your documents also include details about external materials?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346",
+              "text": "Greater London Authority Act 1999"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Does the site include more than one property?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Do you know the title number of the property?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346",
+              "text": "Greater London Authority Act 1999"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "What is the title number of the property?",
+        "responses": [
+          {
+            "value": "48374"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346",
+              "text": "Greater London Authority Act 1999"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Does the property have an Energy Performance Certificate (EPC)?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "What type of application is this?",
+        "responses": [
+          {
+            "value": "Planning permission"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346",
+              "text": "Greater London Authority Act 1999"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "What is the current ownership status of the land?",
+        "responses": [
+          {
+            "value": "Private ownership"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Does your project result in the gain or loss of any homes?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is the property a brownfield site?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Does this application replace or amend a previously granted planning permission?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Is your development expected to be delivered in phases?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Have works already started?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346",
+              "text": "Greater London Authority Act 1999"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "When will the work start?",
+        "responses": [
+          {
+            "value": "2026-02-01"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346",
+              "text": "Greater London Authority Act 1999"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "When will the work be completed?",
+        "responses": [
+          {
+            "value": "2027-02-01"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "What is the project name?",
+        "responses": [
+          {
+            "value": "Unknown "
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Has a lead developer been assigned to the project?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.london.gov.uk/programmes-strategies/planning/london-plan/new-london-plan/london-plan-2021",
+              "text": "The London Plan 2021, Policy D9 Tall buildings"
+            }
+          ],
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Are you creating new buildings?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.london.gov.uk/programmes-strategies/planning/london-plan/new-london-plan/london-plan-2021",
+              "text": "The London Plan 2021, Policy D9 Tall buildings"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Are you increasing the height of existing buildings?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Does the proposal involve new buildings or increasing the height of existing buildings?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "How much will the project cost?",
+        "responses": [
+          {
+            "value": "Between £2 million and £100 million"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.london.gov.uk/programmes-strategies/planning/london-plan/new-london-plan/london-plan-2021",
+              "text": "The London Plan 2021, Policy H2 Small sites"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Does the project involve the loss of garden land?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is the project subdividing a property?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346",
+              "text": "Greater London Authority Act 1999"
+            }
+          ],
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is this a fast-track application for the purposes of affordable housing?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Does the project include any of the following?",
+        "responses": [
+          {
+            "value": "No, none of these"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "What is the percentage reduction of surface water discharge from the site for a 1 in 100-year rainfall event?",
+        "responses": [
+          {
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Are green sustainable drainage systems incorporated into the drainage design?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Does the project affect residential units?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "What is the targeted internal residential water usage?",
+        "responses": [
+          {
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Does the development include rain water harvesting?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Does the development include grey water reuse?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Which utilities are needed as part of the development?",
+        "responses": [
+          {
+            "value": "Full fibre internet connection"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "How many residential units will be served by a full fibre internet connection?",
+        "responses": [
+          {
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "How many commercial units will be served by a full fibre internet connection?",
+        "responses": [
+          {
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Is a fire suppression system proposed?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Have you consulted mobile network operators?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Does the proposal provide any of the following?",
+        "responses": [
+          {
+            "value": "None of these"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "What is the Urban Greening Factor Score?",
+        "responses": [
+          {
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "What area of green roof is proposed?",
+        "responses": [
+          {
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "What percentage of material from demolition and construction will be re-used or recycled?",
+        "responses": [
+          {
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/2",
+              "text": "https://www.legislation.gov.uk/uksi/2015/595/article/2"
+            }
+          ],
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Does the proposal constitute a major development?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Does the project affect residential units?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "How many of the proposed residential units will have electrical heating?",
+        "responses": [
+          {
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is the property in Greater London?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Are there existing or proposed parking spaces on the site?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "[Parking space type 1] Type",
+        "responses": [
+          {
+            "value": "cycles"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "[Parking space type 1] How many existing spaces of this type are there on the site?",
+        "responses": [
+          {
+            "value": "12"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "[Parking space type 1] How many spaces of this type are you proposing?",
+        "responses": [
+          {
+            "value": "12"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "What type of application is this?",
+        "responses": [
+          {
+            "value": "Full planning"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Describe the current use of the property",
+        "responses": [
+          {
+            "value": "Commercial office space"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is the site of the development currently vacant?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Are you applying solely to make changes to a flat?",
+        "responses": [
+          {
+            "value": "No, my project also includes other changes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Does the project involve any of the following?",
+        "responses": [
+          {
+            "value": "None of these"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Is the development within 20 metres of a watercourse?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Will the development increase the flood risk elsewhere?",
+        "responses": [
+          {
+            "value": "I'm not sure"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is the property in a flood zone?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "What is the area of the site?",
+        "responses": [
+          {
+            "value": "Less than 1 hectare"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Is the site in an area at risk of flooding?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "How will surface water be drained from the property?",
+        "responses": [
+          {
+            "value": "Main sewer"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "How does the project affect the foul drainage system on the property?",
+        "responses": [
+          {
+            "value": "The project doesn't affect foul drainage at all"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Use new tree structure?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Are there any protected trees on the property?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Are there trees or hedges on the site?",
+        "responses": [
+          {
+            "value": "Neither on nor adjacent to the site"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/ukpga/2006/16/section/40",
+              "text": "Section 40 of the Natural Environment and Rural Communities Act 2006"
+            },
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Is it likely that the project will affect any of the following?",
+        "responses": [
+          {
+            "value": "None of the above"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/ukpga/2021/30/schedule/14/enacted",
+              "text": "Part 2, Schedule 7A of the Town and Country Planning Act 1990"
+            },
+            {
+              "url": "https://www.gov.uk/guidance/understanding-biodiversity-net-gain#who-bng-rules-affect",
+              "text": "Planning practice Guidance Who BNG affects"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Would the project be exempt from the biodiversity gain condition were it to be granted planning permission?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is the project exempt from the Biodiversity Net Gain condition?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "What are the reasons why the Biodiversity Gain Condition would not apply?",
+        "responses": [
+          {
+            "value": "Not applicable "
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is the property in Greater London?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Does your project result in the loss of any residential units?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Does your project result in the gain of any residential units?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "[Gained residential unit type 1] Number of units of this type",
+        "responses": [
+          {
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "[Gained residential unit type 1] What best describes this unit?",
+        "responses": [
+          {
+            "value": "flat"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "[Gained residential unit type 1] What will be the Gross Internal Floor Area (GIA) of this unit?",
+        "responses": [
+          {
+            "value": "50"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "[Gained residential unit type 1] How many habitable rooms will this unit have?",
+        "responses": [
+          {
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "[Gained residential unit type 1] How many bedrooms will this unit have?",
+        "responses": [
+          {
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "[Gained residential unit type 1] What best describes the tenure of this unit?",
+        "responses": [
+          {
+            "value": "marketForSale"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "[Gained residential unit type 1] What best describes the provider of this unit?",
+        "responses": [
+          {
+            "value": "private"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "[Gained residential unit type 1] Will this unit be compliant with any of the following?",
+        "responses": [
+          {
+            "value": "m42"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "[Gained residential unit type 1] Will this unit be built on garden land?",
+        "responses": [
+          {
+            "value": "false"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "[Gained residential unit type 1] Will this unit provide sheltered accommodation?",
+        "responses": [
+          {
+            "value": "false"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "[Gained residential unit type 1] Is this unit specifically designed for older people?",
+        "responses": [
+          {
+            "value": "false"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Does the project affect any residential units?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Are any communal spaces gained, lost or replaced by the development?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Does the development introduce any of these?",
+        "responses": [
+          {
+            "value": "None of these"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Do the plans show where waste will be stored on the property?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Does the waste provision allow for the separate storage and collection of recyclable waste?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Are you applying solely to make changes to a flat?",
+        "responses": [
+          {
+            "value": "No, my project includes other changes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Does the project involve the need to dispose of trade effluents or waste?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Does the project involve the use or storage of any hazardous materials?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Does the development include industrial or commercial processes?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Does the development involve the loss or gain of rooms in hotels or residential institutions and hostels?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Does the project constitute a major development?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is the property in Greater London?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project"
+        },
+        "question": "Are there any existing buildings on the site?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.london.gov.uk/programmes-strategies/planning/london-plan/new-london-plan/london-plan-2021",
+              "text": "The London Plan"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "[Existing and proposed uses 1] What is the use class?",
+        "responses": [
+          {
+            "value": "e"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.london.gov.uk/programmes-strategies/planning/london-plan/new-london-plan/london-plan-2021",
+              "text": "The London Plan"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "[Existing and proposed uses 1] What is the existing gross internal floor area?",
+        "responses": [
+          {
+            "value": "112"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.london.gov.uk/programmes-strategies/planning/london-plan/new-london-plan/london-plan-2021",
+              "text": "The London Plan"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "[Existing and proposed uses 1] What is the gross internal floor area lost?",
+        "responses": [
+          {
+            "value": "112"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.london.gov.uk/programmes-strategies/planning/london-plan/new-london-plan/london-plan-2021",
+              "text": "The London Plan"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "[Existing and proposed uses 1] What is the gross internal floor area gained?",
+        "responses": [
+          {
+            "value": "112"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Are there any existing employees on the site or will the project create new employment on the site?",
+        "responses": [
+          {
+            "value": "None of the above"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015, paragraph 7"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "Are hours of opening relevant to this project?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is the property in Greater London?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "What type of application is this?",
+        "responses": [
+          {
+            "value": "Minor development"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is the property on designated land?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "http://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) 2015 (as amended)"
+            }
+          ],
+          "sectionName": "The project"
+        },
+        "question": "How do you want to submit design and access information?",
+        "responses": [
+          {
+            "value": "Upload a document"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "http://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) 2015 (as amended"
+            }
+          ],
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Is the property in a conservation area?",
+        "responses": [
+          {
+            "value": "Conservation area"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "http://www.legislation.gov.uk/uksi/2015/595/article/7",
+              "text": "The Town and Country Planning (Development Management Procedure) (England) 2015 (as amended"
+            }
+          ],
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Do any of these types of heritage asset affect the property?",
+        "responses": [
+          {
+            "value": "None of these"
+          },
+          {
+            "value": "None of these"
+          },
+          {
+            "value": "None of these"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Heritage Statement needed?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "The project",
+          "autoAnswered": true
+        },
+        "question": "Data option provided?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application"
+        },
+        "question": "Did you get any pre-application advice from the council before making this application?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application"
+        },
+        "question": "In the 3 months before making this application, did you use our free guidance service to find out if you need planning permission?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "What type of application is it?",
+        "responses": [
+          {
+            "value": "Full planning permission"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/2",
+              "text": "https://www.legislation.gov.uk/uksi/2015/595/article/2"
+            }
+          ],
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "What type of development are you applying for?",
+        "responses": [
+          {
+            "value": "Minor development"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Is the property a dwellinghouse?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Does your project also involve new build dwellinghouses?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/schedule/1/part/2",
+              "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012, Scale of Fees"
+            }
+          ],
+          "sectionName": "Your application"
+        },
+        "question": "How many dwellinghouses does your project create?",
+        "responses": [
+          {
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Are you creating fewer than 10 new homes?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "What types of changes does the application relate to?",
+        "responses": [
+          {
+            "value": "Change use"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "What is the new use?",
+        "responses": [
+          {
+            "value": "Dwellinghouses"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Is the property a home?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Does the project involve any of these changes?",
+        "responses": [
+          {
+            "value": "Changing the use of a property"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Check for multiple fees?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Does the proposal include fees in category 1 or 2 to 13?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Does the proposal include developments in category 1?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "What type of application is it?",
+        "responses": [
+          {
+            "value": "Something else"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "What type of application is it?",
+        "responses": [
+          {
+            "value": "Another application type"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Does the project involve a demolition?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Does the application qualify for a disability exemption?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Does the application qualify for a Regulation 5A exemption?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Is the site a sports field?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/regulation/11",
+              "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012 - Regulation 11"
+            }
+          ],
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Is the application being made by (or on behalf of) a parish or community council?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/schedule/1",
+              "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012 Chapter 2, Paragraph 10"
+            }
+          ],
+          "sectionName": "Your application"
+        },
+        "question": "Are you also submitting another proposal for the same site today?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Does the application qualify for the sports club fee reduction?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/regulation/11",
+              "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012 - Regulation 11"
+            }
+          ],
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Does the application qualify for the parish council reduction?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/schedule/1",
+              "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012 Chapter 2, Paragraph 10"
+            }
+          ],
+          "sectionName": "Your application",
+          "autoAnswered": true
+        },
+        "question": "Does the application qualify for the alternative application reduction?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Community Infrastructure Levy (CIL)",
+          "autoAnswered": true
+        },
+        "question": "What type of application is it?",
+        "responses": [
+          {
+            "value": "Full planning permission - other"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Community Infrastructure Levy (CIL)",
+          "autoAnswered": true
+        },
+        "question": "Is the property an existing home?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Community Infrastructure Levy (CIL)",
+          "autoAnswered": true
+        },
+        "question": "Is the applicant a charity?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Community Infrastructure Levy (CIL)",
+          "autoAnswered": true
+        },
+        "question": "Does the development involve building any new homes?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Community Infrastructure Levy (CIL)",
+          "autoAnswered": true
+        },
+        "question": "Does the project involve building any new homes?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Community Infrastructure Levy (CIL)",
+          "autoAnswered": true
+        },
+        "question": "Provide docs to data option?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "policyRefs": [
+            {
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/2",
+              "text": "https://www.legislation.gov.uk/uksi/2015/595/article/2"
+            }
+          ],
+          "sectionName": "Upload application documents",
+          "autoAnswered": true
+        },
+        "question": "What type of development are you applying for?",
+        "responses": [
+          {
+            "value": "Minor development"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Upload application documents",
+          "autoAnswered": true
+        },
+        "question": "What type of application are you submitting?",
+        "responses": [
+          {
+            "value": "Minor"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Review and confirm",
+          "autoAnswered": true
+        },
+        "question": "What type of application is this?",
+        "responses": [
+          {
+            "value": "Planning permission"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Review and confirm"
+        },
+        "question": "Connections with London Borough of Camden Council",
+        "responses": [
+          {
+            "value": "None of the above apply to me"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Review and confirm"
+        },
+        "question": "Confirm the information in this application is correct",
+        "responses": [
+          {
+            "value": "I/we confirm that the above statements are true"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Pay and send",
+          "autoAnswered": true
+        },
+        "question": "Does the application qualify for a disability exemption?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Pay and send",
+          "autoAnswered": true
+        },
+        "question": "Have you been asked by Camden Council to resubmit this application as part of our pilot software testing?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Pay and send",
+          "autoAnswered": true
+        },
+        "question": "What type of application is this?",
+        "responses": [
+          {
+            "value": "Planning permission"
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "sectionName": "Pay and send",
+          "autoAnswered": true
+        },
+        "question": "What type of application is it?",
+        "responses": [
+          {
+            "value": "Minor"
+          }
+        ]
+      }
+    ]
+  }
+}

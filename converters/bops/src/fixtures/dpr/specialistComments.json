@@ -1,0 +1,31 @@
+{
+  "data": {
+    "comments": [
+      {
+        "id": 123,
+        "comment": "Secure cycle parking via condition and car-free via s106. ",
+        "receivedDate": "2025-07-03T14:56:58Z",
+        "sentiment": "approved"
+      },
+      {
+        "id": 122,
+        "comment": "The original factory building at 5-6 Underhill Street was partially destroyed by enemy action during WWII and rebuilt in 1946. The site is located within Camden Town Conservation Area.\r\n\r\nIn 1988 consent was granted for external alterations to the building (plus small extension). This is the building we find today.\r\n\r\nUnderhill Street façade (ref 8701306)\r\n\r\nThe current proposal seeks to return the Underhill Street elevation to an arrangement of four windows at ground floor level as previously granted in 1988.\r\n\r\nTo ensure the building retains an architecturally coherent appearance there should be a condition attached to any consent requiring the new windows to match the existing windows in style i.e. have an ‘Art Deco’ metal Crittall-like appearance.\r\n\r\nProviding the design of the proposed windows is in keeping, the elevational changes are considered not to harm the contribution made by this building to the character and appearance of the streetscape and hence the conservation area.\r\n",
+        "receivedDate": "2025-07-03T14:55:27Z",
+        "sentiment": "amendmentsNeeded"
+      }
+    ],
+    "summary": {
+      "totalConsulted": 3,
+      "totalComments": 2,
+      "sentiment": { "approved": 1, "amendmentsNeeded": 1, "objected": 0 }
+    }
+  },
+  "status": { "code": 200, "message": "" },
+  "pagination": {
+    "resultsPerPage": 10,
+    "currentPage": 1,
+    "totalPages": 1,
+    "totalResults": 2,
+    "totalAvailableItems": 2
+  }
+}

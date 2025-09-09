@@ -2,6 +2,10 @@
   "name": "@dpr/odp-schemas",
   "type": "module",
   "private": true,
+  "exports": {
+    "./*": "./src/*",
+    "./types/shared/formats": "./src/types/shared/formats.ts"
+  },
   "main": "src/index.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
