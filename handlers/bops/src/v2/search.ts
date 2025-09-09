@@ -93,16 +93,7 @@ export async function search<T>(
   }
   try {
     const request = await handleBopsGetRequest<ApiResponse<T>>(client, url)
-    const applications = request.data || []
-    const pagination = request.pagination || {}
-
-    return {
-      ...request,
-      data: {
-        applications,
-        pagination
-      }
-    } as ApiResponse<T>
+    return request
   } catch (error) {
     console.error('Error fetching application data:', error)
     let detail = 'Unknown error'
