@@ -101,31 +101,26 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
     async ({ params, query, headers, error }) => {
       try {
         const client = headers['x-client']
-        const apiResponse = await documents(
+
+        const documentsData = await documents(
           client,
           params.reference,
           query as SearchParamsDocuments
         )
-        return apiResponse
-      } catch (e: any) {
-        return error(
-          e.status || 500,
-          e.detail || 'Failed to retrieve documents'
-        )
+
+        if (!documentsData) {
+          return error(404, 'Documents not found for this application.')
+        }
+        return documentsData
+      } catch (e) {
+        console.error('An error occurred while fetching documents:', e)
+        return error(500, 'An unexpected error occurred')
       }
     },
     {
       headers: t.Object({
-        'x-client': t.String({
-          description:
-            'Who is requesting the data, ensures the correct data is returned',
-          example: 'cavyshire-borough-council'
-        }),
-        'x-service': t.String({
-          description:
-            'What is requesting the data, mostly for diagnostic purposes',
-          example: 'open-api-spec'
-        })
+        'x-client': t.String(),
+        'x-service': t.String()
       }),
       query: t.Object({
         page: t.Optional(t.Numeric()),

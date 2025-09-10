@@ -1,5 +1,11 @@
 interface ClientConfig {
+  id: number
+  name: string
+  slug: string | null
   endpoint: string
+  lastPolledAt: string | null
+  updatedAt: string
+  createdAt: string
 }
 
 /**

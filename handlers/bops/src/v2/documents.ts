@@ -1,12 +1,16 @@
 import type { ApiResponse } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.js'
 import { handleBopsGetRequest } from '../requests'
 import type { SearchParamsDocuments } from '../types'
+import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse'
+import type { PostSubmissionDocumentsEndpoint } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/documents'
+import { bopsDocumentsEndpointToOdp } from '@dpr/converter-bops/converters/documents/index.ts'
+import type { BopsDocumentsEndpoint } from '@dpr/converter-bops/schemas/documents/documents.ts'
 
-export async function documents<T>(
+export async function documents(
   client: string,
   reference: string,
   searchParams?: SearchParamsDocuments
-): Promise<ApiResponse<T> | null> {
+): Promise<PostSubmissionDocumentsEndpoint | null> {
   let url = `public/planning_applications/${reference}/documents`
 
   if (searchParams) {
@@ -35,21 +39,21 @@ export async function documents<T>(
   }
 
   try {
-    const request = await handleBopsGetRequest<ApiResponse<T>>(client, url)
-    return request
+    const request = await handleBopsGetRequest<
+      ApiResponse<BopsDocumentsEndpoint>
+    >(client, url)
+    if (!request || !request.data) {
+      return null
+    }
+
+    const convertedData = bopsDocumentsEndpointToOdp(
+      request.data,
+      searchParams as SearchParamsDocuments,
+      request.status as ApiResponseStatus
+    )
+    return convertedData
   } catch (error) {
     console.error('Error fetching application documents:', error)
-    let detail = 'Unknown error'
-    if (error instanceof Error) {
-      detail = error.message
-    }
-    return {
-      data: null,
-      status: {
-        code: 500,
-        message: 'Internal server error',
-        detail
-      }
-    }
+    return null
   }
 }
