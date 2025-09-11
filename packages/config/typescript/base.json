@@ -44,7 +44,8 @@
       "@dpr/odp-schemas/*": ["packages/odp-schemas/src/*"],
       "@dpr/odp-schemas/types/shared/formats": [
         "packages/odp-schemas/src/types/shared/formats.ts"
-      ]
+      ],
+      "@dpr/converter-bops/*": ["converters/bops/src/*"]
 
       // "@dpr/ui/styles/*": ["packages/ui/dist/styles/*"]
       // "@dpr/ui": ["packages/ui/src/index.ts"],

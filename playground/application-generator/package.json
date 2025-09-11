@@ -1,13 +1,13 @@
 {
-  "name": "@dpr/converter-bops",
+  "name": "@dpr/application-generator",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "typeconfig": "tsc --showConfig",
-    "test": "bun test ",
-    "download-fixtures": "bun run src/scripts/download-fixtures.ts"
+    "build": "bun run src/scripts/generateJsonFiles.ts",
+    "test": "bun test "
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -15,11 +15,11 @@
   },
   "dependencies": {
     "@sinclair/typebox": "^0.34.41",
-    "ajv": "^8.17.1",
-    "ajv-formats": "^3.0.1",
     "dayjs": "^1.11.18",
     "typescript": "^5",
     "@dpr/odp-schemas": "workspace:*",
-    "@dpr/libs": "workspace:*"
+    "@dpr/libs": "workspace:*",
+    "@faker-js/faker": "^8.4.1",
+    "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz"
   }
 }

@@ -1,0 +1,74 @@
+{
+  "data": {
+    "applicant": {
+      "type": "individual",
+      "name": {
+        "first": "William",
+        "last": "Zane"
+      },
+      "email": "areyouon@email.org",
+      "phone": {
+        "primary": "01234000000"
+      },
+      "address": {
+        "sameAsSiteAddress": true
+      }
+    },
+    "property": {
+      "address": {
+        "latitude": 51.3304155,
+        "longitude": -0.1043842,
+        "x": 532161,
+        "y": 160741,
+        "title": "32, ST JAMES ROAD, PURLEY",
+        "source": "Ordnance Survey",
+        "uprn": "100020623888",
+        "usrn": "20502851",
+        "pao": "32",
+        "street": "ST JAMES ROAD",
+        "town": "PURLEY",
+        "postcode": "CR8 2DL",
+        "singleLine": "32 ST JAMES ROAD, PURLEY, CROYDON, CR8 2DL"
+      },
+      "boundary": {
+        "site": {
+          "type": "Feature",
+          "geometry": {
+            "type": "MultiPolygon",
+            "coordinates": [
+              [
+                [
+                  [-0.072763, 51.456622],
+                  [-0.072749, 51.456669],
+                  [-0.073167, 51.456732],
+                  [-0.073195, 51.456736],
+                  [-0.073213, 51.456688],
+                  [-0.072763, 51.456622]
+                ]
+              ]
+            ]
+          },
+          "properties": {
+            "name": "",
+            "entity": 12000593377,
+            "prefix": "title-boundary",
+            "dataset": "title-boundary",
+            "end-date": "",
+            "typology": "geography",
+            "reference": "37786766",
+            "entry-date": "2024-05-06",
+            "start-date": "2002-06-26",
+            "organisation-entity": "13"
+          }
+        },
+        "area": {
+          "hectares": 0.017289,
+          "squareMetres": 172.89
+        }
+      }
+    },
+    "proposal": {
+      "description": "A 2 storey rear extension with a roof garden and built in pizza oven"
+    }
+  }
+}

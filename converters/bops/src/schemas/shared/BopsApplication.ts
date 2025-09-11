@@ -1,4 +1,5 @@
 import { Type, type Static } from '@sinclair/typebox'
+import './formats'
 
 /**
  * BOPS represents application with a shared file in many places, replicating that here
@@ -24,8 +25,8 @@ export const BopsApplication = Type.Object({
   status: Type.String(),
   consultation: Type.Optional(
     Type.Object({
-      startDate: Type.String({ format: 'date' }),
-      endDate: Type.String({ format: 'date' }),
+      startDate: Type.Union([Type.Null(), Type.String({ format: 'date' })]),
+      endDate: Type.Union([Type.Null(), Type.String({ format: 'date' })]),
       publicUrl: Type.String({ format: 'uri' }),
       publishedComments: Type.Array(
         Type.Object({
