@@ -765,13 +765,11 @@ export const PostSubmissionPlanningPermissionFullMajor =
 // export const PostSubmissionWorksToTreesNotice =
 //   PostSubmissionApplicationSpecificationGenerator(Type.Literal('wtt.notice'))
 
-export type PostSubmissionApplication = Static<
-  typeof PostSubmissionApplicationSchema
->
+export type PostSubmissionApplication = Static<typeof PostSubmissionApplication>
 
-export const PostSubmissionApplicationSchema =
+export const PostSubmissionApplication =
   PostSubmissionPlanningPermissionFullMajor
-// export const PostSubmissionApplicationSchema = Type.Union(
+// export const PostSubmissionApplication = Type.Union(
 // [
 // PostSubmissionAdvertConsent,
 // PostSubmissionAmendmentMinorMaterial,

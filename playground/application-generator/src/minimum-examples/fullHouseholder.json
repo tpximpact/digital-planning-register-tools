@@ -1,0 +1,89 @@
+{
+  "data": {
+    "applicant": {
+      "type": "individual",
+      "name": {
+        "first": "David",
+        "last": "Bowie"
+      },
+      "email": "ziggy@example.com",
+      "phone": {
+        "primary": "Not provided by agent"
+      },
+      "address": {
+        "sameAsSiteAddress": true
+      },
+      "siteContact": {
+        "role": "proxy"
+      },
+      "ownership": {
+        "interest": "owner.sole",
+        "certificate": "a",
+        "agriculturalTenants": false,
+        "declaration": {
+          "accurate": true
+        }
+      },
+      "agent": {
+        "name": {
+          "first": "Ziggy",
+          "last": "Stardust"
+        },
+        "email": "ziggy@example.com",
+        "phone": {
+          "primary": "01100 0110 0011"
+        },
+        "address": {
+          "line1": "40 Stansfield Road",
+          "line2": "Brixton",
+          "town": "London",
+          "county": "Greater London",
+          "postcode": "SW9 9RZ",
+          "country": "UK"
+        }
+      }
+    },
+    "property": {
+      "address": {
+        "latitude": 51.4656522,
+        "longitude": -0.1185926,
+        "x": 530787,
+        "y": 175754,
+        "title": "40, STANSFIELD ROAD, LONDON",
+        "singleLine": "40, STANSFIELD ROAD, LONDON, SW9 9RZ",
+        "source": "Ordnance Survey",
+        "uprn": "100021892955",
+        "usrn": "21901294",
+        "pao": "40",
+        "street": "STANSFIELD ROAD",
+        "town": "LONDON",
+        "postcode": "SW9 9RZ"
+      },
+      "boundary": {
+        "site": {
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [-0.1186569035053321, 51.465703531871384],
+                [-0.1185938715934822, 51.465724418998775],
+                [-0.1184195280075143, 51.46552473766957],
+                [-0.11848390102387167, 51.4655038504508],
+                [-0.1186569035053321, 51.465703531871384]
+              ]
+            ]
+          },
+          "properties": null
+        },
+        "area": {
+          "hectares": 0.012592,
+          "squareMetres": 125.92
+        }
+      }
+    },
+    "proposal": {
+      "description": "Roof extension to the rear of the property, incorporating starship launchpad."
+    }
+  }
+}
