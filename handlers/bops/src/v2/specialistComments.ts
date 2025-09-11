@@ -1,6 +1,6 @@
 import type { ApiResponse } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.js'
 import { handleBopsGetRequest } from '../requests'
-import type { SearchParamsComments } from '../types'
+import type { SearchParamsComments } from '../types/types'
 
 export async function specialistComments<T>(
   client: string,

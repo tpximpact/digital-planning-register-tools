@@ -1,3 +1,5 @@
+import type { DprCommentSubmission } from './types/definitions'
+
 interface ClientConfig {
   id: number
   name: string
@@ -103,6 +105,68 @@ export async function handleBopsGetRequest<T>(
   }
 
   const data = await response.json()
+  return {
+    data,
+    status: {
+      code: response.status,
+      message: response.statusText
+    }
+  } as T
+}
+
+export async function handleBopsPostRequest<T>(
+  client: string,
+  url: string,
+  apiData: DprCommentSubmission
+): Promise<T> {
+  let apiUrl: string | undefined
+
+  const dbConfig = await getCouncilConfig(client)
+  if (dbConfig) {
+    apiUrl = dbConfig.endpoint
+  } else {
+    const normalisedName = normaliseClientForEnv(client)
+    const envUrlVar = `${normalisedName}_BOPS_API_URL`
+    apiUrl = process.env[envUrlVar]
+  }
+
+  if (!apiUrl) {
+    throw new Error(
+      `API URL for client '${client}' not found in database or .env file.`
+    )
+  }
+
+  const normalisedNameForKey = normaliseClientForEnv(client)
+  const envApiKeyVar = `${normalisedNameForKey}_BOPS_API_KEY`
+  const apiKey = process.env[envApiKeyVar]
+  if (!apiKey) {
+    throw new Error(`API Key for client '${client}' not found in .env file.`)
+  }
+
+  const fullUrl = `${apiUrl}${url}`
+  console.log(fullUrl, 'fullUrl')
+  const response = await fetch(fullUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`
+    },
+    body: JSON.stringify(apiData)
+  })
+
+  if (!response.ok) {
+    const errorText = await response.text()
+    console.log('RAW ERROR RESPONSE FROM BOPS API:', errorText)
+
+    throw {
+      status: response.status,
+      statusText: response.statusText,
+      detail: errorText
+    }
+  }
+  const responseData = await response.json()
+
+  const data = JSON.parse(responseData)
   return {
     data,
     status: {

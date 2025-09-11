@@ -1,6 +1,6 @@
 import type { ApiResponse } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.js'
 import { handleBopsGetRequest } from '../requests'
-import type { SearchParamsDocuments } from '../types'
+import type { SearchParamsDocuments } from '../types/types'
 import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse'
 import type { PostSubmissionDocumentsEndpoint } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/documents'
 import { bopsDocumentsEndpointToOdp } from '@dpr/converter-bops/converters/documents/index.ts'

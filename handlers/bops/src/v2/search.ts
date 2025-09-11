@@ -1,6 +1,6 @@
 import type { ApiResponse } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.js'
 import { handleBopsGetRequest } from '../requests'
-import type { SearchParamsApplication } from '../types'
+import type { SearchParamsApplication } from '../types/types'
 
 export async function search<T>(
   client: string,

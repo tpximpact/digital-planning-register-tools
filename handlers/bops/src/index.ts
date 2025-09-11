@@ -12,7 +12,8 @@ import type {
   SearchParamsApplication,
   SearchParamsComments,
   SearchParamsDocuments
-} from './types'
+} from './types/types'
+import { postComment } from './v2/postComment'
 
 export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
   .get(
@@ -241,6 +242,59 @@ export const bopsHandlers = new Elysia({ name: 'bops-handlers' })
       }
     },
     {
+      headers: t.Object({
+        'x-client': t.String({
+          description:
+            'Who is requesting the data, ensures the correct data is returned',
+          example: 'cavyshire-borough-council'
+        }),
+        'x-service': t.String({
+          description:
+            'What is requesting the data, mostly for diagnostic purposes',
+          example: 'open-api-spec'
+        })
+      })
+    }
+  )
+  .post(
+    '/:reference/comments/public',
+    async ({ params, body, headers, error }) => {
+      const client = headers['x-client']
+      try {
+        const apiResponse = await postComment(client, params.reference, body)
+        return apiResponse
+      } catch (e: any) {
+        console.error(
+          '[bops-handlers] An error occurred in POST /:reference/comments/public:',
+          e
+        )
+        return error(
+          e.status || 500,
+          e.detail || 'Failed to post public comment'
+        )
+      }
+    },
+    {
+      body: t.Object(
+        {
+          name: t.String(),
+          address: t.String(),
+          email: t.String(),
+          response: t.String(),
+          summary_tag: t.String(),
+          tags: t.Array(t.String())
+        },
+        {
+          example: {
+            name: 'Jo Blogs',
+            address: '123 street, AAA111',
+            email: 'jo.blogs@example.com',
+            response: 'I like it',
+            summary_tag: 'supportive',
+            tags: ['light']
+          }
+        }
+      ),
       headers: t.Object({
         'x-client': t.String({
           description:
