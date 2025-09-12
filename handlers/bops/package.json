@@ -1,5 +1,5 @@
 {
-  "name": "@dpr/bops-handlers",
+  "name": "@dpr/handler-bops",
   "version": "0.0.0",
   "private": true,
   "type": "module",

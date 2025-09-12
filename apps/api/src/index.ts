@@ -6,7 +6,7 @@ import { appSetup } from './modules/app/app.controller'
 import { authentication, getInfo, handleErrors } from './middleware'
 import config from './config'
 import { swaggerConfig } from './modules/swagger'
-import { bopsHandlers } from '@dpr/bops-handlers'
+import { bopsHandlers } from '@dpr/handler-bops'
 
 // import appJson from 'digital-planning-data-schemas/schemas/application.json'
 // import type { SiteAddress } from 'digital-planning-data-schemas/types/shared/Addresses.ts'
