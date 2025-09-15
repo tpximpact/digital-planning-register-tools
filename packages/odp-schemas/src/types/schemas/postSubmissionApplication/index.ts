@@ -3,6 +3,7 @@ import type { Static, TSchema } from '@sinclair/typebox'
 import { PostSubmissionMetadata } from './Metadata'
 import { CaseOfficer } from './data/CaseOfficer'
 import { AppealSchema } from './data/Appeal'
+import { PostSubmissionFile } from './data/PostSubmissionFile'
 
 export const PostSubmissionApplicationSpecificationGenerator = <
   T extends TSchema
@@ -27,6 +28,7 @@ export const PostSubmissionApplicationSpecificationGenerator = <
     //     specialist: Type.Optional(SpecialistComments)
     //   })
     // ),
+    files: Type.Optional(Type.Any()),
     // files: Type.Optional(Type.Array(PostSubmissionFile)),
     // submission: PrototypeApplication,
     metadata: PostSubmissionMetadata

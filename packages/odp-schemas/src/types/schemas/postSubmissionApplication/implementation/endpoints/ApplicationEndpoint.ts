@@ -1,4 +1,4 @@
-import { type Static } from '@sinclair/typebox'
+import { Type, type Static } from '@sinclair/typebox'
 import { ApiResponse } from '../ApiResponse'
 import { PostSubmissionApplication } from '../..'
 
@@ -12,4 +12,15 @@ export const PostSubmissionApplicationEndpoint = ApiResponse(
 )
 export type PostSubmissionApplicationEndpoint = Static<
   typeof PostSubmissionApplicationEndpoint
+>
+
+/**
+ * Parameters for the endpoint
+ */
+
+export const PostSubmissionApplicationParams = Type.Object({
+  id: Type.String()
+})
+export type PostSubmissionApplicationParams = Static<
+  typeof PostSubmissionApplicationParams
 >
