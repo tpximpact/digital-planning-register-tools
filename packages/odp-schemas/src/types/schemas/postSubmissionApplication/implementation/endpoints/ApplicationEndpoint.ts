@@ -1,25 +1,33 @@
 import { Type, type Static } from '@sinclair/typebox'
-import { ApiResponse } from '../ApiResponse'
 import { PostSubmissionApplication } from '../..'
+import { ApiResponse } from '../ApiResponse'
 
 /**
- * Endpoint to get a post submission application
- * /api/@next/applications/{id}
+ * The data returned by the ApiResponse
  */
-
-export const PostSubmissionApplicationEndpoint = ApiResponse(
-  PostSubmissionApplication
-)
+export const PostSubmissionApplicationEndpoint = PostSubmissionApplication
 export type PostSubmissionApplicationEndpoint = Static<
   typeof PostSubmissionApplicationEndpoint
 >
 
 /**
+ * Endpoint to get a post submission application
+ * /api/@next/applications/{applicationId}
+ */
+export const PostSubmissionApplicationEndpointApiResponse = ApiResponse(
+  PostSubmissionApplicationEndpoint
+)
+export type PostSubmissionApplicationEndpointApiResponse = Static<
+  typeof PostSubmissionApplicationEndpointApiResponse
+>
+
+/**
  * Parameters for the endpoint
+ * /api/@next/applications/{applicationId} endpoint
  */
 
 export const PostSubmissionApplicationParams = Type.Object({
-  id: Type.String()
+  applicationId: Type.String()
 })
 export type PostSubmissionApplicationParams = Static<
   typeof PostSubmissionApplicationParams
