@@ -1,17 +1,26 @@
 import { Type, type Static } from '@sinclair/typebox'
 import { PostSubmissionFile } from '../../data/PostSubmissionFile'
-import { ApiResponse } from '../ApiResponse'
 import { PrototypeFileType as FileType } from '../../../prototypeApplication/enums/FileType'
+import { ApiResponse } from '../ApiResponse'
+
+/**
+ * The data returned by the ApiResponse
+ */
+export const PostSubmissionDocumentsEndpoint = Type.Array(PostSubmissionFile)
+export type PostSubmissionDocumentsEndpoint = Static<
+  typeof PostSubmissionDocumentsEndpoint
+>
 
 /**
  * Endpoint to get a list of post submission application documents
  * /api/@next/applications/{id}/documents
  */
-export const PostSubmissionDocumentsEndpoint = ApiResponse(
-  Type.Array(PostSubmissionFile)
+export const PostSubmissionDocumentsEndpointApiResponse = ApiResponse(
+  Type.Union([PostSubmissionDocumentsEndpoint, Type.Null()]),
+  { description: '#PostSubmissionDocumentsEndpointApiResponse' }
 )
-export type PostSubmissionDocumentsEndpoint = Static<
-  typeof PostSubmissionDocumentsEndpoint
+export type PostSubmissionDocumentsEndpointApiResponse = Static<
+  typeof PostSubmissionDocumentsEndpointApiResponse
 >
 
 /**
@@ -35,9 +44,8 @@ export type PostSubmissionDocumentsOrderBy = Static<
 >
 
 export const PostSubmissionDocumentsSearchParams = Type.Object({
-  page: Type.Number(),
-  resultsPerPage: Type.Number(),
-  query: Type.Optional(Type.String()),
+  page: Type.Number({ default: 1, minimum: 1 }),
+  resultsPerPage: Type.Number({ default: 10, minimum: 1, maximum: 50 }),
   sortBy: Type.Optional(PostSubmissionDocumentsSortBy),
   orderBy: Type.Optional(PostSubmissionDocumentsOrderBy),
   name: Type.Optional(Type.String()),

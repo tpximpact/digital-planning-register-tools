@@ -1,19 +1,31 @@
-import { type Static } from '@sinclair/typebox'
+import { Type, type Static } from '@sinclair/typebox'
 import {
-  PostSubmissionDocumentsEndpoint,
   PostSubmissionDocumentsOrderBy,
   PostSubmissionDocumentsSearchParams,
   PostSubmissionDocumentsSortBy
 } from '../../../postSubmissionApplication/implementation/endpoints/DocumentsEndpoint'
+import { PostSubmissionFile } from '../../../postSubmissionApplication/data/PostSubmissionFile'
+import { ApiResponse } from '../../../postSubmissionApplication/implementation/ApiResponse'
+
+/**
+ * The data returned by the ApiResponse
+ */
+export const PostSubmissionPublishedDocumentsEndpoint =
+  Type.Array(PostSubmissionFile)
+export type PostSubmissionPublishedDocumentsEndpoint = Static<
+  typeof PostSubmissionPublishedDocumentsEndpoint
+>
 
 /**
  * Endpoint to get a list of post submission application documents
- * /api/@next/public/applications/{id}/documents
+ * /api/@next/applications/{id}/documents
  */
-export const PostSubmissionPublishedPublicDocumentsEndpoint =
-  PostSubmissionDocumentsEndpoint
-export type PostSubmissionPublishedPublicDocumentsEndpoint = Static<
-  typeof PostSubmissionPublishedPublicDocumentsEndpoint
+export const PostSubmissionPublishedDocumentsEndpointApiResponse = ApiResponse(
+  Type.Union([PostSubmissionPublishedDocumentsEndpoint, Type.Null()]),
+  { description: '#PostSubmissionPublishedDocumentsEndpointApiResponse' }
+)
+export type PostSubmissionPublishedDocumentsEndpointApiResponse = Static<
+  typeof PostSubmissionPublishedDocumentsEndpointApiResponse
 >
 
 /**

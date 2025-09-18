@@ -1,22 +1,29 @@
 import { type Static } from '@sinclair/typebox'
-import { ApiResponse } from '../../../postSubmissionApplication/implementation/ApiResponse'
 import { PublicCommentsRedacted } from '../../../postSubmissionApplication/data/Comment'
 import {
   PostSubmissionPublicCommentsOrderBy,
   PostSubmissionPublicCommentsSearchParams,
   PostSubmissionPublicCommentsSortBy
 } from '../../../postSubmissionApplication/implementation/endpoints/PublicCommentsEndpoint'
+import { ApiResponse } from '../../../postSubmissionApplication/implementation/ApiResponse'
+
+/**
+ * The data returned by the ApiResponse
+ */
+export const PostSubmissionPublishedPublicCommentsEndpoint =
+  PublicCommentsRedacted
+export type PostSubmissionPublishedPublicCommentsEndpoint = Static<
+  typeof PostSubmissionPublishedPublicCommentsEndpoint
+>
 
 /**
  * Endpoint to get a list of post submission applications
  * /api/@next/public/applications/{id}/publicComments
  */
-
-export const PostSubmissionPublishedPublicCommentsEndpoint = ApiResponse(
-  PublicCommentsRedacted
-)
-export type PostSubmissionPublishedPublicCommentsEndpoint = Static<
-  typeof PostSubmissionPublishedPublicCommentsEndpoint
+export const PostSubmissionPublishedPublicCommentsEndpointApiResponse =
+  ApiResponse(PostSubmissionPublishedPublicCommentsEndpoint)
+export type PostSubmissionPublishedPublicCommentsEndpointApiResponse = Static<
+  typeof PostSubmissionPublishedPublicCommentsEndpointApiResponse
 >
 
 /**

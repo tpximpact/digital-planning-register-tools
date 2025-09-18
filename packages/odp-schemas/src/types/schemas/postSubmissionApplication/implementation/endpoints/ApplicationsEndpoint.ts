@@ -1,17 +1,26 @@
 import { Type, type Static } from '@sinclair/typebox'
-import { ApiResponse } from '../ApiResponse'
 import { PostSubmissionApplication } from '../..'
+import { ApiResponse } from '../ApiResponse'
+
+/**
+ * The data returned by the ApiResponse
+ */
+export const PostSubmissionApplicationsEndpoint = Type.Array(
+  PostSubmissionApplication
+)
+export type PostSubmissionApplicationsEndpoint = Static<
+  typeof PostSubmissionApplicationsEndpoint
+>
 
 /**
  * Endpoint to get a list of post submission applications
  * /api/@next/applications
  */
-
-export const PostSubmissionApplicationsEndpoint = ApiResponse(
-  Type.Array(PostSubmissionApplication)
+export const PostSubmissionApplicationsEndpointApiResponse = ApiResponse(
+  Type.Union([PostSubmissionApplicationsEndpoint, Type.Null()])
 )
-export type PostSubmissionApplicationsEndpoint = Static<
-  typeof PostSubmissionApplicationsEndpoint
+export type PostSubmissionApplicationsEndpointApiResponse = Static<
+  typeof PostSubmissionApplicationsEndpointApiResponse
 >
 
 /**

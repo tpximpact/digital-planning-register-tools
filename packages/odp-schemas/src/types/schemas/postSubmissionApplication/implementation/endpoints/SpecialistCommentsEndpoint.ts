@@ -1,16 +1,25 @@
 import { Type, type Static } from '@sinclair/typebox'
 import { SpecialistComments } from '../../data/Comment'
-import { ApiResponse } from '../ApiResponse'
 import { SpecialistCommentSentiment } from '../../enums/CommentSentiment'
+import { ApiResponse } from '../ApiResponse'
+
+/**
+ * The data returned by the ApiResponse
+ */
+export const PostSubmissionSpecialistCommentsEndpoint = SpecialistComments
+export type PostSubmissionSpecialistCommentsEndpoint = Static<
+  typeof PostSubmissionSpecialistCommentsEndpoint
+>
 
 /**
  * Endpoint to get a list of post submission applications
  * /api/@next/applications/{id}/specialistComments
  */
-export const PostSubmissionSpecialistCommentsEndpoint =
-  ApiResponse(SpecialistComments)
-export type PostSubmissionSpecialistCommentsEndpoint = Static<
-  typeof PostSubmissionSpecialistCommentsEndpoint
+export const PostSubmissionSpecialistCommentsEndpointApiResponse = ApiResponse(
+  PostSubmissionSpecialistCommentsEndpoint
+)
+export type PostSubmissionSpecialistCommentsEndpointApiResponse = Static<
+  typeof PostSubmissionSpecialistCommentsEndpointApiResponse
 >
 
 /**

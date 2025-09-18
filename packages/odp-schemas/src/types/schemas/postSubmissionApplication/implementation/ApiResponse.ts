@@ -38,9 +38,20 @@ export const ApiResponse = <T extends TSchema>(
     options ? options : { description: '#ApiResponse' }
   )
 
-export const ApiResponseStatus = Type.Object({
-  code: Type.Number(),
-  message: Type.String(),
-  detail: Type.Optional(Type.String())
-})
+export const ApiResponseStatus = Type.Object(
+  {
+    code: Type.Number(),
+    message: Type.String(),
+    detail: Type.Optional(Type.String())
+  },
+  {
+    description: '#ApiResponseStatus',
+    examples: [
+      {
+        code: 200,
+        message: 'OK'
+      }
+    ]
+  }
+)
 export type ApiResponseStatus = Static<typeof ApiResponseStatus>
