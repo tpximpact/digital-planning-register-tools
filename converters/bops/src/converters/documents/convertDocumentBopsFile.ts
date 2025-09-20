@@ -1,14 +1,18 @@
-import type { PostSubmissionFileAssociation } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/PostSubmissionFileAssociation.ts'
+import { type PostSubmissionFileAssociation } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/PostSubmissionFileAssociation.ts'
 import type { BopsFile } from '../../schemas/shared/BopsFile'
-import type { PostSubmissionFile } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PostSubmissionFile.ts'
+import {
+  PostSubmissionFile as PostSubmissionFileSchema,
+  type PostSubmissionFile
+} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PostSubmissionFile.ts'
 import type { PrototypeFileType as FileType } from '@dpr/odp-schemas/types/schemas/prototypeApplication/enums/FileType.ts'
 import { convertDateTimeToUtc } from '../../utils/formatDates'
+import { Value } from '@sinclair/typebox/value'
 
 export const convertDocumentBopsFile = (
   document: BopsFile,
   association: PostSubmissionFileAssociation = 'application'
-): PostSubmissionFile => {
-  return {
+): PostSubmissionFile | undefined => {
+  const postSubmissionFile: PostSubmissionFile = {
     id: Math.ceil(Math.random() * 10000),
     name: document.name ?? 'Unnamed document',
     association: association ?? 'application',
@@ -29,4 +33,10 @@ export const convertDocumentBopsFile = (
       publishedAt: convertDateTimeToUtc(document.createdAt)
     }
   }
+
+  if (!Value.Check(PostSubmissionFileSchema, postSubmissionFile)) {
+    return undefined
+  }
+
+  return postSubmissionFile
 }

@@ -20,6 +20,8 @@ export const debugSchema = <T extends TSchema>(schema: T, example: unknown) => {
   console.log('Validation failed. Errors:')
   const errors = [...compiler.Errors(example)]
 
+  // console.log(JSON.stringify(errors))
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function printError(error: any, indent = 0) {
     const pad = '  '.repeat(indent)

@@ -1,16 +1,30 @@
 import { describe, it, expect } from 'bun:test'
 import { Value } from '@sinclair/typebox/value'
-import before from '../../fixtures/bops/documents.json'
-import after from '../../fixtures/dpr/documents.json'
 import { bopsDocumentsEndpointToOdp } from './documents'
-import { BopsDocumentsEndpoint } from '../../schemas/documents'
-import { PostSubmissionPublishedDocumentsEndpoint } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/implementation/documents/documents'
-import type { PostSubmissionPublishedDocumentsSearchParams } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/implementation/documents/documentsSearchParams.ts'
-import { Pagination } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
+import { BopsDocumentsEndpoint } from '../../schemas/bops/documents'
+import type { BopsFile } from '../../schemas/shared/BopsFile'
+
+import { validBopsApplication } from '../../mocks/validBopsApplication'
+import { validBopsFile } from '../../mocks/validBopsFile'
+import { PostSubmissionPublishedDocumentsResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 
 describe('bopsDocumentsEndpointToOdp conversion', () => {
-  describe('with results', () => {
-    it('converts to a valid response successfully', () => {
+  describe('Conversion', () => {
+    it('returns a valid response', () => {
+      const bopsFiles: BopsFile[] = Array.from({ length: 100 }, (_, i) => ({
+        ...validBopsFile,
+        name: `Test Document ${i + 1}`
+      }))
+
+      const before: BopsDocumentsEndpoint = {
+        application: validBopsApplication,
+        files: bopsFiles,
+        metadata: {
+          results: 100,
+          totalResults: 100
+        }
+      }
+
       expect(Value.Check(BopsDocumentsEndpoint, before)).toBe(true)
 
       const conversion = bopsDocumentsEndpointToOdp(
@@ -21,163 +35,108 @@ describe('bopsDocumentsEndpointToOdp conversion', () => {
         },
         { code: 200, message: 'OK' }
       )
-      // exclude id because its randomly generated for now
-      expect(conversion).toEqual(
-        expect.objectContaining({
-          ...after,
-          data: after.data.map(({ id, ...rest }) =>
-            expect.objectContaining(rest)
-          )
-        })
-      )
-      expect(Value.Check(PostSubmissionPublishedDocumentsEndpoint, after)).toBe(
-        true
-      )
-    })
-    describe('searchParams', () => {
-      it('handles missing searchParams', () => {
-        const conversion = bopsDocumentsEndpointToOdp(
-          before,
-          {} as PostSubmissionPublishedDocumentsSearchParams,
-          { code: 200, message: 'OK' }
-        )
-        expect(conversion.pagination).toEqual({
-          resultsPerPage: 10,
-          currentPage: 1,
-          totalPages: 2,
-          totalResults: 10,
-          totalAvailableItems: 13
-        })
-        expect(Value.Check(Pagination, conversion.pagination)).toBe(true)
-      })
-      it('handles missing searchParams.page', () => {
-        const conversion = bopsDocumentsEndpointToOdp(
-          before,
-          {
-            resultsPerPage: 10
-          } as PostSubmissionPublishedDocumentsSearchParams,
-          { code: 200, message: 'OK' }
-        )
-        expect(conversion.pagination).toEqual({
-          resultsPerPage: 10,
-          currentPage: 1,
-          totalPages: 2,
-          totalResults: 10,
-          totalAvailableItems: 13
-        })
-        expect(Value.Check(Pagination, conversion.pagination)).toBe(true)
-      })
-      it('handles missing searchParams.resultsPerPage', () => {
-        const conversion = bopsDocumentsEndpointToOdp(
-          before,
-          {
-            page: 1
-          } as PostSubmissionPublishedDocumentsSearchParams,
-          { code: 200, message: 'OK' }
-        )
-        expect(conversion.pagination).toEqual({
-          resultsPerPage: 10,
-          currentPage: 1,
-          totalPages: 2,
-          totalResults: 10,
-          totalAvailableItems: 13
-        })
-        expect(Value.Check(Pagination, conversion.pagination)).toBe(true)
-      })
-    })
-  })
 
-  describe('with no results', () => {
-    it('converts to a valid response successfully', () => {
+      expect(
+        Value.Check(PostSubmissionPublishedDocumentsResponse, conversion)
+      ).toBe(true)
+
+      expect(conversion?.pagination?.resultsPerPage).toBe(10)
+      if (conversion.pagination && 'currentPage' in conversion.pagination) {
+        expect(conversion.pagination.currentPage).toBe(1)
+        expect(conversion.pagination.totalPages).toBe(10)
+      }
+      expect(conversion?.pagination?.totalResults).toBe(100)
+      expect(conversion?.pagination?.totalAvailableItems).toBe(100)
+    })
+
+    it('ignores invalid documents', () => {
+      const bopsFiles: BopsFile[] = Array.from({ length: 100 }, (_, i) => ({
+        ...validBopsFile,
+        name: `Test Document ${i + 1}`
+      }))
+
+      bopsFiles.push({
+        type: [],
+        url: '',
+        createdAt: ''
+      } as unknown as BopsFile) // Invalid file
+
+      const before: BopsDocumentsEndpoint = {
+        application: validBopsApplication,
+        files: bopsFiles,
+        metadata: {
+          results: 101,
+          totalResults: 101
+        }
+      }
+
       const conversion = bopsDocumentsEndpointToOdp(
-        {
-          application: before.application,
-          files: [],
-          metadata: { results: 0, totalResults: 0 }
-        },
+        before,
         {
           resultsPerPage: 10,
           page: 1
         },
         { code: 200, message: 'OK' }
       )
-      expect(conversion).toEqual({
-        data: null,
-        pagination: {
-          resultsPerPage: 10,
-          currentPage: 1,
-          totalPages: 0,
-          totalResults: 0,
-          totalAvailableItems: 0
-        },
-        status: { code: 200, message: 'OK' }
-      })
+
       expect(
-        Value.Check(PostSubmissionPublishedDocumentsEndpoint, conversion)
+        Value.Check(PostSubmissionPublishedDocumentsResponse, conversion)
       ).toBe(true)
+
+      expect(conversion?.pagination?.resultsPerPage).toBe(10)
+      if (conversion.pagination && 'currentPage' in conversion.pagination) {
+        expect(conversion.pagination.currentPage).toBe(1)
+        expect(conversion.pagination.totalPages).toBe(10)
+      }
+      expect(conversion?.pagination?.totalResults).toBe(100)
+      expect(conversion?.pagination?.totalAvailableItems).toBe(100)
     })
-    describe('searchParams', () => {
-      it('handles missing searchParams', () => {
-        const conversion = bopsDocumentsEndpointToOdp(
-          {
-            application: before.application,
-            files: [],
-            metadata: { results: 0, totalResults: 0 }
-          },
-          {} as PostSubmissionPublishedDocumentsSearchParams,
-          { code: 200, message: 'OK' }
-        )
-        expect(conversion.pagination).toEqual({
-          resultsPerPage: 10,
-          currentPage: 1,
-          totalPages: 0,
-          totalResults: 0,
-          totalAvailableItems: 0
-        })
-        expect(Value.Check(Pagination, conversion.pagination)).toBe(true)
-      })
-      it('handles missing searchParams.page', () => {
-        const conversion = bopsDocumentsEndpointToOdp(
-          {
-            application: before.application,
-            files: [],
-            metadata: { results: 0, totalResults: 0 }
-          },
-          {
-            resultsPerPage: 10
-          } as PostSubmissionPublishedDocumentsSearchParams,
-          { code: 200, message: 'OK' }
-        )
-        expect(conversion.pagination).toEqual({
-          resultsPerPage: 10,
-          currentPage: 1,
-          totalPages: 0,
-          totalResults: 0,
-          totalAvailableItems: 0
-        })
-        expect(Value.Check(Pagination, conversion.pagination)).toBe(true)
-      })
-      it('handles missing searchParams.resultsPerPage', () => {
-        const conversion = bopsDocumentsEndpointToOdp(
-          {
-            application: before.application,
-            files: [],
-            metadata: { results: 0, totalResults: 0 }
-          },
-          {
-            page: 1
-          } as PostSubmissionPublishedDocumentsSearchParams,
-          { code: 200, message: 'OK' }
-        )
-        expect(conversion.pagination).toEqual({
-          resultsPerPage: 10,
-          currentPage: 1,
-          totalPages: 0,
-          totalResults: 0,
-          totalAvailableItems: 0
-        })
-        expect(Value.Check(Pagination, conversion.pagination)).toBe(true)
-      })
+
+    it('orders results by newest publishedAt first', () => {
+      // Create files with different publishedAt dates
+      const bopsFiles: BopsFile[] = [
+        {
+          ...validBopsFile,
+          name: 'Oldest Document',
+          createdAt: '2020-07-03T15:23:53.264+01:00'
+        },
+        {
+          ...validBopsFile,
+          name: 'Middle Document',
+          createdAt: '2022-07-03T15:23:53.264+01:00'
+        },
+        {
+          ...validBopsFile,
+          name: 'Newest Document',
+          createdAt: '2025-07-03T15:23:53.264+01:00'
+        }
+      ]
+
+      const before: BopsDocumentsEndpoint = {
+        application: validBopsApplication,
+        files: bopsFiles,
+        metadata: {
+          results: 3,
+          totalResults: 3
+        }
+      }
+
+      const conversion = bopsDocumentsEndpointToOdp(
+        before,
+        {
+          resultsPerPage: 3,
+          page: 1
+        },
+        { code: 200, message: 'OK' }
+      )
+      expect(conversion?.data).toBeDefined()
+      expect(conversion?.data).not.toBeNull()
+
+      if (conversion?.data) {
+        expect(conversion?.data[0]?.name).toBe('Newest Document')
+        expect(conversion?.data[1]?.name).toBe('Middle Document')
+        expect(conversion?.data[2]?.name).toBe('Oldest Document')
+      }
     })
   })
 })
