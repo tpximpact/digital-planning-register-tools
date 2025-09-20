@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes'
-import { DprApiError } from './DprApiError.error'
+import { DprApiError } from '../../errors/DprApiError.error'
 
 /**
  * @file Error class for DPR getInfo errors

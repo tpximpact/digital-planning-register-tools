@@ -1,8 +1,8 @@
 import { Elysia, t } from 'elysia'
 
-import { ApiResponseSchema, ApiPaginatedResponseSchema } from '../../schemas'
 import { DefaultResponseSchema, HealthcheckResponseSchema } from './app.schema'
 import { OkResponseObject } from '../../libs'
+import { ApiResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
 
 export const appSetup = new Elysia({
   name: 'appSetup',
@@ -10,15 +10,9 @@ export const appSetup = new Elysia({
 })
   .model({
     // Sets up the schemas section to show what we would like an apiResponse to be
-    ApiResponse: ApiResponseSchema(t.Union([t.Any(), t.Null()]), {
+    ApiResponse: ApiResponse(t.Union([t.Any(), t.Null()]), {
       description: 'Default API response schema'
-    }),
-    ApiPaginatedResponse: ApiPaginatedResponseSchema(
-      t.Union([t.Any(), t.Null()]),
-      {
-        description: 'Default API paginated response schema'
-      }
-    )
+    })
   })
   .get(
     '/',
@@ -35,7 +29,7 @@ export const appSetup = new Elysia({
       detail: {
         security: []
       },
-      parse: ['application/json'],
+      // parse: ['application/json'],
       response: DefaultResponseSchema
     }
   )
@@ -56,7 +50,7 @@ export const appSetup = new Elysia({
       detail: {
         security: []
       },
-      parse: ['application/json'],
+      // parse: ['application/json'],
       response: HealthcheckResponseSchema
     }
   )
