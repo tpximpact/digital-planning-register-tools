@@ -1,0 +1,41 @@
+# Use the Bun image as the base image
+FROM oven/bun:1.2.10 AS build
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy and install dependencies
+COPY package.json package.json
+COPY bun.lock bun.lock
+
+# Copy over the files for this application
+COPY apps/server-api/package.json apps/server-api/package.json
+
+# Copy over the files for the dependency packages
+COPY packages/config/package.json packages/config/package.json
+
+# Install dependencies
+RUN bun install
+
+# Copy the directory contents into the container at /app
+COPY apps/server-api apps/server-api
+COPY packages/config packages/config
+
+ENV NODE_ENV=production
+
+WORKDIR /app/apps/server-api
+
+RUN bun run build
+
+ENV NODE_ENV=production
+ENV PORT=3000
+
+# Copy the entrypoint script into the container
+COPY docker-entrypoint.sh docker-entrypoint.sh
+
+# Expose the port on which the API will listen
+EXPOSE 3000
+
+# Run the server when the container launches
+ENTRYPOINT ["./docker-entrypoint.sh", "DPR API", "/app/apps/server-api"]
+CMD ["./server"]
