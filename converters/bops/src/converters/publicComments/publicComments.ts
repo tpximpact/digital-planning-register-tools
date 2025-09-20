@@ -1,27 +1,27 @@
-import type { PostSubmissionPublishedSpecialistsResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
+import type { PostSubmissionPublishedPublicCommentsResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import {
-  BopsSpecialistCommentsEndpoint as BopsSpecialistCommentsEndpointSchema,
-  type BopsSpecialistCommentsEndpoint
-} from '../../schemas/bops/specialistComments'
+  BopsPublicCommentsEndpoint as BopsPublicCommentsEndpointSchema,
+  type BopsPublicCommentsEndpoint
+} from '../../schemas/bops/publicComments'
 import { Value } from '@sinclair/typebox/value'
 import { Pagination } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
-import { SpecialistCommentSummary } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/CommentSummary.ts'
-import { SpecialistRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.ts'
+import { PublicCommentSummary } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/CommentSummary.ts'
+import { PublicCommentRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PublicComment.ts'
 import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse'
-import { convertBopsSpecialistComment } from './convertBopsSpecialistComment'
+import { convertBopsPublicComment } from './convertBopsPublicComment'
 
 /**
  * Converts a BopsPublicCommentsEndpoint object to a PostSubmissionPublishedPublicCommentsResponse.
  * Validates input, summary, pagination, and each comment.
  * Filters out invalid comments and adjusts pagination accordingly.
  */
-export const bopsSpecialistCommentsEndpointToOdp = (
-  input: BopsSpecialistCommentsEndpoint,
+export const bopsPublicCommentsEndpointToOdp = (
+  input: BopsPublicCommentsEndpoint,
   status: ApiResponseStatus
-): PostSubmissionPublishedSpecialistsResponse | undefined => {
+): PostSubmissionPublishedPublicCommentsResponse | undefined => {
   // Validate input schema
-  if (!Value.Check(BopsSpecialistCommentsEndpointSchema, input)) {
-    console.warn('Invalid BopsSpecialistCommentsEndpoint:', input)
+  if (!Value.Check(BopsPublicCommentsEndpointSchema, input)) {
+    console.warn('Invalid BopsPublicCommentsEndpoint:', input)
     return undefined
   }
 
@@ -32,18 +32,18 @@ export const bopsSpecialistCommentsEndpointToOdp = (
     console.warn('Invalid Pagination:', pagination)
     return undefined
   }
-  if (!Value.Check(SpecialistCommentSummary, summary)) {
-    console.warn('Invalid SpecialistCommentSummary:', summary)
+  if (!Value.Check(PublicCommentSummary, summary)) {
+    console.warn('Invalid PublicCommentSummary:', summary)
     return undefined
   }
 
   // Convert and filter comments
   const convertedComments = (comments ?? [])
-    .map((comment) => convertBopsSpecialistComment(comment))
+    .map((comment) => convertBopsPublicComment(comment))
     .filter((comment) => {
       const valid =
-        comment !== undefined && Value.Check(SpecialistRedacted, comment)
-      if (!valid) console.warn('Invalid SpecialistRedacted:', comment)
+        comment !== undefined && Value.Check(PublicCommentRedacted, comment)
+      if (!valid) console.warn('Invalid PublicCommentRedacted:', comment)
       return valid
     })
 

@@ -1,46 +1,39 @@
-import type { BopsDocumentsEndpoint } from '../../schemas/documents'
+import type { BopsDocumentsEndpoint } from '../../schemas/bops/documents'
 import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
-import type { PostSubmissionPublishedDocumentsEndpoint } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/implementation/documents/documents.ts'
-import type { PostSubmissionPublishedDocumentsSearchParams } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/implementation/documents/documentsSearchParams.ts'
+import type {
+  PostSubmissionPublishedDocumentsResponse,
+  PostSubmissionPublishedDocumentsQueryParams
+} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { convertDocumentBopsFile } from './convertDocumentBopsFile'
+import { paginateArray } from '@dpr/libs'
+import type { PostSubmissionFile } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PostSubmissionFile'
 
 export const bopsDocumentsEndpointToOdp = (
   input: BopsDocumentsEndpoint,
-  searchParams: PostSubmissionPublishedDocumentsSearchParams,
+  searchParams: PostSubmissionPublishedDocumentsQueryParams,
   status: ApiResponseStatus
-): PostSubmissionPublishedDocumentsEndpoint => {
-  const documents = input.files || []
-  const bopsPagination = input.metadata || { totalResults: 0 }
-  const totalResults = bopsPagination.totalResults
+): PostSubmissionPublishedDocumentsResponse => {
+  const allDocuments = (input.files ?? [])
+    .map((file) => convertDocumentBopsFile(file))
+    .filter((doc) => doc !== undefined)
+    .sort((a, b) => {
+      const aDate = a?.metadata?.publishedAt
+        ? new Date(a.metadata.publishedAt).getTime()
+        : 0
+      const bDate = b?.metadata?.publishedAt
+        ? new Date(b.metadata.publishedAt).getTime()
+        : 0
+      return bDate - aDate // Most recent first
+    })
 
-  const convertedDocuments = documents.map((file) =>
-    convertDocumentBopsFile(file)
+  const { data, pagination } = paginateArray<PostSubmissionFile>(
+    allDocuments,
+    searchParams.page,
+    searchParams.resultsPerPage
   )
-  const allDocuments = [...convertedDocuments]
-
-  const resultsPerPage = searchParams.resultsPerPage ?? 10
-  const currentPage = searchParams.page ?? 1
-
-  // Calculate shown documents
-  const startIdx = ((currentPage ?? 1) - 1) * (resultsPerPage ?? 10)
-  const endIdx = startIdx + (resultsPerPage ?? 10)
-  const data = allDocuments.slice(startIdx, endIdx)
-
-  const finalTotalAvailableItems = totalResults
-  const finalTotalResults = data.length
-  const totalPages = Math.ceil(finalTotalAvailableItems / resultsPerPage)
-
-  // put together valid pagination
-  const pagination = {
-    resultsPerPage,
-    currentPage,
-    totalPages,
-    totalResults: finalTotalResults,
-    totalAvailableItems: finalTotalAvailableItems
-  }
 
   return {
-    data: data.length > 0 ? data : null,
+    data,
     pagination,
     status
   }

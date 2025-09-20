@@ -1,5 +1,6 @@
 import { Type, type Static } from '@sinclair/typebox'
 import './formats'
+import { ApplicationType } from '@dpr/odp-schemas/types/schemas/prototypeApplication/enums/ApplicationType.ts'
 
 /**
  * BOPS represents application with a shared file in many places, replicating that here
@@ -7,7 +8,7 @@ import './formats'
  */
 export const BopsApplication = Type.Object({
   type: Type.Object({
-    value: Type.String(),
+    value: ApplicationType,
     description: Type.String()
   }),
   reference: Type.String(),

@@ -4,17 +4,18 @@ import { SpecialistCommentSummary } from '@dpr/odp-schemas/types/schemas/postSub
 import { SpecialistCommentSentiment } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/CommentSentiment.ts'
 import '@dpr/odp-schemas/types/shared/formats'
 
+export const BopsSpecialistComment = Type.Object({
+  id: Type.Number(),
+  sentiment: SpecialistCommentSentiment,
+  comment: Type.String(),
+  receivedAt: Type.String({ format: 'date-time' })
+})
+export type BopsSpecialistComment = Static<typeof BopsSpecialistComment>
+
 export const BopsSpecialistCommentsEndpoint = Type.Object({
   pagination: Pagination,
   summary: SpecialistCommentSummary,
-  comments: Type.Array(
-    Type.Object({
-      id: Type.Number(),
-      sentiment: SpecialistCommentSentiment,
-      comment: Type.String(),
-      receivedAt: Type.String({ format: 'date-time' })
-    })
-  )
+  comments: Type.Array(BopsSpecialistComment)
 })
 export type BopsSpecialistCommentsEndpoint = Static<
   typeof BopsSpecialistCommentsEndpoint
