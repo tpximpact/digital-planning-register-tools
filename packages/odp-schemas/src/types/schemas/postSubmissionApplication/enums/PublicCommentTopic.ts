@@ -40,8 +40,8 @@ const Traffic = Type.Literal('traffic', {
 type Other = Static<typeof Other>
 const Other = Type.Literal('other', { description: 'Comment on other things' })
 
-export type CommentTopic = Static<typeof CommentTopic>
-export const CommentTopic = Type.Union(
+export type PublicCommentTopic = Static<typeof PublicCommentTopic>
+export const PublicCommentTopic = Type.Union(
   [Design, Use, Light, Privacy, Access, Noise, Traffic, Other],
-  { id: '#CommentTopic', description: 'Types of comments' }
+  { id: '#PublicCommentTopic', description: 'Types of comments' }
 )

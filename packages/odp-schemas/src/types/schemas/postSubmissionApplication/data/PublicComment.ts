@@ -1,15 +1,17 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
-import { CommentSentiment } from '../enums/CommentSentiment'
+import { PublicCommentSentiment } from '../enums/CommentSentiment'
 import { CommentMetaData } from './CommentMetaData'
-import { CommentTopic } from '../enums/CommentTopic'
+import { PublicCommentTopic } from '../enums/PublicCommentTopic'
+import { Address } from '../../../shared/Addresses'
 
 export type PublicCommentAuthor = Static<typeof PublicCommentAuthor>
 export const PublicCommentAuthor = Type.Object(
   {
     name: Type.Object({
       singleLine: Type.String()
-    })
+    }),
+    address: Address
   },
   { id: '#PublicCommentAuthor', description: 'The author of a public comment' }
 )
@@ -17,7 +19,7 @@ export const PublicCommentAuthor = Type.Object(
 export type TopicAndComments = Static<typeof TopicAndComments>
 export const TopicAndComments = Type.Object(
   {
-    topic: CommentTopic,
+    topic: PublicCommentTopic,
     question: Type.String(),
     comment: Type.String()
   },
@@ -31,8 +33,8 @@ type PublicCommentBase = Static<typeof PublicCommentBase>
 const PublicCommentBase = Type.Object(
   {
     id: Type.String(),
-    sentiment: CommentSentiment,
-    author: PublicCommentAuthor,
+    sentiment: PublicCommentSentiment,
+    author: Type.Optional(PublicCommentAuthor),
     metadata: CommentMetaData
   },
   { internal: 'All the required fields for a public or private public comment' }

@@ -14,11 +14,14 @@ const Supportive = Type.Literal('supportive', {
   description: 'Supportive comment'
 })
 
-export type CommentSentiment = Static<typeof CommentSentiment>
-export const CommentSentiment = Type.Union([Objection, Neutral, Supportive], {
-  id: '#CommentSentiment',
-  description: 'Types of comments'
-})
+export type PublicCommentSentiment = Static<typeof PublicCommentSentiment>
+export const PublicCommentSentiment = Type.Union(
+  [Objection, Neutral, Supportive],
+  {
+    id: '#PublicCommentSentiment',
+    description: 'Types of comments'
+  }
+)
 
 type Approved = Static<typeof Approved>
 const Approved = Type.Literal('approved', { description: 'Approved' })

@@ -1,7 +1,7 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 import {
-  CommentSentiment,
+  PublicCommentSentiment,
   SpecialistCommentSentiment
 } from '../enums/CommentSentiment'
 
@@ -15,7 +15,7 @@ export const PublicCommentSummary = Type.Composite(
   [
     CommentSummaryBase,
     Type.Object({
-      sentiment: Type.Record(CommentSentiment, Type.Number())
+      sentiment: Type.Record(PublicCommentSentiment, Type.Number())
     })
   ],
   { id: '#PublicCommentsSummary' }
