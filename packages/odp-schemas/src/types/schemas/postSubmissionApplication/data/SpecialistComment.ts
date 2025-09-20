@@ -9,7 +9,7 @@ type SpecialistBase = Static<typeof SpecialistBase>
 const SpecialistBase = Type.Object(
   {
     id: Type.String(),
-    organisationSpecialism: Type.String(),
+    organisationSpecialism: Type.Optional(Type.String()),
     jobTitle: Type.Optional(Type.String()),
     reason: Type.Optional(
       Type.Union([Type.Literal('constraint'), Type.String()])
