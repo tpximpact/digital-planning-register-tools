@@ -1,11 +1,12 @@
-import { ApiResponseSchema } from '../../schemas'
+import { ApiResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
+
 import type { Static } from 'elysia'
 import { t } from 'elysia'
 
 /**
  * Schema for the default API response.
  */
-export const DefaultResponseSchema = ApiResponseSchema(t.Null(), {
+export const DefaultResponseSchema = ApiResponse(t.Null(), {
   description: `Successful response`
 })
 export type DefaultResponse = Static<typeof DefaultResponseSchema>
@@ -17,7 +18,7 @@ export const HealthcheckSchema = t.Object({
   // date: t.Date()
   date: t.String({ format: 'date-time' })
 })
-export const HealthcheckResponseSchema = ApiResponseSchema(HealthcheckSchema, {
+export const HealthcheckResponseSchema = ApiResponse(HealthcheckSchema, {
   description: `Successful response`
 })
 

@@ -1,48 +1,109 @@
-import { Elysia } from 'elysia'
-import { swagger } from '@elysiajs/swagger'
+import { Elysia, t } from 'elysia'
 import { cors } from '@elysiajs/cors'
+import { openapi } from '@elysiajs/openapi'
 
-import { appSetup } from './modules/app/app.controller'
-import { authentication, getInfo, handleErrors } from './middleware'
-import config from './config'
-import { swaggerConfig } from './modules/swagger'
-import { bopsHandlers } from '@dpr/handler-bops'
+import {
+  BadRequestResponseObject,
+  InternalServerErrorResponseObject,
+  OkResponseObject,
+  setupEndpoint
+} from '@dpr/libs'
+import { applications } from './modules/applications'
+import { documents } from './modules/documents'
+import { publicComments } from './modules/publicComments'
+import { specialistComments } from './modules/specialistComments'
+import { ApiResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
+import { ReasonPhrases } from 'http-status-codes'
+import { openapiConfig } from './modules/openapi'
+import { handleErrors } from './modules/handleErrors'
+import { app as handlerBops } from '@dpr/handler-bops'
 
-// import appJson from 'digital-planning-data-schemas/schemas/application.json'
-// import type { SiteAddress } from 'digital-planning-data-schemas/types/shared/Addresses.ts'
-// const address: SiteAddress = {
-//   title: 'Site Address',
-//   x: 1,
-//   y: 2,
-//   latitude: 51.5074,
-//   longitude: -0.1278
-// }
+/**
+ * @file Types for authentication middleware
+ */
+export interface ApiOptions {
+  enabled: boolean
+  debug: boolean
+  prefix?: string
+}
 
-const app = new Elysia()
-  .use(getInfo)
-  .use(cors({ origin: true }))
-  .use(swagger(swaggerConfig))
-  .use(appSetup)
-  .use(
-    authentication({
-      enabled: config.authentication,
-      debug: config.debug
+const defaultOptions: ApiOptions = {
+  enabled: true,
+  debug: false,
+  prefix: ''
+}
+
+const app = (userOptions?: ApiOptions) => {
+  const options: ApiOptions = {
+    ...defaultOptions,
+    ...userOptions
+  }
+
+  if (options.debug) {
+    console.info(`[@dpr/api] options: ${JSON.stringify(options)}`)
+  }
+  return new Elysia({
+    name: '@dpr/api'
+  })
+    .use(cors({ origin: true }))
+    .use(openapi(openapiConfig))
+    .use(setupEndpoint)
+    .model({
+      '200': ApiResponse(t.Null(), {
+        title: ReasonPhrases.OK,
+        description: ReasonPhrases.OK,
+        examples: [
+          {
+            data: null,
+            status: OkResponseObject
+          }
+        ]
+      }),
+      '400': ApiResponse(t.Null(), {
+        title: ReasonPhrases.BAD_REQUEST,
+        description: ReasonPhrases.BAD_REQUEST,
+        examples: [
+          {
+            data: null,
+            status: BadRequestResponseObject
+          }
+        ]
+      }),
+      '500': ApiResponse(t.Null(), {
+        title: ReasonPhrases.INTERNAL_SERVER_ERROR,
+        description: ReasonPhrases.INTERNAL_SERVER_ERROR,
+        examples: [
+          {
+            data: null,
+            status: InternalServerErrorResponseObject
+          }
+        ]
+      })
     })
-  )
-  .group('/api/handlers/bops/@next/public/planningApplications', (app) =>
-    app.use(bopsHandlers)
-  )
-
-  .use(handleErrors)
-
-// .use(planningApplications({ path: '/api/@next' }))
-// commented out because of type inheritance issues with Elysia just need to add parse: ['application/json'], for each route for now
-// This is a workaround for ensuring all routes are parsed as JSON see https://github.com/elysiajs/elysia-swagger/issues/215
-// .group('', { parse: ['application/json'] }, (group) =>
-//   group.use(appSetup).group('/api/@next', (app) => {
-//     return app.use(planningApplications())
-//   })
-// )
+    .guard({
+      response: {
+        400: '400',
+        500: '500'
+      },
+      parse: ['application/json']
+    })
+    .group('/api/@next', (app) => {
+      return app
+        .use(applications)
+        .use(documents)
+        .use(publicComments)
+        .use(specialistComments)
+    })
+    .group('/api/handlers/bops', (app) => {
+      return app.use(
+        handlerBops({
+          debug: options.debug,
+          enabled: true
+        })
+      )
+    })
+    .use(handleErrors)
+}
 
 export { app }
 export type App = typeof app

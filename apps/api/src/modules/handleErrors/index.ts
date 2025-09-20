@@ -11,7 +11,7 @@ import { StatusCodes } from 'http-status-codes'
 export const handleErrors = new Elysia({
   name: 'handleErrors'
 })
-  .error({ DPR_AUTHENTICATION_ERROR: DprApiError })
+  // .error({ DPR_AUTHENTICATION_ERROR: DprApiError })
   .onError({ as: 'global' }, (context) => {
     const { error, set, code } = context
 

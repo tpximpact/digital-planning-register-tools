@@ -1,10 +1,10 @@
+import { ApiResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
 import type { DprApiError } from '../../errors'
-import { ApiResponseSchema } from '../../schemas'
 
 import { t, type Static, type StatusMap } from 'elysia'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 
-const _ErrorResponseSchema = ApiResponseSchema(t.Null(), {
+const _ErrorResponseSchema = ApiResponse(t.Null(), {
   description: 'Bad Request'
 })
 type ErrorResponse = Static<typeof _ErrorResponseSchema>

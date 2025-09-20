@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'bun:test'
 
-import { app } from '@dpr/api'
+import { app } from 'apps/api/src/index2'
 
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000
 
