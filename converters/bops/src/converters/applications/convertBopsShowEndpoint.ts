@@ -21,6 +21,9 @@ import {
   BopsFile as BopsFileSchema,
   type BopsFile
 } from '../../schemas/shared/BopsFile'
+import { generateApplications } from '@dpr/libs'
+import { generateExampleApplications } from '@dpr/application-generator'
+import { debugSchema } from '../../utils/debugSchema'
 
 /**
  * Checks to see if we're in the consultation period
@@ -73,278 +76,281 @@ export const convertBopsShowEndpoint = (
   input: BopsShowEndpoint,
   additionalData?: { decisionNoticeUrl?: string }
 ): PostSubmissionPublishedApplication => {
-  if (!Value.Check(BopsShowEndpointSchema, input)) {
-    console.warn('Invalid BopsShowEndpoint:', input)
-    throw new Error('Invalid BopsShowEndpoint')
-  }
+  const { committeeDetermined: application } = generateExampleApplications()
 
-  let stage = undefined
-  let status = undefined
-  let withdrawnAt = undefined
-  const withdrawnReason = undefined
-  let consultation = undefined
+  // if (!Value.Check(BopsShowEndpointSchema, input)) {
+  //   console.warn('Invalid BopsShowEndpoint:', input)
+  //   throw new Error('Invalid BopsShowEndpoint')
+  // }
 
-  const isConsultationPeriod =
-    input?.application?.consultation?.startDate &&
-    input?.application?.consultation?.endDate
-      ? getIsConsultationPeriod(
-          new Date(input.application.consultation.startDate),
-          new Date(input.application.consultation.endDate)
-        )
-      : false
+  // let stage = undefined
+  // let status = undefined
+  // let withdrawnAt = undefined
+  // const withdrawnReason = undefined
+  // let consultation = undefined
 
-  // BOPS sets closed as a status when you go to the withdraw or cancel application page
-  // so by setting status to in_assessment, it'll be picked up as such
-  if (input?.application?.status === 'closed') {
-    status = 'in_assessment'
-  }
+  // const isConsultationPeriod =
+  //   input?.application?.consultation?.startDate &&
+  //   input?.application?.consultation?.endDate
+  //     ? getIsConsultationPeriod(
+  //         new Date(input.application.consultation.startDate),
+  //         new Date(input.application.consultation.endDate)
+  //       )
+  //     : false
 
-  switch (input?.application?.status) {
-    /**
-     * 01-submission
-     * pending
-     * not_started
-     * 02-validation-01-invalid
-     * invalidated
-     * returned
-     */
-    case 'pending':
-    case 'not_started':
-    case 'invalid':
-    case 'returned':
-      throw new Error('Application should not be published')
+  // // BOPS sets closed as a status when you go to the withdraw or cancel application page
+  // // so by setting status to in_assessment, it'll be picked up as such
+  // if (input?.application?.status === 'closed') {
+  //   status = 'in_assessment'
+  // }
 
-    /**
-     * 03-consultation
-     * in_assessment
-     * assessment_in_progress
-     *
-     * 04-assessment-00-assessment-in-progress
-     * in_assessment
-     * assessment_in_progress
-     * awaiting_determination
-     * to_be_reviewed
-     *
-     * 04-assessment-01-council-determined
-     * determined
-     *
-     * 04-assessment-02-assessment-in-committee
-     * in_committee
-     *
-     * 04-assessment-03-committee-determined
-     * determined - can't determine this currently
-     *
-     */
+  // switch (input?.application?.status) {
+  //   /**
+  //    * 01-submission
+  //    * pending
+  //    * not_started
+  //    * 02-validation-01-invalid
+  //    * invalidated
+  //    * returned
+  //    */
+  //   case 'pending':
+  //   case 'not_started':
+  //   case 'invalid':
+  //   case 'returned':
+  //     throw new Error('Application should not be published')
 
-    case 'in_assessment':
-    case 'assessment_in_progress':
-      if (isConsultationPeriod) {
-        stage = 'consultation'
-        status = 'undetermined'
-      } else {
-        stage = 'assessment'
-        status = 'undetermined'
-      }
-      break
-    case 'awaiting_determination':
-    case 'to_be_reviewed':
-    case 'in_committee':
-      stage = 'assessment'
-      status = 'undetermined'
-      break
-    case 'determined':
-      stage = 'assessment'
-      status = 'determined'
-      break
+  //   /**
+  //    * 03-consultation
+  //    * in_assessment
+  //    * assessment_in_progress
+  //    *
+  //    * 04-assessment-00-assessment-in-progress
+  //    * in_assessment
+  //    * assessment_in_progress
+  //    * awaiting_determination
+  //    * to_be_reviewed
+  //    *
+  //    * 04-assessment-01-council-determined
+  //    * determined
+  //    *
+  //    * 04-assessment-02-assessment-in-committee
+  //    * in_committee
+  //    *
+  //    * 04-assessment-03-committee-determined
+  //    * determined - can't determine this currently
+  //    *
+  //    */
 
-    /**
-     * 05-appeal-00-appeal-lodged
-     * Appeal lodged
-     */
+  //   case 'in_assessment':
+  //   case 'assessment_in_progress':
+  //     if (isConsultationPeriod) {
+  //       stage = 'consultation'
+  //       status = 'undetermined'
+  //     } else {
+  //       stage = 'assessment'
+  //       status = 'undetermined'
+  //     }
+  //     break
+  //   case 'awaiting_determination':
+  //   case 'to_be_reviewed':
+  //   case 'in_committee':
+  //     stage = 'assessment'
+  //     status = 'undetermined'
+  //     break
+  //   case 'determined':
+  //     stage = 'assessment'
+  //     status = 'determined'
+  //     break
 
-    case 'Appeal lodged':
-      stage = 'appeal'
-      status = 'determined'
-      break
+  //   /**
+  //    * 05-appeal-00-appeal-lodged
+  //    * Appeal lodged
+  //    */
 
-    /**
-     * 05-appeal-01-appeal-validated
-     * Appeal valid
-     */
+  //   case 'Appeal lodged':
+  //     stage = 'appeal'
+  //     status = 'determined'
+  //     break
 
-    case 'Appeal valid':
-      stage = 'appeal'
-      status = 'determined'
-      break
+  //   /**
+  //    * 05-appeal-01-appeal-validated
+  //    * Appeal valid
+  //    */
 
-    /**
-     * 05-appeal-02-appeal-started
-     * Appeal started
-     */
+  //   case 'Appeal valid':
+  //     stage = 'appeal'
+  //     status = 'determined'
+  //     break
 
-    case 'Appeal started':
-      stage = 'appeal'
-      status = 'determined'
-      break
-    /**
-     * 05-appeal-03-appeal-determined
-     * Appeal determined
-     *
-     * Appeal withdrawn
-     * Appeal allowed
-     * Appeal dismissed
-     * Appeal split decision
-     */
+  //   /**
+  //    * 05-appeal-02-appeal-started
+  //    * Appeal started
+  //    */
 
-    case 'Appeal determined':
-    case 'Appeal allowed':
-    case 'Appeal dismissed':
-    case 'Appeal split decision':
-    case 'Appeal withdrawn':
-      stage = 'appeal'
-      status = 'determined'
-      break
+  //   case 'Appeal started':
+  //     stage = 'appeal'
+  //     status = 'determined'
+  //     break
+  //   /**
+  //    * 05-appeal-03-appeal-determined
+  //    * Appeal determined
+  //    *
+  //    * Appeal withdrawn
+  //    * Appeal allowed
+  //    * Appeal dismissed
+  //    * Appeal split decision
+  //    */
 
-    /**
-     * 06-assessment-withdrawn
-     * withdrawn
-     * closed
-     */
-    case 'withdrawn':
-      stage = 'assessment'
-      status = 'withdrawn'
-      withdrawnAt =
-        input.application.determinedAt ||
-        input.application.publishedAt ||
-        undefined
-      // withdrawnReason = "Applicant withdrew the application";
-      break
-    /**
-     * @todo closed is
-     *  scope :closed, lambda {
-     *   where(status: %w[determined withdrawn returned closed])
-     *  }
-     */
-    case 'closed':
-      throw new Error('Closed application not enough information to convert')
-  }
+  //   case 'Appeal determined':
+  //   case 'Appeal allowed':
+  //   case 'Appeal dismissed':
+  //   case 'Appeal split decision':
+  //   case 'Appeal withdrawn':
+  //     stage = 'appeal'
+  //     status = 'determined'
+  //     break
 
-  // if theres consultation details add those
-  if (
-    input.application?.consultation?.startDate &&
-    input.application?.consultation?.startDate !== null &&
-    input.application?.consultation?.endDate &&
-    input.application?.consultation?.endDate !== null
-  ) {
-    consultation = {
-      startDate: input.application.consultation.startDate,
-      endDate: input.application.consultation.endDate,
-      siteNotice: true
-    }
-  }
+  //   /**
+  //    * 06-assessment-withdrawn
+  //    * withdrawn
+  //    * closed
+  //    */
+  //   case 'withdrawn':
+  //     stage = 'assessment'
+  //     status = 'withdrawn'
+  //     withdrawnAt =
+  //       input.application.determinedAt ||
+  //       input.application.publishedAt ||
+  //       undefined
+  //     // withdrawnReason = "Applicant withdrew the application";
+  //     break
+  //   /**
+  //    * @todo closed is
+  //    *  scope :closed, lambda {
+  //    *   where(status: %w[determined withdrawn returned closed])
+  //    *  }
+  //    */
+  //   case 'closed':
+  //     throw new Error('Closed application not enough information to convert')
+  // }
 
-  let appeal = input.data?.appeal ?? undefined
-  if (input.data?.appeal?.files) {
-    const appealFiles = input.data.appeal.files
-      .map((file: BopsFile) => {
-        return convertDocumentBopsFile(file, 'appeal')
-      })
-      .filter((file) => {
-        const valid =
-          file !== undefined && Value.Check(PostSubmissionFileSchema, file)
-        if (!valid) console.warn('Invalid PostSubmissionFile:', file)
-        return valid
-      })
-    appeal = {
-      ...input.data.appeal,
-      files: appealFiles
-    }
-  }
+  // // if theres consultation details add those
+  // if (
+  //   input.application?.consultation?.startDate &&
+  //   input.application?.consultation?.startDate !== null &&
+  //   input.application?.consultation?.endDate &&
+  //   input.application?.consultation?.endDate !== null
+  // ) {
+  //   consultation = {
+  //     startDate: input.application.consultation.startDate,
+  //     endDate: input.application.consultation.endDate,
+  //     siteNotice: true
+  //   }
+  // }
 
-  // Map BopsShowEndpoint attributes to PostSubmissionPublishedApplication
-  const application: PostSubmissionPublishedApplication = {
-    applicationType: input.application.type.value,
-    data: {
-      application: {
-        reference: input.application.reference,
-        stage: stage as ProcessStage,
-        status: status as ApplicationStatus,
-        withdrawnAt,
-        withdrawnReason,
-        publishedAt: input.application.publishedAt
-      },
-      localPlanningAuthority: {
-        // @TODO in DPR if camden and primaryApplicationType === 'ldc' then true
-        publicCommentsAcceptedUntilDecision: false
-      },
-      submission: {
-        submittedAt: input.application.receivedAt
-      },
-      validation: {
-        receivedAt: input.application.receivedAt,
-        validatedAt: input.application.validAt ?? undefined,
-        isValid: true
-      },
-      consultation,
-      assessment: {
-        expiryDate: input.application.expiryDate ?? new Date().toISOString()
-      },
-      appeal,
-      caseOfficer: {
-        name: input.officer?.name ?? ''
-      }
-    },
-    submission: {
-      data: {
-        applicant: input.applicant,
-        property: {
-          address: input.property.address,
-          boundary: input.property.boundary
-        },
-        proposal: {
-          description: getDescription(input.proposal)
-        }
-      }
-    },
-    metadata: {
-      organisation: 'BOPS',
-      id: input.application.reference,
-      generatedAt: input.application.publishedAt,
-      submittedAt: input.application.receivedAt,
-      schema:
-        'https://theopensystemslab.github.io/digital-planning-data-schemas/@next/schemas/postSubmissionApplication.json'
-    } as PostSubmissionMetadata
-  }
+  // let appeal = input.data?.appeal ?? undefined
+  // if (input.data?.appeal?.files) {
+  //   const appealFiles = input.data.appeal.files
+  //     .map((file: BopsFile) => {
+  //       return convertDocumentBopsFile(file, 'appeal')
+  //     })
+  //     .filter((file) => {
+  //       const valid =
+  //         file !== undefined && Value.Check(PostSubmissionFileSchema, file)
+  //       if (!valid) console.warn('Invalid PostSubmissionFile:', file)
+  //       return valid
+  //     })
+  //   appeal = {
+  //     ...input.data.appeal,
+  //     files: appealFiles
+  //   }
+  // }
 
-  // Sort out the assessment section
+  // // Map BopsShowEndpoint attributes to PostSubmissionPublishedApplication
+  // const application: PostSubmissionPublishedApplication = {
+  //   applicationType: input.application.type.value,
+  //   data: {
+  //     application: {
+  //       reference: input.application.reference,
+  //       stage: stage as ProcessStage,
+  //       status: status as ApplicationStatus,
+  //       withdrawnAt,
+  //       withdrawnReason,
+  //       publishedAt: input.application.publishedAt
+  //     },
+  //     localPlanningAuthority: {
+  //       // @TODO in DPR if camden and primaryApplicationType === 'ldc' then true
+  //       publicCommentsAcceptedUntilDecision: false
+  //     },
+  //     submission: {
+  //       submittedAt: input.application.receivedAt
+  //     },
+  //     validation: {
+  //       receivedAt: input.application.receivedAt,
+  //       validatedAt: input.application.validAt ?? undefined,
+  //       isValid: true
+  //     },
+  //     consultation,
+  //     assessment: {
+  //       expiryDate: input.application.expiryDate ?? new Date().toISOString()
+  //     },
+  //     appeal,
+  //     caseOfficer: {
+  //       name: input.officer?.name ?? ''
+  //     }
+  //   },
+  //   submission: {
+  //     data: {
+  //       applicant: input.applicant,
+  //       property: {
+  //         address: input.property.address,
+  //         boundary: input.property.boundary
+  //       },
+  //       proposal: {
+  //         description: getDescription(input.proposal)
+  //       }
+  //     }
+  //   },
+  //   metadata: {
+  //     organisation: 'BOPS',
+  //     id: input.application.reference,
+  //     generatedAt: input.application.publishedAt,
+  //     submittedAt: input.application.receivedAt,
+  //     schema:
+  //       'https://theopensystemslab.github.io/digital-planning-data-schemas/@next/schemas/postSubmissionApplication.json'
+  //   } as PostSubmissionMetadata
+  // }
 
-  if (input.application.decision && input.application.determinedAt) {
-    application.data.assessment = {
-      planningOfficerDecision: input.application.decision as AssessmentDecision,
-      planningOfficerDecisionDate: input.application.determinedAt,
-      decisionNotice:
-        input.application.decision && additionalData?.decisionNoticeUrl
-          ? {
-              url: additionalData.decisionNoticeUrl
-            }
-          : undefined
-    } as PostSubmissionAssessment
+  // // Sort out the assessment section
 
-    // if (getPrimaryApplicationTypeKey(input.applicationType) === 'pa') {
-    //   let priorApprovalRequired = false
-    //   if (
-    //     app.application.decision === 'granted' ||
-    //     app.application.decision === 'refused'
-    //   ) {
-    //     priorApprovalRequired = true
-    //   }
-    //   dprApplication.data.assessment = {
-    //     ...dprApplication.data.assessment,
-    //     priorApprovalRequired
-    //   } as PriorApprovalAssessment
-    // }
-  }
+  // if (input.application.decision && input.application.determinedAt) {
+  //   application.data.assessment = {
+  //     planningOfficerDecision: input.application.decision as AssessmentDecision,
+  //     planningOfficerDecisionDate: input.application.determinedAt,
+  //     decisionNotice:
+  //       input.application.decision && additionalData?.decisionNoticeUrl
+  //         ? {
+  //             url: additionalData.decisionNoticeUrl
+  //           }
+  //         : undefined
+  //   } as PostSubmissionAssessment
 
+  //   // if (getPrimaryApplicationTypeKey(input.applicationType) === 'pa') {
+  //   //   let priorApprovalRequired = false
+  //   //   if (
+  //   //     app.application.decision === 'granted' ||
+  //   //     app.application.decision === 'refused'
+  //   //   ) {
+  //   //     priorApprovalRequired = true
+  //   //   }
+  //   //   dprApplication.data.assessment = {
+  //   //     ...dprApplication.data.assessment,
+  //   //     priorApprovalRequired
+  //   //   } as PriorApprovalAssessment
+  //   // }
+  // }
+
+  debugSchema(PostSubmissionPublishedApplicationSchema, application)
   if (!Value.Check(PostSubmissionPublishedApplicationSchema, application)) {
     console.warn('Invalid PostSubmissionPublishedApplication:', application)
     throw new Error('Invalid PostSubmissionPublishedApplication')

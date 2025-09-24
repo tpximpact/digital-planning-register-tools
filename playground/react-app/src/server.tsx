@@ -1,8 +1,7 @@
 import { serve } from 'bun'
 import index from './index.html'
-import { env } from '@dpr/libs'
 
-const port = env?.PORT ? parseInt(env.PORT, 10) : 3000
+const port = process.env?.PORT ? parseInt(process.env.PORT, 10) : 3000
 
 const server = serve({
   routes: {

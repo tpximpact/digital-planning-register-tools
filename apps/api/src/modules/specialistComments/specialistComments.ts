@@ -11,14 +11,14 @@ import {
   PostSubmissionPublishedSpecialistUrlParams,
   PostSubmissionPublishedSpecialistResponse
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import { resolveClientService } from '@dpr/libs'
+import { resolveClientHeaders } from '../../libs/client-headers'
 
 /**
  * Plugin for elysia that generates the planning applications API.
  */
 export const specialistComments = (app: Elysia) =>
   app
-    .use(resolveClientService)
+    .use(resolveClientHeaders)
     .get(
       `/applications/:applicationId/specialistComments`,
       async (context) => 'hi',
@@ -29,7 +29,7 @@ export const specialistComments = (app: Elysia) =>
           200: PostSubmissionSpecialistsResponse
         },
         detail: {
-          tags: ['Private', 'Specialist Comments'],
+          tags: ['Private'],
           security: [], // Remove this to make endpoint public
           summary: 'Get all specialists and their comments for an application',
           description:
@@ -46,7 +46,7 @@ export const specialistComments = (app: Elysia) =>
           200: PostSubmissionSpecialistResponse
         },
         detail: {
-          tags: ['Private', 'Specialist Comments'],
+          tags: ['Private'],
           security: [], // Remove this to make endpoint public
           summary: 'Get specialist by specialist ID',
           description:
@@ -66,7 +66,7 @@ export const specialistComments = (app: Elysia) =>
               200: PostSubmissionPublishedSpecialistsResponse
             },
             detail: {
-              tags: ['Public', 'Specialist Comments'],
+              tags: ['Public'],
               security: [], // Remove this to make endpoint public
               summary:
                 'Get all published specialists and their comments for an application',
@@ -84,7 +84,7 @@ export const specialistComments = (app: Elysia) =>
               200: PostSubmissionPublishedSpecialistResponse
             },
             detail: {
-              tags: ['Public', 'Specialist Comments'],
+              tags: ['Public'],
               security: [], // Remove this to make endpoint public
               summary: 'Get published specialist by specialist ID',
               description:

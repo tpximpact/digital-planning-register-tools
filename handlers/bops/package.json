@@ -18,15 +18,12 @@
     "docker": "cd ../.. && docker build -t dpr-tools:handler-bops -f ./apps/handler-bops/Dockerfile ."
   },
   "dependencies": {
-    "@elysiajs/cors": "^1.4.0",
-    "@elysiajs/openapi": "latest",
     "elysia": "latest",
-    "elysia-rate-limit": "^4.4.0",
-    "http-status-codes": "^2.3.0",
+    "@elysiajs/openapi": "latest",
     "@dpr/libs": "workspace:*",
-    "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",
     "@dpr/converter-bops": "workspace:*",
-    "@dpr/odp-schemas": "workspace:*"
+    "@dpr/odp-schemas": "workspace:*",
+    "@dpr/api": "workspace:*"
   },
   "devDependencies": {
     "@dpr/config": "workspace:*",

@@ -21,7 +21,6 @@
     "@dpr/handler-bops": "workspace:*",
     "@dpr/odp-schemas": "workspace:*",
     "@dpr/application-generator": "workspace:*",
-    "@dpr/libs": "workspace:*",
     "@elysiajs/cors": "^1.3.3",
     "@elysiajs/openapi": "latest",
     "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",

@@ -13,16 +13,14 @@ import {
   PostSubmissionPublishedPublicCommentUrlParams,
   PostSubmissionPublishedPublicCommentResponse
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import { OkResponseObject, resolveClientService } from '@dpr/libs'
-import { ApiResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
-import { ReasonPhrases } from 'http-status-codes'
+import { resolveClientHeaders } from '../../libs/client-headers'
 
 /**
  * Plugin for elysia that generates the planning applications API.
  */
 export const publicComments = (app: Elysia) =>
   app
-    .use(resolveClientService)
+    .use(resolveClientHeaders)
     .get(
       `/applications/:applicationId/publicComments`,
       async (context) => 'hi',
@@ -33,7 +31,7 @@ export const publicComments = (app: Elysia) =>
           200: PostSubmissionPublicCommentsResponse
         },
         detail: {
-          tags: ['Private', 'Public Comments'],
+          tags: ['Private'],
           security: [], // Remove this to make endpoint public
           summary: 'Get all public comments for an application',
           description:
@@ -50,7 +48,7 @@ export const publicComments = (app: Elysia) =>
           200: PostSubmissionPublicCommentResponse
         },
         detail: {
-          tags: ['Private', 'Public Comments'],
+          tags: ['Private'],
           security: [], // Remove this to make endpoint public
           summary: 'Get application public comment by application ID',
           description:
@@ -65,19 +63,10 @@ export const publicComments = (app: Elysia) =>
         params: PostSubmissionPublicCommentPostUrlParams,
         body: PostSubmissionPublicCommentPostBody,
         response: {
-          200: ApiResponse(t.Null(), {
-            title: ReasonPhrases.OK,
-            description: ReasonPhrases.OK,
-            examples: [
-              {
-                data: null,
-                status: OkResponseObject
-              }
-            ]
-          })
+          200: 'empty200'
         },
         detail: {
-          tags: ['Private', 'Public Comments'],
+          tags: ['Private'],
           security: [], // Remove this to make endpoint public
           summary: 'Post a new public comment for an application',
           description:
@@ -97,7 +86,7 @@ export const publicComments = (app: Elysia) =>
               200: PostSubmissionPublishedPublicCommentsResponse
             },
             detail: {
-              tags: ['Public', 'Public Comments'],
+              tags: ['Public'],
               security: [], // Remove this to make endpoint public
               summary: 'Get all published public comments for an application',
               description:
@@ -114,7 +103,7 @@ export const publicComments = (app: Elysia) =>
               200: PostSubmissionPublishedPublicCommentResponse
             },
             detail: {
-              tags: ['Public', 'Public Comments'],
+              tags: ['Public'],
               security: [], // Remove this to make endpoint public
               summary:
                 'Get published application public comment by application ID',

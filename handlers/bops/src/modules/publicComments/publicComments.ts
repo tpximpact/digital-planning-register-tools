@@ -6,24 +6,18 @@ import {
   PostSubmissionPublishedPublicCommentsResponse,
   PostSubmissionPublishedPublicCommentsUrlParams
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import {
-  BadRequestResponseObject,
-  createUrlSearchParams,
-  OkResponseObject,
-  resolveClientService
-} from '@dpr/libs'
-import { ReasonPhrases } from 'http-status-codes'
-import { ApiResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
+import { createUrlSearchParams } from '@dpr/libs'
 import {
   handleBopsGetRequest,
   handleBopsPostRequest
-} from '../../libs/requests'
+} from '../../libs/requests/requests'
 import type {
   BopsPostComment,
   BopsPublicCommentsEndpoint
 } from '@dpr/converter-bops/schemas/bops/publicComments/index.ts'
 import { bopsPublicCommentsEndpointToOdp } from '@dpr/converter-bops/converters/publicComments/index.ts'
 import { convertOdpPublicCommentToBops } from '@dpr/converter-bops/converters/publicComments/convertBopsToOdpPublicComment.ts'
+import { clientHeaders, standardResponses } from '@dpr/api'
 
 /**
  * Helper to build public comments endpoint URL with query params.
@@ -54,7 +48,7 @@ function buildPublicCommentsUrl(
  */
 export const publicComments = (app: Elysia) =>
   app
-    .use(resolveClientService)
+    .use(clientHeaders.requireClientHeaders)
     .get(
       `/applications/:applicationId/publicComments`,
       async (context) => {
@@ -77,11 +71,11 @@ export const publicComments = (app: Elysia) =>
                 bopsResponse =
                   (await response.json()) as BopsPublicCommentsEndpoint
               } catch (jsonError) {
-                set.status = BadRequestResponseObject.code
+                set.status = standardResponses.BadRequestResponseObject.code
                 return {
                   data: null,
                   status: {
-                    ...BadRequestResponseObject,
+                    ...standardResponses.BadRequestResponseObject,
                     detail: `Failed to parse response JSON: ${jsonError}`
                   }
                 }
@@ -94,11 +88,11 @@ export const publicComments = (app: Elysia) =>
           )
         } catch (e) {
           console.error('Error fetching public comments:', e)
-          set.status = BadRequestResponseObject.code
+          set.status = standardResponses.BadRequestResponseObject.code
           return {
             data: null,
             status: {
-              ...BadRequestResponseObject,
+              ...standardResponses.BadRequestResponseObject,
               detail: `An error occurred while fetching public comments: ${
                 e instanceof Error ? e.message : String(e)
               }`
@@ -149,17 +143,19 @@ export const publicComments = (app: Elysia) =>
           return {
             data: null,
             status: {
-              ...(response.status ? response.status : OkResponseObject),
+              ...(response.status
+                ? response.status
+                : standardResponses.OkResponseObject),
               detail: `Public comment submitted successfully`
             }
           }
         } catch (e) {
           console.error('Error posting public comment:', e)
-          set.status = BadRequestResponseObject.code
+          set.status = standardResponses.BadRequestResponseObject.code
           return {
             data: null,
             status: {
-              ...BadRequestResponseObject,
+              ...standardResponses.BadRequestResponseObject,
               detail: `An error occurred while posting public comment: ${
                 e instanceof Error ? e.message : String(e)
               }`
@@ -171,16 +167,7 @@ export const publicComments = (app: Elysia) =>
         params: PostSubmissionPublicCommentPostUrlParams,
         body: PostSubmissionPublicCommentPostBody,
         response: {
-          200: ApiResponse(t.Null(), {
-            title: ReasonPhrases.OK,
-            description: ReasonPhrases.OK,
-            examples: [
-              {
-                data: null,
-                status: OkResponseObject
-              }
-            ]
-          })
+          200: 'empty200'
         },
         detail: {
           // security: [], // Remove this to make endpoint public

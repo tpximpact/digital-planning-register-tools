@@ -23,6 +23,7 @@
     "dayjs": "^1.11.18",
     "typescript": "^5",
     "@dpr/odp-schemas": "workspace:*",
-    "@dpr/libs": "workspace:*"
+    "@dpr/libs": "workspace:*",
+    "@dpr/application-generator": "workspace:*"
   }
 }

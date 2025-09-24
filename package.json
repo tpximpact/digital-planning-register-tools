@@ -32,5 +32,8 @@
     "converters/*",
     "playground/*",
     "environment/*"
-  ]
+  ],
+  "dependencies": {
+    "@elysiajs/openapi": "^1.4.10"
+  }
 }

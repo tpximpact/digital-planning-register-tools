@@ -4,14 +4,11 @@ import {
   PostSubmissionPublishedSpecialistsResponse,
   PostSubmissionPublishedSpecialistsUrlParams
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import {
-  BadRequestResponseObject,
-  createUrlSearchParams,
-  resolveClientService
-} from '@dpr/libs'
-import { handleBopsGetRequest } from '../../libs/requests'
+import { createUrlSearchParams } from '@dpr/libs'
+import { handleBopsGetRequest } from '../../libs/requests/requests'
 import { bopsSpecialistCommentsEndpointToOdp } from '@dpr/converter-bops/converters/specialistComments/index.ts'
 import type { BopsSpecialistCommentsEndpoint } from '@dpr/converter-bops/schemas/bops/specialistComments/specialistComments.ts'
+import { clientHeaders, standardResponses } from '@dpr/api'
 
 /**
  * Helper to build specialist comments endpoint URL with query params.
@@ -41,7 +38,7 @@ function buildSpecialistCommentsUrl(
  * Plugin for elysia that generates the planning applications API.
  */
 export const specialistComments = (app: Elysia) =>
-  app.use(resolveClientService).get(
+  app.use(clientHeaders.requireClientHeaders).get(
     `/applications/:applicationId/specialistComments`,
     async (context) => {
       const {
@@ -63,11 +60,11 @@ export const specialistComments = (app: Elysia) =>
               bopsResponse =
                 (await response.json()) as BopsSpecialistCommentsEndpoint
             } catch (jsonError) {
-              set.status = BadRequestResponseObject.code
+              set.status = standardResponses.BadRequestResponseObject.code
               return {
                 data: null,
                 status: {
-                  ...BadRequestResponseObject,
+                  ...standardResponses.BadRequestResponseObject,
                   detail: `Failed to parse response JSON: ${jsonError}`
                 }
               }
@@ -80,11 +77,11 @@ export const specialistComments = (app: Elysia) =>
         )
       } catch (e) {
         console.error('Error fetching public comments:', e)
-        set.status = BadRequestResponseObject.code
+        set.status = standardResponses.BadRequestResponseObject.code
         return {
           data: null,
           status: {
-            ...BadRequestResponseObject,
+            ...standardResponses.BadRequestResponseObject,
             detail: `An error occurred while fetching public comments: ${
               e instanceof Error ? e.message : String(e)
             }`

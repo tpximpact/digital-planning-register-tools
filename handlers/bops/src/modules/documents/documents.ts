@@ -4,15 +4,11 @@ import {
   PostSubmissionPublishedDocumentsResponse,
   PostSubmissionPublishedDocumentsUrlParams
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import {
-  BadRequestResponseObject,
-  createUrlSearchParams,
-  resolveClientService
-} from '@dpr/libs'
+import { createUrlSearchParams } from '@dpr/libs'
 import type { BopsDocumentsEndpoint } from '@dpr/converter-bops/schemas/bops/documents/documents.ts'
-import { handleBopsGetRequest } from '../../libs/requests'
+import { handleBopsGetRequest } from '../../libs/requests/requests'
 import { filterResults } from './sortFilterResults'
-
+import { clientHeaders, standardResponses } from '@dpr/api'
 /**
  * Helper to build documents endpoint URL with query params.
  */
@@ -37,7 +33,7 @@ function buildDocumentsUrl(
  * Plugin for elysia that generates the planning applications API.
  */
 export const documents = (app: Elysia) =>
-  app.use(resolveClientService).get(
+  app.use(clientHeaders.requireClientHeaders).get(
     `/applications/:applicationId/documents`,
     async (context) => {
       const {
@@ -67,11 +63,11 @@ export const documents = (app: Elysia) =>
             try {
               bopsResponse = (await response.json()) as BopsDocumentsEndpoint
             } catch (jsonError) {
-              set.status = BadRequestResponseObject.code
+              set.status = standardResponses.BadRequestResponseObject.code
               return {
                 data: null,
                 status: {
-                  ...BadRequestResponseObject,
+                  ...standardResponses.BadRequestResponseObject,
                   detail: `Failed to parse response JSON: ${jsonError}`
                 }
               }
@@ -82,11 +78,11 @@ export const documents = (app: Elysia) =>
         )
       } catch (e) {
         console.error('Error fetching documents:', e)
-        set.status = BadRequestResponseObject.code
+        set.status = standardResponses.BadRequestResponseObject.code
         return {
           data: null,
           status: {
-            ...BadRequestResponseObject,
+            ...standardResponses.BadRequestResponseObject,
             detail: `An error occurred while fetching documents: ${
               e instanceof Error ? e.message : String(e)
             }`
