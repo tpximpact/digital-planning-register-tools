@@ -21,7 +21,6 @@
     "dayjs": "^1.11.18",
     "typescript": "^5",
     "@dpr/odp-schemas": "workspace:*",
-    "@dpr/libs": "workspace:*",
     "@faker-js/faker": "^8.4.1",
     "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz"
   }

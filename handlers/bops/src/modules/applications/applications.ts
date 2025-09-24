@@ -5,17 +5,13 @@ import {
   PostSubmissionPublishedApplicationUrlParams,
   PostSubmissionPublishedApplicationResponse
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import {
-  BadRequestResponseObject,
-  createUrlSearchParams,
-  OkResponseObject,
-  resolveClientService
-} from '@dpr/libs'
-import { handleBopsGetRequest } from '../../libs/requests'
+import { createUrlSearchParams } from '@dpr/libs'
+import { handleBopsGetRequest } from '../../libs/requests/requests'
 import type { BopsSearchEndpoint } from '@dpr/converter-bops/schemas/bops/search/index.ts'
 import { bopsSearchEndpointToOdp } from '@dpr/converter-bops/converters/applications/index.ts'
 import type { BopsShowEndpoint } from '@dpr/converter-bops/schemas/bops/show/index.ts'
 import { convertBopsShowEndpoint } from '@dpr/converter-bops/converters/applications/convertBopsShowEndpoint.ts'
+import { clientHeaders, standardResponses } from '@dpr/api'
 
 /**
  * Helper to build public comments endpoint URL with query params.
@@ -41,7 +37,7 @@ function buildApplicationsUrl(
  */
 export const applications = (app: Elysia) =>
   app
-    .use(resolveClientService)
+    .use(clientHeaders.resolveClientHeaders)
     .get(
       `/applications`,
       async (context) => {
@@ -67,11 +63,11 @@ export const applications = (app: Elysia) =>
               try {
                 bopsResponse = (await response.json()) as BopsSearchEndpoint
               } catch (jsonError) {
-                set.status = BadRequestResponseObject.code
+                set.status = standardResponses.BadRequestResponseObject.code
                 return {
                   data: null,
                   status: {
-                    ...BadRequestResponseObject,
+                    ...standardResponses.BadRequestResponseObject,
                     detail: `Failed to parse response JSON: ${jsonError}`
                   }
                 }
@@ -84,11 +80,11 @@ export const applications = (app: Elysia) =>
           )
         } catch (e) {
           console.error('Error fetching applications:', e)
-          set.status = BadRequestResponseObject.code
+          set.status = standardResponses.BadRequestResponseObject.code
           return {
             data: null,
             status: {
-              ...BadRequestResponseObject,
+              ...standardResponses.BadRequestResponseObject,
               detail: `An error occurred while fetching applications: ${
                 e instanceof Error ? e.message : String(e)
               }`
@@ -138,11 +134,11 @@ export const applications = (app: Elysia) =>
               try {
                 bopsResponse = (await response.json()) as BopsShowEndpoint
               } catch (jsonError) {
-                set.status = BadRequestResponseObject.code
+                set.status = standardResponses.BadRequestResponseObject.code
                 return {
                   data: null,
                   status: {
-                    ...BadRequestResponseObject,
+                    ...standardResponses.BadRequestResponseObject,
                     detail: `Failed to parse response JSON: ${jsonError}`
                   }
                 }
@@ -151,11 +147,11 @@ export const applications = (app: Elysia) =>
               const data = convertBopsShowEndpoint(bopsResponse)
 
               if (!data) {
-                set.status = BadRequestResponseObject.code
+                set.status = standardResponses.BadRequestResponseObject.code
                 return {
                   data: null,
                   status: {
-                    ...BadRequestResponseObject,
+                    ...standardResponses.BadRequestResponseObject,
                     detail: `Failed to convert BOPS response: ${JSON.stringify(
                       bopsResponse
                     )}`
@@ -165,17 +161,17 @@ export const applications = (app: Elysia) =>
 
               return {
                 data,
-                status: OkResponseObject
+                status: standardResponses.OkResponseObject
               }
             }
           )
         } catch (e) {
           console.error('Error fetching applications:', e)
-          set.status = BadRequestResponseObject.code
+          set.status = standardResponses.BadRequestResponseObject.code
           return {
             data: null,
             status: {
-              ...BadRequestResponseObject,
+              ...standardResponses.BadRequestResponseObject,
               detail: `An error occurred while fetching applications: ${
                 e instanceof Error ? e.message : String(e)
               }`

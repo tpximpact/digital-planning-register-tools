@@ -1,6 +1,9 @@
-import config from './config'
-import { app } from './index'
 import Elysia from 'elysia'
+import { app } from '.'
+import { config } from './config'
+
+import * as everything from '.'
+console.log(everything)
 
 new Elysia().use(app()).listen(config.port, () => {
   console.log(

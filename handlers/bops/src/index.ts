@@ -1,16 +1,10 @@
-import { Elysia, t } from 'elysia'
+import { Elysia } from 'elysia'
 import { openapi } from '@elysiajs/openapi'
-import {
-  BadRequestResponseObject,
-  InternalServerErrorResponseObject,
-  setupEndpoint
-} from '@dpr/libs'
 import { applications } from './modules/applications'
 import { documents } from './modules/documents'
 import { publicComments } from './modules/publicComments'
 import { specialistComments } from './modules/specialistComments'
-import { ApiResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
-import { ReasonPhrases } from 'http-status-codes'
+import { standardResponses, clientHeaders } from '@dpr/api'
 
 /**
  * @file Types for authentication middleware
@@ -18,12 +12,14 @@ import { ReasonPhrases } from 'http-status-codes'
 export interface HandlerBopsOptions {
   enabled: boolean
   debug: boolean
+  openApiEnabled: boolean
   prefix?: string
 }
 
 const defaultOptions: HandlerBopsOptions = {
   enabled: true,
   debug: false,
+  openApiEnabled: false,
   prefix: ''
 }
 
@@ -44,66 +40,12 @@ const app = (userOptions?: HandlerBopsOptions) => {
   })
     .use(
       openapi({
-        path: '/bopsHandler',
-        documentation: {
-          components: {
-            securitySchemes: {
-              basicAuth: {
-                type: 'http',
-                scheme: 'basic'
-              }
-            },
-            parameters: {
-              xClient: {
-                name: 'x-client',
-                in: 'header',
-                required: true,
-                schema: { type: 'string' },
-                description: 'Client identifier'
-              },
-              xService: {
-                name: 'x-service',
-                in: 'header',
-                required: true,
-                schema: { type: 'string' },
-                description: 'Service identifier'
-              }
-            }
-          },
-          security: [{ basicAuth: [] }]
-        }
+        enabled: options.openApiEnabled,
+        path: '/bopsHandler'
       })
     )
-    .use(setupEndpoint)
-    .model({
-      '400': ApiResponse(t.Null(), {
-        title: ReasonPhrases.BAD_REQUEST,
-        description: ReasonPhrases.BAD_REQUEST,
-        examples: [
-          {
-            data: null,
-            status: BadRequestResponseObject
-          }
-        ]
-      }),
-      '500': ApiResponse(t.Null(), {
-        title: ReasonPhrases.INTERNAL_SERVER_ERROR,
-        description: ReasonPhrases.INTERNAL_SERVER_ERROR,
-        examples: [
-          {
-            data: null,
-            status: InternalServerErrorResponseObject
-          }
-        ]
-      })
-    })
-    .guard({
-      response: {
-        400: '400',
-        500: '500'
-      },
-      parse: ['application/json']
-    })
+    .use(standardResponses.standardResponses)
+    .use(clientHeaders.requireClientHeaders)
     .use(applications)
     .use(documents)
     .use(publicComments)

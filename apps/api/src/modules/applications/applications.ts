@@ -9,25 +9,25 @@ import {
   PostSubmissionApplicationUrlParams,
   PostSubmissionApplicationResponse
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import { resolveClientService } from '@dpr/libs'
+import { resolveClientHeaders } from '../../libs/client-headers'
 
 /**
  * Plugin for elysia that generates the planning applications API.
  */
 export const applications = (app: Elysia) =>
   app
-    .use(resolveClientService)
+    .use(resolveClientHeaders)
     .get(`/applications`, async (context) => 'hi', {
       query: PostSubmissionApplicationsQueryParams,
       response: {
         200: PostSubmissionApplicationsResponse
       },
       detail: {
-        tags: ['Private', 'Applications'],
+        tags: ['Private'],
         security: [], // Remove this to make endpoint public
-        summary: 'Get all applications',
+        summary: 'Get all private applications',
         description:
-          'Retrieves a list of all applications, currently uses x-client header to filter by client'
+          'Retrieves an unredacted list of all applications, currently uses x-client header to filter by client'
       }
     })
     .get(`/applications/:applicationId`, async (context) => 'hi', {
@@ -36,11 +36,11 @@ export const applications = (app: Elysia) =>
         200: PostSubmissionApplicationResponse
       },
       detail: {
-        tags: ['Private', 'Applications'],
+        tags: ['Private'],
         security: [], // Remove this to make endpoint public
-        summary: 'Get application by application ID',
+        summary: 'Get private application by application ID',
         description:
-          'Retrieves a single application, currently uses x-client header to filter by client'
+          'Retrieves a single unredacted application, currently uses x-client header to filter by client'
       }
     })
     .group('/public', (app) =>
@@ -51,11 +51,11 @@ export const applications = (app: Elysia) =>
             200: PostSubmissionPublishedApplicationsResponse
           },
           detail: {
-            tags: ['Public', 'Applications'],
+            tags: ['Public'],
             security: [], // Remove this to make endpoint public
             summary: 'Get all published applications',
             description:
-              'Retrieves a list of all applications, currently uses x-client header to filter by client'
+              'Retrieves a redacted list of all applications, currently uses x-client header to filter by client'
           }
         })
         .get(`/applications/:applicationId`, async (context) => 'hi', {
@@ -64,11 +64,11 @@ export const applications = (app: Elysia) =>
             200: PostSubmissionPublishedApplicationResponse
           },
           detail: {
-            tags: ['Public', 'Applications'],
+            tags: ['Public'],
             security: [], // Remove this to make endpoint public
             summary: 'Get published application by application ID',
             description:
-              'Retrieves a single application, currently uses x-client header to filter by client'
+              'Retrieves a single redacted application, currently uses x-client header to filter by client'
           }
         })
     )

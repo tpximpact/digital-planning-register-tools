@@ -19,7 +19,6 @@
     "db:push": "drizzle-kit push --config=drizzle.config.ts"
   },
   "dependencies": {
-    "@dpr/libs": "workspace:*",
     "@dpr/ui": "workspace:*",
     "drizzle-orm": "^0.44.4",
     "drizzle-typebox": "^0.3.3",

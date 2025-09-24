@@ -55,3 +55,25 @@ export const ApiResponseStatus = Type.Object(
   }
 )
 export type ApiResponseStatus = Static<typeof ApiResponseStatus>
+
+/**
+ *
+ * @param T
+ * @param options
+ * @returns
+ */
+export const ApiResponseNoPagination = <T extends TSchema>(
+  T: T,
+  options?: Parameters<typeof Type.Object>[1]
+) =>
+  Type.Object(
+    {
+      data: T,
+      status: Type.Optional(ApiResponseStatus)
+    },
+    options ? options : { description: '#ApiResponseNoPagination' }
+  )
+
+export type ApiResponseNoPagination<T extends TSchema> = Static<
+  ReturnType<typeof ApiResponseNoPagination<T>>
+>
