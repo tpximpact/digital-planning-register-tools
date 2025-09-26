@@ -9,12 +9,11 @@
     "dev": "bun run --watch src/index.ts"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@dpr/config": "workspace:*"
+    "@dpr/config": "catalog:"
   },
   "dependencies": {
-    "@elysiajs/eden": "^1.3.2",
-    "@dpr/api": "workspace:*",
-    "typescript": "^5"
+    "@elysiajs/eden": "catalog:",
+    "@dpr/api": "catalog:",
+    "typescript": "catalog:"
   }
 }

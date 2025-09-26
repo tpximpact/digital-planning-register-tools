@@ -1,5 +1,6 @@
 {
   "name": "@dpr/converter-bops",
+  "description": "A utility module for converting data from the Back Office Planning System (BOPS) API to the ODP Post-submission format.",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -13,17 +14,17 @@
     "download-fixtures": "bun run src/scripts/download-fixtures.ts"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@dpr/config": "workspace:*"
+    "@types/bun": "catalog:",
+    "@dpr/config": "catalog:"
   },
   "dependencies": {
-    "@sinclair/typebox": "^0.34.41",
+    "@sinclair/typebox": "catalog:",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
-    "dayjs": "^1.11.18",
-    "typescript": "^5",
-    "@dpr/odp-schemas": "workspace:*",
-    "@dpr/libs": "workspace:*",
-    "@dpr/application-generator": "workspace:*"
+    "dayjs": "catalog:",
+    "typescript": "catalog:",
+    "@dpr/odp-schemas": "catalog:",
+    "@dpr/libs": "catalog:",
+    "@dpr/application-generator": "catalog:"
   }
 }

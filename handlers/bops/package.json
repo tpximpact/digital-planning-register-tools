@@ -1,5 +1,6 @@
 {
   "name": "@dpr/handler-bops",
+  "description": "An elysia plugin for handling requests and responses from the Back Office Planning System (BOPS) API.",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -15,18 +16,18 @@
     "start": "NODE_ENV=production bun src/server.ts",
     "serve": "bun run build && ./server",
     "clean": "rm server && rm .*.bun-build && rm -rf logs",
-    "docker": "cd ../.. && docker build -t dpr-tools:handler-bops -f ./apps/handler-bops/Dockerfile ."
+    "docker": "cd ../.. && docker build -t dpr-backend:handler-bops -f ./apps/handler-bops/Dockerfile ."
   },
   "dependencies": {
-    "elysia": "latest",
-    "@elysiajs/openapi": "latest",
-    "@dpr/libs": "workspace:*",
-    "@dpr/converter-bops": "workspace:*",
-    "@dpr/odp-schemas": "workspace:*",
-    "@dpr/api": "workspace:*"
+    "elysia": "catalog:",
+    "@elysiajs/openapi": "catalog:",
+    "@dpr/libs": "catalog:",
+    "@dpr/converter-bops": "catalog:",
+    "@dpr/odp-schemas": "catalog:",
+    "@dpr/api": "catalog:"
   },
   "devDependencies": {
-    "@dpr/config": "workspace:*",
-    "typescript": "^5.9.2"
+    "@dpr/config": "catalog:",
+    "typescript": "catalog:"
   }
 }

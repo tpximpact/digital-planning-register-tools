@@ -25,11 +25,40 @@
     "concurrently": "^9.2.1",
     "eslint": "^9.35.0"
   },
-  "workspaces": [
-    "packages/*",
-    "apps/*",
-    "handlers/*",
-    "converters/*",
-    "playground/*"
-  ]
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "apps/*",
+      "handlers/*",
+      "converters/*",
+      "playground/*"
+    ],
+    "catalog": {
+      "@types/bun": "latest",
+      "typescript": "^5",
+      "react": "19.1.0",
+      "react-dom": "19.1.0",
+      "@types/react": "^19",
+      "@types/react-dom": "^19",
+      "@dpr/config": "workspace:*",
+      "@dpr/ui": "workspace:*",
+      "@dpr/api": "workspace:*",
+      "@dpr/libs": "workspace:*",
+      "@dpr/converter-bops": "workspace:*",
+      "@dpr/application-generator": "workspace:*",
+      "@dpr/handler-bops": "workspace:*",
+      "@elysiajs/eden": "latest",
+      "@elysiajs/openapi": "latest",
+      "elysia": "latest",
+      "@sinclair/typebox": "^0.34.41",
+      "http-status-codes": "^2.3.0",
+      "@dpr/odp-schemas": "workspace:*",
+      "dayjs": "^1.11.18",
+      "@faker-js/faker": "^8.4.1"
+    },
+    "catalogs": {
+      "build": {},
+      "testing": {}
+    }
+  }
 }

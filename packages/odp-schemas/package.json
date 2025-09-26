@@ -1,5 +1,6 @@
 {
   "name": "@dpr/odp-schemas",
+  "description": "The post submission schema in typebox form - **eventually this will be replaced by the `digital-planning-data-schemas` package**",
   "type": "module",
   "private": true,
   "exports": {
@@ -12,11 +13,10 @@
     "typeconfig": "tsc --showConfig"
   },
   "devDependencies": {
-    "@dpr/config": "workspace:*",
-    "@types/bun": "latest",
-    "typescript": "^5"
+    "@dpr/config": "catalog:",
+    "typescript": "catalog:"
   },
   "dependencies": {
-    "@sinclair/typebox": "^0.34.38"
+    "@sinclair/typebox": "catalog:"
   }
 }

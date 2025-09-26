@@ -1,4 +1,3 @@
-export * from './env'
 export * from './types'
 export * from './capitaliseFirstLetter'
 export * from './createUrlSearchParams'

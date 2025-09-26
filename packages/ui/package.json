@@ -1,5 +1,6 @@
 {
   "name": "@dpr/ui",
+  "description": "Contains react components, styles and a storybook for the Digital Planning Register that comply with Post-submission schema.",
   "type": "module",
   "private": true,
   "exports": {
@@ -19,12 +20,11 @@
     "clean": "rm -rf dist"
   },
   "devDependencies": {
-    "@dpr/config": "workspace:*",
+    "@dpr/config": "catalog:",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.0",
-    "@types/bun": "latest",
     "sass-embedded": "^1.91.0",
-    "typescript": "^5"
+    "typescript": "catalog:"
   },
   "dependencies": {
     "@chromatic-com/storybook": "^4.0.1",

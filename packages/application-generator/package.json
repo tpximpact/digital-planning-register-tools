@@ -14,15 +14,14 @@
     "test": "bun test "
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@dpr/config": "workspace:*"
+    "@dpr/config": "workspace:*",
+    "typescript": "catalog:"
   },
   "dependencies": {
-    "@sinclair/typebox": "^0.34.41",
-    "dayjs": "^1.11.18",
-    "typescript": "^5",
-    "@dpr/odp-schemas": "workspace:*",
-    "@faker-js/faker": "^8.4.1",
+    "@sinclair/typebox": "catalog:",
+    "dayjs": "catalog:",
+    "@dpr/odp-schemas": "catalog:",
+    "@faker-js/faker": "catalog:",
     "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz"
   }
 }
