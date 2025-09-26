@@ -1,5 +1,6 @@
 {
   "name": "@dpr/react-app",
+  "description": "An example React application for DPR Tools",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -11,18 +12,16 @@
     "start": "NODE_ENV=production bun src/server.tsx",
     "serve": "bun run build && NODE_ENV=production bun src/server.tsx",
     "clean": "rm -rf dist",
-    "docker": "cd ../.. && docker build -t dpr-tools:react-app -f ./apps/react-app/Dockerfile ."
+    "docker": "cd ../.. && docker build -t dpr-backend:react-app -f ./apps/react-app/Dockerfile ."
   },
   "dependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "@dpr/api": "workspace:*"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@types/bun": "latest",
-    "@dpr/config": "workspace:*",
-    "typescript": "^5"
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@dpr/config": "catalog:",
+    "typescript": "catalog:"
   }
 }

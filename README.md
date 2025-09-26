@@ -267,8 +267,8 @@ When creating a new package you will need to ensure that the standard commands a
   },
   "dependencies": {},
   "devDependencies": {
-    "@dpr/config": "workspace:*",
-    "typescript": "^5"
+    "@dpr/config": "catalog:",
+    "typescript": "catalog:"
   }
 }
 ```

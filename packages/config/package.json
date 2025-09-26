@@ -1,11 +1,12 @@
 {
   "name": "@dpr/config",
+  "description": "Configuration management for the packages in this monorepo, included eslint and base typescript configurations",
   "type": "module",
   "private": true,
   "devDependencies": {
     "eslint": "^9.32.0",
     "globals": "^16.3.0",
-    "typescript": "^5",
+    "typescript": "catalog:",
     "typescript-eslint": "^8.38.0",
     "eslint-plugin-jsx-a11y": "^6.10.2"
   }

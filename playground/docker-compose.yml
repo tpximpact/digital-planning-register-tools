@@ -5,15 +5,15 @@ services:
       context: .
       dockerfile: apps/server-api/Dockerfile
       tags:
-        - dpr-tools:server-api
-    image: dpr-tools:server-api
+        - dpr-backend:server-api
+    image: dpr-backend:server-api
     ports:
-      - '4000:3000'
+      - "4000:3000"
     environment:
       - PORT=3000
     restart: unless-stopped
     networks:
-      - dpr-tools
+      - dpr-backend
 
   react-app:
     # command: ["tail", "-f", "/dev/null"]
@@ -21,15 +21,15 @@ services:
       context: .
       dockerfile: apps/react-app/Dockerfile
       tags:
-        - dpr-tools:react-app
-    image: dpr-tools:react-app
+        - dpr-backend:react-app
+    image: dpr-backend:react-app
     ports:
-      - '3001:3000'
+      - "3001:3000"
     environment:
       - PORT=3000
     restart: unless-stopped
     networks:
-      - dpr-tools
+      - dpr-backend
 
   next-example:
     # command: ["tail", "-f", "/dev/null"]
@@ -37,31 +37,31 @@ services:
       context: .
       dockerfile: apps/next-example/Dockerfile
       tags:
-        - dpr-tools:next-example
-    image: dpr-tools:next-example
+        - dpr-backend:next-example
+    image: dpr-backend:next-example
     ports:
-      - '3002:3000'
+      - "3002:3000"
     environment:
       - PORT=3000
     restart: unless-stopped
     networks:
-      - dpr-tools
+      - dpr-backend
 
   mock-bucket:
     image: mcr.microsoft.com/azure-storage/azurite
     hostname: azurite
     restart: always
     ports:
-      - '10000:10000'
-      - '10001:10001'
-      - '10002:10002'
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
     volumes:
       - azurite-data:/data
     networks:
-      - dpr-tools
+      - dpr-backend
 
 volumes:
   azurite-data:
 
 networks:
-  dpr-tools:
+  dpr-backend:

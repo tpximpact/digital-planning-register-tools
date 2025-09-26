@@ -14,7 +14,7 @@
  *   bun scripts/workspace.ts react-app bun test
  *
  * Requirements:
- * - Must be run from the root of the dpr-tools monorepo (package.json name must be 'dpr-tools').
+ * - Must be run from the root of the dpr-backend monorepo (package.json name must be 'dpr-backend').
  * - Requires Bun runtime.
  *
  * The script will:
@@ -25,13 +25,13 @@
  */
 import { readdir } from 'fs/promises'
 
-// Check if we are in the dpr-tools monorepo by verifying the package name
+// Check if we are in the dpr-backend monorepo by verifying the package name
 const pkg = await Bun.file('package.json').json()
 const PKG_NAME = pkg.name
 
-if (PKG_NAME !== 'dpr-tools') {
+if (PKG_NAME !== 'dpr-backend') {
   console.error(
-    `Error: Not in the dpr-tools monorepo (package name: ${PKG_NAME})`
+    `Error: Not in the dpr-backend monorepo (package name: ${PKG_NAME})`
   )
   process.exit(1)
 }
