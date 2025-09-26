@@ -1,5 +1,5 @@
 {
-  "name": "dpr-tools",
+  "name": "dpr-backend",
   "version": "0.0.0",
   "type": "module",
   "private": true,
@@ -30,10 +30,6 @@
     "apps/*",
     "handlers/*",
     "converters/*",
-    "playground/*",
-    "environment/*"
-  ],
-  "dependencies": {
-    "@elysiajs/openapi": "^1.4.10"
-  }
+    "playground/*"
+  ]
 }
