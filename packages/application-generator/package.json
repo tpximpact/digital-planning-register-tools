@@ -1,5 +1,6 @@
 {
   "name": "@dpr/application-generator",
+  "description": "Generates dummy application data in Post-submission format for testing and development purposes",
   "version": "0.0.0",
   "private": true,
   "type": "module",
