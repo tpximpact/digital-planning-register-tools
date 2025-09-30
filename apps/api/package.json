@@ -27,10 +27,12 @@
     "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",
     "elysia": "catalog:",
     "elysia-rate-limit": "^4.4.0",
-    "http-status-codes": "catalog:"
+    "http-status-codes": "catalog:",
+    "@sinclair/typebox": "catalog:",
+    "@dpr/handler-local": "catalog:"
   },
   "devDependencies": {
-    "@dpr/config": "catalog:",
+    "@dpr/dev-config": "catalog:",
     "typescript": "catalog:"
   }
 }

@@ -1,6 +1,10 @@
-import { baseConfig } from '..'
+import { ENV_HANDLER_API as env } from '@dpr/config'
+const { DEBUG, ENVIRONMENT, PORT } = env
 
-interface Config extends baseConfig.BaseConfig {
+export interface Config {
+  environment: string
+  debug: boolean
+  port: number
   rateLimitMax: number
   rateLimitDuration: number
   authentication: boolean
@@ -25,10 +29,10 @@ const authentication =
     : true
 
 export const config: Config = {
-  ...baseConfig.config,
+  environment: ENVIRONMENT,
+  debug: DEBUG,
+  port: PORT,
   rateLimitMax,
   rateLimitDuration,
   authentication
 }
-
-export type { Config }

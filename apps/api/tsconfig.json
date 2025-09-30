@@ -1,9 +1,8 @@
 {
-  "extends": "@dpr/config/typescript/dom.json",
+  "extends": "@dpr/dev-config/typescript/dom.json",
   "compilerOptions": {
     // Environment setup, support latest features & stop errors for featres not supported by typescript but supported by bun
-    "module": "ESNext",
-    "jsx": "react"
+    "module": "ESNext"
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

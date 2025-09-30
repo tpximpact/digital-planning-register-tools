@@ -11,10 +11,7 @@ import { resolveClientHeaders } from './resolve-client-headers'
  */
 export const requireClientHeaders = (app: Elysia) =>
   app
-    .model({
-      clientHeaders: ClientHeaders
-    })
     .guard({
-      headers: 'clientHeaders'
+      headers: ClientHeaders
     })
     .use(resolveClientHeaders)

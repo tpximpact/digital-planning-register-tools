@@ -11,17 +11,43 @@ import {
   PostSubmissionPublishedSpecialistUrlParams,
   PostSubmissionPublishedSpecialistResponse
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import { resolveClientHeaders } from '../../libs/client-headers'
+import { standardResponseObjects } from '../../libs/standard-responses'
+import {
+  getAllApplicationSpecialistComments,
+  getAllPublishedApplicationSpecialistComments,
+  getApplicationSpecialistComment,
+  getPublishedApplicationSpecialistComment
+} from '@dpr/handler-local'
 
 /**
  * Plugin for elysia that generates the planning applications API.
  */
 export const specialistComments = (app: Elysia) =>
   app
-    .use(resolveClientHeaders)
     .get(
       `/applications/:applicationId/specialistComments`,
-      async (context) => 'hi',
+      async (context) => {
+        try {
+          const { data, pagination } = getAllApplicationSpecialistComments(
+            context.params.applicationId,
+            context.query
+          )
+          return {
+            data,
+            pagination,
+            status: standardResponseObjects.OkResponseObject
+          }
+        } catch (e) {
+          console.error(e)
+          return {
+            data: null,
+            status: {
+              ...standardResponseObjects.InternalServerErrorResponseObject,
+              detail: 'Failed to generate example applications'
+            }
+          }
+        }
+      },
       {
         params: PostSubmissionSpecialistsUrlParams,
         query: PostSubmissionSpecialistsQueryParams,
@@ -31,7 +57,7 @@ export const specialistComments = (app: Elysia) =>
         detail: {
           tags: ['Private'],
           security: [], // Remove this to make endpoint public
-          summary: 'Get all specialists and their comments for an application',
+          summary: 'Get specialist comments',
           description:
             'Retrieves a list of all specialists and their comments for a specific application, currently uses x-client header to filter by client'
         }
@@ -39,7 +65,27 @@ export const specialistComments = (app: Elysia) =>
     )
     .get(
       `/applications/:applicationId/specialistComments/:specialistId`,
-      async (context) => 'hi',
+      async (context) => {
+        try {
+          const data = getApplicationSpecialistComment(
+            context.params.applicationId,
+            context.params.specialistId
+          )
+          return {
+            data,
+            status: standardResponseObjects.OkResponseObject
+          }
+        } catch (e) {
+          console.error(e)
+          return {
+            data: null,
+            status: {
+              ...standardResponseObjects.InternalServerErrorResponseObject,
+              detail: 'Failed to generate example applications'
+            }
+          }
+        }
+      },
       {
         params: PostSubmissionSpecialistUrlParams,
         response: {
@@ -48,7 +94,7 @@ export const specialistComments = (app: Elysia) =>
         detail: {
           tags: ['Private'],
           security: [], // Remove this to make endpoint public
-          summary: 'Get specialist by specialist ID',
+          summary: 'Get specialist',
           description:
             "Retrieves a single specialist's comments, currently uses x-client header to filter by client"
         }
@@ -58,7 +104,29 @@ export const specialistComments = (app: Elysia) =>
       app
         .get(
           `/applications/:applicationId/specialistComments`,
-          async (context) => 'hi',
+          async (context) => {
+            try {
+              const { data, pagination } =
+                getAllPublishedApplicationSpecialistComments(
+                  context.params.applicationId,
+                  context.query
+                )
+              return {
+                data,
+                pagination,
+                status: standardResponseObjects.OkResponseObject
+              }
+            } catch (e) {
+              console.error(e)
+              return {
+                data: null,
+                status: {
+                  ...standardResponseObjects.InternalServerErrorResponseObject,
+                  detail: 'Failed to generate example applications'
+                }
+              }
+            }
+          },
           {
             params: PostSubmissionPublishedSpecialistsUrlParams,
             query: PostSubmissionPublishedSpecialistsQueryParams,
@@ -68,8 +136,7 @@ export const specialistComments = (app: Elysia) =>
             detail: {
               tags: ['Public'],
               security: [], // Remove this to make endpoint public
-              summary:
-                'Get all published specialists and their comments for an application',
+              summary: 'Get published specialist comments',
               description:
                 'Retrieves a list of all published specialists and their comments for a specific application, currently uses x-client header to filter by client'
             }
@@ -77,7 +144,27 @@ export const specialistComments = (app: Elysia) =>
         )
         .get(
           `/applications/:applicationId/specialistComments/:specialistId`,
-          async (context) => 'hi',
+          async (context) => {
+            try {
+              const data = getPublishedApplicationSpecialistComment(
+                context.params.applicationId,
+                context.params.specialistId
+              )
+              return {
+                data,
+                status: standardResponseObjects.OkResponseObject
+              }
+            } catch (e) {
+              console.error(e)
+              return {
+                data: null,
+                status: {
+                  ...standardResponseObjects.InternalServerErrorResponseObject,
+                  detail: 'Failed to generate example applications'
+                }
+              }
+            }
+          },
           {
             params: PostSubmissionPublishedSpecialistUrlParams,
             response: {
@@ -86,7 +173,7 @@ export const specialistComments = (app: Elysia) =>
             detail: {
               tags: ['Public'],
               security: [], // Remove this to make endpoint public
-              summary: 'Get published specialist by specialist ID',
+              summary: 'Get published specialist',
               description:
                 "Retrieves a single published specialist's comments, currently uses x-client header to filter by client"
             }

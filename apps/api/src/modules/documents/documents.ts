@@ -11,31 +11,81 @@ import {
   PostSubmissionDocumentResponse,
   PostSubmissionPublishedDocumentsUrlParams
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import { resolveClientHeaders } from '../../libs/client-headers'
+import { standardResponseObjects } from '../../libs/standard-responses'
+import {
+  getAllApplicationDocuments,
+  getAllPublishedApplicationDocuments,
+  getApplicationDocument,
+  getPublishedApplicationDocument
+} from '@dpr/handler-local'
 
 /**
  * Plugin for elysia that generates the planning applications API.
  */
 export const documents = (app: Elysia) =>
   app
-    .use(resolveClientHeaders)
-    .get(`/applications/:applicationId/documents`, async (context) => 'hi', {
-      params: PostSubmissionDocumentsUrlParams,
-      query: PostSubmissionDocumentsQueryParams,
-      response: {
-        200: PostSubmissionDocumentsResponse
+    .get(
+      `/applications/:applicationId/documents`,
+      async (context) => {
+        try {
+          const { data, pagination } = getAllApplicationDocuments(
+            context.params.applicationId,
+            context.query
+          )
+          return {
+            data,
+            pagination,
+            status: standardResponseObjects.OkResponseObject
+          }
+        } catch (e) {
+          console.error(e)
+          return {
+            data: null,
+            status: {
+              ...standardResponseObjects.InternalServerErrorResponseObject,
+              detail: 'Failed to generate example applications'
+            }
+          }
+        }
       },
-      detail: {
-        tags: ['Private'],
-        security: [], // Remove this to make endpoint public
-        summary: 'Get all unredacted documents for an application',
-        description:
-          'Retrieves a list of all unredacted documents for a specific application, currently uses x-client header to filter by client'
+      {
+        params: PostSubmissionDocumentsUrlParams,
+        query: PostSubmissionDocumentsQueryParams,
+        response: {
+          200: PostSubmissionDocumentsResponse
+        },
+        detail: {
+          tags: ['Private'],
+          security: [], // Remove this to make endpoint public
+          summary: 'Get documents',
+          description:
+            'Retrieves a list of all unredacted documents for a specific application, currently uses x-client header to filter by client'
+        }
       }
-    })
+    )
     .get(
       `/applications/:applicationId/documents/:documentId`,
-      async (context) => 'hi',
+      async (context) => {
+        try {
+          const data = getApplicationDocument(
+            context.params.applicationId,
+            context.params.documentId
+          )
+          return {
+            data,
+            status: standardResponseObjects.OkResponseObject
+          }
+        } catch (e) {
+          console.error(e)
+          return {
+            data: null,
+            status: {
+              ...standardResponseObjects.InternalServerErrorResponseObject,
+              detail: 'Failed to generate example applications'
+            }
+          }
+        }
+      },
       {
         params: PostSubmissionDocumentUrlParams,
         response: {
@@ -44,8 +94,7 @@ export const documents = (app: Elysia) =>
         detail: {
           tags: ['Private'],
           security: [], // Remove this to make endpoint public
-          summary:
-            'Get unredacted application document information by application ID',
+          summary: 'Get document',
           description:
             'Retrieves a single unredacted application document information, currently uses x-client header to filter by client'
         }
@@ -55,7 +104,28 @@ export const documents = (app: Elysia) =>
       app
         .get(
           `/applications/:applicationId/documents`,
-          async (context) => 'hi',
+          async (context) => {
+            try {
+              const { data, pagination } = getAllPublishedApplicationDocuments(
+                context.params.applicationId,
+                context.query
+              )
+              return {
+                data,
+                pagination,
+                status: standardResponseObjects.OkResponseObject
+              }
+            } catch (e) {
+              console.error(e)
+              return {
+                data: null,
+                status: {
+                  ...standardResponseObjects.InternalServerErrorResponseObject,
+                  detail: 'Failed to generate example applications'
+                }
+              }
+            }
+          },
           {
             params: PostSubmissionPublishedDocumentsUrlParams,
             query: PostSubmissionPublishedDocumentsQueryParams,
@@ -65,7 +135,7 @@ export const documents = (app: Elysia) =>
             detail: {
               tags: ['Public'],
               security: [], // Remove this to make endpoint public
-              summary: 'Get all redacted documents for an application',
+              summary: 'Get published documents',
               description:
                 'Retrieves a list of all redacted documents for a specific application, currently uses x-client header to filter by client'
             }
@@ -73,7 +143,27 @@ export const documents = (app: Elysia) =>
         )
         .get(
           `/applications/:applicationId/documents/:documentId`,
-          async (context) => 'hi',
+          async (context) => {
+            try {
+              const data = getPublishedApplicationDocument(
+                context.params.applicationId,
+                context.params.documentId
+              )
+              return {
+                data,
+                status: standardResponseObjects.OkResponseObject
+              }
+            } catch (e) {
+              console.error(e)
+              return {
+                data: null,
+                status: {
+                  ...standardResponseObjects.InternalServerErrorResponseObject,
+                  detail: 'Failed to generate example applications'
+                }
+              }
+            }
+          },
           {
             params: PostSubmissionPublishedDocumentUrlParams,
             response: {
@@ -82,8 +172,7 @@ export const documents = (app: Elysia) =>
             detail: {
               tags: ['Public'],
               security: [], // Remove this to make endpoint public
-              summary:
-                'Get redacted application document information by application ID',
+              summary: 'Get published document',
               description:
                 'Retrieves a single redacted application document information, currently uses x-client header to filter by client'
             }

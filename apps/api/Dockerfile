@@ -12,14 +12,14 @@ COPY bun.lock bun.lock
 COPY apps/server-api/package.json apps/server-api/package.json
 
 # Copy over the files for the dependency packages
-COPY packages/config/package.json packages/config/package.json
+COPY packages/dev-config/package.json packages/dev-config/package.json
 
 # Install dependencies
 RUN bun install
 
 # Copy the directory contents into the container at /app
 COPY apps/server-api apps/server-api
-COPY packages/config packages/config
+COPY packages/dev-config packages/dev-config
 
 ENV NODE_ENV=production
 
