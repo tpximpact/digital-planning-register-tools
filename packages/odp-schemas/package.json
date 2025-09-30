@@ -7,13 +7,12 @@
     "./*": "./src/*",
     "./types/shared/formats": "./src/types/shared/formats.ts"
   },
-  "main": "src/index.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "typeconfig": "tsc --showConfig"
   },
   "devDependencies": {
-    "@dpr/config": "catalog:",
+    "@dpr/dev-config": "catalog:",
     "typescript": "catalog:"
   },
   "dependencies": {

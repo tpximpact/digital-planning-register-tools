@@ -66,8 +66,8 @@ const BaseApplicationUrlParams = Type.Object({
 // -----------------------------------------------------------------------------
 
 const BaseQueryParams = Type.Object({
-  page: Type.Number(),
-  resultsPerPage: Type.Number()
+  page: Type.Number({ default: 1 }),
+  resultsPerPage: Type.Number({ default: 10 })
 })
 
 // -----------------------------------------------------------------------------
