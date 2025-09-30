@@ -6,7 +6,7 @@ import type {
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { convertDocumentBopsFile } from './convertDocumentBopsFile'
 import { paginateArray } from '@dpr/libs'
-import type { PostSubmissionFile } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PostSubmissionFile'
+import type { PostSubmissionFile } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PostSubmissionFile.ts'
 
 export const bopsDocumentsEndpointToOdp = (
   input: BopsDocumentsEndpoint,

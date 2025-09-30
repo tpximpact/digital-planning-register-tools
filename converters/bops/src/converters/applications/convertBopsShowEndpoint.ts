@@ -1,29 +1,29 @@
 import {
-  PostSubmissionPublishedApplication as PostSubmissionPublishedApplicationSchema,
+  // PostSubmissionPublishedApplication as PostSubmissionPublishedApplicationSchema,
   type PostSubmissionPublishedApplication
 } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
-import { type ProcessStage } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/ProcessStage.ts'
-import { type ApplicationStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/ApplicationStatus.ts'
-import { type AssessmentDecision } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/AssessmentDecision.ts'
+// import { type ProcessStage } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/ProcessStage.ts'
+// import { type ApplicationStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/ApplicationStatus.ts'
+// import { type AssessmentDecision } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/AssessmentDecision.ts'
 import { type ApplicationType } from '@dpr/odp-schemas/types/schemas/prototypeApplication/enums/ApplicationType.ts'
+// import {
+//   PostSubmissionFile as PostSubmissionFileSchema,
+//   type PostSubmissionFile
+// } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PostSubmissionFile.ts'
 import {
-  PostSubmissionFile as PostSubmissionFileSchema,
-  type PostSubmissionFile
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PostSubmissionFile.ts'
-import {
-  BopsShowEndpoint as BopsShowEndpointSchema,
+  // BopsShowEndpoint as BopsShowEndpointSchema,
   type BopsShowEndpoint
 } from '../../schemas/bops/show'
-import { Value } from '@sinclair/typebox/value'
-import type { PostSubmissionMetadata } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/Metadata'
-import { convertDocumentBopsFile } from '../documents/convertDocumentBopsFile'
-import {
-  BopsFile as BopsFileSchema,
-  type BopsFile
-} from '../../schemas/shared/BopsFile'
-import { generateApplications } from '@dpr/libs'
-import { generateExampleApplications } from '@dpr/application-generator'
-import { debugSchema } from '../../utils/debugSchema'
+// import { Value } from '@sinclair/typebox/value'
+// import type { PostSubmissionMetadata } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/Metadata'
+// import { convertDocumentBopsFile } from '../documents/convertDocumentBopsFile'
+// import {
+//   BopsFile as BopsFileSchema,
+//   type BopsFile
+// } from '../../schemas/shared/BopsFile'
+// import { generateApplications } from '@dpr/libs'
+// import { generateExampleApplications } from '@dpr/application-generator'
+// import { debugSchema } from '../../utils/debugSchema'
 
 /**
  * Checks to see if we're in the consultation period
@@ -31,11 +31,11 @@ import { debugSchema } from '../../utils/debugSchema'
  * @param endDate string
  * @returns boolean
  */
-const getIsConsultationPeriod = (startDate: Date, endDate: Date): boolean => {
-  const now = new Date()
+// const getIsConsultationPeriod = (startDate: Date, endDate: Date): boolean => {
+//   const now = new Date()
 
-  return now >= startDate && now <= endDate
-}
+//   return now >= startDate && now <= endDate
+// }
 
 /**
  * pa.part1.classA = pa
@@ -50,33 +50,33 @@ export const getPrimaryApplicationTypeKey = (
     return undefined
   }
   const type = applicationType.split('.')[0]
-  if (type && isValidPrimaryApplicationType(type)) {
-    return type || undefined
-  }
+  // if (type && isValidPrimaryApplicationType(type)) {
+  return type || undefined
+  // }
 }
 
-const getDescription = (
-  proposal: PostSubmissionPublishedApplication['submission']['data']['proposal']
-): string => {
-  if (!proposal) {
-    return 'No description'
-  }
+// const getDescription = (
+//   proposal: PostSubmissionPublishedApplication['submission']['data']['proposal']
+// ): string => {
+//   if (!proposal) {
+//     return 'No description'
+//   }
 
-  if ('description' in proposal && proposal.description) {
-    return proposal.description
-  }
-  if ('reason' in proposal && proposal.reason) {
-    return proposal.reason
-  }
+//   if ('description' in proposal && proposal.description) {
+//     return proposal.description
+//   }
+//   if ('reason' in proposal && proposal.reason) {
+//     return proposal.reason
+//   }
 
-  return 'No description'
-}
+//   return 'No description'
+// }
 
 export const convertBopsShowEndpoint = (
-  input: BopsShowEndpoint,
-  additionalData?: { decisionNoticeUrl?: string }
+  input: BopsShowEndpoint
+  // additionalData?: { decisionNoticeUrl?: string }
 ): PostSubmissionPublishedApplication => {
-  const { committeeDetermined: application } = generateExampleApplications()
+  // const { committeeDetermined: application } = generateExampleApplications()
 
   // if (!Value.Check(BopsShowEndpointSchema, input)) {
   //   console.warn('Invalid BopsShowEndpoint:', input)
@@ -350,11 +350,13 @@ export const convertBopsShowEndpoint = (
   //   // }
   // }
 
-  debugSchema(PostSubmissionPublishedApplicationSchema, application)
-  if (!Value.Check(PostSubmissionPublishedApplicationSchema, application)) {
-    console.warn('Invalid PostSubmissionPublishedApplication:', application)
-    throw new Error('Invalid PostSubmissionPublishedApplication')
-  }
+  // debugSchema(PostSubmissionPublishedApplicationSchema, application)
+  // if (!Value.Check(PostSubmissionPublishedApplicationSchema, application)) {
+  //   console.warn('Invalid PostSubmissionPublishedApplication:', application)
+  //   throw new Error('Invalid PostSubmissionPublishedApplication')
+  // }
 
-  return application
+  // return application
+
+  return input
 }

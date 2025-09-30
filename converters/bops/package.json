@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@types/bun": "catalog:",
-    "@dpr/config": "catalog:"
+    "@dpr/dev-config": "catalog:"
   },
   "dependencies": {
     "@sinclair/typebox": "catalog:",
@@ -24,7 +24,6 @@
     "dayjs": "catalog:",
     "typescript": "catalog:",
     "@dpr/odp-schemas": "catalog:",
-    "@dpr/libs": "catalog:",
-    "@dpr/application-generator": "catalog:"
+    "@dpr/libs": "catalog:"
   }
 }
