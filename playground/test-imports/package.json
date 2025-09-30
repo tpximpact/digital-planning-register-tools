@@ -1,0 +1,29 @@
+{
+  "name": "@dpr/test-imports",
+  "description": "A package to help test import/export of packages in this repo",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "typeconfig": "tsc --showConfig",
+    "dev": "bun run --hot src/index.ts",
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "@dpr/dev-config": "catalog:",
+    "@types/bun": "catalog:",
+    "typescript": "catalog:"
+  },
+  "dependencies": {
+    "@dpr/api": "catalog:",
+    "@dpr/converter-bops": "catalog:",
+    "@dpr/handler-bops": "catalog:",
+    "@dpr/application-generator": "catalog:",
+    "@dpr/libs": "catalog:",
+    "@dpr/odp-schemas": "catalog:",
+    "@dpr/ui": "catalog:",
+    "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  }
+}
