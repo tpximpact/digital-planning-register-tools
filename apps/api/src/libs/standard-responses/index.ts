@@ -1,2 +1,2 @@
 export * from './standard-responses'
-export * from './standard-response-objects'
+export * as standardResponseObjects from './standard-response-objects'

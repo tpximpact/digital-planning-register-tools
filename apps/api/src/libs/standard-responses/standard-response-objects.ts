@@ -1,5 +1,5 @@
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
-import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse'
+import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
 
 export const OkResponseObject: ApiResponseStatus = {
   code: StatusCodes.OK,
@@ -16,4 +16,8 @@ export const InternalServerErrorResponseObject: ApiResponseStatus = {
 export const NotFoundResponseObject: ApiResponseStatus = {
   code: StatusCodes.NOT_FOUND,
   message: ReasonPhrases.NOT_FOUND
+}
+export const UnprocessableEntityResponseObject: ApiResponseStatus = {
+  code: StatusCodes.UNPROCESSABLE_ENTITY,
+  message: ReasonPhrases.UNPROCESSABLE_ENTITY
 }
