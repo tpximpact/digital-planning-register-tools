@@ -1,5 +1,5 @@
-import type { ApplicationStatus } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/enums/ApplicationStatus.js'
-import type { ProcessStage } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/enums/ProcessStage.js'
+import type { ApplicationStatus } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/enums/ApplicationStatus.d.ts'
+import type { ProcessStage } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/enums/ProcessStage.d.ts'
 
 export const getApplicationStatesByStage = (
   applicationStage: ProcessStage

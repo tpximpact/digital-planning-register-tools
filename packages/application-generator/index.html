@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dpr-pplication-generator example</title>
+
+  <style type="text/css">
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    h2 {
+      color: #555;
+    }
+
+    code {
+      display: block;
+      background-color: #e8e8e8;
+      padding: 10px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+      margin-bottom: 20px;
+      height: 300px;
+      width: 80%;
+      margin: 0 auto;
+      overflow-y: scroll;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Application Types With No Consultation</h1>
+  <div id="applicationTypesWithNoConsultation"></div>
+
+  <h1>Example applications</h1>
+  <div id="exampleApplications"></div>
+
+
+  <script type="module">
+
+    import * as applicationGenerator from './src/index.ts';
+
+    const exports = Object.keys(applicationGenerator)
+    console.log('Exports from application-generator package:')
+    console.log(exports)
+
+    console.log('Application Types With No Consultation:')
+    console.log(applicationGenerator.applicationTypesWithNoConsultation)
+    document.getElementById('applicationTypesWithNoConsultation').innerText = applicationGenerator.applicationTypesWithNoConsultation.join(', ')
+
+
+    const exampleApplications = applicationGenerator.generateExampleApplications();
+    console.log('Example Applications:')
+    console.log(exampleApplications)
+
+
+    const exampleApplicationsDiv = document.getElementById('exampleApplications');
+    exampleApplicationsDiv.innerHTML = '';
+
+    Object.entries(exampleApplications).forEach(([key, value]) => {
+      const h2 = document.createElement('h2');
+      h2.textContent = key;
+      exampleApplicationsDiv.appendChild(h2);
+
+      const code = document.createElement('code');
+      code.textContent = JSON.stringify(value, null, 2);
+      exampleApplicationsDiv.appendChild(code);
+    });
+
+    console.log(applicationGenerator)
+
+  </script>
+</body>
+
+</html>

@@ -1,27 +1,45 @@
 {
   "name": "@dpr/application-generator",
   "description": "Generates dummy application data in Post-submission format for testing and development purposes",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
+  "author": "Hannah Nicholas (https://github.com/tpximpact/digital-planning-register-tools)",
+  "license": "GPL-3.0-only",
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/dpr-application-generator.umd.js",
+  "module": "./dist/dpr-application-generator.es.js",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "bun": "./src/index.ts",
+      "import": "./dist/dpr-application-generator.es.js",
+      "require": "./dist/dpr-application-generator.umd.js",
+      "default": "./src/index.ts"
+    }
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
     "typeconfig": "tsc --showConfig",
-    "build": "bun run src/scripts/generateJsonFiles.ts",
-    "test": "bun test "
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "generate-json-files": "bun run src/scripts/generateJsonFiles.ts",
+    "test": "bun test",
+    "prepublish": "bun build"
   },
   "devDependencies": {
-    "@dpr/config": "workspace:*",
-    "typescript": "catalog:"
+    "@dpr/dev-config": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
   },
   "dependencies": {
-    "@sinclair/typebox": "catalog:",
     "dayjs": "catalog:",
-    "@dpr/odp-schemas": "catalog:",
     "@faker-js/faker": "catalog:",
     "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "tag": "latest"
   }
 }

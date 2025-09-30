@@ -1,21 +1,14 @@
-import type * as PostSubmissionPublishedTypes from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.js'
+import type * as PostSubmissionPublishedTypes from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.d.ts'
 import type {
   ApplicationType,
   PrimaryApplicationType
-} from 'digital-planning-data-schemas/types/schemas/prototypeApplication/enums/ApplicationType.ts'
-import type { ProcessStage } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/enums/ProcessStage.ts'
-import type { ApplicationStatus } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/enums/ApplicationStatus.ts'
-import type { PostSubmissionPublishedApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.js'
-import type { AppealDecision } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/enums/AppealDecision.ts'
-import type { PriorApprovalAssessment } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/Assessment.js'
-import type * as PrototypeTypes from 'digital-planning-data-schemas/types/schemas/prototypeApplication/index.js'
-import planningPermissionFullHouseholderPrototype from 'digital-planning-data-schemas/examples/prototypeApplication/planningPermission/fullHouseholder.json'
-import priorApprovalLargerExtensionPrototype from 'digital-planning-data-schemas/examples/prototypeApplication/priorApproval/largerExtension.json'
-import lawfulDevelopmentCertificateProposedPrototype from 'digital-planning-data-schemas/examples/prototypeApplication/lawfulDevelopmentCertificate/proposed.json'
-// import planningPermissionFullHouseholderPrototype from './minimum-examples/fullHouseholder.json'
-// import priorApprovalLargerExtensionPrototype from './minimum-examples/largerExtension.json'
-// import lawfulDevelopmentCertificateProposedPrototype from './minimum-examples/proposed.json'
-import { faker } from '@faker-js/faker'
+} from 'digital-planning-data-schemas/types/schemas/prototypeApplication/enums/ApplicationType.d.ts'
+import type { ProcessStage } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/enums/ProcessStage.d.ts'
+import type { ApplicationStatus } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/enums/ApplicationStatus.d.ts'
+import type { PostSubmissionPublishedApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.d.ts'
+import type { AppealDecision } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/enums/AppealDecision.d.ts'
+import type { PriorApprovalAssessment } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/Assessment.d.ts'
+import { fakerEN_GB as faker } from '@faker-js/faker'
 import { generateAllPossibleDates } from './libs/generateAllPossibleDates'
 import { setCorrectApplicationType } from './libs/setCorrectApplicationType'
 import { generateReference } from './libs/generateReference'
@@ -24,16 +17,19 @@ import { getApplicationStatesByStage } from './libs/getApplicationStatesByStage'
 import { getApplicationStagesByType } from './libs/getApplicationStagesByType'
 import { getPrimaryApplicationTypeKey } from './libs/getPrimaryApplicationTypeKey'
 import { validApplicationTypes } from './libs/validApplicationTypes'
+import { generateApplicationSubmission } from './generateApplicationSubmission'
+import { generatePublicCommentsRedacted } from './generators/PublicComments'
+import { generatePostSubmissionFiles } from './generators/PostSubmissionFile'
+import { generateSpecialistCommentsRedacted } from './generators/SpecialistComments'
 
 export const applicationTypesWithNoConsultation = ['ldc']
 const applicationTypesWithCommentsAcceptedUntilDecision = ['ldc']
 
-export const generateDprApplication = ({
-  applicationType,
-  applicationStage,
-  applicationStatus,
-  customStatus
-}: {
+export type SupportedPrimaryApplicationTypes = 'pp' | 'pa' | 'ldc'
+export const supportedPrimaryApplicationTypes: SupportedPrimaryApplicationTypes[] =
+  ['pp', 'pa', 'ldc']
+
+export interface GeneratePostSubmissionPublishedApplicationProps {
   applicationType?: ApplicationType
   applicationStage?: ProcessStage
   applicationStatus?: ApplicationStatus
@@ -52,7 +48,14 @@ export const generateDprApplication = ({
     | 'appealDeterminedDismissed'
     | 'appealDeterminedSplitDecision'
     | 'withdrawn'
-} = {}): PostSubmissionPublishedApplication => {
+}
+
+export const generatePostSubmissionPublishedApplication = ({
+  applicationType,
+  applicationStage,
+  applicationStatus,
+  customStatus
+}: GeneratePostSubmissionPublishedApplicationProps = {}): PostSubmissionPublishedApplication => {
   switch (customStatus) {
     case 'consultationInProgress':
       applicationStage = 'consultation'
@@ -147,33 +150,7 @@ export const generateDprApplication = ({
     }
   }
 
-  // determine the submission part - copied from ODP examples
-  let submission
-  switch (primaryApplicationType) {
-    case 'pp':
-      submission =
-        planningPermissionFullHouseholderPrototype as unknown as PrototypeTypes.PlanningPermissionFullHouseholder
-      break
-    case 'pa':
-      submission =
-        priorApprovalLargerExtensionPrototype as unknown as PrototypeTypes.PriorApprovalPart1ClassA
-      break
-    case 'ldc':
-      submission =
-        lawfulDevelopmentCertificateProposedPrototype as unknown as PrototypeTypes.LawfulDevelopmentCertificateProposed
-      break
-    default:
-      submission =
-        planningPermissionFullHouseholderPrototype as unknown as PrototypeTypes.PlanningPermissionFullHouseholder
-      break
-  }
-
   const metadata = generateMetadata(dates)
-
-  submission.metadata = {
-    ...submission.metadata,
-    submittedAt: dates.submission.submittedAt.toISOString()
-  }
 
   // there is no such thing as a 'valid' stage in this schema
   if (applicationStage === 'validation' && applicationStatus !== 'returned') {
@@ -246,11 +223,16 @@ export const generateDprApplication = ({
         name: 'Casey Officer'
       }
     },
-    submission,
+    comments: {
+      public: generatePublicCommentsRedacted(dates),
+      specialist: generateSpecialistCommentsRedacted(dates)
+    },
+    files: generatePostSubmissionFiles('application', dates),
+    submission: generateApplicationSubmission(primaryApplicationType, dates),
     metadata: metadata
   }
 
-  const data = setCorrectApplicationType(
+  let data = setCorrectApplicationType(
     applicationType,
     applicationData as PostSubmissionPublishedTypes.PostSubmissionPublishedApplication
   )
@@ -275,10 +257,14 @@ export const generateDprApplication = ({
 
   // manage the data added at each stage and the states within them
   if (applicationStage === 'submission') {
+    const { comments, ...theRest } = data
+    data = theRest
     const { validation, consultation, assessment, appeal, ...rest } = data.data
     data.data = rest
   }
   if (applicationStage === 'validation') {
+    const { comments, ...theRest } = data
+    data = theRest
     const { consultation, assessment, appeal, ...rest } = data.data
     data.data = rest
 
@@ -308,8 +294,10 @@ export const generateDprApplication = ({
     }
   }
 
-  // make sure theres no consultation section for those that don't have it
+  // make sure theres no consultation or comments section for those that don't have it
   if (applicationTypesWithNoConsultation.includes(primaryApplicationType)) {
+    const { comments, ...theRest } = data
+    data = theRest
     const { consultation, ...rest } = data.data
     data.data = rest
   }

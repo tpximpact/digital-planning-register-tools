@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'bun:test'
 import { generateExampleApplications } from './generateExampleApplications'
-import { generateDprApplication } from './generateDprApplication'
+import { generatePostSubmissionPublishedApplication } from './generatePostSubmissionPublishedApplication'
 import type {
   PostSubmissionAssessment,
   PriorApprovalAssessment
-} from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/Assessment.js'
+} from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/Assessment.d.ts'
 
 /**
  * Check the consultation dates are valid Dates
@@ -40,7 +40,7 @@ export const checkConsultationInProgress = (
   // // expect(now >= start && now <= end).toBe(true);
 }
 
-describe('generateDprApplication', () => {
+describe('generatePostSubmissionPublishedApplication', () => {
   // 01-submission the application is submitted via planX into BOPS
   it('Generates the correct structure for a post-submission application just after submission', () => {
     const { submission } = generateExampleApplications()
@@ -97,12 +97,18 @@ describe('generateDprApplication', () => {
     expect(
       planningPermissionFullHouseholderSubmission.data.appeal
     ).toBeUndefined()
+
+    // comment check
+    expect(planningPermissionFullHouseholderSubmission.comments).toBeUndefined()
+
+    // files check
+    expect(planningPermissionFullHouseholderSubmission.files).toBeDefined()
   })
 
   // 02 The application is validated in BOPS - it passes - so it goes straight to consultation/assessment depending on application type
   it('Generates an error if we request a valid application still in the validation stage', () => {
     expect(() => {
-      generateDprApplication({
+      generatePostSubmissionPublishedApplication({
         applicationType: 'pp.full.householder',
         applicationStage: 'validation',
         applicationStatus: 'undetermined'
@@ -178,13 +184,21 @@ describe('generateDprApplication', () => {
     expect(
       planningPermissionFullHouseholderValidationFail.data.appeal
     ).toBeUndefined()
+
+    // comment check
+    expect(
+      planningPermissionFullHouseholderValidationFail.comments
+    ).toBeUndefined()
+
+    // files check
+    expect(planningPermissionFullHouseholderValidationFail.files).toBeDefined()
   })
 
   // 03-consultation Applications move immediately into consultation from validation except for those that don't have consultation stage (ldc) which go to assessment
   it('Generates the correct structure for a valid post-submission that is in consultation', () => {
     // throws an error for the wrong application type
     expect(() => {
-      generateDprApplication({
+      generatePostSubmissionPublishedApplication({
         applicationType: 'ldc.proposed',
         customStatus: 'consultationInProgress'
       })
@@ -263,6 +277,14 @@ describe('generateDprApplication', () => {
     expect(
       planningPermissionFullHouseholderConsultation.data.appeal
     ).toBeUndefined()
+
+    // comment check
+    expect(
+      planningPermissionFullHouseholderConsultation.comments
+    ).not.toBeUndefined()
+
+    // files check
+    expect(planningPermissionFullHouseholderConsultation.files).toBeDefined()
   })
 
   // 04-assessment-00-assessment-in-progress Applications now moves to assessment and comments are no longer allowed unless the council allows it until a decision is made (ldc)
@@ -356,6 +378,16 @@ describe('generateDprApplication', () => {
     expect(
       planningPermissionFullHouseholderAssessmentInProgress.data.appeal
     ).toBeUndefined()
+
+    // comment check
+    expect(
+      planningPermissionFullHouseholderAssessmentInProgress.comments
+    ).not.toBeUndefined()
+
+    // files check
+    expect(
+      planningPermissionFullHouseholderAssessmentInProgress.files
+    ).toBeDefined()
 
     const {
       assessmentInProgress:
@@ -492,6 +524,16 @@ describe('generateDprApplication', () => {
       planningPermissionFullHouseholderAssessmentCouncilDetermined.data.appeal
     ).toBeUndefined()
 
+    // comment check
+    expect(
+      planningPermissionFullHouseholderAssessmentCouncilDetermined.comments
+    ).not.toBeUndefined()
+
+    // files check
+    expect(
+      planningPermissionFullHouseholderAssessmentCouncilDetermined.files
+    ).toBeDefined()
+
     const {
       planningOfficerDetermined:
         PriorApprovalLargerExtensionAssessmentCouncilDetermined
@@ -619,6 +661,16 @@ describe('generateDprApplication', () => {
     expect(
       planningPermissionFullHouseholderAssessmentInCommittee.data.appeal
     ).toBeUndefined()
+
+    // comment check
+    expect(
+      planningPermissionFullHouseholderAssessmentInCommittee.comments
+    ).not.toBeUndefined()
+
+    // files check
+    expect(
+      planningPermissionFullHouseholderAssessmentInCommittee.files
+    ).toBeDefined()
   })
 
   // 04-assessment-03-committee-determined The committee then makes a decision
@@ -734,6 +786,16 @@ describe('generateDprApplication', () => {
     expect(
       planningPermissionFullHouseholderAssessmentCommitteeDetermined.data.appeal
     ).toBeUndefined()
+
+    // comment check
+    expect(
+      planningPermissionFullHouseholderAssessmentCommitteeDetermined.comments
+    ).not.toBeUndefined()
+
+    // files check
+    expect(
+      planningPermissionFullHouseholderAssessmentCommitteeDetermined.files
+    ).toBeDefined()
   })
 
   // 05-appeal-00-appeal-lodged Things can end before this but within 6 months of the decision a decision can be appealed
@@ -851,6 +913,14 @@ describe('generateDprApplication', () => {
     expect(
       planningPermissionFullHouseholderAppealLodged.data.appeal?.decision
     ).not.toBeDefined()
+
+    // comment check
+    expect(
+      planningPermissionFullHouseholderAppealLodged.comments
+    ).not.toBeUndefined()
+
+    // files check
+    expect(planningPermissionFullHouseholderAppealLodged.files).toBeDefined()
   })
 
   // 05-appeal-01-appeal-validated After the appeal starts its validated
@@ -977,6 +1047,14 @@ describe('generateDprApplication', () => {
     expect(
       planningPermissionFullHouseholderAppealValidated.data.appeal?.decision
     ).not.toBeDefined()
+
+    // comment check
+    expect(
+      planningPermissionFullHouseholderAppealValidated.comments
+    ).not.toBeUndefined()
+
+    // files check
+    expect(planningPermissionFullHouseholderAppealValidated.files).toBeDefined()
   })
 
   // 05-appeal-02-appeal-started Then it starts
@@ -1097,6 +1175,14 @@ describe('generateDprApplication', () => {
     expect(
       planningPermissionFullHouseholderAppealStarted.data.appeal?.decision
     ).not.toBeDefined()
+
+    // comment check
+    expect(
+      planningPermissionFullHouseholderAppealStarted.comments
+    ).not.toBeUndefined()
+
+    // files check
+    expect(planningPermissionFullHouseholderAppealStarted.files).toBeDefined()
   })
 
   // 05-appeal-03-appeal-determined and a decision is made by the appeal
@@ -1229,6 +1315,16 @@ describe('generateDprApplication', () => {
     ).toBeDefined()
     expect(
       planningPermissionFullHouseholderAppealDetermined.data.appeal?.decision
+    ).toBeDefined()
+
+    // comment check
+    expect(
+      planningPermissionFullHouseholderAppealDetermined.comments
+    ).not.toBeUndefined()
+
+    // files check
+    expect(
+      planningPermissionFullHouseholderAppealDetermined.files
     ).toBeDefined()
 
     // 05-appeal-03-appeal-determined--withdrawn
@@ -1391,11 +1487,19 @@ describe('generateDprApplication', () => {
     expect(
       planningPermissionFullHouseholderWithdrawn.data.appeal
     ).toBeUndefined()
+
+    // comment check
+    expect(
+      planningPermissionFullHouseholderWithdrawn.comments
+    ).not.toBeUndefined()
+
+    // files check
+    expect(planningPermissionFullHouseholderWithdrawn.files).toBeDefined()
   })
 
   it("Certain application types don't have consultation phases", () => {
     const lawfulDevelopmentCertificateProposedAssessmentCouncilDetermined =
-      generateDprApplication({
+      generatePostSubmissionPublishedApplication({
         applicationType: 'ldc.proposed',
         customStatus: 'assessmentCouncilDetermined'
       })
@@ -1407,7 +1511,7 @@ describe('generateDprApplication', () => {
 
   it('Certain local authorities allow comments until the decision is made', () => {
     const planningPermissionFullHouseholderAssessmentInProgress =
-      generateDprApplication({
+      generatePostSubmissionPublishedApplication({
         applicationType: 'pp.full.householder',
         customStatus: 'assessmentInProgress'
       })
@@ -1417,7 +1521,7 @@ describe('generateDprApplication', () => {
     ).toBe(false)
 
     const lawfulDevelopmentCertificateProposedAssessmentInProgress =
-      generateDprApplication({
+      generatePostSubmissionPublishedApplication({
         applicationType: 'ldc.proposed',
         customStatus: 'assessmentInProgress'
       })
