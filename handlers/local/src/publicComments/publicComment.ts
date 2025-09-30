@@ -1,24 +1,34 @@
 import { getValueByPath } from '../utils/get-value-by-path'
-import { PostSubmissionApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/index.ts'
-import { PostSubmissionPublishedApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
 import { getApplication, getPublishedApplication } from '../applications'
-import type { PostSubmissionFile } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/File.js'
+import type { PostSubmissionApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/index.js'
+import type { PostSubmissionPublishedApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.js'
+import type {
+  PublicComment,
+  PublicCommentRedacted
+} from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/PublicComment.js'
 
 const findApplicationPublicComment = <
   T extends PostSubmissionApplication | PostSubmissionPublishedApplication
 >(
-  documentId: number,
+  publicCommentId: number,
   application: T
-): PostSubmissionFile => {
-  const allDocuments = application?.files ?? []
-  const applicationDocument = allDocuments.find(
-    (app) => getValueByPath(app, 'id') === documentId
-  )
-  console.log(applicationDocument)
-  if (!applicationDocument) {
-    throw new Error('Application document not found')
+): PublicComment | PublicCommentRedacted => {
+  const allPublicComments = application?.comments?.public ?? []
+  let applicationPublicComment:
+    | PublicComment
+    | PublicCommentRedacted
+    | undefined
+
+  if (Array.isArray(allPublicComments)) {
+    applicationPublicComment = allPublicComments.find(
+      (app) => getValueByPath(app, 'id') === publicCommentId
+    )
   }
-  return applicationDocument
+
+  if (!applicationPublicComment) {
+    throw new Error('Application public comment not found')
+  }
+  return applicationPublicComment
 }
 
 export const getApplicationPublicComment = (

@@ -2,10 +2,10 @@ import type {
   PostSubmissionApplicationsQueryParams,
   PostSubmissionPublishedApplicationsQueryParams
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
+import type { PostSubmissionApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/index.js'
+import type { PostSubmissionPublishedApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.js'
 import { fetchAllData } from '../utils/fetch-all-data'
 import { paginateArray } from '@dpr/libs'
-import { PostSubmissionApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/index.ts'
-import { PostSubmissionPublishedApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
 import { filterByPaths } from '../utils/filter-by-paths'
 import { sortBy } from '../utils/sort-by'
 
@@ -92,6 +92,8 @@ export const getAllPublishedApplications = (
   >(query, () =>
     fetchAllData<PostSubmissionPublishedApplication>(
       true,
-      (file) => !file.includes('01-submission')
+      (file) =>
+        !file.includes('01-submission') &&
+        !file.includes('02-validation-01-invalid')
     )
   )

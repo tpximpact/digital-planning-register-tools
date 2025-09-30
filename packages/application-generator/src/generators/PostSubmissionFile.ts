@@ -1,5 +1,8 @@
 import { fakerEN_GB as faker } from '@faker-js/faker'
-import type { PostSubmissionFile } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/File.js'
+import type {
+  PostSubmissionFile,
+  PostSubmissionFileRedacted
+} from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/File.js'
 import type { PossibleDates } from '../libs/generateAllPossibleDates'
 import type { PostSubmissionFileAssociation } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/enums/FileAssociation.js'
 import type { PrototypeFileType } from 'digital-planning-data-schemas/types/schemas/prototypeApplication/enums/FileType.js'
@@ -54,7 +57,7 @@ export const generatePostSubmissionFiles = (
   association?: PostSubmissionFileAssociation,
   dates?: PossibleDates
 ): PostSubmissionFile[] => {
-  const numFiles = faker.number.int({ min: 1, max: 5 })
+  const numFiles = faker.number.int({ min: 1, max: 100 })
   const files: PostSubmissionFile[] = []
 
   for (let i = 0; i < numFiles; i++) {
@@ -66,6 +69,35 @@ export const generatePostSubmissionFiles = (
   }
 
   return files
+}
+
+export const generatePostSubmissionFilesRedacted = (
+  association?: PostSubmissionFileAssociation,
+  dates?: PossibleDates
+): PostSubmissionFileRedacted[] => {
+  const numFiles = faker.number.int({ min: 1, max: 100 })
+  const files: PostSubmissionFileRedacted[] = []
+
+  for (let i = 0; i < numFiles; i++) {
+    const file: PostSubmissionFileRedacted = generatePostSubmissionFileRedacted(
+      association,
+      dates
+    )
+    files.push(file)
+  }
+
+  return files
+}
+
+export const generatePostSubmissionFileRedacted = (
+  association?: PostSubmissionFileAssociation,
+  dates?: PossibleDates
+): PostSubmissionFileRedacted => {
+  const { url, ...file } = generatePostSubmissionFile(association, dates)
+  return {
+    ...file,
+    redactedUrl: url ?? faker.internet.url()
+  }
 }
 
 export const generatePostSubmissionFile = (
@@ -197,6 +229,7 @@ export const generatePostSubmissionFile = (
     ),
     thumbnailUrl: faker.datatype.boolean() ? faker.image.url() : undefined,
     url: faker.internet.url(),
+    redactedUrl: faker.datatype.boolean() ? faker.internet.url() : undefined,
     metadata: {
       size: {
         bytes: Number(faker.string.numeric(8))

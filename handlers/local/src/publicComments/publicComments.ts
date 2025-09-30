@@ -2,15 +2,15 @@ import type {
   PostSubmissionPublicCommentsQueryParams,
   PostSubmissionPublishedPublicCommentsQueryParams
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import { paginateArray } from '@dpr/libs'
-import { filterByPaths } from '../utils/filter-by-paths'
-import { sortBy } from '../utils/sort-by'
-import { getApplication, getPublishedApplication } from '../applications'
-import type { PostSubmissionFile } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/File.js'
-import { filterByDateRange } from '../utils/filter-by-date-range'
-import { getByPaths } from '../utils/get-by-paths'
 import type { PostSubmissionApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/index.js'
 import type { PostSubmissionPublishedApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.js'
+import type {
+  PublicComment,
+  PublicCommentRedacted
+} from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/PublicComment.js'
+import { paginateArray } from '@dpr/libs'
+import { filterByPaths } from '../utils/filter-by-paths'
+import { getApplication, getPublishedApplication } from '../applications'
 
 interface FilterConfig {
   contentsPaths: string[]
@@ -20,6 +20,7 @@ interface FilterConfig {
   sortPaths: Record<string, string>
 }
 
+// @TODO
 const defaultFilterConfig: FilterConfig = {
   contentsPaths: ['comment', 'commentRedacted'],
   referencePaths: ['data.application.reference'],
@@ -44,7 +45,7 @@ export const findApplicationPublicComments = <
   const summary = application?.comments?.public?.summary
   const allPublicComments = application?.comments?.public?.comments ?? []
 
-  const filtered = filterByPaths(
+  const filtered = filterByPaths<PublicComment | PublicCommentRedacted>(
     allPublicComments,
     query.query,
     filterConfig.contentsPaths
@@ -62,20 +63,10 @@ export const findApplicationPublicComments = <
   //   query.orderBy,
   //   filterConfig.sortPaths
   // )
-  const { data, pagination } = paginateArray<PostSubmissionFile>(
-    filtered,
-    query.page,
-    query.resultsPerPage,
-    allPublicComments.length
-  )
+  const { data, pagination } = paginateArray<
+    PublicComment | PublicCommentRedacted
+  >(filtered, query.page, query.resultsPerPage, allPublicComments.length)
 
-  console.log({
-    data: {
-      summary,
-      data
-    },
-    pagination
-  })
   return {
     data: {
       summary,

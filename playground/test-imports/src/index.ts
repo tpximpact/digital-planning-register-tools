@@ -1,4 +1,4 @@
-import * as test from '@dpr/api'
+import * as test from '@dpr/application-generator'
 
 console.log(test)
 

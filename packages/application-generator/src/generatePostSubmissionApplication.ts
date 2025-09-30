@@ -8,6 +8,7 @@ import { generatePublicComments } from './generators/PublicComments'
 import { generateSpecialistComments } from './generators/SpecialistComments'
 import dayjs from 'dayjs'
 import type { PossibleDates } from './libs/generateAllPossibleDates'
+import { generatePostSubmissionFiles } from './generators/PostSubmissionFile'
 
 export const generatePostSubmissionApplication = ({
   applicationType,
@@ -27,15 +28,21 @@ export const generatePostSubmissionApplication = ({
     throw new Error('Failed to generate published application')
   }
 
-  const { comments, ...dataObj } = data
+  const { comments, files, ...dataObj } = data
 
   // remove publishedAt date from application
   const { publishedAt, ...application } = dataObj.data.application
 
   const dates = {
+    submission: {
+      submittedAt: dayjs(dataObj.data.submission?.submittedAt)
+    },
     consultation: {
       startAt: dayjs(dataObj.data.consultation?.startDate),
       endAt: dayjs(dataObj.data.consultation?.endDate)
+    },
+    appeal: {
+      decidedAt: dayjs(dataObj.data.appeal?.decisionDate)
     }
   }
 
@@ -49,6 +56,13 @@ export const generatePostSubmissionApplication = ({
         }
       : undefined
 
+  const newFiles: PostSubmissionApplication['files'] | undefined = files
+    ? generatePostSubmissionFiles(
+        'application',
+        dates as unknown as PossibleDates
+      )
+    : undefined
+
   // remove publishedAt from data.application.publishedAt
   const applicationData: PostSubmissionApplication = {
     ...dataObj,
@@ -56,7 +70,8 @@ export const generatePostSubmissionApplication = ({
       ...dataObj.data,
       application
     },
-    ...(newComments && { comments: newComments })
+    ...(newComments && { comments: newComments }),
+    ...(files && { files: newFiles })
   }
 
   return applicationData
