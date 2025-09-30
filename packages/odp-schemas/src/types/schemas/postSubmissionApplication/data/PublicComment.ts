@@ -1,20 +1,9 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
+import { PublicCommentTopic } from '../enums/PublicCommentTopic'
 import { PublicCommentSentiment } from '../enums/CommentSentiment'
 import { CommentMetaData } from './CommentMetaData'
-import { PublicCommentTopic } from '../enums/PublicCommentTopic'
 import { Address } from '../../../shared/Addresses'
-
-export type PublicCommentAuthor = Static<typeof PublicCommentAuthor>
-export const PublicCommentAuthor = Type.Object(
-  {
-    name: Type.Object({
-      singleLine: Type.String()
-    }),
-    address: Address
-  },
-  { id: '#PublicCommentAuthor', description: 'The author of a public comment' }
-)
 
 export type TopicAndComments = Static<typeof TopicAndComments>
 export const TopicAndComments = Type.Object(
@@ -34,10 +23,35 @@ const PublicCommentBase = Type.Object(
   {
     id: Type.String(),
     sentiment: PublicCommentSentiment,
-    author: Type.Optional(PublicCommentAuthor),
     metadata: CommentMetaData
   },
   { internal: 'All the required fields for a public or private public comment' }
+)
+
+export type PublicCommentAuthor = Static<typeof PublicCommentAuthor>
+export const PublicCommentAuthor = Type.Object(
+  {
+    name: Type.Object({
+      singleLine: Type.String()
+    }),
+    address: Address
+  },
+  { id: '#PublicCommentAuthor', description: 'The author of a public comment' }
+)
+
+export type PublicCommentAuthorRedacted = Static<
+  typeof PublicCommentAuthorRedacted
+>
+export const PublicCommentAuthorRedacted = Type.Object(
+  {
+    name: Type.Object({
+      singleLine: Type.String()
+    })
+  },
+  {
+    id: '#PublicCommentAuthorRedacted',
+    description: 'The author of a public comment'
+  }
 )
 
 export type PublicComment = Static<typeof PublicComment>
@@ -45,6 +59,7 @@ export const PublicComment = Type.Composite(
   [
     PublicCommentBase,
     Type.Object({
+      author: PublicCommentAuthor,
       comment: Type.Union([Type.Array(TopicAndComments), Type.String()]),
       commentRedacted: Type.Optional(
         Type.Union([Type.Array(TopicAndComments), Type.String()])
@@ -63,6 +78,7 @@ export const PublicCommentRedacted = Type.Composite(
   [
     PublicCommentBase,
     Type.Object({
+      author: PublicCommentAuthorRedacted,
       commentRedacted: Type.Union([
         Type.Array(TopicAndComments),
         Type.String()

@@ -40,7 +40,7 @@ import {
 import { PostSubmissionApplication } from '..'
 import { ApiResponse } from './ApiResponse'
 import { PostSubmissionPublishedApplication } from '../../postSubmissionPublishedApplication'
-import { PostSubmissionFile } from '../data/PostSubmissionFile'
+import { PostSubmissionFile } from '../data/File'
 import {
   PublicComments,
   PublicCommentsRedacted,

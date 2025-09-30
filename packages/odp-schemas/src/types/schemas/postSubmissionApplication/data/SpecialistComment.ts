@@ -1,25 +1,8 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 import { CommentMetaData } from './CommentMetaData'
-import { PostSubmissionFile } from './PostSubmissionFile'
+import { PostSubmissionFile } from './File'
 import { SpecialistCommentSentiment } from '../enums/CommentSentiment'
-import '../../../shared/formats'
-
-type SpecialistBase = Static<typeof SpecialistBase>
-const SpecialistBase = Type.Object(
-  {
-    id: Type.String(),
-    organisationSpecialism: Type.Optional(Type.String()),
-    jobTitle: Type.Optional(Type.String()),
-    reason: Type.Optional(
-      Type.Union([Type.Literal('constraint'), Type.String()])
-    ),
-    // @TODO
-    // constraints: Type.Optional(Type.Array(PlanningConstraint)),
-    firstConsultedAt: Type.String({ format: 'date-time' })
-  },
-  { internal: 'All the required fields for a public or private specialist' }
-)
 
 type SpecialistCommentBase = Static<typeof SpecialistCommentBase>
 const SpecialistCommentBase = Type.Object(
@@ -66,12 +49,27 @@ export const SpecialistCommentRedacted = Type.Composite(
   }
 )
 
+type SpecialistBase = Static<typeof SpecialistBase>
+const SpecialistBase = Type.Object(
+  {
+    id: Type.String(),
+    organisationSpecialism: Type.Optional(Type.String()),
+    jobTitle: Type.Optional(Type.String()),
+    reason: Type.Optional(
+      Type.Union([Type.Literal('constraint'), Type.String()])
+    ),
+    constraints: Type.Optional(Type.Any()), // @TODO
+    firstConsultedAt: Type.Optional(Type.String({ format: 'date-time' }))
+  },
+  { internal: 'All the required fields for a public or private specialist' }
+)
+
 export type Specialist = Static<typeof Specialist>
 export const Specialist = Type.Composite(
   [
     SpecialistBase,
     Type.Object({
-      comments: Type.Array(SpecialistComment)
+      comments: Type.Optional(Type.Array(SpecialistComment))
     })
   ],
   {

@@ -6,7 +6,6 @@ import {
 } from './CommentSummary'
 import { PublicComment, PublicCommentRedacted } from './PublicComment'
 import { Specialist, SpecialistRedacted } from './SpecialistComment'
-import '../../../shared/formats'
 
 export type PublicComments = Static<typeof PublicComments>
 export const PublicComments = Type.Object(

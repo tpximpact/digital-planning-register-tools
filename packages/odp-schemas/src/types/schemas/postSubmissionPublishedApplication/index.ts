@@ -5,6 +5,7 @@ import {
   SpecialistCommentsRedacted
 } from '../postSubmissionApplication/data/Comment'
 import { PostSubmissionApplicationSpecificationGenerator } from '../postSubmissionApplication'
+import { PostSubmissionFileRedacted } from '../postSubmissionApplication/data/File'
 
 export const PostSubmissionPublishedApplicationSpecificationGenerator = <
   T extends TSchema
@@ -14,7 +15,8 @@ export const PostSubmissionPublishedApplicationSpecificationGenerator = <
   Type.Composite([
     Type.Omit(
       PostSubmissionApplicationSpecificationGenerator(T),
-      Type.Literal('comments')
+      Type.Literal('comments'),
+      Type.Literal('files')
     ),
     Type.Object({
       comments: Type.Optional(
@@ -22,7 +24,8 @@ export const PostSubmissionPublishedApplicationSpecificationGenerator = <
           public: Type.Optional(PublicCommentsRedacted),
           specialist: Type.Optional(SpecialistCommentsRedacted)
         })
-      )
+      ),
+      files: Type.Optional(Type.Array(PostSubmissionFileRedacted))
     })
   ])
 
