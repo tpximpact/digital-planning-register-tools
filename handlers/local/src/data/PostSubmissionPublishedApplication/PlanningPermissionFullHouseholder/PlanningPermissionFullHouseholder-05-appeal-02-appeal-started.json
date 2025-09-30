@@ -1,0 +1,2320 @@
+{
+  "applicationType": "pp.full.householder",
+  "data": {
+    "application": {
+      "reference": "45-49908-KFKM",
+      "stage": "appeal",
+      "status": "determined",
+      "publishedAt": "2019-05-13T07:49:49.840Z"
+    },
+    "localPlanningAuthority": {
+      "publicCommentsAcceptedUntilDecision": false
+    },
+    "submission": {
+      "submittedAt": "2019-05-12T07:49:49.440Z"
+    },
+    "validation": {
+      "receivedAt": "2019-05-12T07:49:49.640Z",
+      "validatedAt": "2019-05-13T07:49:49.640Z",
+      "isValid": true
+    },
+    "consultation": {
+      "startDate": "2019-05-13",
+      "endDate": "2019-06-03",
+      "siteNotice": true
+    },
+    "assessment": {
+      "expiryDate": "2019-07-03",
+      "planningOfficerDecision": "refused",
+      "planningOfficerDecisionDate": "2019-06-13",
+      "decisionNotice": {
+        "url": "https://planningregister.org"
+      }
+    },
+    "appeal": {
+      "lodgedDate": "2019-07-24",
+      "reason": "We don't believe the council took into consideration the environmental impact alleviation approach during their assessment.",
+      "validatedDate": "2019-07-25",
+      "startedDate": "2019-07-25"
+    },
+    "caseOfficer": {
+      "name": "Casey Officer"
+    }
+  },
+  "comments": {
+    "public": {
+      "summary": {
+        "totalComments": 14,
+        "sentiment": {
+          "supportive": 5,
+          "objection": 5,
+          "neutral": 4
+        }
+      },
+      "comments": [
+        {
+          "id": "c5e5de37-25ac-4f4a-b326-da752bc058ab",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Dr. Dallas Kris"
+            },
+            "address": {
+              "line1": "63 Oran Side",
+              "line2": "Boyle-Wuckert Side",
+              "town": "Kub-le-Konopelski",
+              "county": "Warwickshire",
+              "postcode": "DF75 8CB",
+              "country": "Croatia"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Demulceo curo deduco autus abundans vestigium tempus vobis spero. Copia charisma attero somnus commemoro audax. Deputo ciminatio ratione vulgus.\nAmitto sollers volaticus adfero aranea adstringo caput quis perferendis. Spes addo cogo tolero unus apostolus. Abbas abundans assumenda crustulum aqua speciosus solutio."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Acerbitas cotidie correptius statim cras aduro. Cetera viridis asper quam. Carbo veniam civis tollo quibusdam curia usque cupio catena.\nSubito carbo cursim bellum. Ascit abeo dolores assentator excepturi quisquam. Dolorum id aqua suadeo tenax veritatis qui aliqua."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Amor uxor surgo. Tracto quas corrupti eligendi porro. Adulescens deleniti pectus alveus subseco cunabula exercitationem clibanus taedium dolorem.\nAbundans error adhaero cibus. Delectus undique vitiosus tametsi aduro amplitudo chirographum adversus. Nesciunt aliquam campana."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Vehemens bellicus apostolus amet ascit vulariter. Utpote catena suus crinis aliquam tergum arx magnam undique. Vesper subito adeptio ustulo suppellex facilis appositus debitis laudantium.\nDegusto tollo cauda vero. Collum auctus degenero sui usitas volutabrum pariatur amissio concido. Fugit quos tabernus reprehenderit coruscus architecto acies."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2019-05-19T15:03:51.234Z",
+            "validatedAt": "2019-06-01T14:19:35.578Z",
+            "publishedAt": "2019-06-03T01:40:00.112Z"
+          }
+        },
+        {
+          "id": "2775df45-ef4b-44a6-8a6a-54b1ac559af7",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Kenneth Shields"
+            },
+            "address": {
+              "line1": "797 Victoria Road",
+              "line2": "Jacobs Orchard",
+              "town": "Old Brekkeford",
+              "county": "Berkshire",
+              "postcode": "IT0 6GN",
+              "country": "Suriname"
+            }
+          },
+          "commentRedacted": "Videlicet corrupti vel tandem non creber debitis vulticulus versus. Sopor utilis porro verbera. Somniculosus stipes sum arma absum aurum.",
+          "metadata": {
+            "submittedAt": "2019-06-03T03:32:46.698Z",
+            "validatedAt": "2019-06-03T07:35:12.935Z",
+            "publishedAt": "2019-06-03T07:40:55.259Z"
+          }
+        },
+        {
+          "id": "a86368f0-508b-4de8-83dc-ce14a2d80e76",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Patti Sawayn"
+            },
+            "address": {
+              "line1": "10 Sven Street",
+              "line2": "Belmont Road",
+              "town": "Dare-upon-Ledner",
+              "county": "Shropshire",
+              "postcode": "XV4 4RH",
+              "country": "Honduras"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Demoror sursum tenax comparo veniam quod aequus. Vix denuncio sponte facere curiositas tremo. Vulticulus tactus culpo thesaurus volubilis absque tunc currus vinco vulnero."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Considero angulus civitas argumentum cotidie. Eos saepe amicitia praesentium speciosus suffragium. Caterva cras coepi tametsi in adipisci cupiditate.\nArs delectatio autem nam. Cerno thesis corrupti magnam alii totidem sortitus crustulum deprimo. Cribro venio strenuus accommodo laboriosam adnuo templum."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Eum balbus aeternus delinquo creo sordeo ascisco. Bene attonbitus contabesco subseco. Vesper venio caveo vapulus.\nVarietas tondeo est debeo paulatim urbs succurro adulescens. Carcer ceno doloremque. Totam adversus defero."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Suffoco aspernatur caste doloremque casso suadeo et tamdiu viscus voluptatem. Verumtamen damno ulterius contigo terra. Ea thymum labore trans enim conicio atrocitas."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Valetudo temeritas cometes molestiae debeo aeneus iusto deripio cunctatio agnosco. Cubitum corrigo arma atque tutis usitas ventito fuga. Crepusculum corporis aveho surculus copia admoveo alius modi audeo defero.\nSoleo virgo attollo utor. Aurum textilis tabgo. Paens pecto testimonium dolorum appositus sono comprehendo talus."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Teres crustulum agnosco. Spectaculum aegrus tametsi cunabula vilis. Ademptio coepi aestus caput temporibus vomica videlicet."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2019-05-24T19:42:38.745Z",
+            "validatedAt": "2019-06-02T06:23:53.215Z",
+            "publishedAt": "2019-06-02T16:00:26.330Z"
+          }
+        },
+        {
+          "id": "37534ac2-5bdb-486a-b84b-761909f88509",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Kurt Cormier"
+            },
+            "address": {
+              "line1": "91 Sherwood Side",
+              "line2": "Brook Street",
+              "town": "Upper Stammbury",
+              "county": "North Yorkshire",
+              "postcode": "EV9 0GN",
+              "country": "Jordan"
+            }
+          },
+          "commentRedacted": "Illo ab tantum. Adulescens ademptio canto. Cohors valeo vulgivagus.\nAbundans tabesco culpa sortitus quisquam pecus theatrum suscipio. Utilis crepusculum conforto cunctatio consectetur tot adicio cogito. Decipio auctus conqueror conitor conor textilis.\nVulnero pax territo tamisium depraedor ago tot debilito consequatur appello. Error voluptatibus absconditus artificiose clibanus dens adfectus surculus. Depraedor balbus cultellus verus totidem vulpes acer verbum coepi textus.",
+          "metadata": {
+            "submittedAt": "2019-05-17T02:14:37.077Z",
+            "validatedAt": "2019-05-19T17:25:56.440Z",
+            "publishedAt": "2019-05-28T13:17:35.818Z"
+          }
+        },
+        {
+          "id": "e0f1418e-0292-4fd2-9bbf-88583824d525",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Camille Treutel"
+            },
+            "address": {
+              "line1": "9 Moss Lane",
+              "line2": "Willow Grove",
+              "town": "Conroy-le-Reynolds",
+              "county": "Worcestershire",
+              "postcode": "YN26 7BZ",
+              "country": "Ukraine"
+            }
+          },
+          "commentRedacted": "Repudiandae catena officia itaque molestiae cuius adulatio ascisco mollitia. Cernuus timor caveo. Torqueo crastinus quia voluptates vitae candidus tremo patrocinor.\nSolio pecco suffragium. Id caveo atrox aer tenetur adstringo hic strenuus cerno. Ventito ducimus utrum videlicet adeptio.\nPecto vinum capitulus aro virgo tantum desolo. Tabesco absum truculenter cruentus. Tenetur demum deprecator collum.\nDefetiscor thermae conicio pauper depraedor curtus. Pauper vulariter custodia utilis inventore. Soleo degusto cohaero vicissitudo perferendis valeo vinitor.\nNostrum trado videlicet quibusdam a suus canto sursum illo. Conqueror conscendo tergo tabernus est. Vester adnuo creator unus.",
+          "metadata": {
+            "submittedAt": "2019-05-27T20:29:01.984Z",
+            "validatedAt": "2019-05-30T01:24:32.544Z",
+            "publishedAt": "2019-05-31T11:42:28.129Z"
+          }
+        },
+        {
+          "id": "14eaefac-3066-43c3-95f3-301261c4e225",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Maureen Rolfson"
+            },
+            "address": {
+              "line1": "64 Mills Gate",
+              "line2": "Church Avenue",
+              "town": "Long Kassulke",
+              "county": "Humberside",
+              "postcode": "DU91 5ZF",
+              "country": "Argentina"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Aduro acervus adfectus voluptates curto cattus aggredior illo soluta. Uredo est demonstro desparatus sit cado cinis crapula angelus textus. Antiquus cernuus stultus spoliatio illum adfero crustulum itaque cogito amor."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2019-05-21T03:44:31.858Z",
+            "validatedAt": "2019-05-25T09:43:53.011Z",
+            "publishedAt": "2019-06-03T02:40:41.889Z"
+          }
+        },
+        {
+          "id": "80596861-730d-4f2e-bd0c-9ddd10b63905",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Samuel Streich"
+            },
+            "address": {
+              "line1": "3 Kirsten Green",
+              "line2": "The Mews",
+              "town": "Long Hammesing",
+              "county": "Cornwall",
+              "postcode": "QV45 8TA",
+              "country": "India"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Damno adinventitias corpus. Officiis dolorum aer commodo amplexus temeritas dolorum canonicus. Coniecto tabesco ullus.\nClaudeo decimus volva sopor caste depereo trado rem. Usque cenaculum centum aureus cribro avaritia aegrus. Quae voro amicitia porro vicissitudo cultura blanditiis cubicularis."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Sto repellat anser atrocitas conqueror ratione amo baiulus temperantia arca. Numquam sufficio thema basium. Abbas auctus architecto aveho virtus tantillus vinculum varius."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Vulticulus amo dolorem tergo abscido paulatim nam demens totidem. Adstringo deorsum deorsum attero fugit timidus tepidus. Quidem toties aeternus vesica admoveo dolore cuppedia vigor.\nUtrimque reprehenderit clementia adulescens certus agnitio adipisci aperiam. Porro praesentium cernuus. Addo speciosus architecto subito."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Trepide animus averto adflicto aduro arbustum sublime adeo trado cupiditas. Magni calcar decerno ustilo. Demitto terreo solus impedit tutamen agnosco torqueo.\nVesco vulpes victoria maxime tibi subvenio capitulus animi volup. Ago vero soluta cogito basium debilito tyrannus vivo vilis. Atrox adsidue cognatus cotidie nostrum accendo dolores attero creator."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Considero careo nihil vulnero varietas quibusdam concido caelestis talis. Stella pel curtus admitto spiculum succurro umerus ullam. Demo sint deporto facilis blandior.\nTero arbor solium. Ullam demoror ambulo celo delectus balbus provident attollo voluptate accusamus. Turpis quis amet corrumpo amaritudo valde sto amitto delectus."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Utroque turba tantum vacuus allatus temptatio. Suppellex repellat auxilium verto alii. Adhuc apto allatus cuius ustulo tempore claudeo.\nAccusamus absque tonsor spiculum. Venustas damno amita thema amet. Sol defessus crur doloremque vulgaris claustrum vivo celer verus."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Eos depromo vaco tumultus. Tutis atrox careo. Ocer aliquam coadunatio."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Auctor textor cado statim. Sumptus advenio vos sub virga rem. Circumvenio terra deleniti.\nAspicio non caute agnosco. Accusator crebro stips creo sufficio convoco. Defetiscor teneo balbus rerum."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2019-05-26T14:33:26.101Z",
+            "validatedAt": "2019-06-02T22:10:41.560Z",
+            "publishedAt": "2019-06-03T01:03:13.695Z"
+          }
+        },
+        {
+          "id": "ce9f545f-ada5-4511-9586-0810d9732a7c",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Sophia Ondricka"
+            },
+            "address": {
+              "line1": "972 Crist Brow",
+              "line2": "Aiden Terrace",
+              "town": "Schowalterton",
+              "county": "Durham",
+              "postcode": "YN34 8ML",
+              "country": "Estonia"
+            }
+          },
+          "commentRedacted": "Theologus absque vorax statua summisse carmen valens amitto. Abstergo tero harum adamo caries decipio consectetur. Aufero error vulgo degusto cohaero spiculum careo tyrannus tricesimus.\nCui alo vereor thema. Calco sed nihil infit. Charisma acervus cognatus quaerat una temporibus tamen vilicus.\nUllam valde accedo strenuus corrupti. Venustas valeo aeger crux. Cupiditate audeo surgo stips caste.\nTracto pecus cito cunae sto terminatio sum utroque cuppedia solvo. Caecus benevolentia accommodo vos varius. Certus claro voluptates voco truculenter beneficium coniecto conventus statim defleo.\nCommodi ademptio tot tego hic. Trans comis provident. Tantillus clementia demitto similique corrupti optio auxilium avaritia temperantia cras.",
+          "metadata": {
+            "submittedAt": "2019-05-26T22:19:53.474Z",
+            "validatedAt": "2019-06-01T07:58:31.747Z",
+            "publishedAt": "2019-06-02T11:34:47.013Z"
+          }
+        },
+        {
+          "id": "ca1bb801-835a-4586-ab57-3043ae5cf64f",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Dr. Anthony Durgan"
+            },
+            "address": {
+              "line1": "53 Lorena Walk",
+              "line2": "Lancaster Road",
+              "town": "Great Gislason",
+              "county": "Lincolnshire",
+              "postcode": "LI6 9KF",
+              "country": "Burundi"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Animus vilitas solutio complectus clam ars antiquus sollicito vulnero. Eum acies arguo amicitia alter animadverto confero soleo conforto admitto. Defungo vinitor comptus quod calamitas similique umerus.\nCapitulus absconditus virtus terreo quam ut calcar. Deleo cuius certus aestas. Commemoro acidus uredo placeat consuasor dapifer."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Alioqui eum succedo colligo ventosus artificiose. Cernuus recusandae adfectus damnatio aureus stillicidium summopere adstringo aliqua. Adopto somniculosus sortitus."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Crebro vereor perferendis somnus texo vulariter cursus carmen. Cursim quam vociferor uter. Numquam animus tersus comprehendo stabilis velit cursim clam desolo dicta."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2019-05-14T01:51:16.212Z",
+            "validatedAt": "2019-05-22T06:46:05.817Z",
+            "publishedAt": "2019-05-27T10:41:43.992Z"
+          }
+        },
+        {
+          "id": "0067d2c0-1075-4e05-9035-3c864b27acce",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Cora Reichel"
+            },
+            "address": {
+              "line1": "4 Franz Mews",
+              "line2": "Main Street",
+              "town": "Long Huelswell",
+              "county": "Essex",
+              "postcode": "FK3 4TV",
+              "country": "Libyan Arab Jamahiriya"
+            }
+          },
+          "commentRedacted": "Armarium terminatio absconditus. Curriculum ocer contigo vito veniam. Conitor celebrer vetus.\nCogo paulatim terror ambulo conicio. Veritatis caritas conventus acervus deinde tam facilis consuasor damno. Angustus vorax allatus.\nCalco timidus agnitio calcar. Tabula terga communis auctor decens placeat cupressus vivo sortitus non. Varius cenaculum surculus vehemens vereor campana consectetur umbra dedecor desolo.\nCaelum claro arbustum utrum deripio astrum adeptio statim animi vetus. Claudeo aliqua attollo thermae. Totidem delinquo vester maiores.",
+          "metadata": {
+            "submittedAt": "2019-06-03T02:33:01.420Z",
+            "validatedAt": "2019-06-03T06:24:03.403Z",
+            "publishedAt": "2019-06-03T06:40:29.818Z"
+          }
+        },
+        {
+          "id": "c1aa46ff-b967-4713-8a05-41e61877b8ce",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Sam White"
+            },
+            "address": {
+              "line1": "746 Novella Place",
+              "line2": "Macejkovic Mount",
+              "town": "Castle Purdy",
+              "county": "Fife",
+              "postcode": "RN2 1ZI",
+              "country": "Namibia"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Termes caput tenus denuncio tubineus veritas curia tunc. Amor auxilium callide inventore tabella verus veritas capio. Clamo acquiro aggredior abutor adamo cavus comparo depopulo tracto atque.\nAudax trans suus ceno pecco unus comedo speciosus apparatus atqui. Attonbitus approbo canis qui caput. Somniculosus despecto amplexus demoror desidero aduro claustrum apto."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Auditor convoco collum pax varietas demergo ultra quam cohibeo triumphus. Conservo sortitus creator statim aetas vigilo rem. Adnuo asperiores repudiandae cattus cumque tamen."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Adicio itaque cupressus deprimo. Cogito itaque virtus conduco tibi adopto temptatio sapiente curtus. Comis tantum accusantium tempore demum cerno undique valde umquam acerbitas.\nCurtus tametsi assentator curvo nulla animadverto. Stultus cavus dicta sit possimus charisma timor. Creptio amplitudo cultura."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Decens tenetur theologus decipio placeat theologus avarus. Accedo abstergo sit volaticus crebro thermae supellex aliqua concedo accusator. Ocer convoco patruus vito comparo tantillus."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Voluptatem sollers caste curiositas brevis strues non absque aer. Vigor apud amiculum suadeo turba vicissitudo decerno denuncio. Bos totus veritas campana caelum.\nCandidus debeo articulus laudantium. Undique aliquam claudeo eos conturbo calculus solum amiculum verecundia. Talus ambitus arma demens."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Volubilis commodo sono theatrum pecco aestivus vinculum aqua. Tempus auxilium celer stipes vergo subnecto sed thalassinus cupressus corporis. Curatio libero verus repudiandae comitatus socius sto.\nSolus caste ratione. Tersus tot vinum collum vacuus consuasor minus debeo adstringo. Viriliter expedita vestrum adduco terga capio vito."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2019-05-30T23:51:44.849Z",
+            "validatedAt": "2019-06-01T01:37:41.711Z",
+            "publishedAt": "2019-06-02T18:45:11.133Z"
+          }
+        },
+        {
+          "id": "e9300b3e-c574-4f1d-aeb2-dbb4f6ba0696",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Adrienne Ziemann"
+            },
+            "address": {
+              "line1": "28 Oak Street",
+              "line2": "Josephine Garth",
+              "town": "East Kuphalton",
+              "county": "Dyfed",
+              "postcode": "KD69 3OJ",
+              "country": "Samoa"
+            }
+          },
+          "commentRedacted": "Una utrimque possimus aliquid ter nemo theatrum crebro campana tempore. Tabella vulgaris quam uxor. Textilis spectaculum derelinquo absum sponte arcesso.\nSupplanto tener cedo adfectus odio viscus vita. Vester cras socius testimonium conicio rem. Deludo ducimus taceo quam aeternus atrocitas.",
+          "metadata": {
+            "submittedAt": "2019-05-18T07:20:07.191Z",
+            "validatedAt": "2019-05-20T03:33:14.172Z",
+            "publishedAt": "2019-05-20T19:22:22.702Z"
+          }
+        },
+        {
+          "id": "6c6b9580-ee36-461c-bdfb-01f01c307eb2",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Margie Kassulke"
+            },
+            "address": {
+              "line1": "283 Miller Close",
+              "line2": "Tressie Approach",
+              "town": "VonRuedenthorpe",
+              "county": "Lincolnshire",
+              "postcode": "UM5 2SU",
+              "country": "Rwanda"
+            }
+          },
+          "commentRedacted": "Deleniti fuga verus. Apparatus cribro claustrum natus tremo. Umbra amplitudo theologus.\nSomniculosus suscipit vere victus cupressus advoco ademptio. Cito ipsum quibusdam civitas taceo vomito arca ars decor. Ulterius utpote tres.\nTener repudiandae adhuc uterque adsum. Cura absque summisse cupiditas perferendis aer tum civitas sortitus. Copia advoco cuius advenio delectus usus.\nDefetiscor exercitationem sublime. Vorago colligo minima suffragium deficio supplanto atqui. Aequus canto eligendi optio animus amicitia voluptatibus.",
+          "metadata": {
+            "submittedAt": "2019-06-01T06:28:09.417Z",
+            "validatedAt": "2019-06-01T19:11:19.826Z",
+            "publishedAt": "2019-06-02T22:07:16.857Z"
+          }
+        },
+        {
+          "id": "0a78786d-6431-438a-b6ce-21073591ff52",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Carole Durgan"
+            },
+            "address": {
+              "line1": "83 Koelpin Court",
+              "line2": "Woodside",
+              "town": "Castle Tillman",
+              "county": "Lothian",
+              "postcode": "YZ1 5BC",
+              "country": "Guyana"
+            }
+          },
+          "commentRedacted": "Laborum doloremque ultra adnuo. Templum angulus cilicium abutor deleo. Venustas quo vulgus minima demulceo audacia.\nVero conicio comburo admoneo quo angulus subito copiose. Vulnus allatus vae abbas contra. Trans spoliatio viscus celebrer quas triduana tero.\nAngelus civitas vester officia spoliatio delego venia molestiae carbo amo. Coepi collum cultura. Nostrum agnosco audax caput deprimo quas commemoro.\nTabernus vita occaecati vulgaris delibero degusto vulariter accommodo deserunt. Inflammatio umbra tricesimus teres fugit deleniti acidus cubitum dolores. Numquam acquiro crapula.\nVulgo vulpes curo velum complectus velum delectatio advoco ambitus. Ulterius suus claustrum comprehendo villa copiose caecus absum. Quidem virtus cohors comburo talus cubo demo aspicio summopere censura.",
+          "metadata": {
+            "submittedAt": "2019-05-20T04:43:08.615Z",
+            "validatedAt": "2019-05-20T17:25:10.378Z",
+            "publishedAt": "2019-05-23T17:51:25.167Z"
+          }
+        }
+      ]
+    },
+    "specialist": {
+      "summary": {
+        "totalComments": 0,
+        "totalConsulted": 0,
+        "sentiment": {
+          "approved": 0,
+          "amendmentsNeeded": 0,
+          "objected": 0
+        }
+      },
+      "comments": []
+    }
+  },
+  "files": [
+    {
+      "id": 1559478635109,
+      "name": "catalogue_truly_ferociously.odp",
+      "association": "application",
+      "version": 10,
+      "type": [
+        "sections.existing"
+      ],
+      "url": "https://aged-chip.me.uk/",
+      "metadata": {
+        "size": {
+          "bytes": 3604398
+        },
+        "mimeType": "application/x-bzip2",
+        "createdAt": "2019-06-02T12:30:35.109Z",
+        "submittedAt": "2019-06-22T08:04:56.299Z",
+        "validatedAt": "2019-07-24T11:22:45.251Z",
+        "publishedAt": "2019-07-29T22:20:16.960Z"
+      }
+    },
+    {
+      "id": 1560086926263,
+      "name": "oof_backfill_across.ogx",
+      "association": "application",
+      "version": 2,
+      "type": [
+        "newDwellingsSchedule",
+        "relevantInformation"
+      ],
+      "url": "https://ancient-happiness.info",
+      "metadata": {
+        "size": {
+          "bytes": 92307496
+        },
+        "mimeType": "application/x-freearc",
+        "createdAt": "2019-06-09T13:28:46.263Z",
+        "submittedAt": "2019-07-28T07:50:07.815Z",
+        "validatedAt": "2019-07-28T17:32:07.621Z",
+        "publishedAt": "2019-07-29T15:35:32.382Z"
+      }
+    },
+    {
+      "id": 1560545710563,
+      "name": "minus_quietly_guestbook.woff",
+      "association": "application",
+      "version": 10,
+      "type": [
+        "externalMaterialsDetails",
+        "openSpaceAssessment"
+      ],
+      "thumbnailUrl": "https://loremflickr.com/640/480?lock=5252038573162496",
+      "url": "https://positive-cousin.ltd.uk/",
+      "metadata": {
+        "size": {
+          "bytes": 3319944
+        },
+        "mimeType": "font/woff",
+        "createdAt": "2019-06-14T20:55:10.563Z",
+        "submittedAt": "2019-07-18T13:44:36.207Z",
+        "validatedAt": "2019-07-24T21:26:54.084Z",
+        "publishedAt": "2019-07-27T19:11:40.505Z"
+      }
+    },
+    {
+      "id": 1561129416772,
+      "name": "welly_unethically_whoever.mp3",
+      "association": "application",
+      "version": 4,
+      "type": [
+        "otherDocument",
+        "viabilityAppraisal",
+        "streetScene",
+        "geodiversityAssessment"
+      ],
+      "thumbnailUrl": "https://picsum.photos/seed/fIzDb/640/480",
+      "url": "https://genuine-sub.biz/",
+      "metadata": {
+        "size": {
+          "bytes": 60328216
+        },
+        "mimeType": "font/ttf",
+        "createdAt": "2019-06-21T15:03:36.772Z",
+        "submittedAt": "2019-07-16T00:34:45.448Z",
+        "validatedAt": "2019-07-17T17:24:02.596Z",
+        "publishedAt": "2019-07-30T00:36:40.822Z"
+      }
+    },
+    {
+      "id": 1560802252780,
+      "name": "under.ods",
+      "association": "application",
+      "type": [
+        "treesReport",
+        "planningStatement"
+      ],
+      "url": "https://fragrant-choir.name",
+      "metadata": {
+        "size": {
+          "bytes": 76732190
+        },
+        "mimeType": "text/javascript",
+        "createdAt": "2019-06-17T20:10:52.780Z",
+        "submittedAt": "2019-07-06T09:27:04.064Z",
+        "validatedAt": "2019-07-14T09:00:05.818Z",
+        "publishedAt": "2019-07-14T10:22:49.816Z"
+      }
+    }
+  ],
+  "submission": {
+    "applicationType": "pp.full.householder",
+    "data": {
+      "application": {
+        "fee": {
+          "calculated": 258,
+          "payable": 258,
+          "category": {
+            "sixAndSeven": 258
+          },
+          "exemption": {
+            "disability": false,
+            "resubmission": false
+          },
+          "reduction": {
+            "sports": false,
+            "parishCouncil": false,
+            "alternative": false
+          },
+          "reference": {
+            "govPay": "sandbox-ref-456"
+          }
+        },
+        "declaration": {
+          "accurate": true,
+          "connection": {
+            "value": "none"
+          }
+        }
+      },
+      "user": {
+        "role": "proxy"
+      },
+      "applicant": {
+        "type": "individual",
+        "name": {
+          "first": "David",
+          "last": "Bowie"
+        },
+        "email": "ziggy@example.com",
+        "phone": {
+          "primary": "Not provided by agent"
+        },
+        "address": {
+          "sameAsSiteAddress": true
+        },
+        "siteContact": {
+          "role": "proxy"
+        },
+        "ownership": {
+          "interest": "owner.sole",
+          "certificate": "a",
+          "agriculturalTenants": false,
+          "declaration": {
+            "accurate": true
+          }
+        },
+        "agent": {
+          "name": {
+            "first": "Ziggy",
+            "last": "Stardust"
+          },
+          "email": "ziggy@example.com",
+          "phone": {
+            "primary": "01100 0110 0011"
+          },
+          "address": {
+            "line1": "40 Stansfield Road",
+            "line2": "Brixton",
+            "town": "London",
+            "county": "Greater London",
+            "postcode": "SW9 9RZ",
+            "country": "UK"
+          }
+        }
+      },
+      "property": {
+        "address": {
+          "latitude": 51.4656522,
+          "longitude": -0.1185926,
+          "x": 530787,
+          "y": 175754,
+          "title": "40, STANSFIELD ROAD, LONDON",
+          "singleLine": "40, STANSFIELD ROAD, LONDON, SW9 9RZ",
+          "source": "Ordnance Survey",
+          "uprn": "100021892955",
+          "usrn": "21901294",
+          "pao": "40",
+          "street": "STANSFIELD ROAD",
+          "town": "LONDON",
+          "postcode": "SW9 9RZ"
+        },
+        "ward": "Brixton North",
+        "boundary": {
+          "site": {
+            "type": "Feature",
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -0.1186569035053321,
+                    51.465703531871384
+                  ],
+                  [
+                    -0.1185938715934822,
+                    51.465724418998775
+                  ],
+                  [
+                    -0.1184195280075143,
+                    51.46552473766957
+                  ],
+                  [
+                    -0.11848390102387167,
+                    51.4655038504508
+                  ],
+                  [
+                    -0.1186569035053321,
+                    51.465703531871384
+                  ]
+                ]
+              ]
+            },
+            "properties": null
+          },
+          "area": {
+            "hectares": 0.012592,
+            "squareMetres": 125.92
+          }
+        },
+        "planning": {
+          "sources": [
+            "https://api.editor.planx.dev/gis/lambeth?geom=POLYGON+%28%28-0.1186569035053321+51.465703531871384%2C+-0.1185938715934822+51.465724418998775%2C+-0.1184195280075143+51.46552473766957%2C+-0.11848390102387167+51.4655038504508%2C+-0.1186569035053321+51.465703531871384%29%29&analytics=false&sessionId=81bcaa0f-baf5-4573-ba0a-ea868c573faf",
+            "https://api.editor.planx.dev/roads?usrn=21901294"
+          ],
+          "designations": [
+            {
+              "value": "articleFour",
+              "description": "Article 4 direction area",
+              "intersects": false
+            },
+            {
+              "value": "articleFour.caz",
+              "description": "Central Activities Zone (CAZ)",
+              "intersects": false
+            },
+            {
+              "value": "tpo",
+              "description": "Tree Preservation Order (TPO) or zone",
+              "intersects": false
+            },
+            {
+              "value": "listed",
+              "description": "Listed building",
+              "intersects": false
+            },
+            {
+              "value": "monument",
+              "description": "Site of a Scheduled Monument",
+              "intersects": false
+            },
+            {
+              "value": "designated",
+              "description": "Designated land",
+              "intersects": false
+            },
+            {
+              "value": "nature.SAC",
+              "description": "Special Area of Conservation (SAC)",
+              "intersects": false
+            },
+            {
+              "value": "nature.ASNW",
+              "description": "Ancient Semi-Natural Woodland (ASNW)",
+              "intersects": false
+            },
+            {
+              "value": "nature.SSSI",
+              "description": "Site of Special Scientific Interest (SSSI)",
+              "intersects": false
+            },
+            {
+              "value": "nature.SPA",
+              "description": "Special Protection Area (SPA)",
+              "intersects": false
+            },
+            {
+              "value": "designated.WHS",
+              "description": "UNESCO World Heritage Site (WHS)",
+              "intersects": false
+            },
+            {
+              "value": "registeredPark",
+              "description": "Registered parks and gardens",
+              "intersects": false
+            },
+            {
+              "value": "designated.AONB",
+              "description": "Area of Outstanding Natural Beauty (AONB)",
+              "intersects": false
+            },
+            {
+              "value": "designated.nationalPark",
+              "description": "National Park",
+              "intersects": false
+            },
+            {
+              "value": "designated.conservationArea",
+              "description": "Conservation area",
+              "intersects": false
+            },
+            {
+              "value": "designated.nationalPark.broads",
+              "description": "National Park - Broads",
+              "intersects": false
+            },
+            {
+              "value": "road.classified",
+              "description": "Classified road",
+              "intersects": false
+            }
+          ]
+        },
+        "localAuthorityDistrict": [
+          "Lambeth"
+        ],
+        "region": "London",
+        "type": "residential.dwelling.house.terrace",
+        "titleNumber": {
+          "known": "No"
+        },
+        "EPC": {
+          "known": "No"
+        },
+        "parking": {
+          "cars": {
+            "count": 1
+          },
+          "cycles": {
+            "count": 2
+          }
+        }
+      },
+      "proposal": {
+        "projectType": [
+          "extend.roof.dormer"
+        ],
+        "description": "Doloribus admiratio at vivo. Validus ullam taceo curto calamitas cerno creator. Volaticus amiculum temperantia utor suadeo suffragium denique.",
+        "boundary": {
+          "site": {
+            "type": "Feature",
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -0.1186569035053321,
+                    51.465703531871384
+                  ],
+                  [
+                    -0.1185938715934822,
+                    51.465724418998775
+                  ],
+                  [
+                    -0.1184195280075143,
+                    51.46552473766957
+                  ],
+                  [
+                    -0.11848390102387167,
+                    51.4655038504508
+                  ],
+                  [
+                    -0.1186569035053321,
+                    51.465703531871384
+                  ]
+                ]
+              ]
+            },
+            "properties": null
+          },
+          "area": {
+            "hectares": 0.012592,
+            "squareMetres": 125.92
+          }
+        },
+        "date": {
+          "start": "2024-05-01",
+          "completion": "2024-05-02"
+        },
+        "extend": {
+          "area": {
+            "squareMetres": 45
+          }
+        },
+        "parking": {
+          "cars": {
+            "count": 1,
+            "difference": 0
+          },
+          "cycles": {
+            "count": 2,
+            "difference": 0
+          }
+        }
+      }
+    },
+    "responses": [
+      {
+        "question": "Is the property in Lambeth?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "The property"
+        }
+      },
+      {
+        "question": "What type of property is it?",
+        "responses": [
+          {
+            "value": "House"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "The property"
+        }
+      },
+      {
+        "question": "What type of house it is?",
+        "responses": [
+          {
+            "value": "Terrace"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "The property"
+        }
+      },
+      {
+        "question": "Is the property in a flood zone?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "sectionName": "The property"
+        }
+      },
+      {
+        "question": "What type of property is it?",
+        "responses": [
+          {
+            "value": "House",
+            "metadata": {
+              "flags": [
+                "Listed building consent / Not required"
+              ]
+            }
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "List the changes involved in the project",
+        "responses": [
+          {
+            "value": "Add a roof extension",
+            "metadata": {
+              "flags": [
+                "Listed building consent / Not required"
+              ]
+            }
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Have works already started?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Is the property in a flood zone?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What type of changes does the project involve?",
+        "responses": [
+          {
+            "value": "Extension"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Is the project to add an outbuilding?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "How much new floor area is being added to the house?",
+        "responses": [
+          {
+            "value": "Less than 100m²"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "How much exactly is the internal floor area of the property increasing by?",
+        "responses": [
+          {
+            "value": "45"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Development Management Procedure) (England) 2015 (as amended)",
+              "url": "http://www.legislation.gov.uk/uksi/2015/595/article/7/made"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Does the project involve creating any new bedrooms or bathrooms?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Development Management Procedure) (England) 2015 (as amended)",
+              "url": "http://www.legislation.gov.uk/uksi/2015/595/article/7/made"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Describe the wall materials of the existing house",
+        "responses": [
+          {
+            "value": "London stock brick"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Development Management Procedure) (England) 2015 (as amended)",
+              "url": "http://www.legislation.gov.uk/uksi/2015/595/article/7/made"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Describe the wall materials of the new extension",
+        "responses": [
+          {
+            "value": "Metallic cladding, reflective. Multiple colours."
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Development Management Procedure) (England) 2015 (as amended)",
+              "url": "http://www.legislation.gov.uk/uksi/2015/595/article/7/made"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Describe the material of the roof of the existing house",
+        "responses": [
+          {
+            "value": "Grey slate"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Development Management Procedure) (England) 2015 (as amended)",
+              "url": "http://www.legislation.gov.uk/uksi/2015/595/article/7/made"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Describe the material for the new roof of the extension",
+        "responses": [
+          {
+            "value": "Zinc panels"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Development Management Procedure) (England) 2015 (as amended)",
+              "url": "http://www.legislation.gov.uk/uksi/2015/595/article/7/made"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Describe the window materials of the existing house",
+        "responses": [
+          {
+            "value": "Wooden sash windows, painted white"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Development Management Procedure) (England) 2015 (as amended)",
+              "url": "http://www.legislation.gov.uk/uksi/2015/595/article/7/made"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Describe the window materials of the extension",
+        "responses": [
+          {
+            "value": "Brushed steel."
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Development Management Procedure) (England) 2015 (as amended)",
+              "url": "http://www.legislation.gov.uk/uksi/2015/595/article/7/made"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Describe the door materials of the existing house",
+        "responses": [
+          {
+            "value": "Wood, painted."
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Development Management Procedure) (England) 2015 (as amended)",
+              "url": "http://www.legislation.gov.uk/uksi/2015/595/article/7/made"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Describe the door materials of the extension",
+        "responses": [
+          {
+            "value": "No door present"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Development Management Procedure) (England) 2015 (as amended)",
+              "url": "http://www.legislation.gov.uk/uksi/2015/595/article/7/made"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Are there any trees that could fall within the property or the areas affected by the project (the previously drawn outline)?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Does the project involve any of these?",
+        "responses": [
+          {
+            "value": "No, none of these"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Is the property in Greater London?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Does the site include more than one property?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Do you know the title number of the property?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Does the property have an Energy Performance Certificate (EPC)?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What type of application is this?",
+        "responses": [
+          {
+            "value": "Planning permission for a home"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "When will the works start?",
+        "responses": [
+          {
+            "value": "2024-05-01"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "When will the works be completed?",
+        "responses": [
+          {
+            "value": "2024-05-02"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Does the site include parking spaces for any of these?",
+        "responses": [
+          {
+            "value": "Cars"
+          },
+          {
+            "value": "Bicycles"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Total number of car parking spaces before",
+        "responses": [
+          {
+            "value": "1"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Total number of car parking spaces after",
+        "responses": [
+          {
+            "value": "1"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What types of car parking space are present?",
+        "responses": [
+          {
+            "value": "Off-street parking for residents only"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Off-street, residents-only car spaces before",
+        "responses": [
+          {
+            "value": "1"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Off-street, residents-only car spaces after",
+        "responses": [
+          {
+            "value": "1"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What type of bicycle parking is there?",
+        "responses": [
+          {
+            "value": "Off-street cycle parking"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Off-street bicycle spaces before",
+        "responses": [
+          {
+            "value": "2"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Off-street bicycle spaces after",
+        "responses": [
+          {
+            "value": "2"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Is the property on designated land?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Does the property include any of these?",
+        "responses": [
+          {
+            "value": "None of these"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Development Management Procedure) (England) 2015 (as amended",
+              "url": "http://www.legislation.gov.uk/uksi/2015/595/article/7/made"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Heritage Statement needed?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Is the property in a flood zone?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What type of application is it?",
+        "responses": [
+          {
+            "value": "Apply for planning permission"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Your contact details",
+        "responses": [
+          {
+            "value": "Mx Ziggy Stardust 01100 0110 0011 ziggy@example.com"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Is this a test?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Are you applying on behalf of someone else?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Which of these best describes you?",
+        "responses": [
+          {
+            "value": "Friend or relative"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Your contact address",
+        "responses": [
+          {
+            "value": "40 Stansfield Road, Brixton, London, Greater London, SW9 9RZ, UK"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Which of these best describes the applicant?",
+        "responses": [
+          {
+            "value": "Private individual"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Applicant's title",
+        "responses": [
+          {
+            "value": "Mr"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Do you want to provide an email address for the applicant?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Do you want to provide a telephone number for the applicant?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Is the applicant's contact address the same as the property address?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Which of these best describes you?",
+        "responses": [
+          {
+            "value": "Friend or relative"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "We may need to visit your site to assess your application. If we do, who should we contact to arrange the visit?",
+        "responses": [
+          {
+            "value": "Me"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Which of these best describes you?",
+        "responses": [
+          {
+            "value": "Friend or relative acting on the applicant's behalf"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Which of these best describes the applicant's interest in the land?",
+        "responses": [
+          {
+            "value": "Sole owner"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Development Management Procedure) (England) Order 2015",
+              "url": "https://www.legislation.gov.uk/uksi/2015/595/article/39/made"
+            }
+          ],
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Did you get any pre-application advice from the council before making this application?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "What type of planning application are you making?",
+        "responses": [
+          {
+            "value": "Full planning permission"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Is the property a home?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "What types of changes does the application relate to?",
+        "responses": [
+          {
+            "value": "Extension"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "What type of extension is it?",
+        "responses": [
+          {
+            "value": "Roof extension"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "List the changes involved in the roof extension",
+        "responses": [
+          {
+            "value": "Add dormer"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Is the purpose of the project to support the needs of a disabled resident?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012, Regulation 14",
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/regulation/14"
+            },
+            {
+              "text": "UK Statutory Instruments 2012 No. 2920 Regulation 4",
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/regulation/4/made"
+            },
+            {
+              "text": "Equalities Act 2010, Section 6",
+              "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/6"
+            },
+            {
+              "text": "Children Act 1989, Part 3",
+              "url": "https://www.legislation.gov.uk/ukpga/1989/41/part/III"
+            }
+          ],
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Is it a prior approval application?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Is the property a home?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "What works does the project involve?",
+        "responses": [
+          {
+            "value": "Extension"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Is this application a resubmission?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012, Regulation 9",
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/regulation/9"
+            }
+          ],
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Does the application qualify for a disability exemption?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Does the application qualify for a resubmission exemption?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Is the site a sports field?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012 Chapter 2, Paragraph 3",
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/schedule/1"
+            }
+          ],
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Is the application being made by (or on behalf of) a parish or community council?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012 - Regulation 11",
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/regulation/11"
+            }
+          ],
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Are you also submitting another proposal for the same site today?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012 Chapter 2, Paragraph 10",
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/schedule/1"
+            }
+          ],
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Does the application qualify for the sports club fee reduction?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Does the application qualify for the parish council reduction?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012 - Regulation 11",
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/regulation/11"
+            }
+          ],
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Does the application qualify for the alternative application reduction?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012 Chapter 2, Paragraph 10",
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/schedule/1"
+            }
+          ],
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "What type of application is it?",
+        "responses": [
+          {
+            "value": "Full planning permission"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "What does the project involve?",
+        "responses": [
+          {
+            "value": "Extension"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "How much new floor area is being created?",
+        "responses": [
+          {
+            "value": "Less than 100m²",
+            "metadata": {
+              "flags": [
+                "Community infrastructure levy / Not liable"
+              ]
+            }
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "policyRefs": [
+            {
+              "text": "The Community Infrastructure Levy Regulations 2010, Regulation 42",
+              "url": "https://www.legislation.gov.uk/uksi/2010/948/regulation/42"
+            }
+          ],
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Is this a householder planning application?",
+        "responses": [
+          {
+            "value": "Yes",
+            "metadata": {
+              "flags": [
+                "Community infrastructure levy / Not liable"
+              ]
+            }
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "policyRefs": [
+            {
+              "text": "The Community Infrastructure Levy Regulations 2010, Regulation 42",
+              "url": "https://www.legislation.gov.uk/uksi/2010/948/regulation/42"
+            }
+          ],
+          "sectionName": "About this application"
+        }
+      },
+      {
+        "question": "Have the works already started?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Upload drawings"
+        }
+      },
+      {
+        "question": "What changes does the project involve?",
+        "responses": [
+          {
+            "value": "Extension"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Upload drawings"
+        }
+      },
+      {
+        "question": "Is the project to add an outbuilding?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Upload drawings"
+        }
+      },
+      {
+        "question": "Which Local Planning authority is it?",
+        "responses": [
+          {
+            "value": "Lambeth"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Check"
+        }
+      },
+      {
+        "question": "Connections with London Borough of Lambeth",
+        "responses": [
+          {
+            "value": "None of the above apply to me"
+          }
+        ],
+        "metadata": {
+          "sectionName": "Check"
+        }
+      },
+      {
+        "question": "I confirm that:",
+        "responses": [
+          {
+            "value": "The information contained in this application is truthful, accurate and complete, to the best of my knowledge"
+          }
+        ],
+        "metadata": {
+          "sectionName": "Check"
+        }
+      },
+      {
+        "question": "Does the application qualify for a disability exemption?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Pay and send"
+        }
+      },
+      {
+        "question": "Does the application qualify for a resubmission exemption?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Pay and send"
+        }
+      },
+      {
+        "question": "Which Local Planning authority is it?",
+        "responses": [
+          {
+            "value": "Lambeth"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Pay and send"
+        }
+      }
+    ],
+    "files": [
+      {
+        "name": "https://api.editor.planx.dev/file/private/tbp4kiba/myPlans.pdf",
+        "type": [
+          "roofPlan.existing",
+          "roofPlan.proposed"
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/5w5v8s8z/other.pdf",
+        "type": [
+          "sitePlan.existing",
+          "sitePlan.proposed"
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/7nrefxnn/elevations.pdf",
+        "type": [
+          "elevations.existing",
+          "elevations.proposed"
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/311w2id6/floor_plans.pdf",
+        "type": [
+          "floorPlan.existing",
+          "floorPlan.proposed"
+        ]
+      }
+    ],
+    "metadata": {
+      "organisation": "LBH",
+      "id": "81bcaa0f-baf5-4573-ba0a-ea868c573faf",
+      "source": "PlanX",
+      "service": {
+        "flowId": "01e38c5d-e701-4e44-acdc-4d6b5cc3b854",
+        "url": "https://www.editor.planx.dev/lambeth/apply-for-planning-permission/preview",
+        "files": {
+          "required": [
+            "roofPlan.existing",
+            "roofPlan.proposed",
+            "sitePlan.existing",
+            "sitePlan.proposed",
+            "elevations.existing",
+            "elevations.proposed"
+          ],
+          "recommended": [
+            "floorPlan.existing",
+            "floorPlan.proposed"
+          ],
+          "optional": []
+        },
+        "fee": {
+          "category": {
+            "sixAndSeven": [
+              {
+                "description": "The fee to apply for planning permission to alter or extend a single home is £258.",
+                "policyRefs": [
+                  {
+                    "text": "UK Statutory Instruments 2023 No. 1197",
+                    "url": "https://www.legislation.gov.uk/uksi/2023/1197/made"
+                  }
+                ]
+              }
+            ]
+          },
+          "calculated": [
+            {
+              "description": "The fee to apply for planning permission to alter or extend a single home is £258.",
+              "policyRefs": [
+                {
+                  "text": "UK Statutory Instruments 2023 No. 1197",
+                  "url": "https://www.legislation.gov.uk/uksi/2023/1197/made"
+                }
+              ]
+            }
+          ],
+          "payable": [
+            {
+              "description": "The fee to apply for planning permission to alter or extend a single home is £258.",
+              "policyRefs": [
+                {
+                  "text": "UK Statutory Instruments 2023 No. 1197",
+                  "url": "https://www.legislation.gov.uk/uksi/2023/1197/made"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "submittedAt": "2019-05-12T07:49:49.440Z",
+      "schema": "https://theopensystemslab.github.io/digital-planning-data-schemas/@next/schemas/prototypeApplication.json"
+    }
+  },
+  "metadata": {
+    "organisation": "BOPS",
+    "id": "1234",
+    "generatedAt": "2025-09-30T00:34:14.442Z",
+    "submittedAt": "2019-05-12T07:49:49.440Z",
+    "schema": "https://theopensystemslab.github.io/digital-planning-data-schemas/@next/schemas/postSubmissionApplication.json"
+  }
+}

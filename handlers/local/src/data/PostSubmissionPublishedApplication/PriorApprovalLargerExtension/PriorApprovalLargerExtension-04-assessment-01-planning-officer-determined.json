@@ -1,0 +1,3785 @@
+{
+  "applicationType": "pa.part1.classA",
+  "data": {
+    "application": {
+      "reference": "91-12345-ITGQ",
+      "stage": "assessment",
+      "status": "determined",
+      "publishedAt": "2014-10-18T22:37:22.883Z"
+    },
+    "localPlanningAuthority": {
+      "publicCommentsAcceptedUntilDecision": false
+    },
+    "submission": {
+      "submittedAt": "2014-10-17T22:37:22.483Z"
+    },
+    "validation": {
+      "receivedAt": "2014-10-17T22:37:22.683Z",
+      "validatedAt": "2014-10-18T22:37:22.683Z",
+      "isValid": true
+    },
+    "consultation": {
+      "startDate": "2014-10-18",
+      "endDate": "2014-11-08",
+      "siteNotice": true
+    },
+    "assessment": {
+      "expiryDate": "2014-12-08",
+      "planningOfficerDecision": "granted",
+      "planningOfficerDecisionDate": "2014-11-18",
+      "decisionNotice": {
+        "url": "https://planningregister.org"
+      },
+      "priorApprovalRequired": false
+    },
+    "caseOfficer": {
+      "name": "Casey Officer"
+    }
+  },
+  "comments": {
+    "public": {
+      "summary": {
+        "totalComments": 57,
+        "sentiment": {
+          "supportive": 17,
+          "objection": 22,
+          "neutral": 18
+        }
+      },
+      "comments": [
+        {
+          "id": "654b5131-eb9b-4119-a300-654baaa6374f",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Leslie Donnelly"
+            },
+            "address": {
+              "line1": "4 Walter Glade",
+              "line2": "Estefania Meadows",
+              "town": "Gleichneringham",
+              "county": "Gwent",
+              "postcode": "YE8 7PN",
+              "country": "Lao People's Democratic Republic"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Cunae universe aeternus vestrum vinum cattus cauda coaegresco apto adsidue. Thymbra est spero. Terreo defleo quam spectaculum stella."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Tum utique averto sollicito defetiscor defessus spiritus creta. Cultellus desipio aperiam vorago. Minus deputo aperiam voveo apostolus vicissitudo avaritia."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Reiciendis arceo valeo porro caterva crebro tandem cado cenaculum caecus. Vos suggero strues audeo derelinquo reprehenderit crustulum. Suggero vinitor degusto depulso tero desolo conor commemoro."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-28T18:01:14.126Z",
+            "validatedAt": "2014-10-31T09:10:06.736Z",
+            "publishedAt": "2014-11-05T01:01:15.511Z"
+          }
+        },
+        {
+          "id": "b34b4848-59d0-4091-9601-915cfb90386f",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Dixie Mills"
+            },
+            "address": {
+              "line1": "776 Herzog Drove",
+              "line2": "Stanton Drive",
+              "town": "St. Mosciski",
+              "county": "Buckinghamshire",
+              "postcode": "OU77 5KA",
+              "country": "Algeria"
+            }
+          },
+          "commentRedacted": "Socius tergo damno admoneo vulgus tempore libero volaticus territo. Ago cogito somniculosus audeo. Delibero fuga commodi odio.\nBene nesciunt bellum sperno utrum absens arx. Desidero assumenda aeneus astrum careo conventus officia vulgus surgo. Depereo tunc cunae denego condico cuius.\nVilitas ipsam cras volubilis titulus abundans tantillus aestas. Apto coruscus ab aut condico ulciscor aptus nihil absens qui. Auctor umquam audentia apparatus ascisco adulescens cruentus spargo.",
+          "metadata": {
+            "submittedAt": "2014-10-30T06:20:55.455Z",
+            "validatedAt": "2014-11-06T19:57:43.767Z",
+            "publishedAt": "2014-11-08T03:00:44.187Z"
+          }
+        },
+        {
+          "id": "4aee6b3b-d3e1-4533-bdc3-c440b56fe854",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Dr. Constance Goodwin"
+            },
+            "address": {
+              "line1": "58 Grimes Mead",
+              "line2": "Mitchell Croft",
+              "town": "South Andersonridge",
+              "county": "County Londonderry",
+              "postcode": "LL71 8RC",
+              "country": "Virgin Islands, U.S."
+            }
+          },
+          "commentRedacted": "Quis possimus arma quia aro cernuus tantum desparatus animi impedit. Comburo caecus quas tantillus asperiores dolore corona teneo cumque. Uxor capillus cariosus cogito varietas.\nTraho minus tepesco celer volo usque nemo. Truculenter quibusdam deporto aureus decipio vulgaris viridis possimus uberrime. Ipsum turba arbustum sollicito balbus ustulo.\nIure vomica terebro decumbo arceo. Amita infit comes appello. Super cimentarius textor advenio utrimque voluptatem.",
+          "metadata": {
+            "submittedAt": "2014-10-28T15:20:18.359Z",
+            "validatedAt": "2014-10-30T23:50:50.517Z",
+            "publishedAt": "2014-11-01T14:04:47.072Z"
+          }
+        },
+        {
+          "id": "19e03527-3bb8-460f-ab03-fb395437a542",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Jenna Haley"
+            },
+            "address": {
+              "line1": "54 Kassulke Glade",
+              "line2": "Murray Drove",
+              "town": "Reinger-on-Ondricka",
+              "county": "Gloucestershire",
+              "postcode": "PM35 0QG",
+              "country": "Cameroon"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Voluptas argumentum spargo tracto. Ambulo demens nesciunt creo credo. Video crux ago."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Tego antepono porro testimonium cetera delectus callide varius suffoco creo. Corona thorax deprecator repellendus comprehendo tepidus validus. Combibo molestiae cilicium curiositas labore cimentarius volaticus abutor aeternus cupiditas.\nDenuncio amissio administratio custodia libero. Vomer certus uterque delicate. Derelinquo vivo taceo aqua solvo."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Similique volup earum comitatus aliquam congregatio natus cunabula cometes suadeo. Provident complectus argumentum ater angustus solus. Aperiam carmen rem.\nStella statua tristis assentator depopulo iste appositus tener somnus. Cerno strues vitae adnuo expedita adfectus aequitas adsum officia victus. Repellendus aequitas demitto."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-28T10:09:32.503Z",
+            "validatedAt": "2014-11-08T07:17:33.663Z",
+            "publishedAt": "2014-11-08T11:51:20.047Z"
+          }
+        },
+        {
+          "id": "c913ef02-9a28-40af-97cc-559a01707c36",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Dexter Abernathy"
+            },
+            "address": {
+              "line1": "233 O'Conner Garth",
+              "line2": "Arno Copse",
+              "town": "Champlin-on-Orn",
+              "county": "North Yorkshire",
+              "postcode": "ZS79 4EP",
+              "country": "Macao"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "In delectus pectus caterva accendo. Cubicularis tibi sopor laudantium temptatio sollicito voveo suscipio maxime umerus. Tollo talus dapifer sponte."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Corporis titulus turba communis cunctatio vester. Ultio cariosus accusamus cibus cupressus. Balbus clementia corrumpo vado."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Defero textus tantillus defetiscor possimus. Adsidue theatrum velut aestivus arbustum. Vir autus voluptatem."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Vulpes vulgivagus iusto inflammatio. Adhaero hic laudantium. Comparo creber non curiositas.\nEnim sub adopto circumvenio civis. Arx suffoco viridis calculus colligo explicabo trado. Degenero temeritas annus comis."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Tendo thermae animus tumultus. Cauda accedo deorsum tricesimus cupiditate admitto. Amor deinde truculenter.\nMagni ustulo incidunt quibusdam tredecim voluptatum aeger. Agnosco caecus subvenio acidus alius. Claro corpus aegrus defessus cumque tactus tamen versus."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Teneo tenuis amitto capillus suscipit delibero. Curo administratio beatus confugo aurum culpa. Atrocitas quae denuo.\nAutem enim eveniet alveus approbo. Apostolus theologus apud atavus depopulo volva. Acies tego utrum volaticus appositus tyrannus."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Quasi aequitas textus decimus aliqua textus. Utrimque apparatus tamen vapulus. Umbra conduco absconditus cunctatio arbitro.\nAssentator ulterius nam abstergo cibus urbanus. Volutabrum patior taceo defessus correptius. Suppellex vulgaris capitulus cohaero conduco auctor."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-23T18:17:49.877Z",
+            "validatedAt": "2014-10-28T14:25:26.135Z",
+            "publishedAt": "2014-11-02T09:56:57.617Z"
+          }
+        },
+        {
+          "id": "c1872b1a-95d9-45ea-ba0b-8bd1697afefb",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Irvin Beier"
+            },
+            "address": {
+              "line1": "565 Murphy Fold",
+              "line2": "Green Drove",
+              "town": "South Borer",
+              "county": "Dyfed",
+              "postcode": "PD4 5CL",
+              "country": "United Kingdom"
+            }
+          },
+          "commentRedacted": "Porro utpote utrimque bis quasi curo tenetur. Harum quisquam varius audio apto tripudio patruus pecus talio. Cumque coniecto bis succedo convoco.\nSolus caelum amor. Turbo sumptus quisquam solus tandem defero aequus corroboro abundans deripio. Voluptatem sonitus terror vilis at.\nIn dolorum carbo tubineus suppellex solium vilis delectatio sol. Cunctatio esse peccatus tardus surculus dedecor testimonium ventus creator quaerat. Thesaurus sordeo taedium defetiscor pectus pariatur alter officia.\nSpargo speculum denique pel caute ea. Deporto solum vobis universe vicinus sulum summa. Concedo vita somnus cum ipsam.\nVergo sodalitas vacuus subiungo summopere carpo speciosus auctor aegrotatio auctor. Agnosco universe harum asporto condico stabilis. Contego correptius corrigo thymum.",
+          "metadata": {
+            "submittedAt": "2014-11-03T20:06:57.574Z",
+            "validatedAt": "2014-11-05T02:54:28.616Z",
+            "publishedAt": "2014-11-08T09:41:25.432Z"
+          }
+        },
+        {
+          "id": "17a76c3c-11f1-4a19-978c-a876f5e67315",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Lorena Paucek"
+            },
+            "address": {
+              "line1": "1 Rogahn Glade",
+              "line2": "Anissa Drove",
+              "town": "North Rohan Hill",
+              "county": "Fife",
+              "postcode": "ZP9 4SN",
+              "country": "Bolivia"
+            }
+          },
+          "commentRedacted": "Comes at approbo sulum consectetur barba quo. Amplitudo conatus territo vulnero vergo arcesso chirographum ipsa sint suasoria. Angustus aperio cornu utrum abscido voluptatibus audax.\nDesipio clementia depereo decor voluntarius aggredior absque. Dolorum coerceo voluptate dolore commemoro. Optio comes concido video thalassinus xiphias.\nAttollo deserunt alveus defluo toties caelestis occaecati cavus aureus. Sapiente iusto comis bos abutor velum averto voluptate inflammatio. Comitatus vilicus depromo voluptate turpis.\nCilicium beneficium usque territo corrigo arx nisi capitulus. Tergeo nobis cuppedia corrigo acervus maiores. Error aut umerus.\nSolium textus capitulus. Damnatio cursim sulum stillicidium depulso caveo vilis vito vulticulus atque. Culpa at textilis vito aegre demonstro aestus atavus.",
+          "metadata": {
+            "submittedAt": "2014-10-28T11:10:49.574Z",
+            "validatedAt": "2014-11-07T09:51:43.742Z",
+            "publishedAt": "2014-11-08T10:34:02.567Z"
+          }
+        },
+        {
+          "id": "2381237b-088f-46bd-83dd-ab091061a983",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Bonnie Tremblay"
+            },
+            "address": {
+              "line1": "58 Lizzie Copse",
+              "line2": "The Glebe",
+              "town": "Old Bogan",
+              "county": "Clwyd",
+              "postcode": "HY76 5GM",
+              "country": "Guadeloupe"
+            }
+          },
+          "commentRedacted": "Audacia asporto labore clibanus. Culpo bonus inflammatio tametsi stips. Quam stultus angulus supplanto crudelis.\nTersus volubilis tondeo textor via truculenter caput recusandae stella. Socius aeneus aeger debilito deprecator auxilium tripudio adsuesco. Cruentus sub contigo tenetur viriliter rem cariosus corpus.\nCrudelis perferendis comminor tubineus arbitro. Astrum atavus utpote tres thymum. Adinventitias demens agnitio toties adsuesco stillicidium decretum tendo laudantium unde.",
+          "metadata": {
+            "submittedAt": "2014-11-02T14:01:59.103Z",
+            "validatedAt": "2014-11-03T16:33:55.533Z",
+            "publishedAt": "2014-11-08T03:10:48.156Z"
+          }
+        },
+        {
+          "id": "6191d637-231e-486e-ac4b-c5b82f11bae6",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Kathryn Schmeler"
+            },
+            "address": {
+              "line1": "8 Jacklyn Street",
+              "line2": "Windsor Close",
+              "town": "North Tremblay Common",
+              "county": "County Down",
+              "postcode": "WO48 3BE",
+              "country": "Liberia"
+            }
+          },
+          "commentRedacted": "Vomica deputo adeptio addo clementia cilicium comis spargo catena sapiente. Admoneo ventus adsuesco tristis videlicet. Arma administratio derideo nulla vel aptus tantum curia utpote.\nAdamo derideo conservo soluta. Ustilo capitulus conor vis maiores commodi bardus tactus demonstro abscido. Civitas comptus substantia triumphus.",
+          "metadata": {
+            "submittedAt": "2014-10-24T21:47:02.128Z",
+            "validatedAt": "2014-10-25T12:16:27.167Z",
+            "publishedAt": "2014-11-03T13:12:06.812Z"
+          }
+        },
+        {
+          "id": "926aa65f-2fe7-417b-a84c-9caed9281f10",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Dixie Johnston"
+            },
+            "address": {
+              "line1": "3 Hipolito Drove",
+              "line2": "Wintheiser Grove",
+              "town": "Cummerata-upon-Lehner",
+              "county": "Gloucestershire",
+              "postcode": "MI2 8XI",
+              "country": "Ecuador"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Molestiae strues comparo. Rem curto enim agnosco solum ambitus. Arx totus despecto vallum utor earum ubi debilito.\nCur speculum cibus in sumptus. Angulus stabilis temporibus aegre. Appono cernuus aestus artificiose consectetur triduana amiculum."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Adopto auditor tempus vestigium denique supra. Aro conspergo sumptus. Sit solitudo corroboro abbas adflicto xiphias.\nSuppellex cupiditas vulgivagus. Deripio statim mollitia facere. Tepesco cado vos victus damno sed titulus eligendi cribro."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-19T17:06:37.747Z",
+            "validatedAt": "2014-10-31T01:37:33.326Z",
+            "publishedAt": "2014-11-01T03:20:52.335Z"
+          }
+        },
+        {
+          "id": "cbe68f09-d1ef-4719-9f3d-ef563678f05b",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Eva Pollich"
+            },
+            "address": {
+              "line1": "428 Ledner Hill",
+              "line2": "Grove Road",
+              "town": "Upton Beattyborough",
+              "county": "East Sussex",
+              "postcode": "VO1 8ZK",
+              "country": "Pakistan"
+            }
+          },
+          "commentRedacted": "Incidunt facilis stips. Sum tergum vinco tamdiu patria pecus. Amita arbor umbra appositus.\nPatruus arcus bardus conicio dignissimos villa denego suscipio adsuesco tracto. Ager videlicet tendo alias accusantium. Contigo vix catena carmen cogito astrum at suppellex tres.\nComprehendo crudelis beneficium aperiam totus contego verto uxor. Videlicet depulso cui pauper numquam in desparatus adulatio. Terga apto adulescens verumtamen.\nVoluntarius abeo bene bardus inventore. Pecus deserunt voro campana solio vestrum sollers crepusculum deserunt. Vester ullus patruus votum tenuis.\nAncilla uredo amicitia copiose territo. Temptatio cur tergo animadverto. Beatus thesaurus vinum sublime tego spiritus deserunt.",
+          "metadata": {
+            "submittedAt": "2014-11-06T02:54:12.716Z",
+            "validatedAt": "2014-11-06T04:47:09.926Z",
+            "publishedAt": "2014-11-06T06:52:10.464Z"
+          }
+        },
+        {
+          "id": "6391fda6-2731-4853-ac28-b6ac599fe2af",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Lamar Denesik"
+            },
+            "address": {
+              "line1": "94 Orchard Street",
+              "line2": "Tracy Court",
+              "town": "South Konopelskiworth",
+              "county": "Greater Manchester",
+              "postcode": "DF6 5GW",
+              "country": "Panama"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Voluptates sui beneficium uter caries accommodo sonitus compono. Abscido vomer attero bonus verbum quos urbanus. Accendo calco delibero facere advenio cilicium.\nCohaero aggredior velum. Tenus asper admitto voluptate crepusculum. Deficio dedico cometes doloribus viscus utilis celer."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Crebro acer studio aestivus vallum. Solitudo autus vallum sum trado. Aegrotatio curriculum abstergo ait pectus viridis conspergo aperte rerum."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Ciminatio convoco caelum chirographum summopere verbum defetiscor iste amet neque. Accusantium aeternus inflammatio atqui thymbra dedico verbera arca. Amo certe curiositas trepide demens."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Appello congregatio blanditiis conscendo crastinus. Ustilo trans articulus ambitus torrens vulgivagus natus labore. Voluptates corroboro iste amplexus admoneo strues."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Annus aedificium saepe tepidus molestias trans communis ipsum caelestis commodo. Absum caelestis tricesimus tutamen summisse pauci quo ars tamquam. Uredo perspiciatis aetas pauci cubo casso.\nFacilis consuasor adulatio thymbra apud xiphias demitto. Tondeo testimonium voluptate dicta agnosco caste ara. Usus deleo demulceo ater xiphias perferendis verumtamen."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-22T06:29:55.601Z",
+            "validatedAt": "2014-11-02T15:45:26.646Z",
+            "publishedAt": "2014-11-08T12:25:53.042Z"
+          }
+        },
+        {
+          "id": "1d2ae8f3-ae98-4128-b80b-969370b268f0",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Maurice Kilback"
+            },
+            "address": {
+              "line1": "37 Hayley Heights",
+              "line2": "Albany Road",
+              "town": "High Cassin",
+              "county": "Borders",
+              "postcode": "KO87 5EI",
+              "country": "Mayotte"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Temperantia degenero strenuus talis. Alveus bibo comptus quibusdam deprimo. Apto ver vinum.\nDepromo tenax reprehenderit audio cum curvo claustrum caritas vivo. Spectaculum demulceo cilicium uterque atrocitas. Turbo angulus ratione timidus placeat sodalitas vel coniecto patruus cimentarius."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Vapulus coaegresco damno nisi alius taceo chirographum assentator. Maiores cubo vulgaris distinctio comitatus voro sortitus damnatio. Totam aranea cruciamentum asporto adulatio confero advenio.\nAdemptio terga inventore desparatus repudiandae thorax. Uter bellicus contra. Vulnus quam veniam cibo ratione turba."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Charisma altus adfectus vulgus teneo. Spargo stipes depopulo traho acer aperio spectaculum. Arto alius tempus vulgivagus carpo.\nCaute vivo clam infit amaritudo alioqui consequuntur ultra voluptates. Cibus damnatio vae. Sui carmen vulnus spes carmen thymum."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Tametsi caecus odit amitto adstringo dolorem tyrannus. Coaegresco minima uberrime varietas delego terminatio centum tum canonicus animi. Colligo sponte copia.\nAcsi templum summisse tam urbanus aequitas ustulo facilis sequi synagoga. Decet speculum absque videlicet. Amplitudo delicate saepe tenetur circumvenio clibanus officiis."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-11-06T23:57:48.662Z",
+            "validatedAt": "2014-11-08T02:37:42.692Z",
+            "publishedAt": "2014-11-08T16:02:31.773Z"
+          }
+        },
+        {
+          "id": "8de6375c-0d40-4175-a8ad-bf996f4629c0",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Bernadette Paucek"
+            },
+            "address": {
+              "line1": "34 Kulas Way",
+              "line2": "Park Drive",
+              "town": "South Kessler",
+              "county": "Clwyd",
+              "postcode": "QV5 1VJ",
+              "country": "Western Sahara"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Tricesimus repellendus careo tabula. Contigo vado tactus turba voluptas uterque soluta laborum alter complectus. Alter uxor deprecator sunt."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Viriliter doloremque subito. Suscipit sol spargo ex illo absconditus. Vita cimentarius vulpes consectetur abutor."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-25T13:38:02.857Z",
+            "validatedAt": "2014-11-07T20:03:41.288Z",
+            "publishedAt": "2014-11-08T11:21:02.114Z"
+          }
+        },
+        {
+          "id": "aab62ded-1599-4d31-8e34-2759700b42f0",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Molly Olson"
+            },
+            "address": {
+              "line1": "35 Hyatt Gardens",
+              "line2": "Kuphal-Nienow Path",
+              "town": "Moore-le-Fritsch",
+              "county": "Hampshire",
+              "postcode": "LL6 2KY",
+              "country": "Portugal"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Amoveo thesaurus sunt neque territo suus cura cubicularis attollo. Caterva administratio adnuo. Creptio aptus paens vulariter conservo solus varius."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Auditor sustineo tero tabernus corrupti tepesco supplanto coadunatio. Vomito minus caterva caelestis sortitus communis. Auctor non tergeo adstringo commodi.\nCulpo cerno brevis consequuntur accusator caput allatus. Soleo torrens vindico desino. Spiculum exercitationem vitae."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Volubilis sequi cicuta ambitus comedo spectaculum viriliter textus aufero abbas. Venustas tergum derelinquo vacuus. Tergum admiratio calco venia defaeco maxime sit.\nDelinquo vilitas xiphias bibo. Vulpes derelinquo caste. Correptius asporto vallum umquam conicio."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Explicabo fugit cupressus eius aranea custodia claro tonsor sed decens. Tandem dapifer triduana aliquid tyrannus absconditus umbra curis sub theatrum. Capto voluptates teres.\nTibi possimus vulticulus. Capto victus varius cupio peior capio aperte curiositas desidero fugiat. Deorsum sodalitas tersus cupressus texo tener vitiosus aperio tui volup."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Aqua calculus perspiciatis omnis tumultus. Adflicto crastinus adduco charisma tamisium vestigium adsum speciosus. Aperte cohibeo natus carmen.\nAbundans triduana damnatio verbum attonbitus. Animadverto nam aperio cultellus abscido thorax. Creo eligendi amet."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Deserunt deduco bestia coepi vaco odio tabgo coadunatio substantia. Unus subito certus solium non. Temptatio spiculum voluptatibus alter possimus delicate.\nVerto reiciendis voluptates cunae pariatur tamquam. Sed volaticus aurum acervus volutabrum tracto. Minima theologus decipio."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Dapifer cogito amo. Clam theca decet artificiose solus voluptas desipio appello caelum benigne. Tot benevolentia capillus ventus deputo arbitro thesis callide campana."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-26T12:06:25.332Z",
+            "validatedAt": "2014-10-28T08:35:13.882Z",
+            "publishedAt": "2014-11-07T13:37:54.994Z"
+          }
+        },
+        {
+          "id": "6264ffc0-6db9-4567-9763-26a7beb959d1",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Lillian Corkery"
+            },
+            "address": {
+              "line1": "78 Schoen Ridge",
+              "line2": "Liliane Wynd",
+              "town": "High McLaughlin",
+              "county": "Avon",
+              "postcode": "MI3 0WB",
+              "country": "United States Minor Outlying Islands"
+            }
+          },
+          "commentRedacted": "Carmen tempore baiulus assumenda alias auxilium. Adicio incidunt auxilium torqueo celer demitto praesentium umbra crapula. Summa summa uterque sui acerbitas ustilo benigne pecto coepi aer.",
+          "metadata": {
+            "submittedAt": "2014-10-19T02:33:00.467Z",
+            "validatedAt": "2014-11-05T00:01:14.446Z",
+            "publishedAt": "2014-11-07T23:57:05.428Z"
+          }
+        },
+        {
+          "id": "2d8e131a-50dd-48ce-a1e2-9c57fc4bb5f5",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Lindsay Gerlach"
+            },
+            "address": {
+              "line1": "8 Aurelie Fold",
+              "line2": "Dillon Street",
+              "town": "Lower Pfannerstill Hill",
+              "county": "Rutland",
+              "postcode": "PX3 7LU",
+              "country": "Mongolia"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Ascit desparatus aspicio ventito. Cernuus deinde depopulo. Ventus crebro uberrime tabella tutamen tamdiu."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Minima surculus vilicus tendo carcer tero tribuo. Nulla timor iste tenetur laborum tergiversatio amor quam. Umerus defendo vox verto victus venia tenuis cupiditate cena adopto.\nCavus attero solium vir temperantia curto verbum excepturi quidem. Cito vinitor caelum curatio aptus. Crustulum acquiro usque numquam degenero denuo arcesso vulpes."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Utpote aureus cariosus cursus cresco nulla auctor ulciscor. Creptio colligo quaerat harum tum acer solutio absum nesciunt. Contabesco currus creator voluptatem."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Amissio atque optio caelum aer abscido temptatio. Solitudo sodalitas solum custodia calco aufero ait sordeo conculco volup. Averto arbustum stips volubilis commemoro."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Bardus rem acervus accedo arbor catena corporis apostolus adiuvo. Solutio culpo terreo antepono usus. Confido vaco aliquid tubineus confero.\nTremo ullus depulso dolore conatus volaticus atqui abbas. Vomito rem unus sollicito acquiro cilicium. Alienus audeo quidem tonsor tertius vociferor tabernus commemoro."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Ocer creo comes ulciscor angulus thesaurus acquiro communis. Error clementia concedo toties temptatio debitis. Arbustum carpo defessus crinis vulgus nisi tepesco altus aqua."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Tripudio culpa depopulo ambitus sursum. Advenio acer vehemens caelestis ver appono cubicularis eaque. Summisse textilis degusto avaritia."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-22T12:58:35.836Z",
+            "validatedAt": "2014-10-26T22:49:35.888Z",
+            "publishedAt": "2014-11-08T00:14:31.637Z"
+          }
+        },
+        {
+          "id": "24c87e40-ca95-4cb6-9d2f-26966dcb8a93",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Harriet Nitzsche"
+            },
+            "address": {
+              "line1": "302 Florencio Walk",
+              "line2": "Victoria Street",
+              "town": "Upton Ziemehill",
+              "county": "Strathclyde",
+              "postcode": "ZR6 3SU",
+              "country": "Kiribati"
+            }
+          },
+          "commentRedacted": "Venustas decet caries temptatio tribuo. Teres aut virgo ultra vulgus aut alveus antepono. Bene tactus crustulum balbus.\nCrinis exercitationem cupio terreo temptatio tui alias contigo. Copia aeternus magni. Advenio tertius certe id dens terminatio.",
+          "metadata": {
+            "submittedAt": "2014-10-31T18:55:51.215Z",
+            "validatedAt": "2014-11-06T16:35:40.615Z",
+            "publishedAt": "2014-11-08T19:09:21.957Z"
+          }
+        },
+        {
+          "id": "3f10c51c-86e7-41a2-b1ec-3771b1c554e2",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Clark Howe"
+            },
+            "address": {
+              "line1": "397 Oak Drive",
+              "line2": "Lonzo Park",
+              "town": "Castle Gulgowski Bridge",
+              "county": "Cumbria",
+              "postcode": "LJ1 1ET",
+              "country": "Romania"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Tero acer nesciunt. Calco admiratio suppellex vesper claudeo copia tenuis antiquus. Accusator textus undique.\nTotus decumbo eaque voluptatibus venustas quos acerbitas capio cultellus. Verus cognomen apostolus valeo ultio dens viridis. Sustineo arca voveo error caterva clam concido inflammatio cado."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Totam derelinquo sollicito. Vivo voveo adiuvo altus. Delectus adflicto ancilla."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-21T13:11:34.710Z",
+            "validatedAt": "2014-10-26T11:22:43.675Z",
+            "publishedAt": "2014-10-28T07:57:47.010Z"
+          }
+        },
+        {
+          "id": "6c255336-8c1b-4aed-ba2d-aed030a7f193",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Ella Wilkinson"
+            },
+            "address": {
+              "line1": "257 Lancaster Road",
+              "line2": "Frami Square",
+              "town": "Great Ferryfield",
+              "county": "Tayside",
+              "postcode": "LF23 5BN",
+              "country": "Tanzania"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Vado accusantium facere. Voveo cetera contabesco abutor autem decumbo suppono. Harum tenuis sto blandior pariatur cetera sperno totam patruus."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Defleo dolores dolorum viscus. Concedo constans nulla uberrime decerno torqueo aeternus. Adiuvo vestigium vulgus certus velut acsi."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Architecto depopulo antiquus dapifer ultio coadunatio depraedor corrumpo. Circumvenio aeger clam trepide curatio. Coepi amplus cilicium.\nArca sponte accusantium aeternus texo dignissimos angustus sordeo video. Audacia videlicet tametsi creptio caterva aegrus doloribus tutis. Virgo terra alias amita delinquo arx conspergo."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Vinculum ater comprehendo. Creo confido ante. Non coruscus attero dens benigne soleo via bis amiculum."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Solutio defluo brevis uxor. Demitto conitor tyrannus adimpleo vel cena tripudio ancilla vilitas trepide. Tot spes barba totidem arbitro agnitio.\nAperio consectetur administratio complectus annus cupio abstergo eum bos defungo. Tabernus certe placeat corrupti decet claudeo armarium collum. Caveo vinitor cruciamentum campana blandior sub defero canonicus usus."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Deprecator bene communis voluptas demens assumenda dignissimos. Hic turbo audentia. Aliqua demulceo conor harum sum adfero perferendis.\nTametsi minima sum tenuis id venia vulpes eligendi conatus aliqua. Celo spes casus vulticulus appono. Deputo somnus aer bardus vomer tersus confido subseco vicinus."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Spes coadunatio curo audentia callide attero stips autem. Tantillus arceo similique. Aut vulnero tabella."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Angulus aedificium arbitro apostolus admiratio terror. Causa suasoria acquiro totidem canis sortitus corrigo arbor. Deserunt illo architecto possimus ipsa quasi vox.\nDamno claustrum tutamen abstergo virga. Soleo canis maiores. Thorax paens demo cunctatio."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-23T19:31:04.606Z",
+            "validatedAt": "2014-11-01T23:23:11.278Z",
+            "publishedAt": "2014-11-04T19:37:23.511Z"
+          }
+        },
+        {
+          "id": "d62bc325-954b-45bb-94bd-657b9a28b865",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Miss Freda Waelchi"
+            },
+            "address": {
+              "line1": "4 Hoyt Brow",
+              "line2": "Colton Approach",
+              "town": "Schmidt-upon-Spencer",
+              "county": "Gwynedd County",
+              "postcode": "GE3 2WL",
+              "country": "Taiwan"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Cometes terebro totam ex videlicet copiose quibusdam adipiscor. Valetudo dens theca vito. Compono vomito textilis.\nCallide sono vobis aegre necessitatibus soleo. Dignissimos ipsum deprimo. Adhaero defessus denuo vicinus tabernus."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Viridis sumo acsi angelus doloremque articulus suppellex abeo theatrum aperte. Acsi contigo vado dignissimos audeo pauper crur capillus. Vorago templum abutor corrigo ullam accommodo concedo vinco civitas attero.\nDespecto dolore adhaero crebro vigor tolero cernuus. Suppono doloribus viridis pel sum. Temptatio utor amita aliquid sponte ulciscor ex ceno cogito."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Adipiscor consuasor bis quaerat compono repudiandae. Veritas adhuc ducimus carus alter. Calcar tergiversatio vetus solitudo commemoro coadunatio illum vilitas."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Tolero deduco aggredior venia villa ago tyrannus appono facere aperiam. Vilitas officia arbustum curiositas solvo cauda vulgaris explicabo delego assumenda. Arx alii contego auctor deporto voluptates.\nSumo umerus audax voluptate succurro deorsum capillus blandior teneo. Vilis aeneus aer. Tremo comminor cubo adstringo accommodo vester crux caritas sono."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Ratione desparatus ex vinum ars animi decimus aro. Torqueo tonsor vester tergo cursus decimus recusandae cursim volutabrum. Consequatur utrimque maiores cohaero hic corrupti alveus cunae."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-11-02T00:55:08.324Z",
+            "validatedAt": "2014-11-05T17:31:14.812Z",
+            "publishedAt": "2014-11-08T14:48:28.043Z"
+          }
+        },
+        {
+          "id": "9cb618af-ec45-40d9-b5f4-fbf4a9e31feb",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Hattie Tillman"
+            },
+            "address": {
+              "line1": "714 The Paddocks",
+              "line2": "Nannie Drive",
+              "town": "Wolff-under-Graham",
+              "county": "Central",
+              "postcode": "AJ4 7GQ",
+              "country": "Aland Islands"
+            }
+          },
+          "commentRedacted": "Artificiose volo tempus cauda thema vivo somnus curtus corona sui. Capitulus quibusdam absens illum. Laudantium necessitatibus thema iste audio vomer.",
+          "metadata": {
+            "submittedAt": "2014-10-28T03:08:13.007Z",
+            "validatedAt": "2014-10-29T12:33:21.716Z",
+            "publishedAt": "2014-11-02T14:55:46.370Z"
+          }
+        },
+        {
+          "id": "525b7bae-26da-4f82-be96-d3db07f9fec3",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Delbert Spinka"
+            },
+            "address": {
+              "line1": "908 Lodge Lane",
+              "line2": "Christiana Square",
+              "town": "Parisian-under-Flatley",
+              "county": "County Fermanagh",
+              "postcode": "YA95 5UA",
+              "country": "Uganda"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Tracto vesper aspicio tabula strenuus quia universe vehemens versus carmen. Spiculum coerceo laborum arbitro pauper arma admiratio sustineo quisquam copia. Victoria uberrime tantum abstergo acidus adamo soluta corrumpo dedecor.\nComis currus approbo vitiosus denique. Universe tres derelinquo adnuo delibero velut patria cubitum. Apud cilicium crudelis animadverto acerbitas absens."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-22T09:49:07.744Z",
+            "validatedAt": "2014-10-24T01:38:45.656Z",
+            "publishedAt": "2014-11-07T16:15:40.934Z"
+          }
+        },
+        {
+          "id": "1251c49a-2504-4b10-894c-70890b54880d",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Craig Osinski"
+            },
+            "address": {
+              "line1": "164 Victoria Road",
+              "line2": "Bulah View",
+              "town": "Newton Swiftfield",
+              "county": "West Midlands",
+              "postcode": "DI24 5CG",
+              "country": "Lithuania"
+            }
+          },
+          "commentRedacted": "Valetudo quae ante. Aequitas derideo cimentarius amitto voro verbum acer textilis. Aestus crustulum thymum capio voco talio.\nAmoveo adstringo aurum. Solium patria quasi earum ter accendo vapulus. Torqueo texo adhuc adhaero trucido vos veniam.",
+          "metadata": {
+            "submittedAt": "2014-10-30T20:29:12.112Z",
+            "validatedAt": "2014-11-06T10:46:33.721Z",
+            "publishedAt": "2014-11-07T07:51:03.862Z"
+          }
+        },
+        {
+          "id": "f953dd4d-9dcc-48a5-8963-4b26e83ddb01",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Herbert Toy"
+            },
+            "address": {
+              "line1": "420 Homenick Paddock",
+              "line2": "Jacobson Gate",
+              "town": "Konopelski-le-Batz",
+              "county": "County Fermanagh",
+              "postcode": "FQ36 8KQ",
+              "country": "Malawi"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Tolero uterque velit spiculum volva aut umerus. Trucido tantum sint casso cohibeo. Tabgo vomito ulciscor facere."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Commodo abduco subiungo sol copia a pariatur cribro thymum cinis. Aufero colo recusandae aedificium. Super soleo talio testimonium cito.\nSuscipio stips arca canto amplitudo. Tandem calculus absque correptius nam. Varius dedico magnam vitium."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Combibo absum ultio ambulo ago absens collum. Ullam ustulo molestiae aegrotatio. Amo charisma adiuvo aduro aegrotatio earum aliquam.\nUberrime velociter turpis. Crebro acervus soleo talis utilis undique. Fuga auditor aestas."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Ait quisquam cado vox pecto campana textilis demum vorago. A tutamen atqui tepesco odit coniecto clamo speculum spoliatio subito. Appono civis talis eius quae.\nCredo adulatio deficio aspernatur clam accendo celer. Suadeo sapiente animadverto terror. Defungo voveo caute tactus celer."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Absens valetudo vulnero amet cursus temperantia ipsum. Sed sol corpus id aspernatur tam. Eos nulla aegre tracto amplexus aperte beatae tantillus."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Ab tego venustas aduro in denique. Maxime sortitus demulceo. Virgo explicabo absque subvenio creber pel doloribus nostrum trans balbus.\nAgnitio umquam voro paulatim carus subvenio cubitum tredecim veniam vinitor. Culpa aequitas cursim sodalitas corrumpo. Degero comminor cursus desidero decretum cumque vis congregatio ultio tepesco."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Strenuus tracto villa campana angustus. Ustulo vulnus tristis aveho. Tabernus conitor cunae tabernus toties volaticus.\nCaterva theologus attero audeo aegrotatio vereor ipsa voluptates audacia. Tot torrens doloribus versus cibo umerus. Calco sub ars supellex beneficium cinis carcer clarus."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Abeo appello thorax collum accusantium aut cupressus autem. Volup utrimque verto astrum spero utrum. Abeo annus pariatur caput adhuc despecto alveus.\nSed vulticulus venio decor ad tum. Crastinus accusamus ago auctus turbo terebro neque repellendus. Pariatur alius autus trepide."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-11-03T18:53:53.564Z",
+            "validatedAt": "2014-11-08T22:08:31.088Z",
+            "publishedAt": "2014-11-08T22:59:21.484Z"
+          }
+        },
+        {
+          "id": "47ff08f4-8983-4db7-b7fd-74d1495b9855",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Kristen Kassulke"
+            },
+            "address": {
+              "line1": "53 High Road",
+              "line2": "Jones Path",
+              "town": "New Runolfsdottirley",
+              "county": "Buckinghamshire",
+              "postcode": "HH0 8EV",
+              "country": "Serbia"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Deputo testimonium aperte thesaurus vergo comparo versus aestus degenero. Vomito varius crastinus debitis alii sunt. Amiculum aegre creptio pel cibo defero caelestis.\nAb ulterius aurum. Eum tener summa absorbeo clarus credo. Ratione perferendis error iure derideo consectetur charisma urbanus omnis."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Copiose arto odio. Creta deinde arbor. Voluptatem aro velit voro vorago."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Tego summisse brevis suscipio provident aegrus chirographum alveus. Debitis adsum acies inventore aspicio. Sonitus placeat pauci antea accendo.\nExercitationem depromo ventosus ars tabula iste templum vehemens. Cupiditate adficio aranea casus acerbitas vinculum patruus. Validus cilicium aut crudelis tumultus succurro."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-29T21:41:38.773Z",
+            "validatedAt": "2014-10-30T15:49:28.544Z",
+            "publishedAt": "2014-11-04T06:46:08.680Z"
+          }
+        },
+        {
+          "id": "b2ea4525-e8f6-423a-bdf6-70e8f117d056",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Raquel Grimes"
+            },
+            "address": {
+              "line1": "29 Gerhold Road",
+              "line2": "Kayden View",
+              "town": "Long Doyleing",
+              "county": "Avon",
+              "postcode": "LM10 8AP",
+              "country": "Gibraltar"
+            }
+          },
+          "commentRedacted": "Alius vomica sustineo conspergo tripudio corporis. Conturbo alter teneo casus. Defessus cattus vere corona alter coma aggero.\nUtrimque crapula truculenter certus ambitus doloremque tubineus surgo cohibeo varius. Vilitas dedecor adipiscor vesco tergum acies. Capio ipsa comparo adflicto audax aequitas calculus brevis rem.",
+          "metadata": {
+            "submittedAt": "2014-10-23T23:06:53.011Z",
+            "validatedAt": "2014-10-28T09:56:41.783Z",
+            "publishedAt": "2014-10-29T20:58:58.705Z"
+          }
+        },
+        {
+          "id": "b5c76534-c932-4243-abec-639b7cb30d69",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Lula Effertz-Kreiger"
+            },
+            "address": {
+              "line1": "99 Turner Place",
+              "line2": "Alison Gardens",
+              "town": "Luettgen-upon-Steuber",
+              "county": "Greater Manchester",
+              "postcode": "ZA9 1UI",
+              "country": "Monaco"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Libero ustilo aveho stips velociter undique deleniti deprecator aufero circumvenio. Aperiam surgo studio. Est aranea coniuratio.\nTerror uterque corrigo conduco. Torqueo abutor conscendo ars vox cervus. Officia tumultus bellum minus curto voluptatum sodalitas."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Ipsa debeo cibo. Vespillo cupiditas tricesimus cometes quia decumbo. Absque tempore comburo.\nVinculum doloremque spero quidem stabilis. Contego ventus depraedor. Voluptas ars amplitudo."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Vero addo atqui abduco aufero varius adfectus asperiores. Thesaurus combibo delicate. Creo corporis desipio aro communis maiores tempore illo."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-11-03T02:39:53.989Z",
+            "validatedAt": "2014-11-07T20:33:53.585Z",
+            "publishedAt": "2014-11-08T22:43:01.872Z"
+          }
+        },
+        {
+          "id": "3147e2ad-58f9-4b61-8e99-a553b625ab4d",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Jimmy Schaefer"
+            },
+            "address": {
+              "line1": "63 Isai Bank",
+              "line2": "Imani Meadow",
+              "town": "Little Satterfield",
+              "county": "Durham",
+              "postcode": "XM65 7TO",
+              "country": "Anguilla"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Tamisium corrupti theca vulariter considero denego suppono arto. Auditor somnus architecto temptatio alo ut bibo viduo. Tollo tamisium antepono admoneo arbustum cunabula turba sollers subito."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Comburo correptius circumvenio comedo terminatio comedo ver suspendo depraedor. Aliquam utique arguo appono. Coadunatio asporto aetas degusto cibus utpote totam.\nTer verumtamen ambulo. Sublime cunae ager supellex sapiente facilis cruentus tolero claudeo. Confero sperno aptus."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Supplanto creber deserunt vesica. Amoveo aut sortitus adflicto aiunt vel alii defessus arbitro. Iure magni thesaurus tardus modi unde cohibeo."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Antea tripudio campana. Debitis tertius aegrus addo subito complectus. Eligendi confero chirographum natus antiquus voluptatem."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Alius numquam atque deleniti credo molestiae. Sursum neque trucido deficio ustulo. Vinculum facilis reprehenderit cimentarius."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Subito socius caput spiritus una. Amplus subito stella vere. Thalassinus corrigo clamo solus delego thema."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Caveo tero bonus terga porro error tero dens. Custodia tricesimus demonstro. Suasoria dolore conicio demens audeo."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Una aurum sum baiulus adfectus testimonium thymum sapiente unus. Verecundia sonitus tero defungo truculenter volva vulnero victus quod ago. Et vita nostrum sonitus conspergo volutabrum depraedor conatus comburo unus.\nAdicio tabula degusto vox. Amita demulceo amiculum altus aqua. Chirographum adamo accommodo in aegrus caelestis adversus molestiae infit."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-11-06T03:45:31.276Z",
+            "validatedAt": "2014-11-08T20:01:49.485Z",
+            "publishedAt": "2014-11-08T20:31:52.159Z"
+          }
+        },
+        {
+          "id": "3e97636e-574a-4a63-bffc-60f642a94ba2",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Doyle Deckow"
+            },
+            "address": {
+              "line1": "74 Kilback Row",
+              "line2": "Carol Brae",
+              "town": "Nether King",
+              "county": "Herefordshire",
+              "postcode": "ZN40 3FZ",
+              "country": "Liberia"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Cumque demens absorbeo ustulo inventore crudelis officiis excepturi vulgo degenero. Subseco vulnero ciminatio cupiditate. Possimus aestas uredo tertius."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Eos cultellus dolores admitto. Demum aperiam aurum arceo porro acsi tondeo atque labore torrens. Depopulo cupio unde repudiandae."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Summopere totam theologus strues condico. Barba ratione decumbo despecto acidus. Adflicto virgo pel consequatur casus ater amplitudo stips doloribus bene.\nUltio alienus usque. Aqua clementia aperte thalassinus solus catena. Tergiversatio vomer sumo textilis collum theatrum fugiat bellicus summisse derelinquo."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Conicio autus amoveo vindico blandior tenus eligendi depereo. Architecto tredecim defessus absum deprecator consequatur bellum earum astrum aiunt. Dicta cimentarius attero tam venustas versus cubicularis."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Attero ager adipisci barba confugo canto tersus. Catena cuppedia demonstro texo vis sperno. Strues depono sub uberrime statua ars porro apto vallum curia.\nAmplexus modi accusamus confero arbor denego. Apparatus arbustum voluntarius paens cunabula suffragium. Canto vestrum succurro thesis debilito acquiro nisi dicta."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Cognatus supellex vinco bis bardus celer stabilis suffragium stipes. Approbo velit similique abduco laboriosam. Ara libero aer id convoco.\nCoadunatio vobis coruscus tempore conicio. Vulgus decor vomica. Vilicus cursus claudeo capto argentum."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Curiositas tricesimus consuasor sonitus nihil. Uredo vilitas adfectus ab aliqua ascisco. Sum vinum provident culpa verbera."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Caute aegre arbustum damno. Copia titulus et quidem sollicito caries sordeo curtus suscipit crapula. Cibus cito accusamus sophismata absum."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-11-01T01:37:47.821Z",
+            "validatedAt": "2014-11-06T09:14:34.892Z",
+            "publishedAt": "2014-11-07T20:19:55.394Z"
+          }
+        },
+        {
+          "id": "603a2ee5-8445-4fdc-8271-36586db27292",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Cassandra Raynor"
+            },
+            "address": {
+              "line1": "98 April Rise",
+              "line2": "West Wynd",
+              "town": "Fahey-le-Abernathy",
+              "county": "Fife",
+              "postcode": "TP70 5LD",
+              "country": "French Guiana"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Agnitio cedo tamquam valens utrimque terror perferendis. Tergo inflammatio arto beneficium aveho depromo taedium praesentium urbanus sublime. Amicitia curto aranea baiulus tum tepesco laudantium cuppedia.\nDolorem suspendo sono subnecto nam. Incidunt antiquus delicate tamen vinculum necessitatibus tametsi illum ratione. Peior talus adnuo correptius quaerat culpo demoror."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Videlicet tergiversatio inflammatio deprecator charisma. Aveho tabula avarus. Censura ait tenetur abeo tenax talus."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Argumentum pecto coepi peccatus. Vinum apparatus apparatus cohibeo est casso arguo pecus cibus. Aeneus quia adopto ago triduana truculenter supra thesaurus convoco tamdiu."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Spoliatio patria averto cubo sumptus aiunt commodi clam molestiae sub. Caput una adipiscor. Corrigo suppono adulescens cogito cumque.\nSpeculum soleo beneficium convoco urbs carmen minus. Id creator quod. Tergeo taceo accendo delicate rerum tero aqua ustilo tego traho."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Adversus calculus adnuo claustrum ascisco bellum. Tenetur pax admoneo. Tergeo minus attollo voluptatum sufficio quam utrum tabernus aptus."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Ulterius advoco vehemens theatrum crux carpo. Confero venia amicitia usque censura voluptas vomica. Cupressus virtus totam adstringo valde creator demens."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Tenuis temperantia delectus. Nisi comburo temperantia delinquo demitto corpus nobis apto conitor allatus. In architecto dolor censura suffoco.\nSui titulus condico adinventitias arca supplanto consectetur impedit vis. Doloribus pax virgo porro ipsam aro socius tonsor. Tempora votum ducimus sollicito."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Viridis vox debilito vesica tabernus convoco. Adeo denique doloribus ullus soluta utrimque quo vicinus acer verus. Viriliter cuius celebrer facilis modi super alienus surculus.\nCompello solio corrumpo rem vicinus callide cuppedia. Dolorem anser turba artificiose est. Convoco fuga conatus appositus venustas deorsum aedificium molestias."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-25T15:52:09.821Z",
+            "validatedAt": "2014-10-30T08:22:24.503Z",
+            "publishedAt": "2014-11-07T13:22:39.598Z"
+          }
+        },
+        {
+          "id": "dbb5cce6-0202-4bfa-b9f8-e2a467d9e7b4",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Dixie Bechtelar"
+            },
+            "address": {
+              "line1": "60 Hamill Way",
+              "line2": "Hilma Mews",
+              "town": "Castle Gerhold",
+              "county": "Cambridgeshire",
+              "postcode": "CZ72 1TA",
+              "country": "Belarus"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Corporis nulla consequuntur verbum inflammatio alienus. Sophismata terebro subiungo beatae. Crebro tonsor coadunatio caterva."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Sophismata tabesco vallum currus ventus caute amo valeo deorsum. Subseco maiores tutis viduo aeneus suffoco vallum tamquam. Substantia ullam alveus acer callide tactus deprimo conventus conculco."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Eveniet aegrus adipisci conicio vesica eligendi arbustum peior inventore. Creber sponte desidero ullam adversus subseco repudiandae candidus copia coruscus. Collum repellendus trans.\nQuasi venustas vel aliquid subiungo consuasor argumentum. Cras arcesso summa. Nobis terreo truculenter nulla vilitas adeo."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-29T10:16:26.845Z",
+            "validatedAt": "2014-11-08T01:03:07.883Z",
+            "publishedAt": "2014-11-08T12:43:10.332Z"
+          }
+        },
+        {
+          "id": "6f1426bb-d3bc-4566-b497-b594dfe34817",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Delia Tillman-Spencer"
+            },
+            "address": {
+              "line1": "14 West Street",
+              "line2": "Gutmann Place",
+              "town": "St. Dickens",
+              "county": "County Armagh",
+              "postcode": "UG0 7UZ",
+              "country": "Egypt"
+            }
+          },
+          "commentRedacted": "Aegrus tero vociferor denuo canonicus terra tepidus deorsum. In arguo supplanto succurro perferendis suppono carus astrum absorbeo correptius. Delicate aspicio acervus est.\nCorrumpo cilicium civitas triduana teneo rem. Cum custodia solutio nulla vicinus vereor voluptatibus xiphias. Versus tui conatus.\nCorporis bardus tepesco cerno solutio spiculum voluptas amor turpis conduco. Verus utique tenetur recusandae. Contabesco doloribus solvo ipsam colligo atque comis stips carpo sopor.",
+          "metadata": {
+            "submittedAt": "2014-10-26T13:50:40.207Z",
+            "validatedAt": "2014-10-31T11:41:39.475Z",
+            "publishedAt": "2014-11-02T13:22:09.456Z"
+          }
+        },
+        {
+          "id": "5af80b7a-52ad-4159-b3ad-901b7ca270b3",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Emma Funk"
+            },
+            "address": {
+              "line1": "956 Lakin Terrace",
+              "line2": "Gerlach Terrace",
+              "town": "New Carrollingham",
+              "county": "Somerset",
+              "postcode": "CS91 9YP",
+              "country": "Virgin Islands, U.S."
+            }
+          },
+          "commentRedacted": "Cavus amplus bestia ultio apparatus adfero caput advenio. Quam labore velit currus tamen. Statim somnus est alioqui culpa defaeco defleo.\nSponte universe valetudo aliqua. Et corporis sequi complectus voro defero depraedor teres ustulo aspernatur. Vereor sodalitas cavus unus usque vulgo ager.\nVigor synagoga verto triduana considero cetera atavus. Voluptas dolorum coadunatio pauper. Culpa depraedor catena condico odio vero cognomen denique carus.\nCondico aeneus tepidus alii vivo solio teres tamen strenuus venio. Aliqua trepide verumtamen. Venia succedo aperiam thesaurus volo suffragium subiungo.\nLaboriosam artificiose aveho stultus cilicium terror templum. Circumvenio comis animus conforto creptio ciminatio deporto absum charisma desidero. Suadeo cubitum illum vicinus animadverto cuppedia utroque cado.",
+          "metadata": {
+            "submittedAt": "2014-11-02T13:39:29.782Z",
+            "validatedAt": "2014-11-07T20:20:33.201Z",
+            "publishedAt": "2014-11-08T16:47:51.906Z"
+          }
+        },
+        {
+          "id": "e39cc5a6-fd0d-4cef-b78a-ab919c581a38",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Bertha Rodriguez"
+            },
+            "address": {
+              "line1": "8 Warren Close",
+              "line2": "Sanford Vale",
+              "town": "Schumm-under-Toy",
+              "county": "South Glamorgan",
+              "postcode": "MC66 7ET",
+              "country": "Saint Helena"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Certus vae vigor aetas. Ea amitto neque accedo amitto torrens. Curo appello conforto sortitus anser viridis abutor averto vero.\nAddo vigor thalassinus avarus. Maiores templum ancilla triumphus defessus celer depulso aliqua summisse. Ulciscor amaritudo vomito bibo."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Benigne molestias vesica abundans. Thesis sub rerum. Nemo ulciscor umerus.\nVester dedico vitium. Agnitio summopere amplitudo. Caute architecto aegrotatio admoneo sufficio tres casso attero."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Sumo coma aureus aequitas defluo solus absque. Arbitro aegrus coma argumentum conor alius id. Voluntarius bene curvo defleo officia.\nDefleo carpo odit totam tunc brevis teres. Arguo ago utpote thermae quam consectetur solvo tunc curriculum. Adiuvo combibo nihil ex vel casso suffoco territo."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-27T07:34:50.788Z",
+            "validatedAt": "2014-10-27T13:50:49.573Z",
+            "publishedAt": "2014-10-28T11:45:32.692Z"
+          }
+        },
+        {
+          "id": "af7d4ea5-96e8-4912-9ba4-dcc3f0df31a7",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Jorge Gusikowski"
+            },
+            "address": {
+              "line1": "1 Raynor Brow",
+              "line2": "Phoebe Croft",
+              "town": "Kerluketon",
+              "county": "West Yorkshire",
+              "postcode": "IE87 8ER",
+              "country": "Colombia"
+            }
+          },
+          "commentRedacted": "Vomito auctus conitor aqua stella adamo appositus nesciunt careo. Vindico ducimus substantia inventore canonicus soluta. Unus viriliter tabgo.\nCreber corrumpo astrum campana. Victus atque patior aeneus vilitas quo absconditus. Tenetur varietas conforto caput curto.\nCustodia subvenio ducimus sunt. Umquam vae architecto earum studio condico. Talio veritas adaugeo torqueo vomer aeternus earum turba.\nDelectus conturbo tergo dolore sopor. Via optio vesica tot corrumpo vesco suus. Sopor comitatus assentator.",
+          "metadata": {
+            "submittedAt": "2014-10-23T20:20:45.687Z",
+            "validatedAt": "2014-10-26T07:35:36.295Z",
+            "publishedAt": "2014-11-07T20:09:57.804Z"
+          }
+        },
+        {
+          "id": "3d8eac4f-b148-48b4-8229-2860a6d8a62c",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Angel Buckridge"
+            },
+            "address": {
+              "line1": "95 Kayla View",
+              "line2": "Castle Lane",
+              "town": "Kuhlman Park",
+              "county": "Greater Manchester",
+              "postcode": "XK7 2AY",
+              "country": "Solomon Islands"
+            }
+          },
+          "commentRedacted": "Comitatus arca eligendi quo tum temperantia. Recusandae thymbra ullam amplexus voveo. Cunctatio illum arguo.\nCorrupti paens adamo. Reprehenderit centum confido. Demum absens voluptatibus rem tempora appono delicate.\nAttero abbas tolero tergo damnatio. Desolo angulus curvo. Solutio dedecor talio vulgivagus tametsi cubo accommodo conqueror.\nNihil sufficio sumo comis vitium decipio civis. Contego conatus culpa. Nihil pauci amitto verus urbs.",
+          "metadata": {
+            "submittedAt": "2014-11-02T19:05:56.394Z",
+            "validatedAt": "2014-11-08T13:33:21.201Z",
+            "publishedAt": "2014-11-08T17:04:08.835Z"
+          }
+        },
+        {
+          "id": "efa19e98-7bdb-423c-b590-d0f2bb9012ae",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Roberto Cormier"
+            },
+            "address": {
+              "line1": "1 Nader-Block Street",
+              "line2": "Maryse Mead",
+              "town": "Lower Feestford",
+              "county": "Gwent",
+              "postcode": "HO4 1FU",
+              "country": "Greece"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Corrumpo tero repudiandae tubineus totam amo conservo inventore nihil. Annus arbor stultus vaco voluptatum voco. Concido conforto aliquam adamo certus amicitia utroque sunt.\nMinus absens coma canonicus tabesco tenax. Termes adamo adfero canonicus patrocinor calco. Adeo quisquam amissio magnam quae."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Tabula canonicus ambulo claustrum decumbo. Vereor balbus patria decretum terga. Colligo coniuratio agnitio utor appello curia spiculum ager.\nCariosus viscus armarium. Viriliter cerno amiculum ex canto degusto vociferor arca. Tenetur conscendo certe derelinquo adstringo absens adhaero varius."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Quaerat adsuesco adfectus desino vigor decerno. Adversus video eligendi deduco suasoria. Denuo appello conventus amitto dolorem expedita spes sapiente recusandae error.\nDeputo curatio ventito decimus colo vomer traho agnitio strenuus neque. Sortitus una esse textilis corporis unus. Curriculum laboriosam pauci temperantia corrigo consectetur testimonium viduo dolor iste."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Tenetur fugit angustus voluptatum administratio subiungo causa ascisco. Tum autus nobis absorbeo soleo esse dapifer capto. Crur casus valens defessus arma arma.\nVulnero dolorem cogito. Coniecto caput spoliatio vapulus desolo civis deleo. Bis valens infit vere ago concido natus."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Sed amiculum desipio compello voro. Abstergo degenero solvo aut terreo suppellex tergum debeo canonicus ars. Templum cauda contego ulciscor."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Curiositas aggredior terra. Possimus universe crur varius argentum bonus contra cupressus. Articulus adeptio iste sub tactus tripudio.\nVicissitudo caste dolores adamo somniculosus timidus deduco. Acceptus accusator tergeo universe adipisci solum ara. Defungo derideo absum blanditiis facilis bibo cunctatio tres minima."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-11-03T08:59:16.084Z",
+            "validatedAt": "2014-11-08T01:46:29.689Z",
+            "publishedAt": "2014-11-08T16:36:32.526Z"
+          }
+        },
+        {
+          "id": "0135e532-7fab-4309-8349-a3f37fddc986",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Bradley Greenfelder"
+            },
+            "address": {
+              "line1": "13 Cedar Close",
+              "line2": "Sycamore Close",
+              "town": "Marks Heath",
+              "county": "Borders",
+              "postcode": "GQ10 5UD",
+              "country": "Austria"
+            }
+          },
+          "commentRedacted": "Aspicio ceno commodo vicinus. Xiphias cura copiose defungo audio aestivus deludo. Beatus sperno temptatio.\nVestrum adeo demens crastinus contigo abundans laboriosam. Sustineo deorsum dolores tepesco. Vesper tumultus basium subseco bonus laborum venia pauci excepturi surculus.\nTricesimus adfectus bellum defungo admoveo vado. Cupiditas carmen deludo angustus apud comedo fugiat voluptas ducimus. Dapifer demum xiphias ulciscor trucido thermae aedificium via.",
+          "metadata": {
+            "submittedAt": "2014-10-31T03:56:56.994Z",
+            "validatedAt": "2014-10-31T12:33:29.356Z",
+            "publishedAt": "2014-11-01T09:09:28.454Z"
+          }
+        },
+        {
+          "id": "29da77a2-bac1-485d-a9a5-5b4990f93817",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Tina Schowalter"
+            },
+            "address": {
+              "line1": "607 Bailey Glade",
+              "line2": "Highfield Avenue",
+              "town": "Lower Jastham",
+              "county": "Kent",
+              "postcode": "HU8 5XR",
+              "country": "Sao Tome and Principe"
+            }
+          },
+          "commentRedacted": "Rem dicta amplitudo. Amor depulso suspendo adversus desino combibo. Pecto suffoco comis.\nNumquam degero curiositas tenuis thymum. Concido vacuus cubo. Corrupti quis bis cum audax defendo comes sto.\nTimor absconditus comes. Audio coma summisse pauci solium commodo culpo corona. Suffragium vallum stillicidium antea caterva damno strenuus depereo.\nAnser terror arbor adulescens vinculum pecus. Vergo depono aggredior allatus numquam cupiditas confugo tum caterva atqui. Curo suspendo verecundia condico vulgus ambulo.\nApud deripio ipsam repellat admitto tamen reiciendis clam. Defluo depereo cauda cilicium. Cavus subnecto ambulo stipes unde.",
+          "metadata": {
+            "submittedAt": "2014-11-03T03:23:56.474Z",
+            "validatedAt": "2014-11-03T13:38:56.887Z",
+            "publishedAt": "2014-11-06T03:47:47.571Z"
+          }
+        },
+        {
+          "id": "0cea6fae-cd25-4bfe-b6f0-091350b6dcdb",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Irma Botsford"
+            },
+            "address": {
+              "line1": "9 Baron Paddock",
+              "line2": "Fahey Rise",
+              "town": "Nether Parker",
+              "county": "Lancashire",
+              "postcode": "NT5 3UN",
+              "country": "Mayotte"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Cubo velociter anser cupressus maiores pecus succurro tempus. Arbitro somniculosus temptatio unde crinis capillus. Cupressus creator delicate adsum patior delicate acies decimus conscendo depopulo."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-11-01T07:50:50.825Z",
+            "validatedAt": "2014-11-02T01:37:11.859Z",
+            "publishedAt": "2014-11-05T09:26:39.920Z"
+          }
+        },
+        {
+          "id": "5c8e98d5-b2ee-4dcb-a658-f71ba34d7577",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Edith Padberg"
+            },
+            "address": {
+              "line1": "3 Towne Orchard",
+              "line2": "Garfield Vale",
+              "town": "Bernhard-le-O'Kon",
+              "county": "West Glamorgan",
+              "postcode": "QZ20 9TM",
+              "country": "Solomon Islands"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Aetas talio dolorum demitto subiungo teneo cunae aestus sequi explicabo. Aegrus avaritia tergiversatio delectus vix vergo. Cernuus verto cito qui defluo depromo velum tenetur."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Pecus aestus traho tempora verumtamen certe. Demitto absum ademptio acer tot alioqui confero clibanus derelinquo. Valde torqueo titulus virgo cetera tempus."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-11-02T23:07:02.204Z",
+            "validatedAt": "2014-11-05T20:36:08.323Z",
+            "publishedAt": "2014-11-07T02:31:16.383Z"
+          }
+        },
+        {
+          "id": "9861c60b-5ce2-47d8-96e6-d734d64a13eb",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Matt Kihn"
+            },
+            "address": {
+              "line1": "899 Bosco Meadows",
+              "line2": "Kutch Lea",
+              "town": "Upper Ferrystone",
+              "county": "Cornwall",
+              "postcode": "MK19 3TZ",
+              "country": "Bulgaria"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Odit adeptio vociferor clamo. Vito aufero architecto barba attonbitus demergo pel cavus caute. Accusator strenuus venio.\nUniverse sto depereo quidem bonus ex. Patruus sapiente cogito ambulo. Tondeo clementia pecto conforto vestrum cultellus vomer distinctio."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Viduo tres cimentarius conturbo apto adfectus arceo debitis. Repellat utrum in synagoga. Stultus aqua aeternus admoveo solitudo.\nVespillo aggredior decerno exercitationem corrupti bis crepusculum ter. Aperte tamquam consequatur aequus coruscus repudiandae somnus auctus turbo compono. Arbitro accusamus surgo facilis."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Suscipio defero civitas suffragium. Autus sint sperno. Comes approbo excepturi decens strenuus colligo abutor quis."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Armarium incidunt cito curtus subiungo deporto conservo cariosus virtus. Canonicus adulatio summa vulnus maiores apparatus cauda cogito nam. Acceptus uter cumque deprimo corroboro delibero armarium.\nId minus denique tendo velum venio verbum. Tonsor ullam delego complectus totus suffragium arbor creptio annus. Eligendi quasi territo celo desparatus adamo arguo venia enim."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-11-05T23:40:49.076Z",
+            "validatedAt": "2014-11-06T02:21:33.689Z",
+            "publishedAt": "2014-11-07T01:04:52.388Z"
+          }
+        },
+        {
+          "id": "d4166967-bcf4-4ecd-87c2-4f70dd400166",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Jaime Lowe"
+            },
+            "address": {
+              "line1": "328 Ellsworth Fold",
+              "line2": "Louisa Glade",
+              "town": "East Batz",
+              "county": "Worcestershire",
+              "postcode": "XF37 7YR",
+              "country": "Sao Tome and Principe"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Atqui adipisci torqueo tego ad angulus. Turpis sed deficio bos tergum sollers undique. Cursus fugiat vilitas omnis alioqui."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Textilis torqueo acerbitas clam clarus creator virgo. Tersus crustulum cupressus uterque solio cilicium capio vulpes apud sit. Audio conor averto."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Vilitas vitiosus censura ventus beatus. Demitto adeo ventosus adfectus utroque voco sto cresco triduana. Trucido coma bibo terebro torqueo tepesco.\nAntea doloremque trucido conspergo comedo accusantium appositus terra alias abscido. Varius suspendo brevis. Cresco dapifer curiositas."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Absque candidus textor. Aer atqui vesper cotidie acerbitas pauper appello turpis cresco basium. Ustilo vos alias curo basium turpis victus optio delinquo argentum."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Itaque ambulo credo vulgaris. Capto consectetur valeo tabernus antepono. Solus vilicus ante umquam comprehendo via denuncio cavus."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Coniecto totam urbanus thymbra appositus attollo accendo cursim. Solio textor exercitationem alioqui tamisium. Compello averto aestus villa.\nTot blanditiis valetudo spiritus. Atavus ver curto chirographum vereor tergiversatio strues templum. Abundans in tutis tot acies ambulo corroboro vociferor certus doloribus."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Aveho culpa centum adimpleo. Cribro absum enim minus cilicium spargo timidus id vita volubilis. Suffoco tero esse ait basium succedo tantillus temporibus.\nConfido curo cupio articulus cupio concedo tricesimus casso campana. Coniecto pax conculco adflicto eaque alter amet similique. Bibo inflammatio deprecator concedo."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-30T18:26:56.592Z",
+            "validatedAt": "2014-11-08T03:07:19.568Z",
+            "publishedAt": "2014-11-08T09:33:05.259Z"
+          }
+        },
+        {
+          "id": "3d68f096-5f3c-4033-881f-b9caaaf6daee",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Frankie Hermiston"
+            },
+            "address": {
+              "line1": "2 Moen Hill",
+              "line2": "West Grove",
+              "town": "South Hane",
+              "county": "South Glamorgan",
+              "postcode": "DO76 4XT",
+              "country": "Oman"
+            }
+          },
+          "commentRedacted": "Tunc vulnus talio vereor tabgo absque verecundia temeritas auctus curto. Admoveo valens officiis combibo velut valens thesaurus. Amor culpa cultura ubi minima calamitas totus minima culpo aliquam.\nTorrens sustineo charisma tergo compono alienus. Fuga libero usus color demoror texo alienus non creator. Optio advenio crinis cometes saepe subiungo validus attero trado.\nApparatus derelinquo demum maxime summisse strues tolero sufficio tergum. Taedium aperiam curtus vulgo tremo. Caute spectaculum perferendis solium quidem audacia tutis.\nValens dolorum comprehendo repellendus aer audax derideo adficio soluta. Cruciamentum ducimus beatae a amplitudo. Aperiam careo culpo minima distinctio solvo.\nTempus tabernus tenus. Solus ter conatus esse catena termes maiores rerum. Atrox voluptate reprehenderit demo altus eos.",
+          "metadata": {
+            "submittedAt": "2014-10-21T21:41:05.469Z",
+            "validatedAt": "2014-10-22T05:02:55.481Z",
+            "publishedAt": "2014-10-27T04:13:00.406Z"
+          }
+        },
+        {
+          "id": "0a310617-c001-451f-b356-856e1f146d1a",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Leticia Greenholt"
+            },
+            "address": {
+              "line1": "177 Quitzon Way",
+              "line2": "Dibbert Path",
+              "town": "Kerlukeford",
+              "county": "Norfolk",
+              "postcode": "VJ58 3DF",
+              "country": "Bangladesh"
+            }
+          },
+          "commentRedacted": "Decor subiungo apud magni arx suscipit valetudo. Auctor tum paens. Abeo velut absens texo blandior credo valens aut vorago.",
+          "metadata": {
+            "submittedAt": "2014-10-21T01:28:29.902Z",
+            "validatedAt": "2014-11-02T16:00:57.359Z",
+            "publishedAt": "2014-11-05T01:35:29.339Z"
+          }
+        },
+        {
+          "id": "9cf57640-3e78-4ec1-a3e4-e916bd0ccdf4",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Veronica Welch"
+            },
+            "address": {
+              "line1": "70 Lynn Park",
+              "line2": "Daphne Walk",
+              "town": "East Moen Heath",
+              "county": "Rutland",
+              "postcode": "PL64 7CR",
+              "country": "Kenya"
+            }
+          },
+          "commentRedacted": "Averto accedo perferendis cur tunc deorsum tamquam. Sponte architecto calamitas consequatur brevis civis beatae aro spectaculum vindico. Quidem artificiose tondeo.\nAngelus aro debilito aut caste confido aestas celebrer. Tibi unus bene. Tristis ulterius summisse bellicus cumque claustrum iusto alioqui cerno coma.\nDeleniti arcus vomito accendo arbustum peior succurro qui. Amicitia contabesco atavus delego totus audacia unde ascit desipio. Vinco abstergo claudeo corpus sufficio absum studio eum.\nAcquiro spiculum comis taedium ago crux blanditiis. Coniuratio tutamen aestas vilis aut aranea delicate officia vapulus. Cultellus validus adiuvo custodia sunt callide patrocinor.",
+          "metadata": {
+            "submittedAt": "2014-11-08T22:14:46.928Z",
+            "validatedAt": "2014-11-08T23:36:42.404Z",
+            "publishedAt": "2014-11-08T23:37:00.828Z"
+          }
+        },
+        {
+          "id": "3b68b32a-d1c4-48c5-bb48-1f48802d2514",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Salvatore Feil"
+            },
+            "address": {
+              "line1": "6 Western Avenue",
+              "line2": "Vincenzo Meadow",
+              "town": "Kuphal-upon-Glover",
+              "county": "Berkshire",
+              "postcode": "RU1 4SO",
+              "country": "Suriname"
+            }
+          },
+          "commentRedacted": "Vester clamo dolorum carbo animus varietas calco cotidie circumvenio. Vox versus aer creptio. Vapulus cervus tracto contabesco tamen aurum speculum verto.\nCulpo facilis sumo cimentarius. Cupiditate administratio trado cohors amet praesentium subiungo quisquam. Eligendi aufero reprehenderit temperantia.",
+          "metadata": {
+            "submittedAt": "2014-10-24T14:48:49.100Z",
+            "validatedAt": "2014-10-26T06:11:50.868Z",
+            "publishedAt": "2014-11-02T19:55:38.293Z"
+          }
+        },
+        {
+          "id": "ff7a50f3-8938-48ca-8d31-a748c8988ee3",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Debra Lakin"
+            },
+            "address": {
+              "line1": "2 Fisher Side",
+              "line2": "Laburnum Grove",
+              "town": "Great Bauch",
+              "county": "Buckinghamshire",
+              "postcode": "GM7 9GF",
+              "country": "Guadeloupe"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Vorago collum triduana. Viridis coniuratio aliqua voluptatum trucido substantia. Copia cumque quae ager cado desino deficio vulgaris absum absque.\nEx cilicium canto tutis fugiat anser varietas amita. Fugiat crustulum tamdiu aer ducimus curto desparatus. Vulnus surculus ter."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Adversus caecus libero peccatus triduana. Surgo paulatim coadunatio consuasor adipisci coruscus cubo cetera uberrime commodi. Cometes facere cena cultellus caelestis torqueo totidem confugo neque.\nTheca tertius vos. Defendo sint defaeco. Creta vitium aperte caste vobis harum ipsum."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Uberrime coma corrupti sollicito pauci cerno aqua amplitudo. Valens utroque adsidue universe recusandae. Defendo acidus turbo qui clam ceno conitor.\nSoluta uterque utpote alo. Universe averto comminor. Cribro convoco terra tepesco cauda."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Usitas peior statua strenuus. Sumptus torrens excepturi. Alo tum stella vergo."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Custodia aequus sperno sursum aureus territo colligo. Tolero desparatus sequi doloribus una sunt sortitus. Statua aegrus cura totidem vociferor.\nTermes stillicidium tepidus maxime unus casus. Decor angulus stella decimus. Vergo adsidue nihil velum acies."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Comptus aiunt utique ipsum tertius error. Decipio acerbitas calcar copia certe cetera adeptio ulciscor triumphus. Decor cado super officiis repudiandae tactus demo coniuratio adulescens verus."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Centum altus vinculum. Cimentarius aliquid abutor. Verbera earum quod amo demum tubineus."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-23T14:49:22.854Z",
+            "validatedAt": "2014-11-06T18:24:11.541Z",
+            "publishedAt": "2014-11-07T05:10:48.974Z"
+          }
+        },
+        {
+          "id": "577df15e-c482-4fc5-b8ae-c2ed782fe850",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Joe Kutch"
+            },
+            "address": {
+              "line1": "238 Meadow Drive",
+              "line2": "South View",
+              "town": "Jaskolskibury",
+              "county": "Hertfordshire",
+              "postcode": "FE9 2RL",
+              "country": "Timor-Leste"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Cotidie tollo caecus cunctatio vilis sui comparo viriliter. Adimpleo tergeo doloremque catena trepide vindico barba cervus desino. Esse termes aggredior."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Clementia coruscus vito comminor ascit. Clam comminor sonitus statua. Crastinus inflammatio ventosus."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Veritatis cupressus quia temeritas exercitationem. Argumentum alias adulatio harum ad. Comitatus callide absum."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Alii cilicium chirographum tui thermae pax tot adversus abeo placeat. Aliquid turpis statim temperantia condico soleo eaque tredecim. Ulciscor audax triumphus officiis tripudio carcer supellex accusamus."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-11-08T01:39:47.012Z",
+            "validatedAt": "2014-11-08T11:04:33.846Z",
+            "publishedAt": "2014-11-08T18:55:04.051Z"
+          }
+        },
+        {
+          "id": "0c418d02-372b-4756-99fd-90e12968f94e",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Jo Homenick"
+            },
+            "address": {
+              "line1": "18 Stokes Ridge",
+              "line2": "George Street",
+              "town": "Great Wintheiser",
+              "county": "Cornwall",
+              "postcode": "OP3 6SI",
+              "country": "Sint Maarten"
+            }
+          },
+          "commentRedacted": "Damno vestigium sublime spectaculum inflammatio. Aliquam quasi sol derideo. Cunabula denuo patior vicinus ad.\nRepellendus assentator admoneo custodia tripudio denego. Patior vis supplanto aveho. Illo ancilla apparatus.\nSunt ulciscor pax balbus. Ascit aeternus vere quas tergum solitudo cupressus arbor. Tepidus appono amitto succurro concedo.\nDenego deporto casso tergum aestivus. Copiose excepturi termes nesciunt utor callide verus ipsa trado aiunt. Consuasor corroboro tandem comburo cubitum ab alter vilitas cuppedia versus.\nSol comburo suffoco copia adipisci expedita civitas enim crur. Vado magnam vilis adulescens curo campana custodia. Caput vespillo appello iure audio vetus suggero vulgivagus tristis.",
+          "metadata": {
+            "submittedAt": "2014-10-19T10:42:19.720Z",
+            "validatedAt": "2014-11-01T01:01:05.903Z",
+            "publishedAt": "2014-11-04T12:11:17.826Z"
+          }
+        },
+        {
+          "id": "c3852298-e145-49eb-a397-8a6ff4d95ceb",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Javier Parisian"
+            },
+            "address": {
+              "line1": "24 School Lane",
+              "line2": "Blanda Orchard",
+              "town": "Great McCullough",
+              "county": "Lancashire",
+              "postcode": "SY5 8AS",
+              "country": "Argentina"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Cerno allatus tum vestrum adfectus aestivus succedo excepturi. Quae facere titulus pecus quis. Sint conatus vero sint temptatio astrum color."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Tenus crudelis cito vestrum adduco demoror. Contra dolores deorsum cernuus animi. Depromo attero eum corrigo solum."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Bellicus perferendis clementia ulterius corrigo. Auxilium incidunt corrigo sequi cunae umquam sperno. Aestus adeptio talis laborum veritas."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Sum nam officia laboriosam tollo aetas voluptates vinculum. Ater sum perspiciatis uredo voro. Facilis theca tergiversatio tego timidus timor."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Condico vomica color addo corpus tui tutamen. Minima minus ager audeo tabgo ustilo absconditus demo attonbitus. Quis crastinus civitas aer ventosus cura enim tutamen.\nVolubilis depereo cultura cervus. Aestas theologus cubicularis consuasor curia. Textilis venustas villa sponte aggero."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Aperte speculum theologus derelinquo dolores subito viscus videlicet adfero. Abeo nulla uxor temeritas voluptas decet avarus omnis timor sui. Delectatio conatus trepide canis defetiscor correptius casus officiis aliquid somniculosus.\nCoaegresco civitas bonus vaco acquiro amplus spes pax ventosus. Coepi adnuo admitto odit quaerat color. Clamo carmen caecus."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Desipio natus ambitus deludo cura creptio averto. Curis provident umquam ipsa temeritas. Volutabrum tolero somnus cribro coaegresco arcus theatrum.\nConcedo suggero deripio cornu. Theca blanditiis tabesco speciosus cunctatio tubineus decumbo. Viriliter decumbo recusandae."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-25T19:10:40.507Z",
+            "validatedAt": "2014-11-06T10:53:06.405Z",
+            "publishedAt": "2014-11-08T14:29:45.302Z"
+          }
+        },
+        {
+          "id": "042f84ae-01b0-41c2-9630-051bfe771daf",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Doug Mitchell"
+            },
+            "address": {
+              "line1": "430 Lee Grange",
+              "line2": "O'Connell Grange",
+              "town": "Kuhn-on-Wunsch",
+              "county": "Warwickshire",
+              "postcode": "CD08 0GK",
+              "country": "Paraguay"
+            }
+          },
+          "commentRedacted": "Itaque auditor utrimque aliquid aliquid. Tamquam vobis conscendo amplexus. Accusator vitiosus defessus canis apto cado.\nCur depraedor cultura. Sonitus cibus possimus adflicto ancilla virga terreo complectus acies. Aegre audacia caries inflammatio caterva campana volubilis stips avarus.\nUlterius cibo audacia ager eaque comedo cenaculum. Constans sonitus casso iure. Temperantia nulla utrum nobis.\nOfficia aestas subito illum cibus barba tersus dapifer. Canis suppono aegre territo cornu odit contra talus ipsum. Qui uredo administratio supplanto.\nOptio somnus cunctatio coepi sperno voluptate coma adficio. Tenuis sollicito aequus despecto cena nobis. Congregatio aeternus socius tenus autus carpo.",
+          "metadata": {
+            "submittedAt": "2014-10-30T07:24:43.002Z",
+            "validatedAt": "2014-11-06T15:59:57.607Z",
+            "publishedAt": "2014-11-08T21:58:59.124Z"
+          }
+        },
+        {
+          "id": "72e50bb2-3043-4a51-a636-1effe7d8ff00",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Ellen Farrell"
+            },
+            "address": {
+              "line1": "75 Lauren Drove",
+              "line2": "Linwood Heights",
+              "town": "Upton Hane Court",
+              "county": "Strathclyde",
+              "postcode": "GJ1 9ZG",
+              "country": "Costa Rica"
+            }
+          },
+          "commentRedacted": "Soleo vester umerus officia thymbra tamen laudantium sursum. Crustulum comburo usque vicissitudo tardus super crapula. Sapiente complectus bellicus conturbo explicabo vociferor videlicet cogito certus.\nTextor doloremque verbum abscido victoria aranea villa solitudo. Architecto caterva theca vehemens vulnus succedo virtus terreo. Adflicto ambulo cibus confugo quis cribro acies enim.\nPerferendis dicta exercitationem spectaculum coaegresco laudantium. Capto sint corporis accusator acerbitas voco thorax comedo supra attero. Asper rem defendo thorax tempora considero ascisco vehemens.\nAbsorbeo animi teres avaritia demoror cetera crudelis conor crapula occaecati. Arca quasi vergo. Aspicio sapiente volaticus auctus coniuratio amaritudo.\nSuper curiositas vos libero molestias tero certe angelus tunc. Utrimque aufero adicio aperio tergo. Aggero sui bellicus audacia voluptas vulpes.",
+          "metadata": {
+            "submittedAt": "2014-10-26T15:19:29.781Z",
+            "validatedAt": "2014-10-30T15:02:53.477Z",
+            "publishedAt": "2014-11-05T06:38:42.593Z"
+          }
+        },
+        {
+          "id": "ced6e5a7-606b-4f92-9eec-faacb12953dc",
+          "sentiment": "supportive",
+          "author": {
+            "name": {
+              "singleLine": "Aubrey Wintheiser-McKenzie"
+            },
+            "address": {
+              "line1": "1 Station Road",
+              "line2": "Darren Grove",
+              "town": "Shanahan-over-Price",
+              "county": "Tyne and Wear",
+              "postcode": "QL01 8FB",
+              "country": "Kazakhstan"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Exercitationem totidem capto. Titulus adimpleo tergo adstringo alias consuasor denuo. Ventus advenio ambitus vitiosus pax triduana amplexus.\nTempora verecundia ambitus ubi vitae vulgaris stultus acsi atavus explicabo. Vallum spiritus thermae eius balbus turba. Alo tabesco aveho suppono solus paens stillicidium veritas."
+            },
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Supplanto unde temporibus suscipit textus contego conforto. Victus capillus incidunt textus cupiditas sodalitas. Provident voluptate cura calamitas mollitia.\nVelociter contabesco non. Subiungo acidus tollo defessus curia expedita tempora. Soluta tabesco vorago tracto tollo videlicet officia tenuis solus."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Decimus decretum talio tabgo aeternus pauper tutis. Speciosus solium et. Consequuntur patrocinor pax ver abscido crudelis tenetur alveus.\nChirographum alius basium cibus vir tersus voluptas accusator vicissitudo dedecor. Viridis ducimus bibo subvenio claustrum adstringo adsidue alius. Contego capitulus ante sequi aureus abduco subiungo esse non iusto."
+            },
+            {
+              "topic": "privacy",
+              "question": "What are your comments about privacy?",
+              "comment": "Solum creber utrum damnatio aequus adfero ambitus solvo curso demonstro. Laborum maxime reiciendis. Aegrotatio chirographum voveo vespillo copia."
+            },
+            {
+              "topic": "noise",
+              "question": "What are your comments about noise?",
+              "comment": "Armarium cras adimpleo ubi vobis stipes. Tergeo blandior aspernatur venio fuga verecundia blanditiis. Depereo vae crepusculum qui attonbitus quidem complectus compello caritas.\nColo vae tergo chirographum benigne. Temptatio bis degusto doloremque. Depereo appositus reprehenderit vulgo verbum sollicito vilis."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Delego desparatus valens. Umbra pectus accommodo curatio bene. Crustulum urbanus tonsor aufero."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Uxor fugit cibus. Illo thalassinus censura aveho voluptatem bardus. Curvo veniam torrens rem.\nCognatus capio ventus via. Commemoro arx aliqua turba unus tribuo acceptus. Comparo nulla correptius beneficium talio absum dignissimos stillicidium ab tubineus."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-11-06T13:30:11.572Z",
+            "validatedAt": "2014-11-08T08:34:02.120Z",
+            "publishedAt": "2014-11-08T20:21:14.359Z"
+          }
+        },
+        {
+          "id": "8f9c9b5d-756c-47b2-adfb-1cf93ed46c6d",
+          "sentiment": "objection",
+          "author": {
+            "name": {
+              "singleLine": "Jeremiah Skiles"
+            },
+            "address": {
+              "line1": "87 Glover Mount",
+              "line2": "Hawthorn Avenue",
+              "town": "Great Wymanwick",
+              "county": "Tyne and Wear",
+              "postcode": "IZ37 6PK",
+              "country": "United Arab Emirates"
+            }
+          },
+          "commentRedacted": "Saepe officiis exercitationem. Ara despecto cedo audacia capitulus adstringo complectus acidus velum. Atrox vulgivagus autem patior ante surculus adduco.\nThymum verumtamen cohaero facilis. Ustulo taedium comes sufficio. Territo eaque succedo dedecor caries virga causa crapula volubilis.\nCohibeo cado coadunatio alius toties tabella officia compello. Aiunt conatus aliquam ventus aptus tutamen deleo laborum administratio ex. Calculus architecto copiose perferendis.",
+          "metadata": {
+            "submittedAt": "2014-10-22T19:40:07.157Z",
+            "validatedAt": "2014-11-04T00:41:02.051Z",
+            "publishedAt": "2014-11-08T01:16:13.865Z"
+          }
+        },
+        {
+          "id": "cffa4a5a-b1c4-40f0-8232-1057244c2b04",
+          "sentiment": "neutral",
+          "author": {
+            "name": {
+              "singleLine": "Danny Kohler"
+            },
+            "address": {
+              "line1": "60 Elm Close",
+              "line2": "Moss Lane",
+              "town": "Great Rippiningham",
+              "county": "County Antrim",
+              "postcode": "FF5 9EJ",
+              "country": "Jamaica"
+            }
+          },
+          "commentRedacted": [
+            {
+              "topic": "design",
+              "question": "What are your comments about design?",
+              "comment": "Delinquo tabesco succurro supplanto auxilium porro certe vitae caelestis veniam. Sulum adamo arbustum absum veritatis casus triumphus sulum contigo. Avarus aestivus ante caelestis stips conatus velum teres thorax dedico.\nVereor caute vinco solus. Compello vallum ascisco circumvenio vestrum acerbitas asporto mollitia. Crinis speciosus conscendo."
+            },
+            {
+              "topic": "light",
+              "question": "What are your comments about light?",
+              "comment": "Sunt tonsor debeo quae dolorem curriculum aedificium textor. Vorago cras averto voluptate vilis caput coniecto succurro. Talis utilis ad votum ipsum trado veniam.\nTum repudiandae depromo substantia esse deinde cuius tam umerus inflammatio. Arcesso sperno chirographum. Deleniti vorago aperio argentum volva ter cupressus molestiae."
+            },
+            {
+              "topic": "traffic",
+              "question": "What are your comments about traffic?",
+              "comment": "Super conscendo vomito damnatio deputo acsi adfectus aedificium tantum comprehendo. Sequi tum coadunatio odit cumque universe cometes. Amicitia veniam amoveo consequatur."
+            },
+            {
+              "topic": "other",
+              "question": "What are your comments about other?",
+              "comment": "Vulariter nulla traho amita alo cruciamentum subvenio spiculum urbs depraedor. Vulgaris avaritia absque cruciamentum corona. Tripudio quibusdam virga vesica ubi considero velut."
+            },
+            {
+              "topic": "use",
+              "question": "What are your comments about use?",
+              "comment": "Tersus patior cibus casso degero tabernus vulnero conitor vox accusamus. Vomito defungo voluptas vorago quasi accedo venustas. Calamitas corrigo eligendi contra volubilis.\nVeritatis ipsum tumultus depereo tactus damnatio. Atqui conduco sapiente adipisci. Capillus angulus peccatus antea claro deprimo tamisium taceo villa crebro."
+            },
+            {
+              "topic": "access",
+              "question": "What are your comments about access?",
+              "comment": "Cognatus vestigium pariatur absorbeo alias aliquid viduo utrimque quibusdam. Clibanus ventosus verbum qui. Quod facere aeternus angustus volubilis clementia."
+            }
+          ],
+          "metadata": {
+            "submittedAt": "2014-10-20T10:04:48.747Z",
+            "validatedAt": "2014-11-01T16:56:28.344Z",
+            "publishedAt": "2014-11-07T17:52:55.104Z"
+          }
+        }
+      ]
+    },
+    "specialist": {
+      "summary": {
+        "totalComments": 0,
+        "totalConsulted": 0,
+        "sentiment": {
+          "approved": 0,
+          "amendmentsNeeded": 0,
+          "objected": 0
+        }
+      },
+      "comments": []
+    }
+  },
+  "files": [
+    {
+      "id": 1414785643555,
+      "name": "meatball_yet_sandal.xhtml",
+      "association": "application",
+      "type": [
+        "bioaerosolAssessment",
+        "fireSafetyReport",
+        "floorPlan.proposed",
+        "townCentreImpactAssessment"
+      ],
+      "thumbnailUrl": "https://loremflickr.com/640/480?lock=8767656465268736",
+      "url": "https://unhappy-derivative.info/",
+      "metadata": {
+        "size": {
+          "bytes": 75636481
+        },
+        "mimeType": "image/jpeg",
+        "createdAt": "2014-10-31T20:00:43.555Z",
+        "submittedAt": "2014-12-19T22:47:04.343Z",
+        "validatedAt": "2014-12-24T18:51:17.250Z",
+        "publishedAt": "2014-12-28T07:13:27.193Z"
+      }
+    },
+    {
+      "id": 1417590926727,
+      "name": "checking_stimulating.pdf",
+      "association": "application",
+      "type": [
+        "bioaerosolAssessment"
+      ],
+      "url": "https://vapid-termination.gov.uk",
+      "metadata": {
+        "size": {
+          "bytes": 11247569
+        },
+        "mimeType": "application/x-abiword",
+        "createdAt": "2014-12-03T07:15:26.727Z",
+        "submittedAt": "2014-12-25T22:34:45.431Z",
+        "validatedAt": "2015-01-04T13:34:58.060Z",
+        "publishedAt": "2015-01-04T14:52:50.980Z"
+      }
+    },
+    {
+      "id": 1417208020246,
+      "name": "when_flag.ogg",
+      "association": "application",
+      "type": [
+        "disabilityExemptionEvidence",
+        "heritageStatement"
+      ],
+      "thumbnailUrl": "https://loremflickr.com/640/480?lock=8907838472585216",
+      "url": "https://roasted-pillar.london/",
+      "metadata": {
+        "size": {
+          "bytes": 33110599
+        },
+        "mimeType": "font/woff2",
+        "createdAt": "2014-11-28T20:53:40.246Z",
+        "submittedAt": "2014-12-21T20:01:19.104Z",
+        "validatedAt": "2014-12-29T23:19:52.328Z",
+        "publishedAt": "2014-12-30T13:50:41.211Z"
+      }
+    },
+    {
+      "id": 1415849562562,
+      "name": "tousle_ack.avi",
+      "association": "application",
+      "type": [
+        "roofPlan.proposed"
+      ],
+      "thumbnailUrl": "https://picsum.photos/seed/qkJJu5p2t/640/480",
+      "url": "https://awesome-wheel.ac.uk/",
+      "metadata": {
+        "size": {
+          "bytes": 69457109
+        },
+        "mimeType": "text/html",
+        "createdAt": "2014-11-13T03:32:42.562Z",
+        "submittedAt": "2014-12-01T22:10:09.968Z",
+        "validatedAt": "2015-01-01T11:30:55.791Z",
+        "publishedAt": "2015-01-04T20:13:38.893Z"
+      }
+    }
+  ],
+  "submission": {
+    "applicationType": "pa.part1.classA",
+    "data": {
+      "user": {
+        "role": "applicant"
+      },
+      "applicant": {
+        "type": "individual",
+        "name": {
+          "first": "William",
+          "last": "Zane"
+        },
+        "email": "areyouon@email.org",
+        "phone": {
+          "primary": "01234000000"
+        },
+        "address": {
+          "sameAsSiteAddress": true
+        }
+      },
+      "property": {
+        "address": {
+          "latitude": 51.3304155,
+          "longitude": -0.1043842,
+          "x": 532161,
+          "y": 160741,
+          "title": "32, ST JAMES ROAD, PURLEY",
+          "source": "Ordnance Survey",
+          "uprn": "100020623888",
+          "usrn": "20502851",
+          "pao": "32",
+          "street": "ST JAMES ROAD",
+          "town": "PURLEY",
+          "postcode": "CR8 2DL",
+          "singleLine": "32 ST JAMES ROAD, PURLEY, CROYDON, CR8 2DL"
+        },
+        "localAuthorityDistrict": [
+          "Croydon"
+        ],
+        "region": "London",
+        "ward": "Purley & Woodcote",
+        "type": "residential.dwelling.house.detached",
+        "planning": {
+          "sources": [
+            "https://api.editor.planx.dev/gis/southwark?geom=MULTIPOLYGON+%28%28%28-0.072763+51.456622%2C+-0.072749+51.456669%2C+-0.073167+51.456732%2C+-0.073195+51.456736%2C+-0.073213+51.456688%2C+-0.072763+51.456622%29%29%29&analytics=false&sessionId=80d3c3c2-0d1c-4a79-be99-912f488c2f02",
+            "https://api.editor.planx.dev/roads?usrn=22500947"
+          ],
+          "designations": [
+            {
+              "value": "tpo",
+              "description": "Tree Preservation Order (TPO) or zone",
+              "intersects": false
+            },
+            {
+              "value": "flood",
+              "description": "Flood risk",
+              "intersects": false
+            },
+            {
+              "value": "listed",
+              "description": "Listed building",
+              "intersects": false
+            },
+            {
+              "value": "articleFour",
+              "description": "Article 4 direction area",
+              "intersects": false
+            },
+            {
+              "value": "monument",
+              "description": "Site of a Scheduled Monument",
+              "intersects": false
+            },
+            {
+              "value": "greenBelt",
+              "description": "Green belt",
+              "intersects": false
+            },
+            {
+              "value": "designated",
+              "description": "Designated land",
+              "intersects": false
+            },
+            {
+              "value": "nature.SAC",
+              "description": "Special Area of Conservation (SAC)",
+              "intersects": false
+            },
+            {
+              "value": "nature.SPA",
+              "description": "Special Protection Area (SPA)",
+              "intersects": false
+            },
+            {
+              "value": "nature.ASNW",
+              "description": "Ancient Semi-Natural Woodland (ASNW)",
+              "intersects": false
+            },
+            {
+              "value": "nature.SSSI",
+              "description": "Site of Special Scientific Interest (SSSI)",
+              "intersects": false
+            },
+            {
+              "value": "brownfieldSite",
+              "description": "Brownfield site",
+              "intersects": false
+            },
+            {
+              "value": "designated.WHS",
+              "description": "UNESCO World Heritage Site (WHS)",
+              "intersects": false
+            },
+            {
+              "value": "registeredPark",
+              "description": "Registered parks and gardens",
+              "intersects": false
+            },
+            {
+              "value": "designated.AONB",
+              "description": "Area of Outstanding Natural Beauty (AONB)",
+              "intersects": false
+            },
+            {
+              "value": "nature.ramsarSite",
+              "description": "Ramsar site",
+              "intersects": false
+            },
+            {
+              "value": "designated.nationalPark",
+              "description": "National Park",
+              "intersects": false
+            },
+            {
+              "value": "designated.conservationArea",
+              "description": "Conservation area",
+              "intersects": false
+            },
+            {
+              "value": "designated.nationalPark.broads",
+              "description": "National Park - Broads",
+              "intersects": false
+            },
+            {
+              "value": "road.classified",
+              "description": "Classified road",
+              "intersects": false
+            }
+          ]
+        },
+        "boundary": {
+          "site": {
+            "type": "Feature",
+            "geometry": {
+              "type": "MultiPolygon",
+              "coordinates": [
+                [
+                  [
+                    [
+                      -0.072763,
+                      51.456622
+                    ],
+                    [
+                      -0.072749,
+                      51.456669
+                    ],
+                    [
+                      -0.073167,
+                      51.456732
+                    ],
+                    [
+                      -0.073195,
+                      51.456736
+                    ],
+                    [
+                      -0.073213,
+                      51.456688
+                    ],
+                    [
+                      -0.072763,
+                      51.456622
+                    ]
+                  ]
+                ]
+              ]
+            },
+            "properties": {
+              "name": "",
+              "entity": 12000593377,
+              "prefix": "title-boundary",
+              "dataset": "title-boundary",
+              "end-date": "",
+              "typology": "geography",
+              "reference": "37786766",
+              "entry-date": "2024-05-06",
+              "start-date": "2002-06-26",
+              "organisation-entity": "13"
+            }
+          },
+          "area": {
+            "hectares": 0.017289,
+            "squareMetres": 172.89
+          }
+        }
+      },
+      "application": {
+        "fee": {
+          "calculated": 120,
+          "payable": 0,
+          "exemption": {
+            "disability": true,
+            "resubmission": false
+          },
+          "reduction": {
+            "sports": false,
+            "parishCouncil": false,
+            "alternative": false
+          }
+        },
+        "declaration": {
+          "accurate": true,
+          "connection": {
+            "value": "none"
+          }
+        }
+      },
+      "proposal": {
+        "projectType": [
+          "extend.rear"
+        ],
+        "description": "Antea dolor conduco tutamen absum crepusculum cerno. Antea barba succedo canis defero denego quibusdam tepidus officiis considero. Atrocitas carbo animus utilis depopulo thalassinus arceo.\nPlaceat vivo comis infit bene candidus. Vulariter ara civitas. Corona caelestis amor urbs desparatus fugiat consequuntur accusantium.\nComminor error anser commodi alioqui acerbitas vicissitudo tribuo tandem. Veritatis comburo aro ut demens vae cibus. Cattus causa suus acerbitas vae dolore nam repellendus.\nAmplitudo cursus aequus molestias nulla. Tactus degenero alius totam turbo credo. Ubi bene vigor conduco verus.\nCaput cognatus subiungo amor arbor assumenda capillus adficio tribuo vulpes. Demo approbo tertius conscendo aegre. Condico cariosus porro creta animi denuncio vindico coaegresco.\nAdipisci derelinquo acidus. Ver pariatur qui adulescens asperiores solvo vomito theatrum casus. Quidem atrocitas comitatus debitis quisquam subiungo.\nSed verbera cervus terga atque adhaero. Tenus circumvenio agnitio. Amitto solus templum curatio.\nThermae cunctatio colo appello conitor aeger. Bibo sollicito tonsor defessus. Trucido denuo vulpes corpus debilito a velit.\nNecessitatibus damnatio illum thermae amo quas. Sustineo veritas ventosus carcer tero. Succedo uxor defetiscor cubo.",
+        "date": {
+          "start": "2024-06-17",
+          "completion": "2050-06-18"
+        },
+        "boundary": {
+          "site": {
+            "type": "Feature",
+            "geometry": {
+              "type": "MultiPolygon",
+              "coordinates": [
+                [
+                  [
+                    [
+                      -0.072763,
+                      51.456622
+                    ],
+                    [
+                      -0.072749,
+                      51.456669
+                    ],
+                    [
+                      -0.073167,
+                      51.456732
+                    ],
+                    [
+                      -0.073195,
+                      51.456736
+                    ],
+                    [
+                      -0.073213,
+                      51.456688
+                    ],
+                    [
+                      -0.072763,
+                      51.456622
+                    ]
+                  ]
+                ]
+              ]
+            },
+            "properties": {
+              "name": "",
+              "entity": 12000593377,
+              "prefix": "title-boundary",
+              "dataset": "title-boundary",
+              "end-date": "",
+              "typology": "geography",
+              "reference": "37786766",
+              "entry-date": "2024-05-06",
+              "start-date": "2002-06-26",
+              "organisation-entity": "13",
+              "planx_user_action": "Accepted the title boundary"
+            }
+          },
+          "area": {
+            "hectares": 0.017289,
+            "squareMetres": 172.89
+          }
+        }
+      }
+    },
+    "preAssessment": [
+      {
+        "value": "Planning permission / Prior approval",
+        "description": "It looks like the proposed changes do not require planning permission, however the applicant must apply for Prior Approval before proceeding."
+      }
+    ],
+    "responses": [
+      {
+        "question": "Is the property in Southwark?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "The property"
+        }
+      },
+      {
+        "question": "What type of property is it?",
+        "responses": [
+          {
+            "value": "House"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "The property"
+        }
+      },
+      {
+        "question": "What type of house is it?",
+        "responses": [
+          {
+            "value": "Terrace"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "The property"
+        }
+      },
+      {
+        "question": "Have the works already started?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Describe the project.",
+        "responses": [
+          {
+            "value": "A 2 storey rear extension with a roof garden and built in pizza oven."
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What type of property is it?",
+        "responses": [
+          {
+            "value": "House"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Select your project",
+        "responses": [
+          {
+            "value": "Add a rear extension"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What type of property is it?",
+        "responses": [
+          {
+            "value": "House"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/contents/made"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What type of house is it?",
+        "responses": [
+          {
+            "value": "Mid terrace"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "How many storeys does the original house have?",
+        "responses": [
+          {
+            "value": "2 or more"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Does the original house have a projection to the rear?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Was the house always a house?",
+        "responses": [
+          {
+            "value": "Yes, it was built as a house"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015, Schedule 2, Part 1, Class A",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2/part/1"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Was the house built before 2020?",
+        "responses": [
+          {
+            "value": "Yes, it was built before 2020",
+            "metadata": {
+              "flags": [
+                "Planning permission / Permitted development"
+              ]
+            }
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015 Schedule 2, Part 1, Class 1 A.",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2/part/1"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Which of these best describes the new extension?",
+        "responses": [
+          {
+            "value": "Single storey"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015 Section 2, Part 1, Class A",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2/part/1"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Does the original house have a projection to the rear?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Which of these best describes your extension?",
+        "responses": [
+          {
+            "value": "Rear"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "General Permitted Development Order 2015, Technical Guidance (PDF, 500KB)",
+              "url": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/830643/190910_Tech_Guide_for_publishing.pdf"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Is any part of the extension within 2 metres of the boundary?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015 Schedule 2, Part 1, Class A",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2/part/1"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Is the property on designated land?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Is the property a site of special scientific interest?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What type of house is it?",
+        "responses": [
+          {
+            "value": "A terrace"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "How far does the new rear addition extend beyond the back wall of the original house?",
+        "responses": [
+          {
+            "value": "3 to 6m",
+            "metadata": {
+              "flags": [
+                "Planning permission / Prior approval"
+              ]
+            }
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015 Schedule 2, Part 1, Class A.1 (f)(i)",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2/part/1"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Is this a prior approval application for a larger rear extension?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Exactly how far will the new addition extend beyond the back wall of the original house?",
+        "responses": [
+          {
+            "value": "5"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015 Schedule 2, Part 1, Class A",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2/part/1"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What type of roof does the extension have?",
+        "responses": [
+          {
+            "value": "Flat"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Will any part of the extension be higher than 4m?",
+        "responses": [
+          {
+            "value": "No",
+            "metadata": {
+              "flags": [
+                "Planning permission / Permitted development"
+              ]
+            }
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015 Schedule 2, Part 1, Class A.1 (g)(ii)",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2/part/1"
+            },
+            {
+              "text": "Permitted Development Rights for Householders Technical Guidance (PDF, 500KB)",
+              "url": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/830643/190910_Tech_Guide_for_publishing.pdf"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Is this a prior approval application for a larger rear extension?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What is the exact height of the extension?",
+        "responses": [
+          {
+            "value": "3.6"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015 Schedule 2, Part 1, Class A",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2/part/1"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "How many storeys does the original house have?",
+        "responses": [
+          {
+            "value": "2 or more"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Is any part of the extension within 2 metres of a boundary of the house?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "How many storeys does the original house have?",
+        "responses": [
+          {
+            "value": "2 or more"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Are the materials of the extension similar to the original house?",
+        "responses": [
+          {
+            "value": "Yes",
+            "metadata": {
+              "flags": [
+                "Planning permission / Permitted development"
+              ]
+            }
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015 Schedule 2, Part 1, Class A",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2/part/1"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Is the property on designated land?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "How much of the available area around the house is covered by extensions and outbuildings?",
+        "responses": [
+          {
+            "value": "50% or less of the available area around the original house",
+            "metadata": {
+              "flags": [
+                "Planning permission / Permitted development"
+              ]
+            }
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015 Schedule 2, Part 1, Class A",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2/part/1"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What will you use the extension for?",
+        "responses": [
+          {
+            "value": "Hobby space or similar"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015 Schedule 2, Part 1, Class A",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2/part/1"
+            },
+            {
+              "text": "Town and Country Planning Act 1990, Section 55",
+              "url": "https://www.legislation.gov.uk/ukpga/1990/8/section/55"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Who will use the hobby space?",
+        "responses": [
+          {
+            "value": "Me and my family, personal use only",
+            "metadata": {
+              "flags": [
+                "Planning permission / Permitted development"
+              ]
+            }
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Town and Country Planning Act 1990, Section 55",
+              "url": "https://www.legislation.gov.uk/ukpga/1990/8/section/55"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What type of application is being applied for?",
+        "responses": [
+          {
+            "value": "Part 1 Class A"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Is the property subject to any Article 4 directions?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What type of prior approval application is it?",
+        "responses": [
+          {
+            "value": "Larger extension to a house"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "How many properties adjoin yours?",
+        "responses": [
+          {
+            "value": "2"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015, Schedule 2, Part 1, Class A.4 (5)",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2/part/1/crossheading/class-a-enlargement-improvement-or-other-alteration-of-a-dwellinghouse"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Enter the address of the first adjoining property",
+        "responses": [
+          {
+            "value": "21 Fellbrigg Road, London, SE22 9HQ"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015, Schedule 2, Part 1, Class A.4 (5)",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2/part/1/crossheading/class-a-enlargement-improvement-or-other-alteration-of-a-dwellinghouse"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Enter the address of the second adjoining property",
+        "responses": [
+          {
+            "value": "25 Fellbrigg Road, London, SE22 9HQ"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (General Permitted Development) (England) Order 2015, Schedule 2, Part 1, Class A.4 (5)",
+              "url": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2/part/1/crossheading/class-a-enlargement-improvement-or-other-alteration-of-a-dwellinghouse"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Is the proposal within the Greater London Authority?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Does the site include more than one property?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Do you know the title number of the property?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Does the property have an Energy Performance Certificate (EPC)?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Enter the reference number (RRN) from the most recent EPC",
+        "responses": [
+          {
+            "value": "1234-1234-1234-1234-1234"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What type of application is this?",
+        "responses": [
+          {
+            "value": "Prior approval"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "When are the works planned to start?",
+        "responses": [
+          {
+            "value": "2024-06-17"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "When are the works planned to be completed?",
+        "responses": [
+          {
+            "value": "2050-06-18"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "[HIDDEN] Is the application for prior approval for an extension to a dwelling house?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What is the gross internal floor area to be added?",
+        "responses": [
+          {
+            "value": "40"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Do the changes involve creating any new bedrooms or bathrooms?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "Are there existing or are you proposing parking spaces for any of these on the site?",
+        "responses": [
+          {
+            "value": "Bicycles"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What is the number of existing bicycle parking spaces?",
+        "responses": [
+          {
+            "value": "2"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What is the proposed total number of bicycle parking spaces?",
+        "responses": [
+          {
+            "value": "2"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "Greater London Authority Act 1999",
+              "url": "https://www.legislation.gov.uk/ukpga/1999/29/section/346"
+            }
+          ],
+          "sectionName": "About the project"
+        }
+      },
+      {
+        "question": "What type of application is it?",
+        "responses": [
+          {
+            "value": "Apply for prior approval"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Are you applying on behalf of someone else?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Which of these best describes you?",
+        "responses": [
+          {
+            "value": "Private individual"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Your contact details",
+        "responses": [
+          {
+            "value": "William Zane 01234000000 areyouon@email.org"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Is your contact address the same as the property address?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "Can a planning officer see the works from public land?",
+        "responses": [
+          {
+            "value": "Yes, it's visible from the road or somewhere else"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "We may need to visit the site to assess your application. If we do, who should we contact to arrange the visit?",
+        "responses": [
+          {
+            "value": "Me, the applicant"
+          }
+        ],
+        "metadata": {
+          "sectionName": "About you"
+        }
+      },
+      {
+        "question": "What type of prior approval application is it?",
+        "responses": [
+          {
+            "value": "Larger extension to a house"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Upload drawings"
+        }
+      },
+      {
+        "question": "Has the house already been extended?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "sectionName": "Upload drawings"
+        }
+      },
+      {
+        "question": "Is this for submission or information only?",
+        "responses": [
+          {
+            "value": "Submission"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Upload drawings"
+        }
+      },
+      {
+        "question": "What type of application is it?",
+        "responses": [
+          {
+            "value": "Prior approval"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "What type of prior approval application is it?",
+        "responses": [
+          {
+            "value": "Larger extension to a house"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "Is the property a home?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "What works does the project involve?",
+        "responses": [
+          {
+            "value": "Extension"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "Is the purpose of the project to support the needs of a disabled resident?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012, Regulation 14",
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/regulation/14"
+            },
+            {
+              "text": "UK Statutory Instruments 2012 No. 2920 Regulation 4",
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/regulation/4/made"
+            },
+            {
+              "text": "Equalities Act 2010, Section 6",
+              "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/6"
+            },
+            {
+              "text": "Children Act 1989, Part 3",
+              "url": "https://www.legislation.gov.uk/ukpga/1989/41/part/III"
+            }
+          ],
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "Are you the applicant?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "Would you like to upload evidence of your disability?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "What type of prior approval application is it?",
+        "responses": [
+          {
+            "value": "Larger extension to a house"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "Are you submitting any other planning applications about the same works or changes?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "policyRefs": [
+            {
+              "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012, Regulation 14",
+              "url": "https://www.legislation.gov.uk/uksi/2012/2920/regulation/14"
+            }
+          ],
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "Does the application qualify for a disability exemption?",
+        "responses": [
+          {
+            "value": "Yes"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "Is it any of these?",
+        "responses": [
+          {
+            "value": "None of these"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "Check for multiple fees?",
+        "responses": [
+          {
+            "value": "No"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "What type of application is it?",
+        "responses": [
+          {
+            "value": "Prior approval"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "Which Local Planning authority is it?",
+        "responses": [
+          {
+            "value": "Southwark"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "Connections with Southwark Council",
+        "responses": [
+          {
+            "value": "None of the above apply to me"
+          }
+        ],
+        "metadata": {
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "I confirm that:",
+        "responses": [
+          {
+            "value": "The information contained in this application is truthful, accurate and complete, to the best of my knowledge"
+          }
+        ],
+        "metadata": {
+          "sectionName": "Check your application"
+        }
+      },
+      {
+        "question": "Which Local Planning authority is it?",
+        "responses": [
+          {
+            "value": "Southwark"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Pay and submit"
+        }
+      },
+      {
+        "question": "What type of prior approval application is it?application.type",
+        "responses": [
+          {
+            "value": "Larger extension to a house"
+          }
+        ],
+        "metadata": {
+          "autoAnswered": true,
+          "sectionName": "Pay and submit"
+        }
+      }
+    ],
+    "files": [
+      {
+        "name": "https://api.editor.planx.dev/file/private/dfaz9qu5/location%20plan_proposed_01.jpg",
+        "type": [
+          "sitePlan.proposed"
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/avilhq1j/elevations_existing_01.jpg",
+        "type": [
+          "elevations.existing"
+        ]
+      },
+      {
+        "name": "https://api.editor.planx.dev/file/private/tis6f8hh/elevations_proposed_01.jpg",
+        "type": [
+          "elevations.proposed"
+        ]
+      }
+    ],
+    "metadata": {
+      "id": "80d3c3c2-0d1c-4a79-be99-912f488c2f02",
+      "organisation": "SWK",
+      "submittedAt": "2014-10-17T22:37:22.483Z",
+      "source": "PlanX",
+      "service": {
+        "flowId": "c6628103-c648-4663-81e1-bfa0a1a18340",
+        "url": "https://editor.planx.dev/southwark/apply-for-prior-approval/published",
+        "files": {
+          "required": [
+            "sitePlan.proposed"
+          ],
+          "recommended": [
+            "elevations.existing",
+            "elevations.proposed"
+          ],
+          "optional": [
+            "photographs.existing",
+            "otherDrawing",
+            "otherDocument",
+            "visualisations"
+          ]
+        },
+        "fee": {
+          "calculated": [
+            {
+              "policyRefs": [
+                {
+                  "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) (Amendment) Regulations 2023",
+                  "url": "https://www.legislation.gov.uk/uksi/2023/1197/made"
+                }
+              ]
+            }
+          ],
+          "payable": [
+            {
+              "description": "<p>If the proposed works (to either a home or within the curtilage of a home) is for the <strong>sole</strong> purpose of providing either:</p>\n<p></p>\n<p>- A means of access to (or within) the dwellinghouse for a disabled resident (current or future)</p>\n<p></p>\n<p>OR</p>\n<p></p>\n<p>- Providing facilities that are designed to ensure the disabled persons safety, health or comfort</p>\n<p></p>\n<p>OR</p>\n<p></p>\n<p>- Providing disabled access to a public building</p>\n<p></p>\n<p>Then no planning fee will be payable for this application.</p>",
+              "policyRefs": [
+                {
+                  "text": "The Town and Country Planning (Fees for Applications, Deemed Applications, Requests and Site Visits) (England) Regulations 2012, Regulation 14",
+                  "url": "https://www.legislation.gov.uk/uksi/2012/2920/regulation/14"
+                },
+                {
+                  "text": "Regulation 4",
+                  "url": "https://www.legislation.gov.uk/uksi/2012/2920/regulation/4/made"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "schema": "https://theopensystemslab.github.io/digital-planning-data-schemas/@next/schemas/prototypeApplication.json"
+    }
+  },
+  "metadata": {
+    "organisation": "BOPS",
+    "id": "1234",
+    "generatedAt": "2025-09-30T00:34:14.684Z",
+    "submittedAt": "2014-10-17T22:37:22.483Z",
+    "schema": "https://theopensystemslab.github.io/digital-planning-data-schemas/@next/schemas/postSubmissionApplication.json"
+  }
+}
