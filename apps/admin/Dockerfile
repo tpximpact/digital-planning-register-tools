@@ -11,14 +11,14 @@ COPY bun.lock bun.lock
 
 COPY apps/next-example/package.json apps/next-example/package.json
 COPY packages/ui/package.json packages/ui/package.json
-COPY packages/config/package.json packages/config/package.json
+COPY packages/dev-config/package.json packages/dev-config/package.json
 COPY packages/libs/package.json packages/libs/package.json
 
 RUN bun install
 
 COPY apps/next-example apps/next-example
 COPY packages/ui packages/ui
-COPY packages/config packages/config
+COPY packages/dev-config packages/dev-config
 COPY packages/libs packages/libs
 
 ENV NODE_ENV=production

@@ -6,13 +6,21 @@ import { updateClient } from '../../actions'
 import { GovukPageLayout } from '@dpr/ui/layouts'
 import { GovukHeading, GovukButton } from '@dpr/ui/components'
 
-export default async function EditClientPage({
-  params
-}: {
-  params: { id: number }
-}) {
+export default async function EditClientPage(
+  props: PageProps<'/clients/[id]/edit'>
+) {
+  const { id: idString } = await props.params
+  const id = parseInt(idString, 10)
+  if (isNaN(id)) {
+    return (
+      <GovukPageLayout>
+        <p>Invalid client ID.</p>
+      </GovukPageLayout>
+    )
+  }
+
   const client = await db.query.clients.findFirst({
-    where: eq(clients.id, params.id)
+    where: eq(clients.id, id)
   })
 
   if (!client) {

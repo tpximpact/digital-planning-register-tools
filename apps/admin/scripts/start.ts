@@ -1,8 +1,9 @@
 import cli from 'next/dist/cli/next-start'
+import { ENV_ADMIN as env } from '@dpr/config'
 
-const port = process.env?.PORT ? parseInt(process.env.PORT, 10) : 3000
+const { PORT, HOSTNAME } = env
 
 cli.nextStart({
-  port,
-  hostname: process.env?.HOSTNAME || '0.0.0.0'
+  port: PORT,
+  hostname: HOSTNAME
 })

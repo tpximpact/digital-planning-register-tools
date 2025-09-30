@@ -20,16 +20,17 @@
     "db:push": "drizzle-kit push --config=drizzle.config.ts"
   },
   "dependencies": {
+    "@dpr/config": "catalog:",
     "@dpr/ui": "catalog:",
     "drizzle-orm": "^0.44.4",
     "drizzle-typebox": "^0.3.3",
-    "next": "15.4.4",
+    "next": "^15.5.4",
     "pg": "^8.16.3",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@dpr/config": "workspace:*",
+    "@dpr/dev-config": "catalog:",
     "@electric-sql/pglite-socket": "^0.0.12",
     "@types/node": "^20",
     "@types/pg": "^8.15.5",

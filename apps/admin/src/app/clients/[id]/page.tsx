@@ -2,12 +2,20 @@ import { notFound } from 'next/navigation'
 import { getClientById } from '../actions'
 import { GovukPageLayout } from '@dpr/ui/layouts'
 import { GovukHeading, GovukButton } from '@dpr/ui/components'
-export default async function ClientDetailPage({
-  params
-}: {
-  params: { id: number }
-}) {
-  const clientId = params.id
+
+export default async function ClientDetailPage(
+  props: PageProps<'/clients/[id]'>
+) {
+  const { id: idString } = await props.params
+  const clientId = parseInt(idString, 10)
+  if (isNaN(clientId)) {
+    return (
+      <GovukPageLayout>
+        <p>Invalid client ID.</p>
+      </GovukPageLayout>
+    )
+  }
+
   const client = await getClientById(clientId)
 
   if (!client) {
