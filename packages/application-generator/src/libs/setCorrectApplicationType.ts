@@ -1,4 +1,4 @@
-import type * as PostSubmissionPublishedTypes from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.js'
+import type * as PostSubmissionPublishedTypes from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.d.ts'
 
 export const setCorrectApplicationType = (
   applicationType: string,

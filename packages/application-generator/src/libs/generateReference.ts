@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker'
+import { fakerEN_GB as faker } from '@faker-js/faker'
 
 /**
  * Generates a random reference string in the format `XX-XXXXX-XXXX`.

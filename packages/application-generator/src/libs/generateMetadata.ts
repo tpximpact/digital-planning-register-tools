@@ -1,4 +1,4 @@
-import type { PostSubmissionMetadata } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/Metadata.js'
+import type { PostSubmissionMetadata } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/Metadata.d.ts'
 import {
   generateAllPossibleDates,
   type PossibleDates

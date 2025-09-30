@@ -1,4 +1,4 @@
-import type { ApplicationType } from 'digital-planning-data-schemas/types/schemas/prototypeApplication/enums/ApplicationType.js'
+import type { ApplicationType } from 'digital-planning-data-schemas/types/schemas/prototypeApplication/enums/ApplicationType.d.ts'
 import { isValidPrimaryApplicationType } from './isValidPrimaryApplicationType'
 
 /**

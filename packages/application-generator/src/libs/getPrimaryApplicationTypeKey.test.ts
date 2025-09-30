@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test'
-import type { ApplicationType } from 'digital-planning-data-schemas/types/schemas/prototypeApplication/enums/ApplicationType.js'
+import type { ApplicationType } from 'digital-planning-data-schemas/types/schemas/prototypeApplication/enums/ApplicationType.d.ts'
 import { getPrimaryApplicationTypeKey } from './getPrimaryApplicationTypeKey'
 
 describe('getPrimaryApplicationTypeKey', () => {
