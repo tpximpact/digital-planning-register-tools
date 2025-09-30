@@ -1,6 +1,6 @@
 import { describe, it, expect, spyOn } from 'bun:test'
 import { Type } from '@sinclair/typebox'
-import { debugSchema } from './debugSchema'
+import { debugSchema } from './debug-schema'
 
 const spy = spyOn(console, 'log')
 

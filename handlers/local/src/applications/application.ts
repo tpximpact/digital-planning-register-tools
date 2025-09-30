@@ -1,7 +1,7 @@
 import { getValueByPath } from '../utils/get-value-by-path'
 import { fetchAllData } from '../utils/fetch-all-data'
-import { PostSubmissionApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/index.ts'
-import { PostSubmissionPublishedApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
+import type { PostSubmissionApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/index.js'
+import type { PostSubmissionPublishedApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.js'
 
 export const findApplication = <T>(
   applicationId: string,
@@ -26,6 +26,8 @@ export const getPublishedApplication = (applicationId: string) =>
   findApplication<PostSubmissionPublishedApplication>(applicationId, () =>
     fetchAllData<PostSubmissionPublishedApplication>(
       true,
-      (file) => !file.includes('01-submission')
+      (file) =>
+        !file.includes('01-submission') &&
+        !file.includes('02-validation-01-invalid')
     )
   )

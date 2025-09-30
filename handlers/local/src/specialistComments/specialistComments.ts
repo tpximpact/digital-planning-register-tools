@@ -4,13 +4,13 @@ import type {
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { paginateArray } from '@dpr/libs'
 import { filterByPaths } from '../utils/filter-by-paths'
-import { sortBy } from '../utils/sort-by'
 import { getApplication, getPublishedApplication } from '../applications'
-import type { PostSubmissionFile } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/File.js'
-import { filterByDateRange } from '../utils/filter-by-date-range'
-import { getByPaths } from '../utils/get-by-paths'
 import type { PostSubmissionApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/index.js'
 import type { PostSubmissionPublishedApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.js'
+import type {
+  Specialist,
+  SpecialistRedacted
+} from 'packages/odp-schemas/src/types/schemas/postSubmissionApplication/data/SpecialistComment'
 
 interface FilterConfig {
   contentsPaths: string[]
@@ -20,6 +20,7 @@ interface FilterConfig {
   sortPaths: Record<string, string>
 }
 
+// @TODO
 const defaultFilterConfig: FilterConfig = {
   contentsPaths: ['comment', 'commentRedacted'],
   referencePaths: ['data.application.reference'],
@@ -42,9 +43,10 @@ export const findApplicationSpecialists = <
   filterConfig: FilterConfig = defaultFilterConfig
 ) => {
   const summary = application?.comments?.public?.summary
-  const allSpecialistComments = application?.comments?.public?.comments ?? []
+  const allSpecialistComments =
+    application?.comments?.specialist?.comments ?? []
 
-  const filtered = filterByPaths(
+  const filtered = filterByPaths<Specialist | SpecialistRedacted>(
     allSpecialistComments,
     query.query,
     filterConfig.contentsPaths
@@ -62,20 +64,13 @@ export const findApplicationSpecialists = <
   //   query.orderBy,
   //   filterConfig.sortPaths
   // )
-  const { data, pagination } = paginateArray<PostSubmissionFile>(
+  const { data, pagination } = paginateArray<Specialist | SpecialistRedacted>(
     filtered,
     query.page,
     query.resultsPerPage,
     allSpecialistComments.length
   )
 
-  console.log({
-    data: {
-      summary,
-      data
-    },
-    pagination
-  })
   return {
     data: {
       summary,

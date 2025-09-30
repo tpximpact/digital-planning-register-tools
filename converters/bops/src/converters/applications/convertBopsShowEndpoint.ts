@@ -23,7 +23,7 @@ import {
 // } from '../../schemas/shared/BopsFile'
 // import { generateApplications } from '@dpr/libs'
 // import { generateExampleApplications } from '@dpr/application-generator'
-// import { debugSchema } from '../../utils/debugSchema'
+// import { debugSchema } from '@dpr/libs'
 
 /**
  * Checks to see if we're in the consultation period

@@ -1,40 +1,43 @@
 import { getValueByPath } from '../utils/get-value-by-path'
-import { PostSubmissionApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/index.ts'
-import { PostSubmissionPublishedApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
+import type { PostSubmissionApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/index.js'
+import type { PostSubmissionPublishedApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.js'
 import { getApplication, getPublishedApplication } from '../applications'
-import type { PostSubmissionFile } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/File.js'
+import type {
+  Specialist,
+  SpecialistRedacted
+} from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.js'
 
 const findApplicationSpecialistComments = <
   T extends PostSubmissionApplication | PostSubmissionPublishedApplication
 >(
-  documentId: number,
+  specialistId: string,
   application: T
-): PostSubmissionFile => {
-  const allDocuments = application?.files ?? []
-  const applicationDocument = allDocuments.find(
-    (app) => getValueByPath(app, 'id') === documentId
+): Specialist | SpecialistRedacted => {
+  const allSpecialists = application?.comments?.specialist?.comments ?? []
+  const applicationSpecialist = allSpecialists.find(
+    (app) => getValueByPath(app, 'id') === specialistId
   )
-  console.log(applicationDocument)
-  if (!applicationDocument) {
-    throw new Error('Application document not found')
+
+  if (!applicationSpecialist) {
+    throw new Error('Application specialist comment not found')
   }
-  return applicationDocument
+  return applicationSpecialist
 }
 
 export const getApplicationSpecialistComment = (
   applicationId: string,
-  publicCommentId: number
+  specialistId: string
 ) =>
   findApplicationSpecialistComments<PostSubmissionApplication>(
-    publicCommentId,
+    specialistId,
     getApplication(applicationId)
   )
 
 export const getPublishedApplicationSpecialistComment = (
   applicationId: string,
-  publicCommentId: number
+  specialistId: string
 ) =>
   findApplicationSpecialistComments<PostSubmissionPublishedApplication>(
-    publicCommentId,
+    specialistId,
     getPublishedApplication(applicationId)
   )

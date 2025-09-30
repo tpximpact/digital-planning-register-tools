@@ -1,7 +1,7 @@
 // import { describe, it, expect } from 'bun:test'
 // import { Value } from '@sinclair/typebox/value'
 // import { DprApplicationSubmissionEndpoint } from '.'
-// import { debugSchema } from '../../../utils/debugSchema'
+// import { debugSchema } from '@dpr/libs'
 // import fs from 'fs'
 // import path from 'path'
 

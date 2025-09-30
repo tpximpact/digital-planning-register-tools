@@ -3,7 +3,7 @@
 // import { DprSpecialistCommentsEndpoint } from '.'
 // import fs from 'fs'
 // import path from 'path'
-// import { debugSchema } from '../../../utils/debugSchema'
+// import { debugSchema } from '@dpr/libs'
 
 // describe.skip('DprSpecialistCommentsEndpoint TypeBox schema', () => {
 //   const specialistCommentsDir = path.join(

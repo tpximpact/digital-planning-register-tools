@@ -19,7 +19,7 @@ import { getPrimaryApplicationTypeKey } from './libs/getPrimaryApplicationTypeKe
 import { validApplicationTypes } from './libs/validApplicationTypes'
 import { generateApplicationSubmission } from './generateApplicationSubmission'
 import { generatePublicCommentsRedacted } from './generators/PublicComments'
-import { generatePostSubmissionFiles } from './generators/PostSubmissionFile'
+import { generatePostSubmissionFilesRedacted } from './generators/PostSubmissionFile'
 import { generateSpecialistCommentsRedacted } from './generators/SpecialistComments'
 
 export const applicationTypesWithNoConsultation = ['ldc']
@@ -227,7 +227,7 @@ export const generatePostSubmissionPublishedApplication = ({
       public: generatePublicCommentsRedacted(dates),
       specialist: generateSpecialistCommentsRedacted(dates)
     },
-    files: generatePostSubmissionFiles('application', dates),
+    files: generatePostSubmissionFilesRedacted('application', dates),
     submission: generateApplicationSubmission(primaryApplicationType, dates),
     metadata: metadata
   }
