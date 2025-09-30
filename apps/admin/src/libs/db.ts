@@ -4,6 +4,10 @@ import { drizzle } from 'drizzle-orm/node-postgres'
 import { migrate } from 'drizzle-orm/node-postgres/migrator'
 import * as clientsSchema from '../db/clients'
 
+import { ENV_ADMIN as env } from '@dpr/config'
+
+const { DATABASE_URL } = env
+
 // Merge all schemas
 const schema = {
   ...clientsSchema
@@ -19,10 +23,10 @@ const globalForDb = globalThis as unknown as {
 const createDbConnection = () => {
   return drizzle({
     connection: {
-      connectionString: process.env?.DATABASE_URL ?? '',
+      connectionString: DATABASE_URL,
       ssl:
-        process.env?.DATABASE_URL?.includes('localhost') &&
-        process.env?.DATABASE_URL?.includes('127.0.0.1')
+        DATABASE_URL?.includes('localhost') &&
+        DATABASE_URL?.includes('127.0.0.1')
     },
     schema,
 

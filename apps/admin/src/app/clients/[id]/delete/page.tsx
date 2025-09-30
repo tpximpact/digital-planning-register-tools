@@ -2,12 +2,20 @@ import { GovukPageLayout } from '@dpr/ui/layouts'
 import { GovukHeading, GovukButton } from '@dpr/ui/components'
 import { deleteClient, getClientById } from '../../actions'
 
-export default async function DeleteClientPage({
-  params
-}: {
-  params: { id: number }
-}) {
-  const client = await getClientById(params.id)
+export default async function DeleteClientPage(
+  props: PageProps<'/clients/[id]/delete'>
+) {
+  const { id: idString } = await props.params
+  const id = parseInt(idString, 10)
+  if (isNaN(id)) {
+    return (
+      <GovukPageLayout>
+        <p>Invalid client ID.</p>
+      </GovukPageLayout>
+    )
+  }
+
+  const client = await getClientById(id)
 
   if (!client) {
     return <p>Client not found.</p>
