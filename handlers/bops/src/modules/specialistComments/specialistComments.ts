@@ -8,7 +8,7 @@ import { createUrlSearchParams } from '@dpr/libs'
 import { handleBopsGetRequest } from '../../libs/requests/requests'
 import { bopsSpecialistCommentsEndpointToOdp } from '@dpr/converter-bops/converters/specialistComments/index.ts'
 import type { BopsSpecialistCommentsEndpoint } from '@dpr/converter-bops/schemas/bops/specialistComments/specialistComments.ts'
-import { clientHeaders, standardResponses } from '@dpr/api'
+import { requireClientHeaders, standardResponseObjects } from '@dpr/api'
 
 /**
  * Helper to build specialist comments endpoint URL with query params.
@@ -38,7 +38,7 @@ function buildSpecialistCommentsUrl(
  * Plugin for elysia that generates the planning applications API.
  */
 export const specialistComments = (app: Elysia) =>
-  app.use(clientHeaders.requireClientHeaders).get(
+  app.use(requireClientHeaders).get(
     `/applications/:applicationId/specialistComments`,
     async (context) => {
       const {
@@ -60,11 +60,11 @@ export const specialistComments = (app: Elysia) =>
               bopsResponse =
                 (await response.json()) as BopsSpecialistCommentsEndpoint
             } catch (jsonError) {
-              set.status = standardResponses.BadRequestResponseObject.code
+              set.status = standardResponseObjects.BadRequestResponseObject.code
               return {
                 data: null,
                 status: {
-                  ...standardResponses.BadRequestResponseObject,
+                  ...standardResponseObjects.BadRequestResponseObject,
                   detail: `Failed to parse response JSON: ${jsonError}`
                 }
               }
@@ -77,11 +77,11 @@ export const specialistComments = (app: Elysia) =>
         )
       } catch (e) {
         console.error('Error fetching public comments:', e)
-        set.status = standardResponses.BadRequestResponseObject.code
+        set.status = standardResponseObjects.BadRequestResponseObject.code
         return {
           data: null,
           status: {
-            ...standardResponses.BadRequestResponseObject,
+            ...standardResponseObjects.BadRequestResponseObject,
             detail: `An error occurred while fetching public comments: ${
               e instanceof Error ? e.message : String(e)
             }`
@@ -97,7 +97,7 @@ export const specialistComments = (app: Elysia) =>
       },
       detail: {
         security: [], // Remove this to make endpoint public
-        summary: 'Get all specialist comments for an application',
+        summary: 'Specialist comments',
         description:
           'Retrieves a list of all specialist comments for a specific application, currently uses x-client header to filter by client'
       }

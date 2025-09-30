@@ -1,10 +1,9 @@
 import { Elysia } from 'elysia'
-import { openapi } from '@elysiajs/openapi'
 import { applications } from './modules/applications'
 import { documents } from './modules/documents'
 import { publicComments } from './modules/publicComments'
 import { specialistComments } from './modules/specialistComments'
-import { standardResponses, clientHeaders } from '@dpr/api'
+import { handleErrors, standardResponses } from '@dpr/api'
 
 /**
  * @file Types for authentication middleware
@@ -12,14 +11,12 @@ import { standardResponses, clientHeaders } from '@dpr/api'
 export interface HandlerBopsOptions {
   enabled: boolean
   debug: boolean
-  openApiEnabled: boolean
   prefix?: string
 }
 
 const defaultOptions: HandlerBopsOptions = {
   enabled: true,
   debug: false,
-  openApiEnabled: false,
   prefix: ''
 }
 
@@ -38,21 +35,11 @@ const app = (userOptions?: HandlerBopsOptions) => {
       tags: ['BOPS Handler']
     }
   })
-    .use(
-      openapi({
-        enabled: options.openApiEnabled,
-        path: '/bopsHandler'
-      })
-    )
-    .use(standardResponses.standardResponses)
-    .use(clientHeaders.requireClientHeaders)
+    .use(handleErrors)
     .use(applications)
     .use(documents)
     .use(publicComments)
     .use(specialistComments)
-    .onError((context) => {
-      console.log('context', context)
-    })
 }
 
 export { app }
