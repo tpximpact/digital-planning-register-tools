@@ -8,7 +8,7 @@ import { createUrlSearchParams } from '@dpr/libs'
 import type { BopsDocumentsEndpoint } from '@dpr/converter-bops/schemas/bops/documents/documents.ts'
 import { handleBopsGetRequest } from '../../libs/requests/requests'
 import { filterResults } from './sortFilterResults'
-import { clientHeaders, standardResponses } from '@dpr/api'
+import { requireClientHeaders, standardResponseObjects } from '@dpr/api'
 /**
  * Helper to build documents endpoint URL with query params.
  */
@@ -33,7 +33,7 @@ function buildDocumentsUrl(
  * Plugin for elysia that generates the planning applications API.
  */
 export const documents = (app: Elysia) =>
-  app.use(clientHeaders.requireClientHeaders).get(
+  app.use(requireClientHeaders).get(
     `/applications/:applicationId/documents`,
     async (context) => {
       const {
@@ -63,11 +63,11 @@ export const documents = (app: Elysia) =>
             try {
               bopsResponse = (await response.json()) as BopsDocumentsEndpoint
             } catch (jsonError) {
-              set.status = standardResponses.BadRequestResponseObject.code
+              set.status = standardResponseObjects.BadRequestResponseObject.code
               return {
                 data: null,
                 status: {
-                  ...standardResponses.BadRequestResponseObject,
+                  ...standardResponseObjects.BadRequestResponseObject,
                   detail: `Failed to parse response JSON: ${jsonError}`
                 }
               }
@@ -78,11 +78,11 @@ export const documents = (app: Elysia) =>
         )
       } catch (e) {
         console.error('Error fetching documents:', e)
-        set.status = standardResponses.BadRequestResponseObject.code
+        set.status = standardResponseObjects.BadRequestResponseObject.code
         return {
           data: null,
           status: {
-            ...standardResponses.BadRequestResponseObject,
+            ...standardResponseObjects.BadRequestResponseObject,
             detail: `An error occurred while fetching documents: ${
               e instanceof Error ? e.message : String(e)
             }`
@@ -98,7 +98,7 @@ export const documents = (app: Elysia) =>
       },
       detail: {
         security: [], // Remove this to make endpoint public
-        summary: 'Get all documents for an application',
+        summary: 'Documents',
         description:
           'Retrieves a list of all documents for a specific application, currently uses x-client header to filter by client'
       }

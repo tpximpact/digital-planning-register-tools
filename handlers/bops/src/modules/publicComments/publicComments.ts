@@ -1,4 +1,4 @@
-import { Elysia, t } from 'elysia'
+import { Elysia } from 'elysia'
 import {
   PostSubmissionPublicCommentPostBody,
   PostSubmissionPublicCommentPostUrlParams,
@@ -17,7 +17,11 @@ import type {
 } from '@dpr/converter-bops/schemas/bops/publicComments/index.ts'
 import { bopsPublicCommentsEndpointToOdp } from '@dpr/converter-bops/converters/publicComments/index.ts'
 import { convertOdpPublicCommentToBops } from '@dpr/converter-bops/converters/publicComments/convertBopsToOdpPublicComment.ts'
-import { clientHeaders, standardResponses } from '@dpr/api'
+import {
+  empty200Model,
+  requireClientHeaders,
+  standardResponseObjects
+} from '@dpr/api'
 
 /**
  * Helper to build public comments endpoint URL with query params.
@@ -48,7 +52,7 @@ function buildPublicCommentsUrl(
  */
 export const publicComments = (app: Elysia) =>
   app
-    .use(clientHeaders.requireClientHeaders)
+    .use(requireClientHeaders)
     .get(
       `/applications/:applicationId/publicComments`,
       async (context) => {
@@ -71,11 +75,12 @@ export const publicComments = (app: Elysia) =>
                 bopsResponse =
                   (await response.json()) as BopsPublicCommentsEndpoint
               } catch (jsonError) {
-                set.status = standardResponses.BadRequestResponseObject.code
+                set.status =
+                  standardResponseObjects.BadRequestResponseObject.code
                 return {
                   data: null,
                   status: {
-                    ...standardResponses.BadRequestResponseObject,
+                    ...standardResponseObjects.BadRequestResponseObject,
                     detail: `Failed to parse response JSON: ${jsonError}`
                   }
                 }
@@ -88,11 +93,11 @@ export const publicComments = (app: Elysia) =>
           )
         } catch (e) {
           console.error('Error fetching public comments:', e)
-          set.status = standardResponses.BadRequestResponseObject.code
+          set.status = standardResponseObjects.BadRequestResponseObject.code
           return {
             data: null,
             status: {
-              ...standardResponses.BadRequestResponseObject,
+              ...standardResponseObjects.BadRequestResponseObject,
               detail: `An error occurred while fetching public comments: ${
                 e instanceof Error ? e.message : String(e)
               }`
@@ -108,7 +113,7 @@ export const publicComments = (app: Elysia) =>
         },
         detail: {
           security: [], // Remove this to make endpoint public
-          summary: 'Get all public comments for an application',
+          summary: 'Public comments',
           description:
             'Retrieves a list of all public comments for a specific application, currently uses x-client header to filter by client'
         }
@@ -145,17 +150,17 @@ export const publicComments = (app: Elysia) =>
             status: {
               ...(response.status
                 ? response.status
-                : standardResponses.OkResponseObject),
+                : standardResponseObjects.OkResponseObject),
               detail: `Public comment submitted successfully`
             }
           }
         } catch (e) {
           console.error('Error posting public comment:', e)
-          set.status = standardResponses.BadRequestResponseObject.code
+          set.status = standardResponseObjects.BadRequestResponseObject.code
           return {
             data: null,
             status: {
-              ...standardResponses.BadRequestResponseObject,
+              ...standardResponseObjects.BadRequestResponseObject,
               detail: `An error occurred while posting public comment: ${
                 e instanceof Error ? e.message : String(e)
               }`
@@ -166,12 +171,13 @@ export const publicComments = (app: Elysia) =>
       {
         params: PostSubmissionPublicCommentPostUrlParams,
         body: PostSubmissionPublicCommentPostBody,
+        parse: 'application/json',
         response: {
-          200: 'empty200'
+          200: empty200Model
         },
         detail: {
           // security: [], // Remove this to make endpoint public
-          summary: 'Post a public comment for an application',
+          summary: 'Submit public comment',
           description:
             'Posts a public comment for a specific application, currently uses x-client header to filter by client'
         }

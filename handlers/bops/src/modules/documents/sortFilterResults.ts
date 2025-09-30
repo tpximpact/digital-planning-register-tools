@@ -2,7 +2,7 @@ import type { PostSubmissionFile } from '@dpr/odp-schemas/types/schemas/postSubm
 import { convertDocumentBopsFile } from '@dpr/converter-bops/converters/documents/convertDocumentBopsFile.ts'
 import type { BopsDocumentsEndpoint } from '@dpr/converter-bops/schemas/bops/documents/documents.ts'
 import { paginateArray } from '@dpr/libs'
-import type { PostSubmissionPublishedDocumentsQueryParams } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints'
+import type { PostSubmissionPublishedDocumentsQueryParams } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 
 /**
  * Filters, sorts, and paginates Bops document results based on query parameters.

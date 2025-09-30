@@ -11,7 +11,7 @@ import type { BopsSearchEndpoint } from '@dpr/converter-bops/schemas/bops/search
 import { bopsSearchEndpointToOdp } from '@dpr/converter-bops/converters/applications/index.ts'
 import type { BopsShowEndpoint } from '@dpr/converter-bops/schemas/bops/show/index.ts'
 import { convertBopsShowEndpoint } from '@dpr/converter-bops/converters/applications/convertBopsShowEndpoint.ts'
-import { clientHeaders, standardResponses } from '@dpr/api'
+import { requireClientHeaders, standardResponseObjects } from '@dpr/api'
 
 /**
  * Helper to build public comments endpoint URL with query params.
@@ -37,7 +37,7 @@ function buildApplicationsUrl(
  */
 export const applications = (app: Elysia) =>
   app
-    .use(clientHeaders.resolveClientHeaders)
+    .use(requireClientHeaders)
     .get(
       `/applications`,
       async (context) => {
@@ -63,11 +63,12 @@ export const applications = (app: Elysia) =>
               try {
                 bopsResponse = (await response.json()) as BopsSearchEndpoint
               } catch (jsonError) {
-                set.status = standardResponses.BadRequestResponseObject.code
+                set.status =
+                  standardResponseObjects.BadRequestResponseObject.code
                 return {
                   data: null,
                   status: {
-                    ...standardResponses.BadRequestResponseObject,
+                    ...standardResponseObjects.BadRequestResponseObject,
                     detail: `Failed to parse response JSON: ${jsonError}`
                   }
                 }
@@ -80,11 +81,11 @@ export const applications = (app: Elysia) =>
           )
         } catch (e) {
           console.error('Error fetching applications:', e)
-          set.status = standardResponses.BadRequestResponseObject.code
+          set.status = standardResponseObjects.BadRequestResponseObject.code
           return {
             data: null,
             status: {
-              ...standardResponses.BadRequestResponseObject,
+              ...standardResponseObjects.BadRequestResponseObject,
               detail: `An error occurred while fetching applications: ${
                 e instanceof Error ? e.message : String(e)
               }`
@@ -99,7 +100,7 @@ export const applications = (app: Elysia) =>
         },
         detail: {
           security: [], // Remove this to make endpoint public
-          summary: 'Get all applications',
+          summary: 'Applications',
           description:
             'Retrieves a list of all applications, currently uses x-client header to filter by client'
         }
@@ -134,11 +135,12 @@ export const applications = (app: Elysia) =>
               try {
                 bopsResponse = (await response.json()) as BopsShowEndpoint
               } catch (jsonError) {
-                set.status = standardResponses.BadRequestResponseObject.code
+                set.status =
+                  standardResponseObjects.BadRequestResponseObject.code
                 return {
                   data: null,
                   status: {
-                    ...standardResponses.BadRequestResponseObject,
+                    ...standardResponseObjects.BadRequestResponseObject,
                     detail: `Failed to parse response JSON: ${jsonError}`
                   }
                 }
@@ -147,11 +149,12 @@ export const applications = (app: Elysia) =>
               const data = convertBopsShowEndpoint(bopsResponse)
 
               if (!data) {
-                set.status = standardResponses.BadRequestResponseObject.code
+                set.status =
+                  standardResponseObjects.BadRequestResponseObject.code
                 return {
                   data: null,
                   status: {
-                    ...standardResponses.BadRequestResponseObject,
+                    ...standardResponseObjects.BadRequestResponseObject,
                     detail: `Failed to convert BOPS response: ${JSON.stringify(
                       bopsResponse
                     )}`
@@ -161,17 +164,17 @@ export const applications = (app: Elysia) =>
 
               return {
                 data,
-                status: standardResponses.OkResponseObject
+                status: standardResponseObjects.OkResponseObject
               }
             }
           )
         } catch (e) {
           console.error('Error fetching applications:', e)
-          set.status = standardResponses.BadRequestResponseObject.code
+          set.status = standardResponseObjects.BadRequestResponseObject.code
           return {
             data: null,
             status: {
-              ...standardResponses.BadRequestResponseObject,
+              ...standardResponseObjects.BadRequestResponseObject,
               detail: `An error occurred while fetching applications: ${
                 e instanceof Error ? e.message : String(e)
               }`
@@ -186,7 +189,7 @@ export const applications = (app: Elysia) =>
         },
         detail: {
           security: [], // Remove this to make endpoint public
-          summary: 'Get application by application ID',
+          summary: 'Application detail',
           description:
             'Retrieves a single application, currently uses x-client header to filter by client'
         }
