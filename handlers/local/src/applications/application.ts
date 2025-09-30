@@ -17,11 +17,17 @@ export const findApplication = <T>(
   return application
 }
 
+/**
+ * Get a non-published application by its ID.
+ */
 export const getApplication = (applicationId: string) =>
   findApplication<PostSubmissionApplication>(applicationId, () =>
     fetchAllData<PostSubmissionApplication>(false)
   )
 
+/**
+ * Get a published application by its ID.
+ */
 export const getPublishedApplication = (applicationId: string) =>
   findApplication<PostSubmissionPublishedApplication>(applicationId, () =>
     fetchAllData<PostSubmissionPublishedApplication>(

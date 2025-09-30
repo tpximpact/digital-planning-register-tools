@@ -11,3 +11,26 @@ export const generateAddress = (): Address => {
     country: faker.location.country()
   }
 }
+
+export const fullAddress: Address = {
+  line1: '29 Park Place',
+  line2: 'Mertz Mount',
+  town: 'Daugherty-under-Collins',
+  county: 'Mid Glamorgan',
+  postcode: 'OA81 8WG',
+  country: 'Kiribati'
+}
+
+export const midAddress: Address = {
+  line1: '6 North Avenue',
+  town: 'Conn Green',
+  county: 'Norfolk',
+  postcode: 'ER0 2JN',
+  country: 'Mauritania'
+}
+
+export const minimalAddress: Address = {
+  line1: '93 Newton Road',
+  town: 'Nether Gulgowskiham',
+  postcode: 'HU0 7BB'
+}

@@ -3,6 +3,36 @@ import type { Static } from '@sinclair/typebox'
 import { CommentMetaData } from './CommentMetaData'
 import { PostSubmissionFile } from './File'
 import { SpecialistCommentSentiment } from '../enums/CommentSentiment'
+import { Address } from '../../../shared/Addresses'
+
+export type SpecialistCommentAuthor = Static<typeof SpecialistCommentAuthor>
+export const SpecialistCommentAuthor = Type.Object(
+  {
+    name: Type.Object({
+      singleLine: Type.String()
+    }),
+    address: Address
+  },
+  {
+    id: '#SpecialistCommentAuthor',
+    description: 'The author of a public comment'
+  }
+)
+
+export type SpecialistCommentAuthorRedacted = Static<
+  typeof SpecialistCommentAuthorRedacted
+>
+export const SpecialistCommentAuthorRedacted = Type.Object(
+  {
+    name: Type.Object({
+      singleLine: Type.String()
+    })
+  },
+  {
+    id: '#SpecialistCommentAuthorRedacted',
+    description: 'The author of a public comment'
+  }
+)
 
 type SpecialistCommentBase = Static<typeof SpecialistCommentBase>
 const SpecialistCommentBase = Type.Object(
@@ -58,7 +88,7 @@ const SpecialistBase = Type.Object(
     reason: Type.Optional(
       Type.Union([Type.Literal('constraint'), Type.String()])
     ),
-    constraints: Type.Optional(Type.Any()), // @TODO
+    constraints: Type.Optional(Type.Array(Type.Any())), // @TODO PlanningConstraints
     firstConsultedAt: Type.Optional(Type.String({ format: 'date-time' }))
   },
   { internal: 'All the required fields for a public or private specialist' }
@@ -68,6 +98,7 @@ export type Specialist = Static<typeof Specialist>
 export const Specialist = Type.Composite(
   [
     SpecialistBase,
+    SpecialistCommentAuthor,
     Type.Object({
       comments: Type.Optional(Type.Array(SpecialistComment))
     })
@@ -82,6 +113,7 @@ export type SpecialistRedacted = Static<typeof SpecialistRedacted>
 export const SpecialistRedacted = Type.Composite(
   [
     SpecialistBase,
+    SpecialistCommentAuthorRedacted,
     Type.Object({
       comments: Type.Array(SpecialistCommentRedacted)
     })

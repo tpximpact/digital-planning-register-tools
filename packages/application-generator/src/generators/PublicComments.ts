@@ -1,6 +1,5 @@
 import { fakerEN_GB as faker } from '@faker-js/faker'
 import type {
-  CommentMetaData,
   PublicComments,
   PublicCommentsRedacted
 } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/Comment.js'
@@ -17,12 +16,13 @@ import {
 import type { PublicCommentTopic } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/enums/PublicCommentTopic.js'
 import type { PublicCommentSentiment } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/enums/CommentSentiment.js'
 import type { PublicCommentSummary } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/CommentSummary.js'
+import type { CommentMetaData } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/CommentMetaData.js'
 
 /**
  * Generates an array of topics with associated questions and comments.
  * @returns An array of topics with associated questions and comments
  */
-const generateTopicAndComments = (): TopicAndComments[] => {
+export const generateTopicAndComments = (): TopicAndComments[] => {
   const topics: PublicCommentTopic[] = [
     'design',
     'use',
@@ -50,7 +50,7 @@ const generateTopicAndComments = (): TopicAndComments[] => {
  * @param dates
  * @returns
  */
-const generateCommentMetadata = (dates?: PossibleDates) => {
+export const generateCommentMetadata = (dates?: PossibleDates) => {
   const consultationStart =
     dates?.consultation.startAt.toISOString() ?? faker.date.past()
   // If no dates object, set consultationEnd to 21 days after consultationStart
@@ -115,7 +115,7 @@ const generatePublicCommentFields = () => {
  * @param dates - Optional dates object for the comment.
  * @returns A public comment object.
  */
-const generatePublicComment = (dates?: PossibleDates): PublicComment => {
+export const generatePublicComment = (dates?: PossibleDates): PublicComment => {
   const fields = generatePublicCommentFields()
 
   const { submittedAt, validatedAt, publishedAt } =
@@ -145,7 +145,7 @@ const generatePublicComment = (dates?: PossibleDates): PublicComment => {
  * @param dates - Optional dates object for the comment.
  * @returns A redacted public comment object.
  */
-const generatePublicCommentRedacted = (
+export const generatePublicCommentRedacted = (
   dates?: PossibleDates
 ): PublicCommentRedacted => {
   const fields = generatePublicCommentFields()
@@ -167,7 +167,7 @@ const generatePublicCommentRedacted = (
  * @param comments
  * @returns
  */
-const generatePublicCommentSummary = (
+export const generatePublicCommentSummary = (
   comments: PublicComment[] | PublicCommentRedacted[]
 ): PublicCommentSummary => {
   return {
@@ -194,7 +194,7 @@ const generatePublicCommentSummary = (
  * @returns
  */
 export const generatePublicComments = (
-  dates: PossibleDates
+  dates?: PossibleDates
 ): PublicComments => {
   if (!dates) {
     dates = generateAllPossibleDates(true)
