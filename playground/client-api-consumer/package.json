@@ -9,7 +9,7 @@
     "dev": "bun run --watch src/index.ts"
   },
   "devDependencies": {
-    "@dpr/config": "catalog:"
+    "@dpr/dev-config": "catalog:"
   },
   "dependencies": {
     "@elysiajs/eden": "catalog:",

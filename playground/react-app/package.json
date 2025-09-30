@@ -21,7 +21,7 @@
   "devDependencies": {
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@dpr/config": "catalog:",
+    "@dpr/dev-config": "catalog:",
     "typescript": "catalog:"
   }
 }

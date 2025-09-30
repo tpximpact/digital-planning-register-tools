@@ -13,7 +13,7 @@ COPY apps/react-app/package.json apps/react-app/package.json
 
 # Copy over the files for the dependency packages
 COPY packages/ui/package.json packages/ui/package.json
-COPY packages/config/package.json packages/config/package.json
+COPY packages/dev-config/package.json packages/dev-config/package.json
 
 # Install dependencies
 RUN bun install
@@ -21,7 +21,7 @@ RUN bun install
 # Copy the directory contents into the container at /app
 COPY apps/react-app apps/react-app
 COPY packages/ui packages/ui
-COPY packages/config packages/config
+COPY packages/dev-config packages/dev-config
 
 ENV NODE_ENV=production
 
