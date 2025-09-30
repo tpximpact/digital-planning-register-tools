@@ -2,8 +2,11 @@ import { describe, it, expect } from 'bun:test'
 import { getApplication, getPublishedApplication } from './application'
 import { Value } from '@sinclair/typebox/value'
 import { PostSubmissionApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/index.ts'
-// import { debugSchema } from '@dpr/libs'
-import { PostSubmissionPublishedApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
+import { debugSchema } from '@dpr/libs'
+import {
+  PostSubmissionPublishedApplication,
+  PostSubmissionPublishedPlanningPermissionFullHouseholder
+} from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
 
 import ppSubmissionJson from '../data/PostSubmissionApplication/PlanningPermissionFullHouseholder/PlanningPermissionFullHouseholder-01-submission.json'
 import ppPublishedSubmissionJson from '../data/PostSubmissionPublishedApplication/PlanningPermissionFullHouseholder/PlanningPermissionFullHouseholder-01-submission.json'
@@ -41,12 +44,11 @@ describe('getPublishedApplication', () => {
     const app = getPublishedApplication(
       ppPublishedConsultationJson.data.application.reference
     )
-    console.log(app)
     expect(app.data.application.reference).toBe(
       ppPublishedConsultationJson.data.application.reference
     )
 
-    // debugSchema(PostSubmissionPublishedApplication, app)
+    debugSchema(PostSubmissionPublishedPlanningPermissionFullHouseholder, app)
     expect(Value.Check(PostSubmissionPublishedApplication, app)).toBe(true)
   })
 })

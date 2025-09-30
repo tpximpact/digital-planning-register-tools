@@ -2,7 +2,7 @@ import { fakerEN_GB as faker } from '@faker-js/faker'
 import type { EnglandApplicationData } from 'digital-planning-data-schemas/types/schemas/prototypeApplication/data/ApplicationData.ts'
 import type { Declaration } from 'digital-planning-data-schemas/types/shared/Declarations.js'
 
-const generateDeclaration = (): Declaration => {
+export const generateDeclaration = (): Declaration => {
   return {
     accurate: faker.datatype.boolean(),
     connection: {

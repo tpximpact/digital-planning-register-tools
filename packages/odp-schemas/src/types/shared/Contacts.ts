@@ -1,5 +1,6 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
+import './formats'
 
 export type ContactDetails = Static<typeof ContactDetails>
 export const ContactDetails = Type.Object(

@@ -79,7 +79,7 @@ export const applications = (app: Elysia) =>
       {
         params: PostSubmissionApplicationUrlParams,
         response: {
-          200: PostSubmissionApplicationResponse
+          // 200: PostSubmissionApplicationResponse
         },
         detail: {
           tags: ['Private'],

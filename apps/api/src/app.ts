@@ -38,44 +38,46 @@ const app = (userOptions?: ApiOptions) => {
   if (options.debug) {
     console.info(`[@dpr/api] options: ${JSON.stringify(options)}`)
   }
-  return new Elysia({
-    name: '@dpr/api'
-  })
-    .use(cors({ origin: true }))
-    .use(showRoutes(options.debug))
-    .use(
-      openapi({
-        enabled: true,
-        path: '/docs',
-        provider: 'scalar',
-        documentation
-      })
-    )
-    .use(
-      openapi({
-        enabled: true,
-        path: '/swagger',
-        provider: 'swagger-ui',
-        documentation
-      })
-    )
-    .use(standardResponses)
-    .group('/api/@next', (app) => {
-      return app
-        .use(applications)
-        .use(documents)
-        .use(publicComments)
-        .use(specialistComments)
+  return (
+    new Elysia({
+      name: '@dpr/api'
     })
-    .group('/api/handlers/bops', (app) => {
-      return app.use(
-        handlerBops({
-          debug: options.debug,
-          enabled: true
+      .use(cors({ origin: true }))
+      .use(showRoutes(options.debug))
+      .use(
+        openapi({
+          enabled: true,
+          path: '/docs',
+          provider: 'scalar',
+          documentation
         })
       )
-    })
-    .use(handleErrors)
+      .use(
+        openapi({
+          enabled: true,
+          path: '/swagger',
+          provider: 'swagger-ui',
+          documentation
+        })
+      )
+      .use(standardResponses)
+      .group('/api/@next', (app) => {
+        return app
+          .use(applications)
+          .use(documents)
+          .use(publicComments)
+          .use(specialistComments)
+      })
+      // .group('/api/handlers/bops', (app) => {
+      //   return app.use(
+      //     handlerBops({
+      //       debug: options.debug,
+      //       enabled: true
+      //     })
+      //   )
+      // })
+      .use(handleErrors)
+  )
 }
 
 export { app }
