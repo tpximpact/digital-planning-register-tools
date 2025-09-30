@@ -1,0 +1,31 @@
+{
+  "name": "@dpr/handler-local",
+  "description": "A utility module for returning sorted and filtered applications for the fake api endpoints.",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "typeconfig": "tsc --showConfig",
+    "test": "bun test ",
+    "download-fixtures": "bun run src/scripts/download-fixtures.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "catalog:",
+    "@dpr/dev-config": "catalog:"
+  },
+  "dependencies": {
+    "@sinclair/typebox": "catalog:",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "dayjs": "catalog:",
+    "typescript": "catalog:",
+    "@dpr/odp-schemas": "catalog:",
+    "@dpr/libs": "catalog:",
+    "@dpr/application-generator": "catalog:",
+    "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz"
+  }
+}
