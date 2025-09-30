@@ -41,11 +41,11 @@ describe('paginateArray', () => {
     expect(pagination.resultsPerPage).toBe(1)
   })
 
-  it('clamps resultsPerPage to maximum of 1000', () => {
+  it('clamps resultsPerPage to maximum of 50', () => {
     const data = Array.from({ length: 1500 }, (_, i) => i + 1)
     const { data: pageData, pagination } = paginateArray(data, 1, 2000)
-    expect(pageData.length).toBe(1000)
-    expect(pagination.resultsPerPage).toBe(1000)
+    expect(pageData.length).toBe(50)
+    expect(pagination.resultsPerPage).toBe(50)
   })
 
   it('returns last page if page number is greater than totalPages', () => {

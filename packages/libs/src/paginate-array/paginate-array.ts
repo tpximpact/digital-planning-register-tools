@@ -1,9 +1,10 @@
-import type { Pagination } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination'
+import type { Pagination } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
 
 export const paginateArray = <T>(
   data: T[],
   page: number,
-  resultsPerPage: number
+  resultsPerPage: number,
+  allDataCount?: number
 ): {
   data: T[]
   pagination: Pagination
@@ -15,7 +16,7 @@ export const paginateArray = <T>(
     resultsPerPage = 10
 
   // Clamp resultsPerPage to reasonable bounds
-  const MAX_RESULTS_PER_PAGE = 1000
+  const MAX_RESULTS_PER_PAGE = 50
   const safeResultsPerPage = Math.max(
     1,
     Math.min(resultsPerPage, MAX_RESULTS_PER_PAGE)
@@ -27,13 +28,14 @@ export const paginateArray = <T>(
   const start = (currentPage - 1) * safeResultsPerPage
   const end = start + safeResultsPerPage
   const paginatedData = data.slice(start, end)
+  const totalAvailableItems = allDataCount ?? totalResults
 
   const pagination: Pagination = {
     resultsPerPage: safeResultsPerPage,
     currentPage,
     totalPages,
     totalResults,
-    totalAvailableItems: totalResults
+    totalAvailableItems
   }
   return {
     data: paginatedData,
