@@ -39,11 +39,14 @@ export const PostSubmissionFileBase = Type.Object(
 )
 
 export type PostSubmissionFile = Static<typeof PostSubmissionFile>
-export const PostSubmissionFile = Type.Object(
-  {
-    url: Type.String(),
-    redactedUrl: Type.Optional(Type.String())
-  },
+export const PostSubmissionFile = Type.Composite(
+  [
+    PostSubmissionFileBase,
+    Type.Object({
+      url: Type.String(),
+      redactedUrl: Type.Optional(Type.String())
+    })
+  ],
   {
     id: '#PostSubmissionFile',
     description:
@@ -54,10 +57,13 @@ export const PostSubmissionFile = Type.Object(
 export type PostSubmissionFileRedacted = Static<
   typeof PostSubmissionFileRedacted
 >
-export const PostSubmissionFileRedacted = Type.Object(
-  {
-    redactedUrl: Type.String()
-  },
+export const PostSubmissionFileRedacted = Type.Composite(
+  [
+    PostSubmissionFileBase,
+    Type.Object({
+      redactedUrl: Type.String()
+    })
+  ],
   {
     id: '#PostSubmissionFile',
     description:

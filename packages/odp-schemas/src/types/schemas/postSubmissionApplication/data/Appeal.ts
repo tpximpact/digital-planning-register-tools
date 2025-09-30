@@ -1,7 +1,7 @@
 import { Type, type Static, type TSchema } from '@sinclair/typebox'
 import { AppealDecision } from '../enums/AppealDecision'
 import '../../../shared/formats'
-import { PostSubmissionFile } from './PostSubmissionFile'
+import { PostSubmissionFile } from './File'
 
 export type AppealBase = Static<typeof AppealBase>
 export const AppealBase = Type.Object({

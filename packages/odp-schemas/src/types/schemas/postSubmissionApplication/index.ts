@@ -3,7 +3,15 @@ import type { Static, TSchema } from '@sinclair/typebox'
 import { PostSubmissionMetadata } from './Metadata'
 import { CaseOfficer } from './data/CaseOfficer'
 import { AppealSchema } from './data/Appeal'
-import { PostSubmissionFile } from './data/PostSubmissionFile'
+import { PostSubmissionFile } from './data/File'
+import { Application } from './data/Application'
+import { LocalPlanningAuthority } from './data/LocalPlanningAuthority'
+import { Submission } from './data/Submission'
+import { Validation } from './data/Validation'
+import { Consultation } from './data/Consultation'
+import { Assessment } from './data/Assessment'
+import { PublicComments, SpecialistComments } from './data/Comment'
+import { Application as PrototypeApplication } from '../prototypeApplication/minimumSubmission'
 
 export const PostSubmissionApplicationSpecificationGenerator = <
   T extends TSchema
@@ -13,24 +21,23 @@ export const PostSubmissionApplicationSpecificationGenerator = <
   Type.Object({
     applicationType: T,
     data: Type.Object({
-      //   application: Application(T),
-      //   localPlanningAuthority: LocalPlanningAuthority(T),
-      //   submission: Submission(T),
-      //   validation: Type.Optional(Validation(T)),
-      //   consultation: Type.Optional(Consultation(T)),
-      //   assessment: Type.Optional(Assessment(T)),
+      application: Application(T),
+      localPlanningAuthority: LocalPlanningAuthority(T),
+      submission: Submission(T),
+      validation: Type.Optional(Validation(T)),
+      consultation: Type.Optional(Consultation(T)),
+      assessment: Type.Optional(Assessment(T)),
       appeal: Type.Optional(AppealSchema(T)),
       caseOfficer: CaseOfficer(T)
     }),
-    // comments: Type.Optional(
-    //   Type.Object({
-    //     public: Type.Optional(PublicComments),
-    //     specialist: Type.Optional(SpecialistComments)
-    //   })
-    // ),
-    // files: Type.Optional(Type.Any()),
+    comments: Type.Optional(
+      Type.Object({
+        public: Type.Optional(PublicComments),
+        specialist: Type.Optional(SpecialistComments)
+      })
+    ),
     files: Type.Optional(Type.Array(PostSubmissionFile)),
-    // submission: PrototypeApplication,
+    submission: PrototypeApplication(T),
     metadata: PostSubmissionMetadata
   })
 
@@ -872,8 +879,3 @@ export const PostSubmissionApplication = Type.Union(
       'The root specification for a planning application in England after it has been through a digital planning service and into a back office system'
   }
 )
-
-export const PostSubmissionApplicationTypeSchemaMap: Record<string, TSchema> = {
-  'pp.full.major': PostSubmissionPlanningPermissionFullMajor
-  // ...add other mappings
-}

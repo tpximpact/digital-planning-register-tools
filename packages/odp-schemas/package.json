@@ -9,7 +9,8 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "typeconfig": "tsc --showConfig"
+    "typeconfig": "tsc --showConfig",
+    "build": "bun run src/scripts/build.ts"
   },
   "devDependencies": {
     "@dpr/dev-config": "catalog:",

@@ -3,7 +3,7 @@ import type { BopsFile } from '../../schemas/shared/BopsFile'
 import {
   PostSubmissionFile as PostSubmissionFileSchema,
   type PostSubmissionFile
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PostSubmissionFile.ts'
+} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
 import type { PrototypeFileType as FileType } from '@dpr/odp-schemas/types/schemas/prototypeApplication/enums/FileType.ts'
 import { convertDateTimeToUtc } from '../../utils/formatDates'
 import { Value } from '@sinclair/typebox/value'
