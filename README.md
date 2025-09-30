@@ -80,7 +80,8 @@ Contains methods and functions used to handle incoming requests and responses
 Contains shared libraries used across applications
 
 - `@dpr/application-generator` - Generates dummy application data in Post-submission format for testing and development purposes
-- `@dpr/config` - Configuration management for the packages in this monorepo, included eslint and base typescript configurations
+- `@dpr/config` - Configuration management for the packages in this monorepo
+- `@dpr/dev-config` - Development configuration for the packages in this monorepo, included eslint and base typescript configurations
 - `@dpr/libs` - A shared library of common utilities to reduce code duplication and consolidate dependencies across packages.
 - `@dpr/odp-schemas` - The post submission schema in typebox form - **eventually this will be replaced by the `digital-planning-data-schemas` package**
 - `@dpr/ui` - Contains react components, styles and a storybook for the Digital Planning Register that comply with Post-submission schema. **Eventually all DPR components will come from here**
@@ -267,7 +268,7 @@ When creating a new package you will need to ensure that the standard commands a
   },
   "dependencies": {},
   "devDependencies": {
-    "@dpr/config": "catalog:",
+    "@dpr/dev-config": "catalog:",
     "typescript": "catalog:"
   }
 }
@@ -324,9 +325,13 @@ An elysia plugin for handling requests and responses from the Back Office Planni
 
 Generates dummy application data in Post-submission format for testing and development purposes
 
+### - `@dpr/dev-config` (packages/dev-config)
+
+Development configuration management for the packages in this monorepo, included eslint and base typescript configurations
+
 ### - `@dpr/config` (packages/config)
 
-Configuration management for the packages in this monorepo, included eslint and base typescript configurations
+Configuration management for the packages in this monorepo
 
 ### - `@dpr/libs` (packages/libs)
 

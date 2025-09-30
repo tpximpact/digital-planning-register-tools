@@ -7,3 +7,5 @@
 - Coverage in tests
 - More tests
 - Playwright e2e tests
+- `apps/admin` - fix linting
+- `apps/admin` - fix build

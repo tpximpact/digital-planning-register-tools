@@ -40,12 +40,14 @@
       "react-dom": "19.1.0",
       "@types/react": "^19",
       "@types/react-dom": "^19",
+      "@dpr/dev-config": "workspace:*",
       "@dpr/config": "workspace:*",
       "@dpr/ui": "workspace:*",
       "@dpr/api": "workspace:*",
       "@dpr/libs": "workspace:*",
       "@dpr/converter-bops": "workspace:*",
       "@dpr/application-generator": "workspace:*",
+      "@dpr/handler-local": "workspace:*",
       "@dpr/handler-bops": "workspace:*",
       "@elysiajs/eden": "latest",
       "@elysiajs/openapi": "latest",
@@ -54,7 +56,8 @@
       "http-status-codes": "^2.3.0",
       "@dpr/odp-schemas": "workspace:*",
       "dayjs": "^1.11.18",
-      "@faker-js/faker": "^8.4.1"
+      "@faker-js/faker": "^8.4.1",
+      "vite": "^7.1.7"
     },
     "catalogs": {
       "build": {},

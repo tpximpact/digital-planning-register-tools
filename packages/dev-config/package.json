@@ -1,0 +1,14 @@
+{
+  "name": "@dpr/dev-config",
+  "description": "Development configuration management for the packages in this monorepo, included eslint and base typescript configurations",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^15.5.4",
+    "eslint": "^9.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "globals": "^16.3.0",
+    "typescript": "catalog:",
+    "typescript-eslint": "^8.38.0"
+  }
+}
