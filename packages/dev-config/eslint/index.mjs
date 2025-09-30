@@ -4,6 +4,7 @@ import eslint from '@eslint/js'
 import globals from 'globals'
 import tseslint, { configs as tsConfigs } from 'typescript-eslint'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
+// import next from '@next/eslint-plugin-next'
 
 // base apps - cli scripts w typescript etc
 // const baseApps = ['']
@@ -31,6 +32,12 @@ const browserConfigs = browserApps.map((appPath) => ({
   name: `browser configs for ${appPath}`,
   languageOptions: { globals: globals.browser }
 }))
+
+// const nextConfigs = nextApps.map((appPath) => ({
+//   files: [`${appPath}/**/*.{js,mjs,cjs,ts,mts,cts}`],
+//   name: 'nextjs recommended',
+//   extends: flatConfig
+// }))
 
 const config = tseslint.config(
   {
@@ -70,6 +77,7 @@ const config = tseslint.config(
   },
   ...browserConfigs,
   ...reactConfigs
+  // ...nextConfigs
 )
 
 export default config

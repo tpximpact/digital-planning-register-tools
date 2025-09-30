@@ -6,6 +6,7 @@
     // Environment setup, support latest features & stop errors for featres not supported by typescript but supported by bun
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "target": "ES2022",
+    // You very likely want "nodenext" for modern Node.js projects and preserve or esnext for code that will be bundled.
     "module": "NodeNext",
     "jsx": "react-jsx",
     "allowJs": true,
