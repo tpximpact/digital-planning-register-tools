@@ -1,7 +1,12 @@
-import { type PostSubmissionPlanningApplication } from '@dpr/api/schemas'
+interface Applications {
+  id: number
+  name: string
+  createdAt: string
+  updatedAt: string
+}
 
 export interface ListApplicationsProps {
-  items: PostSubmissionPlanningApplication[]
+  items: Applications[]
 }
 
 export function ListApplications({ items }: ListApplicationsProps) {
