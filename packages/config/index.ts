@@ -1,1 +1,1 @@
-export * from './env/index.mjs'
+export * from './env/index'

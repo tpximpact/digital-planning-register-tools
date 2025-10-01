@@ -410,6 +410,7 @@ const app = (userOptions?: ApiOptions) => {
         //   async (context) => {},
         //   {
         //     params: 'public.specialists.single.params',
+        // query:  'public.specialists.single.query',
         //     response: {
         //       200: 'public.specialists.single.response'
         //     },

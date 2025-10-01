@@ -40,7 +40,7 @@ import {
 import { PostSubmissionApplication } from '..'
 import { ApiResponse } from './ApiResponse'
 import { PostSubmissionPublishedApplication } from '../../postSubmissionPublishedApplication'
-import { PostSubmissionFile } from '../data/File'
+import { PostSubmissionFile, PostSubmissionFileRedacted } from '../data/File'
 import {
   PublicComments,
   PublicCommentsRedacted,
@@ -50,7 +50,7 @@ import {
 import { PublicComment, PublicCommentRedacted } from '../data/PublicComment'
 import {
   SpecialistComment,
-  SpecialistCommentRedacted
+  SpecialistRedacted
 } from '../data/SpecialistComment'
 
 // -----------------------------------------------------------------------------
@@ -94,9 +94,7 @@ const endpoints = {
           })
         ]),
         data: Type.Array(PostSubmissionApplication),
-        response: ApiResponse(
-          Type.Union([Type.Array(PostSubmissionApplication), Type.Null()])
-        )
+        response: ApiResponse(Type.Array(PostSubmissionApplication))
       },
       application: {
         method: 'GET',
@@ -138,15 +136,9 @@ const endpoints = {
           }
         ),
         data: Type.Array(PostSubmissionPublishedApplication),
-        response: ApiResponse(
-          Type.Union([
-            Type.Array(PostSubmissionPublishedApplication),
-            Type.Null()
-          ]),
-          {
-            description: 'Public applications endpoint response'
-          }
-        )
+        response: ApiResponse(Type.Array(PostSubmissionPublishedApplication), {
+          description: 'Public applications endpoint response'
+        })
       },
       application: {
         method: 'GET',
@@ -184,9 +176,7 @@ const endpoints = {
           })
         ]),
         data: Type.Array(PostSubmissionFile),
-        response: ApiResponse(
-          Type.Union([Type.Array(PostSubmissionFile), Type.Null()])
-        )
+        response: ApiResponse(Type.Array(PostSubmissionFile))
       },
       document: {
         method: 'GET',
@@ -222,10 +212,8 @@ const endpoints = {
             publishedAtTo: Type.Optional(Type.String())
           })
         ]),
-        data: Type.Array(PostSubmissionFile),
-        response: ApiResponse(
-          Type.Union([Type.Array(PostSubmissionFile), Type.Null()])
-        )
+        data: Type.Array(PostSubmissionFileRedacted),
+        response: ApiResponse(Type.Array(PostSubmissionFileRedacted))
       },
       document: {
         method: 'GET',
@@ -236,8 +224,10 @@ const endpoints = {
           Type.Object({ documentId: Type.Number() })
         ]),
         queryParams: undefined,
-        data: PostSubmissionFile,
-        response: ApiResponse(Type.Union([PostSubmissionFile, Type.Null()]))
+        data: PostSubmissionFileRedacted,
+        response: ApiResponse(
+          Type.Union([PostSubmissionFileRedacted, Type.Null()])
+        )
       }
     }
   },
@@ -397,11 +387,9 @@ const endpoints = {
           BaseApplicationUrlParams,
           Type.Object({ specialistId: Type.String() })
         ]),
-        queryParams: undefined,
-        data: SpecialistCommentRedacted,
-        response: ApiResponse(
-          Type.Union([SpecialistCommentRedacted, Type.Null()])
-        )
+        queryParams: BaseQueryParams,
+        data: SpecialistRedacted,
+        response: ApiResponse(Type.Union([SpecialistRedacted, Type.Null()]))
       }
     }
   }
@@ -819,11 +807,11 @@ export type PostSubmissionPublishedSpecialistUrlParams = Static<
   typeof PostSubmissionPublishedSpecialistUrlParams
 >
 
-// export const PostSubmissionPublishedSpecialistQueryParams =
-//   endpoints.specialistComments.public.specialist.queryParams
-// export type PostSubmissionPublishedSpecialistCommentQueryParams = Static<
-//   typeof PostSubmissionPublishedSpecialistCommentQueryParams
-// >
+export const PostSubmissionPublishedSpecialistQueryParams =
+  endpoints.specialistComments.public.specialist.queryParams
+export type PostSubmissionPublishedSpecialistQueryParams = Static<
+  typeof PostSubmissionPublishedSpecialistQueryParams
+>
 
 export const PostSubmissionPublishedSpecialistData =
   endpoints.specialistComments.public.specialist.data

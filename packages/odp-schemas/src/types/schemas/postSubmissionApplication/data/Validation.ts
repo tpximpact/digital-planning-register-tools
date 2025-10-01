@@ -1,5 +1,6 @@
 import { Type } from '@sinclair/typebox'
 import type { Static, TSchema } from '@sinclair/typebox'
+import '../../../shared/formats'
 
 type ValidationBase = Static<typeof ValidationBase>
 const ValidationBase = Type.Object({

@@ -1,9 +1,10 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 import { CommentMetaData } from './CommentMetaData'
-import { PostSubmissionFile } from './File'
+import { PostSubmissionFile, PostSubmissionFileRedacted } from './File'
 import { SpecialistCommentSentiment } from '../enums/CommentSentiment'
 import { Address } from '../../../shared/Addresses'
+import '../../../shared/formats'
 
 export type SpecialistCommentAuthor = Static<typeof SpecialistCommentAuthor>
 export const SpecialistCommentAuthor = Type.Object(
@@ -39,7 +40,6 @@ const SpecialistCommentBase = Type.Object(
   {
     id: Type.String(),
     sentiment: SpecialistCommentSentiment,
-    files: Type.Optional(Type.Array(PostSubmissionFile)),
     metadata: CommentMetaData
   },
   {
@@ -53,6 +53,7 @@ export const SpecialistComment = Type.Composite(
   [
     SpecialistCommentBase,
     Type.Object({
+      files: Type.Optional(Type.Array(PostSubmissionFile)),
       comment: Type.String(),
       commentRedacted: Type.Optional(Type.String())
     })
@@ -68,6 +69,7 @@ export const SpecialistCommentRedacted = Type.Composite(
   [
     SpecialistCommentBase,
     Type.Object({
+      files: Type.Optional(Type.Array(PostSubmissionFileRedacted)),
       commentRedacted: Type.String(),
       metadata: Type.Required(CommentMetaData)
     })

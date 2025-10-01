@@ -1,5 +1,6 @@
 import { Type } from '@sinclair/typebox'
 import type { Static, TSchema } from '@sinclair/typebox'
+import '../../../shared/formats'
 
 type SubmissionBase = Static<typeof SubmissionBase>
 const SubmissionBase = Type.Object({

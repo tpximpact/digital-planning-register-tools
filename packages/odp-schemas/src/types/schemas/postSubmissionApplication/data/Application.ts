@@ -2,6 +2,7 @@ import { CloneType, Type } from '@sinclair/typebox'
 import type { Static, TSchema } from '@sinclair/typebox'
 import { ProcessStage } from '../enums/ProcessStage'
 import { ApplicationStatus } from '../enums/ApplicationStatus'
+import '../../../shared/formats'
 
 type ApplicationBase = Static<typeof ApplicationBase>
 const ApplicationBase = Type.Object({

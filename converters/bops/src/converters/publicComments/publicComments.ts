@@ -1,28 +1,26 @@
-import type { PostSubmissionPublishedPublicCommentsResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import {
-  BopsPublicCommentsEndpoint as BopsPublicCommentsEndpointSchema,
-  type BopsPublicCommentsEndpoint
-} from '../../schemas/bops/publicComments'
+  type PostSubmissionPublishedPublicCommentsResponse,
+  PostSubmissionPublishedPublicCommentsResponse as PostSubmissionPublishedPublicCommentsResponseSchema
+} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { Value } from '@sinclair/typebox/value'
 import { Pagination } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
 import { PublicCommentSummary } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/CommentSummary.ts'
-import { PublicCommentRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PublicComment.ts'
 import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
-import { convertBopsPublicComment } from './convertBopsPublicComment'
-
+import type { PublicCommentRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PublicComment.ts'
+import { convertBopsCommentToPublicCommentRedacted } from './convertBopsCommentToPublicCommentRedacted'
 /**
  * Converts a BopsPublicCommentsEndpoint object to a PostSubmissionPublishedPublicCommentsResponse.
  * Validates input, summary, pagination, and each comment.
  * Filters out invalid comments and adjusts pagination accordingly.
  */
 export const bopsPublicCommentsEndpointToOdp = (
-  input: BopsPublicCommentsEndpoint,
+  // allowed since it could really be anything and we don't need the typeguards from unknown
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  input: any,
   status: ApiResponseStatus
 ): PostSubmissionPublishedPublicCommentsResponse => {
-  // Validate input schema
-  if (!Value.Check(BopsPublicCommentsEndpointSchema, input)) {
-    console.warn('Invalid BopsPublicCommentsEndpoint:', input)
-    throw new Error('Invalid BopsPublicCommentsEndpoint')
+  if (Value.Check(PostSubmissionPublishedPublicCommentsResponseSchema, input)) {
+    return input
   }
 
   const { summary, comments, pagination } = input
@@ -38,14 +36,24 @@ export const bopsPublicCommentsEndpointToOdp = (
   }
 
   // Convert and filter comments
-  const convertedComments = (comments ?? [])
-    .map((comment) => convertBopsPublicComment(comment))
-    .filter((comment) => {
-      const valid =
-        comment !== undefined && Value.Check(PublicCommentRedacted, comment)
-      if (!valid) console.warn('Invalid PublicCommentRedacted:', comment)
-      return valid
+
+  const convertedComments: PublicCommentRedacted[] = (comments ?? [])
+    .map((comment: unknown): PublicCommentRedacted | undefined => {
+      try {
+        return convertBopsCommentToPublicCommentRedacted(comment)
+      } catch (error) {
+        console.warn(
+          'Error converting public comment but its taken care of elsewhere:',
+          error
+        )
+        return undefined
+      }
     })
+    .filter(
+      (
+        comment: PublicCommentRedacted | undefined
+      ): comment is PublicCommentRedacted => comment !== undefined
+    )
 
   const difference = (comments?.length ?? 0) - convertedComments.length
 
@@ -62,7 +70,7 @@ export const bopsPublicCommentsEndpointToOdp = (
         }
       : pagination
 
-  return {
+  const results = {
     data: {
       comments: convertedComments,
       summary
@@ -70,4 +78,12 @@ export const bopsPublicCommentsEndpointToOdp = (
     pagination: adjustedPagination,
     status
   }
+
+  if (
+    Value.Check(PostSubmissionPublishedPublicCommentsResponseSchema, results)
+  ) {
+    return results
+  }
+
+  throw new Error('Unable to convert public comment endpoint')
 }

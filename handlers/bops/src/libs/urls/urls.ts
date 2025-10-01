@@ -83,7 +83,7 @@ export function getPublicApplicationPublicCommentsUrl(
 ): string {
   const legacy = BOPS_LEGACY_PUBLIC_COMMENTS || false
   let url = legacy
-    ? `public/planning_applications/${applicationId}/public/comments`
+    ? `public/planning_applications/${applicationId}/comments/public`
     : `public/planningApplications/${applicationId}/publicComments`
   if (query) {
     const { sortBy, ...searchParams } = query
@@ -106,7 +106,7 @@ export function getPublicApplicationSpecialistCommentsUrl(
 ): string {
   const legacy = BOPS_LEGACY_SPECIALIST_COMMENTS || false
   let url = legacy
-    ? `public/planning_applications/${applicationId}/public/specialist`
+    ? `public/planning_applications/${applicationId}/comments/specialist`
     : `public/planningApplications/${applicationId}/specialistComments`
   if (query) {
     const { sortBy, ...searchParams } = query
@@ -118,6 +118,23 @@ export function getPublicApplicationSpecialistCommentsUrl(
         if (sortBy === 'publishedAt') params.append('sortBy', 'receivedAt')
       }
     }
+    url += `?${params.toString()}`
+  }
+  return url
+}
+
+export function getPublicApplicationSpecialistCommentUrl(
+  applicationId: string,
+  specialistId: string,
+  query?: PostSubmissionPublishedSpecialistsQueryParams
+): string {
+  const legacy = BOPS_LEGACY_SPECIALIST_COMMENTS || false
+  let url = legacy
+    ? `public/planning_applications/${applicationId}/comments/specialist`
+    : `public/planningApplications/${applicationId}/specialistComments/${specialistId}`
+  if (query) {
+    const searchParams = query
+    const params = createUrlSearchParams(searchParams)
     url += `?${params.toString()}`
   }
   return url

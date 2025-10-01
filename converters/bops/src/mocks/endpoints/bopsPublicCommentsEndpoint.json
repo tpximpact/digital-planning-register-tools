@@ -1,0 +1,75 @@
+{
+  "pagination": {
+    "resultsPerPage": 10,
+    "currentPage": 1,
+    "totalPages": 3,
+    "totalResults": 30,
+    "totalAvailableItems": 30
+  },
+  "summary": {
+    "totalComments": 30,
+    "sentiment": { "supportive": 15, "objection": 5, "neutral": 10 }
+  },
+  "comments": [
+    {
+      "id": 591,
+      "sentiment": "supportive",
+      "comment": "This is comment number 30",
+      "receivedAt": "2025-04-11T11:37:36Z"
+    },
+    {
+      "id": 590,
+      "sentiment": "supportive",
+      "comment": "This is comment number 29",
+      "receivedAt": "2025-04-11T11:37:31Z"
+    },
+    {
+      "id": 589,
+      "sentiment": "supportive",
+      "comment": "This is comment number 28",
+      "receivedAt": "2025-04-11T11:37:26Z"
+    },
+    {
+      "id": 587,
+      "sentiment": "supportive",
+      "comment": "This is comment number 26",
+      "receivedAt": "2025-04-11T11:37:15Z"
+    },
+    {
+      "id": 585,
+      "sentiment": "supportive",
+      "comment": "This is comment number 24",
+      "receivedAt": "2025-04-11T11:37:05Z"
+    },
+    {
+      "id": 584,
+      "sentiment": "objection",
+      "comment": "This is comment number 23",
+      "receivedAt": "2025-04-11T11:37:00Z"
+    },
+    {
+      "id": 583,
+      "sentiment": "supportive",
+      "comment": "This is comment number 22",
+      "receivedAt": "2025-04-11T11:36:55Z"
+    },
+    {
+      "id": 582,
+      "sentiment": "neutral",
+      "comment": "This is comment number 21",
+      "receivedAt": "2025-04-11T11:36:50Z"
+    },
+    {
+      "id": 581,
+      "sentiment": "objection",
+      "comment": "This is comment number 20",
+      "receivedAt": "2025-04-11T11:36:45Z"
+    },
+    {
+      "id": 580,
+      "sentiment": "supportive",
+      "comment": "This is comment number 19",
+      "receivedAt": "2025-04-11T11:36:40Z"
+    }
+  ]
+}

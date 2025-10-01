@@ -2,6 +2,7 @@ import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 import { PostSubmissionFileAssociation } from '../enums/PostSubmissionFileAssociation'
 import { FileType } from '../enums/FileType'
+import '../../../shared/formats'
 
 type PostSubmissionFileMetadata = Static<typeof PostSubmissionFileMetadata>
 const PostSubmissionFileMetadata = Type.Object(
