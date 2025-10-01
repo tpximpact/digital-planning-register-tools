@@ -1,5 +1,5 @@
 import type { PostSubmissionFile } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PostSubmissionFile.ts'
-import { convertDocumentBopsFile } from '@dpr/converter-bops/converters/documents/convertDocumentBopsFile.ts'
+import { convertBopsFileToPostSubmissionFileRedacted } from '@dpr/converter-bops'
 import type { BopsDocumentsEndpoint } from '@dpr/converter-bops/schemas/bops/documents/documents.ts'
 import { paginateArray } from '@dpr/libs'
 import type { PostSubmissionPublishedDocumentsQueryParams } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
@@ -20,7 +20,9 @@ export const filterResults = (
   let filtered = false
 
   const allDocuments: PostSubmissionFile[] = (bopsResponse.files ?? [])
-    .map((file) => convertDocumentBopsFile(file))
+    .map((file) =>
+      convertBopsFileToPostSubmissionFileRedacted(file, 'application')
+    )
     .filter((doc): doc is PostSubmissionFile => !!doc)
 
   const filteredDocuments = allDocuments.filter((doc) => {

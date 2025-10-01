@@ -1,0 +1,281 @@
+{
+  "application": {
+    "type": {
+      "value": "pp.full.householder.retro",
+      "description": "planning_permission"
+    },
+    "reference": "25-00151-HAPR",
+    "fullReference": "CMD-25-00151-HAPR",
+    "targetDate": "2025-03-05",
+    "expiryDate": "2025-03-25",
+    "receivedAt": "2025-01-29T00:00:00.000+00:00",
+    "validAt": "2025-01-29T00:00:00.000+00:00",
+    "publishedAt": "2025-04-11T12:40:43.626+01:00",
+    "determinedAt": null,
+    "decision": null,
+    "status": "in_assessment",
+    "consultation": {
+      "startDate": "2025-01-31",
+      "endDate": "2025-02-21",
+      "publicUrl": "https://camden.bops-applicants-staging.services/planning_applications/25-00151-HAPR",
+      "publishedComments": [
+        {
+          "comment": "I like it you can only see this because its in the redacted comment",
+          "receivedAt": "2025-04-11T12:32:02.636+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "This is comment number 2",
+          "receivedAt": "2025-04-11T12:35:13.452+01:00",
+          "summaryTag": "neutral"
+        },
+        {
+          "comment": "This is comment number 4",
+          "receivedAt": "2025-04-11T12:35:23.652+01:00",
+          "summaryTag": "neutral"
+        },
+        {
+          "comment": "This is comment number 6",
+          "receivedAt": "2025-04-11T12:35:33.815+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "This is comment number 3",
+          "receivedAt": "2025-04-11T12:35:18.556+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "This is comment number 7",
+          "receivedAt": "2025-04-11T12:35:38.904+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "This is comment number 9",
+          "receivedAt": "2025-04-11T12:35:49.072+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "This is comment number 10",
+          "receivedAt": "2025-04-11T12:35:54.157+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "This is comment number 11",
+          "receivedAt": "2025-04-11T12:35:59.245+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "This is comment number 12",
+          "receivedAt": "2025-04-11T12:36:04.337+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "This is comment number 19",
+          "receivedAt": "2025-04-11T12:36:40.011+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "This is comment number 22",
+          "receivedAt": "2025-04-11T12:36:55.297+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "This is comment number 24",
+          "receivedAt": "2025-04-11T12:37:05.472+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "This is comment number 15",
+          "receivedAt": "2025-04-11T12:36:19.632+01:00",
+          "summaryTag": "objection"
+        },
+        {
+          "comment": "This is comment number 16",
+          "receivedAt": "2025-04-11T12:36:24.719+01:00",
+          "summaryTag": "objection"
+        },
+        {
+          "comment": "This is comment number 18",
+          "receivedAt": "2025-04-11T12:36:34.918+01:00",
+          "summaryTag": "objection"
+        },
+        {
+          "comment": "This is comment number 20",
+          "receivedAt": "2025-04-11T12:36:45.102+01:00",
+          "summaryTag": "objection"
+        },
+        {
+          "comment": "This is comment number 23",
+          "receivedAt": "2025-04-11T12:37:00.382+01:00",
+          "summaryTag": "objection"
+        },
+        {
+          "comment": "This is comment number 5",
+          "receivedAt": "2025-04-11T12:35:28.732+01:00",
+          "summaryTag": "neutral"
+        },
+        {
+          "comment": "This is comment number 1",
+          "receivedAt": "2025-04-11T12:35:08.334+01:00",
+          "summaryTag": "neutral"
+        },
+        {
+          "comment": "This is comment number 8",
+          "receivedAt": "2025-04-11T12:35:43.988+01:00",
+          "summaryTag": "neutral"
+        },
+        {
+          "comment": "This is comment number 13",
+          "receivedAt": "2025-04-11T12:36:09.421+01:00",
+          "summaryTag": "neutral"
+        },
+        {
+          "comment": "This is comment number 17",
+          "receivedAt": "2025-04-11T12:36:29.838+01:00",
+          "summaryTag": "neutral"
+        },
+        {
+          "comment": "This is comment number 21",
+          "receivedAt": "2025-04-11T12:36:50.211+01:00",
+          "summaryTag": "neutral"
+        },
+        {
+          "comment": "This is comment number 26",
+          "receivedAt": "2025-04-11T12:37:15.664+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "This is comment number 28",
+          "receivedAt": "2025-04-11T12:37:26.057+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "This is comment number 29",
+          "receivedAt": "2025-04-11T12:37:31.141+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "This is comment number 30",
+          "receivedAt": "2025-04-11T12:37:36.246+01:00",
+          "summaryTag": "supportive"
+        },
+        {
+          "comment": "* Comment on any impacts on privacy of neighbours: Dummy data ",
+          "receivedAt": "2025-01-31T13:01:40.701+00:00",
+          "summaryTag": "neutral"
+        },
+        {
+          "comment": "* Comment on the design, size or height of new buildings or extensions: test  * Comment on any impacts on natural light: test  * Comment on disabled access: test ",
+          "receivedAt": "2025-02-04T17:20:14.281+00:00",
+          "summaryTag": "neutral"
+        }
+      ],
+      "consulteeComments": [
+        {
+          "comment": "test objection",
+          "receivedAt": "2025-01-30T00:00:00.000+00:00"
+        },
+        {
+          "comment": "test amendments",
+          "receivedAt": "2025-01-30T00:00:00.000+00:00"
+        },
+        {
+          "comment": "test approve",
+          "receivedAt": "2025-01-30T00:00:00.000+00:00"
+        },
+        {
+          "comment": "testing testing",
+          "receivedAt": "2025-01-30T00:00:00.000+00:00"
+        }
+      ]
+    },
+    "pressNotice": null
+  },
+  "property": {
+    "address": {
+      "latitude": "51.54909",
+      "longitude": "-0.1549788",
+      "title": "27, HERBERT STREET",
+      "singleLine": "27, HERBERT STREET, LONDON, NW5 4HA",
+      "uprn": "5039466",
+      "town": "LONDON",
+      "postcode": "NW5 4HA"
+    },
+    "boundary": {
+      "site": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-0.15494853258134098, 51.548952924152985],
+                  [-0.15483856201173046, 51.549092195284516],
+                  [-0.15487611293793893, 51.54914139875601],
+                  [-0.15496596693993778, 51.5491397308426],
+                  [-0.1549874246120569, 51.54913222523146],
+                  [-0.15509337186814506, 51.5491455685393],
+                  [-0.1551027595996972, 51.549144734582654],
+                  [-0.1550437510013696, 51.54906467467555],
+                  [-0.155008882284176, 51.54901880695698],
+                  [-0.15494853258134098, 51.548952924152985]
+                ]
+              ]
+            },
+            "properties": null
+          }
+        ]
+      }
+    }
+  },
+  "proposal": {
+    "description": "retrospective erection of outbuilding",
+    "reportingType": null,
+    "ownerIsPlanningAuthority": false
+  },
+  "applicant": {
+    "type": null,
+    "address": null,
+    "ownership": null,
+    "agent": { "address": null }
+  },
+  "officer": { "name": "Camden Moderator" },
+  "data": {
+    "appeal": {
+      "reason": "testing qwert",
+      "lodgedDate": "2024-12-25",
+      "files": [
+        {
+          "name": "testing.png",
+          "referencesInDocument": [],
+          "url": "https://camden.bops-staging.services/files/ypmum31zlx0umyo1pwwftw52ev8s",
+          "type": [
+            {
+              "value": "internal.appeal",
+              "description": "Appeal"
+            }
+          ],
+          "createdAt": "2025-01-09T14:42:32.702+00:00",
+          "applicantDescription": null,
+          "metadata": {
+            "byteSize": 6695,
+            "contentType": "image/png"
+          }
+        }
+      ]
+    }
+  },
+  "applicationFee": {
+    "id": 2047,
+    "planning_application_id": 2843,
+    "total_fee": null,
+    "payable_fee": null,
+    "requested_fee": "258.0",
+    "exemptions": [],
+    "reductions": [],
+    "created_at": "2025-01-29T16:08:27.943+00:00",
+    "updated_at": "2025-01-29T16:08:27.943+00:00"
+  }
+}

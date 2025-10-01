@@ -1,0 +1,1205 @@
+{
+  "pagination": {
+    "resultsPerPage": 10,
+    "currentPage": 1,
+    "totalPages": 3,
+    "totalResults": 27,
+    "totalAvailableItems": 27
+  },
+  "data": [
+    {
+      "application": {
+        "type": {
+          "value": "pp.full.minor",
+          "description": "planning_permission"
+        },
+        "reference": "25-00179-FULL",
+        "fullReference": "CMD-25-00179-FULL",
+        "targetDate": "2025-09-22",
+        "expiryDate": "2025-10-13",
+        "receivedAt": "2025-08-18T16:54:35.701+01:00",
+        "validAt": "2025-08-18T16:54:35.701+01:00",
+        "publishedAt": "2025-08-18T16:56:04.928+01:00",
+        "determinedAt": null,
+        "decision": null,
+        "status": "in_assessment",
+        "consultation": {
+          "startDate": "2025-08-18",
+          "endDate": "2025-09-09",
+          "publicUrl": "https://camden.bops-applicants-staging.services/planning_applications/25-00179-FULL",
+          "publishedComments": [],
+          "consulteeComments": []
+        },
+        "pressNotice": null
+      },
+      "property": {
+        "address": {
+          "latitude": "52.0003007",
+          "longitude": "-0.8271026",
+          "title": "WHADDON JUBILEE HALL, STOCK LANE",
+          "singleLine": "WHADDON JUBILEE HALL, STOCK LANE, WHADDON, MK17 0LS",
+          "uprn": "000766301871",
+          "town": "WHADDON",
+          "postcode": "MK17 0LS"
+        },
+        "boundary": {
+          "site": {
+            "type": "Feature",
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-0.8271436393261123, 52.00047292273189],
+                  [-0.8268579840660265, 52.000354853531235],
+                  [-0.8271127939224412, 52.00012862216494],
+                  [-0.8273246884346175, 52.00021366547688],
+                  [-0.8272831141948866, 52.000249994609476],
+                  [-0.8273608982563186, 52.00027971842326],
+                  [-0.8271436393261123, 52.00047292273189]
+                ]
+              ]
+            },
+            "properties": null
+          }
+        }
+      },
+      "proposal": {
+        "description": "Change of use from sui generis (top secret HQ of MI6 Section VIII) to home",
+        "reportingType": null,
+        "ownerIsPlanningAuthority": false
+      },
+      "applicant": {
+        "type": "individual",
+        "address": { "sameAsSiteAddress": true },
+        "ownership": {
+          "interest": "owner.sole",
+          "certificate": "a",
+          "declaration": { "accurate": true },
+          "agriculturalTenants": false
+        },
+        "agent": { "address": null }
+      },
+      "officer": null
+    },
+    {
+      "application": {
+        "type": {
+          "value": "pp.full.minor",
+          "description": "planning_permission"
+        },
+        "reference": "25-00176-FULL",
+        "fullReference": "CMD-25-00176-FULL",
+        "targetDate": "2025-08-07",
+        "expiryDate": "2025-08-28",
+        "receivedAt": "2025-07-03T15:23:53.264+01:00",
+        "validAt": "2025-07-03T15:23:53.264+01:00",
+        "publishedAt": "2025-07-03T15:46:02.342+01:00",
+        "determinedAt": "2025-08-04T16:26:53.630+01:00",
+        "decision": "granted",
+        "status": "determined",
+        "consultation": {
+          "startDate": "2025-07-03",
+          "endDate": "2025-07-25",
+          "publicUrl": "https://camden.bops-applicants-staging.services/planning_applications/25-00176-FULL",
+          "publishedComments": [
+            {
+              "comment": "* Design, size or height of new buildings or extensions: Looks a bit big to me  \r\n* Impacts on natural light: The sunlight in my back garden! Nooooooo! ",
+              "receivedAt": "2025-07-03T15:52:28.266+01:00",
+              "summaryTag": "neutral"
+            },
+            {
+              "comment": "Use and function of the proposed development: This is in CAZ, don't give the office away.  ",
+              "receivedAt": "2025-07-03T15:53:49.030+01:00",
+              "summaryTag": "objection"
+            },
+            {
+              "comment": "* Impacts on natural light: geerrth ",
+              "receivedAt": "2025-07-04T09:50:45.939+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "* Design, size or height of new buildings or extensions: few ",
+              "receivedAt": "2025-07-04T10:42:52.200+01:00",
+              "summaryTag": "supportive"
+            }
+          ],
+          "consulteeComments": [
+            {
+              "comment": "The original factory building at 5-6 Underhill Street was partially destroyed by enemy action during WWII and rebuilt in 1946. The site is located within Camden Town Conservation Area.\r\n\r\nIn 1988 consent was granted for external alterations to the building (plus small extension). This is the building we find today.\r\n\r\nUnderhill Street façade (ref 8701306)\r\n\r\nThe current proposal seeks to return the Underhill Street elevation to an arrangement of four windows at ground floor level as previously granted in 1988.\r\n\r\nTo ensure the building retains an architecturally coherent appearance there should be a condition attached to any consent requiring the new windows to match the existing windows in style i.e. have an ‘Art Deco’ metal Crittall-like appearance.\r\n\r\nProviding the design of the proposed windows is in keeping, the elevational changes are considered not to harm the contribution made by this building to the character and appearance of the streetscape and hence the conservation area.\r\n",
+              "receivedAt": "2025-07-03T15:55:27.525+01:00"
+            },
+            {
+              "comment": "Secure cycle parking via condition and car-free via s106. ",
+              "receivedAt": "2025-07-03T15:56:58.839+01:00"
+            }
+          ]
+        },
+        "pressNotice": {
+          "required": true,
+          "reason": "Conservation area",
+          "publishedAt": "2025-07-03T00:00:00.000+01:00"
+        }
+      },
+      "property": {
+        "address": {
+          "latitude": "51.5378008",
+          "longitude": "-0.1427892",
+          "title": "5–6, UNDERHILL STREET",
+          "singleLine": "5–6, UNDERHILL STREET, LONDON, NW1 7HS",
+          "uprn": "000005088268",
+          "town": "LONDON",
+          "postcode": "NW1 7HS"
+        },
+        "boundary": {
+          "site": {
+            "type": "Feature",
+            "geometry": {
+              "type": "MultiPolygon",
+              "coordinates": [
+                [
+                  [
+                    [-0.142522, 51.537472],
+                    [-0.142379, 51.537524],
+                    [-0.142786, 51.537874],
+                    [-0.142802, 51.537867],
+                    [-0.142813, 51.537877],
+                    [-0.143013, 51.537798],
+                    [-0.142983, 51.537766],
+                    [-0.142917, 51.537791],
+                    [-0.142866, 51.537744],
+                    [-0.142797, 51.537709],
+                    [-0.142522, 51.537472]
+                  ]
+                ]
+              ]
+            },
+            "properties": {
+              "name": "",
+              "entity": 12000510848,
+              "prefix": "title-boundary",
+              "dataset": "title-boundary",
+              "end-date": "",
+              "typology": "geography",
+              "reference": "36702504",
+              "entry-date": "2024-05-06",
+              "start-date": "2003-09-08",
+              "planx_user_action": "Accepted the title boundary",
+              "organisation-entity": "13"
+            }
+          }
+        }
+      },
+      "proposal": {
+        "description": "Change of use of ground floor front office (Class E) unit to residential (Class C3) for the provision of two self-contained residential units.",
+        "reportingType": { "code": "Q13", "description": "Dwellings (minor)" },
+        "ownerIsPlanningAuthority": false
+      },
+      "applicant": {
+        "type": "individual",
+        "address": { "sameAsSiteAddress": true },
+        "ownership": {
+          "owners": [],
+          "interest": "owner.sole",
+          "certificate": "a",
+          "declaration": { "accurate": true },
+          "agriculturalTenants": false
+        },
+        "agent": {
+          "address": {
+            "town": "London",
+            "line1": "38A Southhampton Road",
+            "line2": "",
+            "county": "",
+            "country": "",
+            "postcode": "NW5 4JR"
+          }
+        }
+      },
+      "officer": { "name": "Camden Officer" }
+    },
+    {
+      "application": {
+        "type": {
+          "value": "pp.full.major",
+          "description": "planning_permission"
+        },
+        "reference": "25-00171-MAJOR",
+        "fullReference": "CMD-25-00171-MAJOR",
+        "targetDate": "2025-07-02",
+        "expiryDate": "2025-08-27",
+        "receivedAt": "2025-05-28T13:41:01.293+01:00",
+        "validAt": "2025-05-28T13:41:01.293+01:00",
+        "publishedAt": "2025-05-28T13:49:10.726+01:00",
+        "determinedAt": null,
+        "decision": null,
+        "status": "in_assessment",
+        "consultation": {
+          "startDate": "2025-05-28",
+          "endDate": "2025-06-19",
+          "publicUrl": "https://camden.bops-applicants-staging.services/planning_applications/25-00171-MAJOR",
+          "publishedComments": [],
+          "consulteeComments": []
+        },
+        "pressNotice": null
+      },
+      "property": {
+        "address": {
+          "latitude": "51.51257224609594",
+          "longitude": "-0.5189885919643893",
+          "title": "",
+          "singleLine": ", , ",
+          "uprn": null,
+          "town": null,
+          "postcode": null
+        },
+        "boundary": {
+          "site": {
+            "type": "Feature",
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-0.5202563671906586, 51.51349326091676],
+                  [-0.5162271673824664, 51.51342965453125],
+                  [-0.5160930726385158, 51.5119189712527],
+                  [-0.5186025432309797, 51.51150473816995],
+                  [-0.5192921685359919, 51.51150076298916],
+                  [-0.5197391470751718, 51.5115882253788],
+                  [-0.5204032314768795, 51.51156039632619],
+                  [-0.5207544293552119, 51.512609937924225],
+                  [-0.5202563671906586, 51.51349326091676]
+                ]
+              ]
+            },
+            "properties": null
+          }
+        }
+      },
+      "proposal": {
+        "description": "The erection of 25 cucumber farms and associated infrastructure on vacant brownfield site",
+        "reportingType": null,
+        "ownerIsPlanningAuthority": false
+      },
+      "applicant": {
+        "type": "company",
+        "address": { "sameAsSiteAddress": true },
+        "ownership": {
+          "owners": [
+            {
+              "name": "Bert Guinea",
+              "address": {
+                "town": "Mycenae",
+                "line1": "Aggy Avenue",
+                "line2": "",
+                "county": "",
+                "country": "Greece",
+                "postcode": "212 00"
+              },
+              "noticeDate": "2024-01-01"
+            }
+          ],
+          "interest": "other",
+          "certificate": "b",
+          "declaration": { "accurate": true },
+          "noticeGiven": true,
+          "ownersKnown": "all"
+        },
+        "agent": {
+          "address": {
+            "town": "Towny Town",
+            "line1": "Roady Road",
+            "line2": "",
+            "county": "",
+            "country": "",
+            "postcode": "Cody Code"
+          }
+        }
+      },
+      "officer": null
+    },
+    {
+      "application": {
+        "type": {
+          "value": "pp.full.major",
+          "description": "planning_permission"
+        },
+        "reference": "25-00170-MAJOR",
+        "fullReference": "CMD-25-00170-MAJOR",
+        "targetDate": "2025-07-02",
+        "expiryDate": "2025-08-27",
+        "receivedAt": "2025-05-28T13:23:07.865+01:00",
+        "validAt": "2025-05-28T13:23:07.865+01:00",
+        "publishedAt": "2025-05-28T13:28:09.099+01:00",
+        "determinedAt": null,
+        "decision": null,
+        "status": "in_assessment",
+        "consultation": {
+          "startDate": "2025-05-28",
+          "endDate": "2025-06-25",
+          "publicUrl": "https://camden.bops-applicants-staging.services/planning_applications/25-00170-MAJOR",
+          "publishedComments": [
+            {
+              "comment": "* Design, size or height of new buildings or extensions: awful design and architecture  ",
+              "receivedAt": "2025-06-20T17:28:57.763+01:00",
+              "summaryTag": "objection"
+            },
+            {
+              "comment": "* Design, size or height of new buildings or extensions: test - the proposal does not fit in with the street scene.  * Use and function of the proposed development: test - the proposed use fits in with the area. ",
+              "receivedAt": "2025-06-20T17:19:53.528+01:00",
+              "summaryTag": "neutral"
+            },
+            {
+              "comment": "* Other: I like it ",
+              "receivedAt": "2025-06-23T08:53:58.182+01:00",
+              "summaryTag": "supportive"
+            }
+          ],
+          "consulteeComments": []
+        },
+        "pressNotice": null
+      },
+      "property": {
+        "address": {
+          "latitude": "51.51257224609594",
+          "longitude": "-0.5189885919643893",
+          "title": "",
+          "singleLine": ", , ",
+          "uprn": null,
+          "town": null,
+          "postcode": null
+        },
+        "boundary": {
+          "site": {
+            "type": "Feature",
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-0.5202563671906586, 51.51349326091676],
+                  [-0.5162271673824664, 51.51342965453125],
+                  [-0.5160930726385158, 51.5119189712527],
+                  [-0.5186025432309797, 51.51150473816995],
+                  [-0.5192921685359919, 51.51150076298916],
+                  [-0.5197391470751718, 51.5115882253788],
+                  [-0.5204032314768795, 51.51156039632619],
+                  [-0.5207544293552119, 51.512609937924225],
+                  [-0.5202563671906586, 51.51349326091676]
+                ]
+              ]
+            },
+            "properties": null
+          }
+        }
+      },
+      "proposal": {
+        "description": "The erection of 25 cucumber farms and associated infrastructure on vacant brownfield site",
+        "reportingType": { "code": "Q01", "description": "Dwellings (major)" },
+        "ownerIsPlanningAuthority": false
+      },
+      "applicant": {
+        "type": "company",
+        "address": { "sameAsSiteAddress": true },
+        "ownership": {
+          "owners": [
+            {
+              "name": "Bert Guinea",
+              "address": {
+                "town": "Mycenae",
+                "line1": "Aggy Avenue",
+                "line2": "",
+                "county": "",
+                "country": "Greece",
+                "postcode": "212 00"
+              },
+              "noticeDate": "2024-01-01"
+            }
+          ],
+          "interest": "other",
+          "certificate": "b",
+          "declaration": { "accurate": true },
+          "noticeGiven": true,
+          "ownersKnown": "all"
+        },
+        "agent": {
+          "address": {
+            "town": "Towny Town",
+            "line1": "Roady Road",
+            "line2": "",
+            "county": "",
+            "country": "",
+            "postcode": "Cody Code"
+          }
+        }
+      },
+      "officer": null
+    },
+    {
+      "application": {
+        "type": {
+          "value": "pp.full.householder",
+          "description": "planning_permission"
+        },
+        "reference": "25-00160-HAPP",
+        "fullReference": "CMD-25-00160-HAPP",
+        "targetDate": "2025-06-04",
+        "expiryDate": "2025-06-25",
+        "receivedAt": "2025-04-29T00:00:00.000+01:00",
+        "validAt": "2025-04-30T09:00:00.000+01:00",
+        "publishedAt": "2025-05-08T10:34:27.994+01:00",
+        "determinedAt": null,
+        "decision": null,
+        "status": "in_assessment",
+        "consultation": {
+          "startDate": "2025-05-09",
+          "endDate": "2025-10-08",
+          "publicUrl": "https://camden.bops-applicants-staging.services/planning_applications/25-00160-HAPP",
+          "publishedComments": [
+            {
+              "comment": "* Design, size or height of new buildings or extensions: The design does not fit in with the character  * Impacts on natural light: The proposal will reduce the light into my bedroom ",
+              "receivedAt": "2025-07-02T10:20:52.027+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "* Other comments: I like it. ",
+              "receivedAt": "2025-05-14T09:38:18.816+01:00",
+              "summaryTag": "neutral"
+            }
+          ],
+          "consulteeComments": [
+            {
+              "comment": "This looks great, approve it. ",
+              "receivedAt": "2025-08-26T14:44:07.624+01:00"
+            }
+          ]
+        },
+        "pressNotice": {
+          "required": true,
+          "reason": "Conservation area",
+          "publishedAt": null
+        }
+      },
+      "property": {
+        "address": {
+          "latitude": "51.451594",
+          "longitude": "-0.0823141",
+          "title": "140, WOODWARDE ROAD",
+          "singleLine": "140, WOODWARDE ROAD, LONDON, SE22 8UR",
+          "uprn": "200003442431",
+          "town": "LONDON",
+          "postcode": "SE22 8UR"
+        },
+        "boundary": {
+          "site": {
+            "type": "Feature",
+            "geometry": {
+              "type": "MultiPolygon",
+              "coordinates": [
+                [
+                  [
+                    [-0.082375, 51.451423],
+                    [-0.082071, 51.451786],
+                    [-0.082162, 51.451815],
+                    [-0.082465, 51.451452],
+                    [-0.082375, 51.451423]
+                  ]
+                ]
+              ]
+            },
+            "properties": {
+              "name": "",
+              "entity": 12000596619,
+              "prefix": "title-boundary",
+              "dataset": "title-boundary",
+              "enddate": "",
+              "typology": "geography",
+              "entrydate": "2024-05-06",
+              "reference": "37641594",
+              "startdate": "2001-11-24",
+              "planx_user_action": "Accepted the title boundary",
+              "organisationentity": 13
+            }
+          }
+        }
+      },
+      "proposal": {
+        "description": "Single storey rear extension.",
+        "reportingType": null,
+        "ownerIsPlanningAuthority": false
+      },
+      "applicant": {
+        "type": "individual",
+        "address": { "sameAsSiteAddress": true },
+        "ownership": {
+          "interest": "owner.sole",
+          "certificate": "a",
+          "declaration": { "accurate": true },
+          "agriculturalTenants": false
+        },
+        "agent": {
+          "address": {
+            "town": "London",
+            "line1": "40 Stansfield Road",
+            "line2": "Brixton",
+            "county": "Greater London",
+            "country": "UK",
+            "postcode": "SW9 9RZ"
+          }
+        }
+      },
+      "officer": { "name": "Camden Moderator" }
+    },
+    {
+      "application": {
+        "type": {
+          "value": "pp.full.householder",
+          "description": "planning_permission"
+        },
+        "reference": "25-00162-HAPP",
+        "fullReference": "CMD-25-00162-HAPP",
+        "targetDate": "2025-06-11",
+        "expiryDate": "2025-07-02",
+        "receivedAt": "2025-05-07T00:00:00.000+01:00",
+        "validAt": "2025-05-07T15:11:40.409+01:00",
+        "publishedAt": "2025-05-07T14:58:51.776+01:00",
+        "determinedAt": null,
+        "decision": null,
+        "status": "awaiting_determination",
+        "consultation": {
+          "startDate": "2025-05-08",
+          "endDate": "2025-05-08",
+          "publicUrl": "https://camden.bops-applicants-staging.services/planning_applications/25-00162-HAPP",
+          "publishedComments": [
+            {
+              "comment": "not good enough\r\n\r\n",
+              "receivedAt": "2025-05-07T15:19:15.996+01:00",
+              "summaryTag": "neutral"
+            }
+          ],
+          "consulteeComments": [
+            {
+              "comment": "No comment",
+              "receivedAt": "2025-05-07T00:00:00.000+01:00"
+            }
+          ]
+        },
+        "pressNotice": { "required": false, "reason": "", "publishedAt": null }
+      },
+      "property": {
+        "address": {
+          "latitude": "51.5459162",
+          "longitude": "-0.1670635",
+          "title": "55, LANCASTER GROVE",
+          "singleLine": "55, LANCASTER GROVE, LONDON, NW3 4HD",
+          "uprn": "000005194142",
+          "town": "LONDON",
+          "postcode": "NW3 4HD"
+        },
+        "boundary": {
+          "site": {
+            "type": "Feature",
+            "geometry": {
+              "type": "MultiPolygon",
+              "coordinates": [
+                [
+                  [
+                    [-0.167073, 51.54581],
+                    [-0.167036, 51.545801],
+                    [-0.166809, 51.546117],
+                    [-0.166968, 51.546152],
+                    [-0.167201, 51.545833],
+                    [-0.167073, 51.54581]
+                  ]
+                ]
+              ]
+            },
+            "properties": {
+              "name": "",
+              "entity": 12000511663,
+              "prefix": "title-boundary",
+              "dataset": "title-boundary",
+              "end-date": "",
+              "typology": "geography",
+              "reference": "48737210",
+              "entry-date": "2024-05-06",
+              "start-date": "2010-11-23",
+              "planx_user_action": "Accepted the title boundary",
+              "organisation-entity": "13"
+            }
+          }
+        }
+      },
+      "proposal": {
+        "description": "Erection of single storey rear extension",
+        "reportingType": {
+          "code": "Q21",
+          "description": "Householder developments"
+        },
+        "ownerIsPlanningAuthority": false
+      },
+      "applicant": {
+        "type": "individual",
+        "address": { "sameAsSiteAddress": true },
+        "ownership": {
+          "owners": [],
+          "interest": "owner.sole",
+          "certificate": "a",
+          "declaration": { "accurate": true },
+          "agriculturalTenants": false
+        },
+        "agent": { "address": null }
+      },
+      "officer": { "name": "Camden Moderator" }
+    },
+    {
+      "application": {
+        "type": {
+          "value": "pp.full.householder",
+          "description": "planning_permission"
+        },
+        "reference": "25-00161-HAPP",
+        "fullReference": "CMD-25-00161-HAPP",
+        "targetDate": "2025-06-05",
+        "expiryDate": "2025-06-26",
+        "receivedAt": "2025-05-01T00:00:00.000+01:00",
+        "validAt": "2025-05-01T00:00:00.000+01:00",
+        "publishedAt": "2025-05-01T10:02:14.878+01:00",
+        "determinedAt": "2025-05-07T16:50:12.391+01:00",
+        "decision": "granted",
+        "status": "Appeal started",
+        "consultation": {
+          "startDate": "2025-05-02",
+          "endDate": "2025-05-06",
+          "publicUrl": "https://camden.bops-applicants-staging.services/planning_applications/25-00161-HAPP",
+          "publishedComments": [],
+          "consulteeComments": []
+        },
+        "pressNotice": { "required": false, "reason": "", "publishedAt": null }
+      },
+      "property": {
+        "address": {
+          "latitude": "51.451594",
+          "longitude": "-0.0823141",
+          "title": "1E GARDEN HOUSE ELLERDALE ROAD",
+          "singleLine": "1E GARDEN HOUSE ELLERDALE ROAD, LONDON, NW3 6BA",
+          "uprn": "200003442431",
+          "town": "LONDON",
+          "postcode": "NW3 6BA"
+        },
+        "boundary": {
+          "site": {
+            "type": "Feature",
+            "geometry": {
+              "type": "MultiPolygon",
+              "coordinates": [
+                [
+                  [
+                    [-0.082375, 51.451423],
+                    [-0.082071, 51.451786],
+                    [-0.082162, 51.451815],
+                    [-0.082465, 51.451452],
+                    [-0.082375, 51.451423]
+                  ]
+                ]
+              ]
+            },
+            "properties": {
+              "name": "",
+              "entity": 12000596619,
+              "prefix": "title-boundary",
+              "dataset": "title-boundary",
+              "enddate": "",
+              "typology": "geography",
+              "entrydate": "2024-05-06",
+              "reference": "37641594",
+              "startdate": "2001-11-24",
+              "planx_user_action": "Accepted the title boundary",
+              "organisationentity": 13
+            }
+          }
+        }
+      },
+      "proposal": {
+        "description": "Single storey rear extension.",
+        "reportingType": {
+          "code": "Q21",
+          "description": "Householder developments"
+        },
+        "ownerIsPlanningAuthority": false
+      },
+      "applicant": {
+        "type": "individual",
+        "address": { "sameAsSiteAddress": true },
+        "ownership": {
+          "interest": "owner.sole",
+          "certificate": "a",
+          "declaration": { "accurate": true },
+          "agriculturalTenants": false
+        },
+        "agent": {
+          "address": {
+            "town": "London",
+            "line1": "40 Stansfield Road",
+            "line2": "Brixton",
+            "county": "Greater London",
+            "country": "UK",
+            "postcode": "SW9 9RZ"
+          }
+        }
+      },
+      "officer": { "name": "Camden Moderator" },
+      "data": {
+        "appeal": {
+          "reason": "test",
+          "lodgedDate": "2025-08-01",
+          "validatedDate": "2025-08-07",
+          "startedDate": "2025-08-07",
+          "files": []
+        }
+      }
+    },
+    {
+      "application": {
+        "type": {
+          "value": "pp.full.householder",
+          "description": "planning_permission"
+        },
+        "reference": "24-00140-HAPP",
+        "fullReference": "CMD-24-00140-HAPP",
+        "targetDate": "2025-04-17",
+        "expiryDate": "2025-05-08",
+        "receivedAt": "2024-10-24T00:00:00.000+01:00",
+        "validAt": "2025-03-13T09:00:00.762+00:00",
+        "publishedAt": "2025-04-28T14:49:24.469+01:00",
+        "determinedAt": null,
+        "decision": null,
+        "status": "Appeal lodged",
+        "consultation": {
+          "startDate": "2025-02-07",
+          "endDate": "2025-02-28",
+          "publicUrl": "https://camden.bops-applicants-staging.services/planning_applications/24-00140-HAPP",
+          "publishedComments": [],
+          "consulteeComments": []
+        },
+        "pressNotice": {
+          "required": true,
+          "reason": "Conservation area and north",
+          "publishedAt": null
+        }
+      },
+      "property": {
+        "address": {
+          "latitude": "51.5546963",
+          "longitude": "-0.1904545",
+          "title": "37, HEATH DRIVE",
+          "singleLine": "37, HEATH DRIVE, LONDON, NW3 7SD",
+          "uprn": "000005060961",
+          "town": "LONDON",
+          "postcode": "NW3 7SD"
+        },
+        "boundary": {
+          "site": {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "geometry": {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [
+                      [-0.19048459928544786, 51.55479433835421],
+                      [-0.19026322928420566, 51.55491845317795],
+                      [-0.1901199145369894, 51.55480229443066],
+                      [-0.190347682594375, 51.55470284321103],
+                      [-0.19048459928544786, 51.55479433835421]
+                    ]
+                  ]
+                },
+                "properties": null
+              }
+            ]
+          }
+        }
+      },
+      "proposal": {
+        "description": "test",
+        "reportingType": null,
+        "ownerIsPlanningAuthority": false
+      },
+      "applicant": {
+        "type": "individual",
+        "address": { "sameAsSiteAddress": true },
+        "ownership": {
+          "owners": [],
+          "interest": "owner.sole",
+          "certificate": "a",
+          "declaration": { "accurate": true },
+          "agriculturalTenants": false
+        },
+        "agent": { "address": null }
+      },
+      "officer": { "name": "Camden Officer" },
+      "data": {
+        "appeal": {
+          "reason": "testing qwert",
+          "lodgedDate": "2024-12-25",
+          "files": [
+            {
+              "name": "testing.png",
+              "referencesInDocument": [],
+              "url": "https://camden.bops-staging.services/files/ypmum31zlx0umyo1pwwftw52ev8s",
+              "type": [{ "value": "internal.appeal", "description": "Appeal" }],
+              "createdAt": "2025-01-09T14:42:32.702+00:00",
+              "applicantDescription": null,
+              "metadata": { "byteSize": 6695, "contentType": "image/png" }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "application": {
+        "type": {
+          "value": "pp.full.householder.retro",
+          "description": "planning_permission"
+        },
+        "reference": "25-00151-HAPR",
+        "fullReference": "CMD-25-00151-HAPR",
+        "targetDate": "2025-03-05",
+        "expiryDate": "2025-03-25",
+        "receivedAt": "2025-01-29T00:00:00.000+00:00",
+        "validAt": "2025-01-29T00:00:00.000+00:00",
+        "publishedAt": "2025-04-11T12:40:43.626+01:00",
+        "determinedAt": null,
+        "decision": null,
+        "status": "in_assessment",
+        "consultation": {
+          "startDate": "2025-01-31",
+          "endDate": "2025-02-21",
+          "publicUrl": "https://camden.bops-applicants-staging.services/planning_applications/25-00151-HAPR",
+          "publishedComments": [
+            {
+              "comment": "I like it you can only see this because its in the redacted comment",
+              "receivedAt": "2025-04-11T12:32:02.636+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "This is comment number 2",
+              "receivedAt": "2025-04-11T12:35:13.452+01:00",
+              "summaryTag": "neutral"
+            },
+            {
+              "comment": "This is comment number 4",
+              "receivedAt": "2025-04-11T12:35:23.652+01:00",
+              "summaryTag": "neutral"
+            },
+            {
+              "comment": "This is comment number 6",
+              "receivedAt": "2025-04-11T12:35:33.815+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "This is comment number 3",
+              "receivedAt": "2025-04-11T12:35:18.556+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "This is comment number 7",
+              "receivedAt": "2025-04-11T12:35:38.904+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "This is comment number 9",
+              "receivedAt": "2025-04-11T12:35:49.072+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "This is comment number 10",
+              "receivedAt": "2025-04-11T12:35:54.157+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "This is comment number 11",
+              "receivedAt": "2025-04-11T12:35:59.245+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "This is comment number 12",
+              "receivedAt": "2025-04-11T12:36:04.337+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "This is comment number 19",
+              "receivedAt": "2025-04-11T12:36:40.011+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "This is comment number 22",
+              "receivedAt": "2025-04-11T12:36:55.297+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "This is comment number 24",
+              "receivedAt": "2025-04-11T12:37:05.472+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "This is comment number 15",
+              "receivedAt": "2025-04-11T12:36:19.632+01:00",
+              "summaryTag": "objection"
+            },
+            {
+              "comment": "This is comment number 16",
+              "receivedAt": "2025-04-11T12:36:24.719+01:00",
+              "summaryTag": "objection"
+            },
+            {
+              "comment": "This is comment number 18",
+              "receivedAt": "2025-04-11T12:36:34.918+01:00",
+              "summaryTag": "objection"
+            },
+            {
+              "comment": "This is comment number 20",
+              "receivedAt": "2025-04-11T12:36:45.102+01:00",
+              "summaryTag": "objection"
+            },
+            {
+              "comment": "This is comment number 23",
+              "receivedAt": "2025-04-11T12:37:00.382+01:00",
+              "summaryTag": "objection"
+            },
+            {
+              "comment": "This is comment number 5",
+              "receivedAt": "2025-04-11T12:35:28.732+01:00",
+              "summaryTag": "neutral"
+            },
+            {
+              "comment": "This is comment number 1",
+              "receivedAt": "2025-04-11T12:35:08.334+01:00",
+              "summaryTag": "neutral"
+            },
+            {
+              "comment": "This is comment number 8",
+              "receivedAt": "2025-04-11T12:35:43.988+01:00",
+              "summaryTag": "neutral"
+            },
+            {
+              "comment": "This is comment number 13",
+              "receivedAt": "2025-04-11T12:36:09.421+01:00",
+              "summaryTag": "neutral"
+            },
+            {
+              "comment": "This is comment number 17",
+              "receivedAt": "2025-04-11T12:36:29.838+01:00",
+              "summaryTag": "neutral"
+            },
+            {
+              "comment": "This is comment number 21",
+              "receivedAt": "2025-04-11T12:36:50.211+01:00",
+              "summaryTag": "neutral"
+            },
+            {
+              "comment": "This is comment number 26",
+              "receivedAt": "2025-04-11T12:37:15.664+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "This is comment number 28",
+              "receivedAt": "2025-04-11T12:37:26.057+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "This is comment number 29",
+              "receivedAt": "2025-04-11T12:37:31.141+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "This is comment number 30",
+              "receivedAt": "2025-04-11T12:37:36.246+01:00",
+              "summaryTag": "supportive"
+            },
+            {
+              "comment": "* Comment on any impacts on privacy of neighbours: Dummy data ",
+              "receivedAt": "2025-01-31T13:01:40.701+00:00",
+              "summaryTag": "neutral"
+            },
+            {
+              "comment": "* Comment on the design, size or height of new buildings or extensions: test  * Comment on any impacts on natural light: test  * Comment on disabled access: test ",
+              "receivedAt": "2025-02-04T17:20:14.281+00:00",
+              "summaryTag": "neutral"
+            }
+          ],
+          "consulteeComments": [
+            {
+              "comment": "test objection",
+              "receivedAt": "2025-01-30T00:00:00.000+00:00"
+            },
+            {
+              "comment": "test amendments",
+              "receivedAt": "2025-01-30T00:00:00.000+00:00"
+            },
+            {
+              "comment": "test approve",
+              "receivedAt": "2025-01-30T00:00:00.000+00:00"
+            },
+            {
+              "comment": "testing testing",
+              "receivedAt": "2025-01-30T00:00:00.000+00:00"
+            }
+          ]
+        },
+        "pressNotice": null
+      },
+      "property": {
+        "address": {
+          "latitude": "51.54909",
+          "longitude": "-0.1549788",
+          "title": "27, HERBERT STREET",
+          "singleLine": "27, HERBERT STREET, LONDON, NW5 4HA",
+          "uprn": "5039466",
+          "town": "LONDON",
+          "postcode": "NW5 4HA"
+        },
+        "boundary": {
+          "site": {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "geometry": {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [
+                      [-0.15494853258134098, 51.548952924152985],
+                      [-0.15483856201173046, 51.549092195284516],
+                      [-0.15487611293793893, 51.54914139875601],
+                      [-0.15496596693993778, 51.5491397308426],
+                      [-0.1549874246120569, 51.54913222523146],
+                      [-0.15509337186814506, 51.5491455685393],
+                      [-0.1551027595996972, 51.549144734582654],
+                      [-0.1550437510013696, 51.54906467467555],
+                      [-0.155008882284176, 51.54901880695698],
+                      [-0.15494853258134098, 51.548952924152985]
+                    ]
+                  ]
+                },
+                "properties": null
+              }
+            ]
+          }
+        }
+      },
+      "proposal": {
+        "description": "retrospective erection of outbuilding",
+        "reportingType": null,
+        "ownerIsPlanningAuthority": false
+      },
+      "applicant": {
+        "type": null,
+        "address": null,
+        "ownership": null,
+        "agent": { "address": null }
+      },
+      "officer": { "name": "Camden Moderator" }
+    },
+    {
+      "application": {
+        "type": {
+          "value": "pp.full.householder",
+          "description": "planning_permission"
+        },
+        "reference": "25-00156-HAPP",
+        "fullReference": "CMD-25-00156-HAPP",
+        "targetDate": "2025-04-29",
+        "expiryDate": "2025-05-20",
+        "receivedAt": "2025-03-25T12:24:06.886+00:00",
+        "validAt": "2025-03-25T12:24:06.886+00:00",
+        "publishedAt": "2025-04-08T14:13:28.369+01:00",
+        "determinedAt": null,
+        "decision": null,
+        "status": "in_assessment",
+        "consultation": {
+          "startDate": "2025-04-09",
+          "endDate": "2025-04-30",
+          "publicUrl": "https://camden.bops-applicants-staging.services/planning_applications/25-00156-HAPP",
+          "publishedComments": [],
+          "consulteeComments": []
+        },
+        "pressNotice": null
+      },
+      "property": {
+        "address": {
+          "latitude": "51.547872",
+          "longitude": "-0.1416145",
+          "title": "231, KENTISH TOWN ROAD",
+          "singleLine": "231, KENTISH TOWN ROAD, LONDON, NW5 2JT",
+          "uprn": "000005049018",
+          "town": "LONDON",
+          "postcode": "NW5 2JT"
+        },
+        "boundary": {
+          "site": {
+            "type": "Feature",
+            "geometry": {
+              "type": "MultiPolygon",
+              "coordinates": [
+                [
+                  [
+                    [-0.142008, 51.547851],
+                    [-0.141982, 51.547822],
+                    [-0.14196, 51.547825],
+                    [-0.141956, 51.547819],
+                    [-0.141737, 51.547843],
+                    [-0.141734, 51.547829],
+                    [-0.141704, 51.547841],
+                    [-0.141618, 51.547853],
+                    [-0.14162, 51.547846],
+                    [-0.141462, 51.547828],
+                    [-0.141461, 51.547835],
+                    [-0.141527, 51.547843],
+                    [-0.141511, 51.547894],
+                    [-0.14164, 51.547906],
+                    [-0.142008, 51.547851]
+                  ]
+                ]
+              ]
+            },
+            "properties": {
+              "name": "",
+              "entity": 12000501011,
+              "prefix": "title-boundary",
+              "dataset": "title-boundary",
+              "end-date": "",
+              "typology": "geography",
+              "reference": "54041575",
+              "entry-date": "2024-05-06",
+              "start-date": "2012-04-25",
+              "planx_user_action": "Accepted the title boundary",
+              "organisation-entity": "13"
+            }
+          }
+        }
+      },
+      "proposal": {
+        "description": "d",
+        "reportingType": {
+          "code": "Q21",
+          "description": "Householder developments"
+        },
+        "ownerIsPlanningAuthority": false
+      },
+      "applicant": {
+        "type": "individual",
+        "address": { "sameAsSiteAddress": true },
+        "ownership": {
+          "owners": [],
+          "interest": "owner.sole",
+          "certificate": "a",
+          "declaration": { "accurate": true },
+          "agriculturalTenants": false
+        },
+        "agent": { "address": null }
+      },
+      "officer": null
+    }
+  ]
+}

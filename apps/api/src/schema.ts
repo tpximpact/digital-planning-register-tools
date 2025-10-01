@@ -39,7 +39,8 @@ import {
   PostSubmissionPublishedSpecialistsQueryParams,
   PostSubmissionPublishedSpecialistsResponse,
   PostSubmissionPublishedSpecialistUrlParams,
-  PostSubmissionPublishedSpecialistResponse
+  PostSubmissionPublishedSpecialistResponse,
+  PostSubmissionPublishedSpecialistQueryParams
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 
 export const SchemaModel = new Elysia().model({
@@ -92,6 +93,8 @@ export const SchemaModel = new Elysia().model({
   'public.specialists.all.response': PostSubmissionPublishedSpecialistsResponse,
   'public.specialists.single.params':
     PostSubmissionPublishedSpecialistUrlParams,
+  'public.specialists.single.query':
+    PostSubmissionPublishedSpecialistQueryParams,
   'public.specialists.single.response':
     PostSubmissionPublishedSpecialistResponse
 })

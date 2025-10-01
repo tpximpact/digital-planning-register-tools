@@ -2,6 +2,7 @@ import { Type } from '@sinclair/typebox'
 import type { Static, TSchema } from '@sinclair/typebox'
 import { Applicant } from './data/Applicant'
 import { Site } from '../../shared/Sites'
+import '../../shared/formats'
 
 type Application<T extends TSchema> = Static<ReturnType<typeof Application<T>>>
 export const Application = <T extends TSchema>(T: T) =>

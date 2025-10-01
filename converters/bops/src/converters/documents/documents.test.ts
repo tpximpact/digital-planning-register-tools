@@ -1,142 +1,1170 @@
-import { describe, it, expect } from 'bun:test'
+import { describe, it, expect, spyOn } from 'bun:test'
 import { Value } from '@sinclair/typebox/value'
+import {
+  type PostSubmissionPublishedDocumentsResponse,
+  PostSubmissionPublishedDocumentsResponse as PostSubmissionPublishedDocumentsResponseSchema
+} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { bopsDocumentsEndpointToOdp } from './documents'
-import { BopsDocumentsEndpoint } from '../../schemas/bops/documents'
-import type { BopsFile } from '../../schemas/shared/BopsFile'
 
-import { validBopsApplication } from '../../mocks/validBopsApplication'
-import { validBopsFile } from '../../mocks/validBopsFile'
-import { PostSubmissionPublishedDocumentsResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-
-describe('bopsDocumentsEndpointToOdp conversion', () => {
-  describe('Conversion', () => {
-    it('returns a valid response', () => {
-      const bopsFiles: BopsFile[] = Array.from({ length: 100 }, (_, i) => ({
-        ...validBopsFile,
-        name: `Test Document ${i + 1}`
-      }))
-
-      const before: BopsDocumentsEndpoint = {
-        application: validBopsApplication,
-        files: bopsFiles,
-        metadata: {
-          results: 100,
-          totalResults: 100
-        }
-      }
-
-      expect(Value.Check(BopsDocumentsEndpoint, before)).toBe(true)
-
-      const conversion = bopsDocumentsEndpointToOdp(
-        before,
+describe('bopsPublicCommentsEndpointToOdp', () => {
+  it('Does nothing if data is already valid', () => {
+    const valid: PostSubmissionPublishedDocumentsResponse = {
+      status: {
+        code: 200,
+        message: 'OK'
+      },
+      pagination: {
+        resultsPerPage: 10,
+        currentPage: 1,
+        totalPages: 1,
+        totalResults: 2,
+        totalAvailableItems: 2
+      },
+      data: [
         {
-          resultsPerPage: 10,
-          page: 1
-        },
-        { code: 200, message: 'OK' }
-      )
-
-      expect(
-        Value.Check(PostSubmissionPublishedDocumentsResponse, conversion)
-      ).toBe(true)
-
-      expect(conversion?.pagination?.resultsPerPage).toBe(10)
-      if (conversion.pagination && 'currentPage' in conversion.pagination) {
-        expect(conversion.pagination.currentPage).toBe(1)
-        expect(conversion.pagination.totalPages).toBe(10)
-      }
-      expect(conversion?.pagination?.totalResults).toBe(100)
-      expect(conversion?.pagination?.totalAvailableItems).toBe(100)
-    })
-
-    it('ignores invalid documents', () => {
-      const bopsFiles: BopsFile[] = Array.from({ length: 100 }, (_, i) => ({
-        ...validBopsFile,
-        name: `Test Document ${i + 1}`
-      }))
-
-      bopsFiles.push({
-        type: [],
-        url: '',
-        createdAt: ''
-      } as unknown as BopsFile) // Invalid file
-
-      const before: BopsDocumentsEndpoint = {
-        application: validBopsApplication,
-        files: bopsFiles,
-        metadata: {
-          results: 101,
-          totalResults: 101
-        }
-      }
-
-      const conversion = bopsDocumentsEndpointToOdp(
-        before,
-        {
-          resultsPerPage: 10,
-          page: 1
-        },
-        { code: 200, message: 'OK' }
-      )
-
-      expect(
-        Value.Check(PostSubmissionPublishedDocumentsResponse, conversion)
-      ).toBe(true)
-
-      expect(conversion?.pagination?.resultsPerPage).toBe(10)
-      if (conversion.pagination && 'currentPage' in conversion.pagination) {
-        expect(conversion.pagination.currentPage).toBe(1)
-        expect(conversion.pagination.totalPages).toBe(10)
-      }
-      expect(conversion?.pagination?.totalResults).toBe(100)
-      expect(conversion?.pagination?.totalAvailableItems).toBe(100)
-    })
-
-    it('orders results by newest publishedAt first', () => {
-      // Create files with different publishedAt dates
-      const bopsFiles: BopsFile[] = [
-        {
-          ...validBopsFile,
-          name: 'Oldest Document',
-          createdAt: '2020-07-03T15:23:53.264+01:00'
+          id: 1,
+          name: 'myPlans.pdf',
+          association: 'application',
+          redactedUrl:
+            'https://api.editor.planx.dev/file/private/tbp4kiba/myPlans.pdf',
+          type: ['roofPlan.existing', 'roofPlan.proposed'],
+          metadata: {
+            size: {
+              bytes: 123456
+            },
+            mimeType: 'application/pdf',
+            createdAt: '2024-02-18T15:54:30.821Z',
+            submittedAt: '2024-02-18T15:54:30.821Z',
+            validatedAt: '2024-02-19T15:54:31.021Z',
+            publishedAt: '2024-02-19T15:54:31.021Z'
+          }
         },
         {
-          ...validBopsFile,
-          name: 'Middle Document',
-          createdAt: '2022-07-03T15:23:53.264+01:00'
+          id: 2,
+          name: 'other.pdf',
+          association: 'application',
+          type: ['sitePlan.existing', 'sitePlan.proposed'],
+          metadata: {
+            size: {
+              bytes: 123456
+            },
+            mimeType: 'application/pdf',
+            createdAt: '2024-02-18T15:54:30.821Z',
+            submittedAt: '2024-02-18T15:54:30.821Z',
+            validatedAt: '2024-02-19T15:54:31.021Z',
+            publishedAt: '2024-02-19T15:54:31.021Z'
+          },
+          redactedUrl:
+            'https://api.editor.planx.dev/file/private/5w5v8s8z/other.pdf'
         },
         {
-          ...validBopsFile,
-          name: 'Newest Document',
-          createdAt: '2025-07-03T15:23:53.264+01:00'
+          id: 3,
+          name: 'elevations.pdf',
+          association: 'application',
+          type: ['elevations.existing', 'elevations.proposed'],
+          metadata: {
+            size: {
+              bytes: 123456
+            },
+            mimeType: 'application/pdf',
+            createdAt: '2024-02-18T15:54:30.821Z',
+            submittedAt: '2024-02-18T15:54:30.821Z',
+            validatedAt: '2024-02-19T15:54:31.021Z',
+            publishedAt: '2024-02-19T15:54:31.021Z'
+          },
+          redactedUrl:
+            'https://api.editor.planx.dev/file/private/7nrefxnn/elevations.pdf'
+        },
+        {
+          id: 4,
+          name: 'floor_plans.pdf',
+          association: 'application',
+          type: ['floorPlan.existing', 'floorPlan.proposed'],
+          metadata: {
+            size: {
+              bytes: 123456
+            },
+            mimeType: 'application/pdf',
+            createdAt: '2024-02-18T15:54:30.821Z',
+            submittedAt: '2024-02-18T15:54:30.821Z',
+            validatedAt: '2024-02-19T15:54:31.021Z',
+            publishedAt: '2024-02-19T15:54:31.021Z'
+          },
+          redactedUrl:
+            'https://api.editor.planx.dev/file/private/311w2id6/floor_plans.pdf'
         }
       ]
+    }
 
-      const before: BopsDocumentsEndpoint = {
-        application: validBopsApplication,
-        files: bopsFiles,
-        metadata: {
-          results: 3,
-          totalResults: 3
-        }
+    const result = bopsDocumentsEndpointToOdp(
+      valid,
+      {
+        page: 1,
+        resultsPerPage: 10
+      },
+      {
+        code: 200,
+        message: 'OK'
       }
+    )
+    expect(result).toBe(valid) // should return the same object by reference if no changes made
+    expect(
+      Value.Check(PostSubmissionPublishedDocumentsResponseSchema, result)
+    ).toBe(true)
+  })
 
-      const conversion = bopsDocumentsEndpointToOdp(
-        before,
-        {
-          resultsPerPage: 3,
-          page: 1
+  it('Converts an invalid endpoint', () => {
+    const invalidData = {
+      application: {
+        type: {
+          value: 'pp.full.householder',
+          description: 'planning_permission'
         },
-        { code: 200, message: 'OK' }
-      )
-      expect(conversion?.data).toBeDefined()
-      expect(conversion?.data).not.toBeNull()
-
-      if (conversion?.data) {
-        expect(conversion?.data[0]?.name).toBe('Newest Document')
-        expect(conversion?.data[1]?.name).toBe('Middle Document')
-        expect(conversion?.data[2]?.name).toBe('Oldest Document')
+        reference: '24-00129-HAPP',
+        fullReference: 'CMD-24-00129-HAPP',
+        targetDate: '2024-06-06',
+        expiryDate: '2024-06-27',
+        receivedAt: '2024-05-02T16:14:39.305+01:00',
+        validAt: '2024-05-02T00:00:00.000+01:00',
+        publishedAt: '2024-05-02T00:00:00.000+01:00',
+        determinedAt: '2024-05-10T13:38:10.852+01:00',
+        decision: 'granted',
+        status: 'determined',
+        consultation: {
+          startDate: '2024-05-07',
+          endDate: '2024-05-07',
+          publicUrl:
+            'https://camden.bops-applicants-staging.services/planning_applications/24-00129-HAPP',
+          publishedComments: [
+            {
+              comment:
+                "Eton Conservation Area Advisory Committee Advice from Eton Conservation Area Advisory Committee: 06.07.2023 Re: 9 Steele’s Road: 2023/2198/P Replacement of existing lower ground floor rear extension; installation of timber French doors at rear; alterations to lower ground floor side fenestration; installation of dormer on rear roof slope; replacement of all windows with timber sash windows to match existing; and associated exterior works. It is the side elevation in this proposal that presents concerns. The new large - very large - side window exposing the stairs is an uncomfortably destabilising presence at the base of this elevation. There is an ill-fitting awkwardness about it, especially as it just manages to squeeze, by a sliver, beneath a newly raised ‘existing' window. It is one of two large presences in this elevation, the other being the proposed extension. Clad in Corten Steel, this extension introduces a markedly forceful presence, which is in some danger of overpowering the main house. It reads, in the drawing, as a defiantly different, almost separate, entity - rather than being in the nature of an addition. However, it is not possible for anyone to give a fully informed and fair judgement when all there is to go on is this drawing (and that of the rear elevation) at this scale. Does Camden agree with this? We would welcome a response to this concern as we have noticed a certain increase in the incidence of drawings submitted with applications that do not provide adequate accounts of a design. We think that a more detailed presentation of the extension, including perhaps CGI’s, is needed, and should be supplied. The new large side window can surely be made more accommodating to its elevation - at present it disregards the scale and patterning of the side wall’s fenestration - and be reduced in size. And the extension requires a further, fuller presentation. Yours sincerely, Eton CAAC",
+              receivedAt: '2024-05-03T10:53:27.704+01:00',
+              summaryTag: 'objection'
+            },
+            {
+              comment: "[redacted]\r\n\r\ndon't redact this comment\r\n\r\n",
+              receivedAt: '2024-05-10T13:22:17.969+01:00',
+              summaryTag: 'objection'
+            },
+            {
+              comment: 'light\r\n\r\naccess\r\n\r\n',
+              receivedAt: '2024-05-10T13:22:58.884+01:00',
+              summaryTag: 'neutral'
+            }
+          ],
+          consulteeComments: [
+            {
+              comment:
+                "Eton Conservation Area Advisory Committee Advice from Eton Conservation Area Advisory Committee: 06.07.2023 Re: 9 Steele’s Road: 2023/2198/P Replacement of existing lower ground floor rear extension; installation of timber French doors at rear; alterations to lower ground floor side fenestration; installation of dormer on rear roof slope; replacement of all windows with timber sash windows to match existing; and associated exterior works. It is the side elevation in this proposal that presents concerns. The new large - very large - side window exposing the stairs is an uncomfortably destabilising presence at the base of this elevation. There is an ill-fitting awkwardness about it, especially as it just manages to squeeze, by a sliver, beneath a newly raised ‘existing' window. It is one of two large presences in this elevation, the other being the proposed extension. Clad in Corten Steel, this extension introduces a markedly forceful presence, which is in some danger of overpowering the main house. It reads, in the drawing, as a defiantly different, almost separate, entity - rather than being in the nature of an addition. However, it is not possible for anyone to give a fully informed and fair judgement when all there is to go on is this drawing (and that of the rear elevation) at this scale. Does Camden agree with this? We would welcome a response to this concern as we have noticed a certain increase in the incidence of drawings submitted with applications that do not provide adequate accounts of a design. We think that a more detailed presentation of the extension, including perhaps CGI’s, is needed, and should be supplied. The new large side window can surely be made more accommodating to its elevation - at present it disregards the scale and patterning of the side wall’s fenestration - and be reduced in size. And the extension requires a further, fuller presentation. Yours sincerely, Eton CAAC",
+              receivedAt: '2024-05-03T00:00:00.000+01:00'
+            }
+          ]
+        },
+        pressNotice: { required: false, reason: '', publishedAt: null }
+      },
+      files: [
+        {
+          name: 'Design and Access Statement.PDF',
+          referencesInDocument: ['DESIGN AND ACCESS STATEMENT'],
+          url: 'https://camden.bops-staging.services/files/hv71uw5pvuuyxdrf8h6qnk6oh1nv',
+          type: [
+            {
+              value: 'designAndAccessStatement',
+              description: 'Design and Access Statement'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:40.682+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 1688899, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Planning and Heritage Statement.PDF',
+          referencesInDocument: ['Planning \u0026 Heritage Statement'],
+          url: 'https://camden.bops-staging.services/files/y4gy2dl9qcgjbrhk912q4692c4i7',
+          type: [
+            { value: 'heritageStatement', description: 'Heritage Statement' }
+          ],
+          createdAt: '2024-05-02T16:14:42.987+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 1546986, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Section AA.PDF',
+          referencesInDocument: ['1959-E-121'],
+          url: 'https://camden.bops-staging.services/files/sbiapwpvh86zrinu4e78wq15caps',
+          type: [
+            { value: 'sections.existing', description: 'Sections - existing' }
+          ],
+          createdAt: '2024-05-02T16:14:43.295+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 53445, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Section BB.PDF',
+          referencesInDocument: ['1959-E-122'],
+          url: 'https://camden.bops-staging.services/files/ps3cqrgq4cf0v0lh39dbibezj1w7',
+          type: [
+            { value: 'sections.existing', description: 'Sections - existing' }
+          ],
+          createdAt: '2024-05-02T16:14:43.570+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 49933, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Section CC.PDF',
+          referencesInDocument: ['Existing Section CC'],
+          url: 'https://camden.bops-staging.services/files/2y63fozksyp0gkgv5qcp73lspp2h',
+          type: [
+            { value: 'sections.existing', description: 'Sections - existing' }
+          ],
+          createdAt: '2024-05-02T16:14:43.829+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 46489, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Section DD.PDF',
+          referencesInDocument: ['Existing Section DD'],
+          url: 'https://camden.bops-staging.services/files/hnsvuidoyvhhqrfd530po17eyayj',
+          type: [
+            { value: 'sections.existing', description: 'Sections - existing' }
+          ],
+          createdAt: '2024-05-02T16:14:44.058+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 46845, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Section EE.PDF',
+          referencesInDocument: ['Existing Section EE'],
+          url: 'https://camden.bops-staging.services/files/ji21s2zjtcb6e8uu361lbh9hbmhk',
+          type: [
+            { value: 'sections.existing', description: 'Sections - existing' }
+          ],
+          createdAt: '2024-05-02T16:14:45.631+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 49353, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Section AA.PDF',
+          referencesInDocument: ['Proposed Section AA'],
+          url: 'https://camden.bops-staging.services/files/iod3210n9n0gexvwt7nfpve34mri',
+          type: [
+            { value: 'sections.proposed', description: 'Sections - proposed' }
+          ],
+          createdAt: '2024-05-02T16:14:45.922+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 121021, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Section BB.PDF',
+          referencesInDocument: ['Proposed Section BB'],
+          url: 'https://camden.bops-staging.services/files/k9xu77dj65ch7a7b6e0jzbn8m7hz',
+          type: [
+            { value: 'sections.proposed', description: 'Sections - proposed' }
+          ],
+          createdAt: '2024-05-02T16:14:46.194+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 234993, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Section DD.PDF',
+          referencesInDocument: ['Proposed Section DD'],
+          url: 'https://camden.bops-staging.services/files/u98ekbpiii8bca6gx9stfnyx04dm',
+          type: [
+            { value: 'sections.proposed', description: 'Sections - proposed' }
+          ],
+          createdAt: '2024-05-02T16:14:46.466+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 110889, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Section FF.PDF',
+          referencesInDocument: ['Proposed Section FF'],
+          url: 'https://camden.bops-staging.services/files/zfjx6wb56dmhvbonz9smgk7opxoz',
+          type: [
+            { value: 'sections.proposed', description: 'Sections - proposed' }
+          ],
+          createdAt: '2024-05-02T16:14:46.796+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 133080, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Site Plan.PDF',
+          referencesInDocument: ['Existing Site Plan'],
+          url: 'https://camden.bops-staging.services/files/3a52g3hd62t64y62l24qz79yhvzb',
+          type: [
+            { value: 'sitePlan.existing', description: 'Site plan - existing' }
+          ],
+          createdAt: '2024-05-02T16:14:47.025+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 76519, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Site Plan.PDF',
+          referencesInDocument: ['Proposed Site Plan'],
+          url: 'https://camden.bops-staging.services/files/4gubql5zfd6ndh60w6quhhi420gz',
+          type: [
+            { value: 'sitePlan.proposed', description: 'Site plan - proposed' }
+          ],
+          createdAt: '2024-05-02T16:14:48.054+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 71269, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Lower Ground Floor Plan.PDF',
+          referencesInDocument: ['Existing Lower Ground Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/pkgcupbwyer40f3diuhadr908zx8',
+          type: [
+            {
+              value: 'floorPlan.existing',
+              description: 'Floor plan - existing'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:48.380+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 53053, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Ground Floor Plan.PDF',
+          referencesInDocument: ['Existing Ground Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/5tbkdwfzrzb9bi104ydaatgk9ltg',
+          type: [
+            {
+              value: 'floorPlan.existing',
+              description: 'Floor plan - existing'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:49.367+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 63455, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing First Floor Plan.PDF',
+          referencesInDocument: ['Existing First Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/yqrcycez9zeclv6is9c3hzvxinq8',
+          type: [
+            {
+              value: 'floorPlan.existing',
+              description: 'Floor plan - existing'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:49.654+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 41592, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Second Floor Plan.PDF',
+          referencesInDocument: ['Existing Second Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/x3aqyar8hgep05wpkie8d0n3mh4u',
+          type: [
+            {
+              value: 'floorPlan.existing',
+              description: 'Floor plan - existing'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:49.936+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 40693, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Roof Plan.PDF',
+          referencesInDocument: ['Existing Roof Plan'],
+          url: 'https://camden.bops-staging.services/files/7qmrm93vr6aqa1xu8zydlhdcef1z',
+          type: [
+            {
+              value: 'floorPlan.existing',
+              description: 'Floor plan - existing'
+            },
+            { value: 'roofPlan.existing', description: 'Roof plan - existing' }
+          ],
+          createdAt: '2024-05-02T16:14:50.247+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 36032, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Ground Floor Plan.PDF',
+          referencesInDocument: ['Proposed Ground Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/qde20gtlc14afsxa7d0piaulcp4o',
+          type: [
+            {
+              value: 'floorPlan.proposed',
+              description: 'Floor plan - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:50.779+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 113183, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed First Floor Plan.PDF',
+          referencesInDocument: ['Proposed First Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/18koix1vyr5gukpkfi3ki4e27v8o',
+          type: [
+            {
+              value: 'floorPlan.proposed',
+              description: 'Floor plan - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:51.759+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 68293, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Loft Plan.PDF',
+          referencesInDocument: ['Proposed Loft Plan'],
+          url: 'https://camden.bops-staging.services/files/jj77fw4cfmxt6z6j90vb2gcygu62',
+          type: [
+            {
+              value: 'floorPlan.proposed',
+              description: 'Floor plan - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:51.972+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 39312, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Roof Plan.PDF',
+          referencesInDocument: ['Proposed Roof Plan'],
+          url: 'https://camden.bops-staging.services/files/41tjyxauucqavx2qifhkaotuci6e',
+          type: [
+            {
+              value: 'floorPlan.proposed',
+              description: 'Floor plan - proposed'
+            },
+            { value: 'roofPlan.proposed', description: 'Roof plan - proposed' }
+          ],
+          createdAt: '2024-05-02T16:14:52.206+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 39308, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Second Floor Plan.PDF',
+          referencesInDocument: ['Proposed Second Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/dg0s9r7oytkuzio7gsl1ypt2jmxu',
+          type: [
+            {
+              value: 'floorPlan.proposed',
+              description: 'Floor plan - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:52.642+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 72371, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Lower Ground Floor Plan.PDF',
+          referencesInDocument: ['Proposed Lower Ground Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/jzy8xyx2r04yid5h1o2tzly1kowx',
+          type: [
+            {
+              value: 'floorPlan.proposed',
+              description: 'Floor plan - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:52.891+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 110288, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Front Elevation.PDF',
+          referencesInDocument: ['Existing Front Elevation'],
+          url: 'https://camden.bops-staging.services/files/cpocqo2zvmq9he7w35om0f40ecr8',
+          type: [
+            {
+              value: 'elevations.existing',
+              description: 'Elevations - existing'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:53.118+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 392170, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Side Elevation.PDF',
+          referencesInDocument: ['Existing Side Elevation'],
+          url: 'https://camden.bops-staging.services/files/2yw5a3kckwoupyfs4n9fhz6kmxar',
+          type: [
+            {
+              value: 'elevations.existing',
+              description: 'Elevations - existing'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:53.389+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 101713, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Rear Elevation.PDF',
+          referencesInDocument: ['Existing Rear Elevation'],
+          url: 'https://camden.bops-staging.services/files/95zvpv2ybbkglfscusupbt0wyfzh',
+          type: [
+            {
+              value: 'elevations.existing',
+              description: 'Elevations - existing'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:53.676+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 134315, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Rear Elevation.PDF',
+          referencesInDocument: ['Proposed Rear Elevation'],
+          url: 'https://camden.bops-staging.services/files/wtn0z310qv0dakyn7p00okzma5a6',
+          type: [
+            {
+              value: 'elevations.proposed',
+              description: 'Elevations - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:53.936+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 144399, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Front Elevation.PDF',
+          referencesInDocument: ['Proposed Front Elevation'],
+          url: 'https://camden.bops-staging.services/files/ajxrb0c4aa94u7jj92zdxvuv98js',
+          type: [
+            {
+              value: 'elevations.proposed',
+              description: 'Elevations - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:54.250+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 399237, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Side Elevation.PDF',
+          referencesInDocument: ['Proposed Side Elevation'],
+          url: 'https://camden.bops-staging.services/files/zq7b17693g9a2wvq9hduxmveu1ry',
+          type: [
+            {
+              value: 'elevations.proposed',
+              description: 'Elevations - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:54.562+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 124442, contentType: 'application/pdf' }
+        }
+      ],
+      metadata: { results: 30, totalResults: 30 },
+      decisionNotice: {
+        name: 'decision-notice-CMD-24-00129-HAPP.pdf',
+        url: 'https://camden.bops-staging.services/api/v1/planning_applications/24-00129-HAPP/decision_notice.pdf'
       }
+    }
+
+    const result = bopsDocumentsEndpointToOdp(
+      invalidData,
+      {
+        page: 1,
+        resultsPerPage: 10
+      },
+      {
+        code: 200,
+        message: 'OK'
+      }
+    )
+    expect(
+      Value.Check(PostSubmissionPublishedDocumentsResponseSchema, result)
+    ).toBe(true)
+
+    expect(result.pagination).toEqual({
+      resultsPerPage: 10,
+      currentPage: 1,
+      totalPages: 3,
+      totalResults: 30,
+      totalAvailableItems: 30
     })
+  })
+
+  it('Adjusts pagination if one isnt returned', () => {
+    const invalidData = {
+      application: {
+        type: {
+          value: 'pp.full.householder',
+          description: 'planning_permission'
+        },
+        reference: '24-00129-HAPP',
+        fullReference: 'CMD-24-00129-HAPP',
+        targetDate: '2024-06-06',
+        expiryDate: '2024-06-27',
+        receivedAt: '2024-05-02T16:14:39.305+01:00',
+        validAt: '2024-05-02T00:00:00.000+01:00',
+        publishedAt: '2024-05-02T00:00:00.000+01:00',
+        determinedAt: '2024-05-10T13:38:10.852+01:00',
+        decision: 'granted',
+        status: 'determined',
+        consultation: {
+          startDate: '2024-05-07',
+          endDate: '2024-05-07',
+          publicUrl:
+            'https://camden.bops-applicants-staging.services/planning_applications/24-00129-HAPP',
+          publishedComments: [
+            {
+              comment:
+                "Eton Conservation Area Advisory Committee Advice from Eton Conservation Area Advisory Committee: 06.07.2023 Re: 9 Steele’s Road: 2023/2198/P Replacement of existing lower ground floor rear extension; installation of timber French doors at rear; alterations to lower ground floor side fenestration; installation of dormer on rear roof slope; replacement of all windows with timber sash windows to match existing; and associated exterior works. It is the side elevation in this proposal that presents concerns. The new large - very large - side window exposing the stairs is an uncomfortably destabilising presence at the base of this elevation. There is an ill-fitting awkwardness about it, especially as it just manages to squeeze, by a sliver, beneath a newly raised ‘existing' window. It is one of two large presences in this elevation, the other being the proposed extension. Clad in Corten Steel, this extension introduces a markedly forceful presence, which is in some danger of overpowering the main house. It reads, in the drawing, as a defiantly different, almost separate, entity - rather than being in the nature of an addition. However, it is not possible for anyone to give a fully informed and fair judgement when all there is to go on is this drawing (and that of the rear elevation) at this scale. Does Camden agree with this? We would welcome a response to this concern as we have noticed a certain increase in the incidence of drawings submitted with applications that do not provide adequate accounts of a design. We think that a more detailed presentation of the extension, including perhaps CGI’s, is needed, and should be supplied. The new large side window can surely be made more accommodating to its elevation - at present it disregards the scale and patterning of the side wall’s fenestration - and be reduced in size. And the extension requires a further, fuller presentation. Yours sincerely, Eton CAAC",
+              receivedAt: '2024-05-03T10:53:27.704+01:00',
+              summaryTag: 'objection'
+            },
+            {
+              comment: "[redacted]\r\n\r\ndon't redact this comment\r\n\r\n",
+              receivedAt: '2024-05-10T13:22:17.969+01:00',
+              summaryTag: 'objection'
+            },
+            {
+              comment: 'light\r\n\r\naccess\r\n\r\n',
+              receivedAt: '2024-05-10T13:22:58.884+01:00',
+              summaryTag: 'neutral'
+            }
+          ],
+          consulteeComments: [
+            {
+              comment:
+                "Eton Conservation Area Advisory Committee Advice from Eton Conservation Area Advisory Committee: 06.07.2023 Re: 9 Steele’s Road: 2023/2198/P Replacement of existing lower ground floor rear extension; installation of timber French doors at rear; alterations to lower ground floor side fenestration; installation of dormer on rear roof slope; replacement of all windows with timber sash windows to match existing; and associated exterior works. It is the side elevation in this proposal that presents concerns. The new large - very large - side window exposing the stairs is an uncomfortably destabilising presence at the base of this elevation. There is an ill-fitting awkwardness about it, especially as it just manages to squeeze, by a sliver, beneath a newly raised ‘existing' window. It is one of two large presences in this elevation, the other being the proposed extension. Clad in Corten Steel, this extension introduces a markedly forceful presence, which is in some danger of overpowering the main house. It reads, in the drawing, as a defiantly different, almost separate, entity - rather than being in the nature of an addition. However, it is not possible for anyone to give a fully informed and fair judgement when all there is to go on is this drawing (and that of the rear elevation) at this scale. Does Camden agree with this? We would welcome a response to this concern as we have noticed a certain increase in the incidence of drawings submitted with applications that do not provide adequate accounts of a design. We think that a more detailed presentation of the extension, including perhaps CGI’s, is needed, and should be supplied. The new large side window can surely be made more accommodating to its elevation - at present it disregards the scale and patterning of the side wall’s fenestration - and be reduced in size. And the extension requires a further, fuller presentation. Yours sincerely, Eton CAAC",
+              receivedAt: '2024-05-03T00:00:00.000+01:00'
+            }
+          ]
+        },
+        pressNotice: { required: false, reason: '', publishedAt: null }
+      },
+      files: [
+        {
+          name: 'Design and Access Statement.PDF',
+          referencesInDocument: ['DESIGN AND ACCESS STATEMENT'],
+          url: 'https://camden.bops-staging.services/files/hv71uw5pvuuyxdrf8h6qnk6oh1nv',
+          type: [
+            {
+              value: 'designAndAccessStatement',
+              description: 'Design and Access Statement'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:40.682+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 1688899, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Planning and Heritage Statement.PDF',
+          referencesInDocument: ['Planning \u0026 Heritage Statement'],
+          url: 'https://camden.bops-staging.services/files/y4gy2dl9qcgjbrhk912q4692c4i7',
+          type: [
+            { value: 'heritageStatement', description: 'Heritage Statement' }
+          ],
+          createdAt: '2024-05-02T16:14:42.987+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 1546986, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Section AA.PDF',
+          referencesInDocument: ['1959-E-121'],
+          url: 'https://camden.bops-staging.services/files/sbiapwpvh86zrinu4e78wq15caps',
+          type: [
+            { value: 'sections.existing', description: 'Sections - existing' }
+          ],
+          createdAt: '2024-05-02T16:14:43.295+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 53445, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Section BB.PDF',
+          referencesInDocument: ['1959-E-122'],
+          url: 'https://camden.bops-staging.services/files/ps3cqrgq4cf0v0lh39dbibezj1w7',
+          type: [
+            { value: 'sections.existing', description: 'Sections - existing' }
+          ],
+          createdAt: '2024-05-02T16:14:43.570+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 49933, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Section CC.PDF',
+          referencesInDocument: ['Existing Section CC'],
+          url: 'https://camden.bops-staging.services/files/2y63fozksyp0gkgv5qcp73lspp2h',
+          type: [
+            { value: 'sections.existing', description: 'Sections - existing' }
+          ],
+          createdAt: '2024-05-02T16:14:43.829+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 46489, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Section DD.PDF',
+          referencesInDocument: ['Existing Section DD'],
+          url: 'https://camden.bops-staging.services/files/hnsvuidoyvhhqrfd530po17eyayj',
+          type: [
+            { value: 'sections.existing', description: 'Sections - existing' }
+          ],
+          createdAt: '2024-05-02T16:14:44.058+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 46845, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Section EE.PDF',
+          referencesInDocument: ['Existing Section EE'],
+          url: 'https://camden.bops-staging.services/files/ji21s2zjtcb6e8uu361lbh9hbmhk',
+          type: [
+            { value: 'sections.existing', description: 'Sections - existing' }
+          ],
+          createdAt: '2024-05-02T16:14:45.631+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 49353, contentType: 'application/pdf' }
+        },
+        {
+          referencesInDocument: ['Proposed Section AA'],
+          url: 'https://camden.bops-staging.services/files/iod3210n9n0gexvwt7nfpve34mri',
+          type: [
+            { value: 'sections.proposed', description: 'Sections - proposed' }
+          ],
+          createdAt: '2024-05-02T16:14:45.922+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 121021, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Section BB.PDF',
+          referencesInDocument: ['Proposed Section BB'],
+          url: 'https://camden.bops-staging.services/files/k9xu77dj65ch7a7b6e0jzbn8m7hz',
+          type: [
+            { value: 'sections.proposed', description: 'Sections - proposed' }
+          ],
+          createdAt: '2024-05-02T16:14:46.194+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 234993, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Section DD.PDF',
+          referencesInDocument: ['Proposed Section DD'],
+          url: 'https://camden.bops-staging.services/files/u98ekbpiii8bca6gx9stfnyx04dm',
+          type: [
+            { value: 'sections.proposed', description: 'Sections - proposed' }
+          ],
+          createdAt: '2024-05-02T16:14:46.466+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 110889, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Section FF.PDF',
+          referencesInDocument: ['Proposed Section FF'],
+          url: 'https://camden.bops-staging.services/files/zfjx6wb56dmhvbonz9smgk7opxoz',
+          type: [
+            { value: 'sections.proposed', description: 'Sections - proposed' }
+          ],
+          createdAt: '2024-05-02T16:14:46.796+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 133080, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Site Plan.PDF',
+          referencesInDocument: ['Existing Site Plan'],
+          url: 'https://camden.bops-staging.services/files/3a52g3hd62t64y62l24qz79yhvzb',
+          type: [
+            { value: 'sitePlan.existing', description: 'Site plan - existing' }
+          ],
+          createdAt: '2024-05-02T16:14:47.025+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 76519, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Site Plan.PDF',
+          referencesInDocument: ['Proposed Site Plan'],
+          url: 'https://camden.bops-staging.services/files/4gubql5zfd6ndh60w6quhhi420gz',
+          type: [
+            { value: 'sitePlan.proposed', description: 'Site plan - proposed' }
+          ],
+          createdAt: '2024-05-02T16:14:48.054+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 71269, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Lower Ground Floor Plan.PDF',
+          referencesInDocument: ['Existing Lower Ground Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/pkgcupbwyer40f3diuhadr908zx8',
+          type: [
+            {
+              value: 'floorPlan.existing',
+              description: 'Floor plan - existing'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:48.380+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 53053, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Ground Floor Plan.PDF',
+          referencesInDocument: ['Existing Ground Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/5tbkdwfzrzb9bi104ydaatgk9ltg',
+          type: [
+            {
+              value: 'floorPlan.existing',
+              description: 'Floor plan - existing'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:49.367+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 63455, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing First Floor Plan.PDF',
+          referencesInDocument: ['Existing First Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/yqrcycez9zeclv6is9c3hzvxinq8',
+          type: [
+            {
+              value: 'floorPlan.existing',
+              description: 'Floor plan - existing'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:49.654+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 41592, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Second Floor Plan.PDF',
+          referencesInDocument: ['Existing Second Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/x3aqyar8hgep05wpkie8d0n3mh4u',
+          type: [
+            {
+              value: 'floorPlan.existing',
+              description: 'Floor plan - existing'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:49.936+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 40693, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Roof Plan.PDF',
+          referencesInDocument: ['Existing Roof Plan'],
+          url: 'https://camden.bops-staging.services/files/7qmrm93vr6aqa1xu8zydlhdcef1z',
+          type: [
+            {
+              value: 'floorPlan.existing',
+              description: 'Floor plan - existing'
+            },
+            { value: 'roofPlan.existing', description: 'Roof plan - existing' }
+          ],
+          createdAt: '2024-05-02T16:14:50.247+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 36032, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Ground Floor Plan.PDF',
+          referencesInDocument: ['Proposed Ground Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/qde20gtlc14afsxa7d0piaulcp4o',
+          type: [
+            {
+              value: 'floorPlan.proposed',
+              description: 'Floor plan - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:50.779+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 113183, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed First Floor Plan.PDF',
+          referencesInDocument: ['Proposed First Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/18koix1vyr5gukpkfi3ki4e27v8o',
+          type: [
+            {
+              value: 'floorPlan.proposed',
+              description: 'Floor plan - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:51.759+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 68293, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Loft Plan.PDF',
+          referencesInDocument: ['Proposed Loft Plan'],
+          url: 'https://camden.bops-staging.services/files/jj77fw4cfmxt6z6j90vb2gcygu62',
+          type: [
+            {
+              value: 'floorPlan.proposed',
+              description: 'Floor plan - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:51.972+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 39312, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Roof Plan.PDF',
+          referencesInDocument: ['Proposed Roof Plan'],
+          url: 'https://camden.bops-staging.services/files/41tjyxauucqavx2qifhkaotuci6e',
+          type: [
+            {
+              value: 'floorPlan.proposed',
+              description: 'Floor plan - proposed'
+            },
+            { value: 'roofPlan.proposed', description: 'Roof plan - proposed' }
+          ],
+          createdAt: '2024-05-02T16:14:52.206+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 39308, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Second Floor Plan.PDF',
+          referencesInDocument: ['Proposed Second Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/dg0s9r7oytkuzio7gsl1ypt2jmxu',
+          type: [
+            {
+              value: 'floorPlan.proposed',
+              description: 'Floor plan - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:52.642+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 72371, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Lower Ground Floor Plan.PDF',
+          referencesInDocument: ['Proposed Lower Ground Floor Plan'],
+          url: 'https://camden.bops-staging.services/files/jzy8xyx2r04yid5h1o2tzly1kowx',
+          type: [
+            {
+              value: 'floorPlan.proposed',
+              description: 'Floor plan - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:52.891+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 110288, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Front Elevation.PDF',
+          referencesInDocument: ['Existing Front Elevation'],
+          url: 'https://camden.bops-staging.services/files/cpocqo2zvmq9he7w35om0f40ecr8',
+          type: [
+            {
+              value: 'elevations.existing',
+              description: 'Elevations - existing'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:53.118+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 392170, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Side Elevation.PDF',
+          referencesInDocument: ['Existing Side Elevation'],
+          url: 'https://camden.bops-staging.services/files/2yw5a3kckwoupyfs4n9fhz6kmxar',
+          type: [
+            {
+              value: 'elevations.existing',
+              description: 'Elevations - existing'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:53.389+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 101713, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Existing Rear Elevation.PDF',
+          referencesInDocument: ['Existing Rear Elevation'],
+          url: 'https://camden.bops-staging.services/files/95zvpv2ybbkglfscusupbt0wyfzh',
+          type: [
+            {
+              value: 'elevations.existing',
+              description: 'Elevations - existing'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:53.676+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 134315, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Rear Elevation.PDF',
+          referencesInDocument: ['Proposed Rear Elevation'],
+          url: 'https://camden.bops-staging.services/files/wtn0z310qv0dakyn7p00okzma5a6',
+          type: [
+            {
+              value: 'elevations.proposed',
+              description: 'Elevations - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:53.936+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 144399, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Front Elevation.PDF',
+          referencesInDocument: ['Proposed Front Elevation'],
+          url: 'https://camden.bops-staging.services/files/ajxrb0c4aa94u7jj92zdxvuv98js',
+          type: [
+            {
+              value: 'elevations.proposed',
+              description: 'Elevations - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:54.250+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 399237, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Proposed Side Elevation.PDF',
+          referencesInDocument: ['Proposed Side Elevation'],
+          url: 'https://camden.bops-staging.services/files/zq7b17693g9a2wvq9hduxmveu1ry',
+          type: [
+            {
+              value: 'elevations.proposed',
+              description: 'Elevations - proposed'
+            }
+          ],
+          createdAt: '2024-05-02T16:14:54.562+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 124442, contentType: 'application/pdf' }
+        }
+      ],
+      metadata: { results: 30, totalResults: 30 },
+      decisionNotice: {
+        name: 'decision-notice-CMD-24-00129-HAPP.pdf',
+        url: 'https://camden.bops-staging.services/api/v1/planning_applications/24-00129-HAPP/decision_notice.pdf'
+      }
+    }
+
+    // Spy on console.warn
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    const warnSpy = spyOn(console, 'warn').mockImplementation(() => {})
+
+    const result = bopsDocumentsEndpointToOdp(
+      invalidData,
+      {
+        page: 1,
+        resultsPerPage: 10
+      },
+      {
+        code: 200,
+        message: 'OK'
+      }
+    )
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      'Error converting document but its taken care of elsewhere:',
+      expect.any(Error)
+    )
+
+    warnSpy.mockRestore()
+    expect(
+      Value.Check(PostSubmissionPublishedDocumentsResponseSchema, result)
+    ).toBe(true)
+
+    expect(result.pagination).toEqual({
+      resultsPerPage: 10,
+      currentPage: 1,
+      totalPages: 3,
+      totalResults: 29,
+      totalAvailableItems: 29
+    })
+  })
+
+  it('orders results by newest publishedAt first', () => {
+    const before = {
+      application: {
+        type: {
+          value: 'pp.full.householder',
+          description: 'planning_permission'
+        },
+        reference: '24-00129-HAPP',
+        fullReference: 'CMD-24-00129-HAPP',
+        targetDate: '2024-06-06',
+        expiryDate: '2024-06-27',
+        receivedAt: '2024-05-02T16:14:39.305+01:00',
+        validAt: '2024-05-02T00:00:00.000+01:00',
+        publishedAt: '2024-05-02T00:00:00.000+01:00',
+        determinedAt: '2024-05-10T13:38:10.852+01:00',
+        decision: 'granted',
+        status: 'determined',
+        consultation: {
+          startDate: '2024-05-07',
+          endDate: '2024-05-07',
+          publicUrl:
+            'https://camden.bops-applicants-staging.services/planning_applications/24-00129-HAPP',
+          publishedComments: [
+            {
+              comment:
+                "Eton Conservation Area Advisory Committee Advice from Eton Conservation Area Advisory Committee: 06.07.2023 Re: 9 Steele’s Road: 2023/2198/P Replacement of existing lower ground floor rear extension; installation of timber French doors at rear; alterations to lower ground floor side fenestration; installation of dormer on rear roof slope; replacement of all windows with timber sash windows to match existing; and associated exterior works. It is the side elevation in this proposal that presents concerns. The new large - very large - side window exposing the stairs is an uncomfortably destabilising presence at the base of this elevation. There is an ill-fitting awkwardness about it, especially as it just manages to squeeze, by a sliver, beneath a newly raised ‘existing' window. It is one of two large presences in this elevation, the other being the proposed extension. Clad in Corten Steel, this extension introduces a markedly forceful presence, which is in some danger of overpowering the main house. It reads, in the drawing, as a defiantly different, almost separate, entity - rather than being in the nature of an addition. However, it is not possible for anyone to give a fully informed and fair judgement when all there is to go on is this drawing (and that of the rear elevation) at this scale. Does Camden agree with this? We would welcome a response to this concern as we have noticed a certain increase in the incidence of drawings submitted with applications that do not provide adequate accounts of a design. We think that a more detailed presentation of the extension, including perhaps CGI’s, is needed, and should be supplied. The new large side window can surely be made more accommodating to its elevation - at present it disregards the scale and patterning of the side wall’s fenestration - and be reduced in size. And the extension requires a further, fuller presentation. Yours sincerely, Eton CAAC",
+              receivedAt: '2024-05-03T10:53:27.704+01:00',
+              summaryTag: 'objection'
+            },
+            {
+              comment: "[redacted]\r\n\r\ndon't redact this comment\r\n\r\n",
+              receivedAt: '2024-05-10T13:22:17.969+01:00',
+              summaryTag: 'objection'
+            },
+            {
+              comment: 'light\r\n\r\naccess\r\n\r\n',
+              receivedAt: '2024-05-10T13:22:58.884+01:00',
+              summaryTag: 'neutral'
+            }
+          ],
+          consulteeComments: [
+            {
+              comment:
+                "Eton Conservation Area Advisory Committee Advice from Eton Conservation Area Advisory Committee: 06.07.2023 Re: 9 Steele’s Road: 2023/2198/P Replacement of existing lower ground floor rear extension; installation of timber French doors at rear; alterations to lower ground floor side fenestration; installation of dormer on rear roof slope; replacement of all windows with timber sash windows to match existing; and associated exterior works. It is the side elevation in this proposal that presents concerns. The new large - very large - side window exposing the stairs is an uncomfortably destabilising presence at the base of this elevation. There is an ill-fitting awkwardness about it, especially as it just manages to squeeze, by a sliver, beneath a newly raised ‘existing' window. It is one of two large presences in this elevation, the other being the proposed extension. Clad in Corten Steel, this extension introduces a markedly forceful presence, which is in some danger of overpowering the main house. It reads, in the drawing, as a defiantly different, almost separate, entity - rather than being in the nature of an addition. However, it is not possible for anyone to give a fully informed and fair judgement when all there is to go on is this drawing (and that of the rear elevation) at this scale. Does Camden agree with this? We would welcome a response to this concern as we have noticed a certain increase in the incidence of drawings submitted with applications that do not provide adequate accounts of a design. We think that a more detailed presentation of the extension, including perhaps CGI’s, is needed, and should be supplied. The new large side window can surely be made more accommodating to its elevation - at present it disregards the scale and patterning of the side wall’s fenestration - and be reduced in size. And the extension requires a further, fuller presentation. Yours sincerely, Eton CAAC",
+              receivedAt: '2024-05-03T00:00:00.000+01:00'
+            }
+          ]
+        },
+        pressNotice: { required: false, reason: '', publishedAt: null }
+      },
+      files: [
+        {
+          name: 'Oldest Document',
+          referencesInDocument: ['DESIGN AND ACCESS STATEMENT'],
+          url: 'https://camden.bops-staging.services/files/hv71uw5pvuuyxdrf8h6qnk6oh1nv',
+          type: [
+            {
+              value: 'designAndAccessStatement',
+              description: 'Design and Access Statement'
+            }
+          ],
+          createdAt: '2025-01-01T16:14:40.682+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 1688899, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Middle Document',
+          referencesInDocument: ['Planning \u0026 Heritage Statement'],
+          url: 'https://camden.bops-staging.services/files/y4gy2dl9qcgjbrhk912q4692c4i7',
+          type: [
+            { value: 'heritageStatement', description: 'Heritage Statement' }
+          ],
+          createdAt: '2025-02-01T16:14:42.987+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 1546986, contentType: 'application/pdf' }
+        },
+        {
+          name: 'Newest Document',
+          referencesInDocument: ['1959-E-121'],
+          url: 'https://camden.bops-staging.services/files/sbiapwpvh86zrinu4e78wq15caps',
+          type: [
+            { value: 'sections.existing', description: 'Sections - existing' }
+          ],
+          createdAt: '2025-03-01T16:14:43.295+01:00',
+          applicantDescription: null,
+          metadata: { byteSize: 53445, contentType: 'application/pdf' }
+        }
+      ]
+    }
+
+    const conversion = bopsDocumentsEndpointToOdp(
+      before,
+      {
+        resultsPerPage: 3,
+        page: 1
+      },
+      { code: 200, message: 'OK' }
+    )
+
+    expect(conversion.data).toBeDefined()
+    expect(conversion.data).not.toBeNull()
+
+    expect(conversion?.data[0]?.name).toBe('Newest Document')
+    expect(conversion?.data[1]?.name).toBe('Middle Document')
+    expect(conversion?.data[2]?.name).toBe('Oldest Document')
   })
 })

@@ -1,14 +1,13 @@
-import type { PostSubmissionPublishedSpecialistsResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import {
-  BopsSpecialistCommentsEndpoint as BopsSpecialistCommentsEndpointSchema,
-  type BopsSpecialistCommentsEndpoint
-} from '../../schemas/bops/specialistComments'
+  type PostSubmissionPublishedSpecialistsResponse,
+  PostSubmissionPublishedSpecialistsResponse as PostSubmissionPublishedSpecialistsResponseSchema
+} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { Value } from '@sinclair/typebox/value'
 import { Pagination } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
 import { SpecialistCommentSummary } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/CommentSummary.ts'
 import { SpecialistRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.ts'
 import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
-import { convertBopsSpecialistComment } from './convertBopsSpecialistComment'
+import { convertBopsSpecialistToSpecialistRedacted } from './convertBopsSpecialistToSpecialistRedacted'
 
 /**
  * Converts a BopsPublicCommentsEndpoint object to a PostSubmissionPublishedPublicCommentsResponse.
@@ -16,16 +15,19 @@ import { convertBopsSpecialistComment } from './convertBopsSpecialistComment'
  * Filters out invalid comments and adjusts pagination accordingly.
  */
 export const bopsSpecialistCommentsEndpointToOdp = (
-  input: BopsSpecialistCommentsEndpoint,
+  // allowed since it could really be anything and we don't need the typeguards from unknown
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  input: any,
   status: ApiResponseStatus
 ): PostSubmissionPublishedSpecialistsResponse => {
-  // Validate input schema
-  if (!Value.Check(BopsSpecialistCommentsEndpointSchema, input)) {
-    console.warn('Invalid BopsSpecialistCommentsEndpoint:', input)
-    throw new Error('Invalid BopsSpecialistCommentsEndpoint')
+  if (Value.Check(PostSubmissionPublishedSpecialistsResponseSchema, input)) {
+    return input
   }
 
-  const { summary, comments, pagination } = input
+  const {
+    data: { summary, comments: specialists },
+    pagination
+  } = input
 
   // Validate pagination and summary
   if (!Value.Check(Pagination, pagination)) {
@@ -37,17 +39,27 @@ export const bopsSpecialistCommentsEndpointToOdp = (
     throw new Error('Invalid SpecialistCommentSummary')
   }
 
-  // Convert and filter comments
-  const convertedComments = (comments ?? [])
-    .map((comment) => convertBopsSpecialistComment(comment))
-    .filter((comment) => {
-      const valid =
-        comment !== undefined && Value.Check(SpecialistRedacted, comment)
-      if (!valid) console.warn('Invalid SpecialistRedacted:', comment)
-      return valid
-    })
+  // Convert and filter specialists
 
-  const difference = (comments?.length ?? 0) - convertedComments.length
+  const convertedSpecialists: SpecialistRedacted[] = (specialists ?? [])
+    .map((specialist: unknown): SpecialistRedacted | undefined => {
+      try {
+        return convertBopsSpecialistToSpecialistRedacted(specialist)
+      } catch (error) {
+        console.warn(
+          'Error converting specialist comment but its taken care of elsewhere:',
+          error
+        )
+        return undefined
+      }
+    })
+    .filter(
+      (
+        specialist: SpecialistRedacted | undefined
+      ): specialist is SpecialistRedacted => specialist !== undefined
+    )
+
+  const difference = (specialists?.length ?? 0) - convertedSpecialists.length
 
   // Adjust pagination if any comments were filtered out
   const adjustedPagination =
@@ -62,12 +74,18 @@ export const bopsSpecialistCommentsEndpointToOdp = (
         }
       : pagination
 
-  return {
+  const results = {
     data: {
-      comments: convertedComments,
+      comments: convertedSpecialists,
       summary
     },
     pagination: adjustedPagination,
     status
   }
+
+  if (Value.Check(PostSubmissionPublishedSpecialistsResponseSchema, results)) {
+    return results
+  }
+
+  throw new Error('Unable to convert specialist endpoint')
 }
