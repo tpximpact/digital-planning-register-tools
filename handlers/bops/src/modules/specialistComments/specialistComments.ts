@@ -1,105 +1,70 @@
-import { Elysia } from 'elysia'
-import {
+import type {
   PostSubmissionPublishedSpecialistsQueryParams,
   PostSubmissionPublishedSpecialistsResponse,
-  PostSubmissionPublishedSpecialistsUrlParams
+  PostSubmissionPublishedSpecialistResponse
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import { createUrlSearchParams } from '@dpr/libs'
-import { handleBopsGetRequest } from '../../libs/requests/requests'
-import { bopsSpecialistCommentsEndpointToOdp } from '@dpr/converter-bops/converters/specialistComments/index.ts'
-import type { BopsSpecialistCommentsEndpoint } from '@dpr/converter-bops/schemas/bops/specialistComments/specialistComments.ts'
-import { requireClientHeaders, standardResponseObjects } from '@dpr/api'
+import { getPublicApplicationSpecialistCommentsUrl } from './../../libs/urls'
+import {
+  getStatusFromRequest,
+  handleBopsGetRequest
+} from './../../libs/requests'
+import { bopsSpecialistCommentsEndpointToOdp } from '@dpr/converter-bops'
+import { ENV_HANDLER_BOPS as ENV } from '@dpr/config'
 
-/**
- * Helper to build specialist comments endpoint URL with query params.
- */
-function buildSpecialistCommentsUrl(
+const { BOPS_LEGACY_SPECIALIST_COMMENTS } = ENV
+
+export const fetchAllApplicationSpecialistComments = async (
+  client: string,
   applicationId: string,
-  query?: PostSubmissionPublishedSpecialistsQueryParams
-): string {
-  let url = `public/planning_applications/${applicationId}/comments/specialist`
-  if (query) {
-    const { publishedAtFrom, publishedAtTo, sortBy, ...searchParams } = query
-    const params = createUrlSearchParams(searchParams)
-    if (publishedAtFrom && publishedAtTo) {
-      params.append('publishedAtFrom', publishedAtFrom)
-      params.append('publishedAtTo', publishedAtTo)
-    }
-    // Convert sortBy from publishedAt to receivedAt
-    if (sortBy) {
-      if (sortBy === 'publishedAt') params.append('sortBy', 'receivedAt')
-    }
-    url += `?${params.toString()}`
+  query: PostSubmissionPublishedSpecialistsQueryParams
+): Promise<PostSubmissionPublishedSpecialistsResponse> => {
+  try {
+    const url = getPublicApplicationSpecialistCommentsUrl(applicationId, query)
+    const results =
+      await handleBopsGetRequest<PostSubmissionPublishedSpecialistsResponse>(
+        client,
+        url,
+        async (response: Response) => {
+          const input = await response.json()
+          if (BOPS_LEGACY_SPECIALIST_COMMENTS) {
+            const status = getStatusFromRequest(response)
+            const data = bopsSpecialistCommentsEndpointToOdp(input, status)
+            return data
+          }
+          return input
+        }
+      )
+    return results
+  } catch (e) {
+    console.error('Error fetching specialist comments:', e)
+    throw new Error('Error fetching specialist comments')
   }
-  return url
 }
 
-/**
- * Plugin for elysia that generates the planning applications API.
- */
-export const specialistComments = (app: Elysia) =>
-  app.use(requireClientHeaders).get(
-    `/applications/:applicationId/specialistComments`,
-    async (context) => {
-      const {
+export const fetchApplicationSpecialistComment = async (
+  client: string,
+  applicationId: string,
+  specialistId: string
+): Promise<PostSubmissionPublishedSpecialistResponse> => {
+  try {
+    const url = getPublicApplicationSpecialistCommentsUrl(applicationId)
+    const results =
+      await handleBopsGetRequest<PostSubmissionPublishedSpecialistResponse>(
         client,
-        params: { applicationId },
-        query,
-        set
-      } = context
-
-      const url = buildSpecialistCommentsUrl(applicationId, query)
-
-      try {
-        return await handleBopsGetRequest<PostSubmissionPublishedSpecialistsResponse>(
-          client,
-          url,
-          async (response: Response) => {
-            let bopsResponse: BopsSpecialistCommentsEndpoint
-            try {
-              bopsResponse =
-                (await response.json()) as BopsSpecialistCommentsEndpoint
-            } catch (jsonError) {
-              set.status = standardResponseObjects.BadRequestResponseObject.code
-              return {
-                data: null,
-                status: {
-                  ...standardResponseObjects.BadRequestResponseObject,
-                  detail: `Failed to parse response JSON: ${jsonError}`
-                }
-              }
-            }
-            return bopsSpecialistCommentsEndpointToOdp(bopsResponse, {
-              code: response.status,
-              message: response.statusText
-            })
+        url,
+        async (response: Response) => {
+          const input = await response.json()
+          if (BOPS_LEGACY_SPECIALIST_COMMENTS) {
+            const status = getStatusFromRequest(response)
+            const data = bopsSpecialistCommentsEndpointToOdp(input, status)
+            return data
           }
-        )
-      } catch (e) {
-        console.error('Error fetching public comments:', e)
-        set.status = standardResponseObjects.BadRequestResponseObject.code
-        return {
-          data: null,
-          status: {
-            ...standardResponseObjects.BadRequestResponseObject,
-            detail: `An error occurred while fetching public comments: ${
-              e instanceof Error ? e.message : String(e)
-            }`
-          }
+          return input
         }
-      }
-    },
-    {
-      params: PostSubmissionPublishedSpecialistsUrlParams,
-      query: PostSubmissionPublishedSpecialistsQueryParams,
-      response: {
-        200: PostSubmissionPublishedSpecialistsResponse
-      },
-      detail: {
-        security: [], // Remove this to make endpoint public
-        summary: 'Specialist comments',
-        description:
-          'Retrieves a list of all specialist comments for a specific application, currently uses x-client header to filter by client'
-      }
-    }
-  )
+      )
+    return results
+  } catch (e) {
+    console.error('Error fetching documents:', e)
+    throw new Error('Error fetching documents')
+  }
+}

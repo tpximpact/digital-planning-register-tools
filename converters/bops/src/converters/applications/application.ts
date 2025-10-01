@@ -1,5 +1,5 @@
 import {
-  // PostSubmissionPublishedApplication as PostSubmissionPublishedApplicationSchema,
+  PostSubmissionPublishedApplication as PostSubmissionPublishedApplicationSchema,
   type PostSubmissionPublishedApplication
 } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
 // import { type ProcessStage } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/ProcessStage.ts'
@@ -14,6 +14,7 @@ import {
   // BopsShowEndpoint as BopsShowEndpointSchema,
   type BopsShowEndpoint
 } from '../../schemas/bops/show'
+import { Value } from '@sinclair/typebox/value'
 // import { Value } from '@sinclair/typebox/value'
 // import type { PostSubmissionMetadata } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/Metadata'
 // import { convertDocumentBopsFile } from '../documents/convertDocumentBopsFile'
@@ -72,7 +73,7 @@ export const getPrimaryApplicationTypeKey = (
 //   return 'No description'
 // }
 
-export const convertBopsShowEndpoint = (
+export const bopsShowEndpointToOdp = (
   input: BopsShowEndpoint
   // additionalData?: { decisionNoticeUrl?: string }
 ): PostSubmissionPublishedApplication => {
@@ -350,13 +351,13 @@ export const convertBopsShowEndpoint = (
   //   // }
   // }
 
+  const application = input
+
   // debugSchema(PostSubmissionPublishedApplicationSchema, application)
-  // if (!Value.Check(PostSubmissionPublishedApplicationSchema, application)) {
-  //   console.warn('Invalid PostSubmissionPublishedApplication:', application)
-  //   throw new Error('Invalid PostSubmissionPublishedApplication')
-  // }
+  if (!Value.Check(PostSubmissionPublishedApplicationSchema, application)) {
+    console.warn('Invalid PostSubmissionPublishedApplication:', application)
+    throw new Error('Invalid PostSubmissionPublishedApplication')
+  }
 
-  // return application
-
-  return input
+  return application
 }

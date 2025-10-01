@@ -18,11 +18,11 @@ import { convertBopsSpecialistComment } from './convertBopsSpecialistComment'
 export const bopsSpecialistCommentsEndpointToOdp = (
   input: BopsSpecialistCommentsEndpoint,
   status: ApiResponseStatus
-): PostSubmissionPublishedSpecialistsResponse | undefined => {
+): PostSubmissionPublishedSpecialistsResponse => {
   // Validate input schema
   if (!Value.Check(BopsSpecialistCommentsEndpointSchema, input)) {
     console.warn('Invalid BopsSpecialistCommentsEndpoint:', input)
-    return undefined
+    throw new Error('Invalid BopsSpecialistCommentsEndpoint')
   }
 
   const { summary, comments, pagination } = input
@@ -30,11 +30,11 @@ export const bopsSpecialistCommentsEndpointToOdp = (
   // Validate pagination and summary
   if (!Value.Check(Pagination, pagination)) {
     console.warn('Invalid Pagination:', pagination)
-    return undefined
+    throw new Error('Invalid Pagination')
   }
   if (!Value.Check(SpecialistCommentSummary, summary)) {
     console.warn('Invalid SpecialistCommentSummary:', summary)
-    return undefined
+    throw new Error('Invalid SpecialistCommentSummary')
   }
 
   // Convert and filter comments

@@ -1,3 +1,6 @@
+import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
+import { standardResponseObjects } from '@dpr/api'
+
 /**
  * Retrieves the API key and URL for a specific client from the environment variables.
  * @param client The client identifier.
@@ -112,4 +115,49 @@ export async function handleBopsPostRequest<T, U>(
       }
     } as U
   }
+}
+
+/**
+ * Gets the status from a fetch Response object.
+ * @param response
+ * @returns
+ */
+export function getStatusFromRequest(response: Response): ApiResponseStatus {
+  return {
+    code: response.status,
+    message: response.statusText
+  }
+}
+
+/**
+ * Helper function to wrap fetch calls with error handling.
+ * @param fetchFn
+ * @param set
+ * @param errorDetail
+ * @returns
+ */
+export function withErrorHandling<T>(
+  fetchFn: () => Promise<T>,
+  setStatus: (code: number) => void,
+  errorDetail = 'An error occurred while fetching applications'
+): Promise<
+  | T
+  | {
+      data: null
+      status: typeof standardResponseObjects.BadRequestResponseObject & {
+        detail: string
+      }
+    }
+> {
+  return fetchFn().catch((e: unknown) => {
+    console.error(errorDetail + ':', e)
+    setStatus(standardResponseObjects.BadRequestResponseObject.code)
+    return {
+      data: null,
+      status: {
+        ...standardResponseObjects.BadRequestResponseObject,
+        detail: `${errorDetail}: ${e instanceof Error ? e.message : String(e)}`
+      }
+    }
+  })
 }

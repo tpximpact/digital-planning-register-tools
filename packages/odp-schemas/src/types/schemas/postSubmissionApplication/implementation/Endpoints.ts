@@ -133,7 +133,6 @@ const endpoints = {
             })
           ],
           {
-            title: 'PostSubmissionPublishedApplicationsQueryParams',
             description: 'Query parameters for applications',
             detail: { description: 'Query parameters for applications' }
           }
@@ -145,7 +144,6 @@ const endpoints = {
             Type.Null()
           ]),
           {
-            title: 'PostSubmissionPublishedApplicationsResponse',
             description: 'Public applications endpoint response'
           }
         )

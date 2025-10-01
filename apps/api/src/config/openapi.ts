@@ -37,11 +37,6 @@ export const documentation: ElysiaOpenAPIConfig['documentation'] = {
       name: 'Private',
       description:
         'Endpoints that require authentication and return sensitive data'
-    },
-    {
-      name: 'BOPS Handler',
-      description:
-        'Handler for BOPS data source that convert requests and responses (e.g. BOPS, etc.)'
     }
   ]
 }
