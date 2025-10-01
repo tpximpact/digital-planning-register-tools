@@ -6,14 +6,15 @@ import {
   getStatusInfo
 } from './utils'
 import { StatusCodes } from 'http-status-codes'
+import type { ApiOptions } from '../../app'
 
-export const handleErrors = (app: Elysia) =>
+export const handleErrors = (options: ApiOptions) => (app: Elysia) =>
   app
     // .error({ DPR_AUTHENTICATION_ERROR: ApiError })
     .onError({ as: 'global' }, (context) => {
       const { error, set, code } = context
 
-      if (config.debug) {
+      if (options.debug) {
         console.error(
           `[handleErrors][onError] code: ${code}, status: ${set.status}`
         )
@@ -22,7 +23,7 @@ export const handleErrors = (app: Elysia) =>
       let response = defaultErrorResponse
 
       if (error instanceof ApiError) {
-        if (config.debug) {
+        if (options.debug) {
           console.error(
             `[handleErrors][onError][ApiError] code: ${
               error.status
@@ -34,7 +35,7 @@ export const handleErrors = (app: Elysia) =>
 
         response = buildApiErrorResponse(error)
       } else {
-        if (config.debug) {
+        if (options.debug) {
           console.error(
             `[handleErrors][onError][Error] code: ${code}, set.status: ${set.status}`
           )

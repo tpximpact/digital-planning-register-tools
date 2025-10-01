@@ -50,7 +50,17 @@ export const ENV_HANDLER_BOPS = {
   INTERNAL_API_TOKEN:
     ENVIRONMENT === 'development'
       ? 'i-am-the-admin-coo-coo-ca-choo'
-      : process.env.INTERNAL_API_TOKEN ?? ''
+      : process.env.INTERNAL_API_TOKEN ?? '',
+  // if applications endpoint is still in 'legacy' mode (ie not ODP yet)
+  BOPS_LEGACY_APPLICATIONS: process.env.BOPS_LEGACY_APPLICATIONS ?? 'false',
+  BOPS_LEGACY_APPLICATION: process.env.BOPS_LEGACY_APPLICATION ?? 'false',
+  BOPS_LEGACY_DOCUMENTS: process.env.BOPS_LEGACY_DOCUMENTS ?? 'false',
+  BOPS_LEGACY_PUBLIC_COMMENTS:
+    process.env.BOPS_LEGACY_PUBLIC_COMMENTS ?? 'false',
+  BOPS_LEGACY_SPECIALIST_COMMENTS:
+    process.env.BOPS_LEGACY_SPECIALIST_COMMENTS ?? 'false',
+  BOPS_LEGACY_SPECIALIST_COMMENT:
+    process.env.BOPS_LEGACY_SPECIALIST_COMMENT ?? 'false'
 }
 
 // applications - api

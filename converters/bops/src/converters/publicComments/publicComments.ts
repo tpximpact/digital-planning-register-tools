@@ -18,11 +18,11 @@ import { convertBopsPublicComment } from './convertBopsPublicComment'
 export const bopsPublicCommentsEndpointToOdp = (
   input: BopsPublicCommentsEndpoint,
   status: ApiResponseStatus
-): PostSubmissionPublishedPublicCommentsResponse | undefined => {
+): PostSubmissionPublishedPublicCommentsResponse => {
   // Validate input schema
   if (!Value.Check(BopsPublicCommentsEndpointSchema, input)) {
     console.warn('Invalid BopsPublicCommentsEndpoint:', input)
-    return undefined
+    throw new Error('Invalid BopsPublicCommentsEndpoint')
   }
 
   const { summary, comments, pagination } = input
@@ -30,11 +30,11 @@ export const bopsPublicCommentsEndpointToOdp = (
   // Validate pagination and summary
   if (!Value.Check(Pagination, pagination)) {
     console.warn('Invalid Pagination:', pagination)
-    return undefined
+    throw new Error('Invalid Pagination')
   }
   if (!Value.Check(PublicCommentSummary, summary)) {
     console.warn('Invalid PublicCommentSummary:', summary)
-    return undefined
+    throw new Error('Invalid PublicCommentSummary')
   }
 
   // Convert and filter comments
