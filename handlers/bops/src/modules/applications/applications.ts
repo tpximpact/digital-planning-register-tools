@@ -12,8 +12,8 @@ import {
   handleBopsGetRequest
 } from './../../libs/requests'
 import {
-  bopsSearchEndpointToOdp,
-  bopsShowEndpointToOdp
+  bopsApplicationsEndpointToOdp,
+  convertBopsApplicationToOdp
 } from '@dpr/converter-bops'
 import { ENV_HANDLER_BOPS as ENV } from '@dpr/config'
 
@@ -33,7 +33,7 @@ export const fetchAllApplications = async (
           const input = await response.json()
           if (BOPS_LEGACY_APPLICATIONS) {
             const status = getStatusFromRequest(response)
-            const data = bopsSearchEndpointToOdp(input, status)
+            const data = bopsApplicationsEndpointToOdp(input, status)
             return data
           }
           return input
@@ -60,7 +60,7 @@ export const fetchApplication = async (
           const input = await response.json()
           if (BOPS_LEGACY_APPLICATION) {
             const status = getStatusFromRequest(response)
-            const data = bopsShowEndpointToOdp(input)
+            const data = convertBopsApplicationToOdp(input)
             return { data, status }
           }
           return input
