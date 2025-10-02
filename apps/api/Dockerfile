@@ -61,11 +61,9 @@ COPY docker-entrypoint.sh docker-entrypoint.sh
 ENV NODE_ENV=production
 ENV PORT=3000
 
-EXPOSE 3000
-
 # Expose the port on which the API will listen
 EXPOSE 3000
 
 # Run the server when the container launches
-ENTRYPOINT ["./docker-entrypoint.sh", "DPR API", "/app"]
+ENTRYPOINT ["./docker-entrypoint.sh", "DPR API", "."]
 CMD ["./server"]
