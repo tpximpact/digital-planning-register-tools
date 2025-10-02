@@ -1,7 +1,7 @@
 import { Type } from '@sinclair/typebox'
 import type { Static, TSchema } from '@sinclair/typebox'
 import { AssessmentDecision } from '../enums/AssessmentDecision'
-
+import '../../../shared/formats'
 type AssessmentBase = Static<typeof AssessmentBase>
 const AssessmentBase = Type.Object(
   {

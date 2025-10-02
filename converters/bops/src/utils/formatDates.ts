@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 
@@ -25,6 +25,14 @@ export const convertDateTimeToUtc = (dateString: string): string => {
 
 export const convertToDate = (dateString: string): Date => {
   return dayjs(dateString).utc().toDate()
+}
+
+export const formatToYYYYMMDDDate = (dateString: string): string => {
+  const date: Dayjs = dayjs.utc(dateString)
+  if (!date.isValid()) {
+    return 'Invalid Date'
+  }
+  return date.format('YYYY-MM-DD')
 }
 
 /**

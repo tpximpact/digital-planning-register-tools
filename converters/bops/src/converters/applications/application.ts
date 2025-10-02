@@ -15,7 +15,7 @@ import type {
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/Assessment.ts'
 import type { PostSubmissionFileRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
 import { convertBopsFileToPostSubmissionFileRedacted } from '../documents'
-import { convertToDate, formatDateToYmd } from '../../utils/formatDates'
+import { convertToDate, formatToYYYYMMDDDate } from '../../utils/formatDates'
 
 export const convertBopsApplicationToOdp = (
   // allowed since it could really be anything and we don't need the typeguards from unknown
@@ -240,9 +240,13 @@ export const convertBopsApplicationToOdp = (
         reference: input.application.reference,
         stage: stage as ProcessStage,
         status: status as ApplicationStatus,
-        withdrawnAt,
+        withdrawnAt: withdrawnAt
+          ? convertToDate(withdrawnAt).toISOString()
+          : undefined,
         withdrawnReason,
         publishedAt: input.application.publishedAt
+          ? convertToDate(input.application.publishedAt).toISOString()
+          : undefined
       },
       localPlanningAuthority: {
         // @TODO in DPR if camden and primaryApplicationType === 'ldc' then true
@@ -252,13 +256,19 @@ export const convertBopsApplicationToOdp = (
         submittedAt: input.application.receivedAt
       },
       validation: {
-        receivedAt: input.application.receivedAt,
-        validatedAt: input.application.validAt ?? undefined,
+        receivedAt: input.application.receivedAt
+          ? convertToDate(input.application.receivedAt).toISOString()
+          : new Date().toISOString(),
+        validatedAt: input.application.validAt
+          ? convertToDate(input.application.validAt).toISOString()
+          : undefined,
         isValid: true
       },
       consultation,
       assessment: {
-        expiryDate: input?.application?.expiryDate ?? new Date().toISOString()
+        expiryDate: input?.application?.expiryDate
+          ? formatToYYYYMMDDDate(input?.application?.expiryDate)
+          : formatToYYYYMMDDDate(new Date().toISOString())
       },
       appeal,
       caseOfficer: {
@@ -280,8 +290,12 @@ export const convertBopsApplicationToOdp = (
     metadata: {
       organisation: 'BOPS',
       id: input.application.reference,
-      generatedAt: input.application.publishedAt,
-      submittedAt: input.application.receivedAt,
+      generatedAt: input?.application?.publishedAt
+        ? convertToDate(input?.application?.publishedAt).toISOString()
+        : new Date().toISOString(),
+      submittedAt: input?.application?.receivedAt
+        ? convertToDate(input?.application?.receivedAt).toISOString()
+        : new Date().toISOString(),
       schema:
         'https://theopensystemslab.github.io/digital-planning-data-schemas/@next/schemas/postSubmissionApplication.json'
     } as PostSubmissionMetadata
@@ -294,8 +308,7 @@ export const convertBopsApplicationToOdp = (
       ...application.data.assessment,
       planningOfficerDecision: input.application.decision as AssessmentDecision,
       planningOfficerDecisionDate:
-        formatDateToYmd(convertToDate(input?.application?.determinedAt)) ??
-        undefined,
+        formatToYYYYMMDDDate(input?.application?.determinedAt) ?? undefined,
       decisionNotice:
         input.application.decision && additionalData?.decisionNoticeUrl
           ? {
