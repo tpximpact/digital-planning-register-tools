@@ -4,6 +4,7 @@ import type {
   PostSubmissionPublishedApplicationsResponse
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import {
+  getPublicApplicationSubmissionUrl,
   getPublicApplicationsUrl,
   getPublicApplicationUrl
 } from './../../libs/urls'
@@ -66,6 +67,28 @@ export const fetchApplication = async (
           return input
         }
       )
+
+    try {
+      const submissionUrl = getPublicApplicationSubmissionUrl(applicationId)
+      const submission = await handleBopsGetRequest<unknown>(
+        client,
+        submissionUrl
+      )
+
+      if (submission && (submission as { submission?: unknown }).submission) {
+        if (results && results.data) {
+          results.data.submission = (
+            submission as { submission: unknown }
+          ).submission
+        }
+      }
+
+      console.log(submission)
+    } catch (e) {
+      console.warn('Couldnt fetch submission', e)
+      // throw new Error('Error fetching applications')
+    }
+
     return results
   } catch (e) {
     console.error('Error fetching applications:', e)
