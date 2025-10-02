@@ -56,6 +56,13 @@ const app = (userOptions?: ApiOptions) => {
             paths: ['/api/handlers/bops']
           },
           documentation
+          // references: fromTypes(
+          //   ENVIRONMENT === 'production' ? 'dist/index.d.ts' : 'index.ts',
+          //   {
+          //     projectRoot: path.join('', import.meta.dir),
+          //     tsconfigPath: path.join('..', import.meta.dir, 'tsconfig.json')
+          //   }
+          // )
         })
       )
       .use(
@@ -67,6 +74,13 @@ const app = (userOptions?: ApiOptions) => {
             paths: ['/api/handlers/bops']
           },
           documentation
+          // references: fromTypes(
+          //   ENVIRONMENT === 'production' ? 'dist/index.d.ts' : 'index.ts',
+          //   {
+          //     projectRoot: path.join('', import.meta.dir),
+          //     tsconfigPath: path.join('..', import.meta.dir, 'tsconfig.json')
+          //   }
+          // )
         })
       )
       .use(standardResponses)

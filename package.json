@@ -17,6 +17,7 @@
     "serve": "bun scripts/run serve",
     "clean": "bun scripts/run clean",
     "docker": "bun scripts/run docker",
+    "docker:run": "bun scripts/run docker:run",
     "lint": "eslint .",
     "format": "eslint . --fix",
     "workspace": "bun scripts/workspace"
