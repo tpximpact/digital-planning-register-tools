@@ -2,7 +2,7 @@
 
 # Accept parameters as positional arguments, with defaults
 APP_NAME="${1:-DPR API}"
-APP_PATH="${2:-/app/apps/api}"
+APP_PATH="${2:-.}"
 APP_EXEC="${3:-./server}"
 
 
