@@ -1,8 +1,9 @@
 import { ApiResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
-import type { DprApiError } from '../../errors'
 
 import { t, type Static, type StatusMap } from 'elysia'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
+import { standardResponseObjects } from '../standard-responses'
+import type { ApiError } from './ApiError.error'
 
 const _ErrorResponseSchema = ApiResponse(t.Null(), {
   description: 'Bad Request'
@@ -15,13 +16,12 @@ type ErrorResponse = Static<typeof _ErrorResponseSchema>
 export const defaultErrorResponse: ErrorResponse = {
   data: null,
   status: {
-    code: StatusCodes.INTERNAL_SERVER_ERROR,
-    message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+    ...standardResponseObjects.InternalServerErrorResponseObject,
     detail: 'An unexpected error occurred'
   }
 }
 
-export const buildApiErrorResponse = (error: DprApiError): ErrorResponse => {
+export const buildApiErrorResponse = (error: ApiError): ErrorResponse => {
   const response = {
     ...defaultErrorResponse,
     status: {

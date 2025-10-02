@@ -8,7 +8,7 @@ import {
 } from './modules/specialistComments'
 import {
   handleErrors,
-  resolveClientHeaders,
+  requireClientHeaders,
   SchemaModel,
   standardResponses
 } from '@dpr/api'
@@ -47,7 +47,7 @@ const app = (userOptions?: HandlerBopsOptions) => {
     .use(standardResponses)
     .use(SchemaModel)
     .use(handleErrors(options))
-    .use(resolveClientHeaders)
+    .use(requireClientHeaders)
     .get(
       `/public/applications`,
       async ({ query, client, set }) => {

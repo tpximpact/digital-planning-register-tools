@@ -1,5 +1,4 @@
 import type Elysia from 'elysia'
-import { ClientHeadersError } from './client-headers.error'
 import { ENV_HANDLER_API as ENV } from '@dpr/config'
 
 const { DEBUG } = ENV
@@ -13,15 +12,58 @@ const { DEBUG } = ENV
  * @returns
  */
 export const resolveClientHeaders = (app: Elysia) =>
-  app.resolve(({ headers: { 'x-client': client, 'x-service': service } }) => {
-    if (!client || !service) {
+  app.resolve(({ request }) => {
+    if (DEBUG) {
+      console.log(`[ClientHeadersError][resolveClientHeaders] request received`)
+    }
+
+    let client = request.headers.get('x-client')
+    let service = request.headers.get('x-service') ?? 'unknown'
+    let handler = request.headers.get('x-handler')
+
+    // Returns 'local' for cavyshire-borough-council or cavyshire-borough.
+    // Returns 'bops' for anything else (with a placeholder for a future DB call).
+    // If client is missing, throws an error unless debug is true, in which case it defaults to 'local'.
+    if (!client) {
       if (DEBUG) {
-        return { client: 'camden', service: 'testing' }
+        console.warn(
+          `[ClientHeadersWarning][resolveClientHeaders] missing client header, defaulting to 'local' due to debug mode`
+        )
+        handler = 'local'
+        client = 'cavyshire-borough-council'
+        service = 'testing'
+        // Optionally log service as well
       } else {
-        throw new ClientHeadersError(
-          '[ClientHeadersError][resolveClientHeaders] Missing x-client or x-service header'
+        console.error(
+          `[ClientHeadersError][resolveClientHeaders] missing or invalid client header; unable to determine required handler`
+        )
+        throw new Error(
+          'Missing or invalid client header; unable to determine required handler'
         )
       }
+    } else if (
+      client === 'cavyshire-borough-council' ||
+      client === 'cavyshire-borough'
+    ) {
+      handler = 'local'
+    } else {
+      // Placeholder for future DB lookup for handler
+      // e.g. context.handler = await fetchHandlerFromDB(client)
+      handler = 'bops'
     }
-    return { client, service }
+
+    if (DEBUG) {
+      console.log(
+        `[ClientHeadersError][resolveClientHeaders] request from ${
+          client ?? 'unknown'
+        } via ${service ?? 'unknown'} using API handler: ${handler}`
+      )
+    }
+
+    // Add these to the context
+    return {
+      client,
+      service,
+      handler
+    }
   })
