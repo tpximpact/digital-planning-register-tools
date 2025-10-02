@@ -17,7 +17,7 @@ name: build and deploy staging
 
 on:
   push:
-    branches: ['main', 'hn/add-typebox-schemas']
+    branches: ['main']
 
 jobs:
   build-and-deploy-staging:
