@@ -7,15 +7,16 @@ import { standardResponseObjects } from '@dpr/api'
  * @returns An object containing the API key and URL for the client.
  */
 export const getClientConfig = (client: string) => {
-  const key = `${client.toUpperCase()}_BOPS_API_KEY`
+  // const key = `${client.toUpperCase()}_BOPS_API_KEY`
   const url = `${client.toUpperCase()}_BOPS_API_URL`
-  const apiKey = process.env?.[key]
+  // const apiKey = process.env?.[key]
+  const apiKey = undefined
   const apiUrl = process.env?.[url]
 
-  if (!apiKey)
-    throw new Error(`API Key for client '${client}' not found in .env file.`, {
-      cause: 'Council not registered'
-    })
+  // if (!apiKey)
+  //   throw new Error(`API Key for client '${client}' not found in .env file.`, {
+  //     cause: 'Council not registered'
+  //   })
   if (!apiUrl)
     throw new Error(`API URL for client '${client}' not found in .env file.`, {
       cause: 'Council not registered'
