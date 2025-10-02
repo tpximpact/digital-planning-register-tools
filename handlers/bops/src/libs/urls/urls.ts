@@ -54,6 +54,20 @@ export function getPublicApplicationUrl(applicationId: string) {
   return url
 }
 
+/**
+ * Helper to build public application endpoint URL.
+ * @param applicationId - ID of the application
+ * @returns
+ */
+export function getPublicApplicationSubmissionUrl(applicationId: string) {
+  const legacy = BOPS_LEGACY_APPLICATION || false
+  const url = legacy
+    ? `public/planning_applications/${applicationId}/submission`
+    : `public/planningApplications/${applicationId}`
+
+  return url
+}
+
 export function getPublicApplicationDocumentsUrl(
   applicationId: string,
   query?: PostSubmissionPublishedDocumentsQueryParams
