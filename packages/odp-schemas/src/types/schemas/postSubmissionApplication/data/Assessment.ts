@@ -5,9 +5,7 @@ import { AssessmentDecision } from '../enums/AssessmentDecision'
 type AssessmentBase = Static<typeof AssessmentBase>
 const AssessmentBase = Type.Object(
   {
-    expiryDate: Type.Date({
-      todo: 'After this the determination can be shown as "Non'
-    }),
+    expiryDate: Type.String({ format: 'date' }),
     decisionNotice: Type.Optional(
       Type.Object({
         url: Type.String()
@@ -21,7 +19,7 @@ type AssessmentDecisionSection = Static<typeof AssessmentDecisionSection>
 const AssessmentDecisionSection = Type.Object(
   {
     planningOfficerDecision: Type.Optional(AssessmentDecision),
-    planningOfficerDecisionDate: Type.Optional(Type.Date())
+    planningOfficerDecisionDate: Type.Optional(Type.String({ format: 'date' }))
   },
   { description: 'AssessmentDecisionSection' }
 )
@@ -30,9 +28,9 @@ type AssessmentCommitteeDecision = Static<typeof AssessmentCommitteeDecision>
 const AssessmentCommitteeDecision = Type.Object(
   {
     planningOfficerRecommendation: Type.Optional(AssessmentDecision),
-    committeeSentDate: Type.Optional(Type.Date()),
+    committeeSentDate: Type.Optional(Type.String({ format: 'date' })),
     committeeDecision: Type.Optional(AssessmentDecision),
-    committeeDecisionDate: Type.Optional(Type.Date())
+    committeeDecisionDate: Type.Optional(Type.String({ format: 'date' }))
   },
   { description: 'AssessmentCommitteeDecision' }
 )

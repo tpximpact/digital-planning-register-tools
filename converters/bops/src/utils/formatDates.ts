@@ -22,3 +22,21 @@ dayjs.extend(utc)
 export const convertDateTimeToUtc = (dateString: string): string => {
   return dayjs(dateString).utc().format()
 }
+
+export const convertToDate = (dateString: string): Date => {
+  return dayjs(dateString).utc().toDate()
+}
+
+/**
+ * Converts Date() to "YYYY-MM-DD" format.
+ * Doesn't use dayjs.
+ * Used in mocks only
+ * @param date
+ * @returns
+ */
+export const formatDateToYmd = (date: Date): string => {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0') // Months are zero-based
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}

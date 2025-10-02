@@ -10,7 +10,7 @@
     {
       "application": {
         "type": {
-          "value": "pp.full.minor",
+          "value": "pp.full.householder",
           "description": "planning_permission"
         },
         "reference": "25-00179-FULL",
@@ -84,7 +84,7 @@
     {
       "application": {
         "type": {
-          "value": "pp.full.minor",
+          "value": "pp.full.householder",
           "description": "planning_permission"
         },
         "reference": "25-00176-FULL",
@@ -220,7 +220,7 @@
     {
       "application": {
         "type": {
-          "value": "pp.full.major",
+          "value": "pp.full.householder",
           "description": "planning_permission"
         },
         "reference": "25-00171-MAJOR",
@@ -320,7 +320,7 @@
     {
       "application": {
         "type": {
-          "value": "pp.full.major",
+          "value": "pp.full.householder",
           "description": "planning_permission"
         },
         "reference": "25-00170-MAJOR",
@@ -859,7 +859,7 @@
     {
       "application": {
         "type": {
-          "value": "pp.full.householder.retro",
+          "value": "pp.full.householder",
           "description": "planning_permission"
         },
         "reference": "25-00151-HAPR",
@@ -1400,7 +1400,7 @@
     },
     {
       "application": {
-        "type": { "value": "pa.part1.classA", "description": "prior_approval" },
+        "type": { "value": "pp.full.householder", "description": "prior_approval" },
         "reference": "23-00115-PA1A",
         "fullReference": "CMD-23-00115-PA1A",
         "targetDate": "2023-09-12",
@@ -1462,7 +1462,7 @@
     },
     {
       "application": {
-        "type": { "value": "pa.part1.classA", "description": "prior_approval" },
+        "type": { "value": "pp.full.householder", "description": "prior_approval" },
         "reference": "23-00118-PA1A",
         "fullReference": "CMD-23-00118-PA1A",
         "targetDate": "2024-01-15",
@@ -1631,7 +1631,7 @@
     {
       "application": {
         "type": {
-          "value": "pp.full.major",
+          "value": "pp.full.householder",
           "description": "planning_permission"
         },
         "reference": "25-00152-MAJOR",
@@ -1731,7 +1731,7 @@
     {
       "application": {
         "type": {
-          "value": "ldc.proposed",
+          "value": "pp.full.householder",
           "description": "lawfulness_certificate"
         },
         "reference": "23-00120-LDCP",
@@ -2310,7 +2310,7 @@
     {
       "application": {
         "type": {
-          "value": "pa.part11.classB",
+          "value": "pp.full.householder",
           "description": "prior_approval"
         },
         "reference": "24-00134-PA11B",
@@ -2496,7 +2496,7 @@
     },
     {
       "application": {
-        "type": { "value": "pa.part1.classA", "description": "prior_approval" },
+        "type": { "value": "pp.full.householder", "description": "prior_approval" },
         "reference": "24-00128-PA1A",
         "fullReference": "CMD-24-00128-PA1A",
         "targetDate": "2024-05-30",
@@ -2644,7 +2644,7 @@
     {
       "application": {
         "type": {
-          "value": "ldc.proposed",
+          "value": "pp.full.householder",
           "description": "lawfulness_certificate"
         },
         "reference": "23-00117-LDCP",
@@ -2701,7 +2701,7 @@
     },
     {
       "application": {
-        "type": { "value": "pa.part1.classA", "description": "prior_approval" },
+        "type": { "value": "pp.full.householder", "description": "prior_approval" },
         "reference": "23-00111-PA1A",
         "fullReference": "CMD-23-00111-PA1A",
         "targetDate": "2023-09-12",
@@ -2763,7 +2763,7 @@
     },
     {
       "application": {
-        "type": { "value": "pa.part1.classA", "description": "prior_approval" },
+        "type": { "value": "pp.full.householder", "description": "prior_approval" },
         "reference": "23-00112-PA1A",
         "fullReference": "CMD-23-00112-PA1A",
         "targetDate": "2023-09-12",
