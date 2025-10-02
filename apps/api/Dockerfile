@@ -65,5 +65,5 @@ ENV PORT=3000
 EXPOSE 3000
 
 # Run the server when the container launches
-ENTRYPOINT ["./docker-entrypoint.sh", "DPR API", "."]
+ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["./server"]
