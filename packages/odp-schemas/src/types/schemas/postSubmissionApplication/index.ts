@@ -11,7 +11,6 @@ import { Validation } from './data/Validation'
 import { Consultation } from './data/Consultation'
 import { Assessment } from './data/Assessment'
 import { PublicComments, SpecialistComments } from './data/Comment'
-import { Application as PrototypeApplication } from '../prototypeApplication/minimumSubmission'
 
 export const PostSubmissionApplicationSpecificationGenerator = <
   T extends TSchema
@@ -37,7 +36,7 @@ export const PostSubmissionApplicationSpecificationGenerator = <
       })
     ),
     files: Type.Optional(Type.Array(PostSubmissionFile)),
-    submission: PrototypeApplication(T),
+    submission: Type.Any(),
     metadata: PostSubmissionMetadata
   })
 

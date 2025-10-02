@@ -42,8 +42,12 @@ import {
   PostSubmissionPublishedSpecialistResponse,
   PostSubmissionPublishedSpecialistQueryParams
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
+import { PostSubmissionPublishedApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
+import { PostSubmissionApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/index.ts'
 
 export const SchemaModel = new Elysia().model({
+  PostSubmissionPublishedApplication: PostSubmissionPublishedApplication,
+  PostSubmissionApplication: PostSubmissionApplication,
   'applications.all.query': PostSubmissionApplicationsQueryParams,
   'applications.all.response': PostSubmissionApplicationsResponse,
   'applications.single.params': PostSubmissionApplicationUrlParams,

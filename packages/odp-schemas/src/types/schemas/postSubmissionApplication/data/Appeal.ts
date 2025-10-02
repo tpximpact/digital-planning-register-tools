@@ -1,7 +1,7 @@
 import { Type, type Static, type TSchema } from '@sinclair/typebox'
 import { AppealDecision } from '../enums/AppealDecision'
 import '../../../shared/formats'
-import { PostSubmissionFile } from './File'
+import { PostSubmissionFileRedacted } from './File'
 
 export type AppealBase = Static<typeof AppealBase>
 export const AppealBase = Type.Object({
@@ -11,7 +11,7 @@ export const AppealBase = Type.Object({
   startedDate: Type.Optional(Type.String({ format: 'date' })),
   decisionDate: Type.Optional(Type.String({ format: 'date' })),
   decision: Type.Optional(AppealDecision),
-  files: Type.Optional(Type.Array(PostSubmissionFile))
+  files: Type.Optional(Type.Array(PostSubmissionFileRedacted))
 })
 
 type AppealVariants = Static<typeof AppealVariants>

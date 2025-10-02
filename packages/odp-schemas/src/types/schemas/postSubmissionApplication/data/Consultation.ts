@@ -3,8 +3,8 @@ import type { Static, TSchema } from '@sinclair/typebox'
 
 type ConsultationBase = Static<typeof ConsultationBase>
 const ConsultationBase = Type.Object({
-  startDate: Type.Date(),
-  endDate: Type.Date(),
+  startDate: Type.String({ format: 'date' }),
+  endDate: Type.String({ format: 'date' }),
   siteNotice: Type.Boolean({ todo: 'expiry and extensions?' })
 })
 
