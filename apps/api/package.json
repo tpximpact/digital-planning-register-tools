@@ -16,7 +16,8 @@
     "start": "NODE_ENV=production bun src/server.ts",
     "serve": "bun run build && ./server",
     "clean": "rm server && rm .*.bun-build && rm -rf logs",
-    "docker": "cd ../.. && docker build -t dpr-backend:server-api -f ./apps/server-api/Dockerfile ."
+    "docker": "cd ../.. && docker build -t dpr-backend:api -f ./apps/api/Dockerfile .",
+    "docker:run": "cd ../.. && docker run --env-file .env.production --rm -p 4000:3000 dpr-backend:api "
   },
   "dependencies": {
     "@dpr/application-generator": "catalog:",
