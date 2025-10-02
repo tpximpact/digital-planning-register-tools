@@ -43,10 +43,10 @@ export const ENV_HANDLER_BOPS = {
   DEBUG,
   PORT: PORT(ports['handlers-bops']),
   HOSTNAME,
-  DATABASE_URL:
-    ENVIRONMENT === 'development'
-      ? 'postgresql://dpr:password@localhost:5433/dpr'
-      : process.env.DATABASE_URL ?? '',
+  // DATABASE_URL:
+  //   ENVIRONMENT === 'development'
+  //     ? 'postgresql://dpr:password@localhost:5433/dpr'
+  //     : process.env.DATABASE_URL ?? '',
   INTERNAL_API_TOKEN:
     ENVIRONMENT === 'development'
       ? 'i-am-the-admin-coo-coo-ca-choo'
@@ -73,7 +73,9 @@ export const ENV_HANDLER_API = {
   DATABASE_URL:
     ENVIRONMENT === 'development'
       ? 'postgresql://dpr:password@localhost:5433/dpr'
-      : process.env.DATABASE_URL ?? ''
+      : process.env.DATABASE_URL ?? '',
+  API_BASE_URL:
+    process.env.API_BASE_URL || `http://localhost:${PORT(ports['apps-api'])}`
 }
 
 // export const API_URL = process.env.API_URL ?? 'http://localhost:3000'

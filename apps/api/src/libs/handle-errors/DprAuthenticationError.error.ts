@@ -1,10 +1,10 @@
 import { StatusCodes } from 'http-status-codes'
-import { DprApiError } from './ApiError.error'
+import { ApiError } from './ApiError.error'
 
 /**
  * @file Error class for DPR authentication errors
  */
-export class DprAuthenticationError extends DprApiError {
+export class DprAuthenticationError extends ApiError {
   public override code = 'DPR_AUTHENTICATION_ERROR'
   readonly realm: string
 
