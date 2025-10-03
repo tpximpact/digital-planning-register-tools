@@ -195,6 +195,34 @@ describe('convertBopsSpecialistToSpecialistRedacted', () => {
       })
     ).toThrow('Unable to convert specialist')
   })
+
+  it(`Supports comment author if it starts getting sent through`, () => {
+    const comment: unknown = {
+      id: '348',
+      organisationSpecialism: 'London Borough of Camden Council',
+      jobTitle: 'Transport (generic email)',
+      reason: 'Other',
+      firstConsultedAt: '2025-07-03T14:47:27Z',
+      name: {
+        singleLine: 'John Doe'
+      },
+      comments: [
+        {
+          id: '123',
+          sentiment: 'approved',
+          commentRedacted:
+            'Secure cycle parking via condition and car-free via s106. ',
+          metadata: {
+            submittedAt: '2025-07-03T14:56:58Z',
+            publishedAt: '2025-07-03T15:49:48Z'
+          }
+        }
+      ]
+    }
+    const result = convertBopsSpecialistToSpecialistRedacted(comment)
+    expect(result.name.singleLine).toBe('John Doe')
+    expect(Value.Check(SpecialistRedactedSchema, result)).toBe(true)
+  })
 })
 
 describe('convertBopsSpecialistCommentToSpecialistCommentRedacted', () => {

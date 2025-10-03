@@ -96,7 +96,7 @@ export const convertBopsSpecialistToSpecialistRedacted = (
   const obj = {
     id: specialist.id,
     name: {
-      singleLine: 'Not disclosed'
+      singleLine: specialist?.name?.singleLine ?? 'Not disclosed'
     },
     organisationSpecialism: specialist.organisationSpecialism,
     jobTitle: specialist.jobTitle,

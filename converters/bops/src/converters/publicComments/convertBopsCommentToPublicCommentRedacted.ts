@@ -18,7 +18,7 @@ export const convertBopsCommentToPublicCommentRedacted = (
     sentiment: comment.sentiment,
     author: {
       name: {
-        singleLine: 'Not disclosed'
+        singleLine: comment?.author?.name?.singleLine ?? 'Not disclosed'
       }
     },
     commentRedacted: comment.comment,
