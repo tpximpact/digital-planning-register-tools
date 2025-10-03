@@ -90,4 +90,21 @@ describe('convertBopsCommentToPublicCommentRedacted', () => {
       })
     ).toThrow('Unable to convert public comment')
   })
+
+  it(`Supports comment author if it starts getting sent through`, () => {
+    const comment: unknown = {
+      id: 591,
+      sentiment: 'supportive',
+      comment: 'This is comment number 30',
+      receivedAt: '2025-04-11T11:37:36Z',
+      author: {
+        name: {
+          singleLine: 'John Doe'
+        }
+      }
+    }
+    const result = convertBopsCommentToPublicCommentRedacted(comment)
+    expect(result.author.name.singleLine).toBe('John Doe')
+    expect(Value.Check(PublicCommentRedactedSchema, result)).toBe(true)
+  })
 })
