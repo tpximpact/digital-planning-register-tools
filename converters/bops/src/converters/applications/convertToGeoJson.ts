@@ -8,13 +8,14 @@ export const convertToGeoJson = (mapData: unknown) => {
     throw new Error('mapData must be a non-null object')
   }
 
-  let data: unknown[] = []
-
   for (const [key, value] of Object.entries(mapData)) {
     if (key.startsWith('EPSG:3857')) {
-      data = value
+      if (typeof value === 'object') {
+        return value
+      }
     }
   }
 
-  return data
+  // If no matching key found, return the original data
+  return mapData
 }

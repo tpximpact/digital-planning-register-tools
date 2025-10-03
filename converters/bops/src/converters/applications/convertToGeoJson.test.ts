@@ -73,4 +73,34 @@ describe('convertToGeoJson', () => {
       ]
     })
   })
+
+  it('should convert to GeoJson', () => {
+    const input = {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          geometry: {
+            type: 'Polygon',
+            coordinates: [
+              [
+                [-0.09173825383185796, 51.485755784075764],
+                [-0.09168460965156015, 51.48577081619891],
+                [-0.09159743785857621, 51.48563970251371],
+                [-0.09165242314338147, 51.48562550546785],
+                [-0.09167522192000804, 51.48565974539446],
+                [-0.09173825383185796, 51.485755784075764]
+              ]
+            ]
+          },
+          properties: null
+        }
+      ]
+    }
+
+    const convert = convertToGeoJson(input)
+
+    expect(convert).toBeDefined()
+    expect(convert).toEqual(input)
+  })
 })
