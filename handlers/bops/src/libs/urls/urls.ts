@@ -26,13 +26,16 @@ export function getPublicApplicationsUrl(
     ? `public/planning_applications/search`
     : `public/planningApplications`
   if (query) {
-    const { sortBy, ...searchParams } = query
+    const { sortBy, query: q, ...searchParams } = query
     const params = createUrlSearchParams(searchParams)
 
     if (legacy) {
       // Convert sortBy from publishedAt to receivedAt
       if (sortBy) {
         if (sortBy === 'publishedAt') params.append('sortBy', 'receivedAt')
+      }
+      if (q) {
+        params.append('q', q)
       }
     }
     url += `?${params.toString()}`
