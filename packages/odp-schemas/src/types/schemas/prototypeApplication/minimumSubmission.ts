@@ -1,18 +1,34 @@
 import { Type } from '@sinclair/typebox'
 import type { Static, TSchema } from '@sinclair/typebox'
-import { Applicant } from './data/Applicant'
-import { Site } from '../../shared/Sites'
+// import { Applicant } from './data/Applicant'
 import '../../shared/formats'
 
+/**
+ * This is generating the minimal things the DPR needs and uses right now in its interface
+ */
 type Application<T extends TSchema> = Static<ReturnType<typeof Application<T>>>
 export const Application = <T extends TSchema>(T: T) =>
   Type.Object(
     {
-      applicationType: T,
+      // applicationType: T,
       data: Type.Object(
         {
-          applicant: Applicant(T),
-          property: Site,
+          // This should check Applicant but we're mostly handling it being missing already in the DPR
+          applicant: Type.Optional(Type.Any()),
+          property: Type.Object(
+            {
+              address: Type.Any(),
+              boundary: Type.Optional(
+                Type.Object(
+                  {
+                    site: Type.Any()
+                  },
+                  { additionalProperties: true }
+                )
+              )
+            },
+            { additionalProperties: true }
+          ),
           proposal: Type.Object(
             {
               description: Type.String(),
@@ -23,9 +39,7 @@ export const Application = <T extends TSchema>(T: T) =>
             }
           )
         },
-        {
-          additionalProperties: true
-        }
+        { additionalProperties: true }
       ),
       metadata: Type.Object(
         {
@@ -36,10 +50,7 @@ export const Application = <T extends TSchema>(T: T) =>
         }
       )
     },
-    {
-      'internal\n': '* The generic base type for all applications',
-      additionalProperties: true
-    }
+    { additionalProperties: true }
   )
 
 export type PlanXPreAssessment = Static<typeof PlanXPreAssessment>
