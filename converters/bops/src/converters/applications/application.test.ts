@@ -4951,11 +4951,110 @@ describe('convertBopsApplicationToOdp', () => {
   ]
 
   applications.forEach((file, i) => {
-    it.only(`Converts each application ${i}`, () => {
+    it(`Converts each application ${i}`, () => {
       const result = convertBopsApplicationToOdp(file)
       expect(
         Value.Check(PostSubmissionPublishedApplicationSchema, result)
       ).toBe(true)
     })
+  })
+
+  it(`Doesn't convert preapps`, () => {
+    const data = {
+      application: {
+        type: {
+          value: 'preApp',
+          description: 'pre_application'
+        },
+        reference: '25-00701-PRE',
+        fullReference: 'SWK-25-00701-PRE',
+        targetDate: '2025-02-25',
+        expiryDate: '2025-03-18',
+        receivedAt: '2025-01-21T00:00:00.000+00:00',
+        validAt: '2025-01-21T14:41:02.792+00:00',
+        publishedAt: '2025-01-31T15:27:16.904+00:00',
+        determinedAt: null,
+        decision: null,
+        status: 'in_assessment',
+        consultation: {
+          startDate: '2025-01-24',
+          endDate: '2025-02-20',
+          publicUrl:
+            'https://southwark.bops-applicants-staging.services/planning_applications/25-00701-PRE',
+          publishedComments: [],
+          consulteeComments: []
+        },
+        pressNotice: null
+      },
+      property: {
+        address: {
+          latitude: '53.5020957',
+          longitude: '-1.0205473',
+          title: '75, MAIN STREET',
+          singleLine: '75, MAIN STREET, DONCASTER, DN9 3HW',
+          uprn: '100050747612',
+          town: 'DONCASTER',
+          postcode: 'DN9 3HW'
+        },
+        boundary: {
+          site: {
+            type: 'Feature',
+            geometry: {
+              type: 'MultiPolygon',
+              coordinates: [
+                [
+                  [
+                    [-1.0206931342729486, 53.50213165258532],
+                    [-1.020646, 53.502065000000016],
+                    [-1.020719, 53.502047000000005],
+                    [-1.0206422209739665, 53.50198572771234],
+                    [-1.020557, 53.501923000000005],
+                    [-1.020433, 53.50195500000001],
+                    [-1.0205027461051923, 53.50206709121434],
+                    [-1.020549684762953, 53.50215722902928],
+                    [-1.0206931342729486, 53.50213165258532]
+                  ]
+                ]
+              ]
+            },
+            properties: {
+              name: '',
+              label: '1',
+              entity: 12000365388,
+              prefix: 'title-boundary',
+              dataset: 'title-boundary',
+              'end-date': '',
+              typology: 'geography',
+              reference: '30240506',
+              'entry-date': '2024-05-06',
+              'start-date': '2009-12-10',
+              'area.hectares': 0.026773,
+              'area.squareMetres': 267.73,
+              planx_user_action: 'Amended the title boundary',
+              'organisation-entity': '13'
+            }
+          }
+        }
+      },
+      proposal: {
+        description: 'test',
+        reportingType: null,
+        ownerIsPlanningAuthority: false
+      },
+      applicant: {
+        type: 'individual',
+        address: {
+          sameAsSiteAddress: true
+        },
+        ownership: null,
+        agent: {
+          address: null
+        }
+      },
+      officer: null
+    }
+    expect(() => convertBopsApplicationToOdp(data)).toThrow(
+      'Unable to convert application'
+    )
   })
 })
