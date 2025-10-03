@@ -5057,4 +5057,167 @@ describe('convertBopsApplicationToOdp', () => {
       'Unable to convert application'
     )
   })
+
+  it('converts applications with currently unsupported data', () => {
+    const input = {
+      application: {
+        type: {
+          value: 'ldc.existing',
+          description: 'lawfulness_certificate'
+        },
+        reference: '23-00184-LDCE',
+        fullReference: 'SWK-23-00184-LDCE',
+        targetDate: '2024-01-18',
+        expiryDate: '2024-02-08',
+        receivedAt: '2023-12-14T00:00:00.000+00:00',
+        validAt: '2023-12-14T00:00:00.000+00:00',
+        publishedAt: '2023-12-14T00:00:00.000+00:00',
+        determinedAt: null,
+        decision: null,
+        status: 'awaiting_determination',
+        pressNotice: null
+      },
+      property: {
+        address: {
+          latitude: null,
+          longitude: null,
+          title: 'Ground Floor Flat, 51 Vicarage Grove',
+          singleLine: 'Ground Floor Flat, 51 Vicarage Grove, London, SE5 7LP',
+          uprn: '200003458404',
+          town: 'London',
+          postcode: 'SE5 7LP'
+        },
+        boundary: {
+          site: {
+            'EPSG:3857': {
+              type: 'FeatureCollection',
+              features: [
+                {
+                  type: 'Feature',
+                  geometry: {
+                    type: 'Polygon',
+                    coordinates: [
+                      [
+                        [-0.08763983845710534, 51.47459807670333],
+                        [-0.08763983845710534, 51.47454378071353],
+                        [-0.08732199668884082, 51.47454294539011],
+                        [-0.08708596229553046, 51.47454294539011],
+                        [-0.08696928620338272, 51.474542110066665],
+                        [-0.08696928620338272, 51.47459306476847],
+                        [-0.08708998560905279, 51.47459390009101],
+                        [-0.08763983845710534, 51.47459807670333]
+                      ]
+                    ]
+                  },
+                  properties: null
+                }
+              ]
+            },
+            'EPSG:27700': {
+              type: 'FeatureCollection',
+              features: [
+                {
+                  type: 'Feature',
+                  geometry: {
+                    type: 'Polygon',
+                    coordinates: [
+                      [
+                        [532910.9565102085, 176804.49162530497],
+                        [532911.1142051198, 176798.45378724992],
+                        [532933.1890911659, 176798.9374287069],
+                        [532949.5804532528, 176799.3656321494],
+                        [532957.6854282983, 176799.48443056125],
+                        [532957.5373857609, 176805.15070926532],
+                        [532949.1530218497, 176805.02461147623],
+                        [532910.9565102085, 176804.49162530497]
+                      ]
+                    ]
+                  },
+                  properties: null
+                }
+              ]
+            }
+          }
+        }
+      },
+      proposal: {
+        description: 'Conversion of 1no. flat into 2no. flats.',
+        reportingType: null,
+        ownerIsPlanningAuthority: false
+      },
+      applicant: {
+        type: null,
+        address: null,
+        ownership: null,
+        agent: {
+          address: null
+        }
+      },
+      officer: {
+        name: 'William Tucker'
+      }
+    }
+    const result = convertBopsApplicationToOdp(input)
+    expect(result).toBeDefined()
+    expect(result.submission.data.property.boundary.site).toBeDefined()
+    expect(Value.Check(PostSubmissionPublishedApplicationSchema, result)).toBe(
+      true
+    )
+  })
+
+  it.only('converts applications with no boundary site', () => {
+    const input = {
+      application: {
+        type: {
+          value: 'ldc.existing',
+          description: 'lawfulness_certificate'
+        },
+        reference: '23-00184-LDCE',
+        fullReference: 'SWK-23-00184-LDCE',
+        targetDate: '2024-01-18',
+        expiryDate: '2024-02-08',
+        receivedAt: '2023-12-14T00:00:00.000+00:00',
+        validAt: '2023-12-14T00:00:00.000+00:00',
+        publishedAt: '2023-12-14T00:00:00.000+00:00',
+        determinedAt: null,
+        decision: null,
+        status: 'awaiting_determination',
+        pressNotice: null
+      },
+      property: {
+        address: {
+          latitude: null,
+          longitude: null,
+          title: 'Ground Floor Flat, 51 Vicarage Grove',
+          singleLine: 'Ground Floor Flat, 51 Vicarage Grove, London, SE5 7LP',
+          uprn: '200003458404',
+          town: 'London',
+          postcode: 'SE5 7LP'
+        }
+      },
+      proposal: {
+        description: 'Conversion of 1no. flat into 2no. flats.',
+        reportingType: null,
+        ownerIsPlanningAuthority: false
+      },
+      applicant: {
+        type: null,
+        address: null,
+        ownership: null,
+        agent: {
+          address: null
+        }
+      },
+      officer: {
+        name: 'William Tucker'
+      }
+    }
+    const result = convertBopsApplicationToOdp(input)
+    expect(result).toBeDefined()
+    expect(result.submission.data.property.boundary).not.toBeDefined()
+    expect(result.submission.data.property.boundary?.site).not.toBeDefined()
+    expect(Value.Check(PostSubmissionPublishedApplicationSchema, result)).toBe(
+      true
+    )
+  })
 })

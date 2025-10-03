@@ -3,7 +3,7 @@ import {
   type PostSubmissionPublishedApplication
 } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
 import { Value } from '@sinclair/typebox/value'
-import { debugSchema } from '@dpr/libs'
+// import { debugSchema } from '@dpr/libs'
 import type { ProcessStage } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/ProcessStage.ts'
 import type { ApplicationStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/ApplicationStatus.ts'
 import type { PostSubmissionMetadata } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/Metadata.ts'
@@ -20,6 +20,7 @@ import {
   PrototypeApplication as PrototypeApplicationSchema,
   type PrototypeApplication
 } from '@dpr/odp-schemas/types/schemas/prototypeApplication/minimumSubmission.ts'
+import { convertToGeoJson } from './convertToGeoJson'
 
 export const convertBopsApplicationToOdp = (
   // allowed since it could really be anything and we don't need the typeguards from unknown
@@ -325,13 +326,26 @@ export const convertBopsApplicationToOdp = (
     }
   }
 
+  const boundary = input.property.boundary
+  if (boundary && boundary?.site) {
+    console.log(boundary)
+    try {
+      boundary.site = convertToGeoJson(boundary.site)
+    } catch (error) {
+      console.warn(
+        'Error converting application boundary info but its taken care of elsewhere:',
+        error
+      )
+    }
+  }
+
   const applicationSubmission: PrototypeApplication = {
     // applicationType: application.applicationType,
     data: {
       applicant: input.applicant,
       property: {
         address: input.property.address,
-        boundary: input.property.boundary
+        boundary: boundary
       },
       proposal: {
         description: getDescription(input.proposal)
@@ -346,12 +360,10 @@ export const convertBopsApplicationToOdp = (
 
   if (Value.Check(PrototypeApplicationSchema, applicationSubmission)) {
     application.submission = applicationSubmission
-  } else {
-    console.log(application.applicationType)
-    debugSchema(PrototypeApplicationSchema, applicationSubmission)
   }
-
-  console.log(application.submission)
+  // else {
+  //   debugSchema(PrototypeApplicationSchema, applicationSubmission)
+  // }
 
   if (Value.Check(PostSubmissionPublishedApplicationSchema, application)) {
     return application
