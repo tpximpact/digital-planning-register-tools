@@ -3,7 +3,7 @@ import {
   type PostSubmissionPublishedApplication
 } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
 import { Value } from '@sinclair/typebox/value'
-// import { debugSchema } from '@dpr/libs'
+import { debugSchema } from '@dpr/libs'
 import type { ProcessStage } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/ProcessStage.ts'
 import type { ApplicationStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/ApplicationStatus.ts'
 import type { PostSubmissionMetadata } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/Metadata.ts'
@@ -16,6 +16,10 @@ import type {
 import type { PostSubmissionFileRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
 import { convertBopsFileToPostSubmissionFileRedacted } from '../documents'
 import { convertToDate, formatToYYYYMMDDDate } from '../../utils/formatDates'
+import {
+  PrototypeApplication as PrototypeApplicationSchema,
+  type PrototypeApplication
+} from '@dpr/odp-schemas/types/schemas/prototypeApplication/minimumSubmission.ts'
 
 export const convertBopsApplicationToOdp = (
   // allowed since it could really be anything and we don't need the typeguards from unknown
@@ -275,18 +279,7 @@ export const convertBopsApplicationToOdp = (
         name: input.officer?.name ?? ''
       }
     },
-    submission: {
-      data: {
-        applicant: input.applicant,
-        property: {
-          address: input.property.address,
-          boundary: input.property.boundary
-        },
-        proposal: {
-          description: getDescription(input.proposal)
-        }
-      }
-    },
+    submission: {},
     metadata: {
       organisation: 'BOPS',
       id: input.application.reference,
@@ -331,6 +324,34 @@ export const convertBopsApplicationToOdp = (
       } as PriorApprovalAssessment
     }
   }
+
+  const applicationSubmission: PrototypeApplication = {
+    // applicationType: application.applicationType,
+    data: {
+      applicant: input.applicant,
+      property: {
+        address: input.property.address,
+        boundary: input.property.boundary
+      },
+      proposal: {
+        description: getDescription(input.proposal)
+      }
+    },
+    metadata: {
+      submittedAt: input?.application?.receivedAt
+        ? convertToDate(input?.application?.receivedAt).toISOString()
+        : new Date().toISOString()
+    }
+  }
+
+  if (Value.Check(PrototypeApplicationSchema, applicationSubmission)) {
+    application.submission = applicationSubmission
+  } else {
+    console.log(application.applicationType)
+    debugSchema(PrototypeApplicationSchema, applicationSubmission)
+  }
+
+  console.log(application.submission)
 
   if (Value.Check(PostSubmissionPublishedApplicationSchema, application)) {
     return application

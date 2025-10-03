@@ -18,12 +18,12 @@
     "@dpr/dev-config": "catalog:"
   },
   "dependencies": {
+    "@dpr/libs": "catalog:",
+    "@dpr/odp-schemas": "catalog:",
     "@sinclair/typebox": "catalog:",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "dayjs": "catalog:",
-    "typescript": "catalog:",
-    "@dpr/odp-schemas": "catalog:",
-    "@dpr/libs": "catalog:"
+    "typescript": "catalog:"
   }
 }
