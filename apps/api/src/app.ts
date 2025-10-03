@@ -52,9 +52,9 @@ const app = (userOptions?: ApiOptions) => {
           enabled: true,
           path: '/docs',
           provider: 'scalar',
-          exclude: {
-            paths: ['/api/handlers/bops']
-          },
+          // exclude: {
+          //   tags: ['BOPS Handler']
+          // },
           documentation
           // references: fromTypes(
           //   ENVIRONMENT === 'production' ? 'dist/index.d.ts' : 'index.ts',

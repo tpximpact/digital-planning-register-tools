@@ -39,7 +39,7 @@ const app = (userOptions?: HandlerBopsOptions) => {
     console.info(`[handler BOPS] options: ${JSON.stringify(options)}`)
   }
   return new Elysia({
-    name: 'handler BOPS',
+    name: 'BOPS to ODP handler',
     detail: {
       tags: ['BOPS Handler']
     }
@@ -188,8 +188,6 @@ const app = (userOptions?: HandlerBopsOptions) => {
           200: 'public.specialists.all.response'
         },
         detail: {
-          tags: ['Public'],
-          security: [], // Remove this to make endpoint public
           summary: 'Get published specialist comments',
           description:
             'Retrieves a list of all published specialists and their comments for a specific application, currently uses x-client header to filter by client'
@@ -219,8 +217,6 @@ const app = (userOptions?: HandlerBopsOptions) => {
           200: 'public.specialists.single.response'
         },
         detail: {
-          tags: ['Public'],
-          security: [], // Remove this to make endpoint public
           summary: 'Get published specialist',
           description:
             "Retrieves a single published specialist's comments, currently uses x-client header to filter by client"
