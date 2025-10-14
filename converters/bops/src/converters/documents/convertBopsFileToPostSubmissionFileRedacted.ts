@@ -11,6 +11,15 @@ import {
   FileType as FileTypeSchema
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/FileType.ts'
 
+/**
+ * Converts an array of unknown file type objects to a deduplicated array of valid FileType values.
+ *
+ * Each item in the input array is checked to ensure it is an object with a 'value' property.
+ * The 'value' is validated against the FileType schema, and only unique, valid FileType values are returned.
+ *
+ * @param {unknown[]} fileTypes - Array of unknown file type objects to convert.
+ * @returns {FileType[]} Array of unique, valid FileType values.
+ */
 export const convertTypesToFileType = (fileTypes: unknown[]): FileType[] => {
   const seen = new Set<FileType>()
   return fileTypes
@@ -47,7 +56,7 @@ export const convertBopsFileToPostSubmissionFileRedacted = (
     id: Date.now() + Math.floor(Math.random() * 1e9),
     name: file.name,
     redactedUrl,
-    type: convertTypesToFileType(file.fileTypes ?? []),
+    type: convertTypesToFileType(file.type ?? []),
     association: association ?? 'application',
     referencesInDocument: Array.isArray(file.referencesInDocument)
       ? file.referencesInDocument
