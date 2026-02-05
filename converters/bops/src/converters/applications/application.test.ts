@@ -5165,7 +5165,7 @@ describe('convertBopsApplicationToOdp', () => {
     )
   })
 
-  it.only('converts applications with no boundary site', () => {
+  it('converts applications with no boundary site', () => {
     const input = {
       application: {
         type: {
@@ -5216,6 +5216,56 @@ describe('convertBopsApplicationToOdp', () => {
     expect(result).toBeDefined()
     expect(result.submission.data.property.boundary).not.toBeDefined()
     expect(result.submission.data.property.boundary?.site).not.toBeDefined()
+    expect(Value.Check(PostSubmissionPublishedApplicationSchema, result)).toBe(
+      true
+    )
+  })
+
+  it('converts applications with localPlanningAuthority settings', () => {
+    const sourceApplication = applications[0]
+    if (!sourceApplication) {
+      throw new Error('Test application not found')
+    }
+    const input = {
+      ...sourceApplication,
+      data: {
+        ...sourceApplication.data,
+        localPlanningAuthority: {
+          publicCommentsAcceptedUntilDecision: true
+        }
+      }
+    }
+
+    const result = convertBopsApplicationToOdp(input)
+    expect(result).toBeDefined()
+    expect(
+      result.data.localPlanningAuthority.publicCommentsAcceptedUntilDecision
+    ).toBe(true)
+    expect(Value.Check(PostSubmissionPublishedApplicationSchema, result)).toBe(
+      true
+    )
+  })
+
+  it('converts applications with incorrect localPlanningAuthority settings', () => {
+    const sourceApplication = applications[0]
+    if (!sourceApplication) {
+      throw new Error('Test application not found')
+    }
+    const input = {
+      ...sourceApplication,
+      data: {
+        ...sourceApplication.data,
+        localPlanningAuthority: {
+          publicCommentsAcceptedUntilDecision: 'true'
+        }
+      }
+    }
+
+    const result = convertBopsApplicationToOdp(input)
+    expect(result).toBeDefined()
+    expect(
+      result.data.localPlanningAuthority.publicCommentsAcceptedUntilDecision
+    ).toBe(false)
     expect(Value.Check(PostSubmissionPublishedApplicationSchema, result)).toBe(
       true
     )

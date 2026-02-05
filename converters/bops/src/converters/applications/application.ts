@@ -254,8 +254,11 @@ export const convertBopsApplicationToOdp = (
           : undefined
       },
       localPlanningAuthority: {
-        // @TODO in DPR if camden and primaryApplicationType === 'ldc' then true
-        publicCommentsAcceptedUntilDecision: false
+        publicCommentsAcceptedUntilDecision:
+          input.data?.localPlanningAuthority
+            ?.publicCommentsAcceptedUntilDecision === true
+            ? true
+            : false
       },
       submission: {
         submittedAt: input.application.receivedAt
