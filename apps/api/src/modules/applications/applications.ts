@@ -6,8 +6,8 @@ import {
   PostSubmissionPublishedApplicationResponse,
   PostSubmissionApplicationsQueryParams,
   PostSubmissionApplicationsResponse,
-  PostSubmissionApplicationUrlParams,
-  PostSubmissionApplicationResponse
+  PostSubmissionApplicationUrlParams
+  // PostSubmissionApplicationResponse
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { standardResponseObjects } from '../../libs/standard-responses'
 import {
