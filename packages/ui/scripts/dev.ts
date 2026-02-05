@@ -49,7 +49,12 @@ function watchComponentAndLayoutStyles() {
         // Put CSS file next to SCSS file: src/components/button/index.scss -> src/components/button/index.css
         const cssOutFile = srcPath.replace(/\.scss$/, '.css')
         await buildStyles(srcPath, cssOutFile, {
-          loadPaths: ['node_modules', 'src/styles/modules', 'src/styles/legacy']
+          loadPaths: [
+            'node_modules',
+            '../../node_modules',
+            'src/styles/modules',
+            'src/styles/legacy'
+          ]
         })
       }
     })
