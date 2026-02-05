@@ -1,4 +1,4 @@
-import { Elysia, t } from 'elysia'
+import { Elysia } from 'elysia'
 import {
   PostSubmissionPublicCommentPostUrlParams,
   PostSubmissionPublicCommentPostBody,
@@ -104,7 +104,7 @@ export const publicComments = (app: Elysia) =>
     )
     .post(
       `/applications/:applicationId/publicComments`,
-      async (context) => {
+      async (_context) => {
         return {
           data: null,
           status: standardResponseObjects.OkResponseObject

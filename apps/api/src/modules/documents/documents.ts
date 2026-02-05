@@ -1,22 +1,22 @@
 import { Elysia } from 'elysia'
 import {
-  PostSubmissionPublishedDocumentsQueryParams,
-  PostSubmissionPublishedDocumentsResponse,
-  PostSubmissionPublishedDocumentUrlParams,
-  PostSubmissionPublishedDocumentResponse,
+  // PostSubmissionPublishedDocumentsQueryParams,
+  // PostSubmissionPublishedDocumentsResponse,
+  // PostSubmissionPublishedDocumentUrlParams,
+  // PostSubmissionPublishedDocumentResponse,
   PostSubmissionDocumentsUrlParams,
   PostSubmissionDocumentsQueryParams,
   PostSubmissionDocumentsResponse,
   PostSubmissionDocumentUrlParams,
-  PostSubmissionDocumentResponse,
-  PostSubmissionPublishedDocumentsUrlParams
+  PostSubmissionDocumentResponse
+  // PostSubmissionPublishedDocumentsUrlParams
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { standardResponseObjects } from '../../libs/standard-responses'
 import {
   getAllApplicationDocuments,
-  getAllPublishedApplicationDocuments,
-  getApplicationDocument,
-  getPublishedApplicationDocument
+  // getAllPublishedApplicationDocuments,
+  getApplicationDocument
+  // getPublishedApplicationDocument
 } from '@dpr/handler-local'
 
 /**
