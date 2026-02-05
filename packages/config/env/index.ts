@@ -15,7 +15,7 @@ export const PORT = (port = 3000) =>
 export const HOSTNAME = process.env?.HOSTNAME || '0.0.0.0'
 
 const ports = {
-  'apps-admin': 3000,
+  'apps-admin': 3003,
   'apps-api': 4000,
   'handlers-bops': 4001,
   'playground-react-app': 3001

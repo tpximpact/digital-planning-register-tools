@@ -114,7 +114,7 @@ bun run dev
 bun run seed
 ```
 
-You can then view the API at [http://localhost:4000](http://localhost:4000), the admin interface at [http://localhost:3000](http://localhost:3000), and Storybook at [http://localhost:6006](http://localhost:6006).
+You can then view the API at [http://localhost:4000](http://localhost:4000), the admin interface at [http://localhost:3003](http://localhost:3003), and Storybook at [http://localhost:6006](http://localhost:6006).
 
 ## Development Workflow
 
