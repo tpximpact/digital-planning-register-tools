@@ -10,7 +10,6 @@ on:
 
 jobs:
   setup:
-    name: Setup and Cache Dependencies
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
