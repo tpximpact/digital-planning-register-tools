@@ -331,7 +331,6 @@ export const convertBopsApplicationToOdp = (
 
   const boundary = input.property.boundary
   if (boundary && boundary?.site) {
-    console.log(boundary)
     try {
       boundary.site = convertToGeoJson(boundary.site)
     } catch (error) {

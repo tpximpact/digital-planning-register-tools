@@ -17,7 +17,6 @@ const findApplicationDocument = <
   const applicationDocument = allDocuments.find(
     (app) => getValueByPath(app, 'id') === documentId
   )
-  console.log(applicationDocument)
   if (!applicationDocument) {
     throw new Error('Application document not found')
   }

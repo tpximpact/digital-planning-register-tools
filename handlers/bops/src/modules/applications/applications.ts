@@ -82,8 +82,6 @@ export const fetchApplication = async (
           ).submission
         }
       }
-
-      console.log(submission)
     } catch (e) {
       console.warn('Couldnt fetch submission', e)
       // throw new Error('Error fetching applications')

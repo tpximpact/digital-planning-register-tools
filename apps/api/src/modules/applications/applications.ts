@@ -134,7 +134,6 @@ export const applications = (app: Elysia) =>
           async (context) => {
             try {
               const data = getPublishedApplication(context.params.applicationId)
-              console.log(data)
               return {
                 data,
                 status: standardResponseObjects.OkResponseObject
