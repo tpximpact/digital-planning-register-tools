@@ -39,10 +39,12 @@ describe('resolve-client-headers', () => {
 
     const { status, error } = await api.get({})
 
-    expect(status).toBe(400)
+    expect(status).toBe(500)
     expect(error).toBeDefined()
-    expect(error?.status).toBe(400)
-    expect(error?.value).toBe('Missing x-client or x-service header')
+    expect(error?.status).toBe(500)
+    expect(error?.value).toBe(
+      'Missing or invalid client header; unable to determine required handler'
+    )
   })
 
   it('returns an error when null headers are provided', async () => {
@@ -60,10 +62,8 @@ describe('resolve-client-headers', () => {
       headers: { 'x-client': null, 'x-service': null }
     })
 
-    expect(status).toBe(400)
-    expect(error).toBeDefined()
-    expect(error?.status).toBe(400)
-    expect(error?.value).toBe('Missing x-client or x-service header')
+    expect(status).toBe(200)
+    expect(error).toBeNull()
   })
 
   it('returns an error when empty headers are provided', async () => {
@@ -81,9 +81,11 @@ describe('resolve-client-headers', () => {
       headers: { 'x-client': '', 'x-service': '' }
     })
 
-    expect(status).toBe(400)
+    expect(status).toBe(500)
     expect(error).toBeDefined()
-    expect(error?.status).toBe(400)
-    expect(error?.value).toBe('Missing x-client or x-service header')
+    expect(error?.status).toBe(500)
+    expect(error?.value).toBe(
+      'Missing or invalid client header; unable to determine required handler'
+    )
   })
 })

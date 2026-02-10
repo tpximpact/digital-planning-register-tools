@@ -23,7 +23,8 @@ describe('require-client-headers', () => {
     const app = new Elysia().use(requireClientHeaders).get('/', () => 'hi')
     const api = treaty(app)
 
-    const { status, data } = await api.get({})
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { status, data } = await api.get({ headers: {} as any })
 
     expect(status).toBe(422)
     expect(data).toBeNull()
@@ -35,8 +36,8 @@ describe('require-client-headers', () => {
 
     const { status, data } = await api.get({
       headers: {
-        'x-client': null,
-        'x-service': null
+        'x-client': null as unknown as string,
+        'x-service': null as unknown as string
       }
     })
 
