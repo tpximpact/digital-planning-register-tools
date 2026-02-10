@@ -28,6 +28,7 @@
     "@dpr/odp-schemas": "catalog:",
     "@dpr/libs": "catalog:",
     "@dpr/application-generator": "catalog:",
-    "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz"
+    "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",
+    "@dpr/api": "catalog:"
   }
 }

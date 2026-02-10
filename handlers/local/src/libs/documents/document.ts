@@ -1,4 +1,4 @@
-import { getValueByPath } from '../utils/get-value-by-path'
+import { getValueByPath } from '../../utils/get-value-by-path'
 import { getApplication, getPublishedApplication } from '../applications'
 import type {
   PostSubmissionFile,
