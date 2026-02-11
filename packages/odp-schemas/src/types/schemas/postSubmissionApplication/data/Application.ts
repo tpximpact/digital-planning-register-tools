@@ -18,16 +18,17 @@ const ApplicationBase = Type.Object({
   publishedAt: Type.Optional(Type.String({ format: 'date-time' }))
 })
 
-type ApplicationVariants = Static<typeof ApplicationVariants>
-const ApplicationVariants = Type.Object({})
+// type ApplicationVariants = Static<typeof ApplicationVariants>
+// const ApplicationVariants = Type.Object({})
 
 export type Application<T extends TSchema> = Static<
   ReturnType<typeof Application<T>>
 >
-export const Application = <T extends TSchema>(T: T) =>
-  Type.Extends(
-    T,
-    Type.KeyOf(ApplicationVariants),
-    Type.Index(ApplicationVariants, T),
-    ApplicationBase
-  )
+// export const Application = <T extends TSchema>(T: T) =>
+//   Type.Extends(
+//     T,
+//     Type.KeyOf(ApplicationVariants),
+//     Type.Index(ApplicationVariants, T),
+//     ApplicationBase
+//   )
+export const Application = <T extends TSchema>(T: T) => ApplicationBase

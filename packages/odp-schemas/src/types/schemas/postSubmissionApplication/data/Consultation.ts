@@ -8,16 +8,17 @@ const ConsultationBase = Type.Object({
   siteNotice: Type.Boolean({ todo: 'expiry and extensions?' })
 })
 
-type ConsultationVariants = Static<typeof ConsultationVariants>
-const ConsultationVariants = Type.Object({})
+// type ConsultationVariants = Static<typeof ConsultationVariants>
+// const ConsultationVariants = Type.Object({})
 
 export type Consultation<T extends TSchema> = Static<
   ReturnType<typeof Consultation<T>>
 >
-export const Consultation = <T extends TSchema>(T: T) =>
-  Type.Extends(
-    T,
-    Type.KeyOf(ConsultationVariants),
-    Type.Index(ConsultationVariants, T),
-    ConsultationBase
-  )
+// export const Consultation = <T extends TSchema>(T: T) =>
+//   Type.Extends(
+//     T,
+//     Type.KeyOf(ConsultationVariants),
+//     Type.Index(ConsultationVariants, T),
+//     ConsultationBase
+//   )
+export const Consultation = <T extends TSchema>(T: T) => ConsultationBase

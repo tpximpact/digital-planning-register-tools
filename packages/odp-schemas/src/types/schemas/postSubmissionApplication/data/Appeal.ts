@@ -14,16 +14,17 @@ export const AppealBase = Type.Object({
   files: Type.Optional(Type.Array(PostSubmissionFileRedacted))
 })
 
-type AppealVariants = Static<typeof AppealVariants>
-const AppealVariants = Type.Object({})
+// type AppealVariants = Static<typeof AppealVariants>
+// const AppealVariants = Type.Object({})
 
 export type Appeal<T extends TSchema> = Static<
   ReturnType<typeof AppealSchema<T>>
 >
-export const AppealSchema = <T extends TSchema>(T: T) =>
-  Type.Extends(
-    T,
-    Type.KeyOf(AppealVariants),
-    Type.Index(AppealVariants, T),
-    AppealBase
-  )
+// export const AppealSchema = <T extends TSchema>(T: T) =>
+//   Type.Extends(
+//     T,
+//     Type.KeyOf(AppealVariants),
+//     Type.Index(AppealVariants, T),
+//     AppealBase
+//   )
+export const AppealSchema = <T extends TSchema>(T: T) => AppealBase

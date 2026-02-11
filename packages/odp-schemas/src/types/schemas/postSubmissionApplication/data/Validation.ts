@@ -9,16 +9,17 @@ const ValidationBase = Type.Object({
   isValid: Type.Optional(Type.Boolean())
 })
 
-type ValidationVariants = Static<typeof ValidationVariants>
-const ValidationVariants = Type.Object({})
+// type ValidationVariants = Static<typeof ValidationVariants>
+// const ValidationVariants = Type.Object({})
 
 export type Validation<T extends TSchema> = Static<
   ReturnType<typeof Validation<T>>
 >
-export const Validation = <T extends TSchema>(T: T) =>
-  Type.Extends(
-    T,
-    Type.KeyOf(ValidationVariants),
-    Type.Index(ValidationVariants, T),
-    ValidationBase
-  )
+// export const Validation = <T extends TSchema>(T: T) =>
+//   Type.Extends(
+//     T,
+//     Type.KeyOf(ValidationVariants),
+//     Type.Index(ValidationVariants, T),
+//     ValidationBase
+//   )
+export const Validation = <T extends TSchema>(T: T) => ValidationBase
