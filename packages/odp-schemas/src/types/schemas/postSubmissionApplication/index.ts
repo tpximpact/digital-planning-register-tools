@@ -774,7 +774,7 @@ export const PostSubmissionWorksToTreesNotice =
   PostSubmissionApplicationSpecificationGenerator(Type.Literal('wtt.notice'))
 
 export type PostSubmissionApplication = Static<typeof PostSubmissionApplication>
-export const PostSubmissionApplication = Type.Union(
+export const PostSubmissionApplication: TSchema = Type.Union(
   [
     PostSubmissionAdvertConsent,
     PostSubmissionAmendmentMinorMaterial,

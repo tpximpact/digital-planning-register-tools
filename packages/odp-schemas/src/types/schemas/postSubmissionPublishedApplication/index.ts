@@ -811,7 +811,7 @@ export const PostSubmissionPublishedWorksToTreesNotice =
 export type PostSubmissionPublishedApplication = Static<
   typeof PostSubmissionPublishedApplication
 >
-export const PostSubmissionPublishedApplication = Type.Union(
+export const PostSubmissionPublishedApplication: TSchema = Type.Union(
   [
     PostSubmissionPublishedAdvertConsent,
     PostSubmissionPublishedAmendmentMinorMaterial,
