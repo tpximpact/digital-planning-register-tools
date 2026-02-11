@@ -11,7 +11,7 @@ const { DEBUG } = ENV
  * @param client x-client header value
  * @param service x-service header value
  */
-export async function proxyBopsGet({
+export async function proxyBopsGet<T>({
   baseUrl,
   path,
   query,
@@ -23,13 +23,21 @@ export async function proxyBopsGet({
   query?: Record<string, unknown>
   client: string
   service: string
-}) {
+}): Promise<
+  | T
+  | {
+      data: null
+      status: typeof standardResponseObjects.BadRequestResponseObject & {
+        detail: string
+      }
+    }
+> {
   try {
     const url = `${baseUrl}${path}${
       query ? `?${createUrlSearchParams(query).toString()}` : ''
     }`
     if (DEBUG) {
-      console.log(
+      console.info(
         `[ProxyBopsGet][proxyBopsGet] Proxying GET request to BOPS handler at ${url} for client ${client} via service ${service}`
       )
     }
@@ -40,7 +48,8 @@ export async function proxyBopsGet({
         'x-service': `DPR on behalf of ${service}`
       }
     })
-    return await response.json()
+    const data = await response.json()
+    return data as T
   } catch (error) {
     return {
       data: null,

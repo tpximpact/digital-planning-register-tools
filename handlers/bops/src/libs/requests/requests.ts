@@ -42,11 +42,16 @@ const handleResponse = async <T>(
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => null)
+    const detail =
+      errorData && typeof errorData === 'object' && 'error' in errorData
+        ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (errorData as any).error?.detail
+        : 'An error occurred'
     return {
       data: null,
       status: {
         ...status,
-        detail: errorData?.error?.detail || 'An error occurred'
+        detail
       }
     } as T
   }

@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@dpr/dev-config": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@types/geojson": "catalog:"
   }
 }

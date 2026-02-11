@@ -1,6 +1,7 @@
-import { Elysia } from 'elysia'
+import path from 'path'
+import { Elysia, t } from 'elysia'
 import { cors } from '@elysiajs/cors'
-import { openapi } from '@elysiajs/openapi'
+import { openapi, fromTypes } from '@elysiajs/openapi'
 import { config, documentation } from './config'
 import { standardResponses } from './libs/standard-responses'
 import { handleErrors } from './libs/handle-errors'
@@ -13,6 +14,14 @@ import { requireClientHeaders } from './libs/client-headers'
 import { proxyBopsGet } from './libs/handle-requests'
 
 import { ENV_HANDLER_API as ENV } from '@dpr/config'
+import type {
+  PostSubmissionPublishedApplicationResponse,
+  PostSubmissionPublishedApplicationsResponse,
+  PostSubmissionPublishedDocumentsResponse,
+  PostSubmissionPublishedPublicCommentsResponse,
+  PostSubmissionPublishedSpecialistsResponse,
+  PostSubmissionPublishedSpecialistResponse
+} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 
 const { API_BASE_URL } = ENV
 
@@ -55,14 +64,22 @@ const app = (userOptions?: ApiOptions) => {
           // exclude: {
           //   tags: ['BOPS Handler']
           // },
-          documentation
-          // references: fromTypes(
-          //   ENVIRONMENT === 'production' ? 'dist/index.d.ts' : 'index.ts',
-          //   {
-          //     projectRoot: path.join('', import.meta.dir),
-          //     tsconfigPath: path.join('..', import.meta.dir, 'tsconfig.json')
-          //   }
-          // )
+          documentation,
+          // references: fromTypes()
+          references: fromTypes(
+            config.environment === 'production'
+              ? 'dist/types/app.d.ts'
+              : 'src/app.ts',
+            {
+              projectRoot: path.join(import.meta.dir, '../'),
+              tsconfigPath: path.join(
+                import.meta.dir,
+                '../',
+                'tsconfig.build.json'
+              ),
+              debug: options.debug
+            }
+          )
         })
       )
       .use(
@@ -73,14 +90,21 @@ const app = (userOptions?: ApiOptions) => {
           exclude: {
             paths: ['/api/handlers/bops']
           },
-          documentation
-          // references: fromTypes(
-          //   ENVIRONMENT === 'production' ? 'dist/index.d.ts' : 'index.ts',
-          //   {
-          //     projectRoot: path.join('', import.meta.dir),
-          //     tsconfigPath: path.join('..', import.meta.dir, 'tsconfig.json')
-          //   }
-          // )
+          documentation,
+          references: fromTypes(
+            config.environment === 'production'
+              ? 'dist/app.d.ts'
+              : 'src/app.ts',
+            {
+              projectRoot: path.join(import.meta.dir, '../'),
+              tsconfigPath: path.join(
+                import.meta.dir,
+                '../',
+                'tsconfig.build.json'
+              ),
+              debug: options.debug
+            }
+          )
         })
       )
       .use(standardResponses)
@@ -139,7 +163,10 @@ const app = (userOptions?: ApiOptions) => {
               {
                 query: 'applications.all.query',
                 response: {
-                  200: 'applications.all.response'
+                  200: t.Union([
+                    t.Ref('applications.all.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   tags: ['Private'],
@@ -174,7 +201,10 @@ const app = (userOptions?: ApiOptions) => {
               {
                 params: 'applications.single.params',
                 response: {
-                  200: 'applications.single.response'
+                  200: t.Union([
+                    t.Ref('applications.single.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   summary: 'Get application',
@@ -209,7 +239,10 @@ const app = (userOptions?: ApiOptions) => {
                 params: 'documents.all.params',
                 query: 'documents.all.query',
                 response: {
-                  200: 'documents.all.response'
+                  200: t.Union([
+                    t.Ref('documents.all.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   summary: 'Get documents',
@@ -243,7 +276,10 @@ const app = (userOptions?: ApiOptions) => {
               {
                 params: 'documents.single.params',
                 response: {
-                  200: 'documents.single.response'
+                  200: t.Union([
+                    t.Ref('documents.single.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   summary: 'Get document',
@@ -278,7 +314,10 @@ const app = (userOptions?: ApiOptions) => {
                 params: 'publicComments.all.params',
                 query: 'publicComments.all.query',
                 response: {
-                  200: 'publicComments.all.response'
+                  200: t.Union([
+                    t.Ref('publicComments.all.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   summary: 'Get public comments',
@@ -312,7 +351,10 @@ const app = (userOptions?: ApiOptions) => {
               {
                 params: 'publicComments.all.params',
                 response: {
-                  200: 'publicComments.all.response'
+                  200: t.Union([
+                    t.Ref('publicComments.all.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   summary: 'Get public comment',
@@ -383,7 +425,10 @@ const app = (userOptions?: ApiOptions) => {
                 params: 'specialists.all.params',
                 query: 'specialists.all.query',
                 response: {
-                  200: 'specialists.all.response'
+                  200: t.Union([
+                    t.Ref('specialists.all.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   summary: 'Get specialist comments',
@@ -417,7 +462,10 @@ const app = (userOptions?: ApiOptions) => {
               {
                 params: 'specialists.single.params',
                 response: {
-                  200: 'specialists.single.response'
+                  200: t.Union([
+                    t.Ref('specialists.single.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   summary: 'Get specialist',
@@ -441,14 +489,24 @@ const app = (userOptions?: ApiOptions) => {
               `/applications`,
               async ({ handler, client, service, query }) => {
                 switch (handler) {
-                  case 'bops':
-                    return proxyBopsGet({
-                      baseUrl: API_BASE_URL,
-                      path: `/api/handlers/bops/public/applications`,
-                      query,
-                      client,
-                      service
-                    })
+                  case 'bops': {
+                    const result =
+                      await proxyBopsGet<PostSubmissionPublishedApplicationsResponse>(
+                        {
+                          baseUrl: API_BASE_URL,
+                          path: `/api/handlers/bops/public/applications`,
+                          query,
+                          client,
+                          service
+                        }
+                      )
+                    const { data, status } = result
+                    const pagination =
+                      'pagination' in result ? result.pagination : undefined
+                    return pagination
+                      ? { data, pagination, status }
+                      : { data, status }
+                  }
                   default:
                     return {
                       data: null,
@@ -462,7 +520,10 @@ const app = (userOptions?: ApiOptions) => {
               {
                 query: 'public.applications.all.query',
                 response: {
-                  200: 'public.applications.all.response'
+                  200: t.Union([
+                    t.Ref('public.applications.all.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   summary: 'Get published applications',
@@ -475,14 +536,24 @@ const app = (userOptions?: ApiOptions) => {
               `/applications/:applicationId`,
               async ({ handler, client, service, query, params }) => {
                 switch (handler) {
-                  case 'bops':
-                    return proxyBopsGet({
-                      baseUrl: API_BASE_URL,
-                      path: `/api/handlers/bops/public/applications/${params.applicationId}`,
-                      query,
-                      client,
-                      service
-                    })
+                  case 'bops': {
+                    const result =
+                      await proxyBopsGet<PostSubmissionPublishedApplicationResponse>(
+                        {
+                          baseUrl: API_BASE_URL,
+                          path: `/api/handlers/bops/public/applications/${params.applicationId}`,
+                          query,
+                          client,
+                          service
+                        }
+                      )
+                    const { data, status } = result
+                    const pagination =
+                      'pagination' in result ? result.pagination : undefined
+                    return pagination
+                      ? { data, pagination, status }
+                      : { data, status }
+                  }
                   default:
                     return {
                       data: null,
@@ -496,7 +567,10 @@ const app = (userOptions?: ApiOptions) => {
               {
                 params: 'public.applications.single.params',
                 response: {
-                  200: 'public.applications.single.response'
+                  200: t.Union([
+                    t.Ref('public.applications.single.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   summary: 'Get published application',
@@ -509,14 +583,24 @@ const app = (userOptions?: ApiOptions) => {
               `/applications/:applicationId/documents`,
               async ({ handler, client, service, query, params }) => {
                 switch (handler) {
-                  case 'bops':
-                    return proxyBopsGet({
-                      baseUrl: API_BASE_URL,
-                      path: `/api/handlers/bops/public/applications/${params.applicationId}/documents`,
-                      query,
-                      client,
-                      service
-                    })
+                  case 'bops': {
+                    const result =
+                      await proxyBopsGet<PostSubmissionPublishedDocumentsResponse>(
+                        {
+                          baseUrl: API_BASE_URL,
+                          path: `/api/handlers/bops/public/applications/${params.applicationId}/documents`,
+                          query,
+                          client,
+                          service
+                        }
+                      )
+                    const { data, status } = result
+                    const pagination =
+                      'pagination' in result ? result.pagination : undefined
+                    return pagination
+                      ? { data, pagination, status }
+                      : { data, status }
+                  }
                   default:
                     return {
                       data: null,
@@ -531,7 +615,10 @@ const app = (userOptions?: ApiOptions) => {
                 params: 'public.documents.all.params',
                 query: 'public.documents.all.query',
                 response: {
-                  200: 'public.documents.all.response'
+                  200: t.Union([
+                    t.Ref('public.documents.all.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   summary: 'Get published documents',
@@ -565,7 +652,10 @@ const app = (userOptions?: ApiOptions) => {
               {
                 params: 'public.documents.single.params',
                 response: {
-                  200: 'public.documents.single.response'
+                  200: t.Union([
+                    t.Ref('public.documents.single.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   summary: 'Get published document',
@@ -578,14 +668,24 @@ const app = (userOptions?: ApiOptions) => {
               `/applications/:applicationId/publicComments`,
               async ({ handler, client, service, query, params }) => {
                 switch (handler) {
-                  case 'bops':
-                    return proxyBopsGet({
-                      baseUrl: API_BASE_URL,
-                      path: `/api/handlers/bops/public/applications/${params.applicationId}/publicComments`,
-                      query,
-                      client,
-                      service
-                    })
+                  case 'bops': {
+                    const result =
+                      await proxyBopsGet<PostSubmissionPublishedPublicCommentsResponse>(
+                        {
+                          baseUrl: API_BASE_URL,
+                          path: `/api/handlers/bops/public/applications/${params.applicationId}/publicComments`,
+                          query,
+                          client,
+                          service
+                        }
+                      )
+                    const { data, status } = result
+                    const pagination =
+                      'pagination' in result ? result.pagination : undefined
+                    return pagination
+                      ? { data, pagination, status }
+                      : { data, status }
+                  }
                   default:
                     return {
                       data: null,
@@ -600,7 +700,10 @@ const app = (userOptions?: ApiOptions) => {
                 params: 'public.publicComments.all.params',
                 query: 'public.publicComments.all.query',
                 response: {
-                  200: 'public.publicComments.all.response'
+                  200: t.Union([
+                    t.Ref('public.publicComments.all.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   summary: 'Get published public comments',
@@ -634,7 +737,10 @@ const app = (userOptions?: ApiOptions) => {
               {
                 params: 'public.publicComments.single.params',
                 response: {
-                  200: 'public.publicComments.single.response'
+                  200: t.Union([
+                    t.Ref('public.publicComments.single.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   summary: 'Get published public comment',
@@ -647,14 +753,24 @@ const app = (userOptions?: ApiOptions) => {
               `/applications/:applicationId/specialistComments`,
               async ({ handler, client, service, query, params }) => {
                 switch (handler) {
-                  case 'bops':
-                    return proxyBopsGet({
-                      baseUrl: API_BASE_URL,
-                      path: `/api/handlers/bops/public/applications/${params.applicationId}/specialistComments`,
-                      query,
-                      client,
-                      service
-                    })
+                  case 'bops': {
+                    const result =
+                      await proxyBopsGet<PostSubmissionPublishedSpecialistsResponse>(
+                        {
+                          baseUrl: API_BASE_URL,
+                          path: `/api/handlers/bops/public/applications/${params.applicationId}/specialistComments`,
+                          query,
+                          client,
+                          service
+                        }
+                      )
+                    const { data, status } = result
+                    const pagination =
+                      'pagination' in result ? result.pagination : undefined
+                    return pagination
+                      ? { data, pagination, status }
+                      : { data, status }
+                  }
                   default:
                     return {
                       data: null,
@@ -669,7 +785,10 @@ const app = (userOptions?: ApiOptions) => {
                 params: 'public.specialists.all.params',
                 query: 'public.specialists.all.query',
                 response: {
-                  200: 'public.specialists.all.response'
+                  200: t.Union([
+                    t.Ref('public.specialists.all.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   tags: ['Public'],
@@ -684,14 +803,24 @@ const app = (userOptions?: ApiOptions) => {
               `/applications/:applicationId/specialistComments/:specialistId`,
               async ({ handler, client, service, query, params }) => {
                 switch (handler) {
-                  case 'bops':
-                    return proxyBopsGet({
-                      baseUrl: API_BASE_URL,
-                      path: `/api/handlers/bops/public/applications/${params.applicationId}/specialistComments/${params.specialistId}`,
-                      query,
-                      client,
-                      service
-                    })
+                  case 'bops': {
+                    const result =
+                      await proxyBopsGet<PostSubmissionPublishedSpecialistResponse>(
+                        {
+                          baseUrl: API_BASE_URL,
+                          path: `/api/handlers/bops/public/applications/${params.applicationId}/specialistComments/${params.specialistId}`,
+                          query,
+                          client,
+                          service
+                        }
+                      )
+                    const { data, status } = result
+                    const pagination =
+                      'pagination' in result ? result.pagination : undefined
+                    return pagination
+                      ? { data, pagination, status }
+                      : { data, status }
+                  }
                   default:
                     return {
                       data: null,
@@ -706,7 +835,10 @@ const app = (userOptions?: ApiOptions) => {
                 params: 'public.specialists.single.params',
                 query: 'public.specialists.single.query',
                 response: {
-                  200: 'public.specialists.single.response'
+                  200: t.Union([
+                    t.Ref('public.specialists.single.response'),
+                    t.Ref('empty200')
+                  ])
                 },
                 detail: {
                   tags: ['Public'],
