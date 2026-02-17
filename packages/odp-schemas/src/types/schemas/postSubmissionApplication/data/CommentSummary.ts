@@ -1,33 +1,35 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 import {
-  PublicCommentSentiment,
-  SpecialistCommentSentiment
+  PublicCommentSentimentSchema,
+  SpecialistCommentSentimentSchema
 } from '../enums/CommentSentiment'
 
-type CommentSummaryBase = Static<typeof CommentSummaryBase>
-const CommentSummaryBase = Type.Object({
+// type CommentSummaryBase = Static<typeof CommentSummaryBaseSchema>
+const CommentSummaryBaseSchema = Type.Object({
   totalComments: Type.Number()
 })
 
-export type PublicCommentSummary = Static<typeof PublicCommentSummary>
-export const PublicCommentSummary = Type.Composite(
+export type PublicCommentSummary = Static<typeof PublicCommentSummarySchema>
+export const PublicCommentSummarySchema = Type.Composite(
   [
-    CommentSummaryBase,
+    CommentSummaryBaseSchema,
     Type.Object({
-      sentiment: Type.Record(PublicCommentSentiment, Type.Number())
+      sentiment: Type.Record(PublicCommentSentimentSchema, Type.Number())
     })
   ],
   { id: '#PublicCommentsSummary' }
 )
 
-export type SpecialistCommentSummary = Static<typeof SpecialistCommentSummary>
-export const SpecialistCommentSummary = Type.Composite(
+export type SpecialistCommentSummary = Static<
+  typeof SpecialistCommentSummarySchema
+>
+export const SpecialistCommentSummarySchema = Type.Composite(
   [
-    CommentSummaryBase,
+    CommentSummaryBaseSchema,
     Type.Object({
       totalConsulted: Type.Number(),
-      sentiment: Type.Record(SpecialistCommentSentiment, Type.Number())
+      sentiment: Type.Record(SpecialistCommentSentimentSchema, Type.Number())
     })
   ],
   { id: '#SpecialistCommentsSummary' }

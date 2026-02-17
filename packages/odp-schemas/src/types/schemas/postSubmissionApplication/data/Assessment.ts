@@ -1,9 +1,9 @@
 import { Type } from '@sinclair/typebox'
 import type { Static, TSchema } from '@sinclair/typebox'
-import { AssessmentDecision } from '../enums/AssessmentDecision'
+import { AssessmentDecisionSchema } from '../enums/AssessmentDecision'
 import '../../../shared/formats'
-type AssessmentBase = Static<typeof AssessmentBase>
-const AssessmentBase = Type.Object(
+// type AssessmentBase = Static<typeof AssessmentBaseSchema>
+const AssessmentBaseSchema = Type.Object(
   {
     expiryDate: Type.String({ format: 'date' }),
     decisionNotice: Type.Optional(
@@ -15,37 +15,43 @@ const AssessmentBase = Type.Object(
   { description: 'Base type for all assessments' }
 )
 
-type AssessmentDecisionSection = Static<typeof AssessmentDecisionSection>
-const AssessmentDecisionSection = Type.Object(
+// type AssessmentDecisionSection = Static<typeof AssessmentDecisionSectionSchema>
+const AssessmentDecisionSectionSchema = Type.Object(
   {
-    planningOfficerDecision: Type.Optional(AssessmentDecision),
+    planningOfficerDecision: Type.Optional(AssessmentDecisionSchema),
     planningOfficerDecisionDate: Type.Optional(Type.String({ format: 'date' }))
   },
   { description: 'AssessmentDecisionSection' }
 )
 
-type AssessmentCommitteeDecision = Static<typeof AssessmentCommitteeDecision>
-const AssessmentCommitteeDecision = Type.Object(
+// type AssessmentCommitteeDecision = Static<
+//   typeof AssessmentCommitteeDecisionSchema
+// >
+const AssessmentCommitteeDecisionSchema = Type.Object(
   {
-    planningOfficerRecommendation: Type.Optional(AssessmentDecision),
+    planningOfficerRecommendation: Type.Optional(AssessmentDecisionSchema),
     committeeSentDate: Type.Optional(Type.String({ format: 'date' })),
-    committeeDecision: Type.Optional(AssessmentDecision),
+    committeeDecision: Type.Optional(AssessmentDecisionSchema),
     committeeDecisionDate: Type.Optional(Type.String({ format: 'date' }))
   },
   { description: 'AssessmentCommitteeDecision' }
 )
 
-export type PostSubmissionAssessment = Static<typeof PostSubmissionAssessment>
-export const PostSubmissionAssessment = Type.Intersect([
-  AssessmentBase,
-  AssessmentDecisionSection,
-  AssessmentCommitteeDecision
+export type PostSubmissionAssessment = Static<
+  typeof PostSubmissionAssessmentSchema
+>
+export const PostSubmissionAssessmentSchema = Type.Intersect([
+  AssessmentBaseSchema,
+  AssessmentDecisionSectionSchema,
+  AssessmentCommitteeDecisionSchema
 ])
 
-export type PriorApprovalAssessment = Static<typeof PriorApprovalAssessment>
-export const PriorApprovalAssessment = Type.Intersect(
+export type PriorApprovalAssessment = Static<
+  typeof PriorApprovalAssessmentSchema
+>
+export const PriorApprovalAssessmentSchema = Type.Intersect(
   [
-    PostSubmissionAssessment,
+    PostSubmissionAssessmentSchema,
     Type.Object({
       priorApprovalRequired: Type.Optional(Type.Boolean())
     })
@@ -56,58 +62,58 @@ export const PriorApprovalAssessment = Type.Intersect(
   }
 )
 
-type AssessmentVariants = Static<typeof AssessmentVariants>
-const AssessmentVariants = Type.Object({
-  'pa.part1.classA': PriorApprovalAssessment,
-  'pa.part1.classAA': PriorApprovalAssessment,
-  'pa.part3.classG': PriorApprovalAssessment,
-  'pa.part3.classM': PriorApprovalAssessment,
-  'pa.part3.classMA': PriorApprovalAssessment,
-  'pa.part3.classN': PriorApprovalAssessment,
-  'pa.part3.classQ': PriorApprovalAssessment,
-  'pa.part3.classR': PriorApprovalAssessment,
-  'pa.part3.classS': PriorApprovalAssessment,
-  'pa.part3.classT': PriorApprovalAssessment,
-  'pa.part3.classV': PriorApprovalAssessment,
-  'pa.part4.classBB': PriorApprovalAssessment,
-  'pa.part4.classBC': PriorApprovalAssessment,
-  'pa.part4.classCA': PriorApprovalAssessment,
-  'pa.part4.classE': PriorApprovalAssessment,
-  'pa.part6': PriorApprovalAssessment,
-  'pa.part6.classA': PriorApprovalAssessment,
-  'pa.part6.classB': PriorApprovalAssessment,
-  'pa.part6.classE': PriorApprovalAssessment,
-  'pa.part7.classC': PriorApprovalAssessment,
-  'pa.part7.classM': PriorApprovalAssessment,
-  'pa.part9.classD': PriorApprovalAssessment,
-  'pa.part11.classB': PriorApprovalAssessment,
-  'pa.part14.classA': PriorApprovalAssessment,
-  'pa.part14.classB': PriorApprovalAssessment,
-  'pa.part14.classJ': PriorApprovalAssessment,
-  'pa.part14.classK': PriorApprovalAssessment,
-  'pa.part14.classOA': PriorApprovalAssessment,
-  'pa.part16.classA': PriorApprovalAssessment,
-  'pa.part17': PriorApprovalAssessment,
-  'pa.part17.classB': PriorApprovalAssessment,
-  'pa.part17.classC': PriorApprovalAssessment,
-  'pa.part17.classG': PriorApprovalAssessment,
-  'pa.part18.classA': PriorApprovalAssessment,
-  'pa.part19.classTA': PriorApprovalAssessment,
-  'pa.part20.classA': PriorApprovalAssessment,
-  'pa.part20.classAA': PriorApprovalAssessment,
-  'pa.part20.classAB': PriorApprovalAssessment,
-  'pa.part20.classAC': PriorApprovalAssessment,
-  'pa.part20.classAD': PriorApprovalAssessment,
-  'pa.part20.classZA': PriorApprovalAssessment
+// type AssessmentVariants = Static<typeof AssessmentVariantsSchema>
+const AssessmentVariantsSchema = Type.Object({
+  'pa.part1.classA': PriorApprovalAssessmentSchema,
+  'pa.part1.classAA': PriorApprovalAssessmentSchema,
+  'pa.part3.classG': PriorApprovalAssessmentSchema,
+  'pa.part3.classM': PriorApprovalAssessmentSchema,
+  'pa.part3.classMA': PriorApprovalAssessmentSchema,
+  'pa.part3.classN': PriorApprovalAssessmentSchema,
+  'pa.part3.classQ': PriorApprovalAssessmentSchema,
+  'pa.part3.classR': PriorApprovalAssessmentSchema,
+  'pa.part3.classS': PriorApprovalAssessmentSchema,
+  'pa.part3.classT': PriorApprovalAssessmentSchema,
+  'pa.part3.classV': PriorApprovalAssessmentSchema,
+  'pa.part4.classBB': PriorApprovalAssessmentSchema,
+  'pa.part4.classBC': PriorApprovalAssessmentSchema,
+  'pa.part4.classCA': PriorApprovalAssessmentSchema,
+  'pa.part4.classE': PriorApprovalAssessmentSchema,
+  'pa.part6': PriorApprovalAssessmentSchema,
+  'pa.part6.classA': PriorApprovalAssessmentSchema,
+  'pa.part6.classB': PriorApprovalAssessmentSchema,
+  'pa.part6.classE': PriorApprovalAssessmentSchema,
+  'pa.part7.classC': PriorApprovalAssessmentSchema,
+  'pa.part7.classM': PriorApprovalAssessmentSchema,
+  'pa.part9.classD': PriorApprovalAssessmentSchema,
+  'pa.part11.classB': PriorApprovalAssessmentSchema,
+  'pa.part14.classA': PriorApprovalAssessmentSchema,
+  'pa.part14.classB': PriorApprovalAssessmentSchema,
+  'pa.part14.classJ': PriorApprovalAssessmentSchema,
+  'pa.part14.classK': PriorApprovalAssessmentSchema,
+  'pa.part14.classOA': PriorApprovalAssessmentSchema,
+  'pa.part16.classA': PriorApprovalAssessmentSchema,
+  'pa.part17': PriorApprovalAssessmentSchema,
+  'pa.part17.classB': PriorApprovalAssessmentSchema,
+  'pa.part17.classC': PriorApprovalAssessmentSchema,
+  'pa.part17.classG': PriorApprovalAssessmentSchema,
+  'pa.part18.classA': PriorApprovalAssessmentSchema,
+  'pa.part19.classTA': PriorApprovalAssessmentSchema,
+  'pa.part20.classA': PriorApprovalAssessmentSchema,
+  'pa.part20.classAA': PriorApprovalAssessmentSchema,
+  'pa.part20.classAB': PriorApprovalAssessmentSchema,
+  'pa.part20.classAC': PriorApprovalAssessmentSchema,
+  'pa.part20.classAD': PriorApprovalAssessmentSchema,
+  'pa.part20.classZA': PriorApprovalAssessmentSchema
 })
 
 export type Assessment<T extends TSchema> = Static<
-  ReturnType<typeof Assessment<T>>
+  ReturnType<typeof AssessmentSchema<T>>
 >
-export const Assessment = <T extends TSchema>(T: T) =>
+export const AssessmentSchema = <T extends TSchema>(T: T) =>
   Type.Extends(
     T,
-    Type.KeyOf(AssessmentVariants),
-    Type.Index(AssessmentVariants, T),
-    PostSubmissionAssessment
+    Type.KeyOf(AssessmentVariantsSchema),
+    Type.Index(AssessmentVariantsSchema, T),
+    PostSubmissionAssessmentSchema
   )

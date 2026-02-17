@@ -1,16 +1,16 @@
 import { Type } from '@sinclair/typebox'
 import type { Static, TSchema } from '@sinclair/typebox'
-import { PostSubmissionMetadata } from './Metadata'
-import { CaseOfficer } from './data/CaseOfficer'
+import { PostSubmissionMetadataSchema } from './Metadata'
+import { CaseOfficerSchema } from './data/CaseOfficer'
 import { AppealSchema } from './data/Appeal'
-import { PostSubmissionFile } from './data/File'
-import { Application } from './data/Application'
-import { LocalPlanningAuthority } from './data/LocalPlanningAuthority'
-import { Submission } from './data/Submission'
-import { Validation } from './data/Validation'
-import { Consultation } from './data/Consultation'
-import { Assessment } from './data/Assessment'
-import { PublicComments, SpecialistComments } from './data/Comment'
+import { PostSubmissionFileSchema } from './data/File'
+import { ApplicationSchema } from './data/Application'
+import { LocalPlanningAuthoritySchema } from './data/LocalPlanningAuthority'
+import { SubmissionSchema } from './data/Submission'
+import { ValidationSchema } from './data/Validation'
+import { ConsultationSchema } from './data/Consultation'
+import { AssessmentSchema } from './data/Assessment'
+import { PublicCommentsSchema, SpecialistCommentsSchema } from './data/Comment'
 
 export const PostSubmissionApplicationSpecificationGenerator = <
   T extends TSchema
@@ -20,857 +20,965 @@ export const PostSubmissionApplicationSpecificationGenerator = <
   Type.Object({
     applicationType: T,
     data: Type.Object({
-      application: Application(T),
-      localPlanningAuthority: LocalPlanningAuthority(T),
-      submission: Submission(T),
-      validation: Type.Optional(Validation(T)),
-      consultation: Type.Optional(Consultation(T)),
-      assessment: Type.Optional(Assessment(T)),
+      application: ApplicationSchema(T),
+      localPlanningAuthority: LocalPlanningAuthoritySchema(T),
+      submission: SubmissionSchema(T),
+      validation: Type.Optional(ValidationSchema(T)),
+      consultation: Type.Optional(ConsultationSchema(T)),
+      assessment: Type.Optional(AssessmentSchema(T)),
       appeal: Type.Optional(AppealSchema(T)),
-      caseOfficer: CaseOfficer(T)
+      caseOfficer: CaseOfficerSchema(T)
     }),
     comments: Type.Optional(
       Type.Object({
-        public: Type.Optional(PublicComments),
-        specialist: Type.Optional(SpecialistComments)
+        public: Type.Optional(PublicCommentsSchema),
+        specialist: Type.Optional(SpecialistCommentsSchema)
       })
     ),
-    files: Type.Optional(Type.Array(PostSubmissionFile)),
+    files: Type.Optional(Type.Array(PostSubmissionFileSchema)),
     submission: Type.Any(),
-    metadata: PostSubmissionMetadata
+    metadata: PostSubmissionMetadataSchema
   })
 
 export type PostSubmissionAdvertConsent = Static<
-  typeof PostSubmissionAdvertConsent
+  typeof PostSubmissionAdvertConsentSchema
 >
-export const PostSubmissionAdvertConsent =
+export const PostSubmissionAdvertConsentSchema =
   PostSubmissionApplicationSpecificationGenerator(Type.Literal('advertConsent'))
 
 export type PostSubmissionAmendmentMinorMaterial = Static<
-  typeof PostSubmissionAmendmentMinorMaterial
+  typeof PostSubmissionAmendmentMinorMaterialSchema
 >
-export const PostSubmissionAmendmentMinorMaterial =
+export const PostSubmissionAmendmentMinorMaterialSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('amendment.minorMaterial')
   )
 
 export type PostSubmissionAmendmentNonMaterial = Static<
-  typeof PostSubmissionAmendmentNonMaterial
+  typeof PostSubmissionAmendmentNonMaterialSchema
 >
-export const PostSubmissionAmendmentNonMaterial =
+export const PostSubmissionAmendmentNonMaterialSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('amendment.nonMaterial')
   )
 
 export type PostSubmissionApprovalConditions = Static<
-  typeof PostSubmissionApprovalConditions
+  typeof PostSubmissionApprovalConditionsSchema
 >
-export const PostSubmissionApprovalConditions =
+export const PostSubmissionApprovalConditionsSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('approval.conditions')
   )
 
 export type PostSubmissionApprovalReservedMatters = Static<
-  typeof PostSubmissionApprovalReservedMatters
+  typeof PostSubmissionApprovalReservedMattersSchema
 >
-export const PostSubmissionApprovalReservedMatters =
+export const PostSubmissionApprovalReservedMattersSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('approval.reservedMatters')
   )
 
 export type PostSubmissionComplianceConfirmation = Static<
-  typeof PostSubmissionComplianceConfirmation
+  typeof PostSubmissionComplianceConfirmationSchema
 >
-export const PostSubmissionComplianceConfirmation =
+export const PostSubmissionComplianceConfirmationSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('complianceConfirmation')
   )
 
 export type PostSubmissionEnvironmentalImpactScoping = Static<
-  typeof PostSubmissionEnvironmentalImpactScoping
+  typeof PostSubmissionEnvironmentalImpactScopingSchema
 >
-export const PostSubmissionEnvironmentalImpactScoping =
+export const PostSubmissionEnvironmentalImpactScopingSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('environmentalImpact.scoping')
   )
 
 export type PostSubmissionEnvironmentalImpactScreening = Static<
-  typeof PostSubmissionEnvironmentalImpactScreening
+  typeof PostSubmissionEnvironmentalImpactScreeningSchema
 >
-export const PostSubmissionEnvironmentalImpactScreening =
+export const PostSubmissionEnvironmentalImpactScreeningSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('environmentalImpact.screening')
   )
 
 export type PostSubmissionHazardousSubstanceConsent = Static<
-  typeof PostSubmissionHazardousSubstanceConsent
+  typeof PostSubmissionHazardousSubstanceConsentSchema
 >
-export const PostSubmissionHazardousSubstanceConsent =
+export const PostSubmissionHazardousSubstanceConsentSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('hazardousSubstanceConsent')
   )
 
 export type PostSubmissionHedgerowRemovalNotice = Static<
-  typeof PostSubmissionHedgerowRemovalNotice
+  typeof PostSubmissionHedgerowRemovalNoticeSchema
 >
-export const PostSubmissionHedgerowRemovalNotice =
+export const PostSubmissionHedgerowRemovalNoticeSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('hedgerowRemovalNotice')
   )
 
 export type PostSubmissionLandDrainageConsent = Static<
-  typeof PostSubmissionLandDrainageConsent
+  typeof PostSubmissionLandDrainageConsentSchema
 >
-export const PostSubmissionLandDrainageConsent =
+export const PostSubmissionLandDrainageConsentSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('landDrainageConsent')
   )
 
 export type PostSubmissionLawfulDevelopmentCertificateBreachOfCondition =
-  Static<typeof PostSubmissionLawfulDevelopmentCertificateBreachOfCondition>
-export const PostSubmissionLawfulDevelopmentCertificateBreachOfCondition =
+  Static<
+    typeof PostSubmissionLawfulDevelopmentCertificateBreachOfConditionSchema
+  >
+export const PostSubmissionLawfulDevelopmentCertificateBreachOfConditionSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('ldc.breachOfCondition')
   )
 
 export type PostSubmissionLawfulDevelopmentCertificateExisting = Static<
-  typeof PostSubmissionLawfulDevelopmentCertificateExisting
+  typeof PostSubmissionLawfulDevelopmentCertificateExistingSchema
 >
-export const PostSubmissionLawfulDevelopmentCertificateExisting =
+export const PostSubmissionLawfulDevelopmentCertificateExistingSchema =
   PostSubmissionApplicationSpecificationGenerator(Type.Literal('ldc.existing'))
 
 export type PostSubmissionLawfulDevelopmentCertificateListedBuildingWorks =
-  Static<typeof PostSubmissionLawfulDevelopmentCertificateListedBuildingWorks>
-export const PostSubmissionLawfulDevelopmentCertificateListedBuildingWorks =
+  Static<
+    typeof PostSubmissionLawfulDevelopmentCertificateListedBuildingWorksSchema
+  >
+export const PostSubmissionLawfulDevelopmentCertificateListedBuildingWorksSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('ldc.listedBuildingWorks')
   )
 
 export type PostSubmissionLawfulDevelopmentCertificateProposed = Static<
-  typeof PostSubmissionLawfulDevelopmentCertificateProposed
+  typeof PostSubmissionLawfulDevelopmentCertificateProposedSchema
 >
-export const PostSubmissionLawfulDevelopmentCertificateProposed =
+export const PostSubmissionLawfulDevelopmentCertificateProposedSchema =
   PostSubmissionApplicationSpecificationGenerator(Type.Literal('ldc.proposed'))
 
 export type PostSubmissionListedBuildingConsent = Static<
-  typeof PostSubmissionListedBuildingConsent
+  typeof PostSubmissionListedBuildingConsentSchema
 >
-export const PostSubmissionListedBuildingConsent =
+export const PostSubmissionListedBuildingConsentSchema =
   PostSubmissionApplicationSpecificationGenerator(Type.Literal('listed'))
 
 export type PostSubmissionNotifyCompletion = Static<
-  typeof PostSubmissionNotifyCompletion
+  typeof PostSubmissionNotifyCompletionSchema
 >
-export const PostSubmissionNotifyCompletion =
+export const PostSubmissionNotifyCompletionSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('notifyCompletion')
   )
 
 export type PostSubmissionObligationDischarge = Static<
-  typeof PostSubmissionObligationDischarge
+  typeof PostSubmissionObligationDischargeSchema
 >
-export const PostSubmissionObligationDischarge =
+export const PostSubmissionObligationDischargeSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('obligation.discharge')
   )
 
 export type PostSubmissionObligationModify = Static<
-  typeof PostSubmissionObligationModify
+  typeof PostSubmissionObligationModifySchema
 >
-export const PostSubmissionObligationModify =
+export const PostSubmissionObligationModifySchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('obligation.modify')
   )
 
 export type PostSubmissionOnshoreExtractionOilAndGasOther = Static<
-  typeof PostSubmissionOnshoreExtractionOilAndGasOther
+  typeof PostSubmissionOnshoreExtractionOilAndGasOtherSchema
 >
-export const PostSubmissionOnshoreExtractionOilAndGasOther =
+export const PostSubmissionOnshoreExtractionOilAndGasOtherSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('onshoreExtractionOilAndGas.other')
   )
 
 export type PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionExtension =
   Static<
-    typeof PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionExtension
+    typeof PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionExtensionSchema
   >
-export const PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionExtension =
+export const PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionExtensionSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('onshoreExtractionOilAndGas.pp.extension')
   )
 
 export type PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWaste =
-  Static<typeof PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWaste>
-export const PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWaste =
+  Static<
+    typeof PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWasteSchema
+  >
+export const PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWasteSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('onshoreExtractionOilAndGas.pp.waste')
   )
 
 export type PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWorking =
   Static<
-    typeof PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWorking
+    typeof PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWorkingSchema
   >
-export const PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWorking =
+export const PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWorkingSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('onshoreExtractionOilAndGas.pp.working')
   )
 
 export type PostSubmissionOnshoreExtractionOilAndGasReview = Static<
-  typeof PostSubmissionOnshoreExtractionOilAndGasReview
+  typeof PostSubmissionOnshoreExtractionOilAndGasReviewSchema
 >
-export const PostSubmissionOnshoreExtractionOilAndGasReview =
+export const PostSubmissionOnshoreExtractionOilAndGasReviewSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('onshoreExtractionOilAndGas.review')
   )
 
 export type PostSubmissionOnshoreExtractionOilAndGasVariation = Static<
-  typeof PostSubmissionOnshoreExtractionOilAndGasVariation
+  typeof PostSubmissionOnshoreExtractionOilAndGasVariationSchema
 >
-export const PostSubmissionOnshoreExtractionOilAndGasVariation =
+export const PostSubmissionOnshoreExtractionOilAndGasVariationSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('onshoreExtractionOilAndGas.variation')
   )
 
 export type PostSubmissionPriorApprovalPart1ClassA = Static<
-  typeof PostSubmissionPriorApprovalPart1ClassA
+  typeof PostSubmissionPriorApprovalPart1ClassASchema
 >
-export const PostSubmissionPriorApprovalPart1ClassA =
+export const PostSubmissionPriorApprovalPart1ClassASchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part1.classA')
   )
 
 export type PostSubmissionPriorApprovalPart1ClassAA = Static<
-  typeof PostSubmissionPriorApprovalPart1ClassAA
+  typeof PostSubmissionPriorApprovalPart1ClassAASchema
 >
-export const PostSubmissionPriorApprovalPart1ClassAA =
+export const PostSubmissionPriorApprovalPart1ClassAASchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part1.classAA')
   )
 
 export type PostSubmissionPriorApprovalPart3ClassG = Static<
-  typeof PostSubmissionPriorApprovalPart3ClassG
+  typeof PostSubmissionPriorApprovalPart3ClassGSchema
 >
-export const PostSubmissionPriorApprovalPart3ClassG =
+export const PostSubmissionPriorApprovalPart3ClassGSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part3.classG')
   )
 
 export type PostSubmissionPriorApprovalPart3ClassM = Static<
-  typeof PostSubmissionPriorApprovalPart3ClassM
+  typeof PostSubmissionPriorApprovalPart3ClassMSchema
 >
-export const PostSubmissionPriorApprovalPart3ClassM =
+export const PostSubmissionPriorApprovalPart3ClassMSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part3.classM')
   )
 
 export type PostSubmissionPriorApprovalPart3ClassMA = Static<
-  typeof PostSubmissionPriorApprovalPart3ClassMA
+  typeof PostSubmissionPriorApprovalPart3ClassMASchema
 >
-export const PostSubmissionPriorApprovalPart3ClassMA =
+export const PostSubmissionPriorApprovalPart3ClassMASchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part3.classMA')
   )
 
 export type PostSubmissionPriorApprovalPart3ClassN = Static<
-  typeof PostSubmissionPriorApprovalPart3ClassN
+  typeof PostSubmissionPriorApprovalPart3ClassNSchema
 >
-export const PostSubmissionPriorApprovalPart3ClassN =
+export const PostSubmissionPriorApprovalPart3ClassNSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part3.classN')
   )
 
 export type PostSubmissionPriorApprovalPart3ClassQ = Static<
-  typeof PostSubmissionPriorApprovalPart3ClassQ
+  typeof PostSubmissionPriorApprovalPart3ClassQSchema
 >
-export const PostSubmissionPriorApprovalPart3ClassQ =
+export const PostSubmissionPriorApprovalPart3ClassQSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part3.classQ')
   )
 
 export type PostSubmissionPriorApprovalPart3ClassR = Static<
-  typeof PostSubmissionPriorApprovalPart3ClassR
+  typeof PostSubmissionPriorApprovalPart3ClassRSchema
 >
-export const PostSubmissionPriorApprovalPart3ClassR =
+export const PostSubmissionPriorApprovalPart3ClassRSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part3.classR')
   )
 
 export type PostSubmissionPriorApprovalPart3ClassS = Static<
-  typeof PostSubmissionPriorApprovalPart3ClassS
+  typeof PostSubmissionPriorApprovalPart3ClassSSchema
 >
-export const PostSubmissionPriorApprovalPart3ClassS =
+export const PostSubmissionPriorApprovalPart3ClassSSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part3.classS')
   )
 
 export type PostSubmissionPriorApprovalPart3ClassT = Static<
-  typeof PostSubmissionPriorApprovalPart3ClassT
+  typeof PostSubmissionPriorApprovalPart3ClassTSchema
 >
-export const PostSubmissionPriorApprovalPart3ClassT =
+export const PostSubmissionPriorApprovalPart3ClassTSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part3.classT')
   )
 
 export type PostSubmissionPriorApprovalPart3ClassV = Static<
-  typeof PostSubmissionPriorApprovalPart3ClassV
+  typeof PostSubmissionPriorApprovalPart3ClassVSchema
 >
-export const PostSubmissionPriorApprovalPart3ClassV =
+export const PostSubmissionPriorApprovalPart3ClassVSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part3.classV')
   )
 
 export type PostSubmissionPriorApprovalPart4ClassBB = Static<
-  typeof PostSubmissionPriorApprovalPart4ClassBB
+  typeof PostSubmissionPriorApprovalPart4ClassBBSchema
 >
-export const PostSubmissionPriorApprovalPart4ClassBB =
+export const PostSubmissionPriorApprovalPart4ClassBBSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part4.classBB')
   )
 
 export type PostSubmissionPriorApprovalPart4ClassBC = Static<
-  typeof PostSubmissionPriorApprovalPart4ClassBC
+  typeof PostSubmissionPriorApprovalPart4ClassBCSchema
 >
-export const PostSubmissionPriorApprovalPart4ClassBC =
+export const PostSubmissionPriorApprovalPart4ClassBCSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part4.classBC')
   )
 
 export type PostSubmissionPriorApprovalPart4ClassCA = Static<
-  typeof PostSubmissionPriorApprovalPart4ClassCA
+  typeof PostSubmissionPriorApprovalPart4ClassCASchema
 >
-export const PostSubmissionPriorApprovalPart4ClassCA =
+export const PostSubmissionPriorApprovalPart4ClassCASchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part4.classCA')
   )
 
 export type PostSubmissionPriorApprovalPart4ClassE = Static<
-  typeof PostSubmissionPriorApprovalPart4ClassE
+  typeof PostSubmissionPriorApprovalPart4ClassESchema
 >
-export const PostSubmissionPriorApprovalPart4ClassE =
+export const PostSubmissionPriorApprovalPart4ClassESchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part4.classE')
   )
 
 export type PostSubmissionPriorApprovalPart6 = Static<
-  typeof PostSubmissionPriorApprovalPart6
+  typeof PostSubmissionPriorApprovalPart6Schema
 >
-export const PostSubmissionPriorApprovalPart6 =
+export const PostSubmissionPriorApprovalPart6Schema =
   PostSubmissionApplicationSpecificationGenerator(Type.Literal('pa.part6'))
 
 export type PostSubmissionPriorApprovalPart6ClassA = Static<
-  typeof PostSubmissionPriorApprovalPart6ClassA
+  typeof PostSubmissionPriorApprovalPart6ClassASchema
 >
-export const PostSubmissionPriorApprovalPart6ClassA =
+export const PostSubmissionPriorApprovalPart6ClassASchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part6.classA')
   )
 
 export type PostSubmissionPriorApprovalPart6ClassB = Static<
-  typeof PostSubmissionPriorApprovalPart6ClassB
+  typeof PostSubmissionPriorApprovalPart6ClassBSchema
 >
-export const PostSubmissionPriorApprovalPart6ClassB =
+export const PostSubmissionPriorApprovalPart6ClassBSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part6.classB')
   )
 
 export type PostSubmissionPriorApprovalPart6ClassE = Static<
-  typeof PostSubmissionPriorApprovalPart6ClassE
+  typeof PostSubmissionPriorApprovalPart6ClassESchema
 >
-export const PostSubmissionPriorApprovalPart6ClassE =
+export const PostSubmissionPriorApprovalPart6ClassESchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part6.classE')
   )
 
 export type PostSubmissionPriorApprovalPart7ClassC = Static<
-  typeof PostSubmissionPriorApprovalPart7ClassC
+  typeof PostSubmissionPriorApprovalPart7ClassCSchema
 >
-export const PostSubmissionPriorApprovalPart7ClassC =
+export const PostSubmissionPriorApprovalPart7ClassCSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part7.classC')
   )
 
 export type PostSubmissionPriorApprovalPart7ClassM = Static<
-  typeof PostSubmissionPriorApprovalPart7ClassM
+  typeof PostSubmissionPriorApprovalPart7ClassMSchema
 >
-export const PostSubmissionPriorApprovalPart7ClassM =
+export const PostSubmissionPriorApprovalPart7ClassMSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part7.classM')
   )
 
 export type PostSubmissionPriorApprovalPart9ClassD = Static<
-  typeof PostSubmissionPriorApprovalPart9ClassD
+  typeof PostSubmissionPriorApprovalPart9ClassDSchema
 >
-export const PostSubmissionPriorApprovalPart9ClassD =
+export const PostSubmissionPriorApprovalPart9ClassDSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part9.classD')
   )
 
 export type PostSubmissionPriorApprovalPart11ClassB = Static<
-  typeof PostSubmissionPriorApprovalPart11ClassB
+  typeof PostSubmissionPriorApprovalPart11ClassBSchema
 >
-export const PostSubmissionPriorApprovalPart11ClassB =
+export const PostSubmissionPriorApprovalPart11ClassBSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part11.classB')
   )
 
 export type PostSubmissionPriorApprovalPart14ClassA = Static<
-  typeof PostSubmissionPriorApprovalPart14ClassA
+  typeof PostSubmissionPriorApprovalPart14ClassASchema
 >
-export const PostSubmissionPriorApprovalPart14ClassA =
+export const PostSubmissionPriorApprovalPart14ClassASchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part14.classA')
   )
 
 export type PostSubmissionPriorApprovalPart14ClassB = Static<
-  typeof PostSubmissionPriorApprovalPart14ClassB
+  typeof PostSubmissionPriorApprovalPart14ClassBSchema
 >
-export const PostSubmissionPriorApprovalPart14ClassB =
+export const PostSubmissionPriorApprovalPart14ClassBSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part14.classB')
   )
 
 export type PostSubmissionPriorApprovalPart14ClassJ = Static<
-  typeof PostSubmissionPriorApprovalPart14ClassJ
+  typeof PostSubmissionPriorApprovalPart14ClassJSchema
 >
-export const PostSubmissionPriorApprovalPart14ClassJ =
+export const PostSubmissionPriorApprovalPart14ClassJSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part14.classJ')
   )
 
 export type PostSubmissionPriorApprovalPart14ClassK = Static<
-  typeof PostSubmissionPriorApprovalPart14ClassK
+  typeof PostSubmissionPriorApprovalPart14ClassKSchema
 >
-export const PostSubmissionPriorApprovalPart14ClassK =
+export const PostSubmissionPriorApprovalPart14ClassKSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part14.classK')
   )
 
 export type PostSubmissionPriorApprovalPart14ClassOA = Static<
-  typeof PostSubmissionPriorApprovalPart14ClassOA
+  typeof PostSubmissionPriorApprovalPart14ClassOASchema
 >
-export const PostSubmissionPriorApprovalPart14ClassOA =
+export const PostSubmissionPriorApprovalPart14ClassOASchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part14.classOA')
   )
 
 export type PostSubmissionPriorApprovalPart16ClassA = Static<
-  typeof PostSubmissionPriorApprovalPart16ClassA
+  typeof PostSubmissionPriorApprovalPart16ClassASchema
 >
-export const PostSubmissionPriorApprovalPart16ClassA =
+export const PostSubmissionPriorApprovalPart16ClassASchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part16.classA')
   )
 
 export type PostSubmissionPriorApprovalPart17 = Static<
-  typeof PostSubmissionPriorApprovalPart17
+  typeof PostSubmissionPriorApprovalPart17Schema
 >
-export const PostSubmissionPriorApprovalPart17 =
+export const PostSubmissionPriorApprovalPart17Schema =
   PostSubmissionApplicationSpecificationGenerator(Type.Literal('pa.part17'))
 
 export type PostSubmissionPriorApprovalPart17ClassB = Static<
-  typeof PostSubmissionPriorApprovalPart17ClassB
+  typeof PostSubmissionPriorApprovalPart17ClassBSchema
 >
-export const PostSubmissionPriorApprovalPart17ClassB =
+export const PostSubmissionPriorApprovalPart17ClassBSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part17.classB')
   )
 
 export type PostSubmissionPriorApprovalPart17ClassC = Static<
-  typeof PostSubmissionPriorApprovalPart17ClassC
+  typeof PostSubmissionPriorApprovalPart17ClassCSchema
 >
-export const PostSubmissionPriorApprovalPart17ClassC =
+export const PostSubmissionPriorApprovalPart17ClassCSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part17.classC')
   )
 
 export type PostSubmissionPriorApprovalPart17ClassG = Static<
-  typeof PostSubmissionPriorApprovalPart17ClassG
+  typeof PostSubmissionPriorApprovalPart17ClassGSchema
 >
-export const PostSubmissionPriorApprovalPart17ClassG =
+export const PostSubmissionPriorApprovalPart17ClassGSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part17.classG')
   )
 
 export type PostSubmissionPriorApprovalPart18ClassA = Static<
-  typeof PostSubmissionPriorApprovalPart18ClassA
+  typeof PostSubmissionPriorApprovalPart18ClassASchema
 >
-export const PostSubmissionPriorApprovalPart18ClassA =
+export const PostSubmissionPriorApprovalPart18ClassASchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part18.classA')
   )
 
 export type PostSubmissionPriorApprovalPart19ClassTA = Static<
-  typeof PostSubmissionPriorApprovalPart19ClassTA
+  typeof PostSubmissionPriorApprovalPart19ClassTASchema
 >
-export const PostSubmissionPriorApprovalPart19ClassTA =
+export const PostSubmissionPriorApprovalPart19ClassTASchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part19.classTA')
   )
 
 export type PostSubmissionPriorApprovalPart20ClassA = Static<
-  typeof PostSubmissionPriorApprovalPart20ClassA
+  typeof PostSubmissionPriorApprovalPart20ClassASchema
 >
-export const PostSubmissionPriorApprovalPart20ClassA =
+export const PostSubmissionPriorApprovalPart20ClassASchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part20.classA')
   )
 
 export type PostSubmissionPriorApprovalPart20ClassAA = Static<
-  typeof PostSubmissionPriorApprovalPart20ClassAA
+  typeof PostSubmissionPriorApprovalPart20ClassAASchema
 >
-export const PostSubmissionPriorApprovalPart20ClassAA =
+export const PostSubmissionPriorApprovalPart20ClassAASchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part20.classAA')
   )
 
 export type PostSubmissionPriorApprovalPart20ClassAB = Static<
-  typeof PostSubmissionPriorApprovalPart20ClassAB
+  typeof PostSubmissionPriorApprovalPart20ClassABSchema
 >
-export const PostSubmissionPriorApprovalPart20ClassAB =
+export const PostSubmissionPriorApprovalPart20ClassABSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part20.classAB')
   )
 
 export type PostSubmissionPriorApprovalPart20ClassAC = Static<
-  typeof PostSubmissionPriorApprovalPart20ClassAC
+  typeof PostSubmissionPriorApprovalPart20ClassACSchema
 >
-export const PostSubmissionPriorApprovalPart20ClassAC =
+export const PostSubmissionPriorApprovalPart20ClassACSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part20.classAC')
   )
 
 export type PostSubmissionPriorApprovalPart20ClassAD = Static<
-  typeof PostSubmissionPriorApprovalPart20ClassAD
+  typeof PostSubmissionPriorApprovalPart20ClassADSchema
 >
-export const PostSubmissionPriorApprovalPart20ClassAD =
+export const PostSubmissionPriorApprovalPart20ClassADSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part20.classAD')
   )
 
 export type PostSubmissionPriorApprovalPart20ClassZA = Static<
-  typeof PostSubmissionPriorApprovalPart20ClassZA
+  typeof PostSubmissionPriorApprovalPart20ClassZASchema
 >
-export const PostSubmissionPriorApprovalPart20ClassZA =
+export const PostSubmissionPriorApprovalPart20ClassZASchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pa.part20.classZA')
   )
 
 export type PostSubmissionPlanningPermissionFullAdvertConsent = Static<
-  typeof PostSubmissionPlanningPermissionFullAdvertConsent
+  typeof PostSubmissionPlanningPermissionFullAdvertConsentSchema
 >
-export const PostSubmissionPlanningPermissionFullAdvertConsent =
+export const PostSubmissionPlanningPermissionFullAdvertConsentSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.full.advertConsent')
   )
 
 export type PostSubmissionPlanningPermissionFullDemolition = Static<
-  typeof PostSubmissionPlanningPermissionFullDemolition
+  typeof PostSubmissionPlanningPermissionFullDemolitionSchema
 >
-export const PostSubmissionPlanningPermissionFullDemolition =
+export const PostSubmissionPlanningPermissionFullDemolitionSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.full.demolition')
   )
 
 export type PostSubmissionPlanningPermissionFullFastTrackAffordable = Static<
-  typeof PostSubmissionPlanningPermissionFullFastTrackAffordable
+  typeof PostSubmissionPlanningPermissionFullFastTrackAffordableSchema
 >
-export const PostSubmissionPlanningPermissionFullFastTrackAffordable =
+export const PostSubmissionPlanningPermissionFullFastTrackAffordableSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.full.fastTrack.affordable')
   )
 
 export type PostSubmissionPlanningPermissionFullHouseholder = Static<
-  typeof PostSubmissionPlanningPermissionFullHouseholder
+  typeof PostSubmissionPlanningPermissionFullHouseholderSchema
 >
-export const PostSubmissionPlanningPermissionFullHouseholder =
+export const PostSubmissionPlanningPermissionFullHouseholderSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.full.householder')
   )
 
 export type PostSubmissionPlanningPermissionFullHouseholderListed = Static<
-  typeof PostSubmissionPlanningPermissionFullHouseholderListed
+  typeof PostSubmissionPlanningPermissionFullHouseholderListedSchema
 >
-export const PostSubmissionPlanningPermissionFullHouseholderListed =
+export const PostSubmissionPlanningPermissionFullHouseholderListedSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.full.householder.listed')
   )
 
 export type PostSubmissionPlanningPermissionFullHouseholderRetrospective =
-  Static<typeof PostSubmissionPlanningPermissionFullHouseholderRetrospective>
-export const PostSubmissionPlanningPermissionFullHouseholderRetrospective =
+  Static<
+    typeof PostSubmissionPlanningPermissionFullHouseholderRetrospectiveSchema
+  >
+export const PostSubmissionPlanningPermissionFullHouseholderRetrospectiveSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.full.householder.retro')
   )
 
 export type PostSubmissionPlanningPermissionFullMinor = Static<
-  typeof PostSubmissionPlanningPermissionFullMinor
+  typeof PostSubmissionPlanningPermissionFullMinorSchema
 >
-export const PostSubmissionPlanningPermissionFullMinor =
+export const PostSubmissionPlanningPermissionFullMinorSchema =
   PostSubmissionApplicationSpecificationGenerator(Type.Literal('pp.full.minor'))
 
 export type PostSubmissionPlanningPermissionFullMinorListed = Static<
-  typeof PostSubmissionPlanningPermissionFullMinorListed
+  typeof PostSubmissionPlanningPermissionFullMinorListedSchema
 >
-export const PostSubmissionPlanningPermissionFullMinorListed =
+export const PostSubmissionPlanningPermissionFullMinorListedSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.full.minor.listed')
   )
 
 export type PostSubmissionPlanningPermissionFullMinorTechnicalDetails = Static<
-  typeof PostSubmissionPlanningPermissionFullMinorTechnicalDetails
+  typeof PostSubmissionPlanningPermissionFullMinorTechnicalDetailsSchema
 >
-export const PostSubmissionPlanningPermissionFullMinorTechnicalDetails =
+export const PostSubmissionPlanningPermissionFullMinorTechnicalDetailsSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.full.minor.technicalDetails')
   )
 
 export type PostSubmissionPlanningPermissionFullMajor = Static<
-  typeof PostSubmissionPlanningPermissionFullMajor
+  typeof PostSubmissionPlanningPermissionFullMajorSchema
 >
-export const PostSubmissionPlanningPermissionFullMajor =
+export const PostSubmissionPlanningPermissionFullMajorSchema =
   PostSubmissionApplicationSpecificationGenerator(Type.Literal('pp.full.major'))
 
 export type PostSubmissionPlanningPermissionFullMajorTechnicalDetails = Static<
-  typeof PostSubmissionPlanningPermissionFullMajorTechnicalDetails
+  typeof PostSubmissionPlanningPermissionFullMajorTechnicalDetailsSchema
 >
-export const PostSubmissionPlanningPermissionFullMajorTechnicalDetails =
+export const PostSubmissionPlanningPermissionFullMajorTechnicalDetailsSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.full.major.technicalDetails')
   )
 
 export type PostSubmissionPlanningPermissionFullMajorTechnicalDetailsWaste =
-  Static<typeof PostSubmissionPlanningPermissionFullMajorTechnicalDetailsWaste>
-export const PostSubmissionPlanningPermissionFullMajorTechnicalDetailsWaste =
+  Static<
+    typeof PostSubmissionPlanningPermissionFullMajorTechnicalDetailsWasteSchema
+  >
+export const PostSubmissionPlanningPermissionFullMajorTechnicalDetailsWasteSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.full.major.technicalDetails.waste')
   )
 
 export type PostSubmissionPlanningPermissionFullMajorWaste = Static<
-  typeof PostSubmissionPlanningPermissionFullMajorWaste
+  typeof PostSubmissionPlanningPermissionFullMajorWasteSchema
 >
-export const PostSubmissionPlanningPermissionFullMajorWaste =
+export const PostSubmissionPlanningPermissionFullMajorWasteSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.full.major.waste')
   )
 
 export type PostSubmissionPlanningPermissionMineralExtraction = Static<
-  typeof PostSubmissionPlanningPermissionMineralExtraction
+  typeof PostSubmissionPlanningPermissionMineralExtractionSchema
 >
-export const PostSubmissionPlanningPermissionMineralExtraction =
+export const PostSubmissionPlanningPermissionMineralExtractionSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.mineralExtraction')
   )
 
 export type PostSubmissionPlanningPermissionOutline = Static<
-  typeof PostSubmissionPlanningPermissionOutline
+  typeof PostSubmissionPlanningPermissionOutlineSchema
 >
-export const PostSubmissionPlanningPermissionOutline =
+export const PostSubmissionPlanningPermissionOutlineSchema =
   PostSubmissionApplicationSpecificationGenerator(Type.Literal('pp.outline'))
 
 export type PostSubmissionPlanningPermissionOutlineAll = Static<
-  typeof PostSubmissionPlanningPermissionOutlineAll
+  typeof PostSubmissionPlanningPermissionOutlineAllSchema
 >
-export const PostSubmissionPlanningPermissionOutlineAll =
+export const PostSubmissionPlanningPermissionOutlineAllSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.outline.all')
   )
 
 export type PostSubmissionPlanningPermissionOutlineSome = Static<
-  typeof PostSubmissionPlanningPermissionOutlineSome
+  typeof PostSubmissionPlanningPermissionOutlineSomeSchema
 >
-export const PostSubmissionPlanningPermissionOutlineSome =
+export const PostSubmissionPlanningPermissionOutlineSomeSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.outline.some')
   )
 
 export type PostSubmissionPlanningPermissionOutlineMinor = Static<
-  typeof PostSubmissionPlanningPermissionOutlineMinor
+  typeof PostSubmissionPlanningPermissionOutlineMinorSchema
 >
-export const PostSubmissionPlanningPermissionOutlineMinor =
+export const PostSubmissionPlanningPermissionOutlineMinorSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.outline.minor')
   )
 
 export type PostSubmissionPlanningPermissionOutlineMinorAll = Static<
-  typeof PostSubmissionPlanningPermissionOutlineMinorAll
+  typeof PostSubmissionPlanningPermissionOutlineMinorAllSchema
 >
-export const PostSubmissionPlanningPermissionOutlineMinorAll =
+export const PostSubmissionPlanningPermissionOutlineMinorAllSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.outline.minor.all')
   )
 
 export type PostSubmissionPlanningPermissionOutlineMinorSome = Static<
-  typeof PostSubmissionPlanningPermissionOutlineMinorSome
+  typeof PostSubmissionPlanningPermissionOutlineMinorSomeSchema
 >
-export const PostSubmissionPlanningPermissionOutlineMinorSome =
+export const PostSubmissionPlanningPermissionOutlineMinorSomeSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.outline.minor.some')
   )
 
 export type PostSubmissionPlanningPermissionOutlineMajor = Static<
-  typeof PostSubmissionPlanningPermissionOutlineMajor
+  typeof PostSubmissionPlanningPermissionOutlineMajorSchema
 >
-export const PostSubmissionPlanningPermissionOutlineMajor =
+export const PostSubmissionPlanningPermissionOutlineMajorSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.outline.major')
   )
 
 export type PostSubmissionPlanningPermissionOutlineMajorAll = Static<
-  typeof PostSubmissionPlanningPermissionOutlineMajorAll
+  typeof PostSubmissionPlanningPermissionOutlineMajorAllSchema
 >
-export const PostSubmissionPlanningPermissionOutlineMajorAll =
+export const PostSubmissionPlanningPermissionOutlineMajorAllSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.outline.major.all')
   )
 
 export type PostSubmissionPlanningPermissionOutlineMajorAllWaste = Static<
-  typeof PostSubmissionPlanningPermissionOutlineMajorAllWaste
+  typeof PostSubmissionPlanningPermissionOutlineMajorAllWasteSchema
 >
-export const PostSubmissionPlanningPermissionOutlineMajorAllWaste =
+export const PostSubmissionPlanningPermissionOutlineMajorAllWasteSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.outline.major.all.waste')
   )
 
 export type PostSubmissionPlanningPermissionOutlineMajorSome = Static<
-  typeof PostSubmissionPlanningPermissionOutlineMajorSome
+  typeof PostSubmissionPlanningPermissionOutlineMajorSomeSchema
 >
-export const PostSubmissionPlanningPermissionOutlineMajorSome =
+export const PostSubmissionPlanningPermissionOutlineMajorSomeSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.outline.major.some')
   )
 
 export type PostSubmissionPlanningPermissionOutlineMajorSomeWaste = Static<
-  typeof PostSubmissionPlanningPermissionOutlineMajorSomeWaste
+  typeof PostSubmissionPlanningPermissionOutlineMajorSomeWasteSchema
 >
-export const PostSubmissionPlanningPermissionOutlineMajorSomeWaste =
+export const PostSubmissionPlanningPermissionOutlineMajorSomeWasteSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('pp.outline.major.some.waste')
   )
 
 export type PostSubmissionPlanningPermissionPermissionInPrinciple = Static<
-  typeof PostSubmissionPlanningPermissionPermissionInPrinciple
+  typeof PostSubmissionPlanningPermissionPermissionInPrincipleSchema
 >
-export const PostSubmissionPlanningPermissionPermissionInPrinciple =
+export const PostSubmissionPlanningPermissionPermissionInPrincipleSchema =
   PostSubmissionApplicationSpecificationGenerator(Type.Literal('pp.pip'))
 
 export type PostSubmissionRightsOfWayOrder = Static<
-  typeof PostSubmissionRightsOfWayOrder
+  typeof PostSubmissionRightsOfWayOrderSchema
 >
-export const PostSubmissionRightsOfWayOrder =
+export const PostSubmissionRightsOfWayOrderSchema =
   PostSubmissionApplicationSpecificationGenerator(
     Type.Literal('rightsOfWayOrder')
   )
 
 export type PostSubmissionWorksToTreesConsent = Static<
-  typeof PostSubmissionWorksToTreesConsent
+  typeof PostSubmissionWorksToTreesConsentSchema
 >
-export const PostSubmissionWorksToTreesConsent =
+export const PostSubmissionWorksToTreesConsentSchema =
   PostSubmissionApplicationSpecificationGenerator(Type.Literal('wtt.consent'))
 
 export type PostSubmissionWorksToTreesNotice = Static<
-  typeof PostSubmissionWorksToTreesNotice
+  typeof PostSubmissionWorksToTreesNoticeSchema
 >
-export const PostSubmissionWorksToTreesNotice =
+export const PostSubmissionWorksToTreesNoticeSchema =
   PostSubmissionApplicationSpecificationGenerator(Type.Literal('wtt.notice'))
 
-export type PostSubmissionApplication = Static<typeof PostSubmissionApplication>
-export const PostSubmissionApplication: TSchema = Type.Union(
+// ////////
+
+export type PostSubmissionApplication =
+  | PostSubmissionAdvertConsent
+  | PostSubmissionAmendmentMinorMaterial
+  | PostSubmissionAmendmentNonMaterial
+  | PostSubmissionApprovalConditions
+  | PostSubmissionApprovalReservedMatters
+  | PostSubmissionComplianceConfirmation
+  | PostSubmissionEnvironmentalImpactScoping
+  | PostSubmissionEnvironmentalImpactScreening
+  | PostSubmissionHazardousSubstanceConsent
+  | PostSubmissionHedgerowRemovalNotice
+  | PostSubmissionLandDrainageConsent
+  | PostSubmissionLawfulDevelopmentCertificateBreachOfCondition
+  | PostSubmissionLawfulDevelopmentCertificateExisting
+  | PostSubmissionLawfulDevelopmentCertificateListedBuildingWorks
+  | PostSubmissionLawfulDevelopmentCertificateProposed
+  | PostSubmissionListedBuildingConsent
+  | PostSubmissionNotifyCompletion
+  | PostSubmissionObligationDischarge
+  | PostSubmissionObligationModify
+  | PostSubmissionOnshoreExtractionOilAndGasOther
+  | PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionExtension
+  | PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWaste
+  | PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWorking
+  | PostSubmissionOnshoreExtractionOilAndGasReview
+  | PostSubmissionOnshoreExtractionOilAndGasVariation
+  | PostSubmissionPriorApprovalPart1ClassA
+  | PostSubmissionPriorApprovalPart1ClassAA
+  | PostSubmissionPriorApprovalPart3ClassG
+  | PostSubmissionPriorApprovalPart3ClassM
+  | PostSubmissionPriorApprovalPart3ClassMA
+  | PostSubmissionPriorApprovalPart3ClassN
+  | PostSubmissionPriorApprovalPart3ClassQ
+  | PostSubmissionPriorApprovalPart3ClassR
+  | PostSubmissionPriorApprovalPart3ClassS
+  | PostSubmissionPriorApprovalPart3ClassT
+  | PostSubmissionPriorApprovalPart3ClassV
+  | PostSubmissionPriorApprovalPart4ClassBB
+  | PostSubmissionPriorApprovalPart4ClassBC
+  | PostSubmissionPriorApprovalPart4ClassCA
+  | PostSubmissionPriorApprovalPart4ClassE
+  | PostSubmissionPriorApprovalPart6
+  | PostSubmissionPriorApprovalPart6ClassA
+  | PostSubmissionPriorApprovalPart6ClassB
+  | PostSubmissionPriorApprovalPart6ClassE
+  | PostSubmissionPriorApprovalPart7ClassC
+  | PostSubmissionPriorApprovalPart7ClassM
+  | PostSubmissionPriorApprovalPart9ClassD
+  | PostSubmissionPriorApprovalPart11ClassB
+  | PostSubmissionPriorApprovalPart14ClassA
+  | PostSubmissionPriorApprovalPart14ClassB
+  | PostSubmissionPriorApprovalPart14ClassJ
+  | PostSubmissionPriorApprovalPart14ClassK
+  | PostSubmissionPriorApprovalPart14ClassOA
+  | PostSubmissionPriorApprovalPart16ClassA
+  | PostSubmissionPriorApprovalPart17
+  | PostSubmissionPriorApprovalPart17ClassB
+  | PostSubmissionPriorApprovalPart17ClassC
+  | PostSubmissionPriorApprovalPart17ClassG
+  | PostSubmissionPriorApprovalPart18ClassA
+  | PostSubmissionPriorApprovalPart19ClassTA
+  | PostSubmissionPriorApprovalPart20ClassA
+  | PostSubmissionPriorApprovalPart20ClassAA
+  | PostSubmissionPriorApprovalPart20ClassAB
+  | PostSubmissionPriorApprovalPart20ClassAC
+  | PostSubmissionPriorApprovalPart20ClassAD
+  | PostSubmissionPriorApprovalPart20ClassZA
+  | PostSubmissionPlanningPermissionFullAdvertConsent
+  | PostSubmissionPlanningPermissionFullDemolition
+  | PostSubmissionPlanningPermissionFullFastTrackAffordable
+  | PostSubmissionPlanningPermissionFullHouseholder
+  | PostSubmissionPlanningPermissionFullHouseholderListed
+  | PostSubmissionPlanningPermissionFullHouseholderRetrospective
+  | PostSubmissionPlanningPermissionFullMinor
+  | PostSubmissionPlanningPermissionFullMinorListed
+  | PostSubmissionPlanningPermissionFullMinorTechnicalDetails
+  | PostSubmissionPlanningPermissionFullMajor
+  | PostSubmissionPlanningPermissionFullMajorTechnicalDetails
+  | PostSubmissionPlanningPermissionFullMajorTechnicalDetailsWaste
+  | PostSubmissionPlanningPermissionFullMajorWaste
+  | PostSubmissionPlanningPermissionMineralExtraction
+  | PostSubmissionPlanningPermissionOutline
+  | PostSubmissionPlanningPermissionOutlineAll
+  | PostSubmissionPlanningPermissionOutlineSome
+  | PostSubmissionPlanningPermissionOutlineMinor
+  | PostSubmissionPlanningPermissionOutlineMinorAll
+  | PostSubmissionPlanningPermissionOutlineMinorSome
+  | PostSubmissionPlanningPermissionOutlineMajor
+  | PostSubmissionPlanningPermissionOutlineMajorAll
+  | PostSubmissionPlanningPermissionOutlineMajorAllWaste
+  | PostSubmissionPlanningPermissionOutlineMajorSome
+  | PostSubmissionPlanningPermissionOutlineMajorSomeWaste
+  | PostSubmissionPlanningPermissionPermissionInPrinciple
+  | PostSubmissionRightsOfWayOrder
+  | PostSubmissionWorksToTreesConsent
+  | PostSubmissionWorksToTreesNotice
+
+export const PostSubmissionApplicationSchema: TSchema = Type.Union(
   [
-    PostSubmissionAdvertConsent,
-    PostSubmissionAmendmentMinorMaterial,
-    PostSubmissionAmendmentNonMaterial,
-    PostSubmissionApprovalConditions,
-    PostSubmissionApprovalReservedMatters,
-    PostSubmissionComplianceConfirmation,
-    PostSubmissionEnvironmentalImpactScoping,
-    PostSubmissionEnvironmentalImpactScreening,
-    PostSubmissionHazardousSubstanceConsent,
-    PostSubmissionHedgerowRemovalNotice,
-    PostSubmissionLandDrainageConsent,
-    PostSubmissionLawfulDevelopmentCertificateBreachOfCondition,
-    PostSubmissionLawfulDevelopmentCertificateExisting,
-    PostSubmissionLawfulDevelopmentCertificateListedBuildingWorks,
-    PostSubmissionLawfulDevelopmentCertificateProposed,
-    PostSubmissionListedBuildingConsent,
-    PostSubmissionNotifyCompletion,
-    PostSubmissionObligationDischarge,
-    PostSubmissionObligationModify,
-    PostSubmissionOnshoreExtractionOilAndGasOther,
-    PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionExtension,
-    PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWaste,
-    PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWorking,
-    PostSubmissionOnshoreExtractionOilAndGasReview,
-    PostSubmissionOnshoreExtractionOilAndGasVariation,
-    PostSubmissionPriorApprovalPart1ClassA,
-    PostSubmissionPriorApprovalPart1ClassAA,
-    PostSubmissionPriorApprovalPart3ClassG,
-    PostSubmissionPriorApprovalPart3ClassM,
-    PostSubmissionPriorApprovalPart3ClassMA,
-    PostSubmissionPriorApprovalPart3ClassN,
-    PostSubmissionPriorApprovalPart3ClassQ,
-    PostSubmissionPriorApprovalPart3ClassR,
-    PostSubmissionPriorApprovalPart3ClassS,
-    PostSubmissionPriorApprovalPart3ClassT,
-    PostSubmissionPriorApprovalPart3ClassV,
-    PostSubmissionPriorApprovalPart4ClassBB,
-    PostSubmissionPriorApprovalPart4ClassBC,
-    PostSubmissionPriorApprovalPart4ClassCA,
-    PostSubmissionPriorApprovalPart4ClassE,
-    PostSubmissionPriorApprovalPart6,
-    PostSubmissionPriorApprovalPart6ClassA,
-    PostSubmissionPriorApprovalPart6ClassB,
-    PostSubmissionPriorApprovalPart6ClassE,
-    PostSubmissionPriorApprovalPart7ClassC,
-    PostSubmissionPriorApprovalPart7ClassM,
-    PostSubmissionPriorApprovalPart9ClassD,
-    PostSubmissionPriorApprovalPart11ClassB,
-    PostSubmissionPriorApprovalPart14ClassA,
-    PostSubmissionPriorApprovalPart14ClassB,
-    PostSubmissionPriorApprovalPart14ClassJ,
-    PostSubmissionPriorApprovalPart14ClassK,
-    PostSubmissionPriorApprovalPart14ClassOA,
-    PostSubmissionPriorApprovalPart16ClassA,
-    PostSubmissionPriorApprovalPart17,
-    PostSubmissionPriorApprovalPart17ClassB,
-    PostSubmissionPriorApprovalPart17ClassC,
-    PostSubmissionPriorApprovalPart17ClassG,
-    PostSubmissionPriorApprovalPart18ClassA,
-    PostSubmissionPriorApprovalPart19ClassTA,
-    PostSubmissionPriorApprovalPart20ClassA,
-    PostSubmissionPriorApprovalPart20ClassAA,
-    PostSubmissionPriorApprovalPart20ClassAB,
-    PostSubmissionPriorApprovalPart20ClassAC,
-    PostSubmissionPriorApprovalPart20ClassAD,
-    PostSubmissionPriorApprovalPart20ClassZA,
-    PostSubmissionPlanningPermissionFullAdvertConsent,
-    PostSubmissionPlanningPermissionFullDemolition,
-    PostSubmissionPlanningPermissionFullFastTrackAffordable,
-    PostSubmissionPlanningPermissionFullHouseholder,
-    PostSubmissionPlanningPermissionFullHouseholderListed,
-    PostSubmissionPlanningPermissionFullHouseholderRetrospective,
-    PostSubmissionPlanningPermissionFullMinor,
-    PostSubmissionPlanningPermissionFullMinorListed,
-    PostSubmissionPlanningPermissionFullMinorTechnicalDetails,
-    PostSubmissionPlanningPermissionFullMajor,
-    PostSubmissionPlanningPermissionFullMajorTechnicalDetails,
-    PostSubmissionPlanningPermissionFullMajorTechnicalDetailsWaste,
-    PostSubmissionPlanningPermissionFullMajorWaste,
-    PostSubmissionPlanningPermissionMineralExtraction,
-    PostSubmissionPlanningPermissionOutline,
-    PostSubmissionPlanningPermissionOutlineAll,
-    PostSubmissionPlanningPermissionOutlineSome,
-    PostSubmissionPlanningPermissionOutlineMinor,
-    PostSubmissionPlanningPermissionOutlineMinorAll,
-    PostSubmissionPlanningPermissionOutlineMinorSome,
-    PostSubmissionPlanningPermissionOutlineMajor,
-    PostSubmissionPlanningPermissionOutlineMajorAll,
-    PostSubmissionPlanningPermissionOutlineMajorAllWaste,
-    PostSubmissionPlanningPermissionOutlineMajorSome,
-    PostSubmissionPlanningPermissionOutlineMajorSomeWaste,
-    PostSubmissionPlanningPermissionPermissionInPrinciple,
-    PostSubmissionRightsOfWayOrder,
-    PostSubmissionWorksToTreesConsent,
-    PostSubmissionWorksToTreesNotice
+    PostSubmissionAdvertConsentSchema,
+    PostSubmissionAmendmentMinorMaterialSchema,
+    PostSubmissionAmendmentNonMaterialSchema,
+    PostSubmissionApprovalConditionsSchema,
+    PostSubmissionApprovalReservedMattersSchema,
+    PostSubmissionComplianceConfirmationSchema,
+    PostSubmissionEnvironmentalImpactScopingSchema,
+    PostSubmissionEnvironmentalImpactScreeningSchema,
+    PostSubmissionHazardousSubstanceConsentSchema,
+    PostSubmissionHedgerowRemovalNoticeSchema,
+    PostSubmissionLandDrainageConsentSchema,
+    PostSubmissionLawfulDevelopmentCertificateBreachOfConditionSchema,
+    PostSubmissionLawfulDevelopmentCertificateExistingSchema,
+    PostSubmissionLawfulDevelopmentCertificateListedBuildingWorksSchema,
+    PostSubmissionLawfulDevelopmentCertificateProposedSchema,
+    PostSubmissionListedBuildingConsentSchema,
+    PostSubmissionNotifyCompletionSchema,
+    PostSubmissionObligationDischargeSchema,
+    PostSubmissionObligationModifySchema,
+    PostSubmissionOnshoreExtractionOilAndGasOtherSchema,
+    PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionExtensionSchema,
+    PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWasteSchema,
+    PostSubmissionOnshoreExtractionOilAndGasPlanningPermissionWorkingSchema,
+    PostSubmissionOnshoreExtractionOilAndGasReviewSchema,
+    PostSubmissionOnshoreExtractionOilAndGasVariationSchema,
+    PostSubmissionPriorApprovalPart1ClassASchema,
+    PostSubmissionPriorApprovalPart1ClassAASchema,
+    PostSubmissionPriorApprovalPart3ClassGSchema,
+    PostSubmissionPriorApprovalPart3ClassMSchema,
+    PostSubmissionPriorApprovalPart3ClassMASchema,
+    PostSubmissionPriorApprovalPart3ClassNSchema,
+    PostSubmissionPriorApprovalPart3ClassQSchema,
+    PostSubmissionPriorApprovalPart3ClassRSchema,
+    PostSubmissionPriorApprovalPart3ClassSSchema,
+    PostSubmissionPriorApprovalPart3ClassTSchema,
+    PostSubmissionPriorApprovalPart3ClassVSchema,
+    PostSubmissionPriorApprovalPart4ClassBBSchema,
+    PostSubmissionPriorApprovalPart4ClassBCSchema,
+    PostSubmissionPriorApprovalPart4ClassCASchema,
+    PostSubmissionPriorApprovalPart4ClassESchema,
+    PostSubmissionPriorApprovalPart6Schema,
+    PostSubmissionPriorApprovalPart6ClassASchema,
+    PostSubmissionPriorApprovalPart6ClassBSchema,
+    PostSubmissionPriorApprovalPart6ClassESchema,
+    PostSubmissionPriorApprovalPart7ClassCSchema,
+    PostSubmissionPriorApprovalPart7ClassMSchema,
+    PostSubmissionPriorApprovalPart9ClassDSchema,
+    PostSubmissionPriorApprovalPart11ClassBSchema,
+    PostSubmissionPriorApprovalPart14ClassASchema,
+    PostSubmissionPriorApprovalPart14ClassBSchema,
+    PostSubmissionPriorApprovalPart14ClassJSchema,
+    PostSubmissionPriorApprovalPart14ClassKSchema,
+    PostSubmissionPriorApprovalPart14ClassOASchema,
+    PostSubmissionPriorApprovalPart16ClassASchema,
+    PostSubmissionPriorApprovalPart17Schema,
+    PostSubmissionPriorApprovalPart17ClassBSchema,
+    PostSubmissionPriorApprovalPart17ClassCSchema,
+    PostSubmissionPriorApprovalPart17ClassGSchema,
+    PostSubmissionPriorApprovalPart18ClassASchema,
+    PostSubmissionPriorApprovalPart19ClassTASchema,
+    PostSubmissionPriorApprovalPart20ClassASchema,
+    PostSubmissionPriorApprovalPart20ClassAASchema,
+    PostSubmissionPriorApprovalPart20ClassABSchema,
+    PostSubmissionPriorApprovalPart20ClassACSchema,
+    PostSubmissionPriorApprovalPart20ClassADSchema,
+    PostSubmissionPriorApprovalPart20ClassZASchema,
+    PostSubmissionPlanningPermissionFullAdvertConsentSchema,
+    PostSubmissionPlanningPermissionFullDemolitionSchema,
+    PostSubmissionPlanningPermissionFullFastTrackAffordableSchema,
+    PostSubmissionPlanningPermissionFullHouseholderSchema,
+    PostSubmissionPlanningPermissionFullHouseholderListedSchema,
+    PostSubmissionPlanningPermissionFullHouseholderRetrospectiveSchema,
+    PostSubmissionPlanningPermissionFullMinorSchema,
+    PostSubmissionPlanningPermissionFullMinorListedSchema,
+    PostSubmissionPlanningPermissionFullMinorTechnicalDetailsSchema,
+    PostSubmissionPlanningPermissionFullMajorSchema,
+    PostSubmissionPlanningPermissionFullMajorTechnicalDetailsSchema,
+    PostSubmissionPlanningPermissionFullMajorTechnicalDetailsWasteSchema,
+    PostSubmissionPlanningPermissionFullMajorWasteSchema,
+    PostSubmissionPlanningPermissionMineralExtractionSchema,
+    PostSubmissionPlanningPermissionOutlineSchema,
+    PostSubmissionPlanningPermissionOutlineAllSchema,
+    PostSubmissionPlanningPermissionOutlineSomeSchema,
+    PostSubmissionPlanningPermissionOutlineMinorSchema,
+    PostSubmissionPlanningPermissionOutlineMinorAllSchema,
+    PostSubmissionPlanningPermissionOutlineMinorSomeSchema,
+    PostSubmissionPlanningPermissionOutlineMajorSchema,
+    PostSubmissionPlanningPermissionOutlineMajorAllSchema,
+    PostSubmissionPlanningPermissionOutlineMajorAllWasteSchema,
+    PostSubmissionPlanningPermissionOutlineMajorSomeSchema,
+    PostSubmissionPlanningPermissionOutlineMajorSomeWasteSchema,
+    PostSubmissionPlanningPermissionPermissionInPrincipleSchema,
+    PostSubmissionRightsOfWayOrderSchema,
+    PostSubmissionWorksToTreesConsentSchema,
+    PostSubmissionWorksToTreesNoticeSchema
   ],
   {
     title: 'PostSubmissionApplication',

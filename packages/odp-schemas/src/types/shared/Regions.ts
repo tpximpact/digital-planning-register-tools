@@ -1,8 +1,8 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 
-export type Region = Static<typeof Region>
-export const Region = Type.Union(
+export type Region = Static<typeof RegionSchema>
+export const RegionSchema = Type.Union(
   [
     Type.Literal('North East'),
     Type.Literal('North West'),

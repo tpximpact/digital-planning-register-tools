@@ -1,23 +1,28 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 
-type application = Static<typeof application>
-const application = Type.Literal('application')
+export type application = Static<typeof applicationSchema>
+export const applicationSchema = Type.Literal('application')
 
-type appeal = Static<typeof appeal>
-const appeal = Type.Literal('appeal')
+export type appeal = Static<typeof appealSchema>
+export const appealSchema = Type.Literal('appeal')
 
-type specialistComment = Static<typeof specialistComment>
-const specialistComment = Type.Literal('specialistComment')
+export type specialistComment = Static<typeof specialistCommentSchema>
+export const specialistCommentSchema = Type.Literal('specialistComment')
 
-type publicComment = Static<typeof publicComment>
-const publicComment = Type.Literal('publicComment')
+export type publicComment = Static<typeof publicCommentSchema>
+export const publicCommentSchema = Type.Literal('publicComment')
 
 export type PostSubmissionFileAssociation = Static<
-  typeof PostSubmissionFileAssociation
+  typeof PostSubmissionFileAssociationSchema
 >
-export const PostSubmissionFileAssociation = Type.Union(
-  [application, appeal, specialistComment, publicComment],
+export const PostSubmissionFileAssociationSchema = Type.Union(
+  [
+    applicationSchema,
+    appealSchema,
+    specialistCommentSchema,
+    publicCommentSchema
+  ],
   {
     id: '#PostSubmissionFileAssociation',
     description: 'Type of file association for a post'

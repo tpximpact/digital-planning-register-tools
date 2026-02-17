@@ -1,10 +1,10 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
-import { Address } from './Addresses'
-import { ContactDetails } from './Contacts'
+import { AddressSchema } from './Addresses'
+import { ContactDetailsSchema } from './Contacts'
 
-export type MaintenanceContacts = Static<typeof MaintenanceContacts>
-export const MaintenanceContacts = Type.Object(
+export type MaintenanceContacts = Static<typeof MaintenanceContactsSchema>
+export const MaintenanceContactsSchema = Type.Object(
   {
     maintenanceContact: Type.Optional(
       Type.Array(
@@ -14,8 +14,8 @@ export const MaintenanceContacts = Type.Object(
             Type.Literal('afterConstruction'),
             Type.Literal('duringAndAfterConstruction')
           ]),
-          address: Address,
-          contact: ContactDetails
+          address: AddressSchema,
+          contact: ContactDetailsSchema
         })
       )
     )

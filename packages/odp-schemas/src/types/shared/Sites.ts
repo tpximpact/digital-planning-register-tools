@@ -7,14 +7,14 @@
  */
 
 import { Type, type Static, CloneType } from '@sinclair/typebox'
-import { OSAddress, ProposedAddress } from './Addresses'
-import { Region } from './Regions'
-import { GeoBoundary } from './Boundaries'
+import { OSAddressSchema, ProposedAddressSchema } from './Addresses'
+import { RegionSchema } from './Regions'
+import { GeoBoundarySchema } from './Boundaries'
 
-export type Site = Static<typeof Site>
-export const Site = Type.Object(
+export type Site = Static<typeof SiteSchema>
+export const SiteSchema = Type.Object(
   {
-    address: Type.Union([ProposedAddress, OSAddress], {
+    address: Type.Union([ProposedAddressSchema, OSAddressSchema], {
       description: 'The property address'
     }),
     localAuthorityDistrict: Type.Array(Type.String(), {
@@ -25,12 +25,12 @@ export const Site = Type.Object(
       description:
         'Name of the ward sourced from planning.data.gov.uk/dataset/ward'
     }),
-    region: CloneType(Region, {
+    region: CloneType(RegionSchema, {
       description:
         'Name of the region sourced from planning.data.gov.uk/dataset/region; "London" is a proxy for the Greater London Authority'
     }),
     boundary: Type.Optional(
-      CloneType(GeoBoundary, {
+      CloneType(GeoBoundarySchema, {
         description:
           'HM Land Registry Index polygon for this property, commonly referred to as the blue line boundary, sourced from planning.data.gov.uk/dataset/title'
       })

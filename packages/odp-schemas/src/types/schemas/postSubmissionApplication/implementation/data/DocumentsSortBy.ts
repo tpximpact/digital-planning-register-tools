@@ -1,16 +1,16 @@
 import { Type, type Static } from '@sinclair/typebox'
 
-const DocumentsSortByBase = Type.Union([
+const DocumentsSortByBaseSchema = Type.Union([
   Type.Literal('publishedAt'),
   Type.Literal('name')
 ])
 
-export const PostSubmissionDocumentsSortBy = DocumentsSortByBase
+export const PostSubmissionDocumentsSortBySchema = DocumentsSortByBaseSchema
 export type PostSubmissionDocumentsSortBy = Static<
-  typeof PostSubmissionDocumentsSortBy
+  typeof PostSubmissionDocumentsSortBySchema
 >
 
-export const PostSubmissionPublishedDocumentsSortBy = DocumentsSortByBase
+export const PostSubmissionPublishedDocumentsSortBySchema = DocumentsSortByBaseSchema
 export type PostSubmissionPublishedDocumentsSortBy = Static<
-  typeof PostSubmissionPublishedDocumentsSortBy
+  typeof PostSubmissionPublishedDocumentsSortBySchema
 >
