@@ -4,11 +4,11 @@ import {
   convertBopsFileToPostSubmissionFileRedacted,
   convertTypesToFileType
 } from './convertBopsFileToPostSubmissionFileRedacted'
-import { FileType as FileTypeSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/FileType.ts'
+import { FileTypeSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/FileType.ts'
 import { Type } from '@sinclair/typebox'
 import {
   type PostSubmissionFileRedacted,
-  PostSubmissionFileRedacted as PostSubmissionFileRedactedSchema
+  PostSubmissionFileRedactedSchema
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
 
 describe('convertTypesToFileType', () => {

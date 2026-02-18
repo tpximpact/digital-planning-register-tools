@@ -1,10 +1,10 @@
 import {
   type PostSubmissionPublishedPublicCommentsResponse,
-  PostSubmissionPublishedPublicCommentsResponse as PostSubmissionPublishedPublicCommentsResponseSchema
+  PostSubmissionPublishedPublicCommentsResponseSchema
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { Value } from '@sinclair/typebox/value'
-import { Pagination } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
-import { PublicCommentSummary } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/CommentSummary.ts'
+import { PaginationSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
+import { PublicCommentSummarySchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/CommentSummary.ts'
 import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
 import type { PublicCommentRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PublicComment.ts'
 import { convertBopsCommentToPublicCommentRedacted } from './convertBopsCommentToPublicCommentRedacted'
@@ -26,11 +26,11 @@ export const bopsPublicCommentsEndpointToOdp = (
   const { summary, comments, pagination } = input
 
   // Validate pagination and summary
-  if (!Value.Check(Pagination, pagination)) {
+  if (!Value.Check(PaginationSchema, pagination)) {
     console.warn('Invalid Pagination:', pagination)
     throw new Error('Invalid Pagination')
   }
-  if (!Value.Check(PublicCommentSummary, summary)) {
+  if (!Value.Check(PublicCommentSummarySchema, summary)) {
     console.warn('Invalid PublicCommentSummary:', summary)
     throw new Error('Invalid PublicCommentSummary')
   }

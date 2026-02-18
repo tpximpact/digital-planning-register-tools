@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'bun:test'
 import {
-  PostSubmissionPublishedApplication as PostSubmissionPublishedApplicationSchema,
+  PostSubmissionPublishedApplicationSchema,
   type PostSubmissionPublishedApplication
 } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
 import { Value } from '@sinclair/typebox/value'

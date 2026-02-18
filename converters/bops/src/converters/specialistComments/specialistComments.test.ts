@@ -1,9 +1,9 @@
 import { describe, it, expect, spyOn } from 'bun:test'
-import { SpecialistCommentRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.ts'
+import type { SpecialistCommentRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.ts'
 import { Value } from '@sinclair/typebox/value'
 import {
   type PostSubmissionPublishedSpecialistsResponse,
-  PostSubmissionPublishedSpecialistsResponse as PostSubmissionPublishedSpecialistsResponseSchema
+  PostSubmissionPublishedSpecialistsResponseSchema
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { bopsSpecialistCommentsEndpointToOdp } from './specialistComments'
 

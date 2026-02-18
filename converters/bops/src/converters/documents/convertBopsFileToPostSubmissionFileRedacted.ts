@@ -2,13 +2,13 @@ import { Value } from '@sinclair/typebox/value'
 
 import {
   type PostSubmissionFileRedacted,
-  PostSubmissionFileRedacted as PostSubmissionFileRedactedSchema
+  PostSubmissionFileRedactedSchema
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
 import type { PostSubmissionFileAssociation } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/PostSubmissionFileAssociation.ts'
 import { convertDateTimeToUtc } from '../../utils/formatDates'
 import {
   type FileType,
-  FileType as FileTypeSchema
+  FileTypeSchema
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/FileType.ts'
 
 /**
