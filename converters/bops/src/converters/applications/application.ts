@@ -13,7 +13,7 @@ import type { PrototypeApplication } from '@dpr/odp-schemas/types/schemas/protot
 import { PostSubmissionPublishedApplicationSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
 import { PrototypeApplicationSchema } from '@dpr/odp-schemas/types/schemas/prototypeApplication/minimumSubmission.ts'
 import { Value } from '@sinclair/typebox/value'
-import { debugSchema } from '@dpr/libs'
+// import { debugSchema } from '@dpr/libs'
 import { convertBopsFileToPostSubmissionFileRedacted } from '../documents'
 import { convertToDate, formatToYYYYMMDDDate } from '../../utils/formatDates'
 import { convertToGeoJson } from './convertToGeoJson'
@@ -368,7 +368,7 @@ export const convertBopsApplicationToOdp = (
   }
 
   //
-  debugSchema(PostSubmissionPublishedApplicationSchema, application)
+  // debugSchema(PostSubmissionPublishedApplicationSchema, application)
 
   throw new Error('Unable to convert application')
 }

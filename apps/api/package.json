@@ -23,7 +23,6 @@
   "dependencies": {
     "@dpr/application-generator": "catalog:",
     "@dpr/handler-bops": "catalog:",
-    "@dpr/handler-local": "catalog:",
     "@dpr/odp-schemas": "catalog:",
     "@elysiajs/cors": "^1.3.3",
     "@elysiajs/openapi": "catalog:",

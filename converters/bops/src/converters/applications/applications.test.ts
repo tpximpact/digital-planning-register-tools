@@ -2521,10 +2521,22 @@ describe('bopsApplicationsEndpointToOdp', () => {
       ]
     }
 
+    // Spy on console.warn
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    const warnSpy = spyOn(console, 'warn').mockImplementation(() => {})
+
     const result = bopsApplicationsEndpointToOdp(invalid, {
       code: 200,
       message: 'OK'
     })
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      'Error converting application but its taken care of elsewhere:',
+      expect.any(Error)
+    )
+
+    warnSpy.mockRestore()
+
     expect(
       Value.Check(PostSubmissionPublishedApplicationsResponseSchema, result)
     ).toBe(true)
