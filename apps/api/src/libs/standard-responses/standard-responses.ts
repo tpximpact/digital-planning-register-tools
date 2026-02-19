@@ -1,4 +1,4 @@
-import { ApiResponseNoPagination } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
+import { ApiResponseNoPaginationSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
 import { t } from 'elysia'
 import { ReasonPhrases } from 'http-status-codes'
 import type Elysia from 'elysia'
@@ -10,7 +10,7 @@ import {
   UnprocessableEntityResponseObject
 } from './standard-response-objects'
 
-export const empty200Model = ApiResponseNoPagination(t.Null(), {
+export const empty200Model = ApiResponseNoPaginationSchema(t.Null(), {
   title: ReasonPhrases.OK,
   description: ReasonPhrases.OK,
   examples: [
@@ -29,7 +29,7 @@ export const standardResponses = (app: Elysia) =>
   app
     .model({
       empty200: empty200Model,
-      '400': ApiResponseNoPagination(t.Null(), {
+      '400': ApiResponseNoPaginationSchema(t.Null(), {
         title: ReasonPhrases.BAD_REQUEST,
         description: ReasonPhrases.BAD_REQUEST,
         examples: [
@@ -39,7 +39,7 @@ export const standardResponses = (app: Elysia) =>
           }
         ]
       }),
-      '404': ApiResponseNoPagination(t.Null(), {
+      '404': ApiResponseNoPaginationSchema(t.Null(), {
         title: ReasonPhrases.NOT_FOUND,
         description: ReasonPhrases.NOT_FOUND,
         examples: [
@@ -49,7 +49,7 @@ export const standardResponses = (app: Elysia) =>
           }
         ]
       }),
-      '422': ApiResponseNoPagination(t.Null(), {
+      '422': ApiResponseNoPaginationSchema(t.Null(), {
         title: ReasonPhrases.UNPROCESSABLE_ENTITY,
         description: ReasonPhrases.UNPROCESSABLE_ENTITY,
         examples: [
@@ -59,7 +59,7 @@ export const standardResponses = (app: Elysia) =>
           }
         ]
       }),
-      '500': ApiResponseNoPagination(t.Null(), {
+      '500': ApiResponseNoPaginationSchema(t.Null(), {
         title: ReasonPhrases.INTERNAL_SERVER_ERROR,
         description: ReasonPhrases.INTERNAL_SERVER_ERROR,
         examples: [
