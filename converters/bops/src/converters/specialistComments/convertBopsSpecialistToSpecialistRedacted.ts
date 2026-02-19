@@ -2,8 +2,8 @@ import { convertDateTimeToUtc } from '../../utils/formatDates'
 import { Value } from '@sinclair/typebox/value'
 import {
   type SpecialistCommentRedacted,
-  SpecialistCommentRedacted as SpecialistCommentRedactedSchema,
-  SpecialistRedacted as SpecialistRedactedSchema,
+  SpecialistCommentRedactedSchema,
+  SpecialistRedactedSchema,
   type SpecialistRedacted
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.ts'
 import { convertBopsFileToPostSubmissionFileRedacted } from '../documents'

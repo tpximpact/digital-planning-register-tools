@@ -1,32 +1,32 @@
 import { Type, type Static } from '@sinclair/typebox'
 import '@dpr/odp-schemas/types/shared/formats'
-import { Pagination } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
-import { PublicCommentSummary } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/CommentSummary.ts'
-import { PublicCommentSentiment } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/CommentSentiment.ts'
-import { PublicCommentTopic } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/PublicCommentTopic.ts'
+import { PaginationSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
+import { PublicCommentSummarySchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/CommentSummary.ts'
+import { PublicCommentSentimentSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/CommentSentiment.ts'
+import { PublicCommentTopicSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/PublicCommentTopic.ts'
 
-export const BopsPublicComment = Type.Object({
+export const BopsPublicCommentSchema = Type.Object({
   id: Type.Number(),
-  sentiment: PublicCommentSentiment,
+  sentiment: PublicCommentSentimentSchema,
   comment: Type.String(),
   receivedAt: Type.String({ format: 'date-time' })
 })
-export type BopsPublicComment = Static<typeof BopsPublicComment>
+export type BopsPublicComment = Static<typeof BopsPublicCommentSchema>
 
-export const BopsPublicCommentsEndpoint = Type.Object({
-  pagination: Pagination,
-  summary: PublicCommentSummary,
-  comments: Type.Array(BopsPublicComment)
+export const BopsPublicCommentsEndpointSchema = Type.Object({
+  pagination: PaginationSchema,
+  summary: PublicCommentSummarySchema,
+  comments: Type.Array(BopsPublicCommentSchema)
 })
 export type BopsPublicCommentsEndpoint = Static<
-  typeof BopsPublicCommentsEndpoint
+  typeof BopsPublicCommentsEndpointSchema
 >
 
-export const BopsPostComment = Type.Object({
+export const BopsPostCommentSchema = Type.Object({
   name: Type.String(),
   address: Type.Optional(Type.String()),
   response: Type.String(),
-  summary_tag: PublicCommentSentiment,
-  tags: Type.Optional(Type.Array(PublicCommentTopic))
+  summary_tag: PublicCommentSentimentSchema,
+  tags: Type.Optional(Type.Array(PublicCommentTopicSchema))
 })
-export type BopsPostComment = Static<typeof BopsPostComment>
+export type BopsPostComment = Static<typeof BopsPostCommentSchema>

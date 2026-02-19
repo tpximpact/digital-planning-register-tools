@@ -1,9 +1,3 @@
-import {
-  PostSubmissionPublishedApplication as PostSubmissionPublishedApplicationSchema,
-  type PostSubmissionPublishedApplication
-} from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
-import { Value } from '@sinclair/typebox/value'
-// import { debugSchema } from '@dpr/libs'
 import type { ProcessStage } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/ProcessStage.ts'
 import type { ApplicationStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/ApplicationStatus.ts'
 import type { PostSubmissionMetadata } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/Metadata.ts'
@@ -14,21 +8,23 @@ import type {
   PriorApprovalAssessment
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/Assessment.ts'
 import type { PostSubmissionFileRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
+import type { PostSubmissionPublishedApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
+import type { PrototypeApplication } from '@dpr/odp-schemas/types/schemas/prototypeApplication/minimumSubmission.ts'
+import { PostSubmissionPublishedApplicationSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
+import { PrototypeApplicationSchema } from '@dpr/odp-schemas/types/schemas/prototypeApplication/minimumSubmission.ts'
+import { Value } from '@sinclair/typebox/value'
+// import { debugSchema } from '@dpr/libs'
 import { convertBopsFileToPostSubmissionFileRedacted } from '../documents'
 import { convertToDate, formatToYYYYMMDDDate } from '../../utils/formatDates'
-import {
-  PrototypeApplication as PrototypeApplicationSchema,
-  type PrototypeApplication
-} from '@dpr/odp-schemas/types/schemas/prototypeApplication/minimumSubmission.ts'
 import { convertToGeoJson } from './convertToGeoJson'
 
 export const convertBopsApplicationToOdp = (
   // allowed since it could really be anything and we don't need the typeguards from unknown
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   input: any
-) => {
+): PostSubmissionPublishedApplication => {
   if (Value.Check(PostSubmissionPublishedApplicationSchema, input)) {
-    return input
+    return input as PostSubmissionPublishedApplication
   }
 
   // if (input.application?.type?.value !== 'pp.full.major') {
@@ -302,7 +298,7 @@ export const convertBopsApplicationToOdp = (
 
   if (input.application.decision && input.application.determinedAt) {
     application.data.assessment = {
-      ...application.data.assessment,
+      ...(application.data.assessment ?? {}),
       planningOfficerDecision: input.application.decision as AssessmentDecision,
       planningOfficerDecisionDate:
         formatToYYYYMMDDDate(input?.application?.determinedAt) ?? undefined,
@@ -323,7 +319,7 @@ export const convertBopsApplicationToOdp = (
         priorApprovalRequired = true
       }
       application.data.assessment = {
-        ...application.data.assessment,
+        ...(application.data.assessment ?? {}),
         priorApprovalRequired
       } as PriorApprovalAssessment
     }
@@ -331,7 +327,6 @@ export const convertBopsApplicationToOdp = (
 
   const boundary = input.property.boundary
   if (boundary && boundary?.site) {
-    console.log(boundary)
     try {
       boundary.site = convertToGeoJson(boundary.site)
     } catch (error) {
@@ -409,7 +404,7 @@ export const getPrimaryApplicationTypeKey = (
 }
 
 const getDescription = (
-  proposal: PostSubmissionPublishedApplication['submission']['data']['proposal']
+  proposal: { description?: string; reason?: string } | undefined
 ): string => {
   if (!proposal) {
     return 'No description'

@@ -1,11 +1,11 @@
 import { Type, type Static } from '@sinclair/typebox'
-import { BopsApplication } from './../../shared/BopsApplication'
-import { BopsFile } from './../../shared/BopsFile'
+import { BopsApplicationSchema } from './../../shared/BopsApplication'
+import { BopsFileSchema } from './../../shared/BopsFile'
 import '@dpr/odp-schemas/types/shared/formats'
 
-export const BopsDocumentsEndpoint = Type.Object({
-  application: BopsApplication,
-  files: Type.Array(BopsFile, { uniqueItems: true }),
+export const BopsDocumentsEndpointSchema = Type.Object({
+  application: BopsApplicationSchema,
+  files: Type.Array(BopsFileSchema, { uniqueItems: true }),
   metadata: Type.Object({
     results: Type.Number(),
     totalResults: Type.Number()
@@ -17,4 +17,4 @@ export const BopsDocumentsEndpoint = Type.Object({
     })
   )
 })
-export type BopsDocumentsEndpoint = Static<typeof BopsDocumentsEndpoint>
+export type BopsDocumentsEndpoint = Static<typeof BopsDocumentsEndpointSchema>

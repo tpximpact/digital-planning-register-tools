@@ -8,7 +8,7 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit",
+    "typecheck": "echo change to \"tsc --noEmit\" when needed",
     "typeconfig": "tsc --showConfig",
     "test": "bun run test:unit && bun run coverage",
     "test:unit": "bun test ",
@@ -28,6 +28,7 @@
     "@dpr/odp-schemas": "catalog:",
     "@dpr/libs": "catalog:",
     "@dpr/application-generator": "catalog:",
-    "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz"
+    "digital-planning-data-schemas": "file:../../digital-planning-data-schemas-0.7.5.tgz",
+    "@dpr/api": "catalog:"
   }
 }

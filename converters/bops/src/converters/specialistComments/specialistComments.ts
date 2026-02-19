@@ -1,11 +1,11 @@
 import {
   type PostSubmissionPublishedSpecialistsResponse,
-  PostSubmissionPublishedSpecialistsResponse as PostSubmissionPublishedSpecialistsResponseSchema
+  PostSubmissionPublishedSpecialistsResponseSchema
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { Value } from '@sinclair/typebox/value'
-import { Pagination } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
-import { SpecialistCommentSummary } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/CommentSummary.ts'
-import { SpecialistRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.ts'
+import { PaginationSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
+import { SpecialistCommentSummarySchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/CommentSummary.ts'
+import type { SpecialistRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.ts'
 import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
 import { convertBopsSpecialistToSpecialistRedacted } from './convertBopsSpecialistToSpecialistRedacted'
 
@@ -30,11 +30,11 @@ export const bopsSpecialistCommentsEndpointToOdp = (
   } = input
 
   // Validate pagination and summary
-  if (!Value.Check(Pagination, pagination)) {
+  if (!Value.Check(PaginationSchema, pagination)) {
     console.warn('Invalid Pagination:', pagination)
     throw new Error('Invalid Pagination')
   }
-  if (!Value.Check(SpecialistCommentSummary, summary)) {
+  if (!Value.Check(SpecialistCommentSummarySchema, summary)) {
     console.warn('Invalid SpecialistCommentSummary:', summary)
     throw new Error('Invalid SpecialistCommentSummary')
   }

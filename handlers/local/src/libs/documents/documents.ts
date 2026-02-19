@@ -9,11 +9,11 @@ import type {
   PostSubmissionFileRedacted
 } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/File.js'
 import { paginateArray } from '@dpr/libs'
-import { filterByPaths } from '../utils/filter-by-paths'
-import { sortBy } from '../utils/sort-by'
+import { filterByPaths } from '../../utils/filter-by-paths'
+import { sortBy } from '../../utils/sort-by'
 import { getApplication, getPublishedApplication } from '../applications'
-import { filterByDateRange } from '../utils/filter-by-date-range'
-import { getByPaths } from '../utils/get-by-paths'
+import { filterByDateRange } from '../../utils/filter-by-date-range'
+import { getByPaths } from '../../utils/get-by-paths'
 
 interface FilterConfig {
   namePaths: string[]

@@ -1,16 +1,16 @@
 import type {
-  PostSubmissionPublicCommentsQueryParams,
-  PostSubmissionPublishedPublicCommentsQueryParams
+  PostSubmissionSpecialistsQueryParams,
+  PostSubmissionPublishedSpecialistsQueryParams
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
+import { paginateArray } from '@dpr/libs'
+import { filterByPaths } from '../../utils/filter-by-paths'
+import { getApplication, getPublishedApplication } from '../applications'
 import type { PostSubmissionApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/index.js'
 import type { PostSubmissionPublishedApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.js'
 import type {
-  PublicComment,
-  PublicCommentRedacted
-} from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/PublicComment.js'
-import { paginateArray } from '@dpr/libs'
-import { filterByPaths } from '../utils/filter-by-paths'
-import { getApplication, getPublishedApplication } from '../applications'
+  Specialist,
+  SpecialistRedacted
+} from 'packages/odp-schemas/src/types/schemas/postSubmissionApplication/data/SpecialistComment'
 
 interface FilterConfig {
   contentsPaths: string[]
@@ -32,21 +32,22 @@ const defaultFilterConfig: FilterConfig = {
   }
 }
 
-export const findApplicationPublicComments = <
+export const findApplicationSpecialists = <
   T extends PostSubmissionApplication | PostSubmissionPublishedApplication,
   Q extends
-    | PostSubmissionPublicCommentsQueryParams
-    | PostSubmissionPublishedPublicCommentsQueryParams
+    | PostSubmissionSpecialistsQueryParams
+    | PostSubmissionPublishedSpecialistsQueryParams
 >(
   query: Q,
   application: T,
   filterConfig: FilterConfig = defaultFilterConfig
 ) => {
   const summary = application?.comments?.public?.summary
-  const allPublicComments = application?.comments?.public?.comments ?? []
+  const allSpecialistComments =
+    application?.comments?.specialist?.comments ?? []
 
-  const filtered = filterByPaths<PublicComment | PublicCommentRedacted>(
-    allPublicComments,
+  const filtered = filterByPaths<Specialist | SpecialistRedacted>(
+    allSpecialistComments,
     query.query,
     filterConfig.contentsPaths
   )
@@ -63,9 +64,12 @@ export const findApplicationPublicComments = <
   //   query.orderBy,
   //   filterConfig.sortPaths
   // )
-  const { data, pagination } = paginateArray<
-    PublicComment | PublicCommentRedacted
-  >(filtered, query.page, query.resultsPerPage, allPublicComments.length)
+  const { data, pagination } = paginateArray<Specialist | SpecialistRedacted>(
+    filtered,
+    query.page,
+    query.resultsPerPage,
+    allSpecialistComments.length
+  )
 
   return {
     data: {
@@ -76,20 +80,20 @@ export const findApplicationPublicComments = <
   }
 }
 
-export const getAllApplicationPublicComments = (
+export const getAllApplicationSpecialistComments = (
   applicationId: string,
-  query: PostSubmissionPublicCommentsQueryParams
+  query: PostSubmissionSpecialistsQueryParams
 ) =>
-  findApplicationPublicComments<
+  findApplicationSpecialists<
     PostSubmissionApplication,
-    PostSubmissionPublicCommentsQueryParams
+    PostSubmissionSpecialistsQueryParams
   >(query, getApplication(applicationId))
 
-export const getAllPublishedApplicationPublicComments = (
+export const getAllPublishedApplicationSpecialistComments = (
   applicationId: string,
-  query: PostSubmissionPublishedPublicCommentsQueryParams
+  query: PostSubmissionPublishedSpecialistsQueryParams
 ) =>
-  findApplicationPublicComments<
+  findApplicationSpecialists<
     PostSubmissionPublishedApplication,
-    PostSubmissionPublishedPublicCommentsQueryParams
+    PostSubmissionPublishedSpecialistsQueryParams
   >(query, getPublishedApplication(applicationId))

@@ -1,11 +1,11 @@
 import { Type, type Static } from '@sinclair/typebox'
-import { BopsApplication } from '../../shared/BopsApplication'
-import { BopsFile } from '../../shared/BopsFile'
-import { AppealBase } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/Appeal.ts'
+import { BopsApplicationSchema } from '../../shared/BopsApplication'
+import { BopsFileSchema } from '../../shared/BopsFile'
+import { AppealBaseSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/Appeal.ts'
 import '@dpr/odp-schemas/types/shared/formats'
 
-export type Address = Static<typeof Address>
-export const Address = Type.Object(
+export type Address = Static<typeof AddressSchema>
+export const AddressSchema = Type.Object(
   {
     line1: Type.String(),
     line2: Type.Optional(Type.String()),
@@ -21,10 +21,10 @@ export const Address = Type.Object(
   }
 )
 
-export type UserAddressNotSameSite = Static<typeof UserAddressNotSameSite>
-export const UserAddressNotSameSite = Type.Composite(
+export type UserAddressNotSameSite = Static<typeof UserAddressNotSameSiteSchema>
+export const UserAddressNotSameSiteSchema = Type.Composite(
   [
-    Address,
+    AddressSchema,
     Type.Object({
       sameAsSiteAddress: Type.Literal(false)
     })
@@ -35,13 +35,13 @@ export const UserAddressNotSameSite = Type.Composite(
   }
 )
 
-export type UserAddress = Static<typeof UserAddress>
-export const UserAddress = Type.Union(
+export type UserAddress = Static<typeof UserAddressSchema>
+export const UserAddressSchema = Type.Union(
   [
     Type.Object({
       sameAsSiteAddress: Type.Literal(true)
     }),
-    UserAddressNotSameSite
+    UserAddressNotSameSiteSchema
   ],
   {
     title: 'User address',
@@ -50,21 +50,21 @@ export const UserAddress = Type.Union(
 )
 
 // Temporarily use bops file schema for appeal files
-const AppealBaseNoId = Type.Intersect([
-  Type.Omit(AppealBase, ['files']),
+const AppealBaseNoIdSchema = Type.Intersect([
+  Type.Omit(AppealBaseSchema, ['files']),
   Type.Object({
-    files: Type.Optional(Type.Array(BopsFile))
+    files: Type.Optional(Type.Array(BopsFileSchema))
   })
 ])
 export const BopsAppealSchema = Type.Extends(
   Type.Object({}),
   Type.KeyOf(Type.Object({})),
   Type.Index(Type.Object({}), Type.Object({})),
-  AppealBaseNoId
+  AppealBaseNoIdSchema
 )
 
-export const BopsShowEndpoint = Type.Object({
-  application: BopsApplication,
+export const BopsShowEndpointSchema = Type.Object({
+  application: BopsApplicationSchema,
   property: Type.Object({
     address: Type.Object({
       singleLine: Type.String()
@@ -89,9 +89,9 @@ export const BopsShowEndpoint = Type.Object({
         ]),
         Type.Null()
       ]),
-      address: Type.Union([Address, UserAddress, Type.Null()]),
+      address: Type.Union([AddressSchema, UserAddressSchema, Type.Null()]),
       ownership: Type.Union([Type.Any(), Type.Null()]), // json.ownership planning_application.applicant_interest
-      agent: Type.Object({ address: Type.Union([Address, Type.Null()]) })
+      agent: Type.Object({ address: Type.Union([AddressSchema, Type.Null()]) })
     })
   ]),
   officer: Type.Union([
@@ -106,4 +106,4 @@ export const BopsShowEndpoint = Type.Object({
     })
   )
 })
-export type BopsShowEndpoint = Static<typeof BopsShowEndpoint>
+export type BopsShowEndpoint = Static<typeof BopsShowEndpointSchema>

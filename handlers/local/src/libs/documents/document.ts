@@ -1,4 +1,4 @@
-import { getValueByPath } from '../utils/get-value-by-path'
+import { getValueByPath } from '../../utils/get-value-by-path'
 import { getApplication, getPublishedApplication } from '../applications'
 import type {
   PostSubmissionFile,
@@ -17,7 +17,6 @@ const findApplicationDocument = <
   const applicationDocument = allDocuments.find(
     (app) => getValueByPath(app, 'id') === documentId
   )
-  console.log(applicationDocument)
   if (!applicationDocument) {
     throw new Error('Application document not found')
   }

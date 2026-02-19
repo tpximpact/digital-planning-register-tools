@@ -1,22 +1,26 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 
-type allowed = Static<typeof allowed>
-const allowed = Type.Literal('allowed', { description: 'allowed' })
+export type allowed = Static<typeof allowedSchema>
+export const allowedSchema = Type.Literal('allowed', { description: 'allowed' })
 
-type dismissed = Static<typeof dismissed>
-const dismissed = Type.Literal('dismissed', { description: 'dismissed' })
+export type dismissed = Static<typeof dismissedSchema>
+export const dismissedSchema = Type.Literal('dismissed', {
+  description: 'dismissed'
+})
 
-type splitDecision = Static<typeof splitDecision>
-const splitDecision = Type.Literal('splitDecision', {
+export type splitDecision = Static<typeof splitDecisionSchema>
+export const splitDecisionSchema = Type.Literal('splitDecision', {
   description: 'splitDecision'
 })
 
-type withdrawn = Static<typeof withdrawn>
-const withdrawn = Type.Literal('withdrawn', { description: 'withdrawn' })
+export type withdrawn = Static<typeof withdrawnSchema>
+export const withdrawnSchema = Type.Literal('withdrawn', {
+  description: 'withdrawn'
+})
 
-export type AppealDecision = Static<typeof AppealDecision>
-export const AppealDecision = Type.Union(
-  [allowed, dismissed, splitDecision, withdrawn],
+export type AppealDecision = Static<typeof AppealDecisionSchema>
+export const AppealDecisionSchema = Type.Union(
+  [allowedSchema, dismissedSchema, splitDecisionSchema, withdrawnSchema],
   { id: '#AppealDecision', description: 'Types of comments' }
 )

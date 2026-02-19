@@ -1,31 +1,44 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 
-type submission = Static<typeof submission>
-const submission = Type.Literal('submission', { description: 'Submission' })
+export type submission = Static<typeof submissionSchema>
+export const submissionSchema = Type.Literal('submission', {
+  description: 'Submission'
+})
 
-type validation = Static<typeof validation>
-const validation = Type.Literal('validation', { description: 'Validation' })
+export type validation = Static<typeof validationSchema>
+export const validationSchema = Type.Literal('validation', {
+  description: 'Validation'
+})
 
-type consultation = Static<typeof consultation>
-const consultation = Type.Literal('consultation', {
+export type consultation = Static<typeof consultationSchema>
+export const consultationSchema = Type.Literal('consultation', {
   description: 'Consultation'
 })
 
-type assessment = Static<typeof assessment>
-const assessment = Type.Literal('assessment', { description: 'Assessment' })
+export type assessment = Static<typeof assessmentSchema>
+export const assessmentSchema = Type.Literal('assessment', {
+  description: 'Assessment'
+})
 
-type appeal = Static<typeof appeal>
-const appeal = Type.Literal('appeal', { description: 'Appeal' })
+export type appeal = Static<typeof appealSchema>
+export const appealSchema = Type.Literal('appeal', { description: 'Appeal' })
 
-type highCourtAppeal = Static<typeof highCourtAppeal>
-const highCourtAppeal = Type.Literal('highCourtAppeal', {
+export type highCourtAppeal = Static<typeof highCourtAppealSchema>
+export const highCourtAppealSchema = Type.Literal('highCourtAppeal', {
   description: 'High court appeal'
 })
 
-export type ProcessStage = Static<typeof ProcessStage>
-export const ProcessStage = Type.Union(
-  [submission, validation, consultation, assessment, appeal, highCourtAppeal],
+export type ProcessStage = Static<typeof ProcessStageSchema>
+export const ProcessStageSchema = Type.Union(
+  [
+    submissionSchema,
+    validationSchema,
+    consultationSchema,
+    assessmentSchema,
+    appealSchema,
+    highCourtAppealSchema
+  ],
   {
     id: '#ProcessStage',
     description: 'Stages of the planning application process'

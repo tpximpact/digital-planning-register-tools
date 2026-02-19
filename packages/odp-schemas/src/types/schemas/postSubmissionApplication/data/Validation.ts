@@ -2,23 +2,23 @@ import { Type } from '@sinclair/typebox'
 import type { Static, TSchema } from '@sinclair/typebox'
 import '../../../shared/formats'
 
-type ValidationBase = Static<typeof ValidationBase>
-const ValidationBase = Type.Object({
+export type ValidationBase = Static<typeof ValidationBaseSchema>
+const ValidationBaseSchema = Type.Object({
   receivedAt: Type.String({ format: 'date-time' }),
   validatedAt: Type.Optional(Type.String({ format: 'date-time' })),
   isValid: Type.Optional(Type.Boolean())
 })
 
-type ValidationVariants = Static<typeof ValidationVariants>
-const ValidationVariants = Type.Object({})
+export type ValidationVariants = Static<typeof ValidationVariantsSchema>
+const ValidationVariantsSchema = Type.Object({})
 
 export type Validation<T extends TSchema> = Static<
-  ReturnType<typeof Validation<T>>
+  ReturnType<typeof ValidationSchema<T>>
 >
-export const Validation = <T extends TSchema>(T: T) =>
+export const ValidationSchema = <T extends TSchema>(T: T) =>
   Type.Extends(
     T,
-    Type.KeyOf(ValidationVariants),
-    Type.Index(ValidationVariants, T),
-    ValidationBase
+    Type.KeyOf(ValidationVariantsSchema),
+    Type.Index(ValidationVariantsSchema, T),
+    ValidationBaseSchema
   )

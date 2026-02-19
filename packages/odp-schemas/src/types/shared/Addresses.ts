@@ -1,8 +1,8 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 
-export type SiteAddress = Static<typeof SiteAddress>
-export const SiteAddress = Type.Object(
+export type SiteAddress = Static<typeof SiteAddressSchema>
+export const SiteAddressSchema = Type.Object(
   {
     title: Type.String({ description: 'Single line address description' }),
     x: Type.Number({
@@ -24,10 +24,10 @@ export const SiteAddress = Type.Object(
   }
 )
 
-export type ProposedAddress = Static<typeof ProposedAddress>
-export const ProposedAddress = Type.Composite(
+export type ProposedAddress = Static<typeof ProposedAddressSchema>
+export const ProposedAddressSchema = Type.Composite(
   [
-    SiteAddress,
+    SiteAddressSchema,
     Type.Object({
       source: Type.Literal('Proposed by applicant')
     })
@@ -39,10 +39,10 @@ export const ProposedAddress = Type.Composite(
   }
 )
 
-export type OSAddress = Static<typeof OSAddress>
-export const OSAddress = Type.Composite(
+export type OSAddress = Static<typeof OSAddressSchema>
+export const OSAddressSchema = Type.Composite(
   [
-    SiteAddress,
+    SiteAddressSchema,
     Type.Object({
       uprn: Type.String({
         title: 'Unique Property Reference Number',
@@ -95,8 +95,8 @@ export const OSAddress = Type.Composite(
   }
 )
 
-export type Address = Static<typeof Address>
-export const Address = Type.Object(
+export type Address = Static<typeof AddressSchema>
+export const AddressSchema = Type.Object(
   {
     line1: Type.String(),
     line2: Type.Optional(Type.String()),
@@ -112,10 +112,10 @@ export const Address = Type.Object(
   }
 )
 
-export type UserAddressNotSameSite = Static<typeof UserAddressNotSameSite>
-export const UserAddressNotSameSite = Type.Composite(
+export type UserAddressNotSameSite = Static<typeof UserAddressNotSameSiteSchema>
+export const UserAddressNotSameSiteSchema = Type.Composite(
   [
-    Address,
+    AddressSchema,
     Type.Object({
       sameAsSiteAddress: Type.Literal(false)
     })
@@ -126,13 +126,13 @@ export const UserAddressNotSameSite = Type.Composite(
   }
 )
 
-export type UserAddress = Static<typeof UserAddress>
-export const UserAddress = Type.Union(
+export type UserAddress = Static<typeof UserAddressSchema>
+export const UserAddressSchema = Type.Union(
   [
     Type.Object({
       sameAsSiteAddress: Type.Literal(true)
     }),
-    UserAddressNotSameSite
+    UserAddressNotSameSiteSchema
   ],
   {
     title: 'User address',

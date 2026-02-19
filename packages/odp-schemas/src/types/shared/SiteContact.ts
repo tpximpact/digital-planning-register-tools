@@ -1,9 +1,9 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
-import { User } from './User'
+import { UserSchema } from './User'
 
-export type SiteContactOther = Static<typeof SiteContactOther>
-export const SiteContactOther = Type.Object(
+export type SiteContactOther = Static<typeof SiteContactOtherSchema>
+export const SiteContactOtherSchema = Type.Object(
   {
     role: Type.Literal('other'),
     name: Type.String(),
@@ -17,14 +17,14 @@ export const SiteContactOther = Type.Object(
   }
 )
 
-export type SiteContact = Static<typeof SiteContact>
-export const SiteContact = Type.Object(
+export type SiteContact = Static<typeof SiteContactSchema>
+export const SiteContactSchema = Type.Object(
   {
     siteContact: Type.Union([
       Type.Object({
-        role: Type.Index(User, Type.Literal('role'))
+        role: Type.Index(UserSchema, Type.Literal('role'))
       }),
-      SiteContactOther
+      SiteContactOtherSchema
     ])
   },
   {

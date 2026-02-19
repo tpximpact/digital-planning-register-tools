@@ -1,48 +1,48 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
-import { Address } from './Addresses'
+import { AddressSchema } from './Addresses'
 
-export type BaseOwners = Static<typeof BaseOwners>
-export const BaseOwners = Type.Object({
+export type BaseOwners = Static<typeof BaseOwnersSchema>
+export const BaseOwnersSchema = Type.Object({
   name: Type.String(),
-  address: Address
+  address: AddressSchema
 })
 
-export type OwnersNoticeDate = Static<typeof OwnersNoticeDate>
-export const OwnersNoticeDate = Type.Composite([
-  BaseOwners,
+export type OwnersNoticeDate = Static<typeof OwnersNoticeDateSchema>
+export const OwnersNoticeDateSchema = Type.Composite([
+  BaseOwnersSchema,
   Type.Object({
     noticeDate: Type.Date()
   })
 ])
 
-export type OwnersInterestedInLand = Static<typeof OwnersInterestedInLand>
-export const OwnersInterestedInLand = Type.Composite([
-  BaseOwners,
+export type OwnersInterestedInLand = Static<typeof OwnersInterestedInLandSchema>
+export const OwnersInterestedInLandSchema = Type.Composite([
+  BaseOwnersSchema,
   Type.Object({
     interest: Type.String()
   })
 ])
 
-export type OwnersNoticeGiven = Static<typeof OwnersNoticeGiven>
-export const OwnersNoticeGiven = Type.Composite([
-  OwnersInterestedInLand,
+export type OwnersNoticeGiven = Static<typeof OwnersNoticeGivenSchema>
+export const OwnersNoticeGivenSchema = Type.Composite([
+  OwnersInterestedInLandSchema,
   Type.Object({
     noticeGiven: Type.Literal(true)
   })
 ])
 
-export type OwnersNoNoticeGiven = Static<typeof OwnersNoNoticeGiven>
-export const OwnersNoNoticeGiven = Type.Composite([
-  OwnersInterestedInLand,
+export type OwnersNoNoticeGiven = Static<typeof OwnersNoNoticeGivenSchema>
+export const OwnersNoNoticeGivenSchema = Type.Composite([
+  OwnersInterestedInLandSchema,
   Type.Object({
     noticeGiven: Type.Literal(false),
     noNoticeReason: Type.String()
   })
 ])
 
-export type OwnersInterest = Static<typeof OwnersInterest>
-export const OwnersInterest = Type.Union([
+export type OwnersInterest = Static<typeof OwnersInterestSchema>
+export const OwnersInterestSchema = Type.Union([
   Type.Literal('owner'),
   Type.Literal('owner.sole'),
   Type.Literal('owner.co'),
@@ -51,11 +51,11 @@ export const OwnersInterest = Type.Union([
   Type.Literal('other')
 ])
 
-export type OwnershipInterest = Static<typeof OwnershipInterest>
-export const OwnershipInterest = Type.Object(
+export type OwnershipInterest = Static<typeof OwnershipInterestSchema>
+export const OwnershipInterestSchema = Type.Object(
   {
     ownership: Type.Object({
-      interest: OwnersInterest
+      interest: OwnersInterestSchema
     })
   },
   {
@@ -65,9 +65,9 @@ export const OwnershipInterest = Type.Object(
   }
 )
 
-export type Owners = Static<typeof Owners>
-export const Owners = Type.Union(
-  [OwnersNoticeGiven, OwnersNoNoticeGiven, OwnersNoticeDate],
+export type Owners = Static<typeof OwnersSchema>
+export const OwnersSchema = Type.Union(
+  [OwnersNoticeGivenSchema, OwnersNoNoticeGivenSchema, OwnersNoticeDateSchema],
   {
     title: '#Owners',
     description:
@@ -75,10 +75,10 @@ export const Owners = Type.Union(
   }
 )
 
-export type Ownership = Static<typeof Ownership>
-export const Ownership = Type.Object(
+export type Ownership = Static<typeof OwnershipSchema>
+export const OwnershipSchema = Type.Object(
   {
-    interest: Type.Optional(OwnersInterest),
+    interest: Type.Optional(OwnersInterestSchema),
     interestDescription: Type.Optional(Type.String()),
     certificate: Type.Optional(
       Type.Union([
@@ -121,7 +121,7 @@ export const Ownership = Type.Object(
         }
       )
     ),
-    owners: Type.Optional(Type.Array(Owners)),
+    owners: Type.Optional(Type.Array(OwnersSchema)),
     declaration: Type.Optional(
       Type.Object(
         {

@@ -1,21 +1,21 @@
 import { CloneType, Type } from '@sinclair/typebox'
 import type { Static, TSchema } from '@sinclair/typebox'
 import {
-  OwnershipInterest,
-  OwnersInterest,
-  OwnersNoNoticeGiven,
-  OwnersNoticeDate,
-  OwnersNoticeGiven
+  OwnershipInterestSchema,
+  OwnersInterestSchema,
+  OwnersNoNoticeGivenSchema,
+  OwnersNoticeDateSchema,
+  OwnersNoticeGivenSchema
 } from '../../../shared/Ownership'
-import { SiteContact } from '../../../shared/SiteContact'
-import { ContactDetails } from '../../../shared/Contacts'
-import { Address, UserAddress } from '../../../shared/Addresses'
-import { MaintenanceContacts } from '../../../shared/MaintenanceContact'
+import { SiteContactSchema } from '../../../shared/SiteContact'
+import { ContactDetailsSchema } from '../../../shared/Contacts'
+import { AddressSchema, UserAddressSchema } from '../../../shared/Addresses'
+import { MaintenanceContactsSchema } from '../../../shared/MaintenanceContact'
 
-export type BaseApplicant = Static<typeof BaseApplicant>
-export const BaseApplicant = Type.Intersect(
+export type BaseApplicant = Static<typeof BaseApplicantSchema>
+export const BaseApplicantSchema = Type.Intersect(
   [
-    ContactDetails,
+    ContactDetailsSchema,
     Type.Object({
       type: Type.Optional(
         Type.Union(
@@ -29,7 +29,7 @@ export const BaseApplicant = Type.Intersect(
           { description: 'The type of applicant' }
         )
       ),
-      address: CloneType(UserAddress, {
+      address: CloneType(UserAddressSchema, {
         description: 'Address information for the applicant'
       })
     })
@@ -37,16 +37,16 @@ export const BaseApplicant = Type.Intersect(
   { title: 'Applicant', description: 'Details about the applicant' }
 )
 
-export type ApplicantWithAgent = Static<typeof ApplicantWithAgent>
-export const ApplicantWithAgent = Type.Intersect(
+export type ApplicantWithAgent = Static<typeof ApplicantWithAgentSchema>
+export const ApplicantWithAgentSchema = Type.Intersect(
   [
-    BaseApplicant,
+    BaseApplicantSchema,
     Type.Object({
       agent: Type.Intersect(
         [
-          ContactDetails,
+          ContactDetailsSchema,
           Type.Object({
-            address: Address
+            address: AddressSchema
           })
         ],
         { description: 'Contact information for the agent or proxy' }
@@ -60,30 +60,33 @@ export const ApplicantWithAgent = Type.Intersect(
   }
 )
 
-export type ApplicantBase = Static<typeof ApplicantBase>
-export const ApplicantBase = Type.Union([BaseApplicant, ApplicantWithAgent])
+export type ApplicantBase = Static<typeof ApplicantBaseSchema>
+export const ApplicantBaseSchema = Type.Union([
+  BaseApplicantSchema,
+  ApplicantWithAgentSchema
+])
 
-export type LDCApplicant = Static<typeof LDCApplicant>
-export const LDCApplicant = Type.Intersect([
-  ApplicantBase,
-  SiteContact,
+export type LDCApplicant = Static<typeof LDCApplicantSchema>
+export const LDCApplicantSchema = Type.Intersect([
+  ApplicantBaseSchema,
+  SiteContactSchema,
   Type.Object({
     ownership: Type.Union(
       [
         Type.Object({
-          interest: Type.Extract(OwnersInterest, Type.Literal('owner'))
+          interest: Type.Extract(OwnersInterestSchema, Type.Literal('owner'))
         }),
         Type.Object({
-          interest: Type.Extract(OwnersInterest, Type.Literal('other')),
+          interest: Type.Extract(OwnersInterestSchema, Type.Literal('other')),
           interestDescription: Type.String(),
           owners: Type.Array(
-            Type.Union([OwnersNoticeGiven, OwnersNoNoticeGiven])
+            Type.Union([OwnersNoticeGivenSchema, OwnersNoNoticeGivenSchema])
           )
         }),
         Type.Object({
-          interest: OwnersInterest,
+          interest: OwnersInterestSchema,
           owners: Type.Array(
-            Type.Union([OwnersNoticeGiven, OwnersNoNoticeGiven])
+            Type.Union([OwnersNoticeGivenSchema, OwnersNoNoticeGivenSchema])
           )
         })
       ],
@@ -95,15 +98,15 @@ export const LDCApplicant = Type.Intersect([
   })
 ])
 
-export type PPApplicant = Static<typeof PPApplicant>
-export const PPApplicant = Type.Intersect([
-  ApplicantBase,
-  SiteContact,
-  MaintenanceContacts,
+export type PPApplicant = Static<typeof PPApplicantSchema>
+export const PPApplicantSchema = Type.Intersect([
+  ApplicantBaseSchema,
+  SiteContactSchema,
+  MaintenanceContactsSchema,
   Type.Object({
     ownership: Type.Object(
       {
-        interest: OwnersInterest,
+        interest: OwnersInterestSchema,
         agriculturalTenants: Type.Optional(
           Type.Boolean({
             description: 'Does the land have any agricultural tenants?'
@@ -137,7 +140,7 @@ export const PPApplicant = Type.Intersect([
             }
           )
         ),
-        owners: Type.Optional(Type.Array(OwnersNoticeDate)),
+        owners: Type.Optional(Type.Array(OwnersNoticeDateSchema)),
         certificate: Type.Union([
           Type.Literal('a'),
           Type.Literal('b'),
@@ -162,44 +165,47 @@ export const PPApplicant = Type.Intersect([
   })
 ])
 
-type ApplicantVariants = Static<typeof ApplicantVariants>
-const ApplicantVariants = Type.Object({
+// type ApplicantVariants = Static<typeof ApplicantVariantsSchema>
+const ApplicantVariantsSchema = Type.Object({
   advertConsent: Type.Intersect([
-    ApplicantBase,
-    SiteContact,
-    OwnershipInterest
+    ApplicantBaseSchema,
+    SiteContactSchema,
+    OwnershipInterestSchema
   ]),
-  complianceConfirmation: Type.Intersect([ApplicantBase, OwnershipInterest]),
+  complianceConfirmation: Type.Intersect([
+    ApplicantBaseSchema,
+    OwnershipInterestSchema
+  ]),
   hedgerowRemovalNotice: Type.Intersect([
-    ApplicantBase,
-    SiteContact,
-    OwnershipInterest
+    ApplicantBaseSchema,
+    SiteContactSchema,
+    OwnershipInterestSchema
   ]),
   landDrainageConsent: Type.Intersect([
-    ApplicantBase,
-    MaintenanceContacts,
-    OwnershipInterest
+    ApplicantBaseSchema,
+    MaintenanceContactsSchema,
+    OwnershipInterestSchema
   ]),
-  'ldc.breachOfCondition': LDCApplicant,
-  'ldc.existing': LDCApplicant,
-  'ldc.proposed': LDCApplicant,
-  'ldc.worksToListedBuilding': LDCApplicant,
-  listed: PPApplicant,
-  'pp.full.householder': PPApplicant,
-  'pp.full.householder.retro': PPApplicant,
-  'pp.full.major': PPApplicant,
-  'pp.full.minor': PPApplicant,
-  'wtt.consent': ApplicantBase,
-  'wtt.notice': ApplicantBase
+  'ldc.breachOfCondition': LDCApplicantSchema,
+  'ldc.existing': LDCApplicantSchema,
+  'ldc.proposed': LDCApplicantSchema,
+  'ldc.worksToListedBuilding': LDCApplicantSchema,
+  listed: PPApplicantSchema,
+  'pp.full.householder': PPApplicantSchema,
+  'pp.full.householder.retro': PPApplicantSchema,
+  'pp.full.major': PPApplicantSchema,
+  'pp.full.minor': PPApplicantSchema,
+  'wtt.consent': ApplicantBaseSchema,
+  'wtt.notice': ApplicantBaseSchema
 })
 
 export type Applicant<T extends TSchema> = Static<
-  ReturnType<typeof Applicant<T>>
+  ReturnType<typeof ApplicantSchema<T>>
 >
-export const Applicant = <T extends TSchema>(T: T) =>
+export const ApplicantSchema = <T extends TSchema>(T: T) =>
   Type.Extends(
     T,
-    Type.KeyOf(ApplicantVariants),
-    Type.Index(ApplicantVariants, T),
-    ApplicantBase
+    Type.KeyOf(ApplicantVariantsSchema),
+    Type.Index(ApplicantVariantsSchema, T),
+    ApplicantBaseSchema
   )

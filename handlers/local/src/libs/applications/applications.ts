@@ -4,10 +4,10 @@ import type {
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import type { PostSubmissionApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/index.js'
 import type { PostSubmissionPublishedApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.js'
-import { fetchAllData } from '../utils/fetch-all-data'
+import { fetchAllData } from '../../utils/fetch-all-data'
 import { paginateArray } from '@dpr/libs'
-import { filterByPaths } from '../utils/filter-by-paths'
-import { sortBy } from '../utils/sort-by'
+import { filterByPaths } from '../../utils/filter-by-paths'
+import { sortBy } from '../../utils/sort-by'
 
 interface ApplicationFilterConfig {
   queryPaths: string[]

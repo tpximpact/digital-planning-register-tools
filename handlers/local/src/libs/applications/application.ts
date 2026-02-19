@@ -1,5 +1,5 @@
-import { getValueByPath } from '../utils/get-value-by-path'
-import { fetchAllData } from '../utils/fetch-all-data'
+import { getValueByPath } from '../../utils/get-value-by-path'
+import { fetchAllData } from '../../utils/fetch-all-data'
 import type { PostSubmissionApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/index.js'
 import type { PostSubmissionPublishedApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.js'
 

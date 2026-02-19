@@ -76,14 +76,12 @@ export const fetchApplication = async (
       )
 
       if (submission && (submission as { submission?: unknown }).submission) {
-        if (results && results.data) {
+        if (results && results?.data) {
           results.data.submission = (
             submission as { submission: unknown }
           ).submission
         }
       }
-
-      console.log(submission)
     } catch (e) {
       console.warn('Couldnt fetch submission', e)
       // throw new Error('Error fetching applications')

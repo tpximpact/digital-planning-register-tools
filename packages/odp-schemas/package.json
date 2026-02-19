@@ -7,10 +7,11 @@
     "./*": "./src/*",
     "./types/shared/formats": "./src/types/shared/formats.ts"
   },
+  "types": "./dist/types",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "typeconfig": "tsc --showConfig",
-    "build": "bun run src/scripts/build.ts"
+    "build": "rm -rf ./dist/types && tsc --noEmit false --declaration true --emitDeclarationOnly true --outDir ./dist/types"
   },
   "devDependencies": {
     "@dpr/dev-config": "catalog:",

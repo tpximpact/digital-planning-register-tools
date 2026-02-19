@@ -1,19 +1,20 @@
 import { Type, type Static } from '@sinclair/typebox'
 
-const ApplicationsOrderByBase = Type.Union(
+const ApplicationsOrderByBaseSchema = Type.Union(
   [Type.Literal('asc'), Type.Literal('desc')],
   {
     default: 'desc'
   }
 )
 
-export const PostSubmissionApplicationsOrderBy = ApplicationsOrderByBase
+export const PostSubmissionApplicationsOrderBySchema =
+  ApplicationsOrderByBaseSchema
 export type PostSubmissionApplicationsOrderBy = Static<
-  typeof PostSubmissionApplicationsOrderBy
+  typeof PostSubmissionApplicationsOrderBySchema
 >
 
-export const PostSubmissionPublishedApplicationsOrderBy =
-  ApplicationsOrderByBase
+export const PostSubmissionPublishedApplicationsOrderBySchema =
+  ApplicationsOrderByBaseSchema
 export type PostSubmissionPublishedApplicationsOrderBy = Static<
-  typeof PostSubmissionPublishedApplicationsOrderBy
+  typeof PostSubmissionPublishedApplicationsOrderBySchema
 >

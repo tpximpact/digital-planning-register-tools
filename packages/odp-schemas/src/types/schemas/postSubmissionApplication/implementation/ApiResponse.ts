@@ -1,6 +1,11 @@
 import { Type } from '@sinclair/typebox'
 import type { Static, TSchema } from '@sinclair/typebox'
-import { CursorPagination, Pagination } from './Pagination'
+import {
+  CursorPaginationSchema,
+  PaginationSchema,
+  type CursorPagination,
+  type Pagination
+} from './Pagination'
 
 /**
  * API response schema.
@@ -21,10 +26,16 @@ import { CursorPagination, Pagination } from './Pagination'
  * @param DataSchema
  * @returns
  */
-export type ApiResponse<T extends TSchema> = Static<
-  ReturnType<typeof ApiResponse<T>>
->
-export const ApiResponse = <T extends TSchema>(
+// export type ApiResponse<T extends TSchema> = Static<
+//   ReturnType<typeof ApiResponseSchema<T>>
+// >
+// Since T is usually used with PostSubmission* and those are typed as TSchema instead of inferred we need to defint ApiResponse schema on its own andn ot use Static
+export interface ApiResponse<T> {
+  data: T
+  pagination?: Pagination | CursorPagination
+  status?: ApiResponseStatus
+}
+export const ApiResponseSchema = <T extends TSchema>(
   T: T,
   options?: Parameters<typeof Type.Object>[1]
 ) =>
@@ -32,13 +43,15 @@ export const ApiResponse = <T extends TSchema>(
     {
       // data: Type.Union([T, Type.Null()]),
       data: T,
-      pagination: Type.Optional(Type.Union([Pagination, CursorPagination])),
-      status: Type.Optional(ApiResponseStatus)
+      pagination: Type.Optional(
+        Type.Union([PaginationSchema, CursorPaginationSchema])
+      ),
+      status: Type.Optional(ApiResponseStatusSchema)
     },
     options ? options : { description: '#ApiResponse' }
   )
 
-export const ApiResponseStatus = Type.Object(
+export const ApiResponseStatusSchema = Type.Object(
   {
     code: Type.Number(),
     message: Type.String(),
@@ -54,7 +67,7 @@ export const ApiResponseStatus = Type.Object(
     ]
   }
 )
-export type ApiResponseStatus = Static<typeof ApiResponseStatus>
+export type ApiResponseStatus = Static<typeof ApiResponseStatusSchema>
 
 /**
  *
@@ -62,18 +75,18 @@ export type ApiResponseStatus = Static<typeof ApiResponseStatus>
  * @param options
  * @returns
  */
-export const ApiResponseNoPagination = <T extends TSchema>(
+export const ApiResponseNoPaginationSchema = <T extends TSchema>(
   T: T,
   options?: Parameters<typeof Type.Object>[1]
 ) =>
   Type.Object(
     {
       data: T,
-      status: Type.Optional(ApiResponseStatus)
+      status: Type.Optional(ApiResponseStatusSchema)
     },
     options ? options : { description: '#ApiResponseNoPagination' }
   )
 
 export type ApiResponseNoPagination<T extends TSchema> = Static<
-  ReturnType<typeof ApiResponseNoPagination<T>>
+  ReturnType<typeof ApiResponseNoPaginationSchema<T>>
 >

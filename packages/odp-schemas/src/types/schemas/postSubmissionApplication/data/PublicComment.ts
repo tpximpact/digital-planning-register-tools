@@ -1,14 +1,14 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
-import { PublicCommentTopic } from '../enums/PublicCommentTopic'
-import { PublicCommentSentiment } from '../enums/CommentSentiment'
-import { CommentMetaData } from './CommentMetaData'
-import { Address } from '../../../shared/Addresses'
+import { PublicCommentTopicSchema } from '../enums/PublicCommentTopic'
+import { PublicCommentSentimentSchema } from '../enums/CommentSentiment'
+import { CommentMetaDataSchema } from './CommentMetaData'
+import { AddressSchema } from '../../../shared/Addresses'
 
-export type TopicAndComments = Static<typeof TopicAndComments>
-export const TopicAndComments = Type.Object(
+export type TopicAndComments = Static<typeof TopicAndCommentsSchema>
+export const TopicAndCommentsSchema = Type.Object(
   {
-    topic: PublicCommentTopic,
+    topic: PublicCommentTopicSchema,
     question: Type.String(),
     comment: Type.String()
   },
@@ -18,31 +18,31 @@ export const TopicAndComments = Type.Object(
   }
 )
 
-type PublicCommentBase = Static<typeof PublicCommentBase>
-const PublicCommentBase = Type.Object(
+// type PublicCommentBase = Static<typeof PublicCommentBaseSchema>
+const PublicCommentBaseSchema = Type.Object(
   {
     id: Type.String(),
-    sentiment: PublicCommentSentiment,
-    metadata: CommentMetaData
+    sentiment: PublicCommentSentimentSchema,
+    metadata: CommentMetaDataSchema
   },
   { internal: 'All the required fields for a public or private public comment' }
 )
 
-export type PublicCommentAuthor = Static<typeof PublicCommentAuthor>
-export const PublicCommentAuthor = Type.Object(
+export type PublicCommentAuthor = Static<typeof PublicCommentAuthorSchema>
+export const PublicCommentAuthorSchema = Type.Object(
   {
     name: Type.Object({
       singleLine: Type.String()
     }),
-    address: Address
+    address: AddressSchema
   },
   { id: '#PublicCommentAuthor', description: 'The author of a public comment' }
 )
 
 export type PublicCommentAuthorRedacted = Static<
-  typeof PublicCommentAuthorRedacted
+  typeof PublicCommentAuthorRedactedSchema
 >
-export const PublicCommentAuthorRedacted = Type.Object(
+export const PublicCommentAuthorRedactedSchema = Type.Object(
   {
     name: Type.Object({
       singleLine: Type.String()
@@ -54,15 +54,15 @@ export const PublicCommentAuthorRedacted = Type.Object(
   }
 )
 
-export type PublicComment = Static<typeof PublicComment>
-export const PublicComment = Type.Composite(
+export type PublicComment = Static<typeof PublicCommentSchema>
+export const PublicCommentSchema = Type.Composite(
   [
-    PublicCommentBase,
+    PublicCommentBaseSchema,
     Type.Object({
-      author: PublicCommentAuthor,
-      comment: Type.Union([Type.Array(TopicAndComments), Type.String()]),
+      author: PublicCommentAuthorSchema,
+      comment: Type.Union([Type.Array(TopicAndCommentsSchema), Type.String()]),
       commentRedacted: Type.Optional(
-        Type.Union([Type.Array(TopicAndComments), Type.String()])
+        Type.Union([Type.Array(TopicAndCommentsSchema), Type.String()])
       )
     })
   ],
@@ -73,17 +73,17 @@ export const PublicComment = Type.Composite(
   }
 )
 
-export type PublicCommentRedacted = Static<typeof PublicCommentRedacted>
-export const PublicCommentRedacted = Type.Composite(
+export type PublicCommentRedacted = Static<typeof PublicCommentRedactedSchema>
+export const PublicCommentRedactedSchema = Type.Composite(
   [
-    PublicCommentBase,
+    PublicCommentBaseSchema,
     Type.Object({
-      author: PublicCommentAuthorRedacted,
+      author: PublicCommentAuthorRedactedSchema,
       commentRedacted: Type.Union([
-        Type.Array(TopicAndComments),
+        Type.Array(TopicAndCommentsSchema),
         Type.String()
       ]),
-      metadata: Type.Required(CommentMetaData)
+      metadata: Type.Required(CommentMetaDataSchema)
     })
   ],
   {

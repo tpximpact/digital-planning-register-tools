@@ -1,23 +1,25 @@
 import { Type } from '@sinclair/typebox'
 import type { Static, TSchema } from '@sinclair/typebox'
 
-type LocalPlanningAuthorityBase = Static<typeof LocalPlanningAuthorityBase>
-const LocalPlanningAuthorityBase = Type.Object({
+// type LocalPlanningAuthorityBase = Static<
+//   typeof LocalPlanningAuthorityBaseSchema
+// >
+const LocalPlanningAuthorityBaseSchema = Type.Object({
   publicCommentsAcceptedUntilDecision: Type.Boolean()
 })
 
-type LocalPlanningAuthorityVariants = Static<
-  typeof LocalPlanningAuthorityVariants
->
-const LocalPlanningAuthorityVariants = Type.Object({})
+// type LocalPlanningAuthorityVariants = Static<
+//   typeof LocalPlanningAuthorityVariantsSchema
+// >
+const LocalPlanningAuthorityVariantsSchema = Type.Object({})
 
 export type LocalPlanningAuthority<T extends TSchema> = Static<
-  ReturnType<typeof LocalPlanningAuthority<T>>
+  ReturnType<typeof LocalPlanningAuthoritySchema<T>>
 >
-export const LocalPlanningAuthority = <T extends TSchema>(T: T) =>
+export const LocalPlanningAuthoritySchema = <T extends TSchema>(T: T) =>
   Type.Extends(
     T,
-    Type.KeyOf(LocalPlanningAuthorityVariants),
-    Type.Index(LocalPlanningAuthorityVariants, T),
-    LocalPlanningAuthorityBase
+    Type.KeyOf(LocalPlanningAuthorityVariantsSchema),
+    Type.Index(LocalPlanningAuthorityVariantsSchema, T),
+    LocalPlanningAuthorityBaseSchema
   )

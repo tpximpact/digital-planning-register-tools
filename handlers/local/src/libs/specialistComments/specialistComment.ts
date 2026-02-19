@@ -1,4 +1,4 @@
-import { getValueByPath } from '../utils/get-value-by-path'
+import { getValueByPath } from '../../utils/get-value-by-path'
 import type { PostSubmissionApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/index.js'
 import type { PostSubmissionPublishedApplication } from 'digital-planning-data-schemas/types/schemas/postSubmissionPublishedApplication/index.js'
 import { getApplication, getPublishedApplication } from '../applications'

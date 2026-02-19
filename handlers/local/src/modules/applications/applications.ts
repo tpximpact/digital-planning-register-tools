@@ -9,13 +9,13 @@ import {
   PostSubmissionApplicationUrlParams
   // PostSubmissionApplicationResponse
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import { standardResponseObjects } from '../../libs/standard-responses'
+import { standardResponseObjects } from '@dpr/api'
 import {
   getAllApplications,
   getApplication,
   getAllPublishedApplications,
   getPublishedApplication
-} from '@dpr/handler-local'
+} from '../../libs/applications'
 /**
  * Plugin for elysia that generates the planning applications API.
  */
@@ -134,7 +134,6 @@ export const applications = (app: Elysia) =>
           async (context) => {
             try {
               const data = getPublishedApplication(context.params.applicationId)
-              console.log(data)
               return {
                 data,
                 status: standardResponseObjects.OkResponseObject
