@@ -37,9 +37,15 @@ import {
   PostSubmissionPublishedSpecialistCommentsOrderBySchema,
   PostSubmissionSpecialistCommentsOrderBySchema
 } from './data/SpecialistCommentsOrderBy'
-import { PostSubmissionApplicationSchema } from '..'
-import { ApiResponseSchema } from './ApiResponse'
-import { PostSubmissionPublishedApplicationSchema } from '../../postSubmissionPublishedApplication'
+import {
+  PostSubmissionApplicationSchema,
+  type PostSubmissionApplication
+} from '..'
+import { ApiResponseSchema, type ApiResponse } from './ApiResponse'
+import {
+  PostSubmissionPublishedApplicationSchema,
+  type PostSubmissionPublishedApplication
+} from '../../postSubmissionPublishedApplication'
 import {
   PostSubmissionFileSchema,
   PostSubmissionFileRedactedSchema
@@ -451,14 +457,14 @@ export type PostSubmissionApplicationsQueryParams = Static<
 
 export const PostSubmissionApplicationsDataSchema =
   endpoints.applications.private.applications.data
-export type PostSubmissionApplicationsData = Static<
-  typeof PostSubmissionApplicationsDataSchema
->
+//NB doesn't use Static<typeof x> because PostSubmissionApplicationSchema is typed as TSchema so it will return unknown elsewhere
+export type PostSubmissionApplicationsData = PostSubmissionApplication[]
 
 export const PostSubmissionApplicationsResponseSchema =
   endpoints.applications.private.applications.response
-export type PostSubmissionApplicationsResponse = Static<
-  typeof PostSubmissionApplicationsResponseSchema
+//NB doesn't use Static<typeof x> because PostSubmissionApplicationSchema is typed as TSchema so it will return unknown elsewhere
+export type PostSubmissionApplicationsResponse = ApiResponse<
+  PostSubmissionApplication[]
 >
 
 // PostSubmissionApplication
@@ -476,15 +482,14 @@ export type PostSubmissionApplicationUrlParams = Static<
 
 export const PostSubmissionApplicationDataSchema =
   endpoints.applications.private.application.data
-export type PostSubmissionApplicationData = Static<
-  typeof PostSubmissionApplicationDataSchema
->
+//NB doesn't use Static<typeof x> because PostSubmissionApplicationSchema is typed as TSchema so it will return unknown elsewhere
+export type PostSubmissionApplicationData = PostSubmissionApplication
 
 export const PostSubmissionApplicationResponseSchema =
   endpoints.applications.private.application.response
-export type PostSubmissionApplicationResponse = Static<
-  typeof PostSubmissionApplicationResponseSchema
->
+//NB doesn't use Static<typeof x> because PostSubmissionApplicationSchema is typed as TSchema so it will return unknown elsewhere
+export type PostSubmissionApplicationResponse =
+  ApiResponse<PostSubmissionApplication | null>
 
 // PostSubmissionPublishedApplications
 // export const PostSubmissionPublishedApplicationsUrlParamsSchema =
@@ -501,14 +506,15 @@ export type PostSubmissionPublishedApplicationsQueryParams = Static<
 
 export const PostSubmissionPublishedApplicationsDataSchema =
   endpoints.applications.public.applications.data
-export type PostSubmissionPublishedApplicationsData = Static<
-  typeof PostSubmissionPublishedApplicationsDataSchema
->
+//NB doesn't use Static<typeof x> because PostSubmissionApplicationSchema is typed as TSchema so it will return unknown elsewhere
+export type PostSubmissionPublishedApplicationsData =
+  PostSubmissionPublishedApplication[]
 
 export const PostSubmissionPublishedApplicationsResponseSchema =
   endpoints.applications.public.applications.response
-export type PostSubmissionPublishedApplicationsResponse = Static<
-  typeof PostSubmissionPublishedApplicationsResponseSchema
+//NB doesn't use Static<typeof x> because PostSubmissionApplicationSchema is typed as TSchema so it will return unknown elsewhere
+export type PostSubmissionPublishedApplicationsResponse = ApiResponse<
+  PostSubmissionPublishedApplication[]
 >
 
 // PostSubmissionPublishedApplication
@@ -526,15 +532,15 @@ export type PostSubmissionPublishedApplicationUrlParams = Static<
 
 export const PostSubmissionPublishedApplicationDataSchema =
   endpoints.applications.public.application.data
-export type PostSubmissionPublishedApplicationData = Static<
-  typeof PostSubmissionPublishedApplicationDataSchema
->
+//NB doesn't use Static<typeof x> because PostSubmissionApplicationSchema is typed as TSchema so it will return unknown elsewhere
+export type PostSubmissionPublishedApplicationData =
+  PostSubmissionPublishedApplication
 
 export const PostSubmissionPublishedApplicationResponseSchema =
   endpoints.applications.public.application.response
-export type PostSubmissionPublishedApplicationResponse = Static<
-  typeof PostSubmissionPublishedApplicationResponseSchema
->
+//NB doesn't use Static<typeof x> because PostSubmissionApplicationSchema is typed as TSchema so it will return unknown elsewhere
+export type PostSubmissionPublishedApplicationResponse =
+  ApiResponse<PostSubmissionPublishedApplication | null>
 
 // -----------------------------------------------------------------------------
 // Documents

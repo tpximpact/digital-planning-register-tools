@@ -1,6 +1,11 @@
 import { Type } from '@sinclair/typebox'
 import type { Static, TSchema } from '@sinclair/typebox'
-import { CursorPaginationSchema, PaginationSchema } from './Pagination'
+import {
+  CursorPaginationSchema,
+  PaginationSchema,
+  type CursorPagination,
+  type Pagination
+} from './Pagination'
 
 /**
  * API response schema.
@@ -21,9 +26,15 @@ import { CursorPaginationSchema, PaginationSchema } from './Pagination'
  * @param DataSchema
  * @returns
  */
-export type ApiResponse<T extends TSchema> = Static<
-  ReturnType<typeof ApiResponseSchema<T>>
->
+// export type ApiResponse<T extends TSchema> = Static<
+//   ReturnType<typeof ApiResponseSchema<T>>
+// >
+// Since T is usually used with PostSubmission* and those are typed as TSchema instead of inferred we need to defint ApiResponse schema on its own andn ot use Static
+export interface ApiResponse<T> {
+  data: T
+  pagination?: Pagination | CursorPagination
+  status?: ApiResponseStatus
+}
 export const ApiResponseSchema = <T extends TSchema>(
   T: T,
   options?: Parameters<typeof Type.Object>[1]

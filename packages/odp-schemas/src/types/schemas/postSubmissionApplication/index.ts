@@ -36,7 +36,7 @@ export const PostSubmissionApplicationSpecificationGenerator = <
       })
     ),
     files: Type.Optional(Type.Array(PostSubmissionFileSchema)),
-    submission: Type.Any(),
+    submission: Type.Unknown(),
     metadata: PostSubmissionMetadataSchema
   })
 
