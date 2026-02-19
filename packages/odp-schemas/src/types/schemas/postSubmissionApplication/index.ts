@@ -17,28 +17,34 @@ export const PostSubmissionApplicationSpecificationGenerator = <
 >(
   T: T
 ) =>
-  Type.Object({
-    applicationType: T,
-    data: Type.Object({
-      application: ApplicationSchema(T),
-      localPlanningAuthority: LocalPlanningAuthoritySchema(T),
-      submission: SubmissionSchema(T),
-      validation: Type.Optional(ValidationSchema(T)),
-      consultation: Type.Optional(ConsultationSchema(T)),
-      assessment: Type.Optional(AssessmentSchema(T)),
-      appeal: Type.Optional(AppealSchema(T)),
-      caseOfficer: CaseOfficerSchema(T)
-    }),
-    comments: Type.Optional(
-      Type.Object({
-        public: Type.Optional(PublicCommentsSchema),
-        specialist: Type.Optional(SpecialistCommentsSchema)
-      })
-    ),
-    files: Type.Optional(Type.Array(PostSubmissionFileSchema)),
-    submission: Type.Unknown(),
-    metadata: PostSubmissionMetadataSchema
-  })
+  Type.Object(
+    {
+      applicationType: T,
+      data: Type.Object({
+        application: ApplicationSchema(T),
+        localPlanningAuthority: LocalPlanningAuthoritySchema(T),
+        submission: SubmissionSchema(T),
+        validation: Type.Optional(ValidationSchema(T)),
+        consultation: Type.Optional(ConsultationSchema(T)),
+        assessment: Type.Optional(AssessmentSchema(T)),
+        appeal: Type.Optional(AppealSchema(T)),
+        caseOfficer: CaseOfficerSchema(T)
+      }),
+      comments: Type.Optional(
+        Type.Object({
+          public: Type.Optional(PublicCommentsSchema),
+          specialist: Type.Optional(SpecialistCommentsSchema)
+        })
+      ),
+      files: Type.Optional(Type.Array(PostSubmissionFileSchema)),
+      submission: Type.Unknown(),
+      metadata: PostSubmissionMetadataSchema
+    },
+    {
+      title: `PostSubmissionApplication ${T.const}`,
+      description: `The root specification for a ${T.const} planning application in England after it has been through a digital planning service and into a back office system`
+    }
+  )
 
 export type PostSubmissionAdvertConsent = Static<
   typeof PostSubmissionAdvertConsentSchema

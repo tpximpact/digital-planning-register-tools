@@ -50,58 +50,56 @@ const app = (userOptions?: ApiOptions) => {
     console.info(`[@dpr/api] options: ${JSON.stringify(options)}`)
   }
 
+  const isProduction = config.environment === 'production' || false
+
   return (
     new Elysia({
       name: '@dpr/api'
     })
       .use(cors({ origin: true }))
       .use(showRoutes(options.debug))
+      // .use(
+      //   openapi({
+      //     enabled: isProduction ? false : true,
+      //     path: '/scalar-docs',
+      //     provider: 'scalar',
+      //     // exclude: {
+      //     //   tags: ['BOPS Handler']
+      //     // },
+      //     documentation,
+      //     references: fromTypes(
+      //       isProduction ? path.resolve('dist/types/app.d.ts') : 'src/app.ts',
+      //       {
+      //         projectRoot: isProduction
+      //           ? path.join(import.meta.dir)
+      //           : path.join(import.meta.dir, '..'),
+      //         tsconfigPath: isProduction
+      //           ? path.join(import.meta.dir, 'tsconfig.build.json')
+      //           : path.join(import.meta.dir, '..', 'tsconfig.build.json'),
+      //         debug: options.debug
+      //       }
+      //     )
+      //   })
+      // )
       .use(
         openapi({
           enabled: true,
           path: '/docs',
-          provider: 'scalar',
-          // exclude: {
-          //   tags: ['BOPS Handler']
-          // },
-          documentation,
-          // references: fromTypes()
-          references: fromTypes(
-            config.environment === 'production'
-              ? 'dist/types/app.d.ts'
-              : 'src/app.ts',
-            {
-              projectRoot: path.join(import.meta.dir, '../'),
-              tsconfigPath: path.join(
-                import.meta.dir,
-                '../',
-                'tsconfig.build.json'
-              ),
-              debug: options.debug
-            }
-          )
-        })
-      )
-      .use(
-        openapi({
-          enabled: true,
-          path: '/swagger',
           provider: 'swagger-ui',
           exclude: {
-            paths: ['/api/handlers/bops']
+            paths: ['/']
+            //  /^\/api\/handlers\/bops/ Exclude all BOPS handler routes from OpenAPI documentation
           },
           documentation,
           references: fromTypes(
-            config.environment === 'production'
-              ? 'dist/app.d.ts'
-              : 'src/app.ts',
+            isProduction ? path.resolve('dist/types/app.d.ts') : 'src/app.ts',
             {
-              projectRoot: path.join(import.meta.dir, '../'),
-              tsconfigPath: path.join(
-                import.meta.dir,
-                '../',
-                'tsconfig.build.json'
-              ),
+              projectRoot: isProduction
+                ? path.join(import.meta.dir)
+                : path.join(import.meta.dir, '..'),
+              tsconfigPath: isProduction
+                ? path.join(import.meta.dir, 'tsconfig.build.json')
+                : path.join(import.meta.dir, '..', 'tsconfig.build.json'),
               debug: options.debug
             }
           )

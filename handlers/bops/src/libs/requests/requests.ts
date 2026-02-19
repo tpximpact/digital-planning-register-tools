@@ -78,7 +78,7 @@ export async function handleBopsGetRequest<T>(
   conversionCallback?: (response: Response) => unknown
 ): Promise<T> {
   const { apiUrl } = getClientConfig(client)
-  console.log(`${apiUrl}${url}`)
+  console.log(`[handleBopsGetRequest] ${apiUrl}${url}`)
   try {
     const response = await fetch(`${apiUrl}${url}`, {
       method: 'GET'

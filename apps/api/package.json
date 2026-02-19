@@ -12,9 +12,10 @@
     "test": "bun run test:unit && bun run coverage",
     "test:unit": "bun test ",
     "coverage": "bun test --coverage",
-    "build": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile server ./src/server.ts",
+    "build": "bun run build:types && bun build --compile --minify-whitespace --minify-syntax --target bun --outfile server ./src/server.ts",
+    "build:types": "tsc --project tsconfig.build.json",
     "start": "NODE_ENV=production bun src/server.ts",
-    "serve": "bun run build && ./server",
+    "serve": "bun run build && NODE_ENV=production ./server",
     "clean": "rm server && rm .*.bun-build && rm -rf logs",
     "docker": "cd ../.. && docker build -t dpr-backend:api -f ./apps/api/Dockerfile .",
     "docker:run": "cd ../.. && docker run --env-file .env.production --rm -p 4000:3000 dpr-backend:api "

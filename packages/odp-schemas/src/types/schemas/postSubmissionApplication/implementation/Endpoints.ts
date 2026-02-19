@@ -199,7 +199,7 @@ const endpoints = {
         method: 'GET',
         path: '/api/@next/applications/{applicationId}/documents/{documentId}',
         prefix: 'PostSubmissionDocument',
-        urlParams: Type.Composite([
+        urlParams: Type.Intersect([
           BaseApplicationUrlParamsSchema,
           Type.Object({ documentId: Type.Number() })
         ]),
@@ -242,7 +242,7 @@ const endpoints = {
         method: 'GET',
         path: '/api/@next/public/applications/{applicationId}/documents/{documentId}',
         prefix: 'PostSubmissionPublishedDocument',
-        urlParams: Type.Composite([
+        urlParams: Type.Intersect([
           BaseApplicationUrlParamsSchema,
           Type.Object({ documentId: Type.Number() })
         ]),
@@ -338,7 +338,7 @@ const endpoints = {
       publicComment: {
         method: 'GET',
         path: '/api/@next/public/applications/{applicationId}/publicComments/{publicCommentId}',
-        urlParams: Type.Composite([
+        urlParams: Type.Intersect([
           BaseApplicationUrlParamsSchema,
           Type.Object({ publicCommentId: Type.String() })
         ]),
@@ -381,9 +381,9 @@ const endpoints = {
       specialist: {
         method: 'GET',
         path: '/api/@next/applications/{applicationId}/specialistComments/{specialistCommentId}',
-        urlParams: Type.Composite([
+        urlParams: Type.Intersect([
           BaseApplicationUrlParamsSchema,
-          Type.Object({ specialistId: Type.String() })
+          Type.Object({ specialistCommentId: Type.String() })
         ]),
         queryParams: undefined,
         data: SpecialistCommentSchema,
