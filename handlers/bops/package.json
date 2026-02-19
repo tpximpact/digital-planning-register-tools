@@ -9,6 +9,11 @@
     "typecheck": "tsc --noEmit",
     "typeconfig": "tsc --showConfig",
     "dev": "bun run --watch src/server.ts",
+    "build": "bun run build:types && bun run build:server",
+    "build:server": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile server ./src/server.ts",
+    "build:types": "tsc --project tsconfig.build.json",
+    "start": "NODE_ENV=production ./server",
+    "serve": "bun run build && bun run start",
     "test": "bun run test:unit && bun run coverage",
     "test:unit": "bun test ",
     "coverage": "bun test --coverage"
