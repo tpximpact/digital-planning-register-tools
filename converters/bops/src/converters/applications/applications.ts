@@ -19,7 +19,7 @@ export const bopsApplicationsEndpointToOdp = (
   status: ApiResponseStatus
 ): PostSubmissionPublishedApplicationsResponse => {
   if (Value.Check(PostSubmissionPublishedApplicationsResponseSchema, input)) {
-    return input
+    return input as PostSubmissionPublishedApplicationsResponse
   }
 
   const { data: applications, pagination } = input

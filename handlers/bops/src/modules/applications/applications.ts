@@ -76,7 +76,7 @@ export const fetchApplication = async (
       )
 
       if (submission && (submission as { submission?: unknown }).submission) {
-        if (results && results.data) {
+        if (results && results?.data) {
           results.data.submission = (
             submission as { submission: unknown }
           ).submission
