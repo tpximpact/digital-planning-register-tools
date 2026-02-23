@@ -1,9 +1,9 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
-import { Area } from './utils'
+import { AreaSchema } from './utils'
 
-export type GeoBoundary = Static<typeof GeoBoundary>
-export const GeoBoundary = Type.Object({
+export type GeoBoundary = Static<typeof GeoBoundarySchema>
+export const GeoBoundarySchema = Type.Object({
   site: Type.Any(), // GeoJSON
-  area: Area
+  area: AreaSchema
 })

@@ -1,14 +1,14 @@
 import { Type, type Static } from '@sinclair/typebox'
 import './formats'
-import { ApplicationType } from '@dpr/odp-schemas/types/schemas/prototypeApplication/enums/ApplicationType.ts'
+import { ApplicationTypeSchema } from '@dpr/odp-schemas/types/schemas/prototypeApplication/enums/ApplicationType.ts'
 
 /**
  * BOPS represents application with a shared file in many places, replicating that here
  * engines/bops_api/app/views/bops_api/v2/shared/_application.json.jbuilder
  */
-export const BopsApplication = Type.Object({
+export const BopsApplicationSchema = Type.Object({
   type: Type.Object({
-    value: ApplicationType,
+    value: ApplicationTypeSchema,
     description: Type.String()
   }),
   reference: Type.String(),
@@ -56,7 +56,7 @@ export const BopsApplication = Type.Object({
     })
   ])
 })
-export type BopsApplication = Static<typeof BopsApplication>
+export type BopsApplication = Static<typeof BopsApplicationSchema>
 
 // json.application do
 //   json.type do

@@ -2,8 +2,8 @@ import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 import '../../shared/formats'
 
-export type BaseMetadata = Static<typeof BaseMetadata>
-export const BaseMetadata = Type.Object(
+export type BaseMetadata = Static<typeof BaseMetadataSchema>
+export const BaseMetadataSchema = Type.Object(
   {
     organisation: Type.String({
       description:
@@ -20,15 +20,19 @@ export const BaseMetadata = Type.Object(
   }
 )
 
-type PostSubmissionMetadataBase = Static<typeof PostSubmissionMetadataBase>
-const PostSubmissionMetadataBase = Type.Object({
+// type PostSubmissionMetadataBase = Static<
+//   typeof PostSubmissionMetadataBaseSchema
+// >
+const PostSubmissionMetadataBaseSchema = Type.Object({
   generatedAt: Type.String({ format: 'date-time' })
 })
 
-type PostSubmissionBaseMetadata = Static<typeof PostSubmissionBaseMetadata>
-const PostSubmissionBaseMetadata = Type.Intersect([
-  BaseMetadata,
-  PostSubmissionMetadataBase
+// type PostSubmissionBaseMetadata = Static<
+//   typeof PostSubmissionBaseMetadataSchema
+// >
+const PostSubmissionBaseMetadataSchema = Type.Intersect([
+  BaseMetadataSchema,
+  PostSubmissionMetadataBaseSchema
 ])
 
 // type PostSubmissionPrototypePlanXMetadata = Static<
@@ -39,8 +43,8 @@ const PostSubmissionBaseMetadata = Type.Intersect([
 //   PostSubmissionMetadataBase
 // ])
 
-export type PostSubmissionMetadata = Static<typeof PostSubmissionMetadata>
-export const PostSubmissionMetadata = Type.Union([
-  PostSubmissionBaseMetadata
+export type PostSubmissionMetadata = Static<typeof PostSubmissionMetadataSchema>
+export const PostSubmissionMetadataSchema = Type.Union([
+  PostSubmissionBaseMetadataSchema
   // PostSubmissionPrototypePlanXMetadata
 ])

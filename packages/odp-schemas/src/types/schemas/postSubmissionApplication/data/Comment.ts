@@ -1,17 +1,20 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 import {
-  PublicCommentSummary,
-  SpecialistCommentSummary
+  PublicCommentSummarySchema,
+  SpecialistCommentSummarySchema
 } from './CommentSummary'
-import { PublicComment, PublicCommentRedacted } from './PublicComment'
-import { Specialist, SpecialistRedacted } from './SpecialistComment'
+import {
+  PublicCommentSchema,
+  PublicCommentRedactedSchema
+} from './PublicComment'
+import { SpecialistSchema, SpecialistRedactedSchema } from './SpecialistComment'
 
-export type PublicComments = Static<typeof PublicComments>
-export const PublicComments = Type.Object(
+export type PublicComments = Static<typeof PublicCommentsSchema>
+export const PublicCommentsSchema = Type.Object(
   {
-    summary: PublicCommentSummary,
-    comments: Type.Array(PublicComment)
+    summary: PublicCommentSummarySchema,
+    comments: Type.Array(PublicCommentSchema)
   },
   {
     id: '#PublicComments',
@@ -19,11 +22,11 @@ export const PublicComments = Type.Object(
   }
 )
 
-export type PublicCommentsRedacted = Static<typeof PublicCommentsRedacted>
-export const PublicCommentsRedacted = Type.Object(
+export type PublicCommentsRedacted = Static<typeof PublicCommentsRedactedSchema>
+export const PublicCommentsRedactedSchema = Type.Object(
   {
-    summary: PublicCommentSummary,
-    comments: Type.Array(PublicCommentRedacted)
+    summary: PublicCommentSummarySchema,
+    comments: Type.Array(PublicCommentRedactedSchema)
   },
   {
     id: '#PublicCommentsRedacted',
@@ -31,11 +34,11 @@ export const PublicCommentsRedacted = Type.Object(
   }
 )
 
-export type SpecialistComments = Static<typeof SpecialistComments>
-export const SpecialistComments = Type.Object(
+export type SpecialistComments = Static<typeof SpecialistCommentsSchema>
+export const SpecialistCommentsSchema = Type.Object(
   {
-    summary: SpecialistCommentSummary,
-    comments: Type.Array(Specialist)
+    summary: SpecialistCommentSummarySchema,
+    comments: Type.Array(SpecialistSchema)
   },
   {
     id: '#SpecialistComments',
@@ -45,12 +48,12 @@ export const SpecialistComments = Type.Object(
 )
 
 export type SpecialistCommentsRedacted = Static<
-  typeof SpecialistCommentsRedacted
+  typeof SpecialistCommentsRedactedSchema
 >
-export const SpecialistCommentsRedacted = Type.Object(
+export const SpecialistCommentsRedactedSchema = Type.Object(
   {
-    summary: SpecialistCommentSummary,
-    comments: Type.Array(SpecialistRedacted)
+    summary: SpecialistCommentSummarySchema,
+    comments: Type.Array(SpecialistRedactedSchema)
   },
   {
     id: '#SpecialistCommentsRedacted',

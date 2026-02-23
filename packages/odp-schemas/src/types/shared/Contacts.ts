@@ -2,8 +2,8 @@ import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 import './formats'
 
-export type ContactDetails = Static<typeof ContactDetails>
-export const ContactDetails = Type.Object(
+export type ContactDetails = Static<typeof ContactDetailsSchema>
+export const ContactDetailsSchema = Type.Object(
   {
     name: Type.Object({
       title: Type.Optional(Type.String()),

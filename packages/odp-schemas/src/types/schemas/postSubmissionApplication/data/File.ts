@@ -1,11 +1,13 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
-import { PostSubmissionFileAssociation } from '../enums/PostSubmissionFileAssociation'
-import { FileType } from '../enums/FileType'
+import { PostSubmissionFileAssociationSchema } from '../enums/PostSubmissionFileAssociation'
+import { FileTypeSchema } from '../enums/FileType'
 import '../../../shared/formats'
 
-type PostSubmissionFileMetadata = Static<typeof PostSubmissionFileMetadata>
-const PostSubmissionFileMetadata = Type.Object(
+export type PostSubmissionFileMetadata = Static<
+  typeof PostSubmissionFileMetadataSchema
+>
+export const PostSubmissionFileMetadataSchema = Type.Object(
   {
     size: Type.Object({
       bytes: Type.Number()
@@ -19,18 +21,18 @@ const PostSubmissionFileMetadata = Type.Object(
   { description: 'Metadata about the file' }
 )
 
-export type PostSubmissionFileBase = Static<typeof PostSubmissionFileBase>
-export const PostSubmissionFileBase = Type.Object(
+export type PostSubmissionFileBase = Static<typeof PostSubmissionFileBaseSchema>
+export const PostSubmissionFileBaseSchema = Type.Object(
   {
     id: Type.Number(),
     name: Type.String(),
-    association: PostSubmissionFileAssociation,
+    association: PostSubmissionFileAssociationSchema,
     version: Type.Optional(Type.Number()),
-    type: Type.Array(FileType),
+    type: Type.Array(FileTypeSchema),
     thumbnailUrl: Type.Optional(Type.String()),
     referencesInDocument: Type.Optional(Type.Array(Type.String())),
     description: Type.Optional(Type.String()),
-    metadata: PostSubmissionFileMetadata
+    metadata: PostSubmissionFileMetadataSchema
   },
   {
     id: '#PostSubmissionFileBase',
@@ -39,10 +41,10 @@ export const PostSubmissionFileBase = Type.Object(
   }
 )
 
-export type PostSubmissionFile = Static<typeof PostSubmissionFile>
-export const PostSubmissionFile = Type.Composite(
+export type PostSubmissionFile = Static<typeof PostSubmissionFileSchema>
+export const PostSubmissionFileSchema = Type.Composite(
   [
-    PostSubmissionFileBase,
+    PostSubmissionFileBaseSchema,
     Type.Object({
       url: Type.String(),
       redactedUrl: Type.Optional(Type.String())
@@ -56,11 +58,11 @@ export const PostSubmissionFile = Type.Composite(
 )
 
 export type PostSubmissionFileRedacted = Static<
-  typeof PostSubmissionFileRedacted
+  typeof PostSubmissionFileRedactedSchema
 >
-export const PostSubmissionFileRedacted = Type.Composite(
+export const PostSubmissionFileRedactedSchema = Type.Intersect(
   [
-    PostSubmissionFileBase,
+    PostSubmissionFileBaseSchema,
     Type.Object({
       redactedUrl: Type.String()
     })

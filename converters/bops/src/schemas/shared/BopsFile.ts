@@ -5,7 +5,7 @@ import '@dpr/odp-schemas/types/shared/formats'
  * Bops file schema
  * engines/bops_api/app/views/bops_api/v2/shared/_document.json.jbuilder
  */
-export const BopsFile = Type.Object({
+export const BopsFileSchema = Type.Object({
   name: Type.Union([Type.String(), Type.Null()]),
   referencesInDocument: Type.Array(Type.String()),
   url: Type.String({ format: 'uri' }),
@@ -22,7 +22,7 @@ export const BopsFile = Type.Object({
     contentType: Type.String()
   })
 })
-export type BopsFile = Static<typeof BopsFile>
+export type BopsFile = Static<typeof BopsFileSchema>
 
 // json.name document.name
 // json.references_in_document [document.numbers].compact_blank

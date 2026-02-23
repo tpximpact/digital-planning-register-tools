@@ -42,7 +42,8 @@ const app = (userOptions?: HandlerBopsOptions) => {
     name: 'BOPS to ODP handler',
     detail: {
       tags: ['BOPS Handler']
-    }
+    },
+    prefix: options.prefix
   })
     .use(standardResponses)
     .use(SchemaModel)

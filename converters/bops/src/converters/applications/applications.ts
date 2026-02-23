@@ -1,10 +1,10 @@
 import { type PostSubmissionPublishedApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
 import {
-  PostSubmissionPublishedApplicationsResponse,
-  PostSubmissionPublishedApplicationsResponse as PostSubmissionPublishedApplicationsResponseSchema
+  type PostSubmissionPublishedApplicationsResponse,
+  PostSubmissionPublishedApplicationsResponseSchema
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { Value } from '@sinclair/typebox/value'
-import { Pagination } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
+import { PaginationSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
 import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
 import { convertBopsApplicationToOdp } from './application'
 /**
@@ -19,13 +19,15 @@ export const bopsApplicationsEndpointToOdp = (
   status: ApiResponseStatus
 ): PostSubmissionPublishedApplicationsResponse => {
   if (Value.Check(PostSubmissionPublishedApplicationsResponseSchema, input)) {
-    return input
+    return input as PostSubmissionPublishedApplicationsResponse
   }
 
   const { data: applications, pagination } = input
 
+  // console.log('Raw applications endpoint response:', input)
+
   // Validate pagination and summary
-  if (!Value.Check(Pagination, pagination)) {
+  if (!Value.Check(PaginationSchema, pagination)) {
     console.warn('Invalid Pagination:', pagination)
     throw new Error('Invalid Pagination')
   }

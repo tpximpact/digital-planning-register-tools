@@ -11,21 +11,23 @@ import {
 } from './PublicComments'
 import { Type } from '@sinclair/typebox'
 import {
-  PublicComment,
-  PublicCommentRedacted,
-  TopicAndComments
+  PublicCommentSchema,
+  PublicCommentRedactedSchema,
+  TopicAndCommentsSchema,
+  type PublicComment,
+  type PublicCommentRedacted
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PublicComment.ts'
 import type { PossibleDates } from '../libs/generateAllPossibleDates'
 import {
-  PublicComments,
-  PublicCommentsRedacted
+  PublicCommentsRedactedSchema,
+  PublicCommentsSchema
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/Comment.ts'
 
 describe('generateTopicAndComments', () => {
   it('returns an valid PostSubmissionFile[]', () => {
     const obj = generateTopicAndComments()
     expect(obj).toBeDefined()
-    expect(Value.Check(Type.Array(TopicAndComments), obj)).toBe(true)
+    expect(Value.Check(Type.Array(TopicAndCommentsSchema), obj)).toBe(true)
   })
 })
 
@@ -75,7 +77,7 @@ describe('generatePublicComment', () => {
   it('returns an valid PublicComment', () => {
     const obj = generatePublicComment()
     expect(obj).toBeDefined()
-    expect(Value.Check(PublicComment, obj)).toBe(true)
+    expect(Value.Check(PublicCommentSchema, obj)).toBe(true)
   })
 })
 
@@ -83,7 +85,7 @@ describe('generatePublicCommentRedacted', () => {
   it('returns an valid PublicCommentRedacted', () => {
     const obj = generatePublicCommentRedacted()
     expect(obj).toBeDefined()
-    expect(Value.Check(PublicCommentRedacted, obj)).toBe(true)
+    expect(Value.Check(PublicCommentRedactedSchema, obj)).toBe(true)
   })
 })
 
@@ -140,7 +142,7 @@ describe('generatePublicComments', () => {
     }
     const obj = generatePublicComments(fakeDates as unknown as PossibleDates)
     expect(obj).toBeDefined()
-    expect(Value.Check(PublicComments, obj)).toBe(true)
+    expect(Value.Check(PublicCommentsSchema, obj)).toBe(true)
   })
 })
 
@@ -161,6 +163,6 @@ describe('generatePublicCommentsRedacted', () => {
       fakeDates as unknown as PossibleDates
     )
     expect(obj).toBeDefined()
-    expect(Value.Check(PublicCommentsRedacted, obj)).toBe(true)
+    expect(Value.Check(PublicCommentsRedactedSchema, obj)).toBe(true)
   })
 })

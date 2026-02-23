@@ -2,7 +2,7 @@ import { describe, it, expect, spyOn } from 'bun:test'
 import { Value } from '@sinclair/typebox/value'
 import {
   type PostSubmissionPublishedDocumentsResponse,
-  PostSubmissionPublishedDocumentsResponse as PostSubmissionPublishedDocumentsResponseSchema
+  PostSubmissionPublishedDocumentsResponseSchema
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { bopsDocumentsEndpointToOdp } from './documents'
 

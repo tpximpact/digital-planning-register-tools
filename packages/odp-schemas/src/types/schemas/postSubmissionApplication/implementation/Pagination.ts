@@ -1,8 +1,8 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 
-export type Pagination = Static<typeof Pagination>
-export const Pagination = Type.Object(
+export type Pagination = Static<typeof PaginationSchema>
+export const PaginationSchema = Type.Object(
   {
     resultsPerPage: Type.Number(),
     currentPage: Type.Number(),
@@ -13,8 +13,8 @@ export const Pagination = Type.Object(
   { description: '#Pagination' }
 )
 
-export type CursorPagination = Static<typeof CursorPagination>
-export const CursorPagination = Type.Object(
+export type CursorPagination = Static<typeof CursorPaginationSchema>
+export const CursorPaginationSchema = Type.Object(
   {
     resultsPerPage: Type.Number(),
     nextCursor: Type.Union([Type.String(), Type.Null()]),

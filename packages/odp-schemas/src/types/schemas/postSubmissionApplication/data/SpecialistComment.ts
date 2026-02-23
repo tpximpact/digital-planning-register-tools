@@ -1,18 +1,23 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
-import { CommentMetaData } from './CommentMetaData'
-import { PostSubmissionFile, PostSubmissionFileRedacted } from './File'
-import { SpecialistCommentSentiment } from '../enums/CommentSentiment'
-import { Address } from '../../../shared/Addresses'
+import { CommentMetaDataSchema } from './CommentMetaData'
+import {
+  PostSubmissionFileSchema,
+  PostSubmissionFileRedactedSchema
+} from './File'
+import { SpecialistCommentSentimentSchema } from '../enums/CommentSentiment'
+import { AddressSchema } from '../../../shared/Addresses'
 import '../../../shared/formats'
 
-export type SpecialistCommentAuthor = Static<typeof SpecialistCommentAuthor>
-export const SpecialistCommentAuthor = Type.Object(
+export type SpecialistCommentAuthor = Static<
+  typeof SpecialistCommentAuthorSchema
+>
+export const SpecialistCommentAuthorSchema = Type.Object(
   {
     name: Type.Object({
       singleLine: Type.String()
     }),
-    address: Address
+    address: AddressSchema
   },
   {
     id: '#SpecialistCommentAuthor',
@@ -21,9 +26,9 @@ export const SpecialistCommentAuthor = Type.Object(
 )
 
 export type SpecialistCommentAuthorRedacted = Static<
-  typeof SpecialistCommentAuthorRedacted
+  typeof SpecialistCommentAuthorRedactedSchema
 >
-export const SpecialistCommentAuthorRedacted = Type.Object(
+export const SpecialistCommentAuthorRedactedSchema = Type.Object(
   {
     name: Type.Object({
       singleLine: Type.String()
@@ -35,12 +40,12 @@ export const SpecialistCommentAuthorRedacted = Type.Object(
   }
 )
 
-type SpecialistCommentBase = Static<typeof SpecialistCommentBase>
-const SpecialistCommentBase = Type.Object(
+// type SpecialistCommentBase = Static<typeof SpecialistCommentBaseSchema>
+const SpecialistCommentBaseSchema = Type.Object(
   {
     id: Type.String(),
-    sentiment: SpecialistCommentSentiment,
-    metadata: CommentMetaData
+    sentiment: SpecialistCommentSentimentSchema,
+    metadata: CommentMetaDataSchema
   },
   {
     internal:
@@ -48,12 +53,12 @@ const SpecialistCommentBase = Type.Object(
   }
 )
 
-export type SpecialistComment = Static<typeof SpecialistComment>
-export const SpecialistComment = Type.Composite(
+export type SpecialistComment = Static<typeof SpecialistCommentSchema>
+export const SpecialistCommentSchema = Type.Composite(
   [
-    SpecialistCommentBase,
+    SpecialistCommentBaseSchema,
     Type.Object({
-      files: Type.Optional(Type.Array(PostSubmissionFile)),
+      files: Type.Optional(Type.Array(PostSubmissionFileSchema)),
       comment: Type.String(),
       commentRedacted: Type.Optional(Type.String())
     })
@@ -64,14 +69,16 @@ export const SpecialistComment = Type.Composite(
   }
 )
 
-export type SpecialistCommentRedacted = Static<typeof SpecialistCommentRedacted>
-export const SpecialistCommentRedacted = Type.Composite(
+export type SpecialistCommentRedacted = Static<
+  typeof SpecialistCommentRedactedSchema
+>
+export const SpecialistCommentRedactedSchema = Type.Composite(
   [
-    SpecialistCommentBase,
+    SpecialistCommentBaseSchema,
     Type.Object({
-      files: Type.Optional(Type.Array(PostSubmissionFileRedacted)),
+      files: Type.Optional(Type.Array(PostSubmissionFileRedactedSchema)),
       commentRedacted: Type.String(),
-      metadata: Type.Required(CommentMetaData)
+      metadata: Type.Required(CommentMetaDataSchema)
     })
   ],
   {
@@ -81,8 +88,8 @@ export const SpecialistCommentRedacted = Type.Composite(
   }
 )
 
-type SpecialistBase = Static<typeof SpecialistBase>
-const SpecialistBase = Type.Object(
+export type SpecialistBase = Static<typeof SpecialistBaseSchema>
+export const SpecialistBaseSchema = Type.Object(
   {
     id: Type.String(),
     organisationSpecialism: Type.Optional(Type.String()),
@@ -96,13 +103,13 @@ const SpecialistBase = Type.Object(
   { internal: 'All the required fields for a public or private specialist' }
 )
 
-export type Specialist = Static<typeof Specialist>
-export const Specialist = Type.Composite(
+export type Specialist = Static<typeof SpecialistSchema>
+export const SpecialistSchema = Type.Intersect(
   [
-    SpecialistBase,
-    SpecialistCommentAuthor,
+    SpecialistBaseSchema,
+    SpecialistCommentAuthorSchema,
     Type.Object({
-      comments: Type.Optional(Type.Array(SpecialistComment))
+      comments: Type.Optional(Type.Array(SpecialistCommentSchema))
     })
   ],
   {
@@ -111,13 +118,13 @@ export const Specialist = Type.Composite(
   }
 )
 
-export type SpecialistRedacted = Static<typeof SpecialistRedacted>
-export const SpecialistRedacted = Type.Composite(
+export type SpecialistRedacted = Static<typeof SpecialistRedactedSchema>
+export const SpecialistRedactedSchema = Type.Intersect(
   [
-    SpecialistBase,
-    SpecialistCommentAuthorRedacted,
+    SpecialistBaseSchema,
+    SpecialistCommentAuthorRedactedSchema,
     Type.Object({
-      comments: Type.Array(SpecialistCommentRedacted)
+      comments: Type.Array(SpecialistCommentRedactedSchema)
     })
   ],
   {

@@ -11,13 +11,13 @@ import {
   PostSubmissionPublishedSpecialistUrlParams,
   PostSubmissionPublishedSpecialistResponse
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import { standardResponseObjects } from '../../libs/standard-responses'
+import { standardResponseObjects } from '@dpr/api'
 import {
   getAllApplicationSpecialistComments,
   getAllPublishedApplicationSpecialistComments,
   getApplicationSpecialistComment,
   getPublishedApplicationSpecialistComment
-} from '@dpr/handler-local'
+} from 'handlers/local/src'
 
 /**
  * Plugin for elysia that generates the planning applications API.

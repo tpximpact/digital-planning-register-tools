@@ -1,17 +1,18 @@
 import { Type, type Static } from '@sinclair/typebox'
 
-const PublicCommentsOrderByBase = Type.Union([
+const PublicCommentsOrderByBaseSchema = Type.Union([
   Type.Literal('asc'),
   Type.Literal('desc')
 ])
 
-export const PostSubmissionPublicCommentsOrderBy = PublicCommentsOrderByBase
+export const PostSubmissionPublicCommentsOrderBySchema =
+  PublicCommentsOrderByBaseSchema
 export type PostSubmissionPublicCommentsOrderBy = Static<
-  typeof PostSubmissionPublicCommentsOrderBy
+  typeof PostSubmissionPublicCommentsOrderBySchema
 >
 
-export const PostSubmissionPublishedPublicCommentsOrderBy =
-  PublicCommentsOrderByBase
+export const PostSubmissionPublishedPublicCommentsOrderBySchema =
+  PublicCommentsOrderByBaseSchema
 export type PostSubmissionPublishedPublicCommentsOrderBy = Static<
-  typeof PostSubmissionPublishedPublicCommentsOrderBy
+  typeof PostSubmissionPublishedPublicCommentsOrderBySchema
 >

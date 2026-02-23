@@ -6,8 +6,10 @@ import '../../shared/formats'
 /**
  * This is generating the minimal things the DPR needs and uses right now in its interface
  */
-type Application<T extends TSchema> = Static<ReturnType<typeof Application<T>>>
-export const Application = <T extends TSchema>(T: T) =>
+export type Application<T extends TSchema> = Static<
+  ReturnType<typeof ApplicationSchema<T>>
+>
+export const ApplicationSchema = <T extends TSchema>(T: T) =>
   Type.Object(
     {
       // applicationType: T,
@@ -53,8 +55,8 @@ export const Application = <T extends TSchema>(T: T) =>
     { additionalProperties: true }
   )
 
-export type PlanXPreAssessment = Static<typeof PlanXPreAssessment>
-export const PlanXPreAssessment = Type.Object(
+export type PlanXPreAssessment = Static<typeof PlanXPreAssessmentSchema>
+export const PlanXPreAssessmentSchema = Type.Object(
   {
     preAssessment: Type.Array(
       Type.Object({
@@ -70,693 +72,770 @@ export const PlanXPreAssessment = Type.Object(
   }
 )
 
-export type AdvertConsent = Static<typeof AdvertConsent>
-export const AdvertConsent = Application(Type.Literal('advertConsent'))
+export type AdvertConsent = Static<typeof AdvertConsentSchema>
+export const AdvertConsentSchema = ApplicationSchema(
+  Type.Literal('advertConsent')
+)
 
-export type AmendmentMinorMaterial = Static<typeof AmendmentMinorMaterial>
-export const AmendmentMinorMaterial = Application(
+export type AmendmentMinorMaterial = Static<typeof AmendmentMinorMaterialSchema>
+export const AmendmentMinorMaterialSchema = ApplicationSchema(
   Type.Literal('amendment.minorMaterial')
 )
 
-export type AmendmentNonMaterial = Static<typeof AmendmentNonMaterial>
-export const AmendmentNonMaterial = Application(
+export type AmendmentNonMaterial = Static<typeof AmendmentNonMaterialSchema>
+export const AmendmentNonMaterialSchema = ApplicationSchema(
   Type.Literal('amendment.nonMaterial')
 )
 
-export type ApprovalConditions = Static<typeof ApprovalConditions>
-export const ApprovalConditions = Application(
+export type ApprovalConditions = Static<typeof ApprovalConditionsSchema>
+export const ApprovalConditionsSchema = ApplicationSchema(
   Type.Literal('approval.conditions')
 )
 
-export type ApprovalReservedMatters = Static<typeof ApprovalReservedMatters>
-export const ApprovalReservedMatters = Application(
+export type ApprovalReservedMatters = Static<
+  typeof ApprovalReservedMattersSchema
+>
+export const ApprovalReservedMattersSchema = ApplicationSchema(
   Type.Literal('approval.reservedMatters')
 )
 
-export type ComplianceConfirmation = Static<typeof ComplianceConfirmation>
-export const ComplianceConfirmation = Application(
+export type ComplianceConfirmation = Static<typeof ComplianceConfirmationSchema>
+export const ComplianceConfirmationSchema = ApplicationSchema(
   Type.Literal('complianceConfirmation')
 )
 
 export type EnvironmentalImpactScoping = Static<
-  typeof EnvironmentalImpactScoping
+  typeof EnvironmentalImpactScopingSchema
 >
-export const EnvironmentalImpactScoping = Application(
+export const EnvironmentalImpactScopingSchema = ApplicationSchema(
   Type.Literal('environmentalImpact.scoping')
 )
 
 export type EnvironmentalImpactScreening = Static<
-  typeof EnvironmentalImpactScreening
+  typeof EnvironmentalImpactScreeningSchema
 >
-export const EnvironmentalImpactScreening = Application(
+export const EnvironmentalImpactScreeningSchema = ApplicationSchema(
   Type.Literal('environmentalImpact.screening')
 )
 
-export type HazardousSubstanceConsent = Static<typeof HazardousSubstanceConsent>
-export const HazardousSubstanceConsent = Application(
+export type HazardousSubstanceConsent = Static<
+  typeof HazardousSubstanceConsentSchema
+>
+export const HazardousSubstanceConsentSchema = ApplicationSchema(
   Type.Literal('hazardousSubstanceConsent')
 )
 
-export type HedgerowRemovalNotice = Static<typeof HedgerowRemovalNotice>
-export const HedgerowRemovalNotice = Application(
+export type HedgerowRemovalNotice = Static<typeof HedgerowRemovalNoticeSchema>
+export const HedgerowRemovalNoticeSchema = ApplicationSchema(
   Type.Literal('hedgerowRemovalNotice')
 )
 
-export type LandDrainageConsent = Static<typeof LandDrainageConsent>
-export const LandDrainageConsent = Application(
+export type LandDrainageConsent = Static<typeof LandDrainageConsentSchema>
+export const LandDrainageConsentSchema = ApplicationSchema(
   Type.Literal('landDrainageConsent')
 )
 
 export type LawfulDevelopmentCertificateBreachOfCondition = Static<
-  typeof LawfulDevelopmentCertificateBreachOfCondition
+  typeof LawfulDevelopmentCertificateBreachOfConditionSchema
 >
-export const LawfulDevelopmentCertificateBreachOfCondition = Application(
-  Type.Literal('ldc.breachOfCondition')
-)
+export const LawfulDevelopmentCertificateBreachOfConditionSchema =
+  ApplicationSchema(Type.Literal('ldc.breachOfCondition'))
 
 export type LawfulDevelopmentCertificateExisting = Static<
-  typeof LawfulDevelopmentCertificateExisting
+  typeof LawfulDevelopmentCertificateExistingSchema
 >
-export const LawfulDevelopmentCertificateExisting = Type.Intersect([
-  Application(Type.Literal('ldc.existing')),
-  PlanXPreAssessment
+export const LawfulDevelopmentCertificateExistingSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('ldc.existing')),
+  PlanXPreAssessmentSchema
 ])
 
 export type LawfulDevelopmentCertificateListedBuildingWorks = Static<
-  typeof LawfulDevelopmentCertificateListedBuildingWorks
+  typeof LawfulDevelopmentCertificateListedBuildingWorksSchema
 >
-export const LawfulDevelopmentCertificateListedBuildingWorks = Application(
-  Type.Literal('ldc.listedBuildingWorks')
-)
+export const LawfulDevelopmentCertificateListedBuildingWorksSchema =
+  ApplicationSchema(Type.Literal('ldc.listedBuildingWorks'))
 
 export type LawfulDevelopmentCertificateProposed = Static<
-  typeof LawfulDevelopmentCertificateProposed
+  typeof LawfulDevelopmentCertificateProposedSchema
 >
-export const LawfulDevelopmentCertificateProposed = Type.Intersect([
-  Application(Type.Literal('ldc.proposed')),
-  PlanXPreAssessment
+export const LawfulDevelopmentCertificateProposedSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('ldc.proposed')),
+  PlanXPreAssessmentSchema
 ])
 
-export type ListedBuildingConsent = Static<typeof ListedBuildingConsent>
-export const ListedBuildingConsent = Application(Type.Literal('listed'))
+export type ListedBuildingConsent = Static<typeof ListedBuildingConsentSchema>
+export const ListedBuildingConsentSchema = ApplicationSchema(
+  Type.Literal('listed')
+)
 
-export type NotifyCompletion = Static<typeof NotifyCompletion>
-export const NotifyCompletion = Application(Type.Literal('notifyCompletion'))
+export type NotifyCompletion = Static<typeof NotifyCompletionSchema>
+export const NotifyCompletionSchema = ApplicationSchema(
+  Type.Literal('notifyCompletion')
+)
 
-export type ObligationDischarge = Static<typeof ObligationDischarge>
-export const ObligationDischarge = Application(
+export type ObligationDischarge = Static<typeof ObligationDischargeSchema>
+export const ObligationDischargeSchema = ApplicationSchema(
   Type.Literal('obligation.discharge')
 )
 
-export type ObligationModify = Static<typeof ObligationModify>
-export const ObligationModify = Application(Type.Literal('obligation.modify'))
+export type ObligationModify = Static<typeof ObligationModifySchema>
+export const ObligationModifySchema = ApplicationSchema(
+  Type.Literal('obligation.modify')
+)
 
 export type OnshoreExtractionOilAndGasOther = Static<
-  typeof OnshoreExtractionOilAndGasOther
+  typeof OnshoreExtractionOilAndGasOtherSchema
 >
-export const OnshoreExtractionOilAndGasOther = Application(
+export const OnshoreExtractionOilAndGasOtherSchema = ApplicationSchema(
   Type.Literal('onshoreExtractionOilAndGas.other')
 )
 
 export type OnshoreExtractionOilAndGasPlanningPermissionExtension = Static<
-  typeof OnshoreExtractionOilAndGasPlanningPermissionExtension
+  typeof OnshoreExtractionOilAndGasPlanningPermissionExtensionSchema
 >
-export const OnshoreExtractionOilAndGasPlanningPermissionExtension =
-  Application(Type.Literal('onshoreExtractionOilAndGas.pp.extension'))
+export const OnshoreExtractionOilAndGasPlanningPermissionExtensionSchema =
+  ApplicationSchema(Type.Literal('onshoreExtractionOilAndGas.pp.extension'))
 
 export type OnshoreExtractionOilAndGasPlanningPermissionWaste = Static<
-  typeof OnshoreExtractionOilAndGasPlanningPermissionWaste
+  typeof OnshoreExtractionOilAndGasPlanningPermissionWasteSchema
 >
-export const OnshoreExtractionOilAndGasPlanningPermissionWaste = Application(
-  Type.Literal('onshoreExtractionOilAndGas.pp.waste')
-)
+export const OnshoreExtractionOilAndGasPlanningPermissionWasteSchema =
+  ApplicationSchema(Type.Literal('onshoreExtractionOilAndGas.pp.waste'))
 
 export type OnshoreExtractionOilAndGasPlanningPermissionWorking = Static<
-  typeof OnshoreExtractionOilAndGasPlanningPermissionWorking
+  typeof OnshoreExtractionOilAndGasPlanningPermissionWorkingSchema
 >
-export const OnshoreExtractionOilAndGasPlanningPermissionWorking = Application(
-  Type.Literal('onshoreExtractionOilAndGas.pp.working')
-)
+export const OnshoreExtractionOilAndGasPlanningPermissionWorkingSchema =
+  ApplicationSchema(Type.Literal('onshoreExtractionOilAndGas.pp.working'))
 
 export type OnshoreExtractionOilAndGasReview = Static<
-  typeof OnshoreExtractionOilAndGasReview
+  typeof OnshoreExtractionOilAndGasReviewSchema
 >
-export const OnshoreExtractionOilAndGasReview = Application(
+export const OnshoreExtractionOilAndGasReviewSchema = ApplicationSchema(
   Type.Literal('onshoreExtractionOilAndGas.review')
 )
 
 export type OnshoreExtractionOilAndGasVariation = Static<
-  typeof OnshoreExtractionOilAndGasVariation
+  typeof OnshoreExtractionOilAndGasVariationSchema
 >
-export const OnshoreExtractionOilAndGasVariation = Application(
+export const OnshoreExtractionOilAndGasVariationSchema = ApplicationSchema(
   Type.Literal('onshoreExtractionOilAndGas.variation')
 )
 
-export type PriorApprovalPart1ClassA = Static<typeof PriorApprovalPart1ClassA>
-export const PriorApprovalPart1ClassA = Type.Intersect([
-  Application(Type.Literal('pa.part1.classA')),
-  PlanXPreAssessment
+export type PriorApprovalPart1ClassA = Static<
+  typeof PriorApprovalPart1ClassASchema
+>
+export const PriorApprovalPart1ClassASchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part1.classA')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart1ClassAA = Static<typeof PriorApprovalPart1ClassAA>
-export const PriorApprovalPart1ClassAA = Type.Intersect([
-  Application(Type.Literal('pa.part1.classAA')),
-  PlanXPreAssessment
+export type PriorApprovalPart1ClassAA = Static<
+  typeof PriorApprovalPart1ClassAASchema
+>
+export const PriorApprovalPart1ClassAASchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part1.classAA')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart3ClassG = Static<typeof PriorApprovalPart3ClassG>
-export const PriorApprovalPart3ClassG = Type.Intersect([
-  Application(Type.Literal('pa.part3.classG')),
-  PlanXPreAssessment
+export type PriorApprovalPart3ClassG = Static<
+  typeof PriorApprovalPart3ClassGSchema
+>
+export const PriorApprovalPart3ClassGSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part3.classG')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart3ClassM = Static<typeof PriorApprovalPart3ClassM>
-export const PriorApprovalPart3ClassM = Type.Intersect([
-  Application(Type.Literal('pa.part3.classM')),
-  PlanXPreAssessment
+export type PriorApprovalPart3ClassM = Static<
+  typeof PriorApprovalPart3ClassMSchema
+>
+export const PriorApprovalPart3ClassMSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part3.classM')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart3ClassMA = Static<typeof PriorApprovalPart3ClassMA>
-export const PriorApprovalPart3ClassMA = Type.Intersect([
-  Application(Type.Literal('pa.part3.classMA')),
-  PlanXPreAssessment
+export type PriorApprovalPart3ClassMA = Static<
+  typeof PriorApprovalPart3ClassMASchema
+>
+export const PriorApprovalPart3ClassMASchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part3.classMA')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart3ClassN = Static<typeof PriorApprovalPart3ClassN>
-export const PriorApprovalPart3ClassN = Type.Intersect([
-  Application(Type.Literal('pa.part3.classN')),
-  PlanXPreAssessment
+export type PriorApprovalPart3ClassN = Static<
+  typeof PriorApprovalPart3ClassNSchema
+>
+export const PriorApprovalPart3ClassNSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part3.classN')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart3ClassQ = Static<typeof PriorApprovalPart3ClassQ>
-export const PriorApprovalPart3ClassQ = Type.Intersect([
-  Application(Type.Literal('pa.part3.classQ')),
-  PlanXPreAssessment
+export type PriorApprovalPart3ClassQ = Static<
+  typeof PriorApprovalPart3ClassQSchema
+>
+export const PriorApprovalPart3ClassQSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part3.classQ')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart3ClassR = Static<typeof PriorApprovalPart3ClassR>
-export const PriorApprovalPart3ClassR = Type.Intersect([
-  Application(Type.Literal('pa.part3.classR')),
-  PlanXPreAssessment
+export type PriorApprovalPart3ClassR = Static<
+  typeof PriorApprovalPart3ClassRSchema
+>
+export const PriorApprovalPart3ClassRSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part3.classR')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart3ClassS = Static<typeof PriorApprovalPart3ClassS>
-export const PriorApprovalPart3ClassS = Type.Intersect([
-  Application(Type.Literal('pa.part3.classS')),
-  PlanXPreAssessment
+export type PriorApprovalPart3ClassS = Static<
+  typeof PriorApprovalPart3ClassSSchema
+>
+export const PriorApprovalPart3ClassSSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part3.classS')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart3ClassT = Static<typeof PriorApprovalPart3ClassT>
-export const PriorApprovalPart3ClassT = Type.Intersect([
-  Application(Type.Literal('pa.part3.classT')),
-  PlanXPreAssessment
+export type PriorApprovalPart3ClassT = Static<
+  typeof PriorApprovalPart3ClassTSchema
+>
+export const PriorApprovalPart3ClassTSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part3.classT')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart3ClassV = Static<typeof PriorApprovalPart3ClassV>
-export const PriorApprovalPart3ClassV = Type.Intersect([
-  Application(Type.Literal('pa.part3.classV')),
-  PlanXPreAssessment
+export type PriorApprovalPart3ClassV = Static<
+  typeof PriorApprovalPart3ClassVSchema
+>
+export const PriorApprovalPart3ClassVSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part3.classV')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart4ClassBB = Static<typeof PriorApprovalPart4ClassBB>
-export const PriorApprovalPart4ClassBB = Type.Intersect([
-  Application(Type.Literal('pa.part4.classBB')),
-  PlanXPreAssessment
+export type PriorApprovalPart4ClassBB = Static<
+  typeof PriorApprovalPart4ClassBBSchema
+>
+export const PriorApprovalPart4ClassBBSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part4.classBB')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart4ClassBC = Static<typeof PriorApprovalPart4ClassBC>
-export const PriorApprovalPart4ClassBC = Type.Intersect([
-  Application(Type.Literal('pa.part4.classBC')),
-  PlanXPreAssessment
+export type PriorApprovalPart4ClassBC = Static<
+  typeof PriorApprovalPart4ClassBCSchema
+>
+export const PriorApprovalPart4ClassBCSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part4.classBC')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart4ClassCA = Static<typeof PriorApprovalPart4ClassCA>
-export const PriorApprovalPart4ClassCA = Type.Intersect([
-  Application(Type.Literal('pa.part4.classCA')),
-  PlanXPreAssessment
+export type PriorApprovalPart4ClassCA = Static<
+  typeof PriorApprovalPart4ClassCASchema
+>
+export const PriorApprovalPart4ClassCASchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part4.classCA')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart4ClassE = Static<typeof PriorApprovalPart4ClassE>
-export const PriorApprovalPart4ClassE = Type.Intersect([
-  Application(Type.Literal('pa.part4.classE')),
-  PlanXPreAssessment
+export type PriorApprovalPart4ClassE = Static<
+  typeof PriorApprovalPart4ClassESchema
+>
+export const PriorApprovalPart4ClassESchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part4.classE')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart6 = Static<typeof PriorApprovalPart6>
-export const PriorApprovalPart6 = Type.Intersect([
-  Application(Type.Literal('pa.part6')),
-  PlanXPreAssessment
+export type PriorApprovalPart6 = Static<typeof PriorApprovalPart6Schema>
+export const PriorApprovalPart6Schema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part6')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart6ClassA = Static<typeof PriorApprovalPart6ClassA>
-export const PriorApprovalPart6ClassA = Type.Intersect([
-  Application(Type.Literal('pa.part6.classA')),
-  PlanXPreAssessment
+export type PriorApprovalPart6ClassA = Static<
+  typeof PriorApprovalPart6ClassASchema
+>
+export const PriorApprovalPart6ClassASchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part6.classA')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart6ClassB = Static<typeof PriorApprovalPart6ClassB>
-export const PriorApprovalPart6ClassB = Type.Intersect([
-  Application(Type.Literal('pa.part6.classB')),
-  PlanXPreAssessment
+export type PriorApprovalPart6ClassB = Static<
+  typeof PriorApprovalPart6ClassBSchema
+>
+export const PriorApprovalPart6ClassBSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part6.classB')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart6ClassE = Static<typeof PriorApprovalPart6ClassE>
-export const PriorApprovalPart6ClassE = Type.Intersect([
-  Application(Type.Literal('pa.part6.classE')),
-  PlanXPreAssessment
+export type PriorApprovalPart6ClassE = Static<
+  typeof PriorApprovalPart6ClassESchema
+>
+export const PriorApprovalPart6ClassESchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part6.classE')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart7ClassC = Static<typeof PriorApprovalPart7ClassC>
-export const PriorApprovalPart7ClassC = Type.Intersect([
-  Application(Type.Literal('pa.part7.classC')),
-  PlanXPreAssessment
+export type PriorApprovalPart7ClassC = Static<
+  typeof PriorApprovalPart7ClassCSchema
+>
+export const PriorApprovalPart7ClassCSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part7.classC')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart7ClassM = Static<typeof PriorApprovalPart7ClassM>
-export const PriorApprovalPart7ClassM = Type.Intersect([
-  Application(Type.Literal('pa.part7.classM')),
-  PlanXPreAssessment
+export type PriorApprovalPart7ClassM = Static<
+  typeof PriorApprovalPart7ClassMSchema
+>
+export const PriorApprovalPart7ClassMSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part7.classM')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart9ClassD = Static<typeof PriorApprovalPart9ClassD>
-export const PriorApprovalPart9ClassD = Type.Intersect([
-  Application(Type.Literal('pa.part9.classD')),
-  PlanXPreAssessment
+export type PriorApprovalPart9ClassD = Static<
+  typeof PriorApprovalPart9ClassDSchema
+>
+export const PriorApprovalPart9ClassDSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part9.classD')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart11ClassB = Static<typeof PriorApprovalPart11ClassB>
-export const PriorApprovalPart11ClassB = Type.Intersect([
-  Application(Type.Literal('pa.part11.classB')),
-  PlanXPreAssessment
+export type PriorApprovalPart11ClassB = Static<
+  typeof PriorApprovalPart11ClassBSchema
+>
+export const PriorApprovalPart11ClassBSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part11.classB')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart14ClassA = Static<typeof PriorApprovalPart14ClassA>
-export const PriorApprovalPart14ClassA = Type.Intersect([
-  Application(Type.Literal('pa.part14.classA')),
-  PlanXPreAssessment
+export type PriorApprovalPart14ClassA = Static<
+  typeof PriorApprovalPart14ClassASchema
+>
+export const PriorApprovalPart14ClassASchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part14.classA')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart14ClassB = Static<typeof PriorApprovalPart14ClassB>
-export const PriorApprovalPart14ClassB = Type.Intersect([
-  Application(Type.Literal('pa.part14.classB')),
-  PlanXPreAssessment
+export type PriorApprovalPart14ClassB = Static<
+  typeof PriorApprovalPart14ClassBSchema
+>
+export const PriorApprovalPart14ClassBSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part14.classB')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart14ClassJ = Static<typeof PriorApprovalPart14ClassJ>
-export const PriorApprovalPart14ClassJ = Type.Intersect([
-  Application(Type.Literal('pa.part14.classJ')),
-  PlanXPreAssessment
+export type PriorApprovalPart14ClassJ = Static<
+  typeof PriorApprovalPart14ClassJSchema
+>
+export const PriorApprovalPart14ClassJSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part14.classJ')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart14ClassK = Static<typeof PriorApprovalPart14ClassK>
-export const PriorApprovalPart14ClassK = Type.Intersect([
-  Application(Type.Literal('pa.part14.classK')),
-  PlanXPreAssessment
+export type PriorApprovalPart14ClassK = Static<
+  typeof PriorApprovalPart14ClassKSchema
+>
+export const PriorApprovalPart14ClassKSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part14.classK')),
+  PlanXPreAssessmentSchema
 ])
 
 export type PriorApprovalPart14ClassOA = Static<
-  typeof PriorApprovalPart14ClassOA
+  typeof PriorApprovalPart14ClassOASchema
 >
-export const PriorApprovalPart14ClassOA = Type.Intersect([
-  Application(Type.Literal('pa.part14.classOA')),
-  PlanXPreAssessment
+export const PriorApprovalPart14ClassOASchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part14.classOA')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart16ClassA = Static<typeof PriorApprovalPart16ClassA>
-export const PriorApprovalPart16ClassA = Type.Intersect([
-  Application(Type.Literal('pa.part16.classA')),
-  PlanXPreAssessment
+export type PriorApprovalPart16ClassA = Static<
+  typeof PriorApprovalPart16ClassASchema
+>
+export const PriorApprovalPart16ClassASchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part16.classA')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart17 = Static<typeof PriorApprovalPart17>
-export const PriorApprovalPart17 = Type.Intersect([
-  Application(Type.Literal('pa.part17')),
-  PlanXPreAssessment
+export type PriorApprovalPart17 = Static<typeof PriorApprovalPart17Schema>
+export const PriorApprovalPart17Schema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part17')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart17ClassB = Static<typeof PriorApprovalPart17ClassB>
-export const PriorApprovalPart17ClassB = Type.Intersect([
-  Application(Type.Literal('pa.part17.classB')),
-  PlanXPreAssessment
+export type PriorApprovalPart17ClassB = Static<
+  typeof PriorApprovalPart17ClassBSchema
+>
+export const PriorApprovalPart17ClassBSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part17.classB')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart17ClassC = Static<typeof PriorApprovalPart17ClassC>
-export const PriorApprovalPart17ClassC = Type.Intersect([
-  Application(Type.Literal('pa.part17.classC')),
-  PlanXPreAssessment
+export type PriorApprovalPart17ClassC = Static<
+  typeof PriorApprovalPart17ClassCSchema
+>
+export const PriorApprovalPart17ClassCSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part17.classC')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart17ClassG = Static<typeof PriorApprovalPart17ClassG>
-export const PriorApprovalPart17ClassG = Type.Intersect([
-  Application(Type.Literal('pa.part17.classG')),
-  PlanXPreAssessment
+export type PriorApprovalPart17ClassG = Static<
+  typeof PriorApprovalPart17ClassGSchema
+>
+export const PriorApprovalPart17ClassGSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part17.classG')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart18ClassA = Static<typeof PriorApprovalPart18ClassA>
-export const PriorApprovalPart18ClassA = Type.Intersect([
-  Application(Type.Literal('pa.part18.classA')),
-  PlanXPreAssessment
+export type PriorApprovalPart18ClassA = Static<
+  typeof PriorApprovalPart18ClassASchema
+>
+export const PriorApprovalPart18ClassASchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part18.classA')),
+  PlanXPreAssessmentSchema
 ])
 
 export type PriorApprovalPart19ClassTA = Static<
-  typeof PriorApprovalPart19ClassTA
+  typeof PriorApprovalPart19ClassTASchema
 >
-export const PriorApprovalPart19ClassTA = Type.Intersect([
-  Application(Type.Literal('pa.part19.classTA')),
-  PlanXPreAssessment
+export const PriorApprovalPart19ClassTASchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part19.classTA')),
+  PlanXPreAssessmentSchema
 ])
 
-export type PriorApprovalPart20ClassA = Static<typeof PriorApprovalPart20ClassA>
-export const PriorApprovalPart20ClassA = Type.Intersect([
-  Application(Type.Literal('pa.part20.classA')),
-  PlanXPreAssessment
+export type PriorApprovalPart20ClassA = Static<
+  typeof PriorApprovalPart20ClassASchema
+>
+export const PriorApprovalPart20ClassASchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part20.classA')),
+  PlanXPreAssessmentSchema
 ])
 
 export type PriorApprovalPart20ClassAA = Static<
-  typeof PriorApprovalPart20ClassAA
+  typeof PriorApprovalPart20ClassAASchema
 >
-export const PriorApprovalPart20ClassAA = Type.Intersect([
-  Application(Type.Literal('pa.part20.classAA')),
-  PlanXPreAssessment
+export const PriorApprovalPart20ClassAASchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part20.classAA')),
+  PlanXPreAssessmentSchema
 ])
 
 export type PriorApprovalPart20ClassAB = Static<
-  typeof PriorApprovalPart20ClassAB
+  typeof PriorApprovalPart20ClassABSchema
 >
-export const PriorApprovalPart20ClassAB = Type.Intersect([
-  Application(Type.Literal('pa.part20.classAB')),
-  PlanXPreAssessment
+export const PriorApprovalPart20ClassABSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part20.classAB')),
+  PlanXPreAssessmentSchema
 ])
 
 export type PriorApprovalPart20ClassAC = Static<
-  typeof PriorApprovalPart20ClassAC
+  typeof PriorApprovalPart20ClassACSchema
 >
-export const PriorApprovalPart20ClassAC = Type.Intersect([
-  Application(Type.Literal('pa.part20.classAC')),
-  PlanXPreAssessment
+export const PriorApprovalPart20ClassACSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part20.classAC')),
+  PlanXPreAssessmentSchema
 ])
 
 export type PriorApprovalPart20ClassAD = Static<
-  typeof PriorApprovalPart20ClassAD
+  typeof PriorApprovalPart20ClassADSchema
 >
-export const PriorApprovalPart20ClassAD = Type.Intersect([
-  Application(Type.Literal('pa.part20.classAD')),
-  PlanXPreAssessment
+export const PriorApprovalPart20ClassADSchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part20.classAD')),
+  PlanXPreAssessmentSchema
 ])
 
 export type PriorApprovalPart20ClassZA = Static<
-  typeof PriorApprovalPart20ClassZA
+  typeof PriorApprovalPart20ClassZASchema
 >
-export const PriorApprovalPart20ClassZA = Type.Intersect([
-  Application(Type.Literal('pa.part20.classZA')),
-  PlanXPreAssessment
+export const PriorApprovalPart20ClassZASchema = Type.Intersect([
+  ApplicationSchema(Type.Literal('pa.part20.classZA')),
+  PlanXPreAssessmentSchema
 ])
 
 export type PlanningPermissionFullAdvertConsent = Static<
-  typeof PlanningPermissionFullAdvertConsent
+  typeof PlanningPermissionFullAdvertConsentSchema
 >
-export const PlanningPermissionFullAdvertConsent = Application(
+export const PlanningPermissionFullAdvertConsentSchema = ApplicationSchema(
   Type.Literal('pp.full.advertConsent')
 )
 
 export type PlanningPermissionFullDemolition = Static<
-  typeof PlanningPermissionFullDemolition
+  typeof PlanningPermissionFullDemolitionSchema
 >
-export const PlanningPermissionFullDemolition = Application(
+export const PlanningPermissionFullDemolitionSchema = ApplicationSchema(
   Type.Literal('pp.full.demolition')
 )
 
 export type PlanningPermissionFullFastTrackAffordable = Static<
-  typeof PlanningPermissionFullFastTrackAffordable
+  typeof PlanningPermissionFullFastTrackAffordableSchema
 >
-export const PlanningPermissionFullFastTrackAffordable = Application(
-  Type.Literal('pp.full.fastTrack.affordable')
-)
+export const PlanningPermissionFullFastTrackAffordableSchema =
+  ApplicationSchema(Type.Literal('pp.full.fastTrack.affordable'))
 
 export type PlanningPermissionFullHouseholder = Static<
-  typeof PlanningPermissionFullHouseholder
+  typeof PlanningPermissionFullHouseholderSchema
 >
-export const PlanningPermissionFullHouseholder = Application(
+export const PlanningPermissionFullHouseholderSchema = ApplicationSchema(
   Type.Literal('pp.full.householder')
 )
 
 export type PlanningPermissionFullHouseholderListed = Static<
-  typeof PlanningPermissionFullHouseholderListed
+  typeof PlanningPermissionFullHouseholderListedSchema
 >
-export const PlanningPermissionFullHouseholderListed = Application(
+export const PlanningPermissionFullHouseholderListedSchema = ApplicationSchema(
   Type.Literal('pp.full.householder.listed')
 )
 
 export type PlanningPermissionFullHouseholderRetrospective = Static<
-  typeof PlanningPermissionFullHouseholderRetrospective
+  typeof PlanningPermissionFullHouseholderRetrospectiveSchema
 >
-export const PlanningPermissionFullHouseholderRetrospective = Application(
-  Type.Literal('pp.full.householder.retro')
-)
+export const PlanningPermissionFullHouseholderRetrospectiveSchema =
+  ApplicationSchema(Type.Literal('pp.full.householder.retro'))
 
 export type PlanningPermissionFullMinor = Static<
-  typeof PlanningPermissionFullMinor
+  typeof PlanningPermissionFullMinorSchema
 >
-export const PlanningPermissionFullMinor = Application(
+export const PlanningPermissionFullMinorSchema = ApplicationSchema(
   Type.Literal('pp.full.minor')
 )
 
 export type PlanningPermissionFullMinorListed = Static<
-  typeof PlanningPermissionFullMinorListed
+  typeof PlanningPermissionFullMinorListedSchema
 >
-export const PlanningPermissionFullMinorListed = Application(
+export const PlanningPermissionFullMinorListedSchema = ApplicationSchema(
   Type.Literal('pp.full.minor.listed')
 )
 
 export type PlanningPermissionFullMinorTechnicalDetails = Static<
-  typeof PlanningPermissionFullMinorTechnicalDetails
+  typeof PlanningPermissionFullMinorTechnicalDetailsSchema
 >
-export const PlanningPermissionFullMinorTechnicalDetails = Application(
-  Type.Literal('pp.full.minor.technicalDetails')
-)
+export const PlanningPermissionFullMinorTechnicalDetailsSchema =
+  ApplicationSchema(Type.Literal('pp.full.minor.technicalDetails'))
 
 export type PlanningPermissionFullMajor = Static<
-  typeof PlanningPermissionFullMajor
+  typeof PlanningPermissionFullMajorSchema
 >
-export const PlanningPermissionFullMajor = Application(
+export const PlanningPermissionFullMajorSchema = ApplicationSchema(
   Type.Literal('pp.full.major')
 )
 
 export type PlanningPermissionFullMajorTechnicalDetails = Static<
-  typeof PlanningPermissionFullMajorTechnicalDetails
+  typeof PlanningPermissionFullMajorTechnicalDetailsSchema
 >
-export const PlanningPermissionFullMajorTechnicalDetails = Application(
-  Type.Literal('pp.full.major.technicalDetails')
-)
+export const PlanningPermissionFullMajorTechnicalDetailsSchema =
+  ApplicationSchema(Type.Literal('pp.full.major.technicalDetails'))
 
 export type PlanningPermissionFullMajorTechnicalDetailsWaste = Static<
-  typeof PlanningPermissionFullMajorTechnicalDetailsWaste
+  typeof PlanningPermissionFullMajorTechnicalDetailsWasteSchema
 >
-export const PlanningPermissionFullMajorTechnicalDetailsWaste = Application(
-  Type.Literal('pp.full.major.technicalDetails.waste')
-)
+export const PlanningPermissionFullMajorTechnicalDetailsWasteSchema =
+  ApplicationSchema(Type.Literal('pp.full.major.technicalDetails.waste'))
 
 export type PlanningPermissionFullMajorWaste = Static<
-  typeof PlanningPermissionFullMajorWaste
+  typeof PlanningPermissionFullMajorWasteSchema
 >
-export const PlanningPermissionFullMajorWaste = Application(
+export const PlanningPermissionFullMajorWasteSchema = ApplicationSchema(
   Type.Literal('pp.full.major.waste')
 )
 
 export type PlanningPermissionMineralExtraction = Static<
-  typeof PlanningPermissionMineralExtraction
+  typeof PlanningPermissionMineralExtractionSchema
 >
-export const PlanningPermissionMineralExtraction = Application(
+export const PlanningPermissionMineralExtractionSchema = ApplicationSchema(
   Type.Literal('pp.mineralExtraction')
 )
 
-export type PlanningPermissionOutline = Static<typeof PlanningPermissionOutline>
-export const PlanningPermissionOutline = Application(Type.Literal('pp.outline'))
+export type PlanningPermissionOutline = Static<
+  typeof PlanningPermissionOutlineSchema
+>
+export const PlanningPermissionOutlineSchema = ApplicationSchema(
+  Type.Literal('pp.outline')
+)
 
 export type PlanningPermissionOutlineAll = Static<
-  typeof PlanningPermissionOutlineAll
+  typeof PlanningPermissionOutlineAllSchema
 >
-export const PlanningPermissionOutlineAll = Application(
+export const PlanningPermissionOutlineAllSchema = ApplicationSchema(
   Type.Literal('pp.outline.all')
 )
 
 export type PlanningPermissionOutlineSome = Static<
-  typeof PlanningPermissionOutlineSome
+  typeof PlanningPermissionOutlineSomeSchema
 >
-export const PlanningPermissionOutlineSome = Application(
+export const PlanningPermissionOutlineSomeSchema = ApplicationSchema(
   Type.Literal('pp.outline.some')
 )
 
 export type PlanningPermissionOutlineMinor = Static<
-  typeof PlanningPermissionOutlineMinor
+  typeof PlanningPermissionOutlineMinorSchema
 >
-export const PlanningPermissionOutlineMinor = Application(
+export const PlanningPermissionOutlineMinorSchema = ApplicationSchema(
   Type.Literal('pp.outline.minor')
 )
 
 export type PlanningPermissionOutlineMinorAll = Static<
-  typeof PlanningPermissionOutlineMinorAll
+  typeof PlanningPermissionOutlineMinorAllSchema
 >
-export const PlanningPermissionOutlineMinorAll = Application(
+export const PlanningPermissionOutlineMinorAllSchema = ApplicationSchema(
   Type.Literal('pp.outline.minor.all')
 )
 
 export type PlanningPermissionOutlineMinorSome = Static<
-  typeof PlanningPermissionOutlineMinorSome
+  typeof PlanningPermissionOutlineMinorSomeSchema
 >
-export const PlanningPermissionOutlineMinorSome = Application(
+export const PlanningPermissionOutlineMinorSomeSchema = ApplicationSchema(
   Type.Literal('pp.outline.minor.some')
 )
 
 export type PlanningPermissionOutlineMajor = Static<
-  typeof PlanningPermissionOutlineMajor
+  typeof PlanningPermissionOutlineMajorSchema
 >
-export const PlanningPermissionOutlineMajor = Application(
+export const PlanningPermissionOutlineMajorSchema = ApplicationSchema(
   Type.Literal('pp.outline.major')
 )
 
 export type PlanningPermissionOutlineMajorAll = Static<
-  typeof PlanningPermissionOutlineMajorAll
+  typeof PlanningPermissionOutlineMajorAllSchema
 >
-export const PlanningPermissionOutlineMajorAll = Application(
+export const PlanningPermissionOutlineMajorAllSchema = ApplicationSchema(
   Type.Literal('pp.outline.major.all')
 )
 
 export type PlanningPermissionOutlineMajorAllWaste = Static<
-  typeof PlanningPermissionOutlineMajorAllWaste
+  typeof PlanningPermissionOutlineMajorAllWasteSchema
 >
-export const PlanningPermissionOutlineMajorAllWaste = Application(
+export const PlanningPermissionOutlineMajorAllWasteSchema = ApplicationSchema(
   Type.Literal('pp.outline.major.all.waste')
 )
 
 export type PlanningPermissionOutlineMajorSome = Static<
-  typeof PlanningPermissionOutlineMajorSome
+  typeof PlanningPermissionOutlineMajorSomeSchema
 >
-export const PlanningPermissionOutlineMajorSome = Application(
+export const PlanningPermissionOutlineMajorSomeSchema = ApplicationSchema(
   Type.Literal('pp.outline.major.some')
 )
 
 export type PlanningPermissionOutlineMajorSomeWaste = Static<
-  typeof PlanningPermissionOutlineMajorSomeWaste
+  typeof PlanningPermissionOutlineMajorSomeWasteSchema
 >
-export const PlanningPermissionOutlineMajorSomeWaste = Application(
+export const PlanningPermissionOutlineMajorSomeWasteSchema = ApplicationSchema(
   Type.Literal('pp.outline.major.some.waste')
 )
 
 export type PlanningPermissionPermissionInPrinciple = Static<
-  typeof PlanningPermissionPermissionInPrinciple
+  typeof PlanningPermissionPermissionInPrincipleSchema
 >
-export const PlanningPermissionPermissionInPrinciple = Application(
+export const PlanningPermissionPermissionInPrincipleSchema = ApplicationSchema(
   Type.Literal('pp.pip')
 )
 
-export type RightsOfWayOrder = Static<typeof RightsOfWayOrder>
-export const RightsOfWayOrder = Application(Type.Literal('rightsOfWayOrder'))
+export type RightsOfWayOrder = Static<typeof RightsOfWayOrderSchema>
+export const RightsOfWayOrderSchema = ApplicationSchema(
+  Type.Literal('rightsOfWayOrder')
+)
 
-export type WorksToTreesConsent = Static<typeof WorksToTreesConsent>
-export const WorksToTreesConsent = Application(Type.Literal('wtt.consent'))
+export type WorksToTreesConsent = Static<typeof WorksToTreesConsentSchema>
+export const WorksToTreesConsentSchema = ApplicationSchema(
+  Type.Literal('wtt.consent')
+)
 
-export type WorksToTreesNotice = Static<typeof WorksToTreesNotice>
-export const WorksToTreesNotice = Application(Type.Literal('wtt.notice'))
+export type WorksToTreesNotice = Static<typeof WorksToTreesNoticeSchema>
+export const WorksToTreesNoticeSchema = ApplicationSchema(
+  Type.Literal('wtt.notice')
+)
 
-export type PrototypeApplication = Static<typeof PrototypeApplication>
-export const PrototypeApplication = Type.Union(
+export type PrototypeApplication = Static<typeof PrototypeApplicationSchema>
+export const PrototypeApplicationSchema = Type.Union(
   [
-    AdvertConsent,
-    AmendmentMinorMaterial,
-    AmendmentNonMaterial,
-    ApprovalConditions,
-    ApprovalReservedMatters,
-    ComplianceConfirmation,
-    EnvironmentalImpactScoping,
-    EnvironmentalImpactScreening,
-    HazardousSubstanceConsent,
-    HedgerowRemovalNotice,
-    LandDrainageConsent,
-    LawfulDevelopmentCertificateBreachOfCondition,
-    LawfulDevelopmentCertificateExisting,
-    LawfulDevelopmentCertificateListedBuildingWorks,
-    LawfulDevelopmentCertificateProposed,
-    ListedBuildingConsent,
-    NotifyCompletion,
-    ObligationDischarge,
-    ObligationModify,
-    OnshoreExtractionOilAndGasOther,
-    OnshoreExtractionOilAndGasPlanningPermissionExtension,
-    OnshoreExtractionOilAndGasPlanningPermissionWaste,
-    OnshoreExtractionOilAndGasPlanningPermissionWorking,
-    OnshoreExtractionOilAndGasReview,
-    OnshoreExtractionOilAndGasVariation,
-    PriorApprovalPart1ClassA,
-    PriorApprovalPart1ClassAA,
-    PriorApprovalPart3ClassG,
-    PriorApprovalPart3ClassM,
-    PriorApprovalPart3ClassMA,
-    PriorApprovalPart3ClassN,
-    PriorApprovalPart3ClassQ,
-    PriorApprovalPart3ClassR,
-    PriorApprovalPart3ClassS,
-    PriorApprovalPart3ClassT,
-    PriorApprovalPart3ClassV,
-    PriorApprovalPart4ClassBB,
-    PriorApprovalPart4ClassBC,
-    PriorApprovalPart4ClassCA,
-    PriorApprovalPart4ClassE,
-    PriorApprovalPart6,
-    PriorApprovalPart6ClassA,
-    PriorApprovalPart6ClassB,
-    PriorApprovalPart6ClassE,
-    PriorApprovalPart7ClassC,
-    PriorApprovalPart7ClassM,
-    PriorApprovalPart9ClassD,
-    PriorApprovalPart11ClassB,
-    PriorApprovalPart14ClassA,
-    PriorApprovalPart14ClassB,
-    PriorApprovalPart14ClassJ,
-    PriorApprovalPart14ClassK,
-    PriorApprovalPart14ClassOA,
-    PriorApprovalPart16ClassA,
-    PriorApprovalPart17,
-    PriorApprovalPart17ClassB,
-    PriorApprovalPart17ClassC,
-    PriorApprovalPart17ClassG,
-    PriorApprovalPart18ClassA,
-    PriorApprovalPart19ClassTA,
-    PriorApprovalPart20ClassA,
-    PriorApprovalPart20ClassAA,
-    PriorApprovalPart20ClassAB,
-    PriorApprovalPart20ClassAC,
-    PriorApprovalPart20ClassAD,
-    PriorApprovalPart20ClassZA,
-    PlanningPermissionFullAdvertConsent,
-    PlanningPermissionFullDemolition,
-    PlanningPermissionFullFastTrackAffordable,
-    PlanningPermissionFullHouseholder,
-    PlanningPermissionFullHouseholderListed,
-    PlanningPermissionFullHouseholderRetrospective,
-    PlanningPermissionFullMinor,
-    PlanningPermissionFullMinorListed,
-    PlanningPermissionFullMinorTechnicalDetails,
-    PlanningPermissionFullMajor,
-    PlanningPermissionFullMajorTechnicalDetails,
-    PlanningPermissionFullMajorTechnicalDetailsWaste,
-    PlanningPermissionFullMajorWaste,
-    PlanningPermissionMineralExtraction,
-    PlanningPermissionOutline,
-    PlanningPermissionOutlineAll,
-    PlanningPermissionOutlineSome,
-    PlanningPermissionOutlineMinor,
-    PlanningPermissionOutlineMinorAll,
-    PlanningPermissionOutlineMinorSome,
-    PlanningPermissionOutlineMajor,
-    PlanningPermissionOutlineMajorAll,
-    PlanningPermissionOutlineMajorAllWaste,
-    PlanningPermissionOutlineMajorSome,
-    PlanningPermissionOutlineMajorSomeWaste,
-    PlanningPermissionPermissionInPrinciple,
-    RightsOfWayOrder,
-    WorksToTreesConsent,
-    WorksToTreesNotice
+    AdvertConsentSchema,
+    AmendmentMinorMaterialSchema,
+    AmendmentNonMaterialSchema,
+    ApprovalConditionsSchema,
+    ApprovalReservedMattersSchema,
+    ComplianceConfirmationSchema,
+    EnvironmentalImpactScopingSchema,
+    EnvironmentalImpactScreeningSchema,
+    HazardousSubstanceConsentSchema,
+    HedgerowRemovalNoticeSchema,
+    LandDrainageConsentSchema,
+    LawfulDevelopmentCertificateBreachOfConditionSchema,
+    LawfulDevelopmentCertificateExistingSchema,
+    LawfulDevelopmentCertificateListedBuildingWorksSchema,
+    LawfulDevelopmentCertificateProposedSchema,
+    ListedBuildingConsentSchema,
+    NotifyCompletionSchema,
+    ObligationDischargeSchema,
+    ObligationModifySchema,
+    OnshoreExtractionOilAndGasOtherSchema,
+    OnshoreExtractionOilAndGasPlanningPermissionExtensionSchema,
+    OnshoreExtractionOilAndGasPlanningPermissionWasteSchema,
+    OnshoreExtractionOilAndGasPlanningPermissionWorkingSchema,
+    OnshoreExtractionOilAndGasReviewSchema,
+    OnshoreExtractionOilAndGasVariationSchema,
+    PriorApprovalPart1ClassASchema,
+    PriorApprovalPart1ClassAASchema,
+    PriorApprovalPart3ClassGSchema,
+    PriorApprovalPart3ClassMSchema,
+    PriorApprovalPart3ClassMASchema,
+    PriorApprovalPart3ClassNSchema,
+    PriorApprovalPart3ClassQSchema,
+    PriorApprovalPart3ClassRSchema,
+    PriorApprovalPart3ClassSSchema,
+    PriorApprovalPart3ClassTSchema,
+    PriorApprovalPart3ClassVSchema,
+    PriorApprovalPart4ClassBBSchema,
+    PriorApprovalPart4ClassBCSchema,
+    PriorApprovalPart4ClassCASchema,
+    PriorApprovalPart4ClassESchema,
+    PriorApprovalPart6Schema,
+    PriorApprovalPart6ClassASchema,
+    PriorApprovalPart6ClassBSchema,
+    PriorApprovalPart6ClassESchema,
+    PriorApprovalPart7ClassCSchema,
+    PriorApprovalPart7ClassMSchema,
+    PriorApprovalPart9ClassDSchema,
+    PriorApprovalPart11ClassBSchema,
+    PriorApprovalPart14ClassASchema,
+    PriorApprovalPart14ClassBSchema,
+    PriorApprovalPart14ClassJSchema,
+    PriorApprovalPart14ClassKSchema,
+    PriorApprovalPart14ClassOASchema,
+    PriorApprovalPart16ClassASchema,
+    PriorApprovalPart17Schema,
+    PriorApprovalPart17ClassBSchema,
+    PriorApprovalPart17ClassCSchema,
+    PriorApprovalPart17ClassGSchema,
+    PriorApprovalPart18ClassASchema,
+    PriorApprovalPart19ClassTASchema,
+    PriorApprovalPart20ClassASchema,
+    PriorApprovalPart20ClassAASchema,
+    PriorApprovalPart20ClassABSchema,
+    PriorApprovalPart20ClassACSchema,
+    PriorApprovalPart20ClassADSchema,
+    PriorApprovalPart20ClassZASchema,
+    PlanningPermissionFullAdvertConsentSchema,
+    PlanningPermissionFullDemolitionSchema,
+    PlanningPermissionFullFastTrackAffordableSchema,
+    PlanningPermissionFullHouseholderSchema,
+    PlanningPermissionFullHouseholderListedSchema,
+    PlanningPermissionFullHouseholderRetrospectiveSchema,
+    PlanningPermissionFullMinorSchema,
+    PlanningPermissionFullMinorListedSchema,
+    PlanningPermissionFullMinorTechnicalDetailsSchema,
+    PlanningPermissionFullMajorSchema,
+    PlanningPermissionFullMajorTechnicalDetailsSchema,
+    PlanningPermissionFullMajorTechnicalDetailsWasteSchema,
+    PlanningPermissionFullMajorWasteSchema,
+    PlanningPermissionMineralExtractionSchema,
+    PlanningPermissionOutlineSchema,
+    PlanningPermissionOutlineAllSchema,
+    PlanningPermissionOutlineSomeSchema,
+    PlanningPermissionOutlineMinorSchema,
+    PlanningPermissionOutlineMinorAllSchema,
+    PlanningPermissionOutlineMinorSomeSchema,
+    PlanningPermissionOutlineMajorSchema,
+    PlanningPermissionOutlineMajorAllSchema,
+    PlanningPermissionOutlineMajorAllWasteSchema,
+    PlanningPermissionOutlineMajorSomeSchema,
+    PlanningPermissionOutlineMajorSomeWasteSchema,
+    PlanningPermissionPermissionInPrincipleSchema,
+    RightsOfWayOrderSchema,
+    WorksToTreesConsentSchema,
+    WorksToTreesNoticeSchema
   ],
   {
     title: 'PrototypeApplication',

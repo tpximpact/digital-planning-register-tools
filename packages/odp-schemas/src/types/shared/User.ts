@@ -1,8 +1,8 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 
-export type User = Static<typeof User>
-export const User = Type.Object(
+export type User = Static<typeof UserSchema>
+export const UserSchema = Type.Object(
   {
     role: Type.Union([
       Type.Literal('applicant'),

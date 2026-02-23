@@ -42,11 +42,16 @@ const handleResponse = async <T>(
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => null)
+    const detail =
+      errorData && typeof errorData === 'object' && 'error' in errorData
+        ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (errorData as any).error?.detail
+        : 'An error occurred'
     return {
       data: null,
       status: {
         ...status,
-        detail: errorData?.error?.detail || 'An error occurred'
+        detail
       }
     } as T
   }
@@ -73,7 +78,7 @@ export async function handleBopsGetRequest<T>(
   conversionCallback?: (response: Response) => unknown
 ): Promise<T> {
   const { apiUrl } = getClientConfig(client)
-  console.log(`${apiUrl}${url}`)
+  console.log(`[handleBopsGetRequest] ${apiUrl}${url}`)
   try {
     const response = await fetch(`${apiUrl}${url}`, {
       method: 'GET'

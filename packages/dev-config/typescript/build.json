@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "JavaScript DOM",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "verbatimModuleSyntax": false,
+    "allowImportingTsExtensions": true,
+
+    "module": "ESNext",
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "skipDefaultLibCheck": true,
+
+    "outDir": "dist/types"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "src/**/*.test.*"]
+}

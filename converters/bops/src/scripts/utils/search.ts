@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 import { downloadFixture } from './download-fixture'
-import { BopsSearchEndpoint } from '../../schemas/bops/search'
+import type { BopsSearchEndpoint } from '../../schemas/bops/search'
 import type { Config } from '../download-fixtures'
 
 export const search = async (config: Config): Promise<string[]> => {
@@ -12,10 +12,10 @@ export const search = async (config: Config): Promise<string[]> => {
     config.source === 'bops'
       ? `${config.apiBaseUrl}/search`
       : config.source === 'dpr'
-        ? `${config.apiBaseUrl.replace('%method%', 'search')}`
-        : (() => {
-            throw new Error(`Unknown source: ${config.source}`)
-          })()
+      ? `${config.apiBaseUrl.replace('%method%', 'search')}`
+      : (() => {
+          throw new Error(`Unknown source: ${config.source}`)
+        })()
 
   const searchDir = path.join(config.outputDir, 'search')
   const getSearchFile = (page: number) =>

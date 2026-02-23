@@ -1,9 +1,9 @@
 import { fakerEN_GB as faker } from '@faker-js/faker'
 import type {
-  CommentMetaData,
   SpecialistComments,
   SpecialistCommentsRedacted
 } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/Comment.js'
+import type { CommentMetaData } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/CommentMetaData.js'
 import {
   generateAllPossibleDates,
   type PossibleDates
@@ -14,6 +14,7 @@ import type {
   SpecialistCommentRedacted
 } from 'digital-planning-data-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.js'
 import { generatePostSubmissionFile } from './PostSubmissionFile'
+import { generateAddress } from './Address'
 
 /**
  * Generates realistic dates for a specialist comment lifecycle
@@ -113,6 +114,8 @@ export const generateSpecialistComments = (
 
       return {
         id: faker.string.uuid(),
+        name: { singleLine: faker.person.fullName() },
+        address: generateAddress(),
         organisationSpecialism: faker.datatype.boolean()
           ? faker.company.name()
           : undefined,

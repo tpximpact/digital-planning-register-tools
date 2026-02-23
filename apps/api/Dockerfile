@@ -53,6 +53,7 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 # Copy only the built output and runtime files from build stage
+COPY --from=build /app/apps/api/dist ./dist
 COPY --from=build /app/apps/api/server ./
 
 # Copy the entrypoint script into the container

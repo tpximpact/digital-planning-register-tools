@@ -1,5 +1,8 @@
 {
   "extends": "@dpr/dev-config/typescript/base.json",
+  "compilerOptions": {
+    "verbatimModuleSyntax": false
+  },
   "include": ["src"],
   "exclude": ["node_modules"]
 }

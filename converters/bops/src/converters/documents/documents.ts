@@ -1,7 +1,7 @@
 import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
 import {
   type PostSubmissionPublishedDocumentsResponse,
-  PostSubmissionPublishedDocumentsResponse as PostSubmissionPublishedDocumentsResponseSchema,
+  PostSubmissionPublishedDocumentsResponseSchema,
   type PostSubmissionPublishedDocumentsQueryParams
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { paginateArray } from '@dpr/libs'

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'bun:test'
 import {
-  PublicCommentRedacted as PublicCommentRedactedSchema,
+  PublicCommentRedactedSchema,
   type PublicCommentRedacted
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PublicComment.ts'
 import { Value } from '@sinclair/typebox/value'

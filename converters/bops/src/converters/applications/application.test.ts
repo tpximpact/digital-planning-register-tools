@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'bun:test'
 import {
-  PostSubmissionPublishedApplication as PostSubmissionPublishedApplicationSchema,
+  PostSubmissionPublishedApplicationSchema,
   type PostSubmissionPublishedApplication
 } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
 import { Value } from '@sinclair/typebox/value'
@@ -5159,7 +5159,8 @@ describe('convertBopsApplicationToOdp', () => {
     }
     const result = convertBopsApplicationToOdp(input)
     expect(result).toBeDefined()
-    expect(result.submission.data.property.boundary.site).toBeDefined()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((result as any).submission.data.property.boundary.site).toBeDefined()
     expect(Value.Check(PostSubmissionPublishedApplicationSchema, result)).toBe(
       true
     )
@@ -5214,8 +5215,12 @@ describe('convertBopsApplicationToOdp', () => {
     }
     const result = convertBopsApplicationToOdp(input)
     expect(result).toBeDefined()
-    expect(result.submission.data.property.boundary).not.toBeDefined()
-    expect(result.submission.data.property.boundary?.site).not.toBeDefined()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((result as any).submission.data.property.boundary).not.toBeDefined()
+    expect(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (result as any).submission.data.property.boundary?.site
+    ).not.toBeDefined()
     expect(Value.Check(PostSubmissionPublishedApplicationSchema, result)).toBe(
       true
     )

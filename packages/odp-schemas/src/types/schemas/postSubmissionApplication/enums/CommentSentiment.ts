@@ -1,44 +1,50 @@
 import { Type } from '@sinclair/typebox'
 import type { Static } from '@sinclair/typebox'
 
-type Objection = Static<typeof Objection>
-const Objection = Type.Literal('objection', {
+export type Objection = Static<typeof ObjectionSchema>
+export const ObjectionSchema = Type.Literal('objection', {
   description: 'Objection comment'
 })
 
-type Neutral = Static<typeof Neutral>
-const Neutral = Type.Literal('neutral', { description: 'Neutral comment' })
+export type Neutral = Static<typeof NeutralSchema>
+export const NeutralSchema = Type.Literal('neutral', {
+  description: 'Neutral comment'
+})
 
-type Supportive = Static<typeof Supportive>
-const Supportive = Type.Literal('supportive', {
+export type Supportive = Static<typeof SupportiveSchema>
+export const SupportiveSchema = Type.Literal('supportive', {
   description: 'Supportive comment'
 })
 
-export type PublicCommentSentiment = Static<typeof PublicCommentSentiment>
-export const PublicCommentSentiment = Type.Union(
-  [Objection, Neutral, Supportive],
+export type PublicCommentSentiment = Static<typeof PublicCommentSentimentSchema>
+export const PublicCommentSentimentSchema = Type.Union(
+  [ObjectionSchema, NeutralSchema, SupportiveSchema],
   {
     id: '#PublicCommentSentiment',
     description: 'Types of comments'
   }
 )
 
-type Approved = Static<typeof Approved>
-const Approved = Type.Literal('approved', { description: 'Approved' })
+export type Approved = Static<typeof ApprovedSchema>
+export const ApprovedSchema = Type.Literal('approved', {
+  description: 'Approved'
+})
 
-type AmendmentsNeeded = Static<typeof AmendmentsNeeded>
-const AmendmentsNeeded = Type.Literal('amendmentsNeeded', {
+export type AmendmentsNeeded = Static<typeof AmendmentsNeededSchema>
+export const AmendmentsNeededSchema = Type.Literal('amendmentsNeeded', {
   description: 'Amendments needed'
 })
 
-type Objected = Static<typeof Objected>
-const Objected = Type.Literal('objected', { description: 'Objected' })
+export type Objected = Static<typeof ObjectedSchema>
+export const ObjectedSchema = Type.Literal('objected', {
+  description: 'Objected'
+})
 
 export type SpecialistCommentSentiment = Static<
-  typeof SpecialistCommentSentiment
+  typeof SpecialistCommentSentimentSchema
 >
-export const SpecialistCommentSentiment = Type.Union(
-  [Approved, AmendmentsNeeded, Objected],
+export const SpecialistCommentSentimentSchema = Type.Union(
+  [ApprovedSchema, AmendmentsNeededSchema, ObjectedSchema],
   {
     id: '#SpecialistCommentSentiment',
     description: 'Types of comments'

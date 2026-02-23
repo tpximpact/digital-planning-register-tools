@@ -4,8 +4,8 @@ import {
   convertBopsSpecialistToSpecialistRedacted
 } from './convertBopsSpecialistToSpecialistRedacted'
 import {
-  SpecialistRedacted as SpecialistRedactedSchema,
-  SpecialistCommentRedacted as SpecialistCommentRedactedSchema,
+  SpecialistRedactedSchema,
+  SpecialistCommentRedactedSchema,
   type SpecialistRedacted
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.ts'
 import { Value } from '@sinclair/typebox/value'

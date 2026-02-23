@@ -8,8 +8,8 @@ import {
   generatePostSubmissionFile
 } from './PostSubmissionFile'
 import {
-  PostSubmissionFile,
-  PostSubmissionFileRedacted
+  PostSubmissionFileSchema,
+  PostSubmissionFileRedactedSchema
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
 import { Type } from '@sinclair/typebox'
 import type { PossibleDates } from '../libs/generateAllPossibleDates'
@@ -66,27 +66,29 @@ describe('generatePostSubmissionFiles', () => {
   it('returns an valid PostSubmissionFile[]', () => {
     const obj = generatePostSubmissionFiles()
     expect(obj).toBeDefined()
-    expect(Value.Check(Type.Array(PostSubmissionFile), obj)).toBe(true)
+    expect(Value.Check(Type.Array(PostSubmissionFileSchema), obj)).toBe(true)
   })
 })
 describe('generatePostSubmissionFilesRedacted', () => {
   it('returns an valid PostSubmissionFileRedacted[]', () => {
     const obj = generatePostSubmissionFilesRedacted()
     expect(obj).toBeDefined()
-    expect(Value.Check(Type.Array(PostSubmissionFileRedacted), obj)).toBe(true)
+    expect(Value.Check(Type.Array(PostSubmissionFileRedactedSchema), obj)).toBe(
+      true
+    )
   })
 })
 describe('generatePostSubmissionFileRedacted', () => {
   it('returns an valid PostSubmissionFileRedacted', () => {
     const obj = generatePostSubmissionFileRedacted()
     expect(obj).toBeDefined()
-    expect(Value.Check(PostSubmissionFileRedacted, obj)).toBe(true)
+    expect(Value.Check(PostSubmissionFileRedactedSchema, obj)).toBe(true)
   })
 })
 describe('generatePostSubmissionFile', () => {
   it('returns an valid PostSubmissionFile', () => {
     const obj = generatePostSubmissionFile()
     expect(obj).toBeDefined()
-    expect(Value.Check(PostSubmissionFile, obj)).toBe(true)
+    expect(Value.Check(PostSubmissionFileSchema, obj)).toBe(true)
   })
 })
