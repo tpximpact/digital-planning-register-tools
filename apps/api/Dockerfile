@@ -31,7 +31,6 @@ COPY packages/libs/package.json packages/libs/package.json
 COPY apps/api apps/api
 COPY converters/bops converters/bops
 COPY handlers/bops handlers/bops
-COPY handlers/local handlers/local
 COPY packages/application-generator packages/application-generator
 COPY packages/config packages/config
 COPY packages/dev-config packages/dev-config
