@@ -47,6 +47,10 @@ WORKDIR /app/apps/api
 ENV NODE_ENV=production
 RUN bun run build
 
+
+# CMD ["tail", "-f", "/dev/null"]
+
+
 # ---- Production Stage ----
 FROM oven/bun:1.2.23 AS prod
 
@@ -54,7 +58,7 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 # Copy only the built output and runtime files from build stage
-RUN mkdir -p ./dist
+RUN mkdir ./dist
 COPY --from=build /app/apps/api/dist ./dist
 COPY --from=build /app/apps/api/server ./
 
