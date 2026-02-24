@@ -13,6 +13,8 @@ COPY bunfig.toml bunfig.toml
 
 # Copy over the files for this application
 COPY apps/api/package.json apps/api/package.json
+COPY apps/api/tsconfig.json apps/api/tsconfig.json
+COPY apps/api/tsconfig.build.json apps/api/tsconfig.build.json
 
 # Copy over catalog
 COPY package.json package.json
