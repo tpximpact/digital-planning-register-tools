@@ -47,6 +47,8 @@ WORKDIR /app/apps/api
 ENV NODE_ENV=production
 RUN bun run build
 
+RUN ls -lah /app/apps/api
+RUN ls -lah /app/apps/api/dist
 
 # CMD ["tail", "-f", "/dev/null"]
 
