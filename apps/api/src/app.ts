@@ -108,6 +108,11 @@ const app = (userOptions?: ApiOptions) => {
       .use(standardResponses)
       .use(SchemaModel)
       .use(handleErrors(options))
+      .get('/health', () => {
+        return {
+          status: 'ok'
+        }
+      })
       // .group('/api/@next', (app) => {
       //   return app
       //     .use(applications)
