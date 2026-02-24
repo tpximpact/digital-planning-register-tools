@@ -43,9 +43,10 @@ COPY digital-planning-data-schemas-0.7.5.tgz digital-planning-data-schemas-0.7.5
 # Install dependencies
 RUN bun install
 
-WORKDIR /app/apps/api
 ENV NODE_ENV=production
-RUN bun run build
+RUN bun run workspace @dpr/api bun run build
+
+WORKDIR /app/apps/api
 
 RUN ls -lah /app/apps/api
 RUN ls -lah /app/apps/api/dist
