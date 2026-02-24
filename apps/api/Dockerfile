@@ -53,7 +53,7 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 # Copy only the built output and runtime files from build stage
-RUN mkdir -p dist
+RUN mkdir -p ./dist
 COPY --from=build /app/apps/api/dist ./dist
 COPY --from=build /app/apps/api/server ./
 
