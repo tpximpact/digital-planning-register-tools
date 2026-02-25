@@ -1,5 +1,8 @@
 {
   "extends": "@dpr/dev-config/typescript/build.json",
-    "include": ["src"],
+  "compilerOptions": {
+    "outDir": "dist/types"
+  },
+  "include": ["src"],
   "exclude": ["node_modules", "dist", "src/**/*.test.*"]
 }
