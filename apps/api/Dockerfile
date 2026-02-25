@@ -13,6 +13,8 @@ COPY bunfig.toml bunfig.toml
 
 # Copy over the files for this application
 COPY apps/api/package.json apps/api/package.json
+COPY apps/api/tsconfig.json apps/api/tsconfig.json
+COPY apps/api/tsconfig.build.json apps/api/tsconfig.build.json
 
 # Copy over catalog
 COPY package.json package.json
@@ -31,7 +33,6 @@ COPY packages/libs/package.json packages/libs/package.json
 COPY apps/api apps/api
 COPY converters/bops converters/bops
 COPY handlers/bops handlers/bops
-COPY handlers/local handlers/local
 COPY packages/application-generator packages/application-generator
 COPY packages/config packages/config
 COPY packages/dev-config packages/dev-config
@@ -46,6 +47,9 @@ WORKDIR /app/apps/api
 ENV NODE_ENV=production
 RUN bun run build
 
+# CMD ["tail", "-f", "/dev/null"]
+
+
 # ---- Production Stage ----
 FROM oven/bun:1.2.23 AS prod
 
@@ -53,7 +57,7 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 # Copy only the built output and runtime files from build stage
-COPY --from=build /app/apps/api/dist ./dist
+COPY --from=build /app/apps/api/dist ./
 COPY --from=build /app/apps/api/server ./
 
 # Copy the entrypoint script into the container

@@ -36,3 +36,18 @@ jobs:
 
       - name: Coverage
         run: bun run coverage
+  docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build Docker image
+        run: docker build -t dpr-backend:api -f ./apps/api/Dockerfile .
+
+      - name: Run Docker image
+        run: docker run -d --rm -p 4000:3000 dpr-backend:api
+
+      - name: Test Docker image
+        run: wget -qO- http://localhost:4000/health | grep "ok"
