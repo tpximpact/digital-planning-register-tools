@@ -44,13 +44,9 @@ COPY digital-planning-data-schemas-0.7.5.tgz digital-planning-data-schemas-0.7.5
 # Install dependencies
 RUN bun install
 
-ENV NODE_ENV=production
-RUN bun run workspace @dpr/api bun run build
-
 WORKDIR /app/apps/api
-
-RUN ls -lah /app/apps/api
-RUN ls -lah /app/apps/api/dist
+ENV NODE_ENV=production
+RUN bun run build
 
 # CMD ["tail", "-f", "/dev/null"]
 
@@ -62,8 +58,7 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 # Copy only the built output and runtime files from build stage
-RUN mkdir ./dist
-COPY --from=build /app/apps/api/dist ./dist
+COPY --from=build /app/apps/api/dist ./
 COPY --from=build /app/apps/api/server ./
 
 # Copy the entrypoint script into the container
