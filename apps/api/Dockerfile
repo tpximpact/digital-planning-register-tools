@@ -7,7 +7,6 @@ FROM oven/bun:1.2.23 AS build
 WORKDIR /app
 
 # Copy and install dependencies
-COPY scripts/ scripts/
 COPY package.json package.json
 COPY bun.lock bun.lock
 COPY bunfig.toml bunfig.toml
