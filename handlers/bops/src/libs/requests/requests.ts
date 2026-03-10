@@ -8,7 +8,7 @@ import { standardResponseObjects } from '@dpr/api'
  */
 export const getClientConfig = (client: string) => {
   // const key = `${client.toUpperCase()}_BOPS_API_KEY`
-  const url = `${client.toUpperCase()}_BOPS_API_URL`
+  const url = `${client.toUpperCase().replace('-', '_')}_BOPS_API_URL`
   // const apiKey = process.env?.[key]
   const apiKey = undefined
   const apiUrl = process.env?.[url]
