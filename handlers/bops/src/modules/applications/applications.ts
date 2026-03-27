@@ -53,8 +53,10 @@ export const fetchApplication = async (
 ): Promise<PostSubmissionPublishedApplicationResponse> => {
   try {
     const url = getPublicApplicationUrl(applicationId)
-    const results =
-      await handleBopsGetRequest<PostSubmissionPublishedApplicationResponse>(
+    const submissionUrl = getPublicApplicationSubmissionUrl(applicationId)
+
+    const [results, submission] = await Promise.all([
+      handleBopsGetRequest<PostSubmissionPublishedApplicationResponse>(
         client,
         url,
         async (response: Response) => {
@@ -66,25 +68,19 @@ export const fetchApplication = async (
           }
           return input
         }
-      )
+      ),
+      handleBopsGetRequest<unknown>(client, submissionUrl).catch((e) => {
+        console.warn('Couldnt fetch submission', e)
+        return null
+      })
+    ])
 
-    try {
-      const submissionUrl = getPublicApplicationSubmissionUrl(applicationId)
-      const submission = await handleBopsGetRequest<unknown>(
-        client,
-        submissionUrl
-      )
-
-      if (submission && (submission as { submission?: unknown }).submission) {
-        if (results && results?.data) {
-          results.data.submission = (
-            submission as { submission: unknown }
-          ).submission
-        }
+    if (submission && (submission as { submission?: unknown }).submission) {
+      if (results && results?.data) {
+        results.data.submission = (
+          submission as { submission: unknown }
+        ).submission
       }
-    } catch (e) {
-      console.warn('Couldnt fetch submission', e)
-      // throw new Error('Error fetching applications')
     }
 
     return results
