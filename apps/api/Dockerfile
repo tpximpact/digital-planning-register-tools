@@ -69,6 +69,13 @@ ENV PORT=3000
 # Expose the port on which the API will listen
 EXPOSE 3000
 
+# Set environment variable to disable stdout buffering for Bun
+ENV BUN_STDOUT_BUFFERING=0
+
+# Add a health check to ensure the container is healthy
+HEALTHCHECK --interval=10s --timeout=5s --start-period=15s \
+  CMD curl -f http://localhost:${PORT:-3000}/health || exit 1
+
 # Run the server when the container launches
 ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["./server"]
