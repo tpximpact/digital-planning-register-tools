@@ -228,3 +228,14 @@ const app = (userOptions?: HandlerBopsOptions) => {
 
 export { app }
 export type App = typeof app
+
+export {
+  fetchAllApplications,
+  fetchApplication
+} from './modules/applications'
+export { fetchAllApplicationDocuments } from './modules/documents'
+export { fetchAllApplicationPublicComments } from './modules/publicComments'
+export {
+  fetchAllApplicationSpecialistComments,
+  fetchApplicationSpecialistComment
+} from './modules/specialistComments'
