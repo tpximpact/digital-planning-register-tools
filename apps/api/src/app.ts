@@ -6,24 +6,19 @@ import { config, documentation } from './config'
 import { standardResponses } from './libs/standard-responses'
 import { handleErrors } from './libs/handle-errors'
 
-import { app as handlerBops } from '@dpr/handler-bops'
+import {
+  app as handlerBops,
+  fetchAllApplications as fetchAllBopsApplications,
+  fetchApplication as fetchBopsApplication,
+  fetchAllApplicationDocuments as fetchAllBopsApplicationDocuments,
+  fetchAllApplicationPublicComments as fetchAllBopsApplicationPublicComments,
+  fetchAllApplicationSpecialistComments as fetchAllBopsApplicationSpecialistComments,
+  fetchApplicationSpecialistComment as fetchBopsApplicationSpecialistComment
+} from '@dpr/handler-bops'
 import { showRoutes } from './libs/show-routes'
 import { SchemaModel } from './schema'
 import { api } from './modules/api'
 import { requireClientHeaders } from './libs/client-headers'
-import { proxyBopsGet } from './libs/handle-requests'
-
-import { ENV_HANDLER_API as ENV } from '@dpr/config'
-import type {
-  PostSubmissionPublishedApplicationResponse,
-  PostSubmissionPublishedApplicationsResponse,
-  PostSubmissionPublishedDocumentsResponse,
-  PostSubmissionPublishedPublicCommentsResponse,
-  PostSubmissionPublishedSpecialistsResponse,
-  PostSubmissionPublishedSpecialistResponse
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-
-const { API_BASE_URL } = ENV
 
 /**
  * @file Types for authentication middleware
@@ -83,7 +78,7 @@ const app = (userOptions?: ApiOptions) => {
       // )
       .use(
         openapi({
-          enabled: true,
+          enabled: !isProduction,
           path: '/docs',
           provider: 'swagger-ui',
           exclude: {
@@ -490,19 +485,10 @@ const app = (userOptions?: ApiOptions) => {
           app
             .get(
               `/applications`,
-              async ({ handler, client, service, query }) => {
+              async ({ handler, client, query }) => {
                 switch (handler) {
                   case 'bops': {
-                    const result =
-                      await proxyBopsGet<PostSubmissionPublishedApplicationsResponse>(
-                        {
-                          baseUrl: API_BASE_URL,
-                          path: `/api/handlers/bops/public/applications`,
-                          query,
-                          client,
-                          service
-                        }
-                      )
+                    const result = await fetchAllBopsApplications(client, query)
                     const { data, status } = result
                     const pagination =
                       'pagination' in result ? result.pagination : undefined
@@ -537,19 +523,13 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId`,
-              async ({ handler, client, service, query, params }) => {
+              async ({ handler, client, params }) => {
                 switch (handler) {
                   case 'bops': {
-                    const result =
-                      await proxyBopsGet<PostSubmissionPublishedApplicationResponse>(
-                        {
-                          baseUrl: API_BASE_URL,
-                          path: `/api/handlers/bops/public/applications/${params.applicationId}`,
-                          query,
-                          client,
-                          service
-                        }
-                      )
+                    const result = await fetchBopsApplication(
+                      client,
+                      params.applicationId
+                    )
                     const { data, status } = result
                     const pagination =
                       'pagination' in result ? result.pagination : undefined
@@ -584,19 +564,14 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/documents`,
-              async ({ handler, client, service, query, params }) => {
+              async ({ handler, client, query, params }) => {
                 switch (handler) {
                   case 'bops': {
-                    const result =
-                      await proxyBopsGet<PostSubmissionPublishedDocumentsResponse>(
-                        {
-                          baseUrl: API_BASE_URL,
-                          path: `/api/handlers/bops/public/applications/${params.applicationId}/documents`,
-                          query,
-                          client,
-                          service
-                        }
-                      )
+                    const result = await fetchAllBopsApplicationDocuments(
+                      client,
+                      params.applicationId,
+                      query
+                    )
                     const { data, status } = result
                     const pagination =
                       'pagination' in result ? result.pagination : undefined
@@ -669,19 +644,14 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/publicComments`,
-              async ({ handler, client, service, query, params }) => {
+              async ({ handler, client, query, params }) => {
                 switch (handler) {
                   case 'bops': {
-                    const result =
-                      await proxyBopsGet<PostSubmissionPublishedPublicCommentsResponse>(
-                        {
-                          baseUrl: API_BASE_URL,
-                          path: `/api/handlers/bops/public/applications/${params.applicationId}/publicComments`,
-                          query,
-                          client,
-                          service
-                        }
-                      )
+                    const result = await fetchAllBopsApplicationPublicComments(
+                      client,
+                      params.applicationId,
+                      query
+                    )
                     const { data, status } = result
                     const pagination =
                       'pagination' in result ? result.pagination : undefined
@@ -754,18 +724,14 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/specialistComments`,
-              async ({ handler, client, service, query, params }) => {
+              async ({ handler, client, query, params }) => {
                 switch (handler) {
                   case 'bops': {
                     const result =
-                      await proxyBopsGet<PostSubmissionPublishedSpecialistsResponse>(
-                        {
-                          baseUrl: API_BASE_URL,
-                          path: `/api/handlers/bops/public/applications/${params.applicationId}/specialistComments`,
-                          query,
-                          client,
-                          service
-                        }
+                      await fetchAllBopsApplicationSpecialistComments(
+                        client,
+                        params.applicationId,
+                        query
                       )
                     const { data, status } = result
                     const pagination =
@@ -804,19 +770,15 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/specialistComments/:specialistId`,
-              async ({ handler, client, service, query, params }) => {
+              async ({ handler, client, query, params }) => {
                 switch (handler) {
                   case 'bops': {
-                    const result =
-                      await proxyBopsGet<PostSubmissionPublishedSpecialistResponse>(
-                        {
-                          baseUrl: API_BASE_URL,
-                          path: `/api/handlers/bops/public/applications/${params.applicationId}/specialistComments/${params.specialistId}`,
-                          query,
-                          client,
-                          service
-                        }
-                      )
+                    const result = await fetchBopsApplicationSpecialistComment(
+                      client,
+                      params.applicationId,
+                      params.specialistId,
+                      query
+                    )
                     const { data, status } = result
                     const pagination =
                       'pagination' in result ? result.pagination : undefined
