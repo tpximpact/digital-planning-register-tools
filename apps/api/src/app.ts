@@ -77,28 +77,26 @@ const app = (userOptions?: ApiOptions) => {
       //   })
       // )
       .use(
-        openapi({
-          enabled: !isProduction,
-          path: '/docs',
-          provider: 'swagger-ui',
-          exclude: {
-            paths: ['/']
-            //  /^\/api\/handlers\/bops/ Exclude all BOPS handler routes from OpenAPI documentation
-          },
-          documentation,
-          references: fromTypes(
-            isProduction ? path.resolve('dist/types/app.d.ts') : 'src/app.ts',
-            {
-              projectRoot: isProduction
-                ? path.join(import.meta.dir)
-                : path.join(import.meta.dir, '..'),
-              tsconfigPath: isProduction
-                ? path.join(import.meta.dir, 'tsconfig.build.json')
-                : path.join(import.meta.dir, '..', 'tsconfig.build.json'),
-              debug: options.debug
-            }
-          )
-        })
+        isProduction
+          ? new Elysia({ name: 'openapi-disabled' })
+          : openapi({
+              path: '/docs',
+              provider: 'swagger-ui',
+              exclude: {
+                paths: ['/']
+                //  /^\/api\/handlers\/bops/ Exclude all BOPS handler routes from OpenAPI documentation
+              },
+              documentation,
+              references: fromTypes('src/app.ts', {
+                projectRoot: path.join(import.meta.dir, '..'),
+                tsconfigPath: path.join(
+                  import.meta.dir,
+                  '..',
+                  'tsconfig.build.json'
+                ),
+                debug: options.debug
+              })
+            })
       )
       .use(standardResponses)
       .use(SchemaModel)
