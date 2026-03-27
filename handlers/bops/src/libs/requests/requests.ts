@@ -79,17 +79,24 @@ export async function handleBopsGetRequest<T>(
 ): Promise<T> {
   const { apiUrl } = getClientConfig(client)
   console.log(`[handleBopsGetRequest] ${apiUrl}${url}`)
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), 25000)
   try {
     const response = await fetch(`${apiUrl}${url}`, {
-      method: 'GET'
+      method: 'GET',
+      signal: controller.signal
     })
+    clearTimeout(timeoutId)
     return await handleResponse<T>(response, conversionCallback)
   } catch (error) {
+    clearTimeout(timeoutId)
+    const isTimeout =
+      error instanceof Error && error.name === 'AbortError'
     return {
       data: null,
       status: {
-        code: 500,
-        message: 'Internal server error',
+        code: isTimeout ? 504 : 500,
+        message: isTimeout ? 'Gateway Timeout' : 'Internal server error',
         detail: (error as Error).message
       }
     } as T
