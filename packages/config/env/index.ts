@@ -52,18 +52,15 @@ export const ENV_HANDLER_BOPS = {
       ? 'i-am-the-admin-coo-coo-ca-choo'
       : process.env.INTERNAL_API_TOKEN ?? '',
   // if applications endpoint is still in 'legacy' mode (ie not ODP yet)
-  BOPS_LEGACY_APPLICATIONS:
-    process.env.BOPS_LEGACY_APPLICATIONS === 'true' ? 'true' : 'false',
-  BOPS_LEGACY_APPLICATION:
-    process.env.BOPS_LEGACY_APPLICATION === 'true' ? 'true' : 'false',
-  BOPS_LEGACY_DOCUMENTS:
-    process.env.BOPS_LEGACY_DOCUMENTS === 'true' ? 'true' : 'false',
+  BOPS_LEGACY_APPLICATIONS: process.env.BOPS_LEGACY_APPLICATIONS === 'true',
+  BOPS_LEGACY_APPLICATION: process.env.BOPS_LEGACY_APPLICATION === 'true',
+  BOPS_LEGACY_DOCUMENTS: process.env.BOPS_LEGACY_DOCUMENTS === 'true',
   BOPS_LEGACY_PUBLIC_COMMENTS:
-    process.env.BOPS_LEGACY_PUBLIC_COMMENTS === 'true' ? 'true' : 'false',
+    process.env.BOPS_LEGACY_PUBLIC_COMMENTS === 'true',
   BOPS_LEGACY_SPECIALIST_COMMENTS:
-    process.env.BOPS_LEGACY_SPECIALIST_COMMENTS === 'true' ? 'true' : 'false',
+    process.env.BOPS_LEGACY_SPECIALIST_COMMENTS === 'true',
   BOPS_LEGACY_SPECIALIST_COMMENT:
-    process.env.BOPS_LEGACY_SPECIALIST_COMMENT === 'true' ? 'true' : 'false'
+    process.env.BOPS_LEGACY_SPECIALIST_COMMENT === 'true'
 }
 
 // applications - api
@@ -80,18 +77,15 @@ export const ENV_HANDLER_API = {
   API_BASE_URL:
     process.env.API_BASE_URL || `http://localhost:${PORT(ports['apps-api'])}`,
   // if applications endpoint is still in 'legacy' mode (ie not ODP yet)
-  BOPS_LEGACY_APPLICATIONS:
-    process.env.BOPS_LEGACY_APPLICATIONS === 'true' ? 'true' : 'false',
-  BOPS_LEGACY_APPLICATION:
-    process.env.BOPS_LEGACY_APPLICATION === 'true' ? 'true' : 'false',
-  BOPS_LEGACY_DOCUMENTS:
-    process.env.BOPS_LEGACY_DOCUMENTS === 'true' ? 'true' : 'false',
+  BOPS_LEGACY_APPLICATIONS: process.env.BOPS_LEGACY_APPLICATIONS === 'true',
+  BOPS_LEGACY_APPLICATION: process.env.BOPS_LEGACY_APPLICATION === 'true',
+  BOPS_LEGACY_DOCUMENTS: process.env.BOPS_LEGACY_DOCUMENTS === 'true',
   BOPS_LEGACY_PUBLIC_COMMENTS:
-    process.env.BOPS_LEGACY_PUBLIC_COMMENTS === 'true' ? 'true' : 'false',
+    process.env.BOPS_LEGACY_PUBLIC_COMMENTS === 'true',
   BOPS_LEGACY_SPECIALIST_COMMENTS:
-    process.env.BOPS_LEGACY_SPECIALIST_COMMENTS === 'true' ? 'true' : 'false',
+    process.env.BOPS_LEGACY_SPECIALIST_COMMENTS === 'true',
   BOPS_LEGACY_SPECIALIST_COMMENT:
-    process.env.BOPS_LEGACY_SPECIALIST_COMMENT === 'true' ? 'true' : 'false'
+    process.env.BOPS_LEGACY_SPECIALIST_COMMENT === 'true'
 }
 
 // export const API_URL = process.env.API_URL ?? 'http://localhost:3000'
