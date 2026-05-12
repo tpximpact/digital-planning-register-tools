@@ -1,6 +1,6 @@
 services:
   dpr-db:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-dpr}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
