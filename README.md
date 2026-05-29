@@ -5,7 +5,7 @@
 </p>
   
 <p align="center">
-    <em>Digital Planning Register</em>
+    <em>Digital Planning Register Backend</em>
 </p>
 
 ---
@@ -17,14 +17,18 @@
 </p>
 
 <p align="center">
-    <em>Screenshot of the planning register frontend</em>         
+    <em>Screenshot of the planning register (frontend)</em>         
 </p>
 
 ---
 
 # Introduction
 
-This repository contains the backend code for the Digital Planning Register (DPR) project. The DPR is a system for indexing and viewing public planning applications in the [Post-submission published application](https://github.com/theopensystemslab/digital-planning-data-schemas/) format. The data is sourced from local authorities' ODP compliant APIs, indexed, and made available via a public API and web interface.
+The Digital Planning Register (DPR) is a system for indexing and viewing public planning applications in the [Post-submission published application](https://github.com/theopensystemslab/digital-planning-data-schemas/) format.
+
+It is composed of two parts, the backend (this repository) and the frontend, a headless application that displays the data from the backend.
+
+The DPR uses data from any ODP compliant API. It also supports the Back Office Planning System (BOPS) by converting the data into an ODP compliant format.
 
 - You can view the live site at [planningregister.org](https://planningregister.org).
 - To read more about the schema, see the [digital-planning-data-schemas](https://github.com/theopensystemslab/digital-planning-data-schemas/) repository.
@@ -104,6 +108,12 @@ To install dependencies, run:
 
 ```bash
 bun install
+```
+
+To run whats in production, use the following command:
+
+```bash
+bun workspace @dpr/api bun run dev
 ```
 
 To run the whole stack, use the following command:

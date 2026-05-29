@@ -85,7 +85,8 @@ export const ENV_HANDLER_API = {
   BOPS_LEGACY_SPECIALIST_COMMENTS:
     process.env.BOPS_LEGACY_SPECIALIST_COMMENTS === 'true',
   BOPS_LEGACY_SPECIALIST_COMMENT:
-    process.env.BOPS_LEGACY_SPECIALIST_COMMENT === 'true'
+    process.env.BOPS_LEGACY_SPECIALIST_COMMENT === 'true',
+  STATUS_API_KEY: process.env.STATUS_API_KEY ?? ''
 }
 
 // export const API_URL = process.env.API_URL ?? 'http://localhost:3000'
