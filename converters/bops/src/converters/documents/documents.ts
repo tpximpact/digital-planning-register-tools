@@ -1,13 +1,12 @@
 import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
 import {
   type PostSubmissionPublishedDocumentsResponse,
-  PostSubmissionPublishedDocumentsResponseSchema,
   type PostSubmissionPublishedDocumentsQueryParams
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { paginateArray } from '@dpr/libs'
 import { convertBopsFileToPostSubmissionFileRedacted } from './convertBopsFileToPostSubmissionFileRedacted'
-import { Value } from '@sinclair/typebox/value'
 import { type PostSubmissionFileRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
+import { PostSubmissionPublishedDocumentsResponseChecker } from '@dpr/libs'
 
 export const bopsDocumentsEndpointToOdp = (
   // allowed since it could really be anything and we don't need the typeguards from unknown
@@ -16,7 +15,7 @@ export const bopsDocumentsEndpointToOdp = (
   searchParams: PostSubmissionPublishedDocumentsQueryParams,
   status: ApiResponseStatus
 ): PostSubmissionPublishedDocumentsResponse => {
-  if (Value.Check(PostSubmissionPublishedDocumentsResponseSchema, input)) {
+  if (PostSubmissionPublishedDocumentsResponseChecker.Check(input)) {
     return input
   }
 
@@ -65,7 +64,7 @@ export const bopsDocumentsEndpointToOdp = (
     status
   }
 
-  if (Value.Check(PostSubmissionPublishedDocumentsResponseSchema, results)) {
+  if (PostSubmissionPublishedDocumentsResponseChecker.Check(results)) {
     return results
   }
 

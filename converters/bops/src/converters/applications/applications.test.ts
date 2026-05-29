@@ -1,10 +1,8 @@
 import { describe, it, expect, spyOn } from 'bun:test'
-import { Value } from '@sinclair/typebox/value'
-import {
-  type PostSubmissionPublishedApplicationsResponse,
-  PostSubmissionPublishedApplicationsResponseSchema
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
+import { type PostSubmissionPublishedApplicationsResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { bopsApplicationsEndpointToOdp } from './applications'
+import { PostSubmissionPublishedApplicationsResponseChecker } from '@dpr/libs'
+import { assertSchema } from '@dpr/test-libs'
 
 describe('bopsApplicationsEndpointToOdp', () => {
   it('Does nothing if data is already valid', () => {
@@ -2088,9 +2086,7 @@ describe('bopsApplicationsEndpointToOdp', () => {
       message: 'OK'
     })
     expect(result).toBe(valid) // should return the same object by reference if no changes made
-    expect(
-      Value.Check(PostSubmissionPublishedApplicationsResponseSchema, result)
-    ).toBe(true)
+    assertSchema(PostSubmissionPublishedApplicationsResponseChecker, result)
   })
 
   it('Converts an invalid endpoint', () => {
@@ -2537,9 +2533,7 @@ describe('bopsApplicationsEndpointToOdp', () => {
 
     warnSpy.mockRestore()
 
-    expect(
-      Value.Check(PostSubmissionPublishedApplicationsResponseSchema, result)
-    ).toBe(true)
+    assertSchema(PostSubmissionPublishedApplicationsResponseChecker, result)
 
     expect(result.pagination).toEqual({
       resultsPerPage: 10,
@@ -5476,9 +5470,7 @@ describe('bopsApplicationsEndpointToOdp', () => {
     )
 
     warnSpy.mockRestore()
-    expect(
-      Value.Check(PostSubmissionPublishedApplicationsResponseSchema, result)
-    ).toBe(true)
+    assertSchema(PostSubmissionPublishedApplicationsResponseChecker, result)
 
     expect(result.pagination).toEqual({
       resultsPerPage: 50,

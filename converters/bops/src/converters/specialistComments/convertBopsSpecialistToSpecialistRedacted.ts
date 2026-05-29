@@ -1,20 +1,21 @@
 import { convertDateTimeToUtc } from '../../utils/formatDates'
-import { Value } from '@sinclair/typebox/value'
 import {
   type SpecialistCommentRedacted,
-  SpecialistCommentRedactedSchema,
-  SpecialistRedactedSchema,
   type SpecialistRedacted
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.ts'
 import { convertBopsFileToPostSubmissionFileRedacted } from '../documents'
 import type { PostSubmissionFileRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
+import {
+  SpecialistCommentRedactedChecker,
+  SpecialistRedactedChecker
+} from '@dpr/libs'
 
 export const convertBopsSpecialistCommentToSpecialistCommentRedacted = (
   // allowed since it could really be anything and we don't need the typeguards from unknown
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   comment: any
 ): SpecialistCommentRedacted => {
-  if (Value.Check(SpecialistCommentRedactedSchema, comment)) {
+  if (SpecialistCommentRedactedChecker.Check(comment)) {
     return comment
   }
 
@@ -51,7 +52,7 @@ export const convertBopsSpecialistCommentToSpecialistCommentRedacted = (
     }
   }
 
-  if (Value.Check(SpecialistCommentRedactedSchema, object)) {
+  if (SpecialistCommentRedactedChecker.Check(object)) {
     return object
   }
 
@@ -63,7 +64,7 @@ export const convertBopsSpecialistToSpecialistRedacted = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   specialist: any
 ): SpecialistRedacted => {
-  if (Value.Check(SpecialistRedactedSchema, specialist)) {
+  if (SpecialistRedactedChecker.Check(specialist)) {
     return specialist
   }
 
@@ -106,7 +107,7 @@ export const convertBopsSpecialistToSpecialistRedacted = (
     comments: convertedComments
   }
 
-  if (Value.Check(SpecialistRedactedSchema, obj)) {
+  if (SpecialistRedactedChecker.Check(obj)) {
     return obj
   }
 

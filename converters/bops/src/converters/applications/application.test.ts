@@ -1,10 +1,8 @@
 import { describe, it, expect } from 'bun:test'
-import {
-  PostSubmissionPublishedApplicationSchema,
-  type PostSubmissionPublishedApplication
-} from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
-import { Value } from '@sinclair/typebox/value'
+import { type PostSubmissionPublishedApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
 import { convertBopsApplicationToOdp } from './application'
+import { PostSubmissionPublishedApplicationChecker } from '@dpr/libs'
+import { assertSchema } from '@dpr/test-libs'
 
 describe('convertBopsApplicationToOdp', () => {
   it(`Does nothing if data is already valid`, () => {
@@ -2060,9 +2058,7 @@ describe('convertBopsApplicationToOdp', () => {
     }
     const result = convertBopsApplicationToOdp(input)
     expect(result).toBe(input) // should return the same object by reference if no changes made
-    expect(Value.Check(PostSubmissionPublishedApplicationSchema, result)).toBe(
-      true
-    )
+    assertSchema(PostSubmissionPublishedApplicationChecker, result)
   })
 
   const applications = [
@@ -4953,9 +4949,7 @@ describe('convertBopsApplicationToOdp', () => {
   applications.forEach((file, i) => {
     it(`Converts each application ${i}`, () => {
       const result = convertBopsApplicationToOdp(file)
-      expect(
-        Value.Check(PostSubmissionPublishedApplicationSchema, result)
-      ).toBe(true)
+      assertSchema(PostSubmissionPublishedApplicationChecker, result)
     })
   })
 
@@ -5161,9 +5155,7 @@ describe('convertBopsApplicationToOdp', () => {
     expect(result).toBeDefined()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect((result as any).submission.data.property.boundary.site).toBeDefined()
-    expect(Value.Check(PostSubmissionPublishedApplicationSchema, result)).toBe(
-      true
-    )
+    assertSchema(PostSubmissionPublishedApplicationChecker, result)
   })
 
   it('converts applications with no boundary site', () => {
@@ -5221,9 +5213,7 @@ describe('convertBopsApplicationToOdp', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (result as any).submission.data.property.boundary?.site
     ).not.toBeDefined()
-    expect(Value.Check(PostSubmissionPublishedApplicationSchema, result)).toBe(
-      true
-    )
+    assertSchema(PostSubmissionPublishedApplicationChecker, result)
   })
 
   it('converts applications with localPlanningAuthority settings', () => {
@@ -5246,9 +5236,7 @@ describe('convertBopsApplicationToOdp', () => {
     expect(
       result.data.localPlanningAuthority.publicCommentsAcceptedUntilDecision
     ).toBe(true)
-    expect(Value.Check(PostSubmissionPublishedApplicationSchema, result)).toBe(
-      true
-    )
+    assertSchema(PostSubmissionPublishedApplicationChecker, result)
   })
 
   it('converts applications with incorrect localPlanningAuthority settings', () => {
@@ -5271,8 +5259,6 @@ describe('convertBopsApplicationToOdp', () => {
     expect(
       result.data.localPlanningAuthority.publicCommentsAcceptedUntilDecision
     ).toBe(false)
-    expect(Value.Check(PostSubmissionPublishedApplicationSchema, result)).toBe(
-      true
-    )
+    assertSchema(PostSubmissionPublishedApplicationChecker, result)
   })
 })

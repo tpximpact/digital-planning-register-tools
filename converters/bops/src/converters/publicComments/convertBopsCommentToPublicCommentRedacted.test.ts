@@ -1,10 +1,8 @@
 import { describe, it, expect } from 'bun:test'
-import {
-  PublicCommentRedactedSchema,
-  type PublicCommentRedacted
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PublicComment.ts'
-import { Value } from '@sinclair/typebox/value'
+import { type PublicCommentRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PublicComment.ts'
 import { convertBopsCommentToPublicCommentRedacted } from './convertBopsCommentToPublicCommentRedacted'
+import { PublicCommentRedactedChecker } from '@dpr/libs'
+import { assertSchema } from '@dpr/test-libs'
 
 describe('convertBopsCommentToPublicCommentRedacted', () => {
   const validPublicCommentRedacted: PublicCommentRedacted[] = [
@@ -50,7 +48,7 @@ describe('convertBopsCommentToPublicCommentRedacted', () => {
     it(`Does nothing if data is already valid ${i}`, () => {
       const result = convertBopsCommentToPublicCommentRedacted(comment)
       expect(result).toBe(comment) // should return the same object by reference if no changes made
-      expect(Value.Check(PublicCommentRedactedSchema, result)).toBe(true)
+      assertSchema(PublicCommentRedactedChecker, result)
     })
   })
 
@@ -78,7 +76,7 @@ describe('convertBopsCommentToPublicCommentRedacted', () => {
   bopsPublicComments.forEach((comment, i) => {
     it(`Converts BOPS public comment from given examples ${i}`, () => {
       const result = convertBopsCommentToPublicCommentRedacted(comment)
-      expect(Value.Check(PublicCommentRedactedSchema, result)).toBe(true)
+      assertSchema(PublicCommentRedactedChecker, result)
     })
   })
 
@@ -105,6 +103,6 @@ describe('convertBopsCommentToPublicCommentRedacted', () => {
     }
     const result = convertBopsCommentToPublicCommentRedacted(comment)
     expect(result.author.name.singleLine).toBe('John Doe')
-    expect(Value.Check(PublicCommentRedactedSchema, result)).toBe(true)
+    assertSchema(PublicCommentRedactedChecker, result)
   })
 })

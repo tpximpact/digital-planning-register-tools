@@ -1,13 +1,12 @@
-import {
-  type PostSubmissionPublishedPublicCommentsResponse,
-  PostSubmissionPublishedPublicCommentsResponseSchema
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import { Value } from '@sinclair/typebox/value'
-import { PaginationSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
-import { PublicCommentSummarySchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/CommentSummary.ts'
+import { type PostSubmissionPublishedPublicCommentsResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
 import type { PublicCommentRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PublicComment.ts'
 import { convertBopsCommentToPublicCommentRedacted } from './convertBopsCommentToPublicCommentRedacted'
+import {
+  PostSubmissionPublishedPublicCommentsResponseChecker,
+  PublicCommentSummaryChecker,
+  PaginationChecker
+} from '@dpr/libs'
 /**
  * Converts a BopsPublicCommentsEndpoint object to a PostSubmissionPublishedPublicCommentsResponse.
  * Validates input, summary, pagination, and each comment.
@@ -19,18 +18,18 @@ export const bopsPublicCommentsEndpointToOdp = (
   input: any,
   status: ApiResponseStatus
 ): PostSubmissionPublishedPublicCommentsResponse => {
-  if (Value.Check(PostSubmissionPublishedPublicCommentsResponseSchema, input)) {
+  if (PostSubmissionPublishedPublicCommentsResponseChecker.Check(input)) {
     return input
   }
 
   const { summary, comments, pagination } = input
 
   // Validate pagination and summary
-  if (!Value.Check(PaginationSchema, pagination)) {
+  if (!PaginationChecker.Check(pagination)) {
     console.warn('Invalid Pagination:', pagination)
     throw new Error('Invalid Pagination')
   }
-  if (!Value.Check(PublicCommentSummarySchema, summary)) {
+  if (!PublicCommentSummaryChecker.Check(summary)) {
     console.warn('Invalid PublicCommentSummary:', summary)
     throw new Error('Invalid PublicCommentSummary')
   }
@@ -79,9 +78,7 @@ export const bopsPublicCommentsEndpointToOdp = (
     status
   }
 
-  if (
-    Value.Check(PostSubmissionPublishedPublicCommentsResponseSchema, results)
-  ) {
+  if (PostSubmissionPublishedPublicCommentsResponseChecker.Check(results)) {
     return results
   }
 

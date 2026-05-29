@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'bun:test'
-import { Value } from '@sinclair/typebox/value'
 import {
   generateCommentMetadata,
   generatePublicComment,
@@ -9,25 +8,25 @@ import {
   generatePublicCommentSummary,
   generateTopicAndComments
 } from './PublicComments'
-import { Type } from '@sinclair/typebox'
 import {
-  PublicCommentSchema,
-  PublicCommentRedactedSchema,
-  TopicAndCommentsSchema,
   type PublicComment,
   type PublicCommentRedacted
 } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PublicComment.ts'
 import type { PossibleDates } from '../libs/generateAllPossibleDates'
 import {
-  PublicCommentsRedactedSchema,
-  PublicCommentsSchema
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/Comment.ts'
+  assertSchema,
+  PublicCommentChecker,
+  PublicCommentsChecker,
+  PublicCommentsRedactedChecker,
+  TopicAndCommentsArrayChecker
+} from '@dpr/test-libs'
+import { PublicCommentRedactedChecker } from '@dpr/libs'
 
 describe('generateTopicAndComments', () => {
   it('returns an valid PostSubmissionFile[]', () => {
     const obj = generateTopicAndComments()
     expect(obj).toBeDefined()
-    expect(Value.Check(Type.Array(TopicAndCommentsSchema), obj)).toBe(true)
+    assertSchema(TopicAndCommentsArrayChecker, obj)
   })
 })
 
@@ -77,7 +76,7 @@ describe('generatePublicComment', () => {
   it('returns an valid PublicComment', () => {
     const obj = generatePublicComment()
     expect(obj).toBeDefined()
-    expect(Value.Check(PublicCommentSchema, obj)).toBe(true)
+    assertSchema(PublicCommentChecker, obj)
   })
 })
 
@@ -85,7 +84,7 @@ describe('generatePublicCommentRedacted', () => {
   it('returns an valid PublicCommentRedacted', () => {
     const obj = generatePublicCommentRedacted()
     expect(obj).toBeDefined()
-    expect(Value.Check(PublicCommentRedactedSchema, obj)).toBe(true)
+    assertSchema(PublicCommentRedactedChecker, obj)
   })
 })
 
@@ -142,7 +141,7 @@ describe('generatePublicComments', () => {
     }
     const obj = generatePublicComments(fakeDates as unknown as PossibleDates)
     expect(obj).toBeDefined()
-    expect(Value.Check(PublicCommentsSchema, obj)).toBe(true)
+    assertSchema(PublicCommentsChecker, obj)
   })
 })
 
@@ -163,6 +162,6 @@ describe('generatePublicCommentsRedacted', () => {
       fakeDates as unknown as PossibleDates
     )
     expect(obj).toBeDefined()
-    expect(Value.Check(PublicCommentsRedactedSchema, obj)).toBe(true)
+    assertSchema(PublicCommentsRedactedChecker, obj)
   })
 })

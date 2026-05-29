@@ -1,11 +1,9 @@
 import { describe, it, expect, spyOn } from 'bun:test'
 import type { SpecialistCommentRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.ts'
-import { Value } from '@sinclair/typebox/value'
-import {
-  type PostSubmissionPublishedSpecialistsResponse,
-  PostSubmissionPublishedSpecialistsResponseSchema
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
+import { type PostSubmissionPublishedSpecialistsResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { bopsSpecialistCommentsEndpointToOdp } from './specialistComments'
+import { PostSubmissionPublishedSpecialistsResponseChecker } from '@dpr/libs'
+import { assertSchema } from '@dpr/test-libs'
 
 describe('bopsSpecialistCommentsEndpointToOdp', () => {
   it('Does nothing if data is already valid', () => {
@@ -162,9 +160,7 @@ describe('bopsSpecialistCommentsEndpointToOdp', () => {
       }
     )
     expect(result).toBe(validSpecialistEndpointRedacted) // should return the same object by reference if no changes made
-    expect(
-      Value.Check(PostSubmissionPublishedSpecialistsResponseSchema, result)
-    ).toBe(true)
+    assertSchema(PostSubmissionPublishedSpecialistsResponseChecker, result)
   })
 
   it('Converts an invalid endpoint', () => {
@@ -288,9 +284,7 @@ describe('bopsSpecialistCommentsEndpointToOdp', () => {
         message: 'OK'
       }
     )
-    expect(
-      Value.Check(PostSubmissionPublishedSpecialistsResponseSchema, result)
-    ).toBe(true)
+    assertSchema(PostSubmissionPublishedSpecialistsResponseChecker, result)
 
     expect(result.pagination).toEqual({
       resultsPerPage: 10,
@@ -394,9 +388,7 @@ describe('bopsSpecialistCommentsEndpointToOdp', () => {
     )
 
     warnSpy.mockRestore()
-    expect(
-      Value.Check(PostSubmissionPublishedSpecialistsResponseSchema, result)
-    ).toBe(true)
+    assertSchema(PostSubmissionPublishedSpecialistsResponseChecker, result)
 
     expect(result.pagination).toEqual({
       resultsPerPage: 10,

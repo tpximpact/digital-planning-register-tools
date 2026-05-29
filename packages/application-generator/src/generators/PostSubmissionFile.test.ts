@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'bun:test'
-import { Value } from '@sinclair/typebox/value'
 import {
   generatePostSubmissionFileDates,
   generatePostSubmissionFiles,
@@ -7,12 +6,14 @@ import {
   generatePostSubmissionFileRedacted,
   generatePostSubmissionFile
 } from './PostSubmissionFile'
-import {
-  PostSubmissionFileSchema,
-  PostSubmissionFileRedactedSchema
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
-import { Type } from '@sinclair/typebox'
 import type { PossibleDates } from '../libs/generateAllPossibleDates'
+import { PostSubmissionFileRedactedChecker } from '@dpr/libs'
+import {
+  assertSchema,
+  PostSubmissionFileChecker,
+  PostSubmissionFileArrayChecker,
+  PostSubmissionFileRedactedArrayChecker
+} from '@dpr/test-libs'
 
 describe('generatePostSubmissionFileDates', () => {
   it('returns an valid set of dates', () => {
@@ -66,29 +67,27 @@ describe('generatePostSubmissionFiles', () => {
   it('returns an valid PostSubmissionFile[]', () => {
     const obj = generatePostSubmissionFiles()
     expect(obj).toBeDefined()
-    expect(Value.Check(Type.Array(PostSubmissionFileSchema), obj)).toBe(true)
+    assertSchema(PostSubmissionFileArrayChecker, obj)
   })
 })
 describe('generatePostSubmissionFilesRedacted', () => {
   it('returns an valid PostSubmissionFileRedacted[]', () => {
     const obj = generatePostSubmissionFilesRedacted()
     expect(obj).toBeDefined()
-    expect(Value.Check(Type.Array(PostSubmissionFileRedactedSchema), obj)).toBe(
-      true
-    )
+    assertSchema(PostSubmissionFileRedactedArrayChecker, obj)
   })
 })
 describe('generatePostSubmissionFileRedacted', () => {
   it('returns an valid PostSubmissionFileRedacted', () => {
     const obj = generatePostSubmissionFileRedacted()
     expect(obj).toBeDefined()
-    expect(Value.Check(PostSubmissionFileRedactedSchema, obj)).toBe(true)
+    assertSchema(PostSubmissionFileRedactedChecker, obj)
   })
 })
 describe('generatePostSubmissionFile', () => {
   it('returns an valid PostSubmissionFile', () => {
     const obj = generatePostSubmissionFile()
     expect(obj).toBeDefined()
-    expect(Value.Check(PostSubmissionFileSchema, obj)).toBe(true)
+    assertSchema(PostSubmissionFileChecker, obj)
   })
 })

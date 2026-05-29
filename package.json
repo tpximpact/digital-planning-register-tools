@@ -47,6 +47,7 @@
       "@dpr/ui": "workspace:*",
       "@dpr/api": "workspace:*",
       "@dpr/libs": "workspace:*",
+      "@dpr/test-libs": "workspace:*",
       "@dpr/converter-bops": "workspace:*",
       "@dpr/application-generator": "workspace:*",
       "@dpr/handler-local": "workspace:*",
