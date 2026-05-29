@@ -7,7 +7,7 @@ import { standardResponses } from './libs/standard-responses'
 import { handleErrors } from './libs/handle-errors'
 
 import {
-  app as handlerBops,
+  // app as handlerBops,
   fetchAllApplications as fetchAllBopsApplications,
   fetchApplication as fetchBopsApplication,
   fetchAllApplicationDocuments as fetchAllBopsApplicationDocuments,
@@ -113,14 +113,14 @@ const app = (userOptions?: ApiOptions) => {
       //     .use(publicComments)
       //     .use(specialistComments)
       // })
-      .group('/api/handlers/bops', (app) => {
-        return app.use(
-          handlerBops({
-            debug: options.debug,
-            enabled: true
-          })
-        )
-      })
+      // .group('/api/handlers/bops', (app) => {
+      //   return app.use(
+      //     handlerBops({
+      //       debug: options.debug,
+      //       enabled: true
+      //     })
+      //   )
+      // })
       // .use(api)
       .use(requireClientHeaders)
       .group(
