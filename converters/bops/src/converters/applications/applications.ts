@@ -1,12 +1,12 @@
 import { type PostSubmissionPublishedApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
-import {
-  type PostSubmissionPublishedApplicationsResponse,
-  PostSubmissionPublishedApplicationsResponseSchema
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import { Value } from '@sinclair/typebox/value'
-import { PaginationSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
+import { type PostSubmissionPublishedApplicationsResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
 import { convertBopsApplicationToOdp } from './application'
+import {
+  PostSubmissionPublishedApplicationsResponseChecker,
+  PaginationChecker
+} from '@dpr/libs'
+
 /**
  * Converts a BopsPublicCommentsEndpoint object to a PostSubmissionPublishedPublicCommentsResponse.
  * Validates input, summary, pagination, and each comment.
@@ -18,7 +18,7 @@ export const bopsApplicationsEndpointToOdp = (
   input: any,
   status: ApiResponseStatus
 ): PostSubmissionPublishedApplicationsResponse => {
-  if (Value.Check(PostSubmissionPublishedApplicationsResponseSchema, input)) {
+  if (PostSubmissionPublishedApplicationsResponseChecker.Check(input)) {
     return input as PostSubmissionPublishedApplicationsResponse
   }
 
@@ -27,7 +27,7 @@ export const bopsApplicationsEndpointToOdp = (
   // console.log('Raw applications endpoint response:', input)
 
   // Validate pagination and summary
-  if (!Value.Check(PaginationSchema, pagination)) {
+  if (!PaginationChecker.Check(pagination)) {
     console.warn('Invalid Pagination:', pagination)
     throw new Error('Invalid Pagination')
   }
@@ -61,7 +61,7 @@ export const bopsApplicationsEndpointToOdp = (
 
   const difference = (applications?.length ?? 0) - convertedApplications.length
 
-  // Adjust pagination if any comments were filtered out
+  // Adjust pagination if any applications were filtered out
   const adjustedPagination =
     difference > 0
       ? {
@@ -69,8 +69,10 @@ export const bopsApplicationsEndpointToOdp = (
           totalAvailableItems:
             (pagination?.totalAvailableItems ?? 0) - difference,
           currentPage: pagination.currentPage,
-          totalPages: pagination.totalPages,
-          totalResults: pagination.totalResults - difference
+          totalResults: pagination.totalResults - difference,
+          totalPages: Math.ceil(
+            (pagination.totalResults - difference) / pagination.resultsPerPage
+          )
         }
       : pagination
 
@@ -80,7 +82,7 @@ export const bopsApplicationsEndpointToOdp = (
     status
   }
 
-  if (Value.Check(PostSubmissionPublishedApplicationsResponseSchema, results)) {
+  if (PostSubmissionPublishedApplicationsResponseChecker.Check(results)) {
     return results
   }
 

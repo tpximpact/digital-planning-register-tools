@@ -31,7 +31,8 @@
   "devDependencies": {
     "@dpr/dev-config": "catalog:",
     "typescript": "catalog:",
-    "vite": "catalog:"
+    "vite": "catalog:",
+    "@dpr/test-libs": "catalog:"
   },
   "dependencies": {
     "dayjs": "catalog:",

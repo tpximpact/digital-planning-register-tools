@@ -10,20 +10,21 @@ import type {
 import type { PostSubmissionFileRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
 import type { PostSubmissionPublishedApplication } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
 import type { PrototypeApplication } from '@dpr/odp-schemas/types/schemas/prototypeApplication/minimumSubmission.ts'
-import { PostSubmissionPublishedApplicationSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionPublishedApplication/index.ts'
-import { PrototypeApplicationSchema } from '@dpr/odp-schemas/types/schemas/prototypeApplication/minimumSubmission.ts'
-import { Value } from '@sinclair/typebox/value'
 // import { debugSchema } from '@dpr/libs'
 import { convertBopsFileToPostSubmissionFileRedacted } from '../documents'
 import { convertToDate, formatToYYYYMMDDDate } from '../../utils/formatDates'
 import { convertToGeoJson } from './convertToGeoJson'
+import {
+  PrototypeApplicationChecker,
+  PostSubmissionPublishedApplicationChecker
+} from '@dpr/libs'
 
 export const convertBopsApplicationToOdp = (
   // allowed since it could really be anything and we don't need the typeguards from unknown
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   input: any
 ): PostSubmissionPublishedApplication => {
-  if (Value.Check(PostSubmissionPublishedApplicationSchema, input)) {
+  if (PostSubmissionPublishedApplicationChecker.Check(input)) {
     return input as PostSubmissionPublishedApplication
   }
 
@@ -356,14 +357,14 @@ export const convertBopsApplicationToOdp = (
     }
   }
 
-  if (Value.Check(PrototypeApplicationSchema, applicationSubmission)) {
+  if (PrototypeApplicationChecker.Check(applicationSubmission)) {
     application.submission = applicationSubmission
   }
   // else {
   //   debugSchema(PrototypeApplicationSchema, applicationSubmission)
   // }
 
-  if (Value.Check(PostSubmissionPublishedApplicationSchema, application)) {
+  if (PostSubmissionPublishedApplicationChecker.Check(application)) {
     return application
   }
 

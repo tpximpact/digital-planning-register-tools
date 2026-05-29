@@ -1,15 +1,12 @@
-import { Value } from '@sinclair/typebox/value'
-import {
-  PublicCommentRedactedSchema,
-  type PublicCommentRedacted
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PublicComment.ts'
+import { type PublicCommentRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/PublicComment.ts'
+import { PublicCommentRedactedChecker } from '@dpr/libs'
 
 export const convertBopsCommentToPublicCommentRedacted = (
   // allowed since it could really be anything and we don't need the typeguards from unknown
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   comment: any
 ): PublicCommentRedacted => {
-  if (Value.Check(PublicCommentRedactedSchema, comment)) {
+  if (PublicCommentRedactedChecker.Check(comment)) {
     return comment
   }
 
@@ -29,7 +26,7 @@ export const convertBopsCommentToPublicCommentRedacted = (
     }
   }
 
-  if (Value.Check(PublicCommentRedactedSchema, object)) {
+  if (PublicCommentRedactedChecker.Check(object)) {
     return object
   }
 

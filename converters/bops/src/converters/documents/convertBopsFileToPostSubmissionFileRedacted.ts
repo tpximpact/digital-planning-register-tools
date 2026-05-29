@@ -1,15 +1,8 @@
-import { Value } from '@sinclair/typebox/value'
-
-import {
-  type PostSubmissionFileRedacted,
-  PostSubmissionFileRedactedSchema
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
+import { type PostSubmissionFileRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
 import type { PostSubmissionFileAssociation } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/PostSubmissionFileAssociation.ts'
 import { convertDateTimeToUtc } from '../../utils/formatDates'
-import {
-  type FileType,
-  FileTypeSchema
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/FileType.ts'
+import { type FileType } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/FileType.ts'
+import { FileTypeChecker, PostSubmissionFileRedactedChecker } from '@dpr/libs'
 
 /**
  * Converts an array of unknown file type objects to a deduplicated array of valid FileType values.
@@ -28,7 +21,7 @@ export const convertTypesToFileType = (fileTypes: unknown[]): FileType[] => {
         typeof item === 'object' && item !== null && 'value' in item
     )
     .map((item) => item.value)
-    .filter((value): value is FileType => Value.Check(FileTypeSchema, value))
+    .filter((value): value is FileType => FileTypeChecker.Check(value))
     .filter((value) => {
       if (seen.has(value)) return false
       seen.add(value)
@@ -42,7 +35,7 @@ export const convertBopsFileToPostSubmissionFileRedacted = (
   file: any,
   association: PostSubmissionFileAssociation
 ): PostSubmissionFileRedacted => {
-  if (Value.Check(PostSubmissionFileRedactedSchema, file)) {
+  if (PostSubmissionFileRedactedChecker.Check(file)) {
     return file
   }
 
@@ -72,7 +65,7 @@ export const convertBopsFileToPostSubmissionFileRedacted = (
     }
   }
 
-  if (Value.Check(PostSubmissionFileRedactedSchema, object)) {
+  if (PostSubmissionFileRedactedChecker.Check(object)) {
     return object
   }
 

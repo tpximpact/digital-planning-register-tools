@@ -1,0 +1,27 @@
+{
+  "name": "@dpr/test-libs",
+  "description": "A shared library of common utilities to reduce code duplication and consolidate dependencies across packages.",
+  "type": "module",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "typeconfig": "tsc --showConfig",
+    "test": "bun run test:unit && bun run coverage",
+    "test:unit": "bun test ",
+    "coverage": "bun test --coverage"
+  },
+  "devDependencies": {
+    "@dpr/dev-config": "catalog:",
+    "@types/bun": "catalog:",
+    "typescript": "catalog:"
+  },
+  "dependencies": {
+    "@dpr/api": "catalog:",
+    "elysia": "catalog:",
+    "@elysiajs/eden": "catalog:",
+    "@sinclair/typebox": "catalog:",
+    "http-status-codes": "catalog:",
+    "@dpr/odp-schemas": "catalog:"
+  }
+}

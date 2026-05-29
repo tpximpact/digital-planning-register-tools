@@ -1,10 +1,8 @@
 import { describe, it, expect, spyOn } from 'bun:test'
-import { Value } from '@sinclair/typebox/value'
-import {
-  type PostSubmissionPublishedDocumentsResponse,
-  PostSubmissionPublishedDocumentsResponseSchema
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
+import { type PostSubmissionPublishedDocumentsResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import { bopsDocumentsEndpointToOdp } from './documents'
+import { PostSubmissionPublishedDocumentsResponseChecker } from '@dpr/libs'
+import { assertSchema } from '@dpr/test-libs'
 
 describe('bopsPublicCommentsEndpointToOdp', () => {
   it('Does nothing if data is already valid', () => {
@@ -108,9 +106,7 @@ describe('bopsPublicCommentsEndpointToOdp', () => {
       }
     )
     expect(result).toBe(valid) // should return the same object by reference if no changes made
-    expect(
-      Value.Check(PostSubmissionPublishedDocumentsResponseSchema, result)
-    ).toBe(true)
+    assertSchema(PostSubmissionPublishedDocumentsResponseChecker, result)
   })
 
   it('Converts an invalid endpoint', () => {
@@ -569,9 +565,7 @@ describe('bopsPublicCommentsEndpointToOdp', () => {
         message: 'OK'
       }
     )
-    expect(
-      Value.Check(PostSubmissionPublishedDocumentsResponseSchema, result)
-    ).toBe(true)
+    assertSchema(PostSubmissionPublishedDocumentsResponseChecker, result)
 
     expect(result.pagination).toEqual({
       resultsPerPage: 10,
@@ -1048,9 +1042,7 @@ describe('bopsPublicCommentsEndpointToOdp', () => {
     )
 
     warnSpy.mockRestore()
-    expect(
-      Value.Check(PostSubmissionPublishedDocumentsResponseSchema, result)
-    ).toBe(true)
+    assertSchema(PostSubmissionPublishedDocumentsResponseChecker, result)
 
     expect(result.pagination).toEqual({
       resultsPerPage: 10,

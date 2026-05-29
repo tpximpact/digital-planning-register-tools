@@ -15,7 +15,8 @@
   },
   "devDependencies": {
     "@types/bun": "catalog:",
-    "@dpr/dev-config": "catalog:"
+    "@dpr/dev-config": "catalog:",
+    "@dpr/test-libs": "catalog:"
   },
   "dependencies": {
     "@dpr/libs": "catalog:",

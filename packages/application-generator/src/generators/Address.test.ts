@@ -1,35 +1,34 @@
 import { describe, it, expect } from 'bun:test'
-import { Value } from '@sinclair/typebox/value'
-import { AddressSchema } from '@dpr/odp-schemas/types/shared/Addresses.ts'
 import {
   fullAddress,
   generateAddress,
   midAddress,
   minimalAddress
 } from './Address'
+import { assertSchema, AddressChecker } from '@dpr/test-libs'
 
 describe('generateAddress', () => {
   it('returns an valid Address', () => {
     const address = generateAddress()
     expect(address).toBeDefined()
-    expect(Value.Check(AddressSchema, address)).toBe(true)
+    assertSchema(AddressChecker, address)
   })
 
   it('returns an valid fullAddress', () => {
     const address = fullAddress
     expect(address).toBeDefined()
-    expect(Value.Check(AddressSchema, address)).toBe(true)
+    assertSchema(AddressChecker, address)
   })
 
   it('returns an valid midAddress', () => {
     const address = midAddress
     expect(address).toBeDefined()
-    expect(Value.Check(AddressSchema, address)).toBe(true)
+    assertSchema(AddressChecker, address)
   })
 
   it('returns an valid minimalAddress', () => {
     const address = minimalAddress
     expect(address).toBeDefined()
-    expect(Value.Check(AddressSchema, address)).toBe(true)
+    assertSchema(AddressChecker, address)
   })
 })

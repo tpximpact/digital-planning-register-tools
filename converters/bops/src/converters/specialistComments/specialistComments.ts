@@ -1,13 +1,12 @@
-import {
-  type PostSubmissionPublishedSpecialistsResponse,
-  PostSubmissionPublishedSpecialistsResponseSchema
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
-import { Value } from '@sinclair/typebox/value'
-import { PaginationSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Pagination.ts'
-import { SpecialistCommentSummarySchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/CommentSummary.ts'
+import { type PostSubmissionPublishedSpecialistsResponse } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/Endpoints.ts'
 import type { SpecialistRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.ts'
 import type { ApiResponseStatus } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/implementation/ApiResponse.ts'
 import { convertBopsSpecialistToSpecialistRedacted } from './convertBopsSpecialistToSpecialistRedacted'
+import {
+  PaginationChecker,
+  PostSubmissionPublishedSpecialistsResponseChecker,
+  SpecialistCommentSummaryChecker
+} from '@dpr/libs'
 
 /**
  * Converts a BopsPublicCommentsEndpoint object to a PostSubmissionPublishedPublicCommentsResponse.
@@ -20,7 +19,7 @@ export const bopsSpecialistCommentsEndpointToOdp = (
   input: any,
   status: ApiResponseStatus
 ): PostSubmissionPublishedSpecialistsResponse => {
-  if (Value.Check(PostSubmissionPublishedSpecialistsResponseSchema, input)) {
+  if (PostSubmissionPublishedSpecialistsResponseChecker.Check(input)) {
     return input
   }
 
@@ -30,11 +29,11 @@ export const bopsSpecialistCommentsEndpointToOdp = (
   } = input
 
   // Validate pagination and summary
-  if (!Value.Check(PaginationSchema, pagination)) {
+  if (!PaginationChecker.Check(pagination)) {
     console.warn('Invalid Pagination:', pagination)
     throw new Error('Invalid Pagination')
   }
-  if (!Value.Check(SpecialistCommentSummarySchema, summary)) {
+  if (!SpecialistCommentSummaryChecker.Check(summary)) {
     console.warn('Invalid SpecialistCommentSummary:', summary)
     throw new Error('Invalid SpecialistCommentSummary')
   }
@@ -83,7 +82,7 @@ export const bopsSpecialistCommentsEndpointToOdp = (
     status
   }
 
-  if (Value.Check(PostSubmissionPublishedSpecialistsResponseSchema, results)) {
+  if (PostSubmissionPublishedSpecialistsResponseChecker.Check(results)) {
     return results
   }
 

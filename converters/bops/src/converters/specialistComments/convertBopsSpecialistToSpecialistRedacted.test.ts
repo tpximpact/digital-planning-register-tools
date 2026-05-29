@@ -3,12 +3,12 @@ import {
   convertBopsSpecialistCommentToSpecialistCommentRedacted,
   convertBopsSpecialistToSpecialistRedacted
 } from './convertBopsSpecialistToSpecialistRedacted'
+import { type SpecialistRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.ts'
 import {
-  SpecialistRedactedSchema,
-  SpecialistCommentRedactedSchema,
-  type SpecialistRedacted
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/SpecialistComment.ts'
-import { Value } from '@sinclair/typebox/value'
+  SpecialistCommentRedactedChecker,
+  SpecialistRedactedChecker
+} from '@dpr/libs'
+import { assertSchema } from '@dpr/test-libs'
 
 describe('convertBopsSpecialistToSpecialistRedacted', () => {
   it('Does nothing if data is already valid', () => {
@@ -55,7 +55,7 @@ describe('convertBopsSpecialistToSpecialistRedacted', () => {
       validSpecialistRedacted
     )
     expect(result).toBe(validSpecialistRedacted) // should return the same object by reference if no changes made
-    expect(Value.Check(SpecialistRedactedSchema, result)).toBe(true)
+    assertSchema(SpecialistRedactedChecker, result)
   })
 
   const bopsSpecialists = [
@@ -158,7 +158,7 @@ describe('convertBopsSpecialistToSpecialistRedacted', () => {
   bopsSpecialists.forEach((specialist, i) => {
     it(`Converts BOPS specialist comment from given examples ${i}`, () => {
       const result = convertBopsSpecialistToSpecialistRedacted(specialist)
-      expect(Value.Check(SpecialistRedactedSchema, result)).toBe(true)
+      assertSchema(SpecialistRedactedChecker, result)
     })
   })
 
@@ -221,7 +221,7 @@ describe('convertBopsSpecialistToSpecialistRedacted', () => {
     }
     const result = convertBopsSpecialistToSpecialistRedacted(comment)
     expect(result.name.singleLine).toBe('John Doe')
-    expect(Value.Check(SpecialistRedactedSchema, result)).toBe(true)
+    assertSchema(SpecialistRedactedChecker, result)
   })
 })
 
@@ -302,7 +302,7 @@ describe('convertBopsSpecialistCommentToSpecialistCommentRedacted', () => {
         convertBopsSpecialistCommentToSpecialistCommentRedacted(
           specialistComment
         )
-      expect(Value.Check(SpecialistCommentRedactedSchema, result)).toBe(true)
+      assertSchema(SpecialistCommentRedactedChecker, result)
     })
   })
 

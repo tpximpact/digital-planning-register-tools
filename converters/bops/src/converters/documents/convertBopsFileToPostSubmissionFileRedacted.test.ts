@@ -1,15 +1,11 @@
 import { describe, it, expect } from 'bun:test'
-import { Value } from '@sinclair/typebox/value'
 import {
   convertBopsFileToPostSubmissionFileRedacted,
   convertTypesToFileType
 } from './convertBopsFileToPostSubmissionFileRedacted'
-import { FileTypeSchema } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/enums/FileType.ts'
-import { Type } from '@sinclair/typebox'
-import {
-  type PostSubmissionFileRedacted,
-  PostSubmissionFileRedactedSchema
-} from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
+import { type PostSubmissionFileRedacted } from '@dpr/odp-schemas/types/schemas/postSubmissionApplication/data/File.ts'
+import { PostSubmissionFileRedactedChecker } from '@dpr/libs'
+import { assertSchema, FileTypeArrayChecker } from '@dpr/test-libs'
 
 describe('convertTypesToFileType', () => {
   it(`Converts types to filetype`, () => {
@@ -25,7 +21,7 @@ describe('convertTypesToFileType', () => {
       { value: 'roofPlan.proposed', description: 'Roof plan - proposed' }
     ])
     expect(result).toEqual(['floorPlan.proposed', 'roofPlan.proposed'])
-    expect(Value.Check(Type.Array(FileTypeSchema), result)).toBe(true)
+    assertSchema(FileTypeArrayChecker, result)
   })
 })
 
@@ -112,7 +108,7 @@ describe('convertBopsFileToPostSubmissionFileRedacted', () => {
         'application'
       )
       expect(result).toBe(file) // should return the same object by reference if no changes made
-      expect(Value.Check(PostSubmissionFileRedactedSchema, result)).toBe(true)
+      assertSchema(PostSubmissionFileRedactedChecker, result)
     })
   })
 
@@ -214,7 +210,7 @@ describe('convertBopsFileToPostSubmissionFileRedacted', () => {
         file,
         'application'
       )
-      expect(Value.Check(PostSubmissionFileRedactedSchema, result)).toBe(true)
+      assertSchema(PostSubmissionFileRedactedChecker, result)
     })
   })
 
