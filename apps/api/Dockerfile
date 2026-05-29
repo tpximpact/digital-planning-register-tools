@@ -28,6 +28,7 @@ COPY packages/config/package.json packages/config/package.json
 COPY packages/dev-config/package.json packages/dev-config/package.json
 COPY packages/odp-schemas/package.json packages/odp-schemas/package.json
 COPY packages/libs/package.json packages/libs/package.json
+COPY packages/test-libs/package.json packages/test-libs/package.json
 
 # Copy the directory contents into the container at /app
 COPY apps/api apps/api
@@ -38,6 +39,7 @@ COPY packages/config packages/config
 COPY packages/dev-config packages/dev-config
 COPY packages/odp-schemas packages/odp-schemas
 COPY packages/libs packages/libs
+COPY packages/test-libs packages/test-libs
 COPY digital-planning-data-schemas-0.7.5.tgz digital-planning-data-schemas-0.7.5.tgz
 
 # Install dependencies
