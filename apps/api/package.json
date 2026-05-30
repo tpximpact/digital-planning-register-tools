@@ -18,7 +18,8 @@
     "serve": "bun run build && NODE_ENV=production ./server",
     "clean": "rm server && rm .*.bun-build && rm -rf logs",
     "docker": "cd ../.. && docker build -t dpr-backend:api -f ./apps/api/Dockerfile .",
-    "docker:run": "cd ../.. && docker run -d --env-file .env.production --rm -p 4000:3000 dpr-backend:api "
+    "docker:run": "cd ../.. && docker run -d --env-file .env.production --rm -p 4000:3000 dpr-backend:api",
+    "generate:openapi": "bun run ./src/scripts/generate-openapi.ts"
   },
   "dependencies": {
     "@dpr/application-generator": "catalog:",
