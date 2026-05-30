@@ -1,8 +1,6 @@
-import path from 'path'
 import { Elysia, t } from 'elysia'
 import { cors } from '@elysiajs/cors'
-import { openapi, fromTypes } from '@elysiajs/openapi'
-import { config, documentation } from './config'
+import { config } from './config'
 import { standardResponses } from './libs/standard-responses'
 import { handleErrors } from './libs/handle-errors'
 
@@ -19,6 +17,7 @@ import { showRoutes } from './libs/show-routes'
 import { SchemaModel } from './schema'
 import { api } from './modules/api'
 import { requireClientHeaders } from './libs/client-headers'
+import { docs } from './modules/open-api'
 
 /**
  * @file Types for authentication middleware
@@ -27,12 +26,33 @@ export interface ApiOptions {
   enabled: boolean
   debug: boolean
   prefix?: string
+  generateDocs?: boolean
 }
 
 const defaultOptions: ApiOptions = {
   enabled: true,
   debug: config.debug || false,
   prefix: ''
+}
+
+const notHandled = {
+  data: null,
+  status: { code: 200, message: 'Not currently handled' }
+}
+const bopsHandler = <T>(
+  handler: string,
+  fn: () => Promise<T>,
+  fallback: T = {
+    data: null,
+    status: { code: 200, message: '@TODO implement example data endpoint' }
+  } as T
+) => {
+  switch (handler) {
+    case 'bops':
+      return fn()
+    default:
+      return fallback
+  }
 }
 
 const app = (userOptions?: ApiOptions) => {
@@ -49,55 +69,29 @@ const app = (userOptions?: ApiOptions) => {
 
   return (
     new Elysia({
-      name: '@dpr/api'
+      name: '@dpr/api',
+      serve: {
+        // no built-in option, but you can skip per route
+      },
+      normalize: false // disables some internal processing
     })
+      .derive(() => ({
+        _memBefore: process.memoryUsage().heapUsed
+      }))
+      .onAfterHandle(({ request, _memBefore }) => {
+        if (options.debug) {
+          const delta = Math.round(
+            (process.memoryUsage().heapUsed - _memBefore) / 1024
+          )
+          const url = new URL(request.url)
+          console.log(
+            `[memory] ${request.method} ${url.pathname} +${delta}KB heap`
+          )
+        }
+      })
       .use(cors({ origin: true }))
       .use(showRoutes(options.debug))
-      // .use(
-      //   openapi({
-      //     enabled: isProduction ? false : true,
-      //     path: '/scalar-docs',
-      //     provider: 'scalar',
-      //     // exclude: {
-      //     //   tags: ['BOPS Handler']
-      //     // },
-      //     documentation,
-      //     references: fromTypes(
-      //       isProduction ? path.resolve('dist/types/app.d.ts') : 'src/app.ts',
-      //       {
-      //         projectRoot: isProduction
-      //           ? path.join(import.meta.dir)
-      //           : path.join(import.meta.dir, '..'),
-      //         tsconfigPath: isProduction
-      //           ? path.join(import.meta.dir, 'tsconfig.build.json')
-      //           : path.join(import.meta.dir, '..', 'tsconfig.build.json'),
-      //         debug: options.debug
-      //       }
-      //     )
-      //   })
-      // )
-      .use(
-        isProduction
-          ? new Elysia({ name: 'openapi-disabled' })
-          : openapi({
-              path: '/docs',
-              provider: 'swagger-ui',
-              exclude: {
-                paths: ['/']
-                //  /^\/api\/handlers\/bops/ Exclude all BOPS handler routes from OpenAPI documentation
-              },
-              documentation,
-              references: fromTypes('src/app.ts', {
-                projectRoot: path.join(import.meta.dir, '..'),
-                tsconfigPath: path.join(
-                  import.meta.dir,
-                  '..',
-                  'tsconfig.build.json'
-                ),
-                debug: options.debug
-              })
-            })
-      )
+      .use(docs(isProduction, options.debug))
       .use(standardResponses)
       .use(SchemaModel)
       .use(handleErrors(options))
@@ -136,34 +130,18 @@ const app = (userOptions?: ApiOptions) => {
             .use(api)
             .get(
               `/applications`,
-              async ({ handler }) => {
-                switch (handler) {
-                  case 'bops':
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: 'Not currently handled'
-                      }
-                    }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+              async ({ handler }) =>
+                bopsHandler(handler, async () => notHandled),
               {
                 query: 'applications.all.query',
-                response: {
-                  200: t.Union([
-                    t.Ref('applications.all.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('applications.all.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   tags: ['Private'],
                   summary: 'Get applications',
@@ -174,34 +152,18 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId`,
-              async ({ handler }) => {
-                switch (handler) {
-                  case 'bops':
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: 'Not currently handled'
-                      }
-                    }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+              async ({ handler }) =>
+                bopsHandler(handler, async () => notHandled),
               {
                 params: 'applications.single.params',
-                response: {
-                  200: t.Union([
-                    t.Ref('applications.single.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('applications.single.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   summary: 'Get application',
                   description:
@@ -211,35 +173,19 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/documents`,
-              async ({ handler }) => {
-                switch (handler) {
-                  case 'bops':
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: 'Not currently handled'
-                      }
-                    }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+              async ({ handler }) =>
+                bopsHandler(handler, async () => notHandled),
               {
                 params: 'documents.all.params',
                 query: 'documents.all.query',
-                response: {
-                  200: t.Union([
-                    t.Ref('documents.all.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('documents.all.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   summary: 'Get documents',
                   description:
@@ -249,34 +195,18 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/documents/:documentId`,
-              async ({ handler }) => {
-                switch (handler) {
-                  case 'bops':
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: 'Not currently handled'
-                      }
-                    }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+              async ({ handler }) =>
+                bopsHandler(handler, async () => notHandled),
               {
                 params: 'documents.single.params',
-                response: {
-                  200: t.Union([
-                    t.Ref('documents.single.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('documents.single.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   summary: 'Get document',
                   description:
@@ -286,35 +216,19 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/publicComments`,
-              async ({ handler }) => {
-                switch (handler) {
-                  case 'bops':
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: 'Not currently handled'
-                      }
-                    }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+              async ({ handler }) =>
+                bopsHandler(handler, async () => notHandled),
               {
                 params: 'publicComments.all.params',
                 query: 'publicComments.all.query',
-                response: {
-                  200: t.Union([
-                    t.Ref('publicComments.all.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('publicComments.all.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   summary: 'Get public comments',
                   description:
@@ -324,34 +238,18 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/publicComments/:publicCommentId`,
-              async ({ handler }) => {
-                switch (handler) {
-                  case 'bops':
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: 'Not currently handled'
-                      }
-                    }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+              async ({ handler }) =>
+                bopsHandler(handler, async () => notHandled),
               {
                 params: 'publicComments.all.params',
-                response: {
-                  200: t.Union([
-                    t.Ref('publicComments.all.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('publicComments.all.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   summary: 'Get public comment',
                   description:
@@ -361,32 +259,16 @@ const app = (userOptions?: ApiOptions) => {
             )
             .post(
               `/applications/:applicationId/publicComments`,
-              async ({ handler }) => {
-                switch (handler) {
-                  case 'bops':
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: 'Not currently handled'
-                      }
-                    }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+              async ({ handler }) =>
+                bopsHandler(handler, async () => notHandled),
               {
                 params: 'publicComments.submit.params',
                 body: 'publicComments.submit.body',
-                response: {
-                  200: 'empty200'
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: 'empty200'
+                  }
+                }),
                 detail: {
                   security: [], // Remove this to make endpoint public
                   summary: 'Send public comment',
@@ -397,35 +279,19 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/specialistComments`,
-              async ({ handler }) => {
-                switch (handler) {
-                  case 'bops':
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: 'Not currently handled'
-                      }
-                    }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+              async ({ handler }) =>
+                bopsHandler(handler, async () => notHandled),
               {
                 params: 'specialists.all.params',
                 query: 'specialists.all.query',
-                response: {
-                  200: t.Union([
-                    t.Ref('specialists.all.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('specialists.all.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   summary: 'Get specialist comments',
                   description:
@@ -435,34 +301,18 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/specialistComments/:specialistId`,
-              async ({ handler }) => {
-                switch (handler) {
-                  case 'bops':
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: 'Not currently handled'
-                      }
-                    }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+              async ({ handler }) =>
+                bopsHandler(handler, async () => notHandled),
               {
                 params: 'specialists.single.params',
-                response: {
-                  200: t.Union([
-                    t.Ref('specialists.single.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('specialists.single.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   summary: 'Get specialist',
                   description:
@@ -505,13 +355,15 @@ const app = (userOptions?: ApiOptions) => {
                 }
               },
               {
-                query: 'public.applications.all.query',
-                response: {
-                  200: t.Union([
-                    t.Ref('public.applications.all.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                query: 'applications.all.query',
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('public.applications.all.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   summary: 'Get published applications',
                   description:
@@ -547,12 +399,14 @@ const app = (userOptions?: ApiOptions) => {
               },
               {
                 params: 'public.applications.single.params',
-                response: {
-                  200: t.Union([
-                    t.Ref('public.applications.single.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('public.applications.single.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   summary: 'Get published application',
                   description:
@@ -590,12 +444,14 @@ const app = (userOptions?: ApiOptions) => {
               {
                 params: 'public.documents.all.params',
                 query: 'public.documents.all.query',
-                response: {
-                  200: t.Union([
-                    t.Ref('public.documents.all.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('public.documents.all.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   summary: 'Get published documents',
                   description:
@@ -605,34 +461,18 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/documents/:documentId`,
-              async ({ handler }) => {
-                switch (handler) {
-                  case 'bops':
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: 'Not currently handled'
-                      }
-                    }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+              async ({ handler }) =>
+                bopsHandler(handler, async () => notHandled),
               {
                 params: 'public.documents.single.params',
-                response: {
-                  200: t.Union([
-                    t.Ref('public.documents.single.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('public.documents.single.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   summary: 'Get published document',
                   description:
@@ -670,12 +510,14 @@ const app = (userOptions?: ApiOptions) => {
               {
                 params: 'public.publicComments.all.params',
                 query: 'public.publicComments.all.query',
-                response: {
-                  200: t.Union([
-                    t.Ref('public.publicComments.all.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('public.publicComments.all.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   summary: 'Get published public comments',
                   description:
@@ -685,34 +527,18 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/publicComments/:publicCommentId`,
-              async ({ handler }) => {
-                switch (handler) {
-                  case 'bops':
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: 'Not currently handled'
-                      }
-                    }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+              async ({ handler }) =>
+                bopsHandler(handler, async () => notHandled),
               {
                 params: 'public.publicComments.single.params',
-                response: {
-                  200: t.Union([
-                    t.Ref('public.publicComments.single.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('public.publicComments.single.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   summary: 'Get published public comment',
                   description:
@@ -751,12 +577,14 @@ const app = (userOptions?: ApiOptions) => {
               {
                 params: 'public.specialists.all.params',
                 query: 'public.specialists.all.query',
-                response: {
-                  200: t.Union([
-                    t.Ref('public.specialists.all.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('public.specialists.all.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   tags: ['Public'],
                   security: [], // Remove this to make endpoint public
@@ -797,12 +625,14 @@ const app = (userOptions?: ApiOptions) => {
               {
                 params: 'public.specialists.single.params',
                 query: 'public.specialists.single.query',
-                response: {
-                  200: t.Union([
-                    t.Ref('public.specialists.single.response'),
-                    t.Ref('empty200')
-                  ])
-                },
+                ...(options.generateDocs && {
+                  response: {
+                    200: t.Union([
+                      t.Ref('public.specialists.single.response'),
+                      t.Ref('empty200')
+                    ])
+                  }
+                }),
                 detail: {
                   tags: ['Public'],
                   security: [], // Remove this to make endpoint public

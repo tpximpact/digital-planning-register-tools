@@ -15,9 +15,11 @@ COPY bunfig.toml bunfig.toml
 COPY apps/api/package.json apps/api/package.json
 COPY apps/api/tsconfig.json apps/api/tsconfig.json
 COPY apps/api/tsconfig.build.json apps/api/tsconfig.build.json
+COPY apps/api/schema.json apps/api/schema.json
 
 # Copy over catalog
 COPY package.json package.json
+
 
 # Copy over the files for the dependency packages
 COPY converters/bops/package.json converters/bops/package.json
@@ -60,6 +62,7 @@ WORKDIR /app
 
 # Copy only the built output and runtime files from build stage
 COPY --from=build /app/apps/api/dist ./
+COPY --from=build /app/apps/api/schema.json ./
 COPY --from=build /app/apps/api/server ./
 
 # Copy the entrypoint script into the container
