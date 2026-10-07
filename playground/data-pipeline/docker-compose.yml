@@ -1,0 +1,30 @@
+services:
+  # One off commands: ingest, map, publish, validate, gaps, status.
+  #   docker compose run --rm pipeline ingest camden
+  pipeline:
+    build: .
+    volumes:
+      # The data stays on your machine, so runs survive rebuilds.
+      - ./data:/app/data
+      - ./config:/app/config
+      # The ODP schemas, if a checkout is sitting beside this repo, so validate can use them.
+      - ../planning-register-data-logistics/repos/digital-planning-data-schemas:/schemas:ro
+    environment:
+      DPR_SCHEMAS: /schemas
+    env_file:
+      - path: .env
+        required: false
+
+  # The admin screen and the API, on http://localhost:8000
+  #   docker compose up api
+  api:
+    build: .
+    entrypoint: ["uvicorn", "dpr_pipeline.api:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+    env_file:
+      - path: .env
+        required: false
