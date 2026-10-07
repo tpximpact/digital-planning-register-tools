@@ -1,0 +1,24 @@
+# Copy to config.yaml and edit. Paths can be a local folder, s3://bucket/prefix
+# or abfs://container/prefix. The code does not change, only this file does.
+
+storage:
+  bronze: data/bronze
+  silver: data/silver
+  gold: data/gold
+
+database:
+  path: data/dpr.duckdb
+
+sources:
+  camden:
+    # Camden's planning applications dataset on their open data platform
+    url: https://opendata.camden.gov.uk/resource/2eiu-s2cw.json
+    page_size: 1000
+    # Leave empty to pull everything. Useful for a quick first run.
+    max_records: 5000
+
+  barnet:
+    # A folder of CSV files, one per table, exported from their Uniform database.
+    # Barnet cannot share real records yet, so this points at made up rows in the same shape.
+    # Build them with: python scripts/make_fake_uniform.py data/fake-barnet 250
+    url: data/fake-barnet

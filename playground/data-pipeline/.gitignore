@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# local config and secrets, never committed
+.env
+config/config.yaml
+
+# data, never committed
+data/
+*.duckdb
+*.duckdb.wal
