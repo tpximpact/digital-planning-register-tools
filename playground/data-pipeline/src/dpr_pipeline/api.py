@@ -57,13 +57,25 @@ def _editor(x_edited_by: str | None) -> str:
 
 
 def _listing(council: str | None, page: int, size: int, sort: str, order: str,
-             include_editing: bool) -> dict:
+             include_editing: bool, approved_only: bool = False,
+             state: str | None = None) -> dict:
     if sort not in SORTABLE:
         raise HTTPException(400, f"Cannot sort by {sort}")
 
     connection = _connection()
-    where = "WHERE council = ?" if council else ""
-    params: list[Any] = [council] if council else []
+    clauses: list[str] = []
+    params: list[Any] = []
+    if council:
+        clauses.append("council = ?")
+        params.append(council)
+    if approved_only:
+        # Nothing is public until somebody has approved it.
+        clauses.append("approved = true")
+    elif state == "approved":
+        clauses.append("approved = true")
+    elif state == "waiting":
+        clauses.append("approved = false")
+    where = ("WHERE " + " AND ".join(clauses)) if clauses else ""
 
     total = connection.execute(
         f"SELECT count(*) FROM gold.applications {where}", params
@@ -77,10 +89,12 @@ def _listing(council: str | None, page: int, size: int, sort: str, order: str,
     rows = connection.execute(
         f"""
         SELECT g.council, g.reference, g.published_at, g.updated_at, g.edited, g.record,
-               s.address, s.description, s.status, s.decision
+               s.address, s.description, s.status, s.decision, g.approved,
+               EXISTS (SELECT 1 FROM silver.mapping_issues i
+                       WHERE i.council = g.council AND i.reference = g.reference) AS flagged
         FROM gold.applications g
         LEFT JOIN silver.applications s USING (council, reference)
-        {where.replace("council", "g.council") if where else ""}
+        {where.replace("council", "g.council").replace("approved", "g.approved") if where else ""}
         ORDER BY g.{sort} {direction}
         LIMIT ? OFFSET ?
         """,
@@ -90,7 +104,7 @@ def _listing(council: str | None, page: int, size: int, sort: str, order: str,
     applications = []
     for row in rows:
         council_name, reference, published, updated, edited, record = row[:6]
-        address, description, status, decision = row[6:]
+        address, description, status, decision, approved, flagged = row[6:]
         item = {
             "council": council_name,
             "reference": reference,
@@ -101,6 +115,8 @@ def _listing(council: str | None, page: int, size: int, sort: str, order: str,
             # Who has touched a record is an internal matter, so it stays out of the public feed.
             item["updatedAt"] = updated.isoformat() if updated else None
             item["edited"] = edited
+            item["approved"] = approved
+            item["flagged"] = flagged
             item["detail"] = {
                 "address": address,
                 "description": description,
@@ -128,15 +144,21 @@ def list_public(
     sort: Literal["reference", "published_at"] = "reference",
     order: Literal["asc", "desc"] = "asc",
 ) -> dict:
-    return _listing(council, page, size, sort, order, include_editing=False)
+    return _listing(council, page, size, sort, order, include_editing=False, approved_only=True)
 
 
 @public.get("/applications/{council}/{reference:path}", summary="Get one published application")
 def get_public(council: str, reference: str) -> dict:
-    record = gold.get(_connection(), council, reference)
-    if record is None:
+    connection = _connection()
+    row = connection.execute(
+        "SELECT approved FROM gold.applications WHERE council = ? AND reference = ?",
+        [council, reference],
+    ).fetchone()
+    if row is None or not row[0]:
+        # An unapproved record is not public, so it is not here as far as anyone outside is
+        # concerned.
         raise HTTPException(404, f"No published application {reference} for {council}")
-    return record
+    return gold.get(connection, council, reference)
 
 
 # --------------------------------------------------------------- private, for an admin tool
@@ -148,11 +170,60 @@ def list_private(
     size: int = Query(20, ge=1, le=200),
     sort: Literal["reference", "published_at", "updated_at"] = "reference",
     order: Literal["asc", "desc"] = "asc",
+    state: Literal["all", "waiting", "approved"] = "all",
 ) -> dict:
-    return _listing(council, page, size, sort, order, include_editing=True)
+    return _listing(council, page, size, sort, order, include_editing=True,
+                    state=None if state == "all" else state)
 
 
 # Declared before the plain get, because a path parameter would otherwise swallow "/history".
+@private.get("/approval/summary", summary="How the approval work splits")
+def approval_summary(council: str | None = Query(None)) -> dict:
+    """Clean, flagged and already approved. The numbers a reviewer needs before starting."""
+    return gold.flagged_counts(_connection(), council)
+
+
+@private.get("/approval/clean", summary="Records with nothing flagged against them")
+def approval_clean(council: str | None = Query(None), limit: int = Query(500, ge=1, le=20000)):
+    rows = gold.clean_references(_connection(), council)
+    return {"total": len(rows),
+            "applications": [{"council": c, "reference": r} for c, r in rows[:limit]]}
+
+
+@private.post("/approval/approve", summary="Approve many records at once")
+def approve_many(
+    council: str = Body(..., embed=True),
+    references: list[str] | None = Body(None, embed=True),
+    all_clean: bool = Body(False, embed=True),
+    x_edited_by: str | None = Header(None),
+) -> dict:
+    """Approve a named list, or everything with nothing flagged against it.
+
+    A council with tens of thousands of historic records cannot read them one at a time. The gaps
+    the mapper found are already recorded per record, so the clean ones can go together and only
+    the flagged ones need a look.
+    """
+    editor = _editor(x_edited_by)
+    connection = _connection()
+
+    if all_clean:
+        references = [r for _, r in gold.clean_references(connection, council)]
+    if not references:
+        return {"approved": 0}
+
+    return {"approved": gold.approve(connection, council, references, editor)}
+
+
+@private.post("/approval/unapprove", summary="Take many records back out of public view")
+def unapprove_many(
+    council: str = Body(..., embed=True),
+    references: list[str] = Body(..., embed=True),
+    x_edited_by: str | None = Header(None),
+) -> dict:
+    editor = _editor(x_edited_by)
+    return {"unapproved": gold.unapprove(_connection(), council, references, editor)}
+
+
 @private.get("/applications/{council}/{reference:path}/history",
              summary="What changed, and who by")
 def get_history(council: str, reference: str) -> list[dict]:

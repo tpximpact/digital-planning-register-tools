@@ -17,6 +17,11 @@ def client(tmp_path, monkeypatch):
     for reference in ("2019/0001/P", "2020/0002/P"):
         gold.create(connection, "camden", reference, {"applicationType": "pp.full.minor"},
                     edited_by="setup")
+    # These tests are about the shape of the two sides, not about approval, so everything is
+    # approved up front. Approval has its own tests.
+    everything = [row[0] for row in connection.execute(
+        "SELECT reference FROM gold.applications WHERE council = 'camden'").fetchall()]
+    gold.approve(connection, "camden", everything, "setup")
     monkeypatch.setattr(api, "_connection", lambda: connection)
     return TestClient(api.app)
 

@@ -6,6 +6,11 @@ Agreed with the team:
   * gold starts as a copy of silver, and every edit happens there
   * re-running the pipeline refreshes silver without wiping anyone's edits
 
+Records arrive in gold unapproved. Nothing is public until somebody approves it, and approval is
+done in bulk, because a council with tens of thousands of historic records cannot read them one at
+a time. The pipeline already records every gap it found per record, so the clean ones can be
+approved together and only the flagged ones need a look.
+
 So publishing copies across records that are not in gold yet, and leaves edited ones alone. A
 record that has never been touched can be refreshed from silver, because nothing is lost by doing
 so. Every change is written to gold.edits, so the difference from what the council sent can always
@@ -61,6 +66,126 @@ def publish(connection, council: str | None = None, refresh_unedited: bool = Tru
             untouched += 1
 
     return {"added": added, "refreshed": refreshed, "left alone": untouched}
+
+
+#: Gaps that every record has, because of what legacy data is, not because of this record.
+#: They are recorded so the limits stay visible, but they are not a reason to hold a record back:
+#: no amount of reviewing will produce a PlanX submission for a 2010 application.
+KNOWN_LIMITS = ("submission", "boundary", "location", "system_status")
+
+
+def _blocking_clause(alias: str = "i") -> str:
+    """Only gaps specific to a record should stop it being approved."""
+    fields = ", ".join(f"'{field}'" for field in KNOWN_LIMITS)
+    return f"{alias}.field NOT IN ({fields})"
+
+
+def approve(connection, council: str, references: list[str], approved_by: str) -> int:
+    """Approve named records so they become public. Returns how many changed."""
+    if not references:
+        return 0
+
+    now = dt.datetime.now(dt.timezone.utc)
+    changed = 0
+    for reference in references:
+        row = connection.execute(
+            "SELECT approved FROM gold.applications WHERE council = ? AND reference = ?",
+            [council, reference],
+        ).fetchone()
+        if row is None or row[0]:
+            continue
+        connection.execute(
+            """
+            UPDATE gold.applications
+            SET approved = true, approved_at = ?, approved_by = ?
+            WHERE council = ? AND reference = ?
+            """,
+            [now, approved_by, council, reference],
+        )
+        _log(connection, council, reference, "approve", approved_by, now, None, None)
+        changed += 1
+
+    return changed
+
+
+def unapprove(connection, council: str, references: list[str], approved_by: str) -> int:
+    """Take records back out of public view without deleting them."""
+    if not references:
+        return 0
+
+    now = dt.datetime.now(dt.timezone.utc)
+    changed = 0
+    for reference in references:
+        row = connection.execute(
+            "SELECT approved FROM gold.applications WHERE council = ? AND reference = ?",
+            [council, reference],
+        ).fetchone()
+        if row is None or not row[0]:
+            continue
+        connection.execute(
+            """
+            UPDATE gold.applications
+            SET approved = false, approved_at = NULL, approved_by = NULL
+            WHERE council = ? AND reference = ?
+            """,
+            [council, reference],
+        )
+        _log(connection, council, reference, "unapprove", approved_by, now, None, None)
+        changed += 1
+
+    return changed
+
+
+def clean_references(connection, council: str | None = None) -> list[tuple[str, str]]:
+    """Records with nothing flagged against them, so nothing needs reading before approval."""
+    where = "WHERE g.council = ?" if council else ""
+    params = [council] if council else []
+    blocking = _blocking_clause()
+    rows = connection.execute(
+        f"""
+        SELECT g.council, g.reference
+        FROM gold.applications g
+        {where}
+        {"AND" if where else "WHERE"} g.approved = false
+          AND NOT EXISTS (
+            SELECT 1 FROM silver.mapping_issues i
+            WHERE i.council = g.council AND i.reference = g.reference
+              AND {blocking}
+          )
+        ORDER BY g.reference
+        """,
+        params,
+    ).fetchall()
+    return [(council_name, reference) for council_name, reference in rows]
+
+
+def flagged_counts(connection, council: str | None = None) -> dict:
+    """How the work splits: clean, flagged, already approved."""
+    where = "WHERE g.council = ?" if council else ""
+    params = [council] if council else []
+    blocking = _blocking_clause()
+    row = connection.execute(
+        f"""
+        SELECT
+            count(*) FILTER (WHERE g.approved) AS approved,
+            count(*) FILTER (
+                WHERE NOT g.approved AND NOT EXISTS (
+                    SELECT 1 FROM silver.mapping_issues i
+                    WHERE i.council = g.council AND i.reference = g.reference
+                      AND {blocking})
+            ) AS clean,
+            count(*) FILTER (
+                WHERE NOT g.approved AND EXISTS (
+                    SELECT 1 FROM silver.mapping_issues i
+                    WHERE i.council = g.council AND i.reference = g.reference
+                      AND {blocking})
+            ) AS flagged
+        FROM gold.applications g
+        {where}
+        """,
+        params,
+    ).fetchone()
+    return {"approved": row[0], "clean": row[1], "flagged": row[2]}
 
 
 def get(connection, council: str, reference: str) -> dict | None:
