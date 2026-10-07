@@ -51,8 +51,14 @@ The standard defines ninety five application types. A council's own list rarely 
       and create, update and delete
 - [x] **Who edited what stays on the private side.** It is internal housekeeping, not planning data
 - [x] **A plain admin screen** for reviewing and editing
-- [ ] Batch approval, for publishing many records at once
-- [ ] Comments. Out of scope for now
+- [x] **Batch approval.** Nothing is public until somebody approves it, and approval is done in
+      bulk. The clean records go together, the flagged ones are left for a person
+- [x] **Approvals survive a re-run**, like edits do
+- [x] **Every approval is attributed** and appears in the record's history
+- [ ] **Field level approval.** Today it is the whole record or nothing. Comments are the clearest
+      case: one council publishes a comment without the name, another publishes both
+- [ ] **Per council settings**, since what can be published varies by council
+- [ ] Comments themselves. Out of scope for now
 
 ## A second council, from a database export
 

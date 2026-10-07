@@ -55,6 +55,39 @@ Camden publishes a coordinate, not a site boundary. The earlier converter drew a
 around the point and passed it off as a boundary. On a map that reads as a real site outline, so
 here the point stays a point and the missing boundary is recorded as a gap.
 
+## Nothing is public until somebody approves it
+
+Publishing and approving are two different things, on purpose. Publishing copies silver into gold
+and happens automatically. Approving decides whether a record in gold is visible outside, and a
+person does it.
+
+So gold can hold a record that nobody outside can see, which is exactly what a council needs while
+it works through a backlog.
+
+## Approval is done in bulk, and the pipeline decides what needs reading
+
+A council with tens of thousands of historic records cannot read them one at a time. The mapper
+already records every gap it found against each record, so that same information splits the work:
+the records with nothing flagged go together, and only the flagged ones need a person.
+
+On a real run that was 125 clean and 73 flagged, so a reviewer reads 73 records instead of 198.
+
+### Gaps that do not count as a reason to review
+
+Some gaps are true of every legacy record rather than of one record: the missing original
+submission, a coordinate instead of a site boundary, no coordinate at all, and the council's own
+status wording. No amount of reviewing produces a PlanX submission for a 2010 application.
+
+They stay recorded so the limits remain visible, but they do not hold a record back. The list is
+`KNOWN_LIMITS` in `gold.py`, in one place, because it is a judgement and should be easy to argue
+with.
+
+## What approval does not do yet
+
+It is the whole record or nothing. In practice what can be published varies by field and by
+council: one council publishes a comment without the author's name, another publishes both. So
+field level approval, with settings per council, is the next piece of work rather than a detail.
+
 ## Camden first
 
 Camden's API is public, needs no key, and updates daily, so that work waits on nobody. Barnet needs
