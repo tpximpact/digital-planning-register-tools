@@ -61,6 +61,22 @@
     border: 1px solid var(--line); color: var(--muted); white-space: nowrap;
   }
   .tag.edited { border-color: var(--ink); background: var(--edited); color: #0b0c0c; }
+  .tag.waiting { border-color: var(--warn); color: var(--warn); }
+  .tag.live { border-color: var(--good); color: var(--good); }
+  .tag.flagged { border-color: var(--warn); background: #fff5f5; color: var(--warn); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .tag.flagged { background: #2a1512; }
+  }
+
+  .bulk {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    padding: 12px; margin-bottom: 16px; background: var(--panel);
+    border-left: 4px solid var(--ink);
+  }
+  .bulk .counts { margin-right: auto; font-size: 0.9rem; }
+  .bulk strong { font-variant-numeric: tabular-nums; }
+  td.pick { width: 28px; }
+  input[type="checkbox"] { width: 18px; height: 18px; flex: none; accent-color: var(--ink); }
   .desc { color: var(--muted); font-size: 0.9rem; }
 
   .pager { display: flex; gap: 8px; align-items: center; margin-top: 16px; }
@@ -103,11 +119,24 @@
       <option value="updated_at">Last edited</option>
     </select>
     <select id="order"><option value="asc">Ascending</option><option value="desc">Descending</option></select>
+    <select id="state">
+      <option value="all">All</option>
+      <option value="waiting">Waiting for approval</option>
+      <option value="approved">Approved</option>
+    </select>
+  </div>
+
+  <div class="bulk">
+    <span class="counts" id="counts">Counting…</span>
+    <button id="approveClean">Approve all clean</button>
+    <button class="secondary" id="approveSelected">Approve selected</button>
+    <button class="secondary" id="unapproveSelected">Unapprove selected</button>
   </div>
 
   <table>
     <thead>
       <tr>
+        <th class="pick"><input type="checkbox" id="pickAll" aria-label="Select all on this page"></th>
         <th>Reference</th>
         <th class="hide-small">Address</th>
         <th>Type</th>
@@ -173,6 +202,7 @@ async function load() {
     size: state.size,
     sort: document.getElementById("sort").value,
     order: document.getElementById("order").value,
+    state: document.getElementById("state").value,
   });
   const council = document.getElementById("council").value;
   if (council) params.set("council", council);
@@ -195,9 +225,18 @@ async function load() {
     const tr = document.createElement("tr");
     tr.className = "row";
     tr.innerHTML = `
+      <td class="pick">
+        <input type="checkbox" class="pick-one" data-council="${escape(item.council)}"
+               data-reference="${escape(item.reference)}" aria-label="Select ${escape(item.reference)}">
+      </td>
       <td>
         <div class="ref">${escape(item.reference)}</div>
-        <div class="desc">${escape(item.council)}${item.edited ? ' <span class="tag edited">edited</span>' : ""}</div>
+        <div class="desc">
+          ${escape(item.council)}
+          ${item.approved ? '<span class="tag live">approved</span>' : '<span class="tag waiting">waiting</span>'}
+          ${item.flagged ? '<span class="tag flagged">needs a look</span>' : ""}
+          ${item.edited ? '<span class="tag edited">edited</span>' : ""}
+        </div>
       </td>
       <td class="hide-small desc">
         ${escape(detail.address || "")}
@@ -273,10 +312,105 @@ document.getElementById("editorForm").addEventListener("submit", async (event) =
   load();
 });
 
+async function loadCounts() {
+  const council = document.getElementById("council").value;
+  const params = council ? "?council=" + encodeURIComponent(council) : "";
+  const counts = await (await fetch("/private/approval/summary" + params)).json();
+  document.getElementById("counts").innerHTML =
+    `<strong>${counts.approved}</strong> approved, ` +
+    `<strong>${counts.clean}</strong> clean and waiting, ` +
+    `<strong>${counts.flagged}</strong> need a look`;
+  document.getElementById("approveClean").disabled = counts.clean === 0;
+}
+
+function picked() {
+  return [...document.querySelectorAll(".pick-one:checked")].map((box) => ({
+    council: box.dataset.council,
+    reference: box.dataset.reference,
+  }));
+}
+
+// Approving happens one council at a time, because a reference only means something inside a
+// council and the audit trail records which council each change belonged to.
+async function send(path, chosen, extra) {
+  const name = editorName();
+  if (!name) { say("A name is needed before anything can be approved.", true); return; }
+
+  const byCouncil = {};
+  for (const item of chosen) {
+    (byCouncil[item.council] = byCouncil[item.council] || []).push(item.reference);
+  }
+
+  let total = 0;
+  for (const [council, references] of Object.entries(byCouncil)) {
+    const response = await fetch(path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Edited-By": name },
+      body: JSON.stringify({ council, references, ...extra }),
+    });
+    if (response.ok) {
+      const body = await response.json();
+      total += body.approved ?? body.unapproved ?? 0;
+    }
+  }
+  return total;
+}
+
+document.getElementById("approveSelected").addEventListener("click", async () => {
+  const chosen = picked();
+  if (!chosen.length) { say("Nothing selected.", true); return; }
+  const total = await send("/private/approval/approve", chosen, {});
+  say(`${total} approved.`);
+  load(); loadCounts();
+});
+
+document.getElementById("unapproveSelected").addEventListener("click", async () => {
+  const chosen = picked();
+  if (!chosen.length) { say("Nothing selected.", true); return; }
+  if (!confirm(`Take ${chosen.length} records back out of public view?`)) return;
+  const total = await send("/private/approval/unapprove", chosen, {});
+  say(`${total} taken back out of public view.`);
+  load(); loadCounts();
+});
+
+document.getElementById("approveClean").addEventListener("click", async () => {
+  const council = document.getElementById("council").value;
+  if (!council) { say("Choose a council first, approval is per council.", true); return; }
+
+  const counts = await (await fetch(
+    "/private/approval/summary?council=" + encodeURIComponent(council))).json();
+  if (!confirm(
+    `Approve ${counts.clean} records for ${council}?
+
+` +
+    `These have nothing flagged against them. ${counts.flagged} others need a look and are left alone.`
+  )) return;
+
+  const name = editorName();
+  if (!name) { say("A name is needed before anything can be approved.", true); return; }
+
+  const response = await fetch("/private/approval/approve", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Edited-By": name },
+    body: JSON.stringify({ council, all_clean: true }),
+  });
+  const body = await response.json();
+  say(`${body.approved} approved for ${council}.`);
+  load(); loadCounts();
+});
+
+document.getElementById("pickAll").addEventListener("change", (event) => {
+  for (const box of document.querySelectorAll(".pick-one")) box.checked = event.target.checked;
+});
+
 document.getElementById("prev").addEventListener("click", () => { state.page--; load(); });
 document.getElementById("next").addEventListener("click", () => { state.page++; load(); });
-for (const id of ["sort", "order", "council"]) {
-  document.getElementById(id).addEventListener("change", () => { state.page = 1; load(); });
+for (const id of ["sort", "order", "council", "state"]) {
+  document.getElementById(id).addEventListener("change", () => {
+    state.page = 1;
+    load();
+    if (id === "council") loadCounts();
+  });
 }
 document.getElementById("search").addEventListener("input", () => load());
 
@@ -290,6 +424,7 @@ document.getElementById("search").addEventListener("input", () => load());
     select.appendChild(option);
   }
   load();
+  loadCounts();
 })();
 </script>
 </body>

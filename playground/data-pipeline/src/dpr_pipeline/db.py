@@ -40,8 +40,11 @@ LATER_COLUMNS = {
     "gold.applications": {
         "updated_at": "TIMESTAMP",
         "updated_by": "VARCHAR",
-        # DuckDB cannot add a column with a constraint, so this one is filled in below instead.
+        "approved_at": "TIMESTAMP",
+        "approved_by": "VARCHAR",
+        # DuckDB cannot add a column with a constraint, so these are filled in below instead.
         "edited": "BOOLEAN",
+        "approved": "BOOLEAN",
     },
 }
 
@@ -62,8 +65,10 @@ def _add_missing_columns(connection: duckdb.DuckDBPyConnection) -> None:
         for column, definition in columns.items():
             if column not in present:
                 connection.execute(f"ALTER TABLE {table} ADD COLUMN {column} {definition}")
-                if column == "edited":
-                    connection.execute(f"UPDATE {table} SET edited = false WHERE edited IS NULL")
+                if column in ("edited", "approved"):
+                    connection.execute(
+                        f"UPDATE {table} SET {column} = false WHERE {column} IS NULL"
+                    )
 
 
 def _create_tables(connection: duckdb.DuckDBPyConnection) -> None:
@@ -130,6 +135,9 @@ def _create_tables(connection: duckdb.DuckDBPyConnection) -> None:
             updated_at     TIMESTAMP,
             updated_by     VARCHAR,
             edited         BOOLEAN NOT NULL DEFAULT false,
+            approved       BOOLEAN NOT NULL DEFAULT false,
+            approved_at    TIMESTAMP,
+            approved_by    VARCHAR,
             record         JSON NOT NULL,
             PRIMARY KEY (council, reference)
         )

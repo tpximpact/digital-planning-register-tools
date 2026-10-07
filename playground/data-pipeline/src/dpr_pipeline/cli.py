@@ -3,6 +3,7 @@
     dpr ingest camden      pull a council's data into bronze
     dpr map camden         convert bronze into silver
     dpr publish            copy silver into gold, keeping any edits
+    dpr approve            approve records so they become public
     dpr validate           check the silver layer
     dpr status             row counts per layer
     dpr show REFERENCE     print one record, before and after
@@ -43,6 +44,13 @@ def main(argv: list[str] | None = None) -> int:
     publishing.add_argument("--no-refresh", action="store_true",
                             help="leave gold alone even where nothing has been edited")
 
+    approving = commands.add_parser("approve", help="approve records so they become public")
+    approving.add_argument("--council", default=None)
+    approving.add_argument("--clean", action="store_true",
+                           help="approve everything with nothing flagged against it")
+    approving.add_argument("--by", default=None, help="who is approving, for the record")
+    approving.add_argument("references", nargs="*", help="specific references to approve")
+
     checking = commands.add_parser("validate", help="check the silver layer")
     checking.add_argument("--council", default=None)
     checking.add_argument("--strict", action="store_true",
@@ -82,6 +90,30 @@ def main(argv: list[str] | None = None) -> int:
     elif args.command == "publish":
         result = gold.publish(connection, args.council, refresh_unedited=not args.no_refresh)
         print("gold: " + ", ".join(f"{count} {label}" for label, count in result.items()))
+
+    elif args.command == "approve":
+        counts = gold.flagged_counts(connection, args.council)
+        print(f"{counts['approved']} approved, {counts['clean']} clean and waiting, "
+              f"{counts['flagged']} flagged for a look")
+
+        if not args.clean and not args.references:
+            print()
+            print("Nothing approved. Pass --clean, or name the references to approve.")
+            return 0
+
+        editor = args.by or "command line"
+        if args.clean:
+            if not args.council:
+                print()
+                print("Pass --council when approving everything clean.")
+                return 1
+            references = [r for _, r in gold.clean_references(connection, args.council)]
+        else:
+            references = args.references
+
+        done = gold.approve(connection, args.council, references, editor)
+        print()
+        print(f"approved {done} records")
 
     elif args.command == "validate":
         problems = validate.basic_checks(connection, args.council)

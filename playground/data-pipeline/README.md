@@ -25,6 +25,9 @@ up rows in the right shape. When a real export is available, only the data chang
 | Silver | The same records converted to the post submission standard | The same everywhere |
 | Gold | The published version, and the only place records are edited | The same everywhere |
 
+Nothing in gold is public until somebody approves it, and approval is done in bulk. See
+`docs/admin-ui.md`.
+
 Bronze exists so that we never have to go back to a council for a second export, and so a change at
 their end cannot take our data away. Silver is never edited, so re-running the pipeline refreshes
 it without wiping anyone's work in gold.
@@ -63,6 +66,7 @@ For Barnet, make the stand in export first:
 | `dpr map camden` | Converts bronze into silver, post submission shape |
 | `dpr map barnet` | The same, from Uniform's tables and codes |
 | `dpr publish` | Copies silver into gold, leaving any edits alone |
+| `dpr approve --council X --clean` | Approves everything with nothing flagged, so it becomes public |
 | `dpr validate` | Checks silver against the real ODP schema |
 | `dpr status` | Row counts for each layer |
 | `dpr show REFERENCE` | Prints one record twice, as published and in the standard shape |
@@ -80,7 +84,7 @@ There are two sets, because they do different jobs.
 
 | Endpoint | What it does |
 | --- | --- |
-| `GET /public/applications` | List, with paging, sorting and a council filter |
+| `GET /public/applications` | List of approved records, with paging, sorting and a council filter |
 | `GET /public/applications/{council}/{reference}` | One record |
 
 **Private**, for an admin tool. The same records, plus the council's own detail, the history, and
@@ -88,7 +92,10 @@ everything that changes a record.
 
 | Endpoint | What it does |
 | --- | --- |
-| `GET /private/applications` | List, showing which records have been edited |
+| `GET /private/applications` | List, showing what is approved, flagged or edited |
+| `POST /private/approval/approve` | Approve a list of references, or everything clean |
+| `POST /private/approval/unapprove` | Take records back out of public view |
+| `GET /private/approval/summary` | How the approval work splits |
 | `GET /private/applications/{council}/{reference}` | One record |
 | `GET /private/applications/{council}/{reference}/history` | What changed, who by, and when |
 | `POST /private/applications/{council}/{reference}` | Add a record by hand |
