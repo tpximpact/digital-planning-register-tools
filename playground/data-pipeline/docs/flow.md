@@ -49,19 +49,37 @@
     │  GOLD                                                                     │
     │                                                                           │
     │    gold.applications   starts as a copy of silver, and is the only place  │
-    │                        records are edited                                 │
-    │    gold.edits          every change, with who made it and when            │
+    │                        records are edited. Arrives unapproved             │
+    │    gold.edits          every change, approval and unapproval, with who    │
     │                                                                           │
-    │  Re-publishing refreshes untouched records and leaves edited ones alone.   │
+    │  Re-publishing refreshes untouched records and leaves edited ones alone,   │
+    │  and never undoes an approval.                                            │
+    └───────────────────────────────┬───────────────────────────────────────────┘
+                                    │  dpr approve --council X --clean
+                                    ▼
+    ┌───────────────────────────────────────────────────────────────────────────┐
+    │  APPROVAL                                                                 │
+    │                                                                           │
+    │  Nothing is public until somebody approves it. The work splits in two,     │
+    │  using the gaps already recorded against each record:                      │
+    │                                                                           │
+    │    clean      nothing flagged, approved together in one command            │
+    │    flagged    something specific to that record, left for a person         │
+    │                                                                           │
+    │  Gaps true of every legacy record do not count: the missing submission,    │
+    │  a coordinate instead of a boundary, the council's own status wording.     │
     └───────────────────────────────┬───────────────────────────────────────────┘
                                     │  uvicorn dpr_pipeline.api:app
                                     ▼
     ┌───────────────────────────────────────────────────────────────────────────┐
     │  THE API AND THE ADMIN SCREEN,  http://localhost:8000                     │
     │                                                                           │
-    │    GET    /applications                 list, page, sort, filter          │
-    │    GET    /applications/{c}/{ref}       one record                        │
-    │    GET    /applications/{c}/{ref}/history   what changed, who by          │
+    │    public    read only, and only approved records                         │
+    │    private   everything, plus what is approved, flagged and edited        │
+    │                                                                           │
+    │    GET    /public/applications          what the register reads           │
+    │    GET    /private/applications         what an admin tool reads          │
+    │    POST   /private/approval/approve     a list, or everything clean       │
     │    POST   PUT   DELETE                  add, replace, unpublish           │
     │    /admin                               a screen for reviewing and editing│
     │    /docs                                generated documentation           │
@@ -93,3 +111,5 @@ run this on AWS, another on Azure, and a third on a laptop before deciding anyth
     dpr ingest barnet       250 from a CSV export
     dpr map barnet          the same shape, from a different system
     dpr validate            checked against the real ODP schema
+    dpr publish             into gold, unapproved
+    dpr approve --clean     the ones with nothing flagged, in one go
