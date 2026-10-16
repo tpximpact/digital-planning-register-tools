@@ -1,6 +1,7 @@
 """Open the DuckDB web interface on this project's database.
 
     python scripts/ui.py
+    uv run --with duckdb scripts/ui.py
 
 Opens a browser with the three layers as browsable tables, so the data can be shown
 without anyone reading SQL off a terminal. Ctrl+C to stop.

@@ -8,7 +8,7 @@ services:
       - ./data:/app/data
       - ./config:/app/config
       # The ODP schemas, if a checkout is sitting beside this repo, so validate can use them.
-      - ../planning-register-data-logistics/repos/digital-planning-data-schemas:/schemas:ro
+      - ../../../digital-planning-data-schemas:/schemas:ro
     environment:
       DPR_SCHEMAS: /schemas
     env_file:
@@ -19,9 +19,10 @@ services:
   #   docker compose up api
   api:
     build: .
-    entrypoint: ["uvicorn", "dpr_pipeline.api:app", "--host", "0.0.0.0", "--port", "8000"]
+    entrypoint:
+      ['uvicorn', 'dpr_pipeline.api:app', '--host', '0.0.0.0', '--port', '8000']
     ports:
-      - "8000:8000"
+      - '8000:8000'
     volumes:
       - ./data:/app/data
       - ./config:/app/config

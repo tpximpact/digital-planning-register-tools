@@ -9,21 +9,21 @@ chosen in config rather than in the code.
 
 Two councils are wired up, on two different back office systems, and both come out identical:
 
-| Council | Back office | How the data arrives |
-| --- | --- | --- |
-| Camden | NEC M3 | Their open data API. Public, no key, refreshed daily |
-| Barnet | Idox Uniform | A CSV export, one file per table |
+| Council | Back office  | How the data arrives                                 |
+| ------- | ------------ | ---------------------------------------------------- |
+| Camden  | NEC M3       | Their open data API. Public, no key, refreshed daily |
+| Barnet  | Idox Uniform | A CSV export, one file per table                     |
 
 Barnet records cannot be used yet while data sharing is agreed, so their side runs against made
 up rows in the right shape. When a real export is available, only the data changes.
 
 ## The three layers
 
-| Layer | What it holds | Shape |
-| --- | --- | --- |
-| Bronze | A copy of whatever the council's export gave us, untouched | Different for every council |
-| Silver | The same records converted to the post submission standard | The same everywhere |
-| Gold | The published version, and the only place records are edited | The same everywhere |
+| Layer  | What it holds                                                | Shape                       |
+| ------ | ------------------------------------------------------------ | --------------------------- |
+| Bronze | A copy of whatever the council's export gave us, untouched   | Different for every council |
+| Silver | The same records converted to the post submission standard   | The same everywhere         |
+| Gold   | The published version, and the only place records are edited | The same everywhere         |
 
 Nothing in gold is public until somebody approves it, and approval is done in bulk. See
 `docs/admin-ui.md`.
@@ -34,6 +34,72 @@ it without wiping anyone's work in gold.
 
 ## Quick start
 
+The folder structure for this project should be as follows:
+
+- `digital-planning-register/` (optional: only needed if you want to see everything on the DPR frontend)
+- `digital-planning-data-schemas/`
+- `digital-planning-register-tools/`
+
+```sh
+# digital-planning-data-schemas
+git clone git@github.com:theopensystemslab/digital-planning-data-schemas.git
+cd digital-planning-data-schemas
+cp sample.env .env
+# edit it to give values
+# CAMDEN_BOPS_API_URL=https://camden.bops.services/api/v2/
+# CAMDEN_API_URL=http://0.0.0.0:8000/
+pnpm i
+pnpm build
+cd ..
+
+# call the dpr api and use bops handlers uses CAMDEN_BOPS_API_URL
+curl 'http://localhost:4000/api/@next/public/applications?page=1&resultsPerPage=10' \
+  --header 'x-client: camden' \
+  --header 'x-service: documentation-example' \
+  --header 'x-handler: bops'
+
+
+curl 'http://localhost:4000/api/@next/public/applications/25-00118-HAPP/specialistComments' \
+  --header 'x-client: camden' \
+  --header 'x-service: documentation-example' \
+  --header 'x-handler: bops'
+
+# call the dpr api and use external handlers uses CAMDEN_API_URL (the data pipeline url)
+curl 'http://localhost:4000/api/@next/public/applications?page=1&resultsPerPage=10' \
+--header 'x-client: camden' \
+--header 'x-service: documentation-example' \
+--header 'x-handler: external'
+
+# digital-planning-register
+git clone git@github.com:tpximpact/digital-planning-register.git
+cd digital-planning-register
+cp sample.env .env
+# edit it to give values
+# CAMDEN_BOPS_API_KEY=123
+# CAMDEN_BOPS_API_URL=123
+cd ..
+
+
+# digital-planning-register-tools
+cd digital-planning-register-tools
+cp sample.env .env
+bun install
+bun workspace @dpr/api bun run dev
+
+
+# setup the pipeline
+cd playground/data-pipeline
+cp config/config.example.yaml config/config.yaml
+
+# run the command in scripts/refresh_application_types.py
+
+# run the command in scripts/make_fake_uniform.py
+
+# to see the data in duckdb
+uv run --with duckdb scripts/ui.py
+```
+
+```sh
 With Docker, nothing else needed:
 
     docker compose run --rm pipeline ingest camden
@@ -165,3 +231,4 @@ would need, and the endpoints behind it.
 
 See `docs/plan.md` for what was asked for and what is built, `docs/decisions.md` for why it is
 built this way, and `docs/flow.md` for the shape of it.
+```

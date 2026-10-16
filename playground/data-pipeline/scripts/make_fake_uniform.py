@@ -1,6 +1,14 @@
 """Make a stand in for an Idox Uniform export, as CSV, one file per table.
 
     python scripts/make_fake_uniform.py data/fake-barnet 250
+    uv run scripts/make_fake_uniform.py data/fake-barnet 250
+
+    docker run --rm \
+        --user "$(id -u):$(id -g)" \
+        -v "$(pwd)":/app \
+        -w /app \
+        python:3.12-slim \
+        python scripts/make_fake_uniform.py data/fake-barnet 250
 
 Barnet have no approval to share their data and there is no contract, so a real export cannot be
 accepted. Agreed on 22 September: build the Barnet side against made up rows in the right shape,

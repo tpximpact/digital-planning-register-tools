@@ -1,6 +1,15 @@
 """Refresh the list of valid ODP application types from the schema repository.
 
-    python scripts/refresh_application_types.py ../planning-register-data-logistics/repos/digital-planning-data-schemas
+    python3 scripts/refresh_application_types.py ../../../digital-planning-data-schemas
+    uv run scripts/refresh_application_types.py ../../../digital-planning-data-schemas
+
+    docker run --rm \
+        --user "$(id -u):$(id -g)" \
+        -v "$(pwd)":/app \
+        -v "$(cd ../../../digital-planning-data-schemas && pwd)":/schemas \
+        -w /app \
+        python:3.12-slim \
+        python scripts/refresh_application_types.py /schemas
 
 The list is vendored into the package so the pipeline runs without a checkout of the schemas.
 Re-run this when the standard changes.
