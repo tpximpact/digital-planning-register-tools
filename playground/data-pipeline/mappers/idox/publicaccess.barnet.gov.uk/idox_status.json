@@ -1,0 +1,202 @@
+[
+  {
+    "value": "Appeal Allowed",
+    "text": "Appeal Allowed"
+  },
+  {
+    "value": "Appeal Dismissed",
+    "text": "Appeal Dismissed"
+  },
+  {
+    "value": "Appeal in progress",
+    "text": "Appeal in progress"
+  },
+  {
+    "value": "Appeal lodged against non determination",
+    "text": "Appeal lodged against non determination"
+  },
+  {
+    "value": "Application Received",
+    "text": "Application Received"
+  },
+  {
+    "value": "Application Refused",
+    "text": "Application Refused"
+  },
+  {
+    "value": "Application Returned",
+    "text": "Application Returned"
+  },
+  {
+    "value": "Application Withdrawn",
+    "text": "Application Withdrawn"
+  },
+  {
+    "value": "Application invalid on receipt",
+    "text": "Application invalid on receipt"
+  },
+  {
+    "value": "Applicaton permitted",
+    "text": "Applicaton permitted"
+  },
+  {
+    "value": "Approved",
+    "text": "Approved"
+  },
+  {
+    "value": "Approved following legal agreement",
+    "text": "Approved following legal agreement"
+  },
+  {
+    "value": "Approved subject to conditions",
+    "text": "Approved subject to conditions"
+  },
+  {
+    "value": "Consent Discharged",
+    "text": "Consent Discharged"
+  },
+  {
+    "value": "Deemed Approval",
+    "text": "Deemed Approval"
+  },
+  {
+    "value": "Deemed Approval subj. to s106",
+    "text": "Deemed Approval subj. to s106"
+  },
+  {
+    "value": "Deemed Refusal",
+    "text": "Deemed Refusal"
+  },
+  {
+    "value": "Deemed Withdrawal",
+    "text": "Deemed Withdrawal"
+  },
+  {
+    "value": "Dispense Agreed",
+    "text": "Dispense Agreed"
+  },
+  {
+    "value": "Env Statement Scope Acceptable",
+    "text": "Env Statement Scope Acceptable"
+  },
+  {
+    "value": "Env Statement Scope Unacceptable",
+    "text": "Env Statement Scope Unacceptable"
+  },
+  {
+    "value": "Environmental Statement Required",
+    "text": "Environmental Statement Required"
+  },
+  {
+    "value": "Envrionmental Statement not Required",
+    "text": "Envrionmental Statement not Required"
+  },
+  {
+    "value": "Exempt",
+    "text": "Exempt"
+  },
+  {
+    "value": "Finally Disposed",
+    "text": "Finally Disposed"
+  },
+  {
+    "value": "Held in Abeyance",
+    "text": "Held in Abeyance"
+  },
+  {
+    "value": "Incomplete - Returned",
+    "text": "Incomplete - Returned"
+  },
+  {
+    "value": "Insufficient Fee",
+    "text": "Insufficient Fee"
+  },
+  {
+    "value": "Invalid Notification",
+    "text": "Invalid Notification"
+  },
+  {
+    "value": "Lawful",
+    "text": "Lawful"
+  },
+  {
+    "value": "Local Review Requested",
+    "text": "Local Review Requested"
+  },
+  {
+    "value": "No Objection",
+    "text": "No Objection"
+  },
+  {
+    "value": "No Prior Approval",
+    "text": "No Prior Approval"
+  },
+  {
+    "value": "Not Exempt",
+    "text": "Not Exempt"
+  },
+  {
+    "value": "Objection",
+    "text": "Objection"
+  },
+  {
+    "value": "Pending Consideration",
+    "text": "Pending Consideration"
+  },
+  {
+    "value": "Pending Decision",
+    "text": "Pending Decision"
+  },
+  {
+    "value": "Permission Not Required",
+    "text": "Permission Not Required"
+  },
+  {
+    "value": "Pre-application advice issued",
+    "text": "Pre-application advice issued"
+  },
+  {
+    "value": "Prior Approval Not Required",
+    "text": "Prior Approval Not Required"
+  },
+  {
+    "value": "Prior Approval Process no Applicable",
+    "text": "Prior Approval Process no Applicable"
+  },
+  {
+    "value": "Prior Approval Required",
+    "text": "Prior Approval Required"
+  },
+  {
+    "value": "Prior Approval Required and Approved",
+    "text": "Prior Approval Required and Approved"
+  },
+  {
+    "value": "Prior Approval Required and Refused",
+    "text": "Prior Approval Required and Refused"
+  },
+  {
+    "value": "Refused",
+    "text": "Refused"
+  },
+  {
+    "value": "Split Decision",
+    "text": "Split Decision"
+  },
+  {
+    "value": "Unknown",
+    "text": "Unknown"
+  },
+  {
+    "value": "Unlawful",
+    "text": "Unlawful"
+  },
+  {
+    "value": "Valid Application Received",
+    "text": "Valid Application Received"
+  },
+  {
+    "value": "Withdrawn",
+    "text": "Withdrawn"
+  }
+]

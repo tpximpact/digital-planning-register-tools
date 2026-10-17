@@ -34,6 +34,7 @@ class Settings:
     gold: str = "data/gold"
     database_path: str = "data/dpr.duckdb"
     openapi_path: str = "data/openapi.json"
+    mappers: str = "mappers"
     sources: dict[str, SourceConfig] = field(default_factory=dict)
 
     def source(self, name: str) -> SourceConfig:
@@ -67,6 +68,7 @@ def load(path: str | Path | None = None) -> Settings:
         database_path=os.getenv("DPR_DATABASE", database.get("path", "data/dpr.duckdb")),
         openapi_path=os.getenv("DPR_OPENAPI", (raw.get("openapi") or {}).get("path",
                                                                             "data/openapi.json")),
+        mappers=os.getenv("DPR_MAPPERS", (raw.get("mappers") or {}).get("path", "mappers")),
     )
 
     for name, values in (raw.get("sources") or {}).items():

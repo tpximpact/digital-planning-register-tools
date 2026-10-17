@@ -1,0 +1,64 @@
+idox_value,idox_text,odp_type,notes
+A21,Article 21 Discharge of conditions (A21),approval.conditions,[check] discharge of conditions
+ADV,Application to Display Adverts (ADV),advertConsent,
+AGR,Agricultural Notification (AGR),pa.part6,[check] agricultural notification; class not known
+ART4,Article 4 Direction (ART4),,[no fit] an Article 4 direction is not an application
+BDC,bdc (BDC),,[no fit] a local code with no description
+CAD,Cert. of appropriate alternative dev (CAD),ldc.proposed,[check] certificate of appropriate alternative development
+CCS,County Council Statement (CCS),,"[no fit] a consultation response, not an application"
+CERTLB,Listed Building Cert (CERTLB),ldc.listedBuildingWorks,[check] certificate for listed building works
+COL,Certificate of Lawfulness - Historic (COL),ldc.existing,[check] historic certificate of lawfulness
+CON,Conservation Area Consent (CON),pp.full.demolition,"[check] conservation area consent, abolished in 2013; closest is permission including demolition"
+CONSV,Trees(Conservation Areas) (CONSV),wtt.notice,
+COU,Change of Use (COU),pp.full.minor,[check] a change of use needing permission
+CPE,Certificate Existing Lawful Use/Dev (CPE),ldc.existing,
+CPL,Certificate Proposed Lawful Use/Dev (CPL),ldc.proposed,
+CPO,Consultation with County Planning (CPO),,"[no fit] a consultation with the county, not an application"
+CUPRIO,COU Prior Approval (CUPRIO),pa.part3.classMA,[check] change of use prior approval; class not known
+DEM,Demolition Notification (DEM),pa.part11.classB,
+DOE,Dept of Environment Circ. (DOE),,"[no fit] a Crown development circular, not an application type in the standard"
+ENFGA,Enforcement Ground Appeal (ENFGA),,"[no fit] an enforcement appeal, not an application"
+EOR,Environmental Outcome Report - EIA (EOR),,[no fit] an environmental outcome report has no equivalent in the standard
+EXTIME,Extension of time for permission (EXTIME),pp.full.minor,[check] treated like a renewal of permission
+FUL,Full Application (FUL),pp.full.minor,[check] size not known; use pp.full.major for major applications
+HAZ,Hazardous Substance Consent (HAZ),hazardousSubstanceConsent,
+HEDG,Hedgerow Removal Notice under Regulation (HEDG),hedgerowRemovalNotice,
+HHEDGE,High Hedge (HHEDGE),,[no fit] a high hedge complaint is not an application
+HHPRIO,Householder Prior Notification (HHPRIO),pa.part1.classA,"[check] householder prior notification, taken as a larger extension"
+HIST,Historic Record 5 digit counter (HIST),,"[no fit] historic record, application type not known"
+HIST1,HIST1 (HIST1),,"[no fit] historic record, application type not known"
+HIST2,HIST2 (HIST2),,"[no fit] historic record, application type not known"
+HIST3,HIST3 (HIST3),,"[no fit] historic record, application type not known"
+HIST4,HIST4 (HIST4),,"[no fit] historic record, application type not known"
+HIST5,Historic record year and counter (HIST5),,"[no fit] historic record, application type not known"
+HIST6,HIST6 - Historic Application No B (HIST6),,"[no fit] historic record, application type not known"
+HYB,Hybrid (HYB),pp.full.major,[check] hybrid applications are usually major
+LBC,Listed Building Consent (LBC),listed,
+NMC,Non-material change to permission (NMC),amendment.nonMaterial,
+NONMAT,Non Material Alteration of permission (NONMAT),amendment.nonMaterial,
+NOT,PD Notification (NOT),,[no fit] a permitted development notification with no class to place it on
+NSIP,Nat Sig Inf Project (NSIP),,"[no fit] consented by development consent order, which the standard has no type for"
+NULL,null (NULL),,[no fit] an empty code
+OHL,Circular 14/90 Overhead Electricity Line (OHL),,[no fit] overhead line consent is not a planning application type in the standard
+OUT,Outline Application (OUT),pp.outline,
+PIP,Permission in Principle (PIP),pp.pip,
+PRIOR,Notification for Prior Approval (PRIOR),pa.part1.classA,"[check] generic prior approval, class not known; there is no bare pa"
+RBC1,rbc (RBC1),,[no fit] a local code with no description
+REG3,Local Authority app - Dev by others (REG3),pp.full.minor,"[check] council's own development, size not known"
+REG4,Local Authority app - Dev by LA (REG4),pp.full.minor,"[check] council's own development, size not known"
+REM,Approval of Reserved Matters (REM),approval.reservedMatters,
+RWPRIO,Railway Prior Approval (RWPRIO),,[no fit] railway prior approval (Part 8) has no value in the standard
+S106A,Modification or Discharge of S.106 (S106A),obligation.modify,[check] modification or discharge
+S106A,Modification or Discharge of S.106 (S106A),obligation.discharge,[check] modification or discharge
+S19,Section 19 Application (S19),,"[no fit] unclear which section 19 this is, so it is not placed"
+S211,Section 211 Notice (S211),wtt.notice,[check] notice of works to a tree in a conservation area
+S52A,Section 52 Agreement (S52A),,[no fit] an agreement rather than a modification or discharge of one
+S73,Section 73 Application (S73),amendment.minorMaterial,
+S73A,Retrospective Planning Application (S73A),pp.full.minor,[check] retrospective application; size not known
+S96,NON MATERIAL AMENDMENT (S96),amendment.nonMaterial,
+SCOP,Enviromental Scoping (SCOP),environmentalImpact.scoping,
+TDC,Technical Details Consent (TDC),pp.full.major.technicalDetails,[check] major or minor not known
+TDC,Technical Details Consent (TDC),pp.full.minor.technicalDetails,[check] major or minor not known
+TEL,Telecommunications Notification (TEL),pa.part16.classA,
+TEMP,Temporary Change of Use (TEMP),pp.full.minor,[check] a temporary change of use needing permission
+TPO,Works to a tree with a TPO (TPO),wtt.consent,

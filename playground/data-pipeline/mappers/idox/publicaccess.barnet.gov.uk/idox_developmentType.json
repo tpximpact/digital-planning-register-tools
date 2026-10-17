@@ -1,0 +1,126 @@
+[
+  {
+    "value": "BNG",
+    "text": "Biodiversity Gain Plan"
+  },
+  {
+    "value": "NOTREQ",
+    "text": "Not Required on Returns"
+  },
+  {
+    "value": "PREAPP",
+    "text": "Pre-application"
+  },
+  {
+    "value": "Q01",
+    "text": "Large Scale Dwellings"
+  },
+  {
+    "value": "Q02",
+    "text": "Large Scale Offices / R&D/ Light Industr"
+  },
+  {
+    "value": "Q03",
+    "text": "Large Scale Gen.Indus./Storage/Warehouse"
+  },
+  {
+    "value": "Q04",
+    "text": "Large Scale Retail Distrib and Servicing"
+  },
+  {
+    "value": "Q05",
+    "text": "Large Scale Gypsy and Traveller Sites"
+  },
+  {
+    "value": "Q06",
+    "text": "Other Large Scale Developments"
+  },
+  {
+    "value": "Q07",
+    "text": "Small Scale Dwellings"
+  },
+  {
+    "value": "Q08",
+    "text": "Small Scale Offices / R&D/ Light Industr"
+  },
+  {
+    "value": "Q09",
+    "text": "Small Scale Gen.Indus./Storage/Warehouse"
+  },
+  {
+    "value": "Q10",
+    "text": "Small Scale Retail Distrib and Servicing"
+  },
+  {
+    "value": "Q11",
+    "text": "Small Scale Gypsy and Traveller Sites"
+  },
+  {
+    "value": "Q12",
+    "text": "Other Small Scale Developments"
+  },
+  {
+    "value": "Q13",
+    "text": "Minor Dwellings"
+  },
+  {
+    "value": "Q14",
+    "text": "Minor Offices / R&D/ Light Industr"
+  },
+  {
+    "value": "Q15",
+    "text": "Minor Gen.Indus./Storage/Warehouse"
+  },
+  {
+    "value": "Q16",
+    "text": "Minor Retail Distrib and Servicing"
+  },
+  {
+    "value": "Q17",
+    "text": "Minor Gypsy and Traveller Sites"
+  },
+  {
+    "value": "Q18",
+    "text": "Other Minor Developments"
+  },
+  {
+    "value": "Q19",
+    "text": "Minerals Processing"
+  },
+  {
+    "value": "Q20",
+    "text": "Change of Use"
+  },
+  {
+    "value": "Q21",
+    "text": "Householder Development"
+  },
+  {
+    "value": "Q22",
+    "text": "Advertisements"
+  },
+  {
+    "value": "Q23",
+    "text": "Listed Building Consents (alter/extend)"
+  },
+  {
+    "value": "Q24",
+    "text": "Listed Building Consents (demolish)"
+  },
+  {
+    "value": "Q25",
+    "text": "Conservation Area Consents"
+  },
+  {
+    "value": "Q26",
+    "text": "Certificates of Lawful Development"
+  },
+  {
+    "value": "Q27",
+    "text": "Notifications"
+  },
+  {
+    "value": "TREE",
+    "text": "Tree application"
+  }
+]

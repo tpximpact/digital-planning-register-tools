@@ -29,3 +29,8 @@ sources:
     # Barnet cannot share real records yet, so this points at made up rows in the same shape.
     # Build them with: python scripts/make_fake_uniform.py data/fake-barnet 250
     url: data/fake-barnet
+
+# The value mapper tables (Idox statuses, MHCLG application types, and so on). They are csv files
+# people fill in, so they live outside data/ and are committed with the code.
+mappers:
+  path: mappers

@@ -7,6 +7,8 @@ services:
       # The data stays on your machine, so runs survive rebuilds.
       - ./data:/app/data
       - ./config:/app/config
+      # The value mapper tables, so edits and fetches land in your checkout.
+      - ./mappers:/app/mappers
       # The ODP schemas, if a checkout is sitting beside this repo, so validate can use them.
       - ../../../digital-planning-data-schemas:/schemas:ro
     environment:
@@ -22,10 +24,11 @@ services:
     entrypoint:
       ['uvicorn', 'dpr_pipeline.api:app', '--host', '0.0.0.0', '--port', '8000']
     ports:
-      - '8000:8000'
+      - '8010:8000'
     volumes:
       - ./data:/app/data
       - ./config:/app/config
+      - ./mappers:/app/mappers
     env_file:
       - path: .env
         required: false

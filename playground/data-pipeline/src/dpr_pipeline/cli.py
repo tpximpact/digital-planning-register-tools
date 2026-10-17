@@ -12,6 +12,7 @@
     dpr values COLUMN      distinct values in silver, with counts
     dpr attach C REF FILE  store the files and comments from a record in the standard's shape
     dpr reset --yes        delete the database so the next run starts from nothing
+    dpr mappers ...        manage the value mapper tables (status, validate, fetch, add-portal)
 """
 
 from __future__ import annotations
@@ -20,6 +21,8 @@ import argparse
 import sys
 
 from . import config, db, gold, validate
+from .value_maps import Library, root_from
+from .value_maps import cli as value_maps_cli
 from .mappers import barnet as barnet_mapper
 from .mappers import camden as camden_mapper
 from .sources import barnet as barnet_source
@@ -84,6 +87,10 @@ def main(argv: list[str] | None = None) -> int:
     resetting.add_argument("--files", action="store_true",
                            help="also delete the bronze, silver and gold folders")
 
+    mappers = commands.add_parser(
+        "mappers", help="manage the value mapper tables, such as Idox statuses")
+    value_maps_cli.add_arguments(mappers)
+
     values = commands.add_parser("values", help="distinct values in silver, with counts")
     values.add_argument("column", choices=["status", "decision", "application_type"])
 
@@ -93,6 +100,10 @@ def main(argv: list[str] | None = None) -> int:
     # Before the database is opened, because an open DuckDB file cannot be deleted.
     if args.command == "reset":
         return _reset(settings, args.yes, args.files)
+
+    # The mapper tables are files, so they never need the database.
+    if args.command == "mappers":
+        return value_maps_cli.run(args, Library(root_from(settings)))
 
     connection = db.connect(settings.database_path)
 

@@ -1,0 +1,54 @@
+idox_value,idox_text,odp_type,notes
+A21G,A21 Granted,granted,
+A21R,A21 Refusal,refused,
+ADVSD,Advert Split Decision,granted,[check] Split decision defaults to granted
+APEAL,Appeal Dismissed,refused,
+APPL,Approved at Appeal - Non-determination,granted,
+ART4,Article 4(1) Direction,,[no fit] an Article 4 direction is not a decision on an application
+C1,C of L Existing Use - Approval,granted,
+C2,C of L Existing Use - Refusal,refused,
+C3,C of L Proposed Use - Approval,granted,
+C4,C of L of Proposed Use - Refusal,refused,
+C5LB,C of L Proposed Works (LB) - Approval,granted,
+C6,C of L Proposed Use Revoked,refused,[check] Revoked mapped to refused
+C7,C of L of Proposed Use - Split,granted,[check] Split decision defaults to granted
+EIANT,EIA Not required,granted,
+EIAR,EIA required,refused,[check] May need full application
+FDO,Finally Disposed Of,,"[no fit] finally disposed of records closure, not whether it was granted or refused"
+FINR,Further information not rec,,"[no fit] further information not received is a status (returned), not a decision"
+GRANT7,Section73 Grant Planning Permission,granted,
+GRANTA,Advertisement Consent Granted,granted,
+GRANTC,Grant of Minor Commercial Development,granted,
+GRANTF,Full Application Granted,granted,
+GRANTH,Householder Granted,granted,
+GRANTL,Listed Building Consent Granted,granted,
+GRANTO,Outline Application Granted,granted,
+GRANTP,Permission in Principle Granted,granted,
+GRANTR,Grant Reserved Matters,granted,
+GRANTT,Trees Granted,granted,
+GRANTX,Hybrid Application,granted,
+NGA,Notification GDO,granted,[check]
+NOOBJC,No Objection,granted,
+OBJECT,Objection,refused,
+OPAC,Opinion accepted,granted,
+OPVA,Opinion varied,granted,
+PD,Permitted Development,granted,
+PER106,Granted Subject to S106 agreement,granted,
+PRIO4,Prior Approval Deemed Consent,granted,
+PRIOR,Prior Approval Required,,[no fit] prior approval required is neither granted nor refused yet
+PRIOR1,Prior Approval Not Required,granted,
+PRIOR2,Prior Approval Required But Not Granted,refused,
+PRIOR3,Prior Approval Required and Granted,granted,
+PRRQD,Permission Required,refused,"[check] PA refused, full PP required"
+REFUS7,Section73 Refuse Planning Permission,refused,
+REFUSA,Advertisement Consent Refusal,refused,
+REFUSC,Refusal of Minor Commercial Development,refused,
+REFUSE,Application Refusal,refused,
+REFUSH,Householder Refusal,refused,
+REFUSL,Listed Building Consent Refusal,refused,
+REFUSO,Outline Application Refusal,refused,
+REFUSP,Permission in Principle Refusal,refused,
+REFUST,Refusal Trees,refused,
+REFUSX,Hybrid Application,refused,[check] idox_value indicates Refusal
+TRANS,Transfered,,[no fit] a transfer is not a decision
+WDN,Application Withdrawn,,"[no fit] withdrawn is a status, not a decision"

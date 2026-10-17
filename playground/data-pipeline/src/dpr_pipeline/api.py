@@ -2,6 +2,7 @@
 
   api_odp     the API: only the Open Digital Planning routes in the standard's OpenAPI spec
   admin_data  the JSON behind the admin page at /admin, hidden from the docs
+  admin_mappers  the JSON behind the value mappers page at /admin/mappers, also hidden
 
     uvicorn dpr_pipeline.api:app --reload
 """
@@ -15,7 +16,7 @@ from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from . import admin_data
+from . import admin_data, admin_mappers
 from .api_common import STATIC
 from .api_odp import public, unredacted
 from .api_responses import envelope
@@ -65,6 +66,7 @@ def _describe(exc: RequestValidationError) -> str:
 app.include_router(public)
 app.include_router(unredacted)
 app.include_router(admin_data.router)
+app.include_router(admin_mappers.router)
 
 
 @app.get("/", include_in_schema=False)
@@ -76,6 +78,19 @@ def home():
 def admin():
     """The admin page, with a switch between bronze, silver and gold. It uses /admin/data."""
     return FileResponse(STATIC / "admin.html")
+
+
+@app.get("/admin/mappers", include_in_schema=False)
+def admin_mappers_page():
+    """The value mappers page: Idox statuses, MHCLG application types and so on. It uses
+    /admin/mappers/data."""
+    return FileResponse(STATIC / "mappers.html")
+
+
+@app.get("/admin/admin.css", include_in_schema=False)
+def admin_css():
+    """The styles both admin pages share."""
+    return FileResponse(STATIC / "admin.css", media_type="text/css")
 
 
 @app.get("/lab", include_in_schema=False)

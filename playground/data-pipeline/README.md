@@ -144,6 +144,10 @@ For Barnet, make the stand in export first:
 | `dpr gaps` | Groups what the mapper could not place, largest first |
 | `dpr values decision` | Distinct statuses, decisions or types, with counts |
 | `dpr sql "SELECT ..."` | Any query against the database |
+| `dpr mappers status` | How finished each value mapper table is (see below) |
+| `dpr mappers validate` | What is unmapped or wrong; exits 1 if a required table is unfinished |
+| `dpr mappers fetch` | Refreshes the standard's values, MHCLG's list and each Idox portal |
+| `dpr mappers add-portal URL` | Starts mapping another Idox portal |
 
 ### Starting again from nothing
 
@@ -244,6 +248,43 @@ It reads and writes through `/admin/data` (`admin_data.py`), which is hidden fro
 the documented API stays the standard's ODP endpoints and nothing else. `POST /admin/data/validate` takes `{schema, record}` and
 `GET /admin/data/{council}/{reference}/check` runs a record through the OpenAPI spec.
 
+## Value mappers
+
+Separate from the council mappers above, which convert whole records. These are small lookup
+tables that turn one source system's wording into the standard's: an Idox status into an ODP
+status, an Idox decision into granted or refused, an MHCLG application type into an ODP one. They
+are being filled in with LPAs, so they live as plain csv files in `mappers/`, committed with the
+code, and are never overwritten by a fetch. `mappers/README.md` explains the files and the
+workflow.
+
+    docker compose run --rm pipeline mappers status                    # a bar and counts per table
+    docker compose run --rm pipeline mappers validate                  # lists what is unmapped or invalid
+    docker compose run --rm pipeline mappers validate idox             # one portal's tables, or any id prefix
+    docker compose run --rm pipeline mappers fetch                     # standard + MHCLG + new portals; --force re-reads portals
+    docker compose run --rm pipeline mappers fetch --offline           # only create or extend csv files from what is on disk
+    docker compose run --rm pipeline mappers add-portal "https://planning.example.gov.uk/online-applications/search.do?action=advanced"
+    docker compose run --rm pipeline mappers show idox/<domain>/decision
+
+They never need the database. With Docker: `docker compose run --rm pipeline mappers status`.
+
+`/admin/mappers` edits the same files in the same style as `/admin`: pick a table, filter to what
+is unmapped, invalid or flagged `[check]`, choose the standard's value from a list, add a note, and
+save. A source value can map to more than one standard value (**Add another**). A value the
+standard does not accept can't be saved. **Refresh from source** and **Add Idox portal** do what
+`fetch` and `add-portal` do. The JSON behind it is `/admin/mappers/data`, hidden from the API docs.
+
+What the checks count: a source value is *unmapped* until a row gives it a standard value,
+*invalid* if a row's value is not one the standard accepts, the source stopped offering it, or the
+same mapping is listed twice, and *to check* when a mapped row has a note starting `[check]`. A
+value with nothing to map to is left empty with a note starting `[no fit]`, which counts as done.
+Status and decision tables must be complete for `validate` to pass. Idox case types, which map to
+application types, are reported but do not fail it.
+
+The standard's values come from the schemas (`schemas/postSubmissionApplication.json` and
+`postSubmissionPublishedApplication.json`), so a parent name such as `pp.full`, `ldc` or `pa`,
+which is not itself a valid application type, is rejected. `fetch` reads them from GitHub, or from
+a checkout with `--schemas PATH` or `DPR_SCHEMAS`.
+
 ## The review lab
 
 `/lab` holds three prototype apps for getting records approved quickly. They are proofs of
@@ -330,11 +371,16 @@ variables, never from the file, so the config can be committed and the repo can 
       api.py                assembles the app
       api_odp.py            the routes in the OpenAPI spec
       admin_data.py         the admin page's data routes, hidden from the docs
+      admin_mappers.py      the value mappers page's data routes, also hidden
+      value_maps/           the mappers/ csv tables: library, checks, fetchers, `dpr mappers`
       extension.py          metadata.pipeline, and the schema change that allows it
       api_common.py         what both share
       expiry.py, geo.py     temporary expiry estimate, and GeoJSON from a point
       validate.py           schema checking
       cli.py                the command line
+      static/               admin.html, mappers.html, admin.css (shared) and the lab
+
+    mappers/                value mapper tables (csv and json), committed with the code
 
 Adding a council means adding one source module, one yaml file in `mappings/` and a small mapper
 module for the parts that are that council's alone. Everything else is shared.

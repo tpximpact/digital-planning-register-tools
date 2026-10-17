@@ -1,0 +1,118 @@
+[
+  {
+    "value": "Appeal Dismissed",
+    "text": "Appeal Dismissed"
+  },
+  {
+    "value": "Appeal lodged",
+    "text": "Appeal lodged"
+  },
+  {
+    "value": "Application Granted",
+    "text": "Application Granted"
+  },
+  {
+    "value": "Application Received",
+    "text": "Application Received"
+  },
+  {
+    "value": "Application Refused",
+    "text": "Application Refused"
+  },
+  {
+    "value": "Application Withdrawn",
+    "text": "Application Withdrawn"
+  },
+  {
+    "value": "Awaiting decision",
+    "text": "Awaiting decision"
+  },
+  {
+    "value": "C of L Existing Use- Approval",
+    "text": "C of L Existing Use- Approval"
+  },
+  {
+    "value": "C of L Existing Use- Refusal",
+    "text": "C of L Existing Use- Refusal"
+  },
+  {
+    "value": "C of L Proposed Use- Approval",
+    "text": "C of L Proposed Use- Approval"
+  },
+  {
+    "value": "C of L Proposed Use- Refused",
+    "text": "C of L Proposed Use- Refused"
+  },
+  {
+    "value": "Decided",
+    "text": "Decided"
+  },
+  {
+    "value": "Details Required",
+    "text": "Details Required"
+  },
+  {
+    "value": "EIA Not required.",
+    "text": "EIA Not required."
+  },
+  {
+    "value": "EIA required",
+    "text": "EIA required"
+  },
+  {
+    "value": "Granted Secrectary of State",
+    "text": "Granted Secrectary of State"
+  },
+  {
+    "value": "Non Determination",
+    "text": "Non Determination"
+  },
+  {
+    "value": "Opinion accepted",
+    "text": "Opinion accepted"
+  },
+  {
+    "value": "Opinion varied",
+    "text": "Opinion varied"
+  },
+  {
+    "value": "P2 - Planning Permission (pre Jan 2005)",
+    "text": "P2 - Planning Permission (pre Jan 2005)"
+  },
+  {
+    "value": "Pending Consideration",
+    "text": "Pending Consideration"
+  },
+  {
+    "value": "Permission Required",
+    "text": "Permission Required"
+  },
+  {
+    "value": "Permitted Development",
+    "text": "Permitted Development"
+  },
+  {
+    "value": "Prior Approval Not Required",
+    "text": "Prior Approval Not Required"
+  },
+  {
+    "value": "Prior Approval Required",
+    "text": "Prior Approval Required"
+  },
+  {
+    "value": "Prior Approval Required and Granted",
+    "text": "Prior Approval Required and Granted"
+  },
+  {
+    "value": "Refused Secrectary of State",
+    "text": "Refused Secrectary of State"
+  },
+  {
+    "value": "TPO Not Required",
+    "text": "TPO Not Required"
+  },
+  {
+    "value": "Unknown",
+    "text": "Unknown"
+  }
+]

@@ -1,0 +1,254 @@
+[
+  {
+    "value": "01QE",
+    "text": "EIA Developments"
+  },
+  {
+    "value": "30",
+    "text": "Planning In Principle"
+  },
+  {
+    "value": "99",
+    "text": "A21 Discharge of Conditions"
+  },
+  {
+    "value": "AGRDTL",
+    "text": "Agricultural Details Submitted"
+  },
+  {
+    "value": "CCS",
+    "text": "County Council Statement"
+  },
+  {
+    "value": "EOR",
+    "text": "Environmental Outcome Report"
+  },
+  {
+    "value": "HEDG",
+    "text": "Hedgerow Removal Notice under Regulation"
+  },
+  {
+    "value": "HH",
+    "text": "High Hedge Complaint"
+  },
+  {
+    "value": "HISTOR",
+    "text": "Historical Application detail"
+  },
+  {
+    "value": "HYB",
+    "text": "Hybrid Applications"
+  },
+  {
+    "value": "NSIP",
+    "text": "Nat Sig Inf Project"
+  },
+  {
+    "value": "PDENQ",
+    "text": "Permitted Development Enquiry"
+  },
+  {
+    "value": "PIP",
+    "text": "Permission in Principle"
+  },
+  {
+    "value": "PREAPP",
+    "text": "Minor Pre App Enquiry"
+  },
+  {
+    "value": "PREMAJ",
+    "text": "Major Pre App Enquiry"
+  },
+  {
+    "value": "Q01",
+    "text": "Major Dwellings (10 or more)"
+  },
+  {
+    "value": "Q02",
+    "text": "Major Offices / R & D / light indust"
+  },
+  {
+    "value": "Q03",
+    "text": "Major General Industry / storage / w"
+  },
+  {
+    "value": "Q04",
+    "text": "Major Retail distribution and servic"
+  },
+  {
+    "value": "Q05",
+    "text": "Major Gypsy and Traveller pitches"
+  },
+  {
+    "value": "Q06",
+    "text": "All other Major development"
+  },
+  {
+    "value": "Q13",
+    "text": "Minor Dwellings"
+  },
+  {
+    "value": "Q14",
+    "text": "Minor Offices / R& D / light industry"
+  },
+  {
+    "value": "Q15",
+    "text": "Minor General Industry / storage / wareh"
+  },
+  {
+    "value": "Q16",
+    "text": "Minor Retail distribution and servicing"
+  },
+  {
+    "value": "Q17",
+    "text": "Minor Gypsy and Traveller pitches"
+  },
+  {
+    "value": "Q18",
+    "text": "Minor All other minor developments"
+  },
+  {
+    "value": "Q20",
+    "text": "Other Change of Use"
+  },
+  {
+    "value": "Q21",
+    "text": "Householder developments"
+  },
+  {
+    "value": "Q22",
+    "text": "Advertisements"
+  },
+  {
+    "value": "Q23",
+    "text": "Listed building consents (to alter)"
+  },
+  {
+    "value": "Q24",
+    "text": "Listed building consents (to demolish)"
+  },
+  {
+    "value": "Q25",
+    "text": "Relevant Demolition in Conservation Area"
+  },
+  {
+    "value": "Q26",
+    "text": "Certificates of lawful development"
+  },
+  {
+    "value": "Q26A",
+    "text": "Cert of Lawfulness- Listed Buildings"
+  },
+  {
+    "value": "Q26CAD",
+    "text": "Cert. of appropriate alternative dev."
+  },
+  {
+    "value": "Q27",
+    "text": "Pt6 Notifications- Dem, Forestry, Agri"
+  },
+  {
+    "value": "Q27AGR",
+    "text": "Agricultural Notification"
+  },
+  {
+    "value": "Q27B",
+    "text": "Pt1 Class A-Larger Householder Ext"
+  },
+  {
+    "value": "Q27C",
+    "text": "Pt 3 Classes M Retail & Sui Generis to R"
+  },
+  {
+    "value": "Q27D",
+    "text": "Pt 3 Class N Amusement Casino to Residen"
+  },
+  {
+    "value": "Q27DEM",
+    "text": "Demolition Notification"
+  },
+  {
+    "value": "Q27E",
+    "text": "Pt3 Class R Agri building to Commercial"
+  },
+  {
+    "value": "Q27F",
+    "text": "Pt3 Class O- Offices to Residential"
+  },
+  {
+    "value": "Q27G",
+    "text": "Pt 3 All other PD Changes of use"
+  },
+  {
+    "value": "Q27H",
+    "text": "Pt3 Class Q Agricultural to Residential"
+  },
+  {
+    "value": "Q27I",
+    "text": "Pt20 Class AA _Householder add storey"
+  },
+  {
+    "value": "Q27J",
+    "text": "Pt20 Class A Dwellings on detached flats"
+  },
+  {
+    "value": "Q27K",
+    "text": "Pt20 Class AA_Detched commerc, mixed"
+  },
+  {
+    "value": "Q27L",
+    "text": "Pt20 Class AB_Terraced commercl, mixed"
+  },
+  {
+    "value": "Q27M",
+    "text": "Pt20 Class AC_ Dwellings in terrace"
+  },
+  {
+    "value": "Q27MA",
+    "text": "CLASS E TO C3"
+  },
+  {
+    "value": "Q27N",
+    "text": "Pt20 Class AD Dwelling on detached"
+  },
+  {
+    "value": "Q27O",
+    "text": "Pt20 Class ZA_Demolition and construct"
+  },
+  {
+    "value": "Q27P",
+    "text": "Pt 20 GDPO-All others"
+  },
+  {
+    "value": "Q27R",
+    "text": "GDPO Transport, Roads, Water, Sewerage"
+  },
+  {
+    "value": "Q27S",
+    "text": "Electricity and Overhead Lines"
+  },
+  {
+    "value": "Q27TEL",
+    "text": "Pt 16 Elec Communications Notification"
+  },
+  {
+    "value": "Q27U",
+    "text": "Pt14 Class J Solar equip on non domestic"
+  },
+  {
+    "value": "S211",
+    "text": "Works to tree/s in a Consevation Area"
+  },
+  {
+    "value": "SCO",
+    "text": "Scoping"
+  },
+  {
+    "value": "TDC",
+    "text": "Technical Details Consent"
+  },
+  {
+    "value": "TPO",
+    "text": "Works to TPO'd Tree/s"
+  }
+]
