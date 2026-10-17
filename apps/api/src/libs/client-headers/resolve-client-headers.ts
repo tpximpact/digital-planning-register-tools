@@ -19,7 +19,10 @@ export const resolveClientHeaders = (app: Elysia) =>
 
     let client = request.headers.get('x-client')
     let service = request.headers.get('x-service') ?? 'unknown'
-    let handler = request.headers.get('x-handler')
+    let handler = request.headers.get('x-handler') ?? 'external'
+
+    // Placeholder for future DB lookup for handler
+    // e.g. context.handler = await fetchHandlerFromDB(client)
 
     // Returns 'local' for cavyshire-borough-council or cavyshire-borough.
     // Returns 'bops' for anything else (with a placeholder for a future DB call).
@@ -41,15 +44,13 @@ export const resolveClientHeaders = (app: Elysia) =>
           'Missing or invalid client header; unable to determine required handler'
         )
       }
-    } else if (
+    }
+
+    if (
       client === 'cavyshire-borough-council' ||
       client === 'cavyshire-borough'
     ) {
       handler = 'local'
-    } else {
-      // Placeholder for future DB lookup for handler
-      // e.g. context.handler = await fetchHandlerFromDB(client)
-      handler = 'bops'
     }
 
     if (DEBUG) {
