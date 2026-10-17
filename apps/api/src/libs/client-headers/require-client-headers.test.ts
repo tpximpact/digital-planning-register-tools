@@ -11,7 +11,8 @@ describe('require-client-headers', () => {
     const { status, data } = await api.get({
       headers: {
         'x-client': 'test-client',
-        'x-service': 'test-service'
+        'x-service': 'test-service',
+        'x-handler': 'test-handler'
       }
     })
 
@@ -37,7 +38,8 @@ describe('require-client-headers', () => {
     const { status, data } = await api.get({
       headers: {
         'x-client': null as unknown as string,
-        'x-service': null as unknown as string
+        'x-service': null as unknown as string,
+        'x-handler': null as unknown as string
       }
     })
 
@@ -50,7 +52,7 @@ describe('require-client-headers', () => {
     const api = treaty(app)
 
     const { status, data } = await api.get({
-      headers: { 'x-client': '', 'x-service': '' }
+      headers: { 'x-client': '', 'x-service': '', 'x-handler': '' }
     })
 
     expect(status).toBe(422)

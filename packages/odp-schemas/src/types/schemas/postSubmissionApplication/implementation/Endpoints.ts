@@ -354,7 +354,7 @@ const endpoints = {
     private: {
       /**
        * /api/@next/applications/{applicationId}/specialistComments
-       * /api/@next/applications/{applicationId}/specialistComments/{specialistCommentId}
+       * /api/@next/applications/{applicationId}/specialistComments/{specialistId}
        */
       specialists: {
         method: 'GET',
@@ -380,10 +380,10 @@ const endpoints = {
       },
       specialist: {
         method: 'GET',
-        path: '/api/@next/applications/{applicationId}/specialistComments/{specialistCommentId}',
+        path: '/api/@next/applications/{applicationId}/specialistComments/{specialistId}',
         urlParams: Type.Intersect([
           BaseApplicationUrlParamsSchema,
-          Type.Object({ specialistCommentId: Type.String() })
+          Type.Object({ specialistId: Type.String() })
         ]),
         queryParams: undefined,
         data: SpecialistCommentSchema,

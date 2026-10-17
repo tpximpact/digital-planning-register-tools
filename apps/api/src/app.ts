@@ -5,7 +5,6 @@ import { standardResponses } from './libs/standard-responses'
 import { handleErrors } from './libs/handle-errors'
 
 import {
-  // app as handlerBops,
   fetchAllApplications as fetchAllBopsApplications,
   fetchApplication as fetchBopsApplication,
   fetchAllApplicationDocuments as fetchAllBopsApplicationDocuments,
@@ -18,6 +17,7 @@ import { SchemaModel } from './schema'
 import { api } from './modules/api'
 import { requireClientHeaders } from './libs/client-headers'
 import { docs } from './modules/open-api'
+import { dispatch, envelope, proxy, unhandled } from './libs/handle-requests'
 
 /**
  * @file Types for authentication middleware
@@ -33,26 +33,6 @@ const defaultOptions: ApiOptions = {
   enabled: true,
   debug: config.debug || false,
   prefix: ''
-}
-
-const notHandled = {
-  data: null,
-  status: { code: 200, message: 'Not currently handled' }
-}
-const bopsHandler = <T>(
-  handler: string,
-  fn: () => Promise<T>,
-  fallback: T = {
-    data: null,
-    status: { code: 200, message: '@TODO implement example data endpoint' }
-  } as T
-) => {
-  switch (handler) {
-    case 'bops':
-      return fn()
-    default:
-      return fallback
-  }
 }
 
 const app = (userOptions?: ApiOptions) => {
@@ -130,8 +110,11 @@ const app = (userOptions?: ApiOptions) => {
             .use(api)
             .get(
               `/applications`,
-              async ({ handler }) =>
-                bopsHandler(handler, async () => notHandled),
+              ({ handler, client, request }) =>
+                dispatch(handler, {
+                  ...unhandled,
+                  external: () => proxy(client, request)
+                }),
               {
                 query: 'applications.all.query',
                 ...(options.generateDocs && {
@@ -152,8 +135,11 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId`,
-              async ({ handler }) =>
-                bopsHandler(handler, async () => notHandled),
+              ({ handler, client, request }) =>
+                dispatch(handler, {
+                  ...unhandled,
+                  external: () => proxy(client, request)
+                }),
               {
                 params: 'applications.single.params',
                 ...(options.generateDocs && {
@@ -173,8 +159,11 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/documents`,
-              async ({ handler }) =>
-                bopsHandler(handler, async () => notHandled),
+              ({ handler, client, request }) =>
+                dispatch(handler, {
+                  ...unhandled,
+                  external: () => proxy(client, request)
+                }),
               {
                 params: 'documents.all.params',
                 query: 'documents.all.query',
@@ -195,8 +184,11 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/documents/:documentId`,
-              async ({ handler }) =>
-                bopsHandler(handler, async () => notHandled),
+              ({ handler, client, request }) =>
+                dispatch(handler, {
+                  ...unhandled,
+                  external: () => proxy(client, request)
+                }),
               {
                 params: 'documents.single.params',
                 ...(options.generateDocs && {
@@ -216,8 +208,11 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/publicComments`,
-              async ({ handler }) =>
-                bopsHandler(handler, async () => notHandled),
+              ({ handler, client, request }) =>
+                dispatch(handler, {
+                  ...unhandled,
+                  external: () => proxy(client, request)
+                }),
               {
                 params: 'publicComments.all.params',
                 query: 'publicComments.all.query',
@@ -238,14 +233,17 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/publicComments/:publicCommentId`,
-              async ({ handler }) =>
-                bopsHandler(handler, async () => notHandled),
+              ({ handler, client, request }) =>
+                dispatch(handler, {
+                  ...unhandled,
+                  external: () => proxy(client, request)
+                }),
               {
-                params: 'publicComments.all.params',
+                params: 'publicComments.single.params',
                 ...(options.generateDocs && {
                   response: {
                     200: t.Union([
-                      t.Ref('publicComments.all.response'),
+                      t.Ref('publicComments.single.response'),
                       t.Ref('empty200')
                     ])
                   }
@@ -259,8 +257,11 @@ const app = (userOptions?: ApiOptions) => {
             )
             .post(
               `/applications/:applicationId/publicComments`,
-              async ({ handler }) =>
-                bopsHandler(handler, async () => notHandled),
+              ({ handler, client, request, body }) =>
+                dispatch(handler, {
+                  ...unhandled,
+                  external: () => proxy(client, request, body)
+                }),
               {
                 params: 'publicComments.submit.params',
                 body: 'publicComments.submit.body',
@@ -279,8 +280,11 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/specialistComments`,
-              async ({ handler }) =>
-                bopsHandler(handler, async () => notHandled),
+              ({ handler, client, request }) =>
+                dispatch(handler, {
+                  ...unhandled,
+                  external: () => proxy(client, request)
+                }),
               {
                 params: 'specialists.all.params',
                 query: 'specialists.all.query',
@@ -301,8 +305,11 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/specialistComments/:specialistId`,
-              async ({ handler }) =>
-                bopsHandler(handler, async () => notHandled),
+              ({ handler, client, request }) =>
+                dispatch(handler, {
+                  ...unhandled,
+                  external: () => proxy(client, request)
+                }),
               {
                 params: 'specialists.single.params',
                 ...(options.generateDocs && {
@@ -333,29 +340,13 @@ const app = (userOptions?: ApiOptions) => {
           app
             .get(
               `/applications`,
-              async ({ handler, client, query }) => {
-                switch (handler) {
-                  case 'bops': {
-                    const result = await fetchAllBopsApplications(client, query)
-                    const { data, status } = result
-                    const pagination =
-                      'pagination' in result ? result.pagination : undefined
-                    return pagination
-                      ? { data, pagination, status }
-                      : { data, status }
-                  }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+              ({ handler, client, query, request }) =>
+                dispatch(handler, {
+                  external: () => proxy(client, request),
+                  bops: envelope(() => fetchAllBopsApplications(client, query))
+                }),
               {
-                query: 'applications.all.query',
+                query: 'public.applications.all.query',
                 ...(options.generateDocs && {
                   response: {
                     200: t.Union([
@@ -373,30 +364,13 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId`,
-              async ({ handler, client, params }) => {
-                switch (handler) {
-                  case 'bops': {
-                    const result = await fetchBopsApplication(
-                      client,
-                      params.applicationId
-                    )
-                    const { data, status } = result
-                    const pagination =
-                      'pagination' in result ? result.pagination : undefined
-                    return pagination
-                      ? { data, pagination, status }
-                      : { data, status }
-                  }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+              ({ handler, client, params, request }) =>
+                dispatch(handler, {
+                  external: () => proxy(client, request),
+                  bops: envelope(() =>
+                    fetchBopsApplication(client, params.applicationId)
+                  )
+                }),
               {
                 params: 'public.applications.single.params',
                 ...(options.generateDocs && {
@@ -416,31 +390,17 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/documents`,
-              async ({ handler, client, query, params }) => {
-                switch (handler) {
-                  case 'bops': {
-                    const result = await fetchAllBopsApplicationDocuments(
+              ({ handler, client, query, params, request }) =>
+                dispatch(handler, {
+                  external: () => proxy(client, request),
+                  bops: envelope(() =>
+                    fetchAllBopsApplicationDocuments(
                       client,
                       params.applicationId,
                       query
                     )
-                    const { data, status } = result
-                    const pagination =
-                      'pagination' in result ? result.pagination : undefined
-                    return pagination
-                      ? { data, pagination, status }
-                      : { data, status }
-                  }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+                  )
+                }),
               {
                 params: 'public.documents.all.params',
                 query: 'public.documents.all.query',
@@ -461,8 +421,11 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/documents/:documentId`,
-              async ({ handler }) =>
-                bopsHandler(handler, async () => notHandled),
+              ({ handler, client, request }) =>
+                dispatch(handler, {
+                  ...unhandled,
+                  external: () => proxy(client, request)
+                }),
               {
                 params: 'public.documents.single.params',
                 ...(options.generateDocs && {
@@ -482,31 +445,17 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/publicComments`,
-              async ({ handler, client, query, params }) => {
-                switch (handler) {
-                  case 'bops': {
-                    const result = await fetchAllBopsApplicationPublicComments(
+              ({ handler, client, query, params, request }) =>
+                dispatch(handler, {
+                  external: () => proxy(client, request),
+                  bops: envelope(() =>
+                    fetchAllBopsApplicationPublicComments(
                       client,
                       params.applicationId,
                       query
                     )
-                    const { data, status } = result
-                    const pagination =
-                      'pagination' in result ? result.pagination : undefined
-                    return pagination
-                      ? { data, pagination, status }
-                      : { data, status }
-                  }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+                  )
+                }),
               {
                 params: 'public.publicComments.all.params',
                 query: 'public.publicComments.all.query',
@@ -525,10 +474,36 @@ const app = (userOptions?: ApiOptions) => {
                 }
               }
             )
+            .post(
+              `/applications/:applicationId/publicComments`,
+              ({ handler, client, request, body }) =>
+                dispatch(handler, {
+                  ...unhandled,
+                  external: () => proxy(client, request, body)
+                }),
+              {
+                params: 'publicComments.submit.params',
+                body: 'publicComments.submit.body',
+                ...(options.generateDocs && {
+                  response: {
+                    200: 'empty200'
+                  }
+                }),
+                detail: {
+                  tags: ['Public'],
+                  summary: 'Send public comment',
+                  description:
+                    'Creates a new public comment for a specific application, currently uses x-client header to filter by client'
+                }
+              }
+            )
             .get(
               `/applications/:applicationId/publicComments/:publicCommentId`,
-              async ({ handler }) =>
-                bopsHandler(handler, async () => notHandled),
+              ({ handler, client, request }) =>
+                dispatch(handler, {
+                  ...unhandled,
+                  external: () => proxy(client, request)
+                }),
               {
                 params: 'public.publicComments.single.params',
                 ...(options.generateDocs && {
@@ -548,32 +523,17 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/specialistComments`,
-              async ({ handler, client, query, params }) => {
-                switch (handler) {
-                  case 'bops': {
-                    const result =
-                      await fetchAllBopsApplicationSpecialistComments(
-                        client,
-                        params.applicationId,
-                        query
-                      )
-                    const { data, status } = result
-                    const pagination =
-                      'pagination' in result ? result.pagination : undefined
-                    return pagination
-                      ? { data, pagination, status }
-                      : { data, status }
-                  }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+              ({ handler, client, query, params, request }) =>
+                dispatch(handler, {
+                  external: () => proxy(client, request),
+                  bops: envelope(() =>
+                    fetchAllBopsApplicationSpecialistComments(
+                      client,
+                      params.applicationId,
+                      query
+                    )
+                  )
+                }),
               {
                 params: 'public.specialists.all.params',
                 query: 'public.specialists.all.query',
@@ -587,7 +547,6 @@ const app = (userOptions?: ApiOptions) => {
                 }),
                 detail: {
                   tags: ['Public'],
-                  security: [], // Remove this to make endpoint public
                   summary: 'Get published specialist comments',
                   description:
                     'Retrieves a list of all published specialists and their comments for a specific application, currently uses x-client header to filter by client'
@@ -596,32 +555,18 @@ const app = (userOptions?: ApiOptions) => {
             )
             .get(
               `/applications/:applicationId/specialistComments/:specialistId`,
-              async ({ handler, client, query, params }) => {
-                switch (handler) {
-                  case 'bops': {
-                    const result = await fetchBopsApplicationSpecialistComment(
+              ({ handler, client, query, params, request }) =>
+                dispatch(handler, {
+                  external: () => proxy(client, request),
+                  bops: envelope(() =>
+                    fetchBopsApplicationSpecialistComment(
                       client,
                       params.applicationId,
                       params.specialistId,
                       query
                     )
-                    const { data, status } = result
-                    const pagination =
-                      'pagination' in result ? result.pagination : undefined
-                    return pagination
-                      ? { data, pagination, status }
-                      : { data, status }
-                  }
-                  default:
-                    return {
-                      data: null,
-                      status: {
-                        code: 200,
-                        message: '@TODO implement example data endpoint'
-                      }
-                    }
-                }
-              },
+                  )
+                }),
               {
                 params: 'public.specialists.single.params',
                 query: 'public.specialists.single.query',
@@ -635,7 +580,6 @@ const app = (userOptions?: ApiOptions) => {
                 }),
                 detail: {
                   tags: ['Public'],
-                  security: [], // Remove this to make endpoint public
                   summary: 'Get published specialist',
                   description:
                     "Retrieves a single published specialist's comments, currently uses x-client header to filter by client"

@@ -18,7 +18,7 @@ export const getClientConfig = (client: string) => {
   //     cause: 'Council not registered'
   //   })
   if (!apiUrl)
-    throw new Error(`API URL for client '${client}' not found in .env file.`, {
+    throw new Error(`BOPS API URL for client '${client}' not found in .env file.`, {
       cause: 'Council not registered'
     })
 

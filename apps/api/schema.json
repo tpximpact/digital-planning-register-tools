@@ -75,994 +75,6 @@
         "operationId": "getHealth"
       }
     },
-    "/api/handlers/bops/public/applications": {
-      "get": {
-        "tags": [
-          "BOPS Handler"
-        ],
-        "summary": "Get published applications",
-        "description": "Retrieves a redacted list of all applications, currently uses x-client header to filter by client",
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "default": 1,
-              "type": "number"
-            }
-          },
-          {
-            "name": "resultsPerPage",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "default": 10,
-              "type": "number"
-            }
-          },
-          {
-            "name": "query",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sortBy",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "publishedAt",
-                "receivedAt"
-              ]
-            }
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ]
-            }
-          },
-          {
-            "name": "reference",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-client",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "example": "camden",
-              "minLength": 1,
-              "maxLength": 100,
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-service",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "example": "documentation-example",
-              "minLength": 1,
-              "maxLength": 100,
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Public applications endpoint response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/public.applications.all.response"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/400"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/404"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/422"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/500"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "getApiHandlersBopsPublicApplications"
-      }
-    },
-    "/api/handlers/bops/public/applications/{applicationId}": {
-      "get": {
-        "tags": [
-          "BOPS Handler"
-        ],
-        "summary": "Get published application",
-        "description": "Retrieves a single redacted application, currently uses x-client header to filter by client",
-        "parameters": [
-          {
-            "name": "applicationId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-client",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "example": "camden",
-              "minLength": 1,
-              "maxLength": 100,
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-service",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "example": "documentation-example",
-              "minLength": 1,
-              "maxLength": 100,
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "#ApiResponse",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/public.applications.single.response"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/400"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/404"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/422"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/500"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "getApiHandlersBopsPublicApplicationsByApplicationId"
-      }
-    },
-    "/api/handlers/bops/public/applications/{applicationId}/documents": {
-      "get": {
-        "tags": [
-          "BOPS Handler"
-        ],
-        "summary": "Get published documents",
-        "description": "Retrieves a list of all redacted documents for a specific application, currently uses x-client header to filter by client",
-        "parameters": [
-          {
-            "name": "applicationId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "default": 1,
-              "type": "number"
-            }
-          },
-          {
-            "name": "resultsPerPage",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "default": 10,
-              "type": "number"
-            }
-          },
-          {
-            "name": "sortBy",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "publishedAt",
-                "name"
-              ]
-            }
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ]
-            }
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "accessRoadsRightsOfWayDetails",
-                "advertsDrawings",
-                "affordableHousingStatement",
-                "arboriculturistReport",
-                "bankStatement",
-                "basementImpactStatement",
-                "bioaerosolAssessment",
-                "birdstrikeRiskManagementPlan",
-                "boreholeOrTrialPitAnalysis",
-                "buildingControlCertificate",
-                "conditionSurvey",
-                "constructionInvoice",
-                "contaminationReport",
-                "councilTaxBill",
-                "crimePreventionStrategy",
-                "designAndAccessStatement",
-                "disabilityExemptionEvidence",
-                "ecologyReport",
-                "elevations.existing",
-                "elevations.proposed",
-                "emissionsMitigationAndMonitoringScheme",
-                "energyStatement",
-                "environmentalImpactAssessment",
-                "externalMaterialsDetails",
-                "fireSafetyReport",
-                "floodRiskAssessment",
-                "floorPlan.existing",
-                "floorPlan.proposed",
-                "foulDrainageAssessment",
-                "geodiversityAssessment",
-                "hedgerowsInformation",
-                "hedgerowsInformation.plantingDate",
-                "heritageStatement",
-                "hydrologicalAssessment",
-                "hydrologyReport",
-                "internalElevations",
-                "internalSections",
-                "joinersReport",
-                "joinerySections",
-                "landContaminationAssessment",
-                "landscapeAndVisualImpactAssessment",
-                "landscapeStrategy",
-                "lightingAssessment",
-                "litterVerminAndBirdControlDetails",
-                "locationPlan",
-                "methodStatement",
-                "mineralsAndWasteAssessment",
-                "necessaryInformation",
-                "newDwellingsSchedule",
-                "noiseAssessment",
-                "openSpaceAssessment",
-                "otherDocument",
-                "otherDrawing",
-                "otherEvidence",
-                "otherSupporting",
-                "parkingPlan",
-                "photographs.existing",
-                "photographs.proposed",
-                "planningStatement",
-                "recycleWasteStorageDetails",
-                "relevantInformation",
-                "residentialUnitsDetails",
-                "roofPlan.existing",
-                "roofPlan.proposed",
-                "sections.existing",
-                "sections.proposed",
-                "sitePlan.existing",
-                "sitePlan.proposed",
-                "sketchPlan",
-                "statementOfCommunityInvolvement",
-                "statutoryDeclaration",
-                "storageTreatmentAndWasteDisposalDetails",
-                "streetScene",
-                "subsidenceReport",
-                "sunlightAndDaylightReport",
-                "sustainabilityStatement",
-                "technicalEvidence",
-                "technicalSpecification",
-                "tenancyAgreement",
-                "tenancyInvoice",
-                "townCentreImpactAssessment",
-                "townCentreSequentialAssessment",
-                "transportAssessment",
-                "travelPlan",
-                "treeAndHedgeLocation",
-                "treeAndHedgeRemovedOrPruned",
-                "treeCanopyCalculator",
-                "treeConditionReport",
-                "treesReport",
-                "treeSurvey",
-                "unitPlan.existing",
-                "unitPlan.proposed",
-                "usePlan.existing",
-                "usePlan.proposed",
-                "utilityBill",
-                "utilitiesStatement",
-                "ventilationStatement",
-                "viabilityAppraisal",
-                "visualisations",
-                "wasteAndRecyclingStrategy",
-                "wasteStorageDetails",
-                "waterEnvironmentAssessment"
-              ]
-            }
-          },
-          {
-            "name": "publishedAtFrom",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "publishedAtTo",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-client",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "example": "camden",
-              "minLength": 1,
-              "maxLength": 100,
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-service",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "example": "documentation-example",
-              "minLength": 1,
-              "maxLength": 100,
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "#ApiResponse",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/public.documents.all.response"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/400"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/404"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/422"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/500"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "getApiHandlersBopsPublicApplicationsByApplicationIdDocuments"
-      }
-    },
-    "/api/handlers/bops/public/applications/{applicationId}/publicComments": {
-      "get": {
-        "tags": [
-          "BOPS Handler"
-        ],
-        "summary": "Get published public comments",
-        "description": "Retrieves a list of all published public comments for a specific application, currently uses x-client header to filter by client",
-        "parameters": [
-          {
-            "name": "applicationId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "default": 1,
-              "type": "number"
-            }
-          },
-          {
-            "name": "resultsPerPage",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "default": 10,
-              "type": "number"
-            }
-          },
-          {
-            "name": "query",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sentiment",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "objection",
-                "neutral",
-                "supportive"
-              ]
-            }
-          },
-          {
-            "name": "topic",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "design",
-                "use",
-                "light",
-                "privacy",
-                "access",
-                "noise",
-                "traffic",
-                "other"
-              ]
-            }
-          },
-          {
-            "name": "publishedAtFrom",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "publishedAtTo",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sortBy",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "const": "publishedAt",
-              "type": "string"
-            }
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ]
-            }
-          },
-          {
-            "name": "x-client",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "example": "camden",
-              "minLength": 1,
-              "maxLength": 100,
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-service",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "example": "documentation-example",
-              "minLength": 1,
-              "maxLength": 100,
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "#ApiResponse",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/public.publicComments.all.response"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/400"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/404"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/422"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/500"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "getApiHandlersBopsPublicApplicationsByApplicationIdPublicComments"
-      }
-    },
-    "/api/handlers/bops/public/applications/{applicationId}/specialistComments": {
-      "get": {
-        "tags": [
-          "BOPS Handler"
-        ],
-        "summary": "Get published specialist comments",
-        "description": "Retrieves a list of all published specialists and their comments for a specific application, currently uses x-client header to filter by client",
-        "parameters": [
-          {
-            "name": "applicationId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "default": 1,
-              "type": "number"
-            }
-          },
-          {
-            "name": "resultsPerPage",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "default": 10,
-              "type": "number"
-            }
-          },
-          {
-            "name": "query",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sentiment",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "approved",
-                "amendmentsNeeded",
-                "objected"
-              ]
-            }
-          },
-          {
-            "name": "publishedAtFrom",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "publishedAtTo",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sortBy",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "const": "publishedAt",
-              "type": "string"
-            }
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ]
-            }
-          },
-          {
-            "name": "x-client",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "example": "camden",
-              "minLength": 1,
-              "maxLength": 100,
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-service",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "example": "documentation-example",
-              "minLength": 1,
-              "maxLength": 100,
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "#ApiResponse",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/public.specialists.all.response"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/400"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/404"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/422"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/500"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "getApiHandlersBopsPublicApplicationsByApplicationIdSpecialistComments"
-      }
-    },
-    "/api/handlers/bops/public/applications/{applicationId}/specialistComments/{specialistId}": {
-      "get": {
-        "tags": [
-          "BOPS Handler"
-        ],
-        "summary": "Get published specialist",
-        "description": "Retrieves a single published specialist's comments, currently uses x-client header to filter by client",
-        "parameters": [
-          {
-            "name": "applicationId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "specialistId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "default": 1,
-              "type": "number"
-            }
-          },
-          {
-            "name": "resultsPerPage",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "default": 10,
-              "type": "number"
-            }
-          },
-          {
-            "name": "x-client",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "example": "camden",
-              "minLength": 1,
-              "maxLength": 100,
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-service",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "example": "documentation-example",
-              "minLength": 1,
-              "maxLength": 100,
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "#ApiResponse",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/public.specialists.single.response"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/400"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/404"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/422"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/500"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "getApiHandlersBopsPublicApplicationsByApplicationIdSpecialistCommentsBySpecialistId"
-      }
-    },
     "/api/@next/applications": {
       "get": {
         "tags": [
@@ -1146,6 +158,17 @@
             "required": true,
             "schema": {
               "example": "documentation-example",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
               "minLength": 1,
               "maxLength": 100,
               "type": "string"
@@ -1247,6 +270,17 @@
             "required": true,
             "schema": {
               "example": "documentation-example",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
               "minLength": 1,
               "maxLength": 100,
               "type": "string"
@@ -1530,6 +564,17 @@
               "maxLength": 100,
               "type": "string"
             }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1619,6 +664,17 @@
             "required": true,
             "schema": {
               "example": "documentation-example",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
               "minLength": 1,
               "maxLength": 100,
               "type": "string"
@@ -1818,6 +874,17 @@
               "maxLength": 100,
               "type": "string"
             }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1918,6 +985,17 @@
               "maxLength": 100,
               "type": "string"
             }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
@@ -2013,6 +1091,14 @@
             }
           },
           {
+            "name": "publicCommentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "x-client",
             "in": "header",
             "required": true,
@@ -2033,6 +1119,17 @@
               "maxLength": 100,
               "type": "string"
             }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -2043,7 +1140,7 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "$ref": "publicComments.all.response"
+                      "$ref": "publicComments.single.response"
                     },
                     {
                       "$ref": "empty200"
@@ -2210,6 +1307,17 @@
               "maxLength": 100,
               "type": "string"
             }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -2299,6 +1407,17 @@
             "required": true,
             "schema": {
               "example": "documentation-example",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
               "minLength": 1,
               "maxLength": 100,
               "type": "string"
@@ -2454,6 +1573,17 @@
               "maxLength": 100,
               "type": "string"
             }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -2551,6 +1681,17 @@
             "required": true,
             "schema": {
               "example": "documentation-example",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
               "minLength": 1,
               "maxLength": 100,
               "type": "string"
@@ -2834,6 +1975,17 @@
               "maxLength": 100,
               "type": "string"
             }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -2923,6 +2075,17 @@
             "required": true,
             "schema": {
               "example": "documentation-example",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
               "minLength": 1,
               "maxLength": 100,
               "type": "string"
@@ -3122,6 +2285,17 @@
               "maxLength": 100,
               "type": "string"
             }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -3184,6 +2358,131 @@
           }
         },
         "operationId": "getApi@nextPublicApplicationsByApplicationIdPublicComments"
+      },
+      "post": {
+        "tags": [
+          "Public"
+        ],
+        "security": [],
+        "summary": "Send public comment",
+        "description": "Creates a new public comment for a specific application, currently uses x-client header to filter by client",
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-client",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "example": "camden",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-service",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "example": "documentation-example",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "A public comment and any associated metadata, including sensitive information",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/publicComments.submit.body"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/publicComments.submit.body"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/publicComments.submit.body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/empty200"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/400"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/422"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postApi@nextPublicApplicationsByApplicationIdPublicComments"
       }
     },
     "/api/@next/public/applications/{applicationId}/publicComments/{publicCommentId}": {
@@ -3211,6 +2510,17 @@
             "required": true,
             "schema": {
               "example": "documentation-example",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
               "minLength": 1,
               "maxLength": 100,
               "type": "string"
@@ -3393,6 +2703,17 @@
               "maxLength": 100,
               "type": "string"
             }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -3517,6 +2838,17 @@
             "required": true,
             "schema": {
               "example": "documentation-example",
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-handler",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "example": "external",
               "minLength": 1,
               "maxLength": 100,
               "type": "string"
@@ -1601451,12 +1600783,12 @@
           {
             "type": "object",
             "properties": {
-              "specialistCommentId": {
+              "specialistId": {
                 "type": "string"
               }
             },
             "required": [
-              "specialistCommentId"
+              "specialistId"
             ]
           }
         ],

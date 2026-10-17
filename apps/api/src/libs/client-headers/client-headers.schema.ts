@@ -11,7 +11,14 @@ export const ClientHeaders = t.Object(
       example: 'documentation-example',
       minLength: 1,
       maxLength: 100
-    })
+    }),
+    'x-handler': t.Optional(
+      t.String({
+        example: 'external',
+        minLength: 1,
+        maxLength: 100
+      })
+    )
   },
   {
     title: 'Headers',
