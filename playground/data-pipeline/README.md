@@ -301,6 +301,19 @@ They read the unredacted ODP endpoint and approve through the admin's data route
 they fall back to sample data and save nothing, so they can be shown from any static host. Add
 `?demo` to force the sample and `?council=barnet` to pick a council. Flagging is not stored.
 
+### Strange but true
+
+`/lab/oddities/` lists things in a council's own data that cannot be right, or are hard to
+believe: an expiry earlier than the received date, a decision with no date, coordinates in the
+Atlantic, a point outside its own site boundary, a site the size of a small town, an applicant
+called ".". It reads bronze, the data as the council sent it, through the council's mapping, so
+it works for any council whose yaml names the field. Each kind shows a count and the most extreme
+records first. Kinds with nothing to report are listed as clean.
+
+The data comes from `GET /admin/data/oddities?council=camden&limit=5` (admin only, not in the API
+docs). The rules are in `oddities.py`; add one by adding a `Rule`. Nothing is changed or flagged
+by the page, it only reports. Add `?demo` to see it with sample data.
+
 ## Checking against the OpenAPI spec
 
 Download `openapi.json` (or `openapi.yaml`) from the digital-planning-data-schemas repository to

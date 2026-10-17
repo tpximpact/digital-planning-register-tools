@@ -77,3 +77,4 @@ def test_an_edit_cannot_quietly_break_the_standard(tmp_path):
 
     validator = Draft202012Validator(validate.load_schema(SCHEMA))
     assert list(validator.iter_errors(record))
+

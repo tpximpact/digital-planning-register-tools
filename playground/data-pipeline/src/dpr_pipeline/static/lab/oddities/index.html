@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Strange But True</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Special+Elite&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #eadcbc;
+        --paper-deep: #d9c79d;
+        --ink: #1c1510;
+        --ink-soft: #4a3b2c;
+        --red: #b02a1f;
+        --red-ink: #fff3dc;
+        --gold: #c8962a;
+        --gold-deep: #8a6212;
+        --page: #2a1f17;
+        --edge: #1c1510;
+        --display: 'Anton', Impact, 'Haettenschweiler', 'Arial Narrow Bold',
+          sans-serif;
+        --type: 'Special Elite', 'American Typewriter', 'Courier New', monospace;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          --paper: #2b2119;
+          --paper-deep: #382b20;
+          --ink: #efe2c4;
+          --ink-soft: #bfae8c;
+          --red: #d8463a;
+          --gold: #e0b04a;
+          --gold-deep: #e0b04a;
+          --page: #120d09;
+          --edge: #efe2c4;
+        }
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        font-family: var(--type);
+        background: var(--page);
+        color: var(--ink);
+        line-height: 1.5;
+        padding: 20px 16px 56px;
+      }
+      .sheet {
+        max-width: 920px;
+        margin: 0 auto;
+        background: var(--paper);
+        border: 4px solid var(--edge);
+        outline: 2px solid var(--gold);
+        outline-offset: -12px;
+        padding: 36px 28px 40px;
+        background-image: radial-gradient(
+          rgba(60, 35, 10, 0.1) 1px,
+          transparent 1.4px
+        );
+        background-size: 7px 7px;
+      }
+      a {
+        color: var(--red);
+      }
+      :focus-visible {
+        outline: 3px solid var(--red);
+        outline-offset: 2px;
+      }
+
+      header {
+        text-align: center;
+        padding-bottom: 20px;
+        border-bottom: 4px double var(--ink);
+      }
+      .stamp {
+        display: inline-block;
+        font: 400 clamp(46px, 11vw, 104px) / 0.92 var(--display);
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        color: var(--red);
+        border: 6px solid var(--red);
+        padding: 0.06em 0.22em 0.02em;
+        transform: rotate(-2.5deg);
+        animation: thump 0.55s cubic-bezier(0.2, 1.6, 0.4, 1) both;
+      }
+      @keyframes thump {
+        from {
+          transform: rotate(-9deg) scale(1.7);
+          opacity: 0;
+        }
+        60% {
+          opacity: 1;
+        }
+        to {
+          transform: rotate(-2.5deg) scale(1);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .stamp {
+          animation: none;
+        }
+      }
+      header p.sub {
+        margin: 20px auto 0;
+        max-width: 52ch;
+        color: var(--ink-soft);
+        font-size: 17px;
+      }
+      header p.sub b {
+        color: var(--ink);
+      }
+
+      .bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 18px;
+        align-items: center;
+        justify-content: space-between;
+        margin: 20px 0 8px;
+      }
+      label.council {
+        font-size: 15px;
+      }
+      select {
+        font: inherit;
+        background: var(--paper-deep);
+        color: var(--ink);
+        border: 2px solid var(--ink);
+        padding: 6px 10px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .chip {
+        font: inherit;
+        font-size: 15px;
+        background: transparent;
+        color: var(--ink);
+        border: 2px solid var(--ink);
+        padding: 4px 12px;
+        cursor: pointer;
+      }
+      .chip[aria-pressed='true'] {
+        background: var(--ink);
+        color: var(--paper);
+      }
+
+      .status {
+        margin: 18px 0;
+        padding: 12px 14px;
+        border: 2px dashed var(--ink-soft);
+        font-size: 15px;
+      }
+      .status.demo {
+        border-color: var(--red);
+        color: var(--red);
+      }
+
+      .exhibit {
+        margin-top: 34px;
+        border: 3px solid var(--ink);
+        background: var(--paper-deep);
+        position: relative;
+      }
+      .ribbon {
+        position: absolute;
+        top: -14px;
+        left: 18px;
+        background: var(--red);
+        color: var(--red-ink);
+        font: 400 15px var(--display);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding: 3px 16px 2px;
+        box-shadow: 3px 3px 0 var(--ink);
+      }
+      .exhibit-head {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 16px;
+        align-items: center;
+        padding: 28px 22px 10px;
+      }
+      .exhibit h2 {
+        font: 400 clamp(26px, 5vw, 38px) / 1.05 var(--display);
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+      .exhibit p.blurb {
+        margin-top: 6px;
+        color: var(--ink-soft);
+        font-size: 15px;
+        max-width: 54ch;
+      }
+      .seal {
+        width: 92px;
+        height: 92px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: #1c1510;
+        border: 4px double #1c1510;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        transform: rotate(7deg);
+        box-shadow: 3px 3px 0 var(--ink);
+      }
+      .seal strong {
+        display: block;
+        font: 400 30px/1 var(--display);
+      }
+      .seal span {
+        display: block;
+        font-size: 11px;
+        line-height: 1.1;
+      }
+      .tickets {
+        list-style: none;
+        padding: 8px 22px 22px;
+        display: grid;
+        gap: 12px;
+      }
+      .ticket {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        background: var(--paper);
+        border: 2px solid var(--ink);
+        position: relative;
+      }
+      .ticket::before,
+      .ticket::after {
+        content: '';
+        position: absolute;
+        left: 118px;
+        width: 14px;
+        height: 14px;
+        background: var(--paper-deep);
+        border: 2px solid var(--ink);
+        border-radius: 50%;
+      }
+      .ticket::before {
+        top: -9px;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        transform: rotate(45deg);
+      }
+      .ticket::after {
+        bottom: -9px;
+        border-bottom-color: transparent;
+        border-right-color: transparent;
+        transform: rotate(45deg);
+      }
+      .ticket .ref {
+        width: 126px;
+        padding: 12px 10px;
+        border-right: 2px dashed var(--ink);
+        font-size: 14px;
+        word-break: break-all;
+        background: var(--gold);
+        color: #1c1510;
+      }
+      .ticket .ref small {
+        display: block;
+        font: 400 11px var(--display);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+      }
+      .ticket .fact {
+        padding: 12px 16px;
+        font-size: 16px;
+      }
+      .quiet {
+        margin-top: 38px;
+        padding: 18px 20px;
+        border: 3px double var(--ink);
+      }
+      .quiet h2 {
+        font: 400 22px var(--display);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 6px;
+      }
+      .quiet ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 14px;
+        color: var(--ink-soft);
+        font-size: 14px;
+      }
+      .quiet li::before {
+        content: '\2713\00a0';
+        color: var(--gold-deep);
+      }
+      footer {
+        margin-top: 30px;
+        text-align: center;
+        font-size: 14px;
+        color: var(--ink-soft);
+      }
+      @media (max-width: 560px) {
+        .sheet {
+          padding: 28px 14px 32px;
+          outline-offset: -8px;
+        }
+        .exhibit-head {
+          grid-template-columns: 1fr;
+        }
+        .seal {
+          justify-self: start;
+        }
+        .ticket {
+          grid-template-columns: 1fr;
+        }
+        .ticket .ref {
+          width: auto;
+          border-right: 0;
+          border-bottom: 2px dashed var(--ink);
+        }
+        .ticket::before,
+        .ticket::after {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sheet">
+      <header>
+        <h1 class="stamp">Strange but true</h1>
+        <p class="sub" id="sub">
+          Every council's data holds a few things that cannot be right. These
+          are the ones in this one.
+        </p>
+      </header>
+      <div class="bar">
+        <label class="council"
+          >Council
+          <select id="council" aria-label="Council"></select
+        ></label>
+        <div
+          class="chips"
+          id="chips"
+          role="group"
+          aria-label="Kind of oddity"
+        ></div>
+      </div>
+      <div id="status" class="status" role="status" hidden></div>
+      <main id="exhibits"></main>
+      <section class="quiet" id="quiet" hidden>
+        <h2>Nothing strange here</h2>
+        <ul id="quietList"></ul>
+      </section>
+      <footer>
+        <a href="/lab/">Review lab</a> &middot;
+        <a href="/admin">Admin</a> &middot; Counted from the council's own data
+        as it was sent, nothing has been changed.
+      </footer>
+    </div>
+    <script>
+      ;(() => {
+        const query = new URLSearchParams(location.search)
+        const el = (tag, cls, text) => {
+          const n = document.createElement(tag)
+          if (cls) n.className = cls
+          if (text !== undefined) n.textContent = text
+          return n
+        }
+        const $ = (id) => document.getElementById(id)
+        let data = null,
+          group = 'All'
+
+        const DEMO = {
+          council: 'camden',
+          scanned: 82786,
+          unreadable: 0,
+          generatedAt: new Date().toISOString(),
+          oddities: [
+            {
+              id: 'expired-before-received',
+              group: 'Dates',
+              title: 'Expired before it arrived',
+              blurb:
+                'The expiry date is earlier than the date the application was received.',
+              count: 14,
+              examples: [
+                {
+                  reference: '2019/1234/P',
+                  fact: 'expired 212 days before it was received (2019-01-04 against 2019-08-04)'
+                },
+                {
+                  reference: '2017/0456/P',
+                  fact: 'expired 40 days before it was received (2017-02-01 against 2017-03-13)'
+                }
+              ]
+            },
+            {
+              id: 'lost-at-sea',
+              group: 'Places',
+              title: 'Lost at sea',
+              blurb:
+                'Coordinates outside Greater London, including the famous 0, 0.',
+              count: 3,
+              examples: [
+                {
+                  reference: '2015/0001/P',
+                  fact: 'sits at 0, 0 (the middle of the Atlantic, off the coast of Africa), 5,610 km from the middle of London'
+                }
+              ]
+            },
+            {
+              id: 'mystery-applicant',
+              group: 'People and words',
+              title: 'The mysterious applicant',
+              blurb:
+                'An applicant that is blank, or only punctuation or a placeholder such as “.”.',
+              count: 320,
+              examples: [
+                { reference: '2016/2222/P', fact: 'the applicant is “.”' }
+              ]
+            },
+            {
+              id: 'giant-site',
+              group: 'Places',
+              title: 'A site the size of a small town',
+              blurb: 'A site boundary of ten hectares or more.',
+              count: 6,
+              examples: [
+                {
+                  reference: '2020/0999/P',
+                  fact: 'the site covers 212.4 hectares, about 297 football pitches'
+                }
+              ]
+            }
+          ],
+          clean: ['Postcards from the future', 'Older than the planning system']
+        }
+
+        const text = (n) => Number(n).toLocaleString('en-GB')
+
+        function chips() {
+          const wrap = $('chips')
+          wrap.replaceChildren()
+          const groups = ['All', ...new Set(data.oddities.map((o) => o.group))]
+          for (const g of groups) {
+            const b = el('button', 'chip', g)
+            b.type = 'button'
+            b.setAttribute('aria-pressed', String(g === group))
+            b.onclick = () => {
+              group = g
+              render()
+            }
+            wrap.append(b)
+          }
+        }
+
+        function render() {
+          const found = data.oddities.reduce((sum, o) => sum + o.count, 0)
+          $('sub').replaceChildren(
+            'We read ',
+            el('b', '', text(data.scanned) + ' records'),
+            ' from ',
+            el('b', '', data.council),
+            found ? ' and found ' : ' and found nothing strange.',
+            ...(found
+              ? [
+                  el('b', '', text(found) + ' oddities'),
+                  ' in ' + data.oddities.length + ' kinds.'
+                ]
+              : [])
+          )
+          chips()
+          const list = $('exhibits')
+          list.replaceChildren()
+          for (const o of data.oddities.filter(
+            (x) => group === 'All' || x.group === group
+          )) {
+            const box = el('section', 'exhibit')
+            box.setAttribute('aria-label', o.title)
+            box.append(el('span', 'ribbon', o.group))
+            const head = el('div', 'exhibit-head'),
+              left = el('div')
+            left.append(el('h2', '', o.title), el('p', 'blurb', o.blurb))
+            const seal = el('div', 'seal')
+            const inner = el('div')
+            inner.append(
+              el('strong', '', text(o.count)),
+              el('span', '', o.count === 1 ? 'record' : 'records')
+            )
+            seal.append(inner)
+            head.append(left, seal)
+            const tickets = el('ul', 'tickets')
+            for (const e of o.examples) {
+              const li = el('li', 'ticket'),
+                ref = el('div', 'ref'),
+                fact = el('div', 'fact', e.fact)
+              ref.append(
+                el('small', '', 'Exhibit'),
+                document.createTextNode(e.reference)
+              )
+              li.append(ref, fact)
+              tickets.append(li)
+            }
+            box.append(head, tickets)
+            list.append(box)
+          }
+          const quiet = data.clean || []
+          $('quiet').hidden = !quiet.length
+          $('quietList').replaceChildren(...quiet.map((t) => el('li', '', t)))
+        }
+
+        function say(message, demo) {
+          const s = $('status')
+          s.hidden = !message
+          s.textContent = message || ''
+          s.classList.toggle('demo', !!demo)
+        }
+
+        async function load(council) {
+          say('Counting…')
+          try {
+            if (query.has('demo')) throw new Error('demo')
+            const response = await fetch(
+              '/admin/data/oddities?council=' +
+                encodeURIComponent(council) +
+                '&limit=5'
+            )
+            const body = await response.json()
+            if (!response.ok)
+              throw new Error((body.status && body.status.message) || 'failed')
+            data = body
+            say('')
+          } catch (problem) {
+            data = { ...DEMO, council }
+            say(
+              query.has('demo')
+                ? 'Showing sample data because ?demo is set.'
+                : 'The pipeline did not answer, so this is sample data, not yours.',
+              true
+            )
+          }
+          render()
+        }
+
+        async function start() {
+          let names = ['camden', 'barnet']
+          if (!query.has('demo')) {
+            try {
+              const r = await fetch('/admin/data/councils')
+              if (r.ok) {
+                const got = await r.json()
+                if (got.length) names = got
+              }
+            } catch (_) {}
+          }
+          const select = $('council')
+          for (const n of names) select.append(new Option(n, n))
+          let saved = null
+          try {
+            saved = localStorage.getItem('lab.council')
+          } catch (_) {}
+          const wanted = query.get('council') || saved || names[0]
+          select.value = names.includes(wanted) ? wanted : names[0]
+          select.onchange = () => {
+            group = 'All'
+            try {
+              localStorage.setItem('lab.council', select.value)
+            } catch (_) {}
+            load(select.value)
+          }
+          load(select.value)
+        }
+        start()
+      })()
+    </script>
+  </body>
+</html>

@@ -19,7 +19,8 @@ openapi:
 sources:
   camden:
     # Camden's planning applications dataset on their open data platform
-    url: https://opendata.camden.gov.uk/resource/2eiu-s2cw.json
+    # url: https://opendata.camden.gov.uk/resource/2eiu-s2cw.json
+    url: https://opendata.camden.gov.uk/resource/bje4-aaba.json
     page_size: 1000
     # Leave empty to pull everything. Useful for a quick first run.
     max_records: 5000

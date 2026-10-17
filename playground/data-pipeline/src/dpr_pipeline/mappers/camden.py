@@ -40,28 +40,48 @@ def _skip(source: dict):
     return None
 
 
+#: Camden's statutory return codes say how big an application was. EMADW, EMAOT, EMAJOFF, EMAJRET
+#: and EMAJIND are the major ones; EMIDW, EMIOT, EMINOFF, EMINRET, EMININD and EHOUS the rest.
+MAJOR_CODES = ("EMA",)
+MINOR_CODES = ("EMI", "MI")
+SIZED = {"pp.full.minor": ("pp.full.major", "pp.full.minor"),
+         "pp.outline": ("pp.outline.major", "pp.outline.minor")}
+
+
+def size_from_code(application_type: str, code: str) -> str:
+    """Full and outline applications start on one type whatever their size. The return code says
+    whether they were major or minor, so use it where it does: anything else keeps its type."""
+    sized = SIZED.get(application_type)
+    if not sized or not code:
+        return application_type
+    if code.startswith(MAJOR_CODES):
+        return sized[0]
+    if code.startswith(MINOR_CODES):
+        return sized[1]
+    return application_type
+
+
 def map_record(source: dict) -> common.MapResult:
     """One Camden record into the standard, plus the gaps and the fields kept beside it."""
     issues: list[common.Issue] = []
 
     camden_type = MAPPING.raw(source, "type")
     application_type, how = application_types.resolve(camden_type)
+    application_type = size_from_code(application_type, MAPPING.raw(source, "size_code"))
     if how != "agreed":
         issues.append(("application_type", camden_type,
                        f"put on {application_type} by {how}, not an agreed equivalent"))
 
     status = MAPPING.raw(source, "status")
-    if status:
-        issues.append(("system_status", status, "council wording, not yet mapped to ODP status"))
 
     record = common.build_record(COUNCIL, MAPPING, source, application_type, issues)
 
     # The standard wants the original submission, which legacy data does not have.
     issues.append(("submission", None,
                    "no original submission for a historic record, only the applicant, address and description"))
-    if not MAPPING.raw(source, "latitude"):
+    if not MAPPING.raw(source, "latitude") and not common.boundary_from(MAPPING, source):
         issues.append(("location", None, "no coordinates in the source record"))
-    else:
+    elif not common.boundary_from(MAPPING, source):
         issues.append(("boundary", None, "source has a point only, so the site is a 10m square around it, not the real boundary"))
 
     return record, issues, common.beside(

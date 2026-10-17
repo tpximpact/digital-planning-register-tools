@@ -18,7 +18,7 @@ from typing import Any, Callable
 
 import yaml
 
-from .. import post_submission
+from .. import geo, post_submission
 
 MAPPINGS = Path(__file__).resolve().parent.parent / "mappings"
 
@@ -63,6 +63,26 @@ class Mapping:
             return as_date(text)
         return text
 
+    def object(self, source: dict, name: str) -> Any:
+        """A value that is more than text, such as a GeoJSON geometry. None if it is not there.
+
+        A source that sends the object as a json string is read as the object it spells.
+        """
+        spec = self.fields.get(name)
+        if spec is None:
+            return None
+        paths = spec["from"] if isinstance(spec["from"], list) else [spec["from"]]
+        for path in paths:
+            found = _dig(source, path)
+            if isinstance(found, str):
+                try:
+                    found = json.loads(found)
+                except ValueError:
+                    found = None
+            if found:
+                return found
+        return None
+
     def wording(self, source: dict, name: str) -> str:
         """The council's own wording: the value, run through its lookup table if it has one."""
         text = self.raw(source, name)
@@ -75,6 +95,15 @@ class Mapping:
 
     def knows(self, table: str, code: str) -> bool:
         return code in self.lookups.get(table, {})
+
+    def sorted_into(self, table: str, wording: str) -> str | None:
+        """What a table says about some wording, ignoring case and spacing, or None if it is not
+        listed. For tables that sort the council's wording into a few outcomes."""
+        wanted = " ".join((wording or "").lower().split())
+        for key, value in self.lookups.get(table, {}).items():
+            if " ".join(str(key).lower().split()) == wanted:
+                return str(value)
+        return None
 
 
 def _dig(source: Any, path: str) -> Any:
@@ -114,11 +143,31 @@ def standard_fields(mapping: Mapping, source: dict, issues: list[Issue]) -> dict
     extra: dict[str, Any] = {}
 
     wording = mapping.wording(source, "decision")
-    outcome = post_submission.normalise_decision(wording)
-    if wording and outcome is None and "withdraw" not in wording.lower() \
-            and "split" not in wording.lower():
-        issues.append(("decision", wording, "council wording not recognised as granted or refused"))
+    sorted_as = mapping.sorted_into("decision_outcome", wording)
+    withdrawn = False
+    if sorted_as is not None:
+        # The council's wording is in its table: granted, refused, withdrawn, or none of those.
+        outcome = sorted_as if sorted_as in post_submission.DECISIONS else None
+        withdrawn = sorted_as == "withdrawn"
+        if sorted_as == "none":
+            issues.append(("decision", wording,
+                           "not granted or refused (split, not a decision, or unclear), so no "
+                           "decision is recorded"))
+    else:
+        outcome = post_submission.normalise_decision(wording)
+        withdrawn = "withdraw" in wording.lower()
+        if wording and outcome is None and not withdrawn and "split" not in wording.lower():
+            issues.append(("decision", wording,
+                           "council wording not recognised as granted or refused"))
     extra["decision"] = outcome
+
+    # The council's status, where its table names the stages: withdrawn, or an appeal.
+    status = mapping.raw(source, "status")
+    stage = mapping.sorted_into("status_kind", status)
+    if status and mapping.lookups.get("status_kind") and stage is None:
+        issues.append(("system_status", status, "status wording not in the mapping, so it is ignored"))
+    withdrawn = withdrawn or stage == "withdrawn"
+    changed = mapping.get(source, "status_changed") if mapping.has("status_changed") else None
 
     if mapping.has("opt_expiry"):
         extra["expiry_date"] = mapping.get(source, "opt_expiry")
@@ -132,10 +181,36 @@ def standard_fields(mapping: Mapping, source: dict, issues: list[Issue]) -> dict
     if mapping.has("opt_withdrawn_reason"):
         extra["withdrawn_reason"] = mapping.raw(source, "opt_withdrawn_reason") or None
 
-    # A withdrawn application was never decided, so its date is when it was withdrawn.
-    if "withdraw" in wording.lower():
-        extra["withdrawn_at"] = mapping.get(source, "decided")
+    # A withdrawn application was never decided, so its date is when it was withdrawn: the date the
+    # status changed if the source has one, then the decision date, then the date it arrived.
+    if withdrawn:
+        when = changed or mapping.get(source, "decided")
+        if when is None:
+            when = mapping.get(source, "received")
+            issues.append(("withdrawn", None, "no withdrawal date in the source, so the date it "
+                                              "was received stands in"))
+        extra["withdrawn_at"] = when
+
+    # An appeal lodged: the source has no lodged date, so the status change stands in for it.
+    if stage == "appeal-lodged" and changed:
+        extra["appeal"] = {"lodged": changed}
+        issues.append(("appeal", status, "lodged date taken from when the status changed; the "
+                                         "reason is not in the source"))
+    elif stage == "appeal-decided":
+        issues.append(("appeal", status, "an appeal was decided but the source has no lodged "
+                                         "date, so the appeal is not described"))
     return extra
+
+
+def boundary_from(mapping: Mapping, source: dict) -> dict | None:
+    """The site boundary the source holds, as the standard's {site, area}, or None.
+
+    Only where the mapping names a geometry (opt_boundary) and it is a usable polygon. None sends
+    the record back to the square around the point.
+    """
+    if not mapping.has("opt_boundary"):
+        return None
+    return geo.boundary_from_geometry(mapping.object(source, "opt_boundary"))
 
 
 def _number(text: str) -> float | None:
@@ -167,8 +242,17 @@ def build_record(council: str, mapping: Mapping, source: dict, application_type:
         decided_at=None if withdrawn else mapping.get(source, "decided"),
         officer_name=mapping.raw(source, "officer"),
         estimate_expiry=extra.get("expiry_date") is None,
+        boundary=boundary_from(mapping, source),
         **extra,
     )
+    received, expiry = mapping.get(source, "received"), extra.get("expiry_date")
+    if expiry and received and expiry < received:
+        issues.append(("expiryDate", expiry.isoformat(),
+                       f"expiry date is before the received date ({received.isoformat()}), "
+                       "check the source"))
+    if mapping.has("opt_boundary") and mapping.object(source, "opt_boundary") \
+            and not boundary_from(mapping, source):
+        issues.append(("boundary", None, "the source boundary could not be read as a polygon"))
     assessment = record["data"].get("assessment")
     if assessment and extra.get("expiry_date") is None:
         estimated = assessment.get("expiryDate")

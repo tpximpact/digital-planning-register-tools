@@ -12,7 +12,7 @@ from typing import Any, Literal
 
 from fastapi import APIRouter, Body, Header, HTTPException, Query
 
-from . import api_common, config, contract, gold, validate
+from . import api_common, config, contract, gold, oddities, validate
 
 router = APIRouter(prefix="/admin/data", include_in_schema=False)
 
@@ -76,6 +76,16 @@ def summary(council: str) -> dict:
     """Approval counts for gold, and how many records each layer holds."""
     connection = _connection()
     return {**gold.flagged_counts(connection, council), **_layer_counts(council)}
+
+
+@router.get("/oddities")
+def strange_but_true(council: str, limit: int = Query(5, ge=1, le=25)) -> dict:
+    """Things in a council's own data that cannot be right, or are hard to believe. Read from bronze,
+    so it is the council's data as sent. The lab's Strange But True page shows it."""
+    try:
+        return oddities.scan_database(_connection(), council, limit=limit)
+    except FileNotFoundError:
+        raise HTTPException(404, f"No mapping is defined for {council}.")
 
 
 def _page(total: int, page: int, size: int, rows: list[dict]) -> dict:

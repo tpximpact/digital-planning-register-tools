@@ -20,26 +20,102 @@ fields:
   type:           {from: application_type}
   status:         {from: system_status}
   decision:       {from: decision_type}
-  received:       {from: registered_date, as: date}
+  # When the status last changed: the withdrawal date for a withdrawn application and, for lack of
+  # anything better, the date an appeal was lodged.
+  status_changed: {from: system_status_change_date, as: date}
+  # The statutory return code. It says whether a full or outline application was major or minor.
+  size_code:      {from: statutory_return_code, upper: true}
+  # When it arrived, not when it was registered: the two can be months apart. Registered is the
+  # fallback for older rows that have no received date.
+  received:       {from: [application_received_date, registered_date], first: true, as: date}
   validated:      {from: valid_from_date, as: date}
+  registered:     {from: registered_date, as: date}
   decided:        {from: decision_date, as: date}
   officer:        {from: case_officer}
   address:        {from: development_address}
   description:    {from: development_description}
   applicant:      {from: applicant_name}
-  # The coordinates are in the flat columns, and again in the location point, which arrives either
-  # as {latitude, longitude} or as GeoJSON ({coordinates: [longitude, latitude]}). First one found.
-  latitude:       {from: [latitude, location.latitude, location.coordinates.1], first: true}
-  longitude:      {from: [longitude, location.longitude, location.coordinates.0], first: true}
+  # The point is in the flat columns. (In the extended dataset "location" is the site's polygon,
+  # not a point, so it is read as the boundary below. A {latitude, longitude} location from the
+  # older dataset is still understood.)
+  latitude:       {from: [latitude, location.latitude], first: true}
+  longitude:      {from: [longitude, location.longitude], first: true}
   easting:        {from: easting}
   northing:       {from: northing}
 
+  # The real site, as a GeoJSON Polygon. Camden's plotted sites only; rows with no spatial
+  # information have none, and fall back to a square around the point.
+  opt_boundary:   {from: location}
+
+  # The date by which Camden should have decided: the extended one when it was extended, otherwise
+  # the statutory one. Rows with neither are estimated (see expiry.py) and flagged.
+  opt_expiry:     {from: [extended_expiry_date, statutory_expiry_date], first: true, as: date}
+
   # Not in Camden's open data today. Uncomment and name the source field when it appears.
-  # Camden's open data has no target decision date, so expiryDate is estimated (see expiry.py).
-  # opt_expiry:             {from: target_decision_date, as: date}
   # opt_recommendation:     {from: officer_recommendation}
   # opt_committee_sent:     {from: committee_date, as: date}
   # opt_notice_url:         {from: decision_notice_url}
   # opt_withdrawn_reason:   {from: withdrawn_reason}
 
-lookups: {}
+lookups:
+  # What Camden's five system statuses mean here. Only withdrawn and the appeal stages change the
+  # record; the others are listed so a new status shows up as something to look at.
+  status_kind:
+    Registered: undetermined
+    Final Decision: determined
+    Withdrawn: withdrawn
+    Appeal Lodged: appeal-lodged
+    Appeal Decided: appeal-decided
+
+  # All 44 wordings Camden uses for a decision, sorted into what the standard can say. A wording
+  # that is not granted or refused is "none" and is reported rather than guessed: part granted and
+  # part refused is a split decision, "would have refused" on a non-determination is not a decision,
+  # and prior approval not being required is neither.
+  decision_outcome:
+    Granted: granted
+    Granted Subject to a Section 106 Legal Agreement: granted
+    Granted and Warning of Enforcement Action: granted
+    Granted and Enforcement Action to be Taken: granted
+    Granted subject to a Section 106 Legal Agreement and Warning of Enforcement Action: granted
+    Approve Works (TPO): granted
+    Approve Emergency Works (TPO): granted
+    No Objection to Works to Tree(s) in CA: granted
+    No Objection to Emergency Works (CA): granted
+    No objection: granted
+    Approval: granted
+    Grant Prior Approval: granted
+    Granted Prior approval subject to Section 106 Legal agreement: granted
+    Prior Approval Required - Approval Given: granted
+    Deemed Consent - No Objection: granted
+    Approve Heritage Partnership Agreement: granted
+    Agree S106 Deed of Variation: granted
+
+    Refused: refused
+    Refused and Warning of Enforcement Action to be Taken: refused
+    Refused and Warning of Prosecution Action to be Taken: refused
+    Refuse Works (TPO): refused
+    Refuse Emergency Works (TPO): refused
+    Prior Approval Required - Approval Refused: refused
+    Refuse Prior Approval: refused
+
+    Withdrawn Decision: withdrawn
+
+    Part Granted/Refused: none
+    Part Granted/Refused - warn of prosecution: none
+    Grant Certificate, Refuse Application: none
+    "Non-Determination: would have refused": none
+    "Non-Determination: would have granted": none
+    Prior Approval not required: none
+    Objection to Works to Tree(s) in a CA: none
+    Objection to Emergency Works (CA): none
+    Objection: none
+    Deemed Consent - Objection: none
+    EIA Not Required: none
+    EIA Required: none
+    Notified: none
+    Void: none
+    Complaint upheld: none
+    Complaint rejected: none
+    Pre-application Advice Issued: none
+    Limited Period: none
+    Listed as Asset of Community Value: none

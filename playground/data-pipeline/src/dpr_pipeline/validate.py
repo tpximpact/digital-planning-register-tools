@@ -169,6 +169,12 @@ def _inside_submission(error) -> bool:
     return bool(error.absolute_path) and error.absolute_path[0] == "submission"
 
 
+def _wrong_type(error) -> bool:
+    """An alternative failing only because it is for a different application type."""
+    return (error.validator in ("const", "enum") and bool(error.absolute_path)
+            and error.absolute_path[-1] == "applicationType")
+
+
 def _deepest(error, depth: int = 0):
     """The most specific errors inside a failed set of alternatives.
 
@@ -182,8 +188,13 @@ def _deepest(error, depth: int = 0):
     for child in error.context:
         by_branch.setdefault(child.schema_path[0] if child.schema_path else 0, []).append(child)
 
-    # The branch that complained least is the one that nearly fitted.
-    best = min(by_branch.values(), key=len)
+    # The branch for this record's own application type is the one to read. Counting errors alone
+    # picks an alternative for some other type whenever it fails on less, and then reports that
+    # the type "was expected" to be something else, which is not what is wrong with the record.
+    matching = [branch for branch in by_branch.values()
+                if not any(_wrong_type(child) for child in branch)]
+    # Failing that, the branch that complained least is the one that nearly fitted.
+    best = min(matching or by_branch.values(), key=len)
     results = []
     for child in best:
         results.extend(_deepest(child, depth + 1))
