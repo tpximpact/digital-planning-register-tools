@@ -11,7 +11,7 @@ from dpr_pipeline.storage import Storage
 from .test_camden_mapper import SAMPLE
 from .test_pipeline import FakeSession
 
-REFERENCE = "2018/2267/P"
+REFERENCE = "2018-2267-P"
 
 
 def build(tmp_path, records=(SAMPLE,)):

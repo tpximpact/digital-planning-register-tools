@@ -36,6 +36,8 @@ LATER_COLUMNS = {
         "description": "VARCHAR",
         "applicant": "VARCHAR",
         "officer": "VARCHAR",
+        # The council's own reference, which bronze is keyed by. Silver's is the cleaned one.
+        "source_reference": "VARCHAR",
     },
     "gold.applications": {
         "updated_at": "TIMESTAMP",
@@ -103,9 +105,27 @@ def _create_tables(connection: duckdb.DuckDBPyConnection) -> None:
             description       VARCHAR,
             applicant         VARCHAR,
             officer           VARCHAR,
+            source_reference  VARCHAR,
             mapped_at         TIMESTAMP NOT NULL,
             record            JSON NOT NULL,
             PRIMARY KEY (council, reference)
+        )
+        """
+    )
+
+    # Documents and comments, which hang off an application and are held as the standard shapes
+    # them. See items.py.
+    connection.execute(
+        """
+        CREATE TABLE IF NOT EXISTS gold.items (
+            council       VARCHAR NOT NULL,
+            reference     VARCHAR NOT NULL,
+            kind          VARCHAR NOT NULL,
+            item_id       VARCHAR NOT NULL,
+            published     BOOLEAN NOT NULL DEFAULT true,
+            published_at  VARCHAR,
+            record        JSON NOT NULL,
+            PRIMARY KEY (council, reference, kind, item_id)
         )
         """
     )
@@ -164,6 +184,6 @@ def counts(connection: duckdb.DuckDBPyConnection) -> dict[str, int]:
     """Row counts per layer, for the status command."""
     result = {}
     for table in ("bronze.applications", "silver.applications", "gold.applications",
-                  "silver.mapping_issues", "gold.edits"):
+                  "silver.mapping_issues", "gold.edits", "gold.items"):
         result[table] = connection.execute(f"SELECT count(*) FROM {table}").fetchone()[0]
     return result

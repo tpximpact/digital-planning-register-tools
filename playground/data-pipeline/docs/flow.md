@@ -1,3 +1,5 @@
+> **Out of date.** The JSON `/private` endpoints described here were removed. The API is now only the ODP endpoints, extra information travels in `metadata.pipeline`, and the admin is one page at `/admin` that uses `/admin/data`. See the README.
+
 # What happens, step by step
 
     CAMDEN                                    BARNET
@@ -93,7 +95,7 @@ Two files per council, and nothing else:
     mappers/camden.py    how their fields translate  mappers/barnet.py
 
 Storage, the database, the record builder, validation, gold, the API and the admin screen are all
-shared. Adding a third council is two files, not a second pipeline.
+shared. Adding a third council is a mapping file and a short mapper, not a second pipeline.
 
 ## Where the data physically lives
 

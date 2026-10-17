@@ -54,13 +54,13 @@ def test_barnet_records_fit_the_same_standard(tmp_path):
 
 
 @needs_schema
-def test_the_missing_submission_shows_up_under_strict(tmp_path):
+def test_the_partial_submission_shows_up_under_strict(tmp_path):
     """The one gap legacy data cannot close, so it is reported apart from the rest."""
     connection = build(tmp_path)
     schema = validate.load_schema(SCHEMA)
 
     strict = validate.against_schema(connection, schema, "camden", strict=True)
-    assert any(validate.LEGACY_GAP in problem for _, problem in strict)
+    assert any(problem.startswith("submission") for _, problem in strict)
 
 
 @needs_schema
@@ -69,9 +69,9 @@ def test_an_edit_cannot_quietly_break_the_standard(tmp_path):
     connection = build(tmp_path)
     gold.publish(connection)
 
-    record = gold.get(connection, "camden", "2018/2267/P")
+    record = gold.get(connection, "camden", "2018-2267-P")
     record["applicationType"] = "not a real type"
-    gold.update(connection, "camden", "2018/2267/P", record, edited_by="someone")
+    gold.update(connection, "camden", "2018-2267-P", record, edited_by="someone")
 
     from jsonschema import Draft202012Validator
 

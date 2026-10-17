@@ -25,7 +25,7 @@ dev = ["pytest>=8.0", "ruff>=0.4", "fastapi>=0.110", "uvicorn>=0.29", "httpx>=0.
 dpr = "dpr_pipeline.cli:main"
 
 [tool.setuptools.package-data]
-dpr_pipeline = ["data/*.json", "static/*.html"]
+dpr_pipeline = ["data/*.json", "data/schemas/*.json", "static/*.html", "static/lab/*", "static/lab/*/*", "mappings/*.yaml"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

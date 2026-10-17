@@ -1,3 +1,5 @@
+> **Out of date.** The JSON `/private` endpoints described here were removed. The API is now only the ODP endpoints, extra information travels in `metadata.pipeline`, and the admin is one page at `/admin` that uses `/admin/data`. See the README.
+
 # The admin screen
 
 Where the admin UI lives, what it does, and what is still open. Written so the next design

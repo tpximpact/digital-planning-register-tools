@@ -1,0 +1,45 @@
+# Camden open data (NEC M3), one flat json object per application.
+#
+# Each entry says where a value lives in the council's record. The mapper in mappers/camden.py
+# does the rest, so a field Camden starts sending later is one more line here.
+#
+#   from      a field name, a dotted path into nested json, or a list of them to join
+#   join      what to put between a list of fields, default a space
+#   first     true, to take the first of a list of fields that has a value instead of joining
+#   as        date, to read it as a date
+#   upper     true, to compare codes in upper case
+#   lookup    a table below, to turn a code into the council's wording
+#
+# Names beginning with "opt_" are things the standard can carry that a source may or may not have.
+# Leave them out and the record simply has no such block.
+
+council: camden
+
+fields:
+  reference:      {from: application_number}
+  type:           {from: application_type}
+  status:         {from: system_status}
+  decision:       {from: decision_type}
+  received:       {from: registered_date, as: date}
+  validated:      {from: valid_from_date, as: date}
+  decided:        {from: decision_date, as: date}
+  officer:        {from: case_officer}
+  address:        {from: development_address}
+  description:    {from: development_description}
+  applicant:      {from: applicant_name}
+  # The coordinates are in the flat columns, and again in the location point, which arrives either
+  # as {latitude, longitude} or as GeoJSON ({coordinates: [longitude, latitude]}). First one found.
+  latitude:       {from: [latitude, location.latitude, location.coordinates.1], first: true}
+  longitude:      {from: [longitude, location.longitude, location.coordinates.0], first: true}
+  easting:        {from: easting}
+  northing:       {from: northing}
+
+  # Not in Camden's open data today. Uncomment and name the source field when it appears.
+  # Camden's open data has no target decision date, so expiryDate is estimated (see expiry.py).
+  # opt_expiry:             {from: target_decision_date, as: date}
+  # opt_recommendation:     {from: officer_recommendation}
+  # opt_committee_sent:     {from: committee_date, as: date}
+  # opt_notice_url:         {from: decision_notice_url}
+  # opt_withdrawn_reason:   {from: withdrawn_reason}
+
+lookups: {}

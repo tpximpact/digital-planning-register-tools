@@ -9,6 +9,13 @@ storage:
 database:
   path: data/dpr.duckdb
 
+# The standard's OpenAPI spec, used to check what the API sends. Download openapi.json from
+# bun workspace @dpr/api bun run generate:openapi
+# cp -rp apps/api/schema.json playground/data-pipeline/data/openapi.json
+# github.com/theopensystemslab/digital-planning-data-schemas. Optional.
+openapi:
+  path: data/openapi.json
+
 sources:
   camden:
     # Camden's planning applications dataset on their open data platform

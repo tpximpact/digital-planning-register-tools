@@ -1,431 +1,1051 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Published applications</title>
-<style>
-  :root {
-    --ink: #0b0c0c;
-    --muted: #505a5f;
-    --line: #b1b4b6;
-    --page: #ffffff;
-    --panel: #f3f2f1;
-    --link: #1d70b8;
-    --good: #00703c;
-    --warn: #d4351c;
-    --edited: #fd0;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --ink: #f3f2f1; --muted: #b1b4b6; --line: #505a5f;
-      --page: #0b0c0c; --panel: #1a1c1d; --link: #5ca7e8;
-      --good: #4ba97a; --warn: #f4796b;
-    }
-  }
-  :root[data-theme="dark"] {
-    --ink: #f3f2f1; --muted: #b1b4b6; --line: #505a5f;
-    --page: #0b0c0c; --panel: #1a1c1d; --link: #5ca7e8;
-    --good: #4ba97a; --warn: #f4796b;
-  }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Published applications</title>
+    <style>
+      :root {
+        --ink: #0b0c0c;
+        --muted: #505a5f;
+        --line: #b1b4b6;
+        --page: #ffffff;
+        --panel: #f3f2f1;
+        --link: #1d70b8;
+        --good: #00703c;
+        --warn: #d4351c;
+        --edited: #fd0;
+        --bronze: #a8682a;
+        --silver: #6b7780;
+        --gold: #b58900;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          --ink: #f3f2f1;
+          --muted: #b1b4b6;
+          --line: #505a5f;
+          --page: #0b0c0c;
+          --panel: #1a1c1d;
+          --link: #5ca7e8;
+          --good: #4ba97a;
+          --warn: #f4796b;
+          --bronze: #d99a5b;
+          --silver: #a9b4bc;
+          --gold: #e0b73a;
+        }
+      }
+      :root[data-theme='dark'] {
+        --ink: #f3f2f1;
+        --muted: #b1b4b6;
+        --line: #505a5f;
+        --page: #0b0c0c;
+        --panel: #1a1c1d;
+        --link: #5ca7e8;
+        --good: #4ba97a;
+        --warn: #f4796b;
+        --bronze: #d99a5b;
+        --silver: #a9b4bc;
+        --gold: #e0b73a;
+      }
 
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--page); color: var(--ink);
-    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-  }
-  header {
-    border-bottom: 4px solid var(--ink); padding: 16px;
-  }
-  h1 { font-size: 1.4rem; margin: 0 0 4px; }
-  .sub { color: var(--muted); font-size: 0.9rem; }
-  main { padding: 16px; max-width: 1100px; margin: 0 auto; }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--ink);
+        font: 16px/1.5 system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+      }
+      header {
+        border-bottom: 4px solid var(--ink);
+        padding: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+        align-items: end;
+        justify-content: space-between;
+      }
+      h1 {
+        font-size: 1.4rem;
+        margin: 0 0 4px;
+      }
+      .sub {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .sub a {
+        color: var(--link);
+      }
+      main {
+        padding: 16px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
 
-  .controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-  input, select, button {
-    font: inherit; padding: 8px 10px; border: 2px solid var(--ink);
-    background: var(--page); color: var(--ink); border-radius: 0;
-  }
-  input { flex: 1 1 240px; min-width: 0; }
-  button { cursor: pointer; background: var(--ink); color: var(--page); border-color: var(--ink); }
-  button.secondary { background: var(--page); color: var(--ink); }
-  button.danger { background: var(--warn); border-color: var(--warn); color: #fff; }
+      /* The switch between layers, always at the top of the page. */
+      .layers {
+        display: flex;
+        border: 2px solid var(--ink);
+      }
+      .layers button {
+        border: 0;
+        border-right: 2px solid var(--ink);
+        background: var(--page);
+        color: var(--ink);
+        padding: 10px 18px;
+        font-weight: 600;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .layers button:last-child {
+        border-right: 0;
+      }
+      .layers button::before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--dot);
+      }
+      .layers button[data-layer='bronze'] {
+        --dot: var(--bronze);
+      }
+      .layers button[data-layer='silver'] {
+        --dot: var(--silver);
+      }
+      .layers button[data-layer='gold'] {
+        --dot: var(--gold);
+      }
+      .layers button[aria-pressed='true'] {
+        background: var(--ink);
+        color: var(--page);
+      }
+      .layers small {
+        font-weight: 400;
+        opacity: 0.8;
+        font-variant-numeric: tabular-nums;
+      }
 
-  table { width: 100%; border-collapse: collapse; }
-  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  th { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
-  tr.row:hover { background: var(--panel); }
-  .ref { font-weight: 600; }
-  .tag {
-    display: inline-block; font-size: 0.75rem; padding: 2px 6px;
-    border: 1px solid var(--line); color: var(--muted); white-space: nowrap;
-  }
-  .tag.edited { border-color: var(--ink); background: var(--edited); color: #0b0c0c; }
-  .tag.waiting { border-color: var(--warn); color: var(--warn); }
-  .tag.live { border-color: var(--good); color: var(--good); }
-  .tag.flagged { border-color: var(--warn); background: #fff5f5; color: var(--warn); }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .tag.flagged { background: #2a1512; }
-  }
+      .council-pick {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .council-pick select {
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 6px 10px;
+      }
+      .checks {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        margin-top: 12px;
+      }
+      .checks .sub {
+        flex-basis: 100%;
+      }
+      .verdict {
+        margin-top: 12px;
+        padding: 10px;
+        border-left: 4px solid var(--line);
+        background: var(--panel);
+        font-size: 0.9rem;
+      }
+      .verdict.ok {
+        border-left-color: var(--good);
+      }
+      .verdict.bad {
+        border-left-color: var(--warn);
+      }
+      .verdict ul {
+        margin: 8px 0 0;
+        padding-left: 20px;
+      }
+      .verdict details {
+        margin-top: 8px;
+        color: var(--muted);
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+      input,
+      select,
+      button {
+        font: inherit;
+        padding: 8px 10px;
+        border: 2px solid var(--ink);
+        background: var(--page);
+        color: var(--ink);
+        border-radius: 0;
+      }
+      input[type='search'] {
+        flex: 1 1 240px;
+        min-width: 0;
+      }
+      button {
+        cursor: pointer;
+        background: var(--ink);
+        color: var(--page);
+        border-color: var(--ink);
+      }
+      button.secondary {
+        background: var(--page);
+        color: var(--ink);
+      }
+      button.danger {
+        background: var(--warn);
+        border-color: var(--warn);
+        color: #fff;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: default;
+      }
+      :focus-visible {
+        outline: 3px solid var(--link);
+        outline-offset: 2px;
+      }
 
-  .bulk {
-    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
-    padding: 12px; margin-bottom: 16px; background: var(--panel);
-    border-left: 4px solid var(--ink);
-  }
-  .bulk .counts { margin-right: auto; font-size: 0.9rem; }
-  .bulk strong { font-variant-numeric: tabular-nums; }
-  td.pick { width: 28px; }
-  input[type="checkbox"] { width: 18px; height: 18px; flex: none; accent-color: var(--ink); }
-  .desc { color: var(--muted); font-size: 0.9rem; }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 10px 8px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      th {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+      }
+      tr.row:hover {
+        background: var(--panel);
+      }
+      .ref {
+        font-weight: 600;
+      }
+      .tag {
+        display: inline-block;
+        font-size: 0.75rem;
+        padding: 2px 6px;
+        border: 1px solid var(--line);
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .tag.edited {
+        border-color: var(--ink);
+        background: var(--edited);
+        color: #0b0c0c;
+      }
+      .tag.waiting {
+        border-color: var(--warn);
+        color: var(--warn);
+      }
+      .tag.live {
+        border-color: var(--good);
+        color: var(--good);
+      }
+      .tag.flagged {
+        border-color: var(--warn);
+        background: #fff5f5;
+        color: var(--warn);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) .tag.flagged {
+          background: #2a1512;
+        }
+      }
 
-  .pager { display: flex; gap: 8px; align-items: center; margin-top: 16px; }
-  .pager .count { color: var(--muted); font-size: 0.9rem; margin-left: auto; }
+      .bulk {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        padding: 12px;
+        margin-bottom: 16px;
+        background: var(--panel);
+        border-left: 4px solid var(--ink);
+      }
+      .bulk .counts {
+        margin-right: auto;
+        font-size: 0.9rem;
+      }
+      .bulk strong {
+        font-variant-numeric: tabular-nums;
+      }
+      td.pick {
+        width: 28px;
+      }
+      input[type='checkbox'] {
+        width: 18px;
+        height: 18px;
+        flex: none;
+        accent-color: var(--ink);
+      }
+      .desc {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
 
-  dialog {
-    border: 4px solid var(--ink); background: var(--page); color: var(--ink);
-    width: min(760px, 94vw); padding: 0;
-  }
-  dialog::backdrop { background: rgba(0,0,0,0.5); }
-  .dialog-head { padding: 16px; border-bottom: 1px solid var(--line); }
-  .dialog-body { padding: 16px; }
-  .dialog-foot { padding: 16px; border-top: 1px solid var(--line); display: flex; gap: 8px; }
-  textarea {
-    width: 100%; min-height: 320px; font: 13px/1.5 ui-monospace, Consolas, monospace;
-    padding: 10px; border: 2px solid var(--ink); background: var(--page); color: var(--ink);
-  }
-  .history { font-size: 0.85rem; color: var(--muted); margin-top: 12px; }
-  .message { padding: 10px; margin-bottom: 12px; border-left: 4px solid var(--good); background: var(--panel); }
-  .message.bad { border-left-color: var(--warn); }
-  .empty { padding: 32px 8px; color: var(--muted); }
-  @media (max-width: 640px) { .hide-small { display: none; } }
-</style>
-</head>
-<body>
-<header>
-  <h1>Published applications</h1>
-  <div class="sub">The gold layer. Editing here never changes what the council sent.</div>
-</header>
+      .pager {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-top: 16px;
+      }
+      .pager .count {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-left: auto;
+      }
 
-<main>
-  <div id="message" hidden></div>
-
-  <div class="controls">
-    <input id="search" type="search" placeholder="Search by reference or address" autocomplete="off">
-    <select id="council"><option value="">All councils</option></select>
-    <select id="sort">
-      <option value="reference">Reference</option>
-      <option value="published_at">Published</option>
-      <option value="updated_at">Last edited</option>
-    </select>
-    <select id="order"><option value="asc">Ascending</option><option value="desc">Descending</option></select>
-    <select id="state">
-      <option value="all">All</option>
-      <option value="waiting">Waiting for approval</option>
-      <option value="approved">Approved</option>
-    </select>
-  </div>
-
-  <div class="bulk">
-    <span class="counts" id="counts">Counting…</span>
-    <button id="approveClean">Approve all clean</button>
-    <button class="secondary" id="approveSelected">Approve selected</button>
-    <button class="secondary" id="unapproveSelected">Unapprove selected</button>
-  </div>
-
-  <table>
-    <thead>
-      <tr>
-        <th class="pick"><input type="checkbox" id="pickAll" aria-label="Select all on this page"></th>
-        <th>Reference</th>
-        <th class="hide-small">Address</th>
-        <th>Type</th>
-        <th class="hide-small">Decision</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody id="rows"></tbody>
-  </table>
-  <div id="empty" class="empty" hidden>Nothing published yet. Run <code>dpr publish</code>.</div>
-
-  <div class="pager">
-    <button class="secondary" id="prev">Previous</button>
-    <button class="secondary" id="next">Next</button>
-    <span class="count" id="count"></span>
-  </div>
-</main>
-
-<dialog id="editor">
-  <form method="dialog" id="editorForm">
-    <div class="dialog-head">
-      <strong id="editorTitle"></strong>
-      <div class="sub" id="editorSub"></div>
-    </div>
-    <div class="dialog-body">
-      <textarea id="record" spellcheck="false"></textarea>
-      <div class="history" id="history"></div>
-    </div>
-    <div class="dialog-foot">
-      <button value="save" id="save">Save changes</button>
-      <button value="cancel" class="secondary" formnovalidate>Cancel</button>
-      <button value="delete" class="danger" id="remove" formnovalidate>Unpublish</button>
-    </div>
-  </form>
-</dialog>
-
-<script>
-const state = { page: 1, size: 20, total: 0, current: null };
-const editor = document.getElementById("editor");
-
-// Who is editing. Real sign in comes later; until then the name is asked for once and
-// sent with every change, so the history is still attributable.
-function editorName() {
-  let name = localStorage.getItem("dpr-editor");
-  if (!name) {
-    name = prompt("Your email, so changes can be attributed:") || "";
-    if (name) localStorage.setItem("dpr-editor", name);
-  }
-  return name;
-}
-
-function say(text, bad) {
-  const box = document.getElementById("message");
-  box.textContent = text;
-  box.className = bad ? "message bad" : "message";
-  box.hidden = false;
-  setTimeout(() => { box.hidden = true; }, 4000);
-}
-
-async function load() {
-  const params = new URLSearchParams({
-    page: state.page,
-    size: state.size,
-    sort: document.getElementById("sort").value,
-    order: document.getElementById("order").value,
-    state: document.getElementById("state").value,
-  });
-  const council = document.getElementById("council").value;
-  if (council) params.set("council", council);
-
-  const response = await fetch("/private/applications?" + params);
-  const body = await response.json();
-  state.total = body.total;
-
-  const search = document.getElementById("search").value.trim().toLowerCase();
-  const rows = body.applications.filter((item) => {
-    if (!search) return true;
-    const haystack = [item.reference, item.detail?.address, item.detail?.description].join(" ");
-    return haystack.toLowerCase().includes(search);
-  });
-
-  const tbody = document.getElementById("rows");
-  tbody.innerHTML = "";
-  for (const item of rows) {
-    const detail = item.detail || {};
-    const tr = document.createElement("tr");
-    tr.className = "row";
-    tr.innerHTML = `
-      <td class="pick">
-        <input type="checkbox" class="pick-one" data-council="${escape(item.council)}"
-               data-reference="${escape(item.reference)}" aria-label="Select ${escape(item.reference)}">
-      </td>
-      <td>
-        <div class="ref">${escape(item.reference)}</div>
-        <div class="desc">
-          ${escape(item.council)}
-          ${item.approved ? '<span class="tag live">approved</span>' : '<span class="tag waiting">waiting</span>'}
-          ${item.flagged ? '<span class="tag flagged">needs a look</span>' : ""}
-          ${item.edited ? '<span class="tag edited">edited</span>' : ""}
+      dialog {
+        border: 4px solid var(--ink);
+        background: var(--page);
+        color: var(--ink);
+        width: min(760px, 94vw);
+        padding: 0;
+      }
+      dialog::backdrop {
+        background: rgba(0, 0, 0, 0.5);
+      }
+      .dialog-head {
+        padding: 16px;
+        border-bottom: 1px solid var(--line);
+      }
+      .dialog-body {
+        padding: 16px;
+      }
+      .dialog-foot {
+        padding: 16px;
+        border-top: 1px solid var(--line);
+        display: flex;
+        gap: 8px;
+      }
+      textarea {
+        width: 100%;
+        min-height: 320px;
+        font: 13px/1.5 ui-monospace, Consolas, monospace;
+        padding: 10px;
+        border: 2px solid var(--ink);
+        background: var(--page);
+        color: var(--ink);
+      }
+      .history {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-top: 12px;
+      }
+      .message {
+        padding: 10px;
+        margin-bottom: 12px;
+        border-left: 4px solid var(--good);
+        background: var(--panel);
+      }
+      .message.bad {
+        border-left-color: var(--warn);
+      }
+      .empty {
+        padding: 32px 8px;
+        color: var(--muted);
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 640px) {
+        .hide-small {
+          display: none;
+        }
+        .layers button {
+          padding: 10px 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <label class="council-pick"
+          >Council
+          <select id="council" aria-label="Council"></select
+        ></label>
+        <h1>Applications</h1>
+        <div class="sub" id="blurb"></div>
+        <div class="sub">
+          <a href="/lab/">Review lab</a> &middot; <a href="/docs">API docs</a>
         </div>
-      </td>
-      <td class="hide-small desc">
-        ${escape(detail.address || "")}
-        <div>${escape((detail.description || "").slice(0, 90))}</div>
-      </td>
-      <td>
-        <span class="tag">${escape(item.record?.applicationType || "")}</span>
-      </td>
-      <td class="hide-small desc">${escape(detail.decision || "")}</td>
-      <td><button class="secondary" data-open>Open</button></td>`;
-    tr.querySelector("[data-open]").addEventListener("click", () => open(item));
-    tbody.appendChild(tr);
-  }
+      </div>
+      <div class="layers" role="group" aria-label="Layer">
+        <button type="button" data-layer="bronze" aria-pressed="false">
+          Bronze <small></small>
+        </button>
+        <button type="button" data-layer="silver" aria-pressed="false">
+          Silver <small></small>
+        </button>
+        <button type="button" data-layer="gold" aria-pressed="true">
+          Gold <small></small>
+        </button>
+      </div>
+    </header>
 
-  document.getElementById("empty").hidden = body.total !== 0;
-  const from = (state.page - 1) * state.size + 1;
-  const to = Math.min(state.page * state.size, body.total);
-  document.getElementById("count").textContent =
-    body.total ? `${from} to ${to} of ${body.total}` : "";
-  document.getElementById("prev").disabled = state.page <= 1;
-  document.getElementById("next").disabled = state.page >= body.pages;
-}
+    <main>
+      <div id="message" role="status" hidden></div>
 
-function escape(value) {
-  return String(value ?? "").replace(/[&<>"]/g, (c) =>
-    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-}
+      <div class="controls">
+        <input
+          id="search"
+          type="search"
+          placeholder="Search by reference, address or description"
+          autocomplete="off"
+          aria-label="Search"
+        />
+        <select id="sort" aria-label="Sort by">
+          <option value="reference">Reference</option>
+          <option value="published_at">Published</option>
+          <option value="updated_at">Last edited</option>
+        </select>
+        <select id="order" aria-label="Order">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+        <select id="state" aria-label="State">
+          <option value="all">All</option>
+          <option value="waiting">Waiting for approval</option>
+          <option value="approved">Approved</option>
+        </select>
+      </div>
 
-async function open(item) {
-  state.current = item;
-  document.getElementById("editorTitle").textContent = item.reference;
-  document.getElementById("editorSub").textContent =
-    `${item.council}${item.edited ? " · edited here" : " · as the council sent it"}`;
-  document.getElementById("record").value = JSON.stringify(item.record, null, 2);
+      <div class="bulk" id="bulk">
+        <span class="counts" id="counts">Counting…</span>
+        <button id="approveClean">Approve all clean</button>
+        <button class="secondary" id="approveSelected">Approve selected</button>
+        <button class="secondary" id="unapproveSelected">
+          Unapprove selected
+        </button>
+      </div>
+      <div class="bulk" id="layerNote" hidden>
+        <span class="counts" id="layerCounts"></span>
+      </div>
 
-  const path = `/private/applications/${item.council}/${item.reference}`;
-  const history = await (await fetch(path + "/history")).json();
-  document.getElementById("history").textContent = history.length
-    ? "Changes: " + history.map((h) => `${h.action} by ${h.by} at ${h.at.slice(0, 16).replace("T", " ")}`).join("; ")
-    : "No changes yet.";
+      <table>
+        <thead>
+          <tr id="head"></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div id="empty" class="empty" hidden></div>
 
-  editor.showModal();
-}
+      <div class="pager">
+        <button class="secondary" id="prev">Previous</button>
+        <button class="secondary" id="next">Next</button>
+        <span class="count" id="count"></span>
+      </div>
+    </main>
 
-document.getElementById("editorForm").addEventListener("submit", async (event) => {
-  const action = event.submitter?.value;
-  const item = state.current;
-  if (!item || action === "cancel") return;
+    <dialog id="editor" aria-labelledby="editorTitle">
+      <form method="dialog" id="editorForm">
+        <div class="dialog-head">
+          <strong id="editorTitle"></strong>
+          <div class="sub" id="editorSub"></div>
+        </div>
+        <div class="dialog-body">
+          <textarea
+            id="record"
+            spellcheck="false"
+            aria-label="The record as JSON"
+          ></textarea>
+          <div class="checks" id="checks">
+            <button
+              type="button"
+              class="secondary"
+              id="checkPrivate"
+              title="postSubmissionApplication, the unredacted application"
+            >
+              Validate: private schema
+            </button>
+            <button
+              type="button"
+              class="secondary"
+              id="checkPublic"
+              title="postSubmissionPublishedApplication, the published copy"
+            >
+              Validate: public schema
+            </button>
+            <span class="sub"
+              >Private is postSubmissionApplication. Public is
+              postSubmissionPublishedApplication. It checks what is in the box
+              above, edits included.</span
+            >
+          </div>
+          <div class="verdict" id="verdict" role="status" hidden></div>
+          <div class="history" id="history"></div>
+        </div>
+        <div class="dialog-foot">
+          <button value="save" id="save">Save changes</button>
+          <button value="cancel" class="secondary" id="cancel" formnovalidate>
+            Cancel
+          </button>
+          <button value="delete" class="danger" id="remove" formnovalidate>
+            Unpublish
+          </button>
+        </div>
+      </form>
+    </dialog>
 
-  const name = editorName();
-  if (!name) { say("A name is needed before a change can be saved.", true); return; }
-  const path = `/private/applications/${item.council}/${item.reference}`;
+    <script>
+      const LAYERS = {
+        bronze: {
+          blurb: 'Bronze: exactly what the council sent. Read only.',
+          editable: false
+        },
+        silver: {
+          blurb:
+            "Silver: the council's data in the standard's shape. Never edited.",
+          editable: false
+        },
+        gold: {
+          blurb:
+            'Gold: what is published. Editing here never changes what the council sent.',
+          editable: true
+        }
+      }
+      const params = new URLSearchParams(location.search)
+      const state = {
+        layer: LAYERS[params.get('layer')] ? params.get('layer') : 'gold',
+        page: 1,
+        size: 20,
+        current: null,
+        busy: false
+      }
+      const $ = (id) => document.getElementById(id)
+      const editor = $('editor')
 
-  if (action === "delete") {
-    if (!confirm(`Unpublish ${item.reference}? It stays in silver and bronze.`)) return;
-    const response = await fetch(path, { method: "DELETE", headers: { "X-Edited-By": name } });
-    say(response.ok ? `${item.reference} unpublished.` : "Could not unpublish.", !response.ok);
-  } else {
-    let record;
-    try {
-      record = JSON.parse(document.getElementById("record").value);
-    } catch (error) {
-      say("That is not valid JSON, so nothing was saved.", true);
-      return;
-    }
-    const response = await fetch(path, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json", "X-Edited-By": name },
-      body: JSON.stringify(record),
-    });
-    say(response.ok ? `${item.reference} saved.` : "Could not save.", !response.ok);
-  }
-  load();
-});
+      function editorName() {
+        let name = localStorage.getItem('dpr-editor')
+        if (!name) {
+          name = prompt('Your email, so changes can be attributed:') || ''
+          if (name) localStorage.setItem('dpr-editor', name)
+        }
+        return name
+      }
 
-async function loadCounts() {
-  const council = document.getElementById("council").value;
-  const params = council ? "?council=" + encodeURIComponent(council) : "";
-  const counts = await (await fetch("/private/approval/summary" + params)).json();
-  document.getElementById("counts").innerHTML =
-    `<strong>${counts.approved}</strong> approved, ` +
-    `<strong>${counts.clean}</strong> clean and waiting, ` +
-    `<strong>${counts.flagged}</strong> need a look`;
-  document.getElementById("approveClean").disabled = counts.clean === 0;
-}
+      let messageTimer
+      function say(text, bad) {
+        const box = $('message')
+        box.textContent = text
+        box.className = bad ? 'message bad' : 'message'
+        box.hidden = false
+        clearTimeout(messageTimer)
+        messageTimer = setTimeout(() => {
+          box.hidden = true
+        }, 4000)
+      }
 
-function picked() {
-  return [...document.querySelectorAll(".pick-one:checked")].map((box) => ({
-    council: box.dataset.council,
-    reference: box.dataset.reference,
-  }));
-}
+      const escapeHtml = (value) =>
+        String(value ?? '').replace(
+          /[&<>"]/g,
+          (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])
+        )
+      const council = () => $('council').value
+      const when = (iso) => (iso ? iso.slice(0, 16).replace('T', ' ') : '')
 
-// Approving happens one council at a time, because a reference only means something inside a
-// council and the audit trail records which council each change belonged to.
-async function send(path, chosen, extra) {
-  const name = editorName();
-  if (!name) { say("A name is needed before anything can be approved.", true); return; }
+      async function api(path, options = {}) {
+        const response = await fetch(path, options)
+        if (!response.ok) {
+          let detail = response.statusText
+          try {
+            detail = (await response.json())?.status?.message || detail
+          } catch {
+            /* no body */
+          }
+          throw new Error(detail)
+        }
+        return response.status === 204 ? null : response.json()
+      }
 
-  const byCouncil = {};
-  for (const item of chosen) {
-    (byCouncil[item.council] = byCouncil[item.council] || []).push(item.reference);
-  }
+      // ---- the layer switch
 
-  let total = 0;
-  for (const [council, references] of Object.entries(byCouncil)) {
-    const response = await fetch(path, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "X-Edited-By": name },
-      body: JSON.stringify({ council, references, ...extra }),
-    });
-    if (response.ok) {
-      const body = await response.json();
-      total += body.approved ?? body.unapproved ?? 0;
-    }
-  }
-  return total;
-}
+      function setLayer(layer) {
+        state.layer = layer
+        state.page = 1
+        for (const button of document.querySelectorAll('.layers button')) {
+          button.setAttribute('aria-pressed', button.dataset.layer === layer)
+        }
+        $('blurb').textContent = LAYERS[layer].blurb
+        const gold = layer === 'gold'
+        $('bulk').hidden = !gold
+        $('layerNote').hidden = gold
+        $('state').hidden = !gold
+        $('sort').hidden = !gold
+        $('sort').value = 'reference'
+        const url = new URL(location.href)
+        url.searchParams.set('layer', layer)
+        history.replaceState(null, '', url)
+        load()
+      }
+      for (const button of document.querySelectorAll('.layers button')) {
+        button.addEventListener('click', () => setLayer(button.dataset.layer))
+      }
 
-document.getElementById("approveSelected").addEventListener("click", async () => {
-  const chosen = picked();
-  if (!chosen.length) { say("Nothing selected.", true); return; }
-  const total = await send("/private/approval/approve", chosen, {});
-  say(`${total} approved.`);
-  load(); loadCounts();
-});
+      // ---- the table, which has different columns in each layer
 
-document.getElementById("unapproveSelected").addEventListener("click", async () => {
-  const chosen = picked();
-  if (!chosen.length) { say("Nothing selected.", true); return; }
-  if (!confirm(`Take ${chosen.length} records back out of public view?`)) return;
-  const total = await send("/private/approval/unapprove", chosen, {});
-  say(`${total} taken back out of public view.`);
-  load(); loadCounts();
-});
+      const COLUMNS = {
+        bronze: ['Council reference', 'Address', 'Mapped to', 'Pulled'],
+        silver: ['Reference', 'Address', 'Type', 'Status', 'Mapped'],
+        gold: ['', 'Reference', 'Address', 'Type', 'Decision', '']
+      }
 
-document.getElementById("approveClean").addEventListener("click", async () => {
-  const council = document.getElementById("council").value;
-  if (!council) { say("Choose a council first, approval is per council.", true); return; }
+      function rowHtml(item) {
+        const open =
+          '<td><button class="secondary" data-open>Open</button></td>'
+        const address = `<td class="hide-small desc">${escapeHtml(
+          item.address || ''
+        )}<div>${escapeHtml((item.description || '').slice(0, 90))}</div></td>`
+        if (state.layer === 'bronze') {
+          return `<td><div class="ref">${escapeHtml(
+            item.reference
+          )}</div></td>${address}
+      <td>${
+        item.mappedTo
+          ? `<span class="tag live">${escapeHtml(item.mappedTo)}</span>`
+          : '<span class="tag waiting">not mapped</span>'
+      }</td>
+      <td class="desc">${when(item.pulledAt)}</td>${open}`
+        }
+        const type = `<td><span class="tag">${escapeHtml(
+          item.record?.applicationType || ''
+        )}</span></td>`
+        if (state.layer === 'silver') {
+          return `<td><div class="ref">${escapeHtml(item.reference)}</div>
+        <div class="desc">${
+          item.inGold
+            ? '<span class="tag live">in gold</span>'
+            : '<span class="tag waiting">not in gold</span>'
+        }
+        ${
+          item.flagged ? '<span class="tag flagged">needs a look</span>' : ''
+        }</div></td>${address}${type}
+      <td class="desc">${escapeHtml(
+        item.status || ''
+      )}</td><td class="desc">${when(item.mappedAt)}</td>${open}`
+        }
+        return `<td class="pick"><input type="checkbox" class="pick-one" data-reference="${escapeHtml(
+          item.reference
+        )}" aria-label="Select ${escapeHtml(item.reference)}"></td>
+    <td><div class="ref">${escapeHtml(item.reference)}</div>
+      <div class="desc">${escapeHtml(item.council)}
+        ${
+          item.approved
+            ? '<span class="tag live">approved</span>'
+            : '<span class="tag waiting">waiting</span>'
+        }
+        ${item.flagged ? '<span class="tag flagged">needs a look</span>' : ''}
+        ${
+          item.edited ? '<span class="tag edited">edited</span>' : ''
+        }</div></td>${address}${type}
+    <td class="hide-small desc">${escapeHtml(item.decision || '')}</td>${open}`
+      }
 
-  const counts = await (await fetch(
-    "/private/approval/summary?council=" + encodeURIComponent(council))).json();
-  if (!confirm(
-    `Approve ${counts.clean} records for ${council}?
+      async function load() {
+        if (!council()) return
+        const query = new URLSearchParams({
+          page: state.page,
+          size: state.size,
+          q: $('search').value.trim(),
+          order: $('order').value
+        })
+        if (state.layer === 'gold') {
+          query.set('sort', $('sort').value)
+          query.set('state', $('state').value)
+        }
 
-` +
-    `These have nothing flagged against them. ${counts.flagged} others need a look and are left alone.`
-  )) return;
+        let body
+        try {
+          body = await api(
+            `/admin/data/${encodeURIComponent(council())}/${
+              state.layer
+            }?${query}`
+          )
+        } catch (error) {
+          say(`Could not load ${state.layer}: ${error.message}`, true)
+          return
+        }
 
-  const name = editorName();
-  if (!name) { say("A name is needed before anything can be approved.", true); return; }
+        $('head').innerHTML =
+          COLUMNS[state.layer]
+            .map(
+              (h, i) =>
+                `<th${
+                  state.layer !== 'bronze' && [2].includes(i)
+                    ? ' class="hide-small"'
+                    : ''
+                }>${h}${
+                  state.layer === 'gold' && i === 0
+                    ? '<input type="checkbox" id="pickAll" aria-label="Select all on this page">'
+                    : ''
+                }</th>`
+            )
+            .join('') + '<th></th>'
+        if (state.layer === 'gold') $('head').lastElementChild.remove()
 
-  const response = await fetch("/private/approval/approve", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "X-Edited-By": name },
-    body: JSON.stringify({ council, all_clean: true }),
-  });
-  const body = await response.json();
-  say(`${body.approved} approved for ${council}.`);
-  load(); loadCounts();
-});
+        const tbody = $('rows')
+        tbody.innerHTML = ''
+        for (const item of body.rows) {
+          const tr = document.createElement('tr')
+          tr.className = 'row'
+          tr.innerHTML = rowHtml(item)
+          tr.querySelector('[data-open]').addEventListener('click', () =>
+            open(item)
+          )
+          tbody.appendChild(tr)
+        }
+        const pickAll = $('pickAll')
+        if (pickAll)
+          pickAll.addEventListener('change', (event) => {
+            for (const box of document.querySelectorAll('.pick-one'))
+              box.checked = event.target.checked
+          })
 
-document.getElementById("pickAll").addEventListener("change", (event) => {
-  for (const box of document.querySelectorAll(".pick-one")) box.checked = event.target.checked;
-});
+        $('empty').hidden = body.total !== 0
+        $('empty').textContent = $('search').value.trim()
+          ? 'Nothing in this layer matches that search.'
+          : state.layer === 'gold'
+          ? 'Nothing published yet. Run dpr publish.'
+          : `Nothing in ${state.layer} yet. Run the pipeline for ${council()}.`
+        const from = (body.page - 1) * body.size + 1
+        $('count').textContent = body.total
+          ? `${from} to ${Math.min(body.page * body.size, body.total)} of ${
+              body.total
+            }`
+          : ''
+        $('prev').disabled = state.page <= 1
+        $('next').disabled = state.page >= body.pages
+      }
 
-document.getElementById("prev").addEventListener("click", () => { state.page--; load(); });
-document.getElementById("next").addEventListener("click", () => { state.page++; load(); });
-for (const id of ["sort", "order", "council", "state"]) {
-  document.getElementById(id).addEventListener("change", () => {
-    state.page = 1;
-    load();
-    if (id === "council") loadCounts();
-  });
-}
-document.getElementById("search").addEventListener("input", () => load());
+      // ---- opening a record
 
-(async function start() {
-  const body = await (await fetch("/private/applications?size=200")).json();
-  const councils = [...new Set(body.applications.map((item) => item.council))].sort();
-  const select = document.getElementById("council");
-  for (const council of councils) {
-    const option = document.createElement("option");
-    option.value = option.textContent = council;
-    select.appendChild(option);
-  }
-  load();
-  loadCounts();
-})();
-</script>
-</body>
+      async function open(item) {
+        state.current = item
+        const editable = LAYERS[state.layer].editable
+        $('editorTitle').textContent = item.reference
+        $('editorSub').textContent = editable
+          ? `${item.council}${
+              item.edited ? ' · edited here' : ' · as the council sent it'
+            }`
+          : `${item.council} · ${state.layer}, read only`
+        $('record').value = JSON.stringify(item.record, null, 2)
+        $('record').readOnly = !editable
+        $('save').hidden = !editable
+        $('remove').hidden = !editable
+        $('cancel').textContent = editable ? 'Cancel' : 'Close'
+        $('checks').hidden = state.layer === 'bronze' // bronze is the council's own shape, not the standard's
+        $('verdict').hidden = true
+
+        $('history').textContent = ''
+        if (editable) {
+          try {
+            const entries = await api(
+              `/admin/data/${item.council}/${encodeURIComponent(
+                item.reference
+              )}/history`
+            )
+            $('history').textContent = entries.length
+              ? 'Changes: ' +
+                entries
+                  .map((h) => `${h.action} by ${h.by} at ${when(h.at)}`)
+                  .join('; ')
+              : 'No changes yet.'
+          } catch {
+            $('history').textContent = ''
+          }
+        }
+        editor.showModal()
+      }
+
+      async function validateRecord(kind) {
+        let record
+        try {
+          record = JSON.parse($('record').value)
+        } catch {
+          show({ ok: false, title: 'That is not valid JSON.', errors: [] })
+          return
+        }
+        show({ ok: null, title: 'Checking…', errors: [] })
+        try {
+          const result = await api('/admin/data/validate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ schema: kind, record })
+          })
+          show({
+            ok: result.valid,
+            title: result.valid
+              ? `Valid against the ${kind} schema (${result.schema}).`
+              : `${result.errors.length} problem${
+                  result.errors.length === 1 ? '' : 's'
+                } against the ${kind} schema (${result.schema}).`,
+            errors: result.errors,
+            known: result.knownGaps
+              ? `${
+                  result.knownGaps
+                } known gaps in the original submission, which a historic record cannot have:\n${result.knownGapExamples.join(
+                  '\n'
+                )}`
+              : ''
+          })
+        } catch (error) {
+          show({ ok: false, title: error.message, errors: [] })
+        }
+      }
+
+      function show({ ok, title, errors, known }) {
+        const box = $('verdict')
+        box.className =
+          'verdict' + (ok === true ? ' ok' : ok === false ? ' bad' : '')
+        box.innerHTML =
+          `<strong>${escapeHtml(title)}</strong>` +
+          (errors.length
+            ? `<ul>${errors
+                .map((e) => `<li>${escapeHtml(e)}</li>`)
+                .join('')}</ul>`
+            : '') +
+          (known
+            ? `<details><summary>Known gaps</summary><pre>${escapeHtml(
+                known
+              )}</pre></details>`
+            : '')
+        box.hidden = false
+      }
+      $('checkPrivate').addEventListener('click', () =>
+        validateRecord('private')
+      )
+      $('checkPublic').addEventListener('click', () => validateRecord('public'))
+
+      $('editorForm').addEventListener('submit', async (event) => {
+        const action = event.submitter?.value
+        const item = state.current
+        if (!item || action === 'cancel') return
+
+        const name = editorName()
+        if (!name) {
+          say('A name is needed before a change can be saved.', true)
+          event.preventDefault()
+          return
+        }
+        const path = `/admin/data/${item.council}/${encodeURIComponent(
+          item.reference
+        )}`
+
+        try {
+          if (action === 'delete') {
+            if (
+              !confirm(
+                `Unpublish ${item.reference}? It stays in silver and bronze.`
+              )
+            ) {
+              event.preventDefault()
+              return
+            }
+            await api(path, {
+              method: 'DELETE',
+              headers: { 'X-Edited-By': name }
+            })
+            say(`${item.reference} unpublished.`)
+          } else {
+            let record
+            try {
+              record = JSON.parse($('record').value)
+            } catch {
+              say('That is not valid JSON, so nothing was saved.', true)
+              event.preventDefault()
+              return
+            }
+            await api(path, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Edited-By': name
+              },
+              body: JSON.stringify(record)
+            })
+            say(`${item.reference} saved.`)
+          }
+        } catch (error) {
+          say(error.message, true)
+        }
+        load()
+        loadCounts()
+      })
+
+      // ---- counts, and approving (gold only)
+
+      async function loadCounts() {
+        if (!council()) return
+        let counts
+        try {
+          counts = await api(
+            '/admin/data/summary?council=' + encodeURIComponent(council())
+          )
+        } catch {
+          return
+        }
+        for (const button of document.querySelectorAll('.layers button')) {
+          button.querySelector('small').textContent =
+            counts[button.dataset.layer]
+        }
+        $(
+          'counts'
+        ).innerHTML = `<strong>${counts.approved}</strong> approved, <strong>${counts.clean}</strong> clean and waiting, <strong>${counts.flagged}</strong> need a look`
+        $('approveClean').disabled = counts.clean === 0
+        $('layerCounts').textContent =
+          state.layer === 'bronze'
+            ? `${counts.unmapped} of ${counts.bronze} bronze records are not in silver yet.`
+            : `${counts.unpublished} of ${counts.silver} silver records are not in gold yet.`
+      }
+
+      const picked = () =>
+        [...document.querySelectorAll('.pick-one:checked')].map(
+          (box) => box.dataset.reference
+        )
+
+      async function send(body) {
+        const name = editorName()
+        if (!name) {
+          say('A name is needed before anything can be approved.', true)
+          return null
+        }
+        try {
+          const result = await api('/admin/data/approve', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Edited-By': name
+            },
+            body: JSON.stringify({ council: council(), ...body })
+          })
+          return result.changed
+        } catch (error) {
+          say(error.message, true)
+          return null
+        }
+      }
+
+      $('approveSelected').addEventListener('click', async () => {
+        const references = picked()
+        if (!references.length) {
+          say('Nothing selected.', true)
+          return
+        }
+        const changed = await send({ references })
+        if (changed !== null) {
+          say(`${changed} approved.`)
+          load()
+          loadCounts()
+        }
+      })
+
+      $('unapproveSelected').addEventListener('click', async () => {
+        const references = picked()
+        if (!references.length) {
+          say('Nothing selected.', true)
+          return
+        }
+        if (
+          !confirm(`Take ${references.length} records back out of public view?`)
+        )
+          return
+        const changed = await send({ references, undo: true })
+        if (changed !== null) {
+          say(`${changed} taken back out of public view.`)
+          load()
+          loadCounts()
+        }
+      })
+
+      $('approveClean').addEventListener('click', async () => {
+        const counts = await api(
+          '/admin/data/summary?council=' + encodeURIComponent(council())
+        )
+        if (
+          !confirm(
+            `Approve ${
+              counts.clean
+            } records for ${council()}?\n\nThese have nothing flagged against them. ${
+              counts.flagged
+            } others need a look and are left alone.`
+          )
+        )
+          return
+        const changed = await send({ all_clean: true })
+        if (changed !== null) {
+          say(`${changed} approved for ${council()}.`)
+          load()
+          loadCounts()
+        }
+      })
+
+      // ---- wiring
+
+      $('prev').addEventListener('click', () => {
+        state.page--
+        load()
+      })
+      $('next').addEventListener('click', () => {
+        state.page++
+        load()
+      })
+      for (const id of ['sort', 'order', 'state', 'council']) {
+        $(id).addEventListener('change', () => {
+          state.page = 1
+          load()
+          if (id === 'council') loadCounts()
+        })
+      }
+      let searchTimer
+      $('search').addEventListener('input', () => {
+        clearTimeout(searchTimer)
+        searchTimer = setTimeout(() => {
+          state.page = 1
+          load()
+        }, 250)
+      })
+      ;(async function start() {
+        let names = []
+        try {
+          names = await api('/admin/data/councils')
+        } catch (error) {
+          say(error.message, true)
+        }
+        const select = $('council')
+        for (const name of names) {
+          const option = document.createElement('option')
+          option.value = option.textContent = name
+          select.appendChild(option)
+        }
+        if (params.get('council') && names.includes(params.get('council')))
+          select.value = params.get('council')
+        if (!names.length) {
+          $('empty').hidden = false
+          $('empty').textContent = 'Nothing here yet. Run the pipeline first.'
+          return
+        }
+        setLayer(state.layer)
+        loadCounts()
+      })()
+    </script>
+  </body>
 </html>

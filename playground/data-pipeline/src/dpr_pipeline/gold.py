@@ -71,7 +71,7 @@ def publish(connection, council: str | None = None, refresh_unedited: bool = Tru
 #: Gaps that every record has, because of what legacy data is, not because of this record.
 #: They are recorded so the limits stay visible, but they are not a reason to hold a record back:
 #: no amount of reviewing will produce a PlanX submission for a 2010 application.
-KNOWN_LIMITS = ("submission", "boundary", "location", "system_status")
+KNOWN_LIMITS = ("submission", "boundary", "location", "system_status", "expiryDate")
 
 
 def _blocking_clause(alias: str = "i") -> str:

@@ -8,11 +8,13 @@ worth looking at, so the rest can go together.
 import pytest
 from fastapi.testclient import TestClient
 
-from dpr_pipeline import api, gold
+from dpr_pipeline import api, api_common, gold
 
 from .test_gold import REFERENCE, build
 
 EDITOR = {"X-Edited-By": "officer@camden.gov.uk"}
+CAMDEN = {"x-client": "camden"}
+PUBLIC = "/api/@next/public/applications"
 
 
 @pytest.fixture
@@ -24,7 +26,7 @@ def connection(tmp_path):
 
 @pytest.fixture
 def client(connection, monkeypatch):
-    monkeypatch.setattr(api, "_connection", lambda: connection)
+    monkeypatch.setattr(api_common, "_connection", lambda: connection)
     return TestClient(api.app)
 
 
@@ -106,46 +108,17 @@ def test_a_record_can_be_taken_back_out(connection):
 
 
 def test_public_only_shows_approved_records(client, connection):
-    assert client.get("/public/applications").json()["total"] == 0
-    assert client.get(f"/public/applications/camden/{REFERENCE}").status_code == 404
+    assert client.get(PUBLIC, headers=CAMDEN).json()["pagination"]["totalResults"] == 0
+    assert client.get(f"{PUBLIC}/{REFERENCE}", headers=CAMDEN).status_code == 404
 
     gold.approve(connection, "camden", [REFERENCE], "officer@camden.gov.uk")
 
-    assert client.get("/public/applications").json()["total"] == 1
-    assert client.get(f"/public/applications/camden/{REFERENCE}").status_code == 200
+    assert client.get(PUBLIC, headers=CAMDEN).json()["pagination"]["totalResults"] == 1
+    assert client.get(f"{PUBLIC}/{REFERENCE}", headers=CAMDEN).status_code == 200
 
 
-def test_private_shows_everything_and_says_which_is_which(client):
-    body = client.get("/private/applications").json()
-    item = body["applications"][0]
-    assert item["approved"] is False
-    assert "flagged" in item
-
-    waiting = client.get("/private/applications", params={"state": "waiting"}).json()
-    assert waiting["total"] == body["total"]
-    assert client.get("/private/applications", params={"state": "approved"}).json()["total"] == 0
-
-
-def test_approve_endpoint_takes_a_list(client):
-    response = client.post("/private/approval/approve",
-                           json={"council": "camden", "references": [REFERENCE]}, headers=EDITOR)
-    assert response.json() == {"approved": 1}
-
-
-def test_approve_endpoint_can_do_all_the_clean_ones(client):
-    response = client.post("/private/approval/approve",
-                           json={"council": "camden", "all_clean": True}, headers=EDITOR)
-    assert response.json()["approved"] >= 1
-    assert client.get("/public/applications").json()["total"] >= 1
-
-
-def test_approving_without_a_name_is_refused(client):
-    response = client.post("/private/approval/approve",
-                           json={"council": "camden", "references": [REFERENCE]})
-    assert response.status_code == 400
-
-
-def test_the_summary_tells_a_reviewer_where_they_stand(client):
-    summary = client.get("/private/approval/summary", params={"council": "camden"}).json()
-    assert set(summary) == {"approved", "clean", "flagged"}
-    assert summary["approved"] + summary["clean"] + summary["flagged"] >= 1
+def test_unredacted_says_which_records_are_approved_and_flagged(client):
+    body = client.get("/api/@next/applications", headers=CAMDEN).json()
+    pipeline = body["data"][0]["metadata"]["pipeline"]
+    assert pipeline["approved"] is False
+    assert "flagged" in pipeline

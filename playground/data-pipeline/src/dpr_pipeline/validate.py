@@ -12,15 +12,31 @@ from __future__ import annotations
 
 import json
 import os
+from functools import lru_cache
 from pathlib import Path
 
 SCHEMA_FILE = "schemas/postSubmissionPublishedApplication.json"
+
+#: The standard has two schemas. The private one is for the unredacted application, the public one
+#: for the published copy. Copies are bundled so the admin can check a record with no checkout.
+SCHEMA_FILES = {
+    "public": SCHEMA_FILE,
+    "private": "schemas/postSubmissionApplication.json",
+}
+BUNDLED = Path(__file__).parent / "data" / "schemas"
+
+
+class NoSchema(Exception):
+    """No schema file could be found."""
 
 
 #: The one thing a legacy record can never have. The standard expects the original submission,
 #: which means a PlanX submission, and historic applications predate it. Reported once rather than
 #: on every record, because it is a known limit rather than a fault in the mapping.
 LEGACY_GAP = "'submission' is a required property"
+
+#: An assessment must carry an expiry date, which no legacy export holds. Same treatment.
+LEGACY_GAPS = (LEGACY_GAP,)
 
 
 def basic_checks(connection, council: str | None = None) -> list[tuple[str, str]]:
@@ -51,8 +67,9 @@ def basic_checks(connection, council: str | None = None) -> list[tuple[str, str]
     return problems
 
 
-def find_schema(given: str | None = None) -> Path | None:
-    """The post submission published schema, from the argument, the environment or nearby."""
+def find_schema(given: str | None = None, kind: str = "public") -> Path | None:
+    """A post submission schema ("public" or "private"), from the argument, the environment,
+    a checkout nearby, or the copy bundled with this package."""
     candidates = []
     if given:
         candidates.append(Path(given))
@@ -63,17 +80,55 @@ def find_schema(given: str | None = None) -> Path | None:
     candidates.append(here.parent / "planning-register-data-logistics" / "repos"
                       / "digital-planning-data-schemas")
 
+    relative = SCHEMA_FILES[kind]
     for candidate in candidates:
         if candidate.is_file():
-            return candidate
-        schema = candidate / SCHEMA_FILE
+            if kind == "public":
+                return candidate
+            continue
+        schema = candidate / relative
         if schema.is_file():
             return schema
-    return None
+    bundled = BUNDLED / Path(relative).name
+    return bundled if bundled.is_file() else None
 
 
 def load_schema(path: str | Path) -> dict:
-    return json.loads(Path(path).read_text(encoding="utf-8"))
+    """The published schema, widened to allow metadata.pipeline (see extension.py)."""
+    from . import extension
+
+    return extension.extend(json.loads(Path(path).read_text(encoding="utf-8")))
+
+
+@lru_cache(maxsize=4)
+def _validator(path: str):
+    from jsonschema import Draft202012Validator
+
+    return Draft202012Validator(load_schema(path))
+
+
+def check_record(record, kind: str = "public", given: str | None = None) -> dict:
+    """Validate one record against the private or public schema.
+
+    Returns {valid, schema, errors, knownGaps}. A legacy record has no original submission, so
+    problems inside it, and the missing submission itself, are listed apart as known gaps rather
+    than counted against the record.
+    """
+    path = find_schema(given, kind)
+    if path is None:
+        raise NoSchema("no schema file found, set DPR_SCHEMAS")
+    errors: list[str] = []
+    known: list[str] = []
+    for error in _validator(str(path)).iter_errors(record):
+        for real in _deepest(error):
+            where = "/".join(str(part) for part in real.absolute_path) or "(root)"
+            line = f"{where}: {_shorten(real.message)}"
+            is_known = any(gap in real.message for gap in LEGACY_GAPS) or _inside_submission(real)
+            (known if is_known else errors).append(line)
+    errors = list(dict.fromkeys(errors))
+    known = list(dict.fromkeys(known))
+    return {"valid": not errors, "schema": path.name, "errors": errors[:50],
+            "knownGaps": len(known), "knownGapExamples": known[:8]}
 
 
 def against_schema(connection, schema: dict, council: str | None = None,
@@ -99,12 +154,19 @@ def against_schema(connection, schema: dict, council: str | None = None,
         record = json.loads(raw) if isinstance(raw, str) else raw
         for error in validator.iter_errors(record):
             for real in _deepest(error):
-                if LEGACY_GAP in real.message and not strict:
+                if not strict and (any(gap in real.message for gap in LEGACY_GAPS)
+                                   or _inside_submission(real)):
                     continue
                 location = "/".join(str(part) for part in real.absolute_path) or "(root)"
                 problems.append((reference, f"{location}: {_shorten(real.message)}"))
 
     return problems
+
+
+def _inside_submission(error) -> bool:
+    """The submission block holds only a legacy record's applicant, address and description, so
+    everything else a full submission requires is missing by design."""
+    return bool(error.absolute_path) and error.absolute_path[0] == "submission"
 
 
 def _deepest(error, depth: int = 0):

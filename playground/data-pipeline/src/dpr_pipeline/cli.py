@@ -10,6 +10,8 @@
     dpr gaps               what the mapper could not place, grouped
     dpr sql "SELECT ..."   run any query against the database
     dpr values COLUMN      distinct values in silver, with counts
+    dpr attach C REF FILE  store the files and comments from a record in the standard's shape
+    dpr reset --yes        delete the database so the next run starts from nothing
 """
 
 from __future__ import annotations
@@ -70,11 +72,28 @@ def main(argv: list[str] | None = None) -> int:
     query = commands.add_parser("sql", help="run a query against the database")
     query.add_argument("statement")
 
+    attaching = commands.add_parser(
+        "attach", help="store the documents and comments from a standard shaped record")
+    attaching.add_argument("council")
+    attaching.add_argument("reference")
+    attaching.add_argument("file", help="a json file with files and comments, like the examples")
+
+    resetting = commands.add_parser(
+        "reset", help="delete the database, and with --files the stored downloads too")
+    resetting.add_argument("--yes", action="store_true", help="really do it")
+    resetting.add_argument("--files", action="store_true",
+                           help="also delete the bronze, silver and gold folders")
+
     values = commands.add_parser("values", help="distinct values in silver, with counts")
     values.add_argument("column", choices=["status", "decision", "application_type"])
 
     args = parser.parse_args(argv)
     settings = config.load(args.config)
+
+    # Before the database is opened, because an open DuckDB file cannot be deleted.
+    if args.command == "reset":
+        return _reset(settings, args.yes, args.files)
+
     connection = db.connect(settings.database_path)
 
     if args.command == "ingest":
@@ -125,8 +144,8 @@ def main(argv: list[str] | None = None) -> int:
                 connection, validate.load_schema(schema_path), args.council, strict=args.strict
             )
             if not args.strict:
-                print("the missing submission block is not counted below:"
-                      " historic records predate it. Use --strict to include it.")
+                print("the submission block is not counted below: historic records only have the"
+                      " applicant, address and description. Use --strict to include it.")
         else:
             print("no ODP schema found, so only the basic checks ran."
                   " Pass --schemas or set DPR_SCHEMAS for the full check.")
@@ -158,10 +177,11 @@ def main(argv: list[str] | None = None) -> int:
             """
             SELECT b.record, s.record
             FROM bronze.applications b
-            LEFT JOIN silver.applications s USING (council, reference)
-            WHERE b.reference = ?
+            LEFT JOIN silver.applications s
+                ON s.council = b.council AND s.source_reference = b.reference
+            WHERE b.reference = ? OR s.reference = ?
             """,
-            [args.reference],
+            [args.reference, args.reference],
         ).fetchall()
         if not rows:
             print(f"nothing here with reference {args.reference}")
@@ -173,6 +193,16 @@ def main(argv: list[str] | None = None) -> int:
         print("--- in the standard shape -------------------------------------")
         print(json.dumps(json.loads(mapped), indent=2, ensure_ascii=False) if mapped
               else "not mapped yet, run: dpr map <council>")
+
+    elif args.command == "attach":
+        import json
+        from pathlib import Path
+
+        from . import items
+
+        record = json.loads(Path(args.file).read_text(encoding="utf-8"))
+        found = items.attach_record(connection, args.council, args.reference, record)
+        print("stored " + ", ".join(f"{count} {kind}" for kind, count in found.items()))
 
     elif args.command == "gaps":
         rows = connection.execute(
@@ -223,6 +253,47 @@ def main(argv: list[str] | None = None) -> int:
         for table, count in db.counts(connection).items():
             print(f"{table:28} {count}")
 
+    return 0
+
+
+
+
+def _reset(settings, confirmed: bool, files: bool) -> int:
+    """Delete the database so the next run starts from nothing.
+
+    Everything in it is rebuilt by ingest, map and publish, except what people did by hand: edits,
+    approvals and their history. Those go too, which is why this asks first.
+    """
+    import shutil
+    from pathlib import Path
+
+    remote = ("s3://", "abfs://")
+    targets = [Path(settings.database_path), Path(settings.database_path + ".wal")]
+    if files:
+        targets += [Path(folder) for folder in (settings.bronze, settings.silver, settings.gold)
+                    if not folder.startswith(remote)]
+
+    if settings.database_path.startswith(remote):
+        print("The database is remote, so it has to be cleared where it lives.")
+        return 1
+
+    present = [path for path in targets if path.exists()]
+    if not present:
+        print("nothing to delete")
+        return 0
+
+    for path in present:
+        print(f"  {path}")
+    if not confirmed:
+        print()
+        print("That is what would be deleted, including every edit and approval. "
+              "Run again with --yes to do it.")
+        return 1
+
+    for path in present:
+        shutil.rmtree(path) if path.is_dir() else path.unlink()
+    print()
+    print("deleted. Start again with: ingest, map, publish, approve")
     return 0
 
 

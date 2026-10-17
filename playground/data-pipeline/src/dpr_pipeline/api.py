@@ -1,287 +1,70 @@
-"""The API over the gold layer, split into public and private.
+"""The application: two sets of endpoints that are deliberately kept apart.
 
-Two sets of endpoints, because they do different jobs:
-
-  public    what the register and anyone else reads. Read only, published records, and no sign of
-            who edited what
-  private   what an admin tool uses. The same records plus their history, and create, update and
-            delete
-
-Both sit on gold rather than silver, because gold is where editing happens and silver stays exactly
-as the council sent it.
-
-Comments are out of scope for now.
+  api_odp     the API: only the Open Digital Planning routes in the standard's OpenAPI spec
+  admin_data  the JSON behind the admin page at /admin, hidden from the docs
 
     uvicorn dpr_pipeline.api:app --reload
 """
 
 from __future__ import annotations
 
-import json
-from pathlib import Path
-from typing import Any, Literal
+from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from fastapi import APIRouter, Body, FastAPI, Header, HTTPException, Query
-from fastapi.responses import FileResponse, RedirectResponse
-
-from . import config, db, gold
-
-STATIC = Path(__file__).parent / "static"
-
-SORTABLE = {"reference", "published_at", "updated_at"}
+from . import admin_data
+from .api_common import STATIC
+from .api_odp import public, unredacted
+from .api_responses import envelope
 
 app = FastAPI(
     title="DPR published applications",
     description=(
         "Planning applications in the post submission standard.\n\n"
-        "**/public** is read only, for the register and anyone else consuming the data.\n\n"
-        "**/private** is for an admin tool: the same records, plus their history, and the"
-        " endpoints that change them."
+        "Only the Open Digital Planning routes from the standard's OpenAPI spec: x-client picks the"
+        " council, paging is page and resultsPerPage, and every response is data, pagination and"
+        " status.\n\n"
+        "**ODP public** is approved records, redacted. **ODP unredacted** is every record, with"
+        " extra information about it in metadata.pipeline.\n\n"
+        "The admin is at /admin."
     ),
-    version="0.2.0",
+    version="0.3.0",
+    openapi_tags=[
+        {"name": "ODP public", "description": "In the spec. Approved records only, redacted."},
+        {"name": "ODP unredacted", "description": "In the spec. Every record, unredacted."},
+    ],
 )
 
-public = APIRouter(prefix="/public", tags=["public"])
-private = APIRouter(prefix="/private", tags=["private"])
+
+@app.exception_handler(StarletteHTTPException)
+async def _http_error(_request, exc: StarletteHTTPException):
+    """Errors use the same envelope, with data null, rather than FastAPI's {"detail": ...}."""
+    return JSONResponse(envelope(None, code=exc.status_code, message=str(exc.detail)),
+                        status_code=exc.status_code)
 
 
-def _connection():
-    return db.connect(config.load().database_path)
+@app.exception_handler(RequestValidationError)
+async def _validation_error(_request, exc: RequestValidationError):
+    return JSONResponse(
+        envelope(None, code=422, message="Unprocessable Entity", detail=_describe(exc)),
+        status_code=422,
+    )
 
 
-def _editor(x_edited_by: str | None) -> str:
-    """Who is making the change. A header for now; real authentication comes later."""
-    if not x_edited_by:
-        raise HTTPException(400, "Send an X-Edited-By header so the change can be attributed.")
-    return x_edited_by
-
-
-def _listing(council: str | None, page: int, size: int, sort: str, order: str,
-             include_editing: bool, approved_only: bool = False,
-             state: str | None = None) -> dict:
-    if sort not in SORTABLE:
-        raise HTTPException(400, f"Cannot sort by {sort}")
-
-    connection = _connection()
-    clauses: list[str] = []
-    params: list[Any] = []
-    if council:
-        clauses.append("council = ?")
-        params.append(council)
-    if approved_only:
-        # Nothing is public until somebody has approved it.
-        clauses.append("approved = true")
-    elif state == "approved":
-        clauses.append("approved = true")
-    elif state == "waiting":
-        clauses.append("approved = false")
-    where = ("WHERE " + " AND ".join(clauses)) if clauses else ""
-
-    total = connection.execute(
-        f"SELECT count(*) FROM gold.applications {where}", params
-    ).fetchone()[0]
-
-
-    direction = "ASC" if order == "asc" else "DESC"
-    # The council's own wording, the address, the description and their decision, live beside the
-    # record rather than inside it, because the standard has no place for them. An admin tool needs
-    # them to make a list readable, so they are joined back on here.
-    rows = connection.execute(
-        f"""
-        SELECT g.council, g.reference, g.published_at, g.updated_at, g.edited, g.record,
-               s.address, s.description, s.status, s.decision, g.approved,
-               EXISTS (SELECT 1 FROM silver.mapping_issues i
-                       WHERE i.council = g.council AND i.reference = g.reference) AS flagged
-        FROM gold.applications g
-        LEFT JOIN silver.applications s USING (council, reference)
-        {where.replace("council", "g.council").replace("approved", "g.approved") if where else ""}
-        ORDER BY g.{sort} {direction}
-        LIMIT ? OFFSET ?
-        """,
-        params + [size, (page - 1) * size],
-    ).fetchall()
-
-    applications = []
-    for row in rows:
-        council_name, reference, published, updated, edited, record = row[:6]
-        address, description, status, decision, approved, flagged = row[6:]
-        item = {
-            "council": council_name,
-            "reference": reference,
-            "publishedAt": published.isoformat() if published else None,
-            "record": json.loads(record),
-        }
-        if include_editing:
-            # Who has touched a record is an internal matter, so it stays out of the public feed.
-            item["updatedAt"] = updated.isoformat() if updated else None
-            item["edited"] = edited
-            item["approved"] = approved
-            item["flagged"] = flagged
-            item["detail"] = {
-                "address": address,
-                "description": description,
-                "status": status,
-                "decision": decision,
-            }
-        applications.append(item)
-
-    return {
-        "total": total,
-        "page": page,
-        "size": size,
-        "pages": (total + size - 1) // size,
-        "applications": applications,
-    }
-
-
-# --------------------------------------------------------------- public, read only
-
-@public.get("/applications", summary="List published applications")
-def list_public(
-    council: str | None = Query(None, description="Limit to one council"),
-    page: int = Query(1, ge=1),
-    size: int = Query(20, ge=1, le=200),
-    sort: Literal["reference", "published_at"] = "reference",
-    order: Literal["asc", "desc"] = "asc",
-) -> dict:
-    return _listing(council, page, size, sort, order, include_editing=False, approved_only=True)
-
-
-@public.get("/applications/{council}/{reference:path}", summary="Get one published application")
-def get_public(council: str, reference: str) -> dict:
-    connection = _connection()
-    row = connection.execute(
-        "SELECT approved FROM gold.applications WHERE council = ? AND reference = ?",
-        [council, reference],
-    ).fetchone()
-    if row is None or not row[0]:
-        # An unapproved record is not public, so it is not here as far as anyone outside is
-        # concerned.
-        raise HTTPException(404, f"No published application {reference} for {council}")
-    return gold.get(connection, council, reference)
-
-
-# --------------------------------------------------------------- private, for an admin tool
-
-@private.get("/applications", summary="List, showing what has been edited")
-def list_private(
-    council: str | None = Query(None, description="Limit to one council"),
-    page: int = Query(1, ge=1),
-    size: int = Query(20, ge=1, le=200),
-    sort: Literal["reference", "published_at", "updated_at"] = "reference",
-    order: Literal["asc", "desc"] = "asc",
-    state: Literal["all", "waiting", "approved"] = "all",
-) -> dict:
-    return _listing(council, page, size, sort, order, include_editing=True,
-                    state=None if state == "all" else state)
-
-
-# Declared before the plain get, because a path parameter would otherwise swallow "/history".
-@private.get("/approval/summary", summary="How the approval work splits")
-def approval_summary(council: str | None = Query(None)) -> dict:
-    """Clean, flagged and already approved. The numbers a reviewer needs before starting."""
-    return gold.flagged_counts(_connection(), council)
-
-
-@private.get("/approval/clean", summary="Records with nothing flagged against them")
-def approval_clean(council: str | None = Query(None), limit: int = Query(500, ge=1, le=20000)):
-    rows = gold.clean_references(_connection(), council)
-    return {"total": len(rows),
-            "applications": [{"council": c, "reference": r} for c, r in rows[:limit]]}
-
-
-@private.post("/approval/approve", summary="Approve many records at once")
-def approve_many(
-    council: str = Body(..., embed=True),
-    references: list[str] | None = Body(None, embed=True),
-    all_clean: bool = Body(False, embed=True),
-    x_edited_by: str | None = Header(None),
-) -> dict:
-    """Approve a named list, or everything with nothing flagged against it.
-
-    A council with tens of thousands of historic records cannot read them one at a time. The gaps
-    the mapper found are already recorded per record, so the clean ones can go together and only
-    the flagged ones need a look.
-    """
-    editor = _editor(x_edited_by)
-    connection = _connection()
-
-    if all_clean:
-        references = [r for _, r in gold.clean_references(connection, council)]
-    if not references:
-        return {"approved": 0}
-
-    return {"approved": gold.approve(connection, council, references, editor)}
-
-
-@private.post("/approval/unapprove", summary="Take many records back out of public view")
-def unapprove_many(
-    council: str = Body(..., embed=True),
-    references: list[str] = Body(..., embed=True),
-    x_edited_by: str | None = Header(None),
-) -> dict:
-    editor = _editor(x_edited_by)
-    return {"unapproved": gold.unapprove(_connection(), council, references, editor)}
-
-
-@private.get("/applications/{council}/{reference:path}/history",
-             summary="What changed, and who by")
-def get_history(council: str, reference: str) -> list[dict]:
-    connection = _connection()
-    if gold.get(connection, council, reference) is None:
-        raise HTTPException(404, f"No published application {reference} for {council}")
-    return gold.history(connection, council, reference)
-
-
-@private.get("/applications/{council}/{reference:path}", summary="Get one application")
-def get_private(council: str, reference: str) -> dict:
-    record = gold.get(_connection(), council, reference)
-    if record is None:
-        raise HTTPException(404, f"No published application {reference} for {council}")
-    return record
-
-
-@private.post("/applications/{council}/{reference:path}", status_code=201,
-              summary="Add one by hand")
-def create_application(
-    council: str,
-    reference: str,
-    record: dict = Body(...),
-    x_edited_by: str | None = Header(None),
-) -> dict:
-    connection = _connection()
-    if not gold.create(connection, council, reference, record, _editor(x_edited_by)):
-        raise HTTPException(409, f"{reference} is already published for {council}")
-    return record
-
-
-@private.put("/applications/{council}/{reference:path}", summary="Replace one")
-def update_application(
-    council: str,
-    reference: str,
-    record: dict = Body(...),
-    x_edited_by: str | None = Header(None),
-) -> dict:
-    connection = _connection()
-    if not gold.update(connection, council, reference, record, _editor(x_edited_by)):
-        raise HTTPException(404, f"No published application {reference} for {council}")
-    return record
-
-
-@private.delete("/applications/{council}/{reference:path}", status_code=204,
-                summary="Unpublish one")
-def delete_application(
-    council: str,
-    reference: str,
-    x_edited_by: str | None = Header(None),
-) -> None:
-    connection = _connection()
-    if not gold.delete(connection, council, reference, _editor(x_edited_by)):
-        raise HTTPException(404, f"No published application {reference} for {council}")
+def _describe(exc: RequestValidationError) -> str:
+    """The spec wants status.detail as a string, so the problems are joined into one."""
+    return "; ".join(
+        f"{'.'.join(str(part) for part in error['loc'])}: {error['msg']}"
+        for error in jsonable_encoder(exc.errors())
+    )
 
 
 app.include_router(public)
-app.include_router(private)
+app.include_router(unredacted)
+app.include_router(admin_data.router)
 
 
 @app.get("/", include_in_schema=False)
@@ -291,9 +74,17 @@ def home():
 
 @app.get("/admin", include_in_schema=False)
 def admin():
-    """A plain screen for reviewing and editing published records.
-
-    A fuller admin front end is being written separately; this is a small one so the pipeline can be
-    shown to people who would rather click than read a terminal. It uses the private endpoints.
-    """
+    """The admin page, with a switch between bronze, silver and gold. It uses /admin/data."""
     return FileResponse(STATIC / "admin.html")
+
+
+@app.get("/lab", include_in_schema=False)
+def lab_redirect():
+    return RedirectResponse("/lab/")
+
+
+# The review lab: prototype screens for approving and redacting, and a data explorer. Mounted last
+# so nothing above is shadowed, and only if the folder is there.
+_LAB = STATIC / "lab"
+if _LAB.is_dir():
+    app.mount("/lab", StaticFiles(directory=_LAB, html=True), name="lab")

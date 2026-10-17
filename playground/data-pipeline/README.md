@@ -97,6 +97,9 @@ cp config/config.example.yaml config/config.yaml
 
 # to see the data in duckdb
 uv run --with duckdb scripts/ui.py
+
+bun workspace @dpr/api bun run generate:openapi
+cp -rp apps/api/schema.json playground/data-pipeline/data/openapi.json
 ```
 
 ```sh
@@ -135,48 +138,139 @@ For Barnet, make the stand in export first:
 | `dpr approve --council X --clean` | Approves everything with nothing flagged, so it becomes public |
 | `dpr validate` | Checks silver against the real ODP schema |
 | `dpr status` | Row counts for each layer |
+| `dpr attach COUNCIL REF FILE` | Store the documents and comments from a standard shaped record |
+| `dpr reset --yes` | Delete the database so the next run starts from nothing (see below) |
 | `dpr show REFERENCE` | Prints one record twice, as published and in the standard shape |
 | `dpr gaps` | Groups what the mapper could not place, largest first |
 | `dpr values decision` | Distinct statuses, decisions or types, with counts |
 | `dpr sql "SELECT ..."` | Any query against the database |
 
-## The API and the admin screen
+### Starting again from nothing
 
-`uvicorn dpr_pipeline.api:app` serves both, on port 8000.
+    dpr reset            # shows what would be deleted
+    dpr reset --yes      # deletes the database
+    dpr reset --yes --files    # and the bronze, silver and gold folders, so downloads are fresh
 
-There are two sets, because they do different jobs.
+Stop the API first, because an open DuckDB file cannot be deleted. A reset removes everything,
+including edits, approvals and their history, which cannot be rebuilt. Then run it again:
 
-**Public**, read only. What the register and anyone else consuming the data would call.
+    dpr ingest camden
+    dpr map camden
+    dpr publish
+    dpr approve --council camden --clean
+
+Keep the folders if you only want to rebuild silver and gold: bronze is the expensive part to fetch.
+
+## The API
+
+`uvicorn dpr_pipeline.api:app` serves it on port 8000.
+
+The API is only the standard's own OpenAPI endpoints, in `api_odp.py`, so the register can call
+this in place of its BOPS handler. Nothing else is exposed as JSON. Anything extra goes in
+`metadata`, covered below.
+
+Every response is an `ApiResponse`: `data`, then `pagination` on lists, then `status`
+(`code`, `message` and an optional `detail` string). Errors use the same shape with `data` null.
+
+Lists take `page`, `resultsPerPage`, `query` (searches reference, address and description),
+`sortBy` (`publishedAt` or `receivedAt`), `orderBy` (`asc` or `desc`) and `reference`. The council
+comes from the `x-client` header, as in the standard. `x-service` is accepted and ignored.
+Pagination is the offset kind: `resultsPerPage`, `currentPage`, `totalPages`, `totalResults` and
+`totalAvailableItems` (everything the caller could see before `query` and `reference` narrowed it).
+
+**Public**, read only, approved records only.
 
 | Endpoint | What it does |
 | --- | --- |
-| `GET /public/applications` | List of approved records, with paging, sorting and a council filter |
-| `GET /public/applications/{council}/{reference}` | One record |
+| `GET /api/@next/public/applications` | A page of published records |
+| `GET /api/@next/public/applications/{applicationId}` | One record, by reference |
+| `GET .../{applicationId}/documents` | Its documents, redacted |
+| `GET .../{applicationId}/documents/{documentId}` | One document |
+| `GET .../{applicationId}/publicComments` | Published public comments, with a sentiment summary |
+| `POST .../{applicationId}/publicComments` | Send a comment. It waits until somebody publishes it |
+| `GET .../{applicationId}/publicComments/{publicCommentId}` | One published comment |
+| `GET .../{applicationId}/specialistComments` | Specialist comments, with a summary |
+| `GET .../{applicationId}/specialistComments/{specialistId}` | One specialist and their comments |
 
-**Private**, for an admin tool. The same records, plus the council's own detail, the history, and
-everything that changes a record.
+**Unredacted**, all of the above again under `/api/@next/applications`, with every record whether
+approved or not, and nothing redacted: documents keep their private `url`, comments keep the
+original wording and the author's address, and comments still waiting to be published are listed.
 
 | Endpoint | What it does |
 | --- | --- |
-| `GET /private/applications` | List, showing what is approved, flagged or edited |
-| `POST /private/approval/approve` | Approve a list of references, or everything clean |
-| `POST /private/approval/unapprove` | Take records back out of public view |
-| `GET /private/approval/summary` | How the approval work splits |
-| `GET /private/applications/{council}/{reference}` | One record |
-| `GET /private/applications/{council}/{reference}/history` | What changed, who by, and when |
-| `POST /private/applications/{council}/{reference}` | Add a record by hand |
-| `PUT /private/applications/{council}/{reference}` | Replace one |
-| `DELETE /private/applications/{council}/{reference}` | Unpublish one |
+| `GET /api/@next/applications` | A page of records |
+| `GET /api/@next/applications/{applicationId}` | One record, by reference |
 
-| Also | |
+Documents and comments are not in a council's planning export, so they start empty. Attach them
+from a file in the standard's shape (the examples have both `files` and `comments`):
+
+    dpr attach camden 24-0001-FUL examples/with-comments.json
+
+Comments sent in through the API are held back from the public list until they are published, which
+happens through `items.publish_comment`. Public items are the stored item with the private parts
+removed, so there is one copy to keep right.
+
+### Extra information goes in metadata
+
+The unredacted endpoints add a `pipeline` object to each record's `metadata`. The public ones never
+do.
+
+    metadata.pipeline: { council, approved, approvedAt, approvedBy, edited, updatedAt, updatedBy,
+                         flagged, issues: [{field, reason}], sourceStatus }
+
+The published schema does not allow extra keys in `metadata`, so `extension.py` adds `pipeline` to
+the schema before anything is validated (`dpr validate`, the tests). The OpenAPI spec's metadata is
+looser and accepts it as it is. Propose the same property to the schemas repository and
+`extension.py` can go. Records are stored without it, and it is dropped from anything saved
+through the admin.
+
+## The admin
+
+`/admin` is a page for reviewing and changing records. A switch at the top moves between bronze,
+silver and gold, and each layer has its own columns: bronze shows the council's own reference and
+what it was mapped to, silver shows type, status and whether it is in gold, and gold shows
+approval and edits. Bronze and silver are read only. Only gold can be approved, edited or
+unpublished, with bulk approve for every clean record. The name you are asked for is recorded with
+each change.
+
+The council is chosen at the very top. Opening an application has two validate buttons that check
+the JSON in the box, edits included, against the standard's two schemas: the private one
+(`postSubmissionApplication.json`, the unredacted application) and the public one
+(`postSubmissionPublishedApplication.json`, the published copy). Problems are listed, and the
+missing original submission that a historic record cannot have is kept apart as known gaps. Copies
+of both schemas are bundled in `data/schemas`; point `DPR_SCHEMAS` at a checkout to use a newer one.
+
+It reads and writes through `/admin/data` (`admin_data.py`), which is hidden from the API docs so
+the documented API stays the standard's ODP endpoints and nothing else. `POST /admin/data/validate` takes `{schema, record}` and
+`GET /admin/data/{council}/{reference}/check` runs a record through the OpenAPI spec.
+
+## The review lab
+
+`/lab` holds three prototype apps for getting records approved quickly. They are proofs of
+concept, for trying with people rather than for production. Each draws a site plan from the
+record's GeoJSON, shows the record as a comment thread, and has the full JSON one tap away.
+
+| App | Path | Idea |
+| --- | --- | --- |
+| Tim-ber | `/lab/timber/` | One application at a time. Drag right to approve, left to flag, up to see it later. Arrow keys and Z (undo) work |
+| plannertok | `/lab/plannertok/` | A full screen feed. Scroll to the next one, double tap to approve |
+| InstaPlan | `/lab/instaplan/` | A photo style feed. Double tap the plan to approve, open the comments to read the record |
+
+They read the unredacted ODP endpoint and approve through the admin's data routes. Without the API
+they fall back to sample data and save nothing, so they can be shown from any static host. Add
+`?demo` to force the sample and `?council=barnet` to pick a council. Flagging is not stored.
+
+## Checking against the OpenAPI spec
+
+Download `openapi.json` (or `openapi.yaml`) from the digital-planning-data-schemas repository to
+`data/openapi.json`, or point `DPR_OPENAPI` or `openapi: path:` in the config at it. The spec is
+large, because it writes every application type out in full, so it is read once and cached.
+
+| Where | What it does |
 | --- | --- |
-| `GET /admin` | A plain screen for reviewing and editing |
-| `GET /docs` | The generated API documentation |
-
-Changes need an `X-Edited-By` header, so every edit is attributable. Real sign in comes later.
-
-The public feed carries the record and nothing else. Who edited what stays on the private side,
-because that is internal housekeeping rather than planning data.
+| `/admin/data/{council}/{reference}/check` | Checks the record as the unredacted endpoint would send it, and lists what the spec rejects |
+| Lab apps | The comments show "matches the spec" or not for each application |
+| `tests/test_contract.py` | Every GET endpoint is called and its answer checked against the spec. Skips without a spec |
 
 ## Looking at the data
 
@@ -191,8 +285,27 @@ repository. Point at a checkout with `--schemas`, or set `DPR_SCHEMAS`. A checko
 this repo is found automatically.
 
 One gap cannot be closed. The standard expects the original submission, which in practice means a
-PlanX submission, and historic records predate it. That is reported separately rather than counted
-as a fault, because no amount of mapping will produce it. Use `--strict` to include it.
+PlanX submission, and historic records predate it. What a legacy record can give is the part a
+register shows, so the `submission` block holds just that:
+
+    submission: { applicationType, data: { applicant, property: { address, boundary }, proposal: { description } } }
+
+Anything the source does not have is left out. A council with only a point gets a `boundary` made
+by `geo.py`: a 10 metre GeoJSON square around the point, with its area, so `site.geometry` has data.
+It is not the real red line, and the mapper notes that in the issues list. A council that holds real
+boundaries passes them to `build(boundary=...)` and they are used instead. The rest of what the standard requires inside a submission is reported separately rather than
+counted as a fault, because no amount of mapping will produce it. Use `--strict` to include it.
+
+References use only `a-z A-Z 0-9` and `-`. Each other run of characters becomes one hyphen, so
+`2018/2267/P` is `2018-2267-P` in silver and gold. Bronze keeps the council's own reference.
+
+`assessment.expiryDate` is estimated until a source supplies it (`expiry.py`): the submission date
+plus a number of days for the type, 56 for most, 91 for major, 112 for environmental impact. It
+only appears where an assessment already exists, and each use is listed in the mapper's issues as
+estimated. A mapping that names `opt_expiry` always wins. Delete `expiry.py` when real dates arrive.
+
+An application that is withdrawn gets the `withdrawn` status, with `withdrawnAt` and, where the
+source has it, `withdrawnReason`. Its stage stays where it had got to.
 
 ## Configuration
 
@@ -209,15 +322,45 @@ variables, never from the file, so the config can be committed and the repo can 
       storage.py            read and write, local or cloud, chosen by the path
       db.py                 DuckDB, one file, three schemas
       sources/              one module per council, pulls data into bronze
-      mappers/              one module per council, bronze into silver
+      mappers/              bronze into silver: common.py is shared, one small module per council
+      mappings/             one yaml per council, saying where each field lives and what its codes mean
       post_submission.py    the shared record builder, why both councils match
       application_types.py  the 95 valid types, and how a council's wording reaches them
       gold.py               publishing, editing, and the history of changes
-      api.py                the endpoints and the admin screen
+      api.py                assembles the app
+      api_odp.py            the routes in the OpenAPI spec
+      admin_data.py         the admin page's data routes, hidden from the docs
+      extension.py          metadata.pipeline, and the schema change that allows it
+      api_common.py         what both share
+      expiry.py, geo.py     temporary expiry estimate, and GeoJSON from a point
       validate.py           schema checking
       cli.py                the command line
 
-Adding a council means adding one source module and one mapper module. Everything else is shared.
+Adding a council means adding one source module, one yaml file in `mappings/` and a small mapper
+module for the parts that are that council's alone. Everything else is shared.
+
+### Mapping a council
+
+Most of a mapper is saying where things are, so that part is data. A mapping file looks like this:
+
+    fields:
+      reference:  {from: application_number}
+      received:   {from: registered_date, as: date}
+      decision:   {from: DECISION, upper: true, lookup: decision}
+      address:    {from: [ADDRESSES.HOUSENUMBER, ADDRESSES.STREET], join: " "}
+      opt_expiry: {from: target_date, as: date}
+    lookups:
+      decision: {GTD: Granted, REF: Refused}
+
+Paths can be dotted, to reach into nested json or across Uniform tables. `lookup` turns a council
+code into its wording, and decision wording is then read as granted or refused (anything else is
+recorded as a gap, not guessed). Fields starting `opt_` are the parts of the standard a council may
+or may not have: expiry date, recommendation, committee date, decision notice, withdrawal reason.
+Name a source for one and it appears in the record, leave it out and that block is simply absent.
+
+The mapper module keeps only the awkward parts: rows that are not applications, how an application
+type resolves, and any council specific gaps to report. `mappers/common.py` does the rest, including
+the write into silver and the issues table.
 
 ## Tests
 
