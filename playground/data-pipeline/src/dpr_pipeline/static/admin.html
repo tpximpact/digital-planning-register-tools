@@ -240,6 +240,13 @@
         gold: ['', 'Reference', 'Address', 'Type', 'Decision', '']
       }
 
+      // The tag on its own says a record needs reading but not what to read it for.
+      function why(item) {
+        return (item.flags || [])
+          .map(f => `<div class="why">${escapeHtml(f.field)}: ${escapeHtml(f.reason)}</div>`)
+          .join('')
+      }
+
       function rowHtml(item) {
         const open =
           '<td><button class="secondary" data-open>Open</button></td>'
@@ -269,7 +276,7 @@
         }
         ${
           item.flagged ? '<span class="tag flagged">needs a look</span>' : ''
-        }</div></td>${address}${type}
+        }${why(item)}</div></td>${address}${type}
       <td class="desc">${escapeHtml(
         item.status || ''
       )}</td><td class="desc">${when(item.mappedAt)}</td>${open}`
@@ -287,7 +294,7 @@
         ${item.flagged ? '<span class="tag flagged">needs a look</span>' : ''}
         ${
           item.edited ? '<span class="tag edited">edited</span>' : ''
-        }</div></td>${address}${type}
+        }${why(item)}</div></td>${address}${type}
     <td class="hide-small desc">${escapeHtml(item.decision || '')}</td>${open}`
       }
 

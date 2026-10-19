@@ -39,6 +39,23 @@ def _flagged(connection, council: str, reference: str) -> bool:
         [council, reference]).fetchone()[0])
 
 
+def _flags(connection, council: str, reference: str) -> list[dict]:
+    """Why a record is flagged, not just that it is.
+
+    The tag on its own says a record needs reading but not what to read it for, which was the
+    first thing anyone asked about the screen. The known limits are left out for the same reason
+    they do not flag a record: they are true of every legacy record.
+    """
+    rows = connection.execute(
+        f"SELECT field, value, reason, kind FROM silver.mapping_issues "
+        f"WHERE council = ? AND reference = ? "
+        f"AND field NOT IN ({', '.join(repr(f) for f in gold.KNOWN_LIMITS)}) "
+        f"ORDER BY field",
+        [council, reference]).fetchall()
+    return [{"field": field, "value": value, "reason": reason, "kind": kind}
+            for field, value, reason, kind in rows]
+
+
 def _layer_counts(council: str) -> dict[str, int]:
     connection = _connection()
 
@@ -129,6 +146,7 @@ def rows(council: str, layer: Literal["bronze", "silver", "gold"],
             out.append({"council": council, "reference": ref, "record": _record(record),
                         "approved": approved, "edited": edited,
                         "flagged": _flagged(connection, council, ref),
+                        "flags": _flags(connection, council, ref),
                         "updatedAt": updated.isoformat() if updated else None,
                         "address": address, "description": description,
                         "status": status, "decision": decision})
@@ -155,7 +173,8 @@ def rows(council: str, layer: Literal["bronze", "silver", "gold"],
                 "address": address, "description": description, "status": status,
                 "decision": decision, "mappedAt": mapped.isoformat() if mapped else None,
                 "inGold": in_gold,
-                "flagged": _flagged(connection, council, ref)}
+                "flagged": _flagged(connection, council, ref),
+                "flags": _flags(connection, council, ref)}
                for ref, record, address, description, status, decision, mapped, in_gold in found]
         return _page(total, page, size, out)
 

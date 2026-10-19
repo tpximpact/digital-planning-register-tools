@@ -368,3 +368,10 @@ textarea {
     padding: 10px 12px;
   }
 }
+
+/* Why a record needs a look, under its row. */
+.why {
+  font-size: 12px;
+  color: var(--warn);
+  margin-top: 2px;
+}

@@ -19,6 +19,7 @@ from typing import Any, Callable
 import yaml
 
 from .. import geo, post_submission
+from .. import issues as issue_kinds
 
 MAPPINGS = Path(__file__).resolve().parent.parent / "mappings"
 
@@ -347,10 +348,15 @@ def map_all(connection, council: str, map_record: Callable[[dict], MapResult],
     if issues:
         connection.executemany(
             """
-            INSERT INTO silver.mapping_issues (council, reference, field, value, reason, found_at)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO silver.mapping_issues
+                (council, reference, field, value, reason, kind, found_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             """,
-            issues,
+            # The kind is worked out in one place rather than by every mapper, so a mapper only
+            # has to say what went wrong in plain words.
+            [(council_name, reference, field, value, reason,
+              issue_kinds.classify(field, reason), found_at)
+             for council_name, reference, field, value, reason, found_at in issues],
         )
 
     return len(records), len(issues)
