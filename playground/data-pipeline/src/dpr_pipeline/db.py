@@ -13,7 +13,7 @@ from pathlib import Path
 
 import duckdb
 
-SCHEMAS = ("bronze", "silver", "gold")
+SCHEMAS = ("bronze", "silver", "gold", "national")
 
 
 def connect(database_path: str) -> duckdb.DuckDBPyConnection:
@@ -26,6 +26,11 @@ def connect(database_path: str) -> duckdb.DuckDBPyConnection:
         connection.execute(f"CREATE SCHEMA IF NOT EXISTS {schema}")
     _create_tables(connection)
     _add_missing_columns(connection)
+
+    # Imported here rather than at the top, because national.py reads this module's tables.
+    from . import national
+
+    national.create_tables(connection)
     return connection
 
 
@@ -38,6 +43,9 @@ LATER_COLUMNS = {
         "officer": "VARCHAR",
         # The council's own reference, which bronze is keyed by. Silver's is the cleaned one.
         "source_reference": "VARCHAR",
+    },
+    "silver.mapping_issues": {
+        "kind": "VARCHAR",
     },
     "gold.applications": {
         "updated_at": "TIMESTAMP",
@@ -139,6 +147,8 @@ def _create_tables(connection: duckdb.DuckDBPyConnection) -> None:
             field      VARCHAR NOT NULL,
             value      VARCHAR,
             reason     VARCHAR NOT NULL,
+            -- missing, mismatch or excluded. See issues.py for why one word was not enough.
+            kind       VARCHAR,
             found_at   TIMESTAMP NOT NULL
         )
         """
@@ -184,6 +194,7 @@ def counts(connection: duckdb.DuckDBPyConnection) -> dict[str, int]:
     """Row counts per layer, for the status command."""
     result = {}
     for table in ("bronze.applications", "silver.applications", "gold.applications",
-                  "silver.mapping_issues", "gold.edits", "gold.items"):
+                  "silver.mapping_issues", "gold.edits", "gold.items",
+                  "national.planning_application", "national.planning_permission_timeline"):
         result[table] = connection.execute(f"SELECT count(*) FROM {table}").fetchone()[0]
     return result

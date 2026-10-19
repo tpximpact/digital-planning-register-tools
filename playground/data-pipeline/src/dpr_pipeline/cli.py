@@ -20,7 +20,7 @@ from __future__ import annotations
 import argparse
 import sys
 
-from . import config, db, gold, validate
+from . import config, db, gold, national, validate
 from .value_maps import Library, root_from
 from .value_maps import cli as value_maps_cli
 from .mappers import barnet as barnet_mapper
@@ -56,6 +56,33 @@ def main(argv: list[str] | None = None) -> int:
     approving.add_argument("--by", default=None, help="who is approving, for the record")
     approving.add_argument("references", nargs="*", help="specific references to approve")
 
+    nationally = commands.add_parser(
+        "national", help="the MHCLG national public view, built from gold"
+    )
+    national_actions = nationally.add_subparsers(dest="action", required=True)
+
+    building = national_actions.add_parser("translate", help="build the eight national datasets")
+    building.add_argument("--council", default=None)
+    building.add_argument(
+        "--all", action="store_true", dest="unapproved",
+        help="include records nobody has approved, which the national view would not carry",
+    )
+
+    covering = national_actions.add_parser(
+        "coverage", help="how many of the 52 national fields come out filled"
+    )
+    covering.add_argument("--council", default=None)
+    covering.add_argument("--empty", action="store_true", help="only the fields with nothing in")
+
+    exporting = national_actions.add_parser("export", help="one CSV per national dataset")
+    exporting.add_argument("directory")
+    exporting.add_argument("--council", default=None)
+
+    tripping = national_actions.add_parser(
+        "roundtrip", help="one record out to the national datasets and back, field by field"
+    )
+    tripping.add_argument("reference")
+
     checking = commands.add_parser("validate", help="check the silver layer")
     checking.add_argument("--council", default=None)
     checking.add_argument("--strict", action="store_true",
@@ -70,7 +97,8 @@ def main(argv: list[str] | None = None) -> int:
     showing.add_argument("reference")
 
     gaps = commands.add_parser("gaps", help="what the mapper could not place")
-    gaps.add_argument("--field", default="application_type")
+    # No field means the summary. One field means the detail for that field.
+    gaps.add_argument("--field", default=None)
 
     query = commands.add_parser("sql", help="run a query against the database")
     query.add_argument("statement")
@@ -145,6 +173,84 @@ def main(argv: list[str] | None = None) -> int:
         print()
         print(f"approved {done} records")
 
+    elif args.command == "national":
+        if args.action == "translate":
+            written = national.translate_all(
+                connection, args.council, approved_only=not args.unapproved
+            )
+            if not any(written.values()):
+                print("nothing to translate. The national view carries approved records only,")
+                print("so run: dpr approve --council <council> --clean --by NAME")
+                return 0
+            for dataset, count in written.items():
+                print(f"  {count:>6}  {dataset}")
+            head = national.summary(connection, args.council)
+            print()
+            print(f"{head['filled']} of {head['fields']} national fields come out with a value")
+
+        elif args.action == "coverage":
+            head = national.summary(connection, args.council)
+            print(f"{head['filled']} of {head['fields']} fields filled, "
+                  f"{head['empty_by_standard']} empty because the register format has no source, "
+                  f"{head['empty_by_data']} empty because this data does not carry it")
+            print()
+            current = None
+            for line in national.coverage(connection, args.council):
+                if args.empty and line["filled"]:
+                    continue
+                if line["dataset"] != current:
+                    current = line["dataset"]
+                    print(f"{current}  ({head['rows'][current]} rows)")
+                mark = "." if line["filled"] else " "
+                print(f"  {mark} {line['field']:<34} {line['filled']:>6}")
+                if not line["filled"] and line["reason"]:
+                    print(f"      {line['reason']}")
+
+        elif args.action == "export":
+            written = national.export(connection, args.directory, args.council)
+            for dataset, count in written.items():
+                print(f"  {count:>6}  {dataset}.csv")
+            print()
+            print(f"written to {args.directory}")
+
+        elif args.action == "roundtrip":
+            rows = connection.execute(
+                """
+                SELECT g.council, g.record, s.address, s.description, s.decision,
+                       s.valid_from, s.decided_at
+                FROM gold.applications g
+                LEFT JOIN silver.applications s
+                       ON s.council = g.council AND s.reference = g.reference
+                WHERE g.reference = ?
+                """,
+                [args.reference],
+            ).fetchall()
+            if not rows:
+                print(f"nothing in gold with reference {args.reference}")
+                return 1
+            import json as _json
+
+            council_name, raw, address, description, decision, valid_from, decided_at = rows[0]
+            result = national.round_trip(
+                _json.loads(raw) if isinstance(raw, str) else raw,
+                council=council_name,
+                beside={
+                    "reference": args.reference, "address": address,
+                    "description": description, "decision": decision,
+                    "valid_from": valid_from, "decided_at": decided_at,
+                },
+            )
+            print(f"{len(result['kept'])} values came back identical")
+            print(f"{len(result['trimmed'])} came back as a date, without the time of day")
+            print(f"{len(result['changed'])} came back different")
+            print(f"{len(result['lost'])} did not come back at all")
+            for label in ("trimmed", "changed", "lost"):
+                if result[label]:
+                    print()
+                    print(f"{label}:")
+                    for path in result[label]:
+                        print(f"  {path}")
+
     elif args.command == "validate":
         problems = validate.basic_checks(connection, args.council)
 
@@ -216,6 +322,37 @@ def main(argv: list[str] | None = None) -> int:
         print("stored " + ", ".join(f"{count} {kind}" for kind, count in found.items()))
 
     elif args.command == "gaps":
+        # Gap was one word doing three jobs. Missing and mismatch need different work from
+        # different people, so the split comes first and the detail second.
+        summary = connection.execute(
+            """
+            SELECT kind, field, count(DISTINCT reference) AS records
+            FROM silver.mapping_issues
+            GROUP BY kind, field
+            ORDER BY kind, records DESC
+            """
+        ).fetchall()
+        total = connection.execute("SELECT count(*) FROM silver.applications").fetchone()[0]
+
+        if not args.field:
+            print(f"{total} records in silver")
+            print()
+            for kind, explanation in (
+                ("missing", "the export does not hold the value at all"),
+                ("mismatch", "the council holds a value that does not agree with the standard"),
+                ("excluded", "the row is not a planning application, so it is not in silver"),
+            ):
+                lines = [(f, c) for k, f, c in summary if k == kind]
+                if not lines:
+                    continue
+                print(f"{kind}, {explanation}")
+                for field, count in lines:
+                    print(f"  {count:>5}  {field}")
+                print()
+            print("Only mismatch can be settled by a person reading records.")
+            print("For the detail on one field: dpr gaps --field application_type")
+            return 0
+
         rows = connection.execute(
             """
             SELECT value, count(*) AS records
@@ -226,9 +363,9 @@ def main(argv: list[str] | None = None) -> int:
             """,
             [args.field],
         ).fetchall()
-        total = connection.execute("SELECT count(*) FROM silver.applications").fetchone()[0]
         affected = sum(count for _, count in rows)
-        print(f"{args.field}: {affected} of {total} records have a gap")
+        kinds = sorted({k for k, f, _ in summary if f == args.field})
+        print(f"{args.field}: {affected} of {total} records, {' and '.join(kinds) or 'no issues'}")
         print()
         for value, count in rows[:15]:
             print(f"  {count:>5}  {value or '(empty)'}")
@@ -261,8 +398,31 @@ def main(argv: list[str] | None = None) -> int:
             print(f"  {count:>5}  {value or '(empty)'}")
 
     elif args.command == "status":
-        for table, count in db.counts(connection).items():
+        counts = db.counts(connection)
+        for table, count in counts.items():
             print(f"{table:28} {count}")
+
+        # Bronze holds more rows than silver, and the difference is never a bug. Saying so here
+        # saves everyone who looks at these numbers from asking.
+        bronze = counts.get("bronze.records") or counts.get("bronze.applications") or 0
+        dropped = bronze - counts.get("silver.applications", 0)
+        if dropped > 0:
+            rows = connection.execute(
+                """
+                SELECT value, count(*) AS n
+                FROM silver.mapping_issues
+                WHERE kind = 'excluded'
+                GROUP BY value
+                ORDER BY n DESC
+                """
+            ).fetchall()
+            print()
+            print(f"{dropped} rows in bronze are not in silver, because they are not planning"
+                  " applications:")
+            for value, count in rows:
+                print(f"  {count:>5}  {value}")
+            if not rows:
+                print("  reason not recorded, run the mappers again")
 
     return 0
 

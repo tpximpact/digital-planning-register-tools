@@ -16,7 +16,7 @@ from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from . import admin_data, admin_mappers
+from . import admin_data, admin_mappers, api_national
 from .api_common import STATIC
 from .api_odp import public, unredacted
 from .api_responses import envelope
@@ -67,6 +67,7 @@ app.include_router(public)
 app.include_router(unredacted)
 app.include_router(admin_data.router)
 app.include_router(admin_mappers.router)
+app.include_router(api_national.router)
 
 
 @app.get("/", include_in_schema=False)
