@@ -45,6 +45,18 @@ def test_a_value_that_disagrees_with_the_standard_is_a_mismatch():
     ) == issues.MISMATCH
 
 
+def test_a_decision_the_council_wrote_is_a_mismatch_not_a_gap():
+    """Camden writes Part Granted/Refused. The value is there, it just does not fit the standard.
+
+    The reason text says "so no decision is recorded", which is about our output rather than the
+    source, and reading it the other way sent people looking for data that was there all along.
+    """
+    assert issues.classify(
+        "decision",
+        "not granted or refused (split, not a decision, or unclear), so no decision is recorded",
+    ) == issues.MISMATCH
+
+
 def test_a_row_that_is_not_an_application_is_excluded():
     assert issues.classify(
         "application_type", "not a planning application, left out of silver"

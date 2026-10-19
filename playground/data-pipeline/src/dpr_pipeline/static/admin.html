@@ -33,6 +33,16 @@
       </div>
     </header>
 
+    <section class="progress" id="progress" hidden>
+      <h2>How much of this council's data got through</h2>
+      <p class="desc" id="progressIntro"></p>
+      <div id="progressBars"></div>
+      <p class="desc">
+        Only a mismatch can be settled by reading records. Missing means the export never held
+        the value, so no amount of reading produces one.
+      </p>
+    </section>
+
     <main>
       <div id="message" role="status" hidden></div>
 
@@ -527,9 +537,64 @@
         }
         load()
         loadCounts()
+        loadProgress()
       })
 
       // ---- counts, and approving (gold only)
+
+      // ---- how much of a council's data got from bronze into silver
+      //
+      // The value mappers screen counts words that have been given a meaning. This counts the
+      // records that helped. A word nobody has mapped might hold up one record or twenty five,
+      // and only this says which.
+
+      async function loadProgress() {
+        const box = $('progress')
+        if (!council()) {
+          box.hidden = true
+          return
+        }
+        let data
+        try {
+          data = await api(
+            '/admin/data/mapping-progress?council=' + encodeURIComponent(council())
+          )
+        } catch {
+          box.hidden = true
+          return
+        }
+        if (!data.records) {
+          box.hidden = true
+          return
+        }
+
+        const settleable = data.fields.filter(f => f.settleable)
+        const worst = settleable.reduce((most, f) => (f.records > most ? f.records : most), 0)
+        $('progressIntro').textContent =
+          `${data.records} records in silver` +
+          (data.excluded ? `, and ${data.excluded} rows left out because they are not planning applications` : '') +
+          (worst ? `. The biggest thing somebody has to settle affects ${worst} of them.` : '. Nothing needs settling.')
+
+        $('progressBars').innerHTML = data.fields
+          .sort((a, b) => b.records - a.records)
+          .map(f => {
+            const share = Math.round((f.through / f.total) * 100)
+            const worstValues = f.worst
+              .map(w => `<li>${escapeHtml(w.value)} <strong>${w.records}</strong></li>`)
+              .join('')
+            return `<div class="bar-row">
+              <div class="bar-head">
+                <span class="bar-name">${escapeHtml(f.field)}</span>
+                <span class="tag ${f.settleable ? 'flagged' : 'waiting'}">${escapeHtml(f.kind)}</span>
+                <span class="desc">${f.through} of ${f.total} came through</span>
+              </div>
+              <div class="bar"><span style="width:${share}%"></span></div>
+              ${worstValues ? `<details><summary>What it costs</summary><ul class="worst">${worstValues}</ul></details>` : ''}
+            </div>`
+          })
+          .join('')
+        box.hidden = false
+      }
 
       async function loadCounts() {
         if (!council()) return
@@ -593,6 +658,7 @@
           say(`${changed} approved.`)
           load()
           loadCounts()
+          loadProgress()
         }
       })
 
@@ -611,6 +677,7 @@
           say(`${changed} taken back out of public view.`)
           load()
           loadCounts()
+          loadProgress()
         }
       })
 
@@ -633,6 +700,7 @@
           say(`${changed} approved for ${council()}.`)
           load()
           loadCounts()
+          loadProgress()
         }
       })
 
@@ -650,7 +718,10 @@
         $(id).addEventListener('change', () => {
           state.page = 1
           load()
-          if (id === 'council') loadCounts()
+          if (id === 'council') {
+            loadCounts()
+            loadProgress()
+          }
         })
       }
       let searchTimer
@@ -683,6 +754,7 @@
         }
         setLayer(state.layer)
         loadCounts()
+        loadProgress()
       })()
     </script>
   </body>

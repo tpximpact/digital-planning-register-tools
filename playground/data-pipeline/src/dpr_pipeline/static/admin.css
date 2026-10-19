@@ -375,3 +375,53 @@ textarea {
   color: var(--warn);
   margin-top: 2px;
 }
+
+/* How much of a council's data got from bronze into silver. */
+.progress {
+  margin: 16px 0;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--panel);
+}
+
+.progress h2 {
+  font-size: 16px;
+  margin: 0 0 4px;
+}
+
+.bar-row {
+  margin: 12px 0;
+}
+
+.bar-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.bar-name {
+  font-weight: 700;
+}
+
+/* The filled part is what came through, so a short bar is the thing to look at. */
+.bar {
+  height: 8px;
+  margin-top: 4px;
+  background: var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  background: var(--good);
+}
+
+.worst {
+  margin: 4px 0 0 18px;
+  padding: 0;
+  font-size: 13px;
+}

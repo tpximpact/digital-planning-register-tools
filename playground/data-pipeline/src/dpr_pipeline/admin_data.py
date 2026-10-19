@@ -95,6 +95,55 @@ def summary(council: str) -> dict:
     return {**gold.flagged_counts(connection, council), **_layer_counts(council)}
 
 
+@router.get("/mapping-progress")
+def mapping_progress(council: str, limit: int = Query(5, ge=1, le=50)) -> dict:
+    """How much of a council's data got from bronze into silver, field by field.
+
+    The mapper tables say how many of a source system's words have been given a meaning. This
+    says how many of a council's records that actually helped. A word nobody has mapped might
+    hold up one record or twenty five, and only this can tell you which.
+
+    Per field: how many records came through with nothing recorded against them, how many carry
+    a mismatch somebody has to settle, and the source values that cost the most records.
+    """
+    connection = _connection()
+    total = connection.execute(
+        "SELECT count(*) FROM silver.applications WHERE council = ?", [council]).fetchone()[0]
+    dropped = connection.execute(
+        "SELECT count(DISTINCT reference) FROM silver.mapping_issues "
+        "WHERE council = ? AND kind = 'excluded'", [council]).fetchone()[0]
+
+    fields = []
+    for field, kind, affected in connection.execute(
+        """
+        SELECT field, kind, count(DISTINCT reference) AS records
+        FROM silver.mapping_issues
+        WHERE council = ? AND kind <> 'excluded'
+        GROUP BY field, kind
+        ORDER BY field, records DESC
+        """, [council]).fetchall():
+        worst = connection.execute(
+            """
+            SELECT value, count(DISTINCT reference) AS records
+            FROM silver.mapping_issues
+            WHERE council = ? AND field = ? AND kind = ? AND value IS NOT NULL
+            GROUP BY value ORDER BY records DESC LIMIT ?
+            """, [council, field, kind, limit]).fetchall()
+        fields.append({
+            "field": field,
+            "kind": kind,
+            "records": affected,
+            "through": total - affected,
+            "total": total,
+            # Only a mismatch can be settled by a person reading records. Missing means the
+            # export never held the value, so no amount of reading produces one.
+            "settleable": kind == "mismatch",
+            "worst": [{"value": value, "records": count} for value, count in worst],
+        })
+
+    return {"council": council, "records": total, "excluded": dropped, "fields": fields}
+
+
 @router.get("/oddities")
 def strange_but_true(council: str, limit: int = Query(5, ge=1, le=25)) -> dict:
     """Things in a council's own data that cannot be right, or are hard to believe. Read from bronze,

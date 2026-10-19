@@ -26,6 +26,12 @@ KINDS = (MISSING, MISMATCH, EXCLUDED)
 #: Fields that are missing by nature of a legacy export rather than by fault of one record.
 _ALWAYS_MISSING = ("submission", "boundary", "location")
 
+#: Fields where the council does hold a value and it is their own wording. Named here rather than
+#: worked out from the reason, because a reason like "not granted or refused, so no decision is
+#: recorded" says "no" about our output, not about the source, and reading it the other way sent
+#: people looking for data that was there all along.
+_COUNCIL_WORDING = ("application_type", "decision", "system_status")
+
 
 def classify(field: str, reason: str) -> str:
     """One of KINDS, from the field and the reason the mapper gave."""
@@ -33,6 +39,8 @@ def classify(field: str, reason: str) -> str:
 
     if "left out of silver" in lowered or "not a planning application" in lowered:
         return EXCLUDED
+    if field in _COUNCIL_WORDING:
+        return MISMATCH
     if field in _ALWAYS_MISSING:
         return MISSING
     if "no " in lowered and "fallback" not in lowered:
