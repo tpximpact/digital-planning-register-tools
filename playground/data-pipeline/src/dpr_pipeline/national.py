@@ -468,6 +468,8 @@ def to_odp(rows: dict, *, council: str = "") -> dict:
     }
     if application.get("withdrawn-date"):
         data["application"]["withdrawnAt"] = _stamp(application["withdrawn-date"])
+        # A withdrawal overrides the status and keeps the stage, as the record builder does.
+        data["application"]["status"] = "withdrawn"
 
     if timeline.get("consultation-start") or timeline.get("consultation-end"):
         data["consultation"] = {
