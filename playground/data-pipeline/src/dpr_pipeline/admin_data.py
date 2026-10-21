@@ -163,11 +163,17 @@ def _page(total: int, page: int, size: int, rows: list[dict]) -> dict:
 def rows(council: str, layer: Literal["bronze", "silver", "gold"],
          page: int = Query(1, ge=1), size: int = Query(20, ge=1, le=200), q: str = "",
          sort: str = "reference", order: Literal["asc", "desc"] = "asc",
-         state: Literal["all", "waiting", "approved"] = "all") -> dict:
+         state: Literal["all", "waiting", "approved"] = "all", issue: str = "") -> dict:
+    """One page of a layer. `issue` narrows silver and gold to the records that lost a given
+    field on the way in, so a click on the progress grid shows exactly what needs reading."""
     connection = _connection()
     pattern = api_common._like(q) if q else None
     direction = "ASC" if order == "asc" else "DESC"
     offset = (page - 1) * size
+
+    def lost_field(alias: str) -> str:
+        return (f"EXISTS (SELECT 1 FROM silver.mapping_issues i WHERE i.council = {alias}.council "
+                f"AND i.reference = {alias}.reference AND i.field = ?)")
 
     if layer == "gold":
         if sort not in GOLD_SORT:
@@ -177,6 +183,9 @@ def rows(council: str, layer: Literal["bronze", "silver", "gold"],
             where.append("g.approved = true")
         elif state == "waiting":
             where.append("g.approved = false")
+        if issue:
+            where.append(lost_field("g"))
+            params.append(issue)
         if q:
             where.append("(g.reference ILIKE ? ESCAPE '\\' OR s.address ILIKE ? ESCAPE '\\'"
                          " OR s.description ILIKE ? ESCAPE '\\')")
@@ -203,6 +212,9 @@ def rows(council: str, layer: Literal["bronze", "silver", "gold"],
 
     if layer == "silver":
         where, params = ["s.council = ?"], [council]
+        if issue:
+            where.append(lost_field("s"))
+            params.append(issue)
         if q:
             where.append("(s.reference ILIKE ? ESCAPE '\\' OR s.address ILIKE ? ESCAPE '\\'"
                          " OR s.description ILIKE ? ESCAPE '\\')")

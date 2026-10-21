@@ -20,6 +20,9 @@
           <a href="/lab/">Review lab</a> &middot; <a href="/docs">API docs</a>
         </div>
       </div>
+      <div class="progress" id="progress" hidden aria-label="How much of this council's data got through">
+        <div class="progress-grid" id="progressGrid"></div>
+      </div>
       <div class="layers" role="group" aria-label="Layer">
         <button type="button" data-layer="bronze" aria-pressed="false">
           Bronze <small></small>
@@ -33,15 +36,7 @@
       </div>
     </header>
 
-    <section class="progress" id="progress" hidden>
-      <h2>How much of this council's data got through</h2>
-      <p class="desc" id="progressIntro"></p>
-      <div id="progressBars"></div>
-      <p class="desc">
-        Only a mismatch can be settled by reading records. Missing means the export never held
-        the value, so no amount of reading produces one.
-      </p>
-    </section>
+    <div class="progress-detail" id="progressDetail" hidden></div>
 
     <main>
       <div id="message" role="status" hidden></div>
@@ -170,7 +165,9 @@
         page: 1,
         size: 20,
         current: null,
-        busy: false
+        busy: false,
+        // A field from the progress grid; while set, the list shows only records that lost it.
+        issue: null
       }
       const $ = (id) => document.getElementById(id)
       const editor = $('editor')
@@ -320,6 +317,7 @@
           query.set('sort', $('sort').value)
           query.set('state', $('state').value)
         }
+        if (state.issue && state.layer !== 'bronze') query.set('issue', state.issue)
 
         let body
         try {
@@ -548,10 +546,18 @@
       // records that helped. A word nobody has mapped might hold up one record or twenty five,
       // and only this says which.
 
+      // It sits in the header as a small grid: one summary cell, then one cell per field.
+      // A green bar can be filled by reading records (mismatch); a grey one cannot, because
+      // the export never held the value (missing). Clicking a cell opens what it costs below.
+      let progressFields = []
+      let progressOpen = null
+
       async function loadProgress() {
         const box = $('progress')
+        const detail = $('progressDetail')
         if (!council()) {
           box.hidden = true
+          detail.hidden = true
           return
         }
         let data
@@ -561,40 +567,101 @@
           )
         } catch {
           box.hidden = true
+          detail.hidden = true
           return
         }
         if (!data.records) {
           box.hidden = true
+          detail.hidden = true
           return
         }
 
-        const settleable = data.fields.filter(f => f.settleable)
+        progressFields = data.fields.sort((a, b) => b.records - a.records)
+        const settleable = progressFields.filter(f => f.settleable)
         const worst = settleable.reduce((most, f) => (f.records > most ? f.records : most), 0)
-        $('progressIntro').textContent =
-          `${data.records} records in silver` +
-          (data.excluded ? `, and ${data.excluded} rows left out because they are not planning applications` : '') +
-          (worst ? `. The biggest thing somebody has to settle affects ${worst} of them.` : '. Nothing needs settling.')
+        const summary = `<div class="progress-summary">
+          <strong>${data.records}</strong> records in silver${
+            data.excluded ? `, <strong>${data.excluded}</strong> left out` : ''
+          }<br>${worst ? `biggest open issue affects <strong>${worst}</strong>` : 'nothing needs settling'}
+          <br><span class="legend settleable">green</span> fixed by mapping words
+          &middot; <span class="legend missing">grey</span> not in the export
+        </div>`
 
-        $('progressBars').innerHTML = data.fields
-          .sort((a, b) => b.records - a.records)
-          .map(f => {
-            const share = Math.round((f.through / f.total) * 100)
-            const worstValues = f.worst
-              .map(w => `<li>${escapeHtml(w.value)} <strong>${w.records}</strong></li>`)
-              .join('')
-            return `<div class="bar-row">
-              <div class="bar-head">
-                <span class="bar-name">${escapeHtml(f.field)}</span>
-                <span class="tag ${f.settleable ? 'flagged' : 'waiting'}">${escapeHtml(f.kind)}</span>
-                <span class="desc">${f.through} of ${f.total} came through</span>
-              </div>
-              <div class="bar"><span style="width:${share}%"></span></div>
-              ${worstValues ? `<details><summary>What it costs</summary><ul class="worst">${worstValues}</ul></details>` : ''}
-            </div>`
-          })
-          .join('')
+        $('progressGrid').innerHTML =
+          summary +
+          progressFields
+            .map((f, i) => {
+              const share = Math.round((f.through / f.total) * 100)
+              const hint = f.settleable
+                ? 'Mismatch: the council uses a word nobody has mapped yet. Reading records settles it.'
+                : 'Missing: the export never held the value, so no amount of reading produces one.'
+              return `<button type="button" class="progress-cell ${f.settleable ? 'settleable' : 'missing'}"
+                data-index="${i}" title="${hint}" aria-expanded="false">
+                <span class="progress-name">${escapeHtml(f.field)}</span>
+                <span class="progress-count">${f.through} / ${f.total}</span>
+                <span class="bar"><span style="width:${share}%"></span></span>
+              </button>`
+            })
+            .join('')
         box.hidden = false
+        if (progressOpen !== null) showProgressDetail(progressOpen)
       }
+
+      // Opening a cell also narrows the list below to the records that lost that field, so
+      // "536 of 995" turns into the 459 rows somebody has to read. Closing it shows all again.
+      function showProgressDetail(index) {
+        const detail = $('progressDetail')
+        const f = progressFields[index]
+        for (const cell of document.querySelectorAll('.progress-cell')) {
+          cell.setAttribute('aria-expanded', String(Number(cell.dataset.index) === index))
+        }
+        if (!f) {
+          progressOpen = null
+          detail.hidden = true
+          return
+        }
+        progressOpen = index
+        const lost = f.total - f.through
+        const worstValues = f.worst
+          .map(w => `<li>${escapeHtml(w.value)} <strong>${w.records}</strong></li>`)
+          .join('')
+        const listNote =
+          state.layer === 'bronze'
+            ? 'Bronze has no mapping, so the list below is not filtered.'
+            : `The list below shows only these ${lost} records.`
+        detail.innerHTML =
+          (f.settleable
+            ? `<strong>${escapeHtml(f.field)}</strong>: ${lost} of ${f.total} records use a word
+               nobody has mapped yet. What it costs, by word:
+               <ul class="worst">${worstValues}</ul>
+               <a href="/admin/mappers">Map the words</a> &middot; `
+            : `<strong>${escapeHtml(f.field)}</strong>: ${lost} of ${f.total} records never had
+               this value in the export. Reading records does not produce it; the council would
+               have to add it at source. `) +
+          `<span class="desc">${listNote}</span>
+           <button type="button" class="secondary small" id="progressClear">Show all records</button>`
+        detail.hidden = false
+      }
+
+      function pickProgress(index) {
+        const field = index === null ? null : progressFields[index]?.field || null
+        if (field === state.issue && index === progressOpen) return
+        state.issue = field
+        state.page = 1
+        showProgressDetail(index)
+        load()
+      }
+
+      $('progressGrid').addEventListener('click', event => {
+        const cell = event.target.closest('.progress-cell')
+        if (!cell) return
+        const index = Number(cell.dataset.index)
+        pickProgress(progressOpen === index ? null : index)
+      })
+
+      $('progressDetail').addEventListener('click', event => {
+        if (event.target.closest('#progressClear')) pickProgress(null)
+      })
 
       async function loadCounts() {
         if (!council()) return
@@ -719,6 +786,9 @@
           state.page = 1
           load()
           if (id === 'council') {
+            state.issue = null
+            progressOpen = null
+            $('progressDetail').hidden = true
             loadCounts()
             loadProgress()
           }

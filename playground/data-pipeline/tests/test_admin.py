@@ -52,6 +52,18 @@ def test_the_admin_summary_counts_every_layer(client):
     assert summary["unmapped"] == 0 and summary["unpublished"] == 0
 
 
+def test_the_list_can_be_narrowed_to_records_that_lost_a_field(client, connection):
+    connection.execute(
+        "INSERT INTO silver.mapping_issues (council, reference, field, value, reason, kind, found_at) "
+        "VALUES ('camden', ?, 'application_type', 'Tree works', 'no mapping', 'mismatch', now())",
+        [REFERENCE])
+    for layer in ("silver", "gold"):
+        assert client.get(f"/admin/data/camden/{layer}", params={"issue": "application_type"}).json()["total"] == 1
+        assert client.get(f"/admin/data/camden/{layer}", params={"issue": "never_lost"}).json()["total"] == 0
+    # Bronze has no mapping, so the filter does not apply there.
+    assert client.get("/admin/data/camden/bronze", params={"issue": "never_lost"}).json()["total"] == 1
+
+
 def test_admin_approving_needs_a_name_and_can_be_undone(client):
     body = {"council": "camden", "all_clean": True}
     assert client.post("/admin/data/approve", json=body).status_code == 400
