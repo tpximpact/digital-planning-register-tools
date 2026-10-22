@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Value mappers</title>
+    <link rel="stylesheet" href="/admin/admin.css" />
+    <style>
+      .table-pick {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .table-pick select {
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 6px 10px;
+        max-width: 70vw;
+      }
+      .progress {
+        min-width: 220px;
+      }
+      .progress .bar {
+        height: 12px;
+        border: 2px solid var(--ink);
+        background: var(--page);
+      }
+      .progress .bar span {
+        display: block;
+        height: 100%;
+        background: var(--good);
+      }
+      .progress .figures {
+        font-size: 0.9rem;
+        margin-top: 4px;
+        font-variant-numeric: tabular-nums;
+      }
+      td.source {
+        width: 36%;
+      }
+      td.source .text,
+      td.source .context {
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      td.source .context {
+        margin-top: 4px;
+        max-width: 46ch;
+      }
+      td.target .entry {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 8px;
+      }
+      td.target .entry input {
+        flex: 1 1 14em;
+        min-width: 0;
+      }
+      td.target .entry input.note {
+        flex: 1 1 10em;
+      }
+      td.target input.bad {
+        border-color: var(--warn);
+      }
+      td.target input.changed {
+        background: var(--edited);
+        color: #0b0c0c;
+      }
+      td.target button.small {
+        padding: 4px 8px;
+        flex: none;
+      }
+      .problem {
+        color: var(--warn);
+        font-size: 0.85rem;
+        margin: 2px 0 6px;
+      }
+      tr.extra td {
+        border-top: 0;
+      }
+      .tag.unmapped {
+        border-color: var(--warn);
+        color: var(--warn);
+      }
+      .tag.invalid {
+        border-color: var(--warn);
+        background: #fff5f5;
+        color: var(--warn);
+      }
+      .tag.review {
+        border-color: var(--ink);
+        background: var(--edited);
+        color: #0b0c0c;
+      }
+      .tag.nofit {
+        border-color: var(--muted);
+        color: var(--muted);
+      }
+      .tag.mapped {
+        border-color: var(--good);
+        color: var(--good);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) .tag.invalid {
+          background: #2a1512;
+        }
+      }
+      details.unused {
+        margin-top: 24px;
+        color: var(--muted);
+      }
+      details.unused p {
+        margin: 8px 0 0;
+        font-size: 0.85rem;
+        line-height: 1.8;
+      }
+      details.unused code {
+        border: 1px solid var(--line);
+        padding: 1px 5px;
+        margin-right: 4px;
+        white-space: nowrap;
+      }
+      label.field {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      label.field input {
+        width: 100%;
+        font-weight: 400;
+        margin-top: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <label class="table-pick"
+          >Table
+          <select id="table" aria-label="Table"></select
+        ></label>
+        <h1>Value mappers</h1>
+        <div class="sub" id="blurb">
+          Match a source system's wording to the values the standard accepts.
+        </div>
+        <div class="sub">
+          <a href="/admin">Applications</a> &middot;
+          <a href="/docs">API docs</a>
+        </div>
+      </div>
+      <div class="progress" id="progress" aria-live="polite">
+        <div class="bar" role="img" aria-label="Share of values mapped">
+          <span id="barFill"></span>
+        </div>
+        <div class="figures" id="figures"></div>
+      </div>
+    </header>
+
+    <main>
+      <div id="message" role="status" hidden></div>
+
+      <div class="controls">
+        <input
+          id="search"
+          type="search"
+          placeholder="Search source values and descriptions"
+          autocomplete="off"
+          aria-label="Search"
+        />
+        <select id="state" aria-label="Show">
+          <option value="all">All</option>
+          <option value="unmapped">Unmapped</option>
+          <option value="invalid">Invalid</option>
+          <option value="review">To check</option>
+          <option value="nofit">No fit</option>
+          <option value="mapped">Mapped</option>
+        </select>
+      </div>
+
+      <div class="bulk">
+        <span class="counts" id="counts"></span>
+        <button id="save" disabled>Save changes</button>
+        <button class="secondary" id="discard" disabled>Discard</button>
+        <button
+          class="secondary"
+          id="refresh"
+          title="Read the source again. New values arrive as blank rows; nothing you filled in changes."
+        >
+          Refresh from source
+        </button>
+        <button class="secondary" id="addPortal">Add Idox portal</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Source value</th>
+            <th>Maps to, and a note</th>
+            <th>State</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div id="empty" class="empty" hidden></div>
+
+      <details class="unused" id="unused" hidden>
+        <summary id="unusedSummary"></summary>
+        <p id="unusedList"></p>
+      </details>
+    </main>
+
+    <dialog id="portal" aria-labelledby="portalTitle">
+      <form method="dialog" id="portalForm">
+        <div class="dialog-head">
+          <strong id="portalTitle">Add an Idox portal</strong>
+        </div>
+        <div class="dialog-body">
+          <label class="field"
+            >Address of the portal's advanced search page
+            <input
+              id="portalUrl"
+              type="url"
+              required
+              placeholder="https://planning.example.gov.uk/online-applications/search.do?action=advanced"
+            />
+          </label>
+          <div class="sub">
+            Reads its status, decision, case type and development type lists,
+            and starts a mapping file for each.
+          </div>
+        </div>
+        <div class="dialog-foot">
+          <button value="add" id="portalAdd">Add portal</button>
+          <button value="cancel" class="secondary" formnovalidate>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <datalist id="targets"></datalist>
+
+    <script>
+      const $ = (id) => document.getElementById(id)
+      const BASE = '/admin/mappers/data'
+      const params = new URLSearchParams(location.search)
+      const state = {
+        id: null,
+        view: null,
+        items: [],
+        dirty: new Set(),
+        tables: [],
+        busy: false
+      }
+
+      function el(tag, props, ...children) {
+        const node = document.createElement(tag)
+        Object.assign(node, props || {})
+        for (const child of children) if (child != null) node.append(child)
+        return node
+      }
+
+      let messageTimer
+      function say(text, bad) {
+        const box = $('message')
+        box.textContent = text
+        box.className = bad ? 'message bad' : 'message'
+        box.hidden = false
+        clearTimeout(messageTimer)
+        if (!bad) messageTimer = setTimeout(() => (box.hidden = true), 5000)
+      }
+
+      async function call(path, options) {
+        const response = await fetch(BASE + path, options)
+        const body = await response.json().catch(() => ({}))
+        if (!response.ok)
+          throw new Error(
+            (body.status && body.status.detail) ||
+              (body.status && body.status.message) ||
+              response.statusText
+          )
+        return body
+      }
+      const send = (method, path, data) =>
+        call(path, {
+          method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+
+      // --- the model: one item per source value, holding its entries ----------------------------------
+
+      function toItems(rows) {
+        const items = []
+        for (const row of rows) {
+          let item = items.find((i) => i.value === row.value)
+          if (!item) {
+            item = {
+              value: row.value,
+              text: row.text,
+              description: row.description,
+              offered: row.offered,
+              state: row.state,
+              entries: []
+            }
+            items.push(item)
+          }
+          if (row.state === 'invalid') item.state = 'invalid'
+          item.entries.push({
+            target: row.target,
+            notes: row.notes,
+            problem: row.problem,
+            saved: { target: row.target, notes: row.notes }
+          })
+        }
+        return items
+      }
+
+      const tidy = (item) =>
+        item.entries.filter((e) => e.target.trim() || e.notes.trim())
+      const same = (item) =>
+        JSON.stringify(tidy(item).map((e) => [e.target.trim(), e.notes])) ===
+        JSON.stringify(
+          item.entries
+            .filter((e) => e.saved.target || e.saved.notes)
+            .map((e) => [e.saved.target, e.saved.notes])
+        )
+      const allowed = () => new Set(state.view.targets)
+
+      function updateDirty(item) {
+        if (same(item)) state.dirty.delete(item.value)
+        else state.dirty.add(item.value)
+        $('save').disabled = $('discard').disabled = state.dirty.size === 0
+        $('save').textContent = state.dirty.size
+          ? `Save changes (${state.dirty.size})`
+          : 'Save changes'
+      }
+
+      // --- drawing ------------------------------------------------------------------------------------
+
+      function entryRow(item, entry, index) {
+        const target = el('input', {
+          value: entry.target,
+          placeholder: 'not mapped',
+          spellcheck: false
+        })
+        target.setAttribute('list', 'targets')
+        target.setAttribute('aria-label', `Standard value for ${item.value}`)
+        const note = el('input', {
+          value: entry.notes,
+          placeholder: 'note',
+          className: 'note'
+        })
+        note.setAttribute('aria-label', `Note for ${item.value}`)
+        note.oninput = () => {
+          entry.notes = note.value
+          updateDirty(item)
+        }
+        const check = () => {
+          const bad = target.value.trim() && !allowed().has(target.value.trim())
+          target.classList.toggle('bad', !!bad)
+          target.title = bad ? 'Not a value the standard accepts' : ''
+        }
+        target.oninput = () => {
+          entry.target = target.value
+          target.classList.toggle(
+            'changed',
+            target.value.trim() !== entry.saved.target
+          )
+          check()
+          updateDirty(item)
+        }
+        check()
+        const wrap = el('div', { className: 'entry' }, target, note)
+        if (item.entries.length > 1) {
+          wrap.append(
+            el('button', {
+              type: 'button',
+              className: 'secondary small',
+              title: 'Remove this row',
+              textContent: 'Remove',
+              onclick: () => {
+                item.entries.splice(index, 1)
+                updateDirty(item)
+                draw()
+              }
+            })
+          )
+        }
+        return wrap
+      }
+
+      function draw() {
+        const term = $('search').value.trim().toLowerCase()
+        const show = $('state').value
+        const body = $('rows')
+        body.replaceChildren()
+        let shown = 0
+
+        for (const item of state.items) {
+          const own = item.state
+          if (show !== 'all' && own !== show) continue
+          if (
+            term &&
+            !(item.value + ' ' + item.text + ' ' + item.description)
+              .toLowerCase()
+              .includes(term)
+          )
+            continue
+          shown++
+
+          const targets = el('td', { className: 'target' })
+          item.entries.forEach((entry, index) => {
+            targets.append(entryRow(item, entry, index))
+            if (entry.problem)
+              targets.append(
+                el('div', { className: 'problem', textContent: entry.problem })
+              )
+          })
+          targets.append(
+            el('button', {
+              type: 'button',
+              className: 'secondary small',
+              textContent: 'Add another',
+              title: 'One source value can map to more than one standard value',
+              onclick: () => {
+                item.entries.push({
+                  target: '',
+                  notes: '',
+                  problem: null,
+                  saved: { target: '', notes: '' }
+                })
+                draw()
+              }
+            })
+          )
+
+          const source = el(
+            'td',
+            { className: 'source' },
+            el('div', { className: 'ref', textContent: item.value })
+          )
+          if (item.text && item.text !== item.value)
+            source.append(
+              el('div', { className: 'text', textContent: item.text })
+            )
+          if (item.description)
+            source.append(
+              el('div', { className: 'context', textContent: item.description })
+            )
+
+          const label = {
+            unmapped: 'Unmapped',
+            invalid: 'Invalid',
+            review: 'To check',
+            nofit: 'No fit',
+            mapped: 'Mapped'
+          }[own]
+          body.append(
+            el(
+              'tr',
+              { className: 'row' },
+              source,
+              targets,
+              el(
+                'td',
+                {},
+                el('span', { className: 'tag ' + own, textContent: label })
+              )
+            )
+          )
+        }
+
+        $('empty').hidden = shown > 0
+        $('empty').textContent = state.items.length
+          ? 'Nothing matches that search.'
+          : 'This table has no source values yet. Use Refresh from source.'
+      }
+
+      function paint(view) {
+        state.view = view
+        state.items = toItems(view.rows)
+        state.dirty.clear()
+        $('save').disabled = $('discard').disabled = true
+        $('save').textContent = 'Save changes'
+
+        const s = view.summary
+        $('barFill').style.width =
+          (s.total ? Math.round((100 * s.resolved) / s.total) : 0) + '%'
+        $('figures').textContent = `${s.resolved} of ${s.total} done`
+        $('counts').replaceChildren(
+          el('strong', { textContent: s.unmapped }),
+          ' unmapped, ',
+          el('strong', { textContent: s.invalid }),
+          ' invalid, ',
+          el('strong', { textContent: s.noFit }),
+          ' no fit, ',
+          el('strong', { textContent: s.review }),
+          ' to check',
+          s.required ? '' : ' (optional, does not fail a run)'
+        )
+        $('targets').replaceChildren(
+          ...view.targets.map((t) => el('option', { value: t }))
+        )
+        $('blurb').textContent = `Each ${
+          view.table.label
+        } is matched to the standard's ${view.table.target.replace(
+          '_',
+          ' '
+        )} values.`
+
+        $('unused').hidden = !view.unused.length
+        $(
+          'unusedSummary'
+        ).textContent = `${view.unused.length} standard values nothing maps to yet`
+        $('unusedList').replaceChildren(
+          ...view.unused.map((t) => el('code', { textContent: t }))
+        )
+        draw()
+      }
+
+      // --- loading and saving -------------------------------------------------------------------------
+
+      async function loadTables(keep) {
+        const { tables } = await call('/tables')
+        state.tables = tables
+        const pick = $('table')
+        pick.replaceChildren()
+        const groups = new Map()
+        for (const t of tables) {
+          if (!groups.has(t.group))
+            groups.set(t.group, el('optgroup', { label: t.group }))
+          groups
+            .get(t.group)
+            .append(
+              el('option', {
+                value: t.id,
+                textContent: `${t.label} (${t.resolved}/${t.total})`
+              })
+            )
+        }
+        pick.append(...groups.values())
+        state.id = tables.some((t) => t.id === keep)
+          ? keep
+          : tables[0] && tables[0].id
+        if (state.id) pick.value = state.id
+        return state.id
+      }
+
+      async function open(id) {
+        if (state.dirty.size && !confirm('Discard your unsaved changes?')) {
+          $('table').value = state.id
+          return
+        }
+        state.id = id
+        $('state').value = 'all'
+        $('search').value = ''
+        history.replaceState(null, '', '?table=' + encodeURIComponent(id))
+        paint(await call('/table?id=' + encodeURIComponent(id)))
+      }
+
+      async function start() {
+        try {
+          const id = await loadTables(params.get('table'))
+          if (!id) {
+            $('empty').hidden = false
+            $('empty').textContent =
+              'No mapper tables found. Run: dpr mappers fetch'
+            return
+          }
+          paint(await call('/table?id=' + encodeURIComponent(id)))
+        } catch (error) {
+          say(error.message, true)
+        }
+      }
+
+      $('table').onchange = () =>
+        open($('table').value).catch((e) => say(e.message, true))
+      $('search').oninput = draw
+      $('state').onchange = draw
+      $('discard').onclick = () => paint(state.view)
+
+      $('save').onclick = async () => {
+        const changes = state.items
+          .filter((i) => state.dirty.has(i.value))
+          .map((i) => ({
+            value: i.value,
+            entries: tidy(i).map((e) => ({
+              target: e.target.trim(),
+              notes: e.notes
+            }))
+          }))
+        const unknown = changes
+          .flatMap((c) => c.entries)
+          .filter((e) => e.target && !allowed().has(e.target))
+        if (unknown.length)
+          return say(
+            `'${unknown[0].target}' is not a value the standard accepts. Pick one from the list.`,
+            true
+          )
+        try {
+          paint(
+            await send('PUT', '/table?id=' + encodeURIComponent(state.id), {
+              changes
+            })
+          )
+          say(
+            `Saved ${changes.length} value${
+              changes.length === 1 ? '' : 's'
+            }. The change is in the csv file; commit it to keep it.`
+          )
+          loadTables(state.id).catch(() => {})
+        } catch (error) {
+          say(error.message, true)
+        }
+      }
+
+      $('refresh').onclick = async () => {
+        if (
+          state.dirty.size &&
+          !confirm(
+            'Refreshing reloads the table and drops your unsaved changes. Continue?'
+          )
+        )
+          return
+        $('refresh').disabled = true
+        try {
+          const view = await send('POST', '/fetch', { id: state.id })
+          paint(view)
+          say(view.message)
+          loadTables(state.id).catch(() => {})
+        } catch (error) {
+          say(error.message, true)
+        }
+        $('refresh').disabled = false
+      }
+
+      $('addPortal').onclick = () => $('portal').showModal()
+      $('portalForm').onsubmit = async (event) => {
+        if (event.submitter && event.submitter.value !== 'add') return
+        try {
+          const added = await send('POST', '/portals', {
+            url: $('portalUrl').value
+          })
+          state.dirty.clear()
+          await open(await loadTables(`idox/${added.domain}/status`))
+          say(`Added ${added.domain}. Fill in its status and decision tables.`)
+        } catch (error) {
+          say(error.message, true)
+        }
+      }
+
+      start()
+    </script>
+  </body>
+</html>

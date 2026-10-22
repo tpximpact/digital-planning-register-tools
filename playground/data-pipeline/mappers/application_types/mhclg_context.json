@@ -1,0 +1,298 @@
+{
+  "advertising": {
+    "name": "Advertising consent",
+    "description": "An application for all types of advertisements and signs"
+  },
+  "approval-condition": {
+    "name": "Approval of details reserved by condition",
+    "description": "An application to have conditions approved which have been applied at the time of granting a planning permission to limit and control the way in which the planning permission has been implemented"
+  },
+  "cert-alt-appropriate-dev": {
+    "name": "Certificate of alternative appropriate development",
+    "description": "This enables the claimant under a compulsory purchase scheme to request that their local planning authority review their site and consider what development could have occurred in a ‘no scheme world’."
+  },
+  "change-of-use": {
+    "name": "Change of use planning application",
+    "description": "A change of use planning application is required when there's a significant alteration in how a property is used, moving it from one 'use class' to another as defined in the Use Classes Order. Most changes of use require permission, but some are permitted under specific circumstances. The need for an application depends on whether the change is considered 'material' and the specific regulations from each LPA."
+  },
+  "cho-agri-to-dwh": {
+    "name": "Change of use from agricultural buildings to dwellinghouses",
+    "description": "Change of use from agricultural or former agricultural buildings to dwellinghouses"
+  },
+  "cho-agri-to-flexcom": {
+    "name": "Change of use from agriculture to flexible commercial use",
+    "description": "Change of use from agriculture to flexible commercial use"
+  },
+  "cho-agri-to-school": {
+    "name": "Change of use from agriculture to state-funded school",
+    "description": "Change of use from agriculture to a state-funded school"
+  },
+  "cho-amusements-to-dwh": {
+    "name": "Change of use from amusements or casinos to dwellinghouses",
+    "description": "Change of use from amusement arcades or casinos to dwellinghouses"
+  },
+  "cho-comm-to-school": {
+    "name": "Change of use from commercial buildings to state-funded school",
+    "description": "Change of use from commercial or business or service or hotel or similar uses to a state-funded school"
+  },
+  "cho-commercial-to-dwh": {
+    "name": "Change of use from commercial buildings to dwellinghouses",
+    "description": "Change of use from commercial or business or service use to dwellinghouses"
+  },
+  "cho-commercial-to-mixed": {
+    "name": "Change of use from commercial buildings to mixed use",
+    "description": "Change of use from commercial or business or service or similar uses to mixed use including up to two flats"
+  },
+  "cho-sui-to-dwh": {
+    "name": "Change of use from sui generis uses to dwellinghouses",
+    "description": "Change of use from takeaway or sui generis or mixed use to dwellinghouses"
+  },
+  "consent-under-tpo": {
+    "name": "Consent under TPO",
+    "description": "An application that will affect a protected tree including those covered by a Tree Preservation Order (TPO) or those which grow in a conservation area"
+  },
+  "demolition-con-area": {
+    "name": "Planning permission for relevant demolition in a conservation area",
+    "description": "An application for planning permission involving the demolition of any unlisted building or structure in a conservation area if permission is required"
+  },
+  "extend-duration-permission": {
+    "name": "Additional environmental approval to extend the duration of a planning permission",
+    "description": "If the original planning permission was subject to an EIA or HRA, and the applicant is seeking an extension to the time limit for implementation, the application for Additional Environmental Approval is required."
+  },
+  "extraction-oil-gas": {
+    "name": "Development relating to the onshore extraction of oil and gas",
+    "description": "An application for planning permission for the onshore extraction of oil and gas onshore, including exploration, appraisal, and production activities. This covers drilling wells, installing associated infrastructure, and any related development required for the extraction process."
+  },
+  "footpath-diversion": {
+    "name": "Footpath diversion",
+    "description": "The diversion or stopping up of public footpaths, bridleways, or restricted byways when it is necessary to facilitate development in accordance with planning permission."
+  },
+  "full": {
+    "name": "Full planning permission",
+    "description": "This application is needed when making detailed proposals for developments which are not covered by a householder application or permitted development rights"
+  },
+  "haz-substance-consent": {
+    "name": "Hazardous Substances Consent",
+    "description": "Hazardous Substance Consent is required when substances on a site are at, or in excess of the 'controlled quantity' as set out in the Planning (Hazardous Substances) Regulations 2015."
+  },
+  "hedgerow-removal": {
+    "name": "Hedgerow removal notice",
+    "description": "An application for anyone proposing to remove a hedgerow, or part of a hedgerow"
+  },
+  "hh": {
+    "name": "Householder planning application",
+    "description": "A simplified process for applications to alter or enlarge a single house (but not a flat), including works within the boundary/garden"
+  },
+  "land-drainage-consent": {
+    "name": "Land Drainage Consent",
+    "description": "Land drainage consent is required for works affecting the flow of water in an ordinary watercourse, such as a stream, ditch, or culvert, to ensure they don't negatively impact flood risk or the environment. This consent, often granted by the Lead Local Flood Authority (LLFA), is needed for both permanent and temporary works, including alterations to culverts, weirs, or other obstructions."
+  },
+  "lbc": {
+    "name": "Listed building consent",
+    "description": "An application for works for the demolition of a listed building or for its alteration or extension in any manner which would affect its character as a building of special architectural or historic interest"
+  },
+  "ldc": {
+    "name": "Lawful development certificate base type",
+    "description": "A legal document stating the lawfulness of past, present or future building use, operation or other matters, signifying that enforcement action cannot be carried out against the development"
+  },
+  "ldc-existing-use": {
+    "name": "Lawful development certificate: Existing Use",
+    "description": "An application for a certificate confirming that an existing use of land, operational development or an activity being carried out in breach of a planning condition is lawful for planning purposes"
+  },
+  "ldc-proposed-work-lb": {
+    "name": "Lawful development certficate: Proposed Work to a Listed Building",
+    "description": "An application for a certificate confirming whether proposed works to a listed building would be lawful because they do not require listed building consent"
+  },
+  "ldc-prospective-use": {
+    "name": "Lawful development certificate: Proposed Use",
+    "description": "An application for a certificate confirming that a proposed use of buildings or other land, or operations proposed to be carried out in, on, over or under land, would be lawful for planning purposes."
+  },
+  "mineral-app": {
+    "name": "Mineral planning applications",
+    "description": "A mineral planning application is a request for permission to extract minerals or carry out related development."
+  },
+  "mineral-extraction": {
+    "name": "Mineral extraction or associated development",
+    "description": "Planning permission is generally required for mineral extraction and associated development from the local Mineral Planning Authority (MPA)"
+  },
+  "mod-construction-hours": {
+    "name": "Modification of conditions relating to construction working hours",
+    "description": "Application for modification of conditions relating to construction working hours"
+  },
+  "mod-discharge-s106": {
+    "name": "Modification or discharge of a Section 106 planning obligation",
+    "description": "A Section 106 planning obligation, which is a legal agreement between a local planning authority and a developer, can be modified or discharged through agreement between the parties involved or, if no agreement can be reached, by application to the local planning authority."
+  },
+  "non-material-amendment": {
+    "name": "Non-material amendment (S96a)",
+    "description": "An application for any minor changes to proposals that have already been approved"
+  },
+  "notice-trees-in-con-area": {
+    "name": "Notification of proposed works to trees in a conservation area",
+    "description": "Notification, 6 weeks prior to works being carried out, of proposed works to a tree in a conservation area that is not subject to a Tree Preservation order"
+  },
+  "nsips": {
+    "name": "Nationally Significant Infrastructure Projects (NSIPs)",
+    "description": "Nationally Significant Infrastructure Projects are large-scale projects which require consent from the Secretary of State."
+  },
+  "outline": {
+    "name": "Outline planning base type",
+    "description": "Applications that are used to understand whether the basic nature of a development is viable"
+  },
+  "outline-all": {
+    "name": "Outline Planning Permission with All Matters Reserved",
+    "description": "Outline planning permission with all matters reserved"
+  },
+  "outline-some": {
+    "name": "Outline Planning Permission with Some Matters Reserved",
+    "description": "Outline planning permission with some matters reserved"
+  },
+  "overhead-lines": {
+    "name": "Circular 14/90 Overhead lines",
+    "description": "Consent required to install or maintain overhead electric lines"
+  },
+  "pa-accom-defence": {
+    "name": "Accommodation on closed defence site",
+    "description": "Single living accommodation or non-residential buildings on a closed defence site"
+  },
+  "pa-build-agri-forest": {
+    "name": "Building for agricultural or forestry use",
+    "description": "Building for agricultural or forestry use"
+  },
+  "pa-col-fac-shop": {
+    "name": "Collection facility for a shop",
+    "description": "Collection facility for a shop"
+  },
+  "pa-demo-building": {
+    "name": "Demolition of building",
+    "description": "Application to determine if prior approval is required for demolition of a building"
+  },
+  "pa-demo-replace-dwh": {
+    "name": "Demolish and replace with dwellinghouses",
+    "description": "Demolish and replace with a building used as dwellinghouses"
+  },
+  "pa-ecomms-network": {
+    "name": "Electronic communications network development",
+    "description": "Development for an electronic communications network"
+  },
+  "pa-excavate-agri": {
+    "name": "Excavation or waste deposit for agriculture",
+    "description": "Excavation or deposit of waste for agriculture"
+  },
+  "pa-extension": {
+    "name": "Prior approval: Larger Home Extension",
+    "description": "An application for prior approval for a proposed larger single-storey rear extension to a dwellinghouse under permitted development rights."
+  },
+  "pa-fish-struct": {
+    "name": "Tank cage or structure for fish farming",
+    "description": "Tank cage or structure for use in fish farming"
+  },
+  "pa-flats-de-blocks": {
+    "name": "New flats on detached blocks of flats",
+    "description": "New flats on top of detached blocks of flats"
+  },
+  "pa-flats-de-comm": {
+    "name": "New flats on detached commercial buildings",
+    "description": "New flats on top of detached commercial buildings"
+  },
+  "pa-flats-de-dwh": {
+    "name": "New flats on detached dwellinghouses",
+    "description": "New flats on top of detached dwellinghouses"
+  },
+  "pa-flats-terr-comm": {
+    "name": "New flats on terraced commercial buildings",
+    "description": "New flats on top of terraced commercial buildings"
+  },
+  "pa-flats-terr-dwh": {
+    "name": "New flats on terraced dwellinghouses",
+    "description": "New flats on top of terraced dwellinghouses"
+  },
+  "pa-movable-structure": {
+    "name": "Movable structure for historic attraction or listed hospitality use",
+    "description": "Movable structure for a historic visitor attraction or a listed pub or restaurant or similar use"
+  },
+  "pa-road-agri-forest": {
+    "name": "Private road for agricultural or forestry use",
+    "description": "Private road for agricultural or forestry use"
+  },
+  "pa-roof-solar-nondom": {
+    "name": "Roof-mounted solar PV on non-domestic building",
+    "description": "Roof-mounted solar PV on a non-domestic building"
+  },
+  "pa-sa-solar-dom": {
+    "name": "Stand-alone solar equipment on domestic premises",
+    "description": "Installation or alteration of stand-alone solar equipment on domestic premises"
+  },
+  "pa-sa-solar-nondom": {
+    "name": "Stand-alone solar equipment on non-domestic premises",
+    "description": "Installation or alteration of stand-alone solar equipment on non-domestic premises"
+  },
+  "pa-solar-eq-dom": {
+    "name": "Solar equipment on domestic premises",
+    "description": "Installation or alteration of solar equipment on domestic premises"
+  },
+  "pa-solar-nondom-park": {
+    "name": "Solar canopy on non-domestic parking",
+    "description": "Installation of a solar canopy on non-domestic off-street parking"
+  },
+  "pa-storey": {
+    "name": "Prior approval: Additional storeys",
+    "description": "Enlargement of a dwellinghouse by construction of additional storeys"
+  },
+  "pa-tmp-school-vacant-comm": {
+    "name": "Temporary school on vacant commercial land",
+    "description": "Temporary school on previously vacant commercial land"
+  },
+  "pa-tmp-use-comm-film": {
+    "name": "Temporary use for commercial film-making",
+    "description": "Temporary use for commercial film-making"
+  },
+  "pa-uni-building": {
+    "name": "University building works",
+    "description": "Erection extension or alteration of a university building"
+  },
+  "pip": {
+    "name": "Permission in principle",
+    "description": "An alternative way of getting planning permission for housing-led development which separates the consideration of matters of principle from the technical detail of the development"
+  },
+  "prior-approval": {
+    "name": "Prior approval base type",
+    "description": "This applies to  developments with permitted development rights (where developments are granted planning permission by national legislation without the need to submit a planning application)"
+  },
+  "psi-app": {
+    "name": "Public Service Infrastructure applications",
+    "description": "Public Service Infrastructure (PSI) applications in planning refer to proposals for major developments related to essential public services like schools, hospitals, and criminal justice accommodation. These applications are subject to specific regulations and accelerated decision-making timelines to ensure timely delivery of these crucial public services."
+  },
+  "reg-3": {
+    "name": "Regulation 3 planning application",
+    "description": "Regulation 3 of the Town and Country Planning General Regulations 1992 allows a local planning authority to grant planning permission for its own development, essentially acting as both the applicant and the decision-maker. This means a council can approve development projects on land they own, even if it might otherwise be restricted."
+  },
+  "reg-4": {
+    "name": "Regulation 4 planning application",
+    "description": "Where a planning authority applies for permission to develop land they own or have an interest in, but do not intend to develop themselves. In such cases, Regulation 4 dictates that the application is determined by the authority itself, unless the Secretary of State decides to take over the determination."
+  },
+  "reserved-matters": {
+    "name": "Reserved matters",
+    "description": "An application to provide details on appearance, means of access, landscaping, layout and scale, following an outline application"
+  },
+  "romp": {
+    "name": "Review of mineral permission (ROMP)",
+    "description": "The ROMP review is an important piece of legislation allowing MPAs to update older mineral planning permissions to bring them into line with modern standards of environmental protection and planning control, and to impose modern restoration and aftercare conditions."
+  },
+  "s73": {
+    "name": "Removal or variation of a condition following grant of planning permission",
+    "description": "Applications for a removal or variation of a condition after planning permission has been granted"
+  },
+  "technical-details-consent": {
+    "name": "Technical Details Consent",
+    "description": "Technical Details Consent (TDC) is the second stage of the 'Permission in Principle' (PiP) and is for assessing the detailed design, layout, and other technical aspects of the proposed development."
+  },
+  "twao": {
+    "name": "Transport and works act order",
+    "description": "A TWAO is a statutory instrument made by the Secretary of State under the Transport and Works Act 1992. A TWAO can authorise the construction, operation and maintenance of new transport infrastructure."
+  },
+  "waste-dev": {
+    "name": "Waste development",
+    "description": "An application which involves the use of land for waste management activities like storage, treatment, or disposal"
+  }
+}

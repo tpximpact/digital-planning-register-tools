@@ -1,0 +1,54 @@
+# Barnet, Idox Uniform. One CSV per table, so paths start with the table name.
+# See camden.yaml for what each key means.
+#
+# The codes below are the ones in common use in Uniform. A real schema will correct some of them,
+# and when it does, only this file changes.
+
+council: barnet
+
+fields:
+  reference:      {from: APPLICATIONS.REFVAL}
+  type:           {from: APPLICATIONS.APPTYPE, upper: true, lookup: type}
+  status:         {from: APPLICATIONS.STATUS, upper: true, lookup: status}
+  decision:       {from: APPLICATIONS.DECISION, upper: true, lookup: decision}
+  received:       {from: APPLICATIONS.RECEIVEDDATE, as: date}
+  validated:      {from: APPLICATIONS.VALIDDATE, as: date}
+  decided:        {from: APPLICATIONS.DECISIONDATE, as: date}
+  officer:        {from: APPLICATIONS.CASEOFFICER}
+  applicant:      {from: APPLICATIONS.APPLICANTNAME}
+  description:    {from: PROPOSALS.PROPOSAL}
+  address:
+    from: [ADDRESSES.HOUSENUMBER, ADDRESSES.STREET, ADDRESSES.TOWN, ADDRESSES.POSTCODE]
+    join: " "
+
+lookups:
+  # Uniform application type codes.
+  type:
+    FUL: pp.full.minor
+    MAJ: pp.full.major
+    HSE: pp.full.householder
+    LBC: listed
+    CAC: listed
+    OUT: pp.outline
+    RES: approval.reservedMatters
+    ADV: advertConsent
+    CLE: ldc.existing
+    CLP: ldc.proposed
+    PNH: pa.part1.classA
+    TPO: wtt.consent
+    NMA: amendment.nonMaterial
+
+  # Expanded into Barnet's own wording rather than the standard's.
+  decision:
+    GTD: Granted
+    PER: Permitted
+    REF: Refused
+    WDN: Withdrawn
+    SPL: Split decision
+    NOB: No objection
+
+  status:
+    DC: Decided
+    PEN: Pending
+    REG: Registered
+    INV: Invalid

@@ -1,0 +1,354 @@
+[
+  {
+    "value": "191",
+    "text": "Existing Lawful Development Certificate"
+  },
+  {
+    "value": "192",
+    "text": "Proposed Lawful Development Certificate"
+  },
+  {
+    "value": "193",
+    "text": "Historic Code 193"
+  },
+  {
+    "value": "ACP",
+    "text": "Historic Code"
+  },
+  {
+    "value": "ADV",
+    "text": "Advertisement"
+  },
+  {
+    "value": "AEA",
+    "text": "Additional Environmental Approval"
+  },
+  {
+    "value": "ALT",
+    "text": "Certificate of Alternative Development"
+  },
+  {
+    "value": "APD",
+    "text": "Reserved Matters"
+  },
+  {
+    "value": "BNG",
+    "text": "Biodiversity Gain Plan"
+  },
+  {
+    "value": "BXE",
+    "text": "Brent Cross Specific Application"
+  },
+  {
+    "value": "CAC",
+    "text": "Conservation Area Consent"
+  },
+  {
+    "value": "CAN",
+    "text": "Communications Act Notification"
+  },
+  {
+    "value": "CLB",
+    "text": "Certificate of Lawfulness - Listed Bldg"
+  },
+  {
+    "value": "CON",
+    "text": "Conditions"
+  },
+  {
+    "value": "DEM",
+    "text": "Demolition"
+  },
+  {
+    "value": "EIA",
+    "text": "Full application Accompanied by ES"
+  },
+  {
+    "value": "EIAN",
+    "text": "Schedule 1 or 2 Development - No ES"
+  },
+  {
+    "value": "EIAO",
+    "text": "Outline application with ES"
+  },
+  {
+    "value": "EIN",
+    "text": "Schedule 1 or 2 Development - No ES"
+  },
+  {
+    "value": "EIO",
+    "text": "Outline application with ES"
+  },
+  {
+    "value": "ELE",
+    "text": "Overhead Electricity Lines"
+  },
+  {
+    "value": "ENF",
+    "text": "Enforcement (Historic Code)"
+  },
+  {
+    "value": "ENQ",
+    "text": "Pre Application"
+  },
+  {
+    "value": "ENQH",
+    "text": "Pre-appplication advice (written)"
+  },
+  {
+    "value": "ESC",
+    "text": "ES Scoping Opinion"
+  },
+  {
+    "value": "ESCR",
+    "text": "ES Screening and Scoping Opinion"
+  },
+  {
+    "value": "ESR",
+    "text": "ES Screening Opinion"
+  },
+  {
+    "value": "ESS",
+    "text": "ES Screening and Scoping Opinion"
+  },
+  {
+    "value": "FUL",
+    "text": "Full Application"
+  },
+  {
+    "value": "FUN",
+    "text": "Flexible Use Notification"
+  },
+  {
+    "value": "HFT",
+    "text": "Hot Food Takeway Notification"
+  },
+  {
+    "value": "HPA",
+    "text": "Heritage Partnership Agreement"
+  },
+  {
+    "value": "HSE",
+    "text": "Householder Application"
+  },
+  {
+    "value": "LBC",
+    "text": "Listed Building Consent / Demolition"
+  },
+  {
+    "value": "LBO",
+    "text": "Listed Building Consent Order"
+  },
+  {
+    "value": "LBW",
+    "text": "Historic Application Type"
+  },
+  {
+    "value": "LIC",
+    "text": "Licence Notification"
+  },
+  {
+    "value": "LLB",
+    "text": "Local Listed Building Consent Order"
+  },
+  {
+    "value": "MDA",
+    "text": "Modify/Discharge Affordable Housing Req"
+  },
+  {
+    "value": "MDL",
+    "text": "Modify / Discharge Legal Agreement"
+  },
+  {
+    "value": "MIN",
+    "text": "Minerals application"
+  },
+  {
+    "value": "NAC",
+    "text": "Neighbouring Authority Consultation"
+  },
+  {
+    "value": "NMA",
+    "text": "Non Material Amendment"
+  },
+  {
+    "value": "NOT",
+    "text": "Notification"
+  },
+  {
+    "value": "OBJ",
+    "text": "Historic Type"
+  },
+  {
+    "value": "OUT",
+    "text": "Outline Application"
+  },
+  {
+    "value": "PAD",
+    "text": "Prior Notification (Office)"
+  },
+  {
+    "value": "PAH",
+    "text": "Prior Notification (Householder)"
+  },
+  {
+    "value": "PAS",
+    "text": "Prior Notification (School)"
+  },
+  {
+    "value": "PIP",
+    "text": "Permission in Principle"
+  },
+  {
+    "value": "PNA",
+    "text": "Prior Notification (Agriculture to Res)"
+  },
+  {
+    "value": "PNC",
+    "text": "Prior Notification (Retail/betting to A3"
+  },
+  {
+    "value": "PND",
+    "text": "Prior Notification (Demolition)"
+  },
+  {
+    "value": "PNE",
+    "text": "Prior Notification (Class E to Resi)"
+  },
+  {
+    "value": "PNF",
+    "text": "Prior Not Agriculture to Flexible Use"
+  },
+  {
+    "value": "PNG",
+    "text": "Prior Notification (General)"
+  },
+  {
+    "value": "PNH",
+    "text": "Prior Notification (Householder)"
+  },
+  {
+    "value": "PNJ",
+    "text": "Prior Notification (Retail/bet to As/Le)"
+  },
+  {
+    "value": "PNL",
+    "text": "Prior Notification (Light ind. to Resi)"
+  },
+  {
+    "value": "PNN",
+    "text": "Prior Notification (Sui-generis to Resi)"
+  },
+  {
+    "value": "PNO",
+    "text": "Prior Notification (Office to Res)"
+  },
+  {
+    "value": "PNP",
+    "text": "Prior Notification (Storage to Resi)"
+  },
+  {
+    "value": "PNR",
+    "text": "Prior Notification (Retail to Resi)"
+  },
+  {
+    "value": "PNS",
+    "text": "Prior Notification (School)"
+  },
+  {
+    "value": "PNT",
+    "text": "Prior Notification (Telecommunication)"
+  },
+  {
+    "value": "PNU",
+    "text": "Prior Notification (Upward Ex house)"
+  },
+  {
+    "value": "PNV",
+    "text": "Prior Notification (Upward Ex flats)"
+  },
+  {
+    "value": "PNW",
+    "text": "Prior Notification (Non Dom Solar Panel)"
+  },
+  {
+    "value": "PNZ",
+    "text": "Prior Notification (Class ZA Dem Dwe)"
+  },
+  {
+    "value": "PRE",
+    "text": "Historic Type"
+  },
+  {
+    "value": "PRN",
+    "text": "Prior Notification (Agri Dem and For)"
+  },
+  {
+    "value": "RCU",
+    "text": "Retention/Continued Use"
+  },
+  {
+    "value": "REF",
+    "text": "Historic Type"
+  },
+  {
+    "value": "REG3",
+    "text": "Council Application and Development"
+  },
+  {
+    "value": "REG4",
+    "text": "Council Application NOT Development"
+  },
+  {
+    "value": "RG3",
+    "text": "Council Application and Development"
+  },
+  {
+    "value": "RG4",
+    "text": "Council Application NOT Development"
+  },
+  {
+    "value": "RMA",
+    "text": "Reserved Matters Application"
+  },
+  {
+    "value": "S73",
+    "text": "Vary/Remove condition/Minor Mtl Amnd"
+  },
+  {
+    "value": "TCO",
+    "text": "Treeworks: Conditions Application"
+  },
+  {
+    "value": "TCP",
+    "text": "Trees: Notices of Intent"
+  },
+  {
+    "value": "THR",
+    "text": "Works to Hedgerow"
+  },
+  {
+    "value": "TPO",
+    "text": "Trees: Works to TPO"
+  },
+  {
+    "value": "TPP",
+    "text": "Works to TPO trees"
+  },
+  {
+    "value": "TRE",
+    "text": "Trees (Historic Code)"
+  },
+  {
+    "value": "UNK",
+    "text": "unknown"
+  },
+  {
+    "value": "VGA",
+    "text": "Village Green Application"
+  },
+  {
+    "value": "WAST",
+    "text": "Waste"
+  }
+]

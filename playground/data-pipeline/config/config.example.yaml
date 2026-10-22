@@ -1,0 +1,37 @@
+# Copy to config.yaml and edit. Paths can be a local folder, s3://bucket/prefix
+# or abfs://container/prefix. The code does not change, only this file does.
+
+storage:
+  bronze: data/bronze
+  silver: data/silver
+  gold: data/gold
+
+database:
+  path: data/dpr.duckdb
+
+# The standard's OpenAPI spec, used to check what the API sends. Download openapi.json from
+# bun workspace @dpr/api bun run generate:openapi
+# cp -rp apps/api/schema.json playground/data-pipeline/data/openapi.json
+# github.com/theopensystemslab/digital-planning-data-schemas. Optional.
+openapi:
+  path: data/openapi.json
+
+sources:
+  camden:
+    # Camden's planning applications dataset on their open data platform
+    # url: https://opendata.camden.gov.uk/resource/2eiu-s2cw.json
+    url: https://opendata.camden.gov.uk/resource/bje4-aaba.json
+    page_size: 1000
+    # Leave empty to pull everything. Useful for a quick first run.
+    max_records: 5000
+
+  barnet:
+    # A folder of CSV files, one per table, exported from their Uniform database.
+    # Barnet cannot share real records yet, so this points at made up rows in the same shape.
+    # Build them with: python scripts/make_fake_uniform.py data/fake-barnet 250
+    url: data/fake-barnet
+
+# The value mapper tables (Idox statuses, MHCLG application types, and so on). They are csv files
+# people fill in, so they live outside data/ and are committed with the code.
+mappers:
+  path: mappers

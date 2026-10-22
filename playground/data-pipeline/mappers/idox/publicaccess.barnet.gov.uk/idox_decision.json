@@ -1,0 +1,250 @@
+[
+  {
+    "value": "AB",
+    "text": "Approve Biodiversity Gain Plan"
+  },
+  {
+    "value": "AC",
+    "text": "Approve subject to conditions"
+  },
+  {
+    "value": "AL",
+    "text": "Approve following legal agreement"
+  },
+  {
+    "value": "AN",
+    "text": "Appeal Lodged against non determination"
+  },
+  {
+    "value": "AP",
+    "text": "Approve"
+  },
+  {
+    "value": "DA",
+    "text": "Deemed Approval (Appeal)"
+  },
+  {
+    "value": "DC",
+    "text": "Discharge Consent"
+  },
+  {
+    "value": "DL",
+    "text": "Deemed Approval subject to S106 (Appeal)"
+  },
+  {
+    "value": "DR",
+    "text": "Deemed Refusal (Appeal)"
+  },
+  {
+    "value": "DW",
+    "text": "Deemed Withdrawal (App incomplete)"
+  },
+  {
+    "value": "EI",
+    "text": "Pre-application advice issued"
+  },
+  {
+    "value": "EN",
+    "text": "Environmental Statement not required"
+  },
+  {
+    "value": "ER",
+    "text": "Environmental Statement required"
+  },
+  {
+    "value": "EX",
+    "text": "Exempt"
+  },
+  {
+    "value": "FD",
+    "text": "Finally Disposed of"
+  },
+  {
+    "value": "FX",
+    "text": "Flexible use closed"
+  },
+  {
+    "value": "HA",
+    "text": "Hold in abeyance"
+  },
+  {
+    "value": "IN",
+    "text": "Invalid Notification"
+  },
+  {
+    "value": "LA",
+    "text": "Listed Building Approve Details"
+  },
+  {
+    "value": "LE",
+    "text": "Approve subject to s106"
+  },
+  {
+    "value": "LN",
+    "text": "License Notification Acknowledged"
+  },
+  {
+    "value": "LW",
+    "text": "Lawful"
+  },
+  {
+    "value": "NC",
+    "text": "No comment"
+  },
+  {
+    "value": "NE",
+    "text": "Not Exempt"
+  },
+  {
+    "value": "NO",
+    "text": "No objection"
+  },
+  {
+    "value": "OB",
+    "text": "Objection"
+  },
+  {
+    "value": "PA",
+    "text": "Prior Approval Not Required"
+  },
+  {
+    "value": "PB",
+    "text": "Prior Approval Required and Approved"
+  },
+  {
+    "value": "PC",
+    "text": "Prior Approval Required and Refused"
+  },
+  {
+    "value": "PD",
+    "text": "Prior Approval Process not applicable"
+  },
+  {
+    "value": "PE",
+    "text": "Prior Approval Required"
+  },
+  {
+    "value": "PF",
+    "text": "No Prior Approval"
+  },
+  {
+    "value": "PG",
+    "text": "Permission not Required"
+  },
+  {
+    "value": "QU",
+    "text": "Decision Quashed"
+  },
+  {
+    "value": "RB",
+    "text": "Refuse Biodiversity Gain Plan"
+  },
+  {
+    "value": "RE",
+    "text": "Refuse"
+  },
+  {
+    "value": "RK",
+    "text": "Revoked"
+  },
+  {
+    "value": "SA",
+    "text": "Statement Scope Acceptable"
+  },
+  {
+    "value": "SP",
+    "text": "Split Decision"
+  },
+  {
+    "value": "SU",
+    "text": "Statement Scope Unacceptable"
+  },
+  {
+    "value": "TA",
+    "text": "Trees: Approve"
+  },
+  {
+    "value": "TB",
+    "text": "Trees: Approve subject to conditions"
+  },
+  {
+    "value": "TD",
+    "text": "Trees: Deemed Refusal"
+  },
+  {
+    "value": "TE",
+    "text": "Trees: Exempt"
+  },
+  {
+    "value": "TF",
+    "text": "Trees: Make a TPO"
+  },
+  {
+    "value": "TG",
+    "text": "Trees: Make a TPO / Split Decision"
+  },
+  {
+    "value": "TH",
+    "text": "Trees: Finally Disposed of"
+  },
+  {
+    "value": "TI",
+    "text": "Trees: Dispense not agreed"
+  },
+  {
+    "value": "TJ",
+    "text": "Trees: Refuse"
+  },
+  {
+    "value": "TK",
+    "text": "Trees: Split Decision"
+  },
+  {
+    "value": "TL",
+    "text": "Trees: Withdrawn by Applicant"
+  },
+  {
+    "value": "TM",
+    "text": "Trees: Dispense Agreed"
+  },
+  {
+    "value": "TN",
+    "text": "Trees: Technically deleted"
+  },
+  {
+    "value": "TO",
+    "text": "Trees: 6 Weeks Expired"
+  },
+  {
+    "value": "TP",
+    "text": "Trees: Not to make TPO"
+  },
+  {
+    "value": "TQ",
+    "text": "Trees: Dispense not agreed"
+  },
+  {
+    "value": "TR",
+    "text": "Approve subject to referral to GOL"
+  },
+  {
+    "value": "TS",
+    "text": "Trees: Application not required"
+  },
+  {
+    "value": "TU",
+    "text": "Treatment undertaken prior to determinat"
+  },
+  {
+    "value": "UL",
+    "text": "Unlawful"
+  },
+  {
+    "value": "WI",
+    "text": "Withdrawn"
+  },
+  {
+    "value": "YD",
+    "text": "Dispense Agreed"
+  }
+]

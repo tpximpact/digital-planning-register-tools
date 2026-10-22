@@ -1,0 +1,117 @@
+{
+  "name": "MHCLG national public view",
+  "source": "planning-application-data-specification, documentation/national-public-view.md",
+  "status": "working draft",
+  "datasets": {
+    "planning-application": {
+      "note": "One row per application. The spine the other datasets point at.",
+      "fields": [
+        "reference",
+        "description",
+        "application-types",
+        "site",
+        "received-date",
+        "planning-authority",
+        "development-scale",
+        "planning-performance-agreement",
+        "withdrawn-date",
+        "linked-applications",
+        "document-url",
+        "documentation-url"
+      ]
+    },
+    "site": {
+      "note": "The land, as a record with its own identity. Applications point at it.",
+      "fields": [
+        "reference",
+        "name",
+        "address-text",
+        "postcode",
+        "description",
+        "geometry"
+      ]
+    },
+    "decision-notice": {
+      "note": "The decision as a record, so conditions can hang off it.",
+      "fields": [
+        "reference",
+        "planning-application",
+        "decision",
+        "decision-date",
+        "organisation",
+        "decision-maker",
+        "planning-officer-recommendation",
+        "document-url",
+        "documentation-url"
+      ]
+    },
+    "planning-condition": {
+      "note": "A condition as written by the authority, reusable across decisions.",
+      "fields": [
+        "reference",
+        "name",
+        "description",
+        "reason",
+        "organisation"
+      ]
+    },
+    "decision-condition": {
+      "note": "A condition attached to one decision, with who asked for it and who discharged it.",
+      "fields": [
+        "reference",
+        "decision-notice",
+        "planning-condition",
+        "organisation",
+        "requested-by",
+        "discharged-by"
+      ]
+    },
+    "section-106": {
+      "note": "A planning obligation agreement attached to a decision.",
+      "fields": [
+        "reference",
+        "decision-notice",
+        "document-url",
+        "documentation-url"
+      ]
+    },
+    "planning-application-document": {
+      "note": "One row per document, pointing back at the application.",
+      "fields": [
+        "reference",
+        "planning-application",
+        "document-url",
+        "documentation-url",
+        "name",
+        "replaces"
+      ]
+    },
+    "planning-permission-timeline": {
+      "note": "Dated events against a controlled vocabulary, instead of fixed date fields.",
+      "fields": [
+        "reference",
+        "planning-application",
+        "permission-process-event",
+        "event-date"
+      ]
+    }
+  },
+  "permission-process-event": [
+    "application-submitted",
+    "invalid-from",
+    "valid-from",
+    "validation-completed",
+    "application-published",
+    "publicity-start",
+    "additional-information-requested",
+    "additional-information-received",
+    "consultation-start",
+    "consultation-end",
+    "consultees-contacted",
+    "call-in-direction-issued",
+    "committee-date",
+    "resolution-to-grant",
+    "resolution-to-refuse",
+    "time-extension-agreed"
+  ]
+}

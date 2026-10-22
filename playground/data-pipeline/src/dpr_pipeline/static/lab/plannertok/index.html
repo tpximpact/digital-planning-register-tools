@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>plannertok</title>
+    <style>
+      :root {
+        --heart: #fe2c55;
+        --ink: #fff;
+        --dim: rgb(255 255 255 / 0.72);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        -webkit-tap-highlight-color: transparent;
+      }
+      html,
+      body {
+        height: 100%;
+        background: #000;
+        color: var(--ink);
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        overscroll-behavior: none;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+      }
+      #frame {
+        position: relative;
+        width: min(100%, 480px);
+        height: 100dvh;
+        background: #000;
+        overflow: hidden;
+      }
+      #feed {
+        height: 100%;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+        scrollbar-width: none;
+      }
+      #feed::-webkit-scrollbar {
+        display: none;
+      }
+      .clip {
+        position: relative;
+        height: 100dvh;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        overflow: hidden;
+        background: #111;
+      }
+      .clip > svg {
+        position: absolute;
+        inset: -4%;
+        width: 108%;
+        height: 108%;
+        animation: drift 14s ease-in-out infinite alternate;
+        filter: saturate(1.1) brightness(0.8);
+      }
+      @keyframes drift {
+        from {
+          transform: scale(1) translate(0, 0);
+        }
+        to {
+          transform: scale(1.12) translate(-2%, -1.5%);
+        }
+      }
+      .clip::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(transparent 55%, rgb(0 0 0 / 0.72)),
+          linear-gradient(rgb(0 0 0 / 0.45), transparent 22%);
+        pointer-events: none;
+      }
+      .top {
+        position: absolute;
+        z-index: 4;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 16px;
+        padding-top: calc(14px + env(safe-area-inset-top));
+      }
+      .top a {
+        color: var(--ink);
+        text-decoration: none;
+        font-size: 26px;
+        width: 36px;
+      }
+      .tabs {
+        display: flex;
+        gap: 18px;
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--dim);
+      }
+      .tabs .on {
+        color: var(--ink);
+        border-bottom: 2.5px solid var(--ink);
+        padding-bottom: 4px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 800;
+        font-size: 14px;
+        width: 36px;
+        justify-content: flex-end;
+      }
+      .logo svg {
+        width: 26px;
+        height: 26px;
+      }
+      .rail {
+        position: absolute;
+        z-index: 4;
+        right: 10px;
+        bottom: 96px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+      }
+      .rail button {
+        background: none;
+        border: 0;
+        color: var(--ink);
+        display: grid;
+        justify-items: center;
+        gap: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        text-shadow: 0 1px 4px rgb(0 0 0 / 0.5);
+      }
+      .rail svg {
+        width: 38px;
+        height: 38px;
+        fill: #fff;
+        filter: drop-shadow(0 1px 3px rgb(0 0 0 / 0.4));
+        transition: transform 0.15s;
+      }
+      .rail button:active svg {
+        transform: scale(0.85);
+      }
+      .rail .liked svg {
+        fill: var(--heart);
+        animation: pop 0.35s;
+      }
+      @keyframes pop {
+        40% {
+          transform: scale(1.35);
+        }
+      }
+      .avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: #fff;
+        color: #000;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        font-size: 20px;
+        border: 2px solid #fff;
+        position: relative;
+        margin-bottom: 8px;
+      }
+      .avatar::after {
+        content: '+';
+        position: absolute;
+        bottom: -10px;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--heart);
+        color: #fff;
+        font-size: 16px;
+        line-height: 21px;
+        text-align: center;
+      }
+      .caption {
+        position: absolute;
+        z-index: 4;
+        left: 14px;
+        right: 84px;
+        bottom: 26px;
+        text-shadow: 0 1px 4px rgb(0 0 0 / 0.6);
+      }
+      .caption b {
+        font-size: 17px;
+      }
+      .caption p {
+        margin-top: 6px;
+        font-size: 15px;
+        line-height: 1.35;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .caption .tags {
+        margin-top: 6px;
+        font-weight: 700;
+        font-size: 15px;
+      }
+      .caption .song {
+        margin-top: 10px;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .caption .song span {
+        display: inline-block;
+        padding-left: 100%;
+        animation: marquee 12s linear infinite;
+      }
+      @keyframes marquee {
+        to {
+          transform: translateX(-100%);
+        }
+      }
+      .bigheart {
+        position: absolute;
+        z-index: 5;
+        left: 50%;
+        top: 50%;
+        width: 120px;
+        height: 120px;
+        margin: -60px 0 0 -60px;
+        fill: var(--heart);
+        opacity: 0;
+        pointer-events: none;
+        filter: drop-shadow(0 4px 12px rgb(0 0 0 / 0.4));
+      }
+      .bigheart.go {
+        animation: big 0.8s ease-out;
+      }
+      @keyframes big {
+        0% {
+          transform: scale(0.3);
+          opacity: 0;
+        }
+        25% {
+          transform: scale(1.15);
+          opacity: 1;
+        }
+        60% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.3);
+          opacity: 0;
+        }
+      }
+      .progress {
+        position: absolute;
+        z-index: 5;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 3px;
+        background: rgb(255 255 255 / 0.25);
+      }
+      .progress i {
+        display: block;
+        height: 100%;
+        background: #fff;
+        width: 0;
+        transition: width 0.3s;
+      }
+      #sheet {
+        position: absolute;
+        inset: 0;
+        z-index: 8;
+        background: rgb(0 0 0 / 0.4);
+        display: flex;
+        align-items: flex-end;
+      }
+      #sheet[hidden] {
+        display: none;
+      }
+      #sheet section {
+        width: 100%;
+        height: 68%;
+        background: #121212;
+        border-radius: 14px 14px 0 0;
+        padding: 14px 16px 24px;
+        overflow: auto;
+      }
+      #sheet h3 {
+        text-align: center;
+        font-size: 14px;
+        padding-bottom: 12px;
+      }
+      .c {
+        display: flex;
+        gap: 10px;
+        padding: 9px 0;
+        font-size: 14.5px;
+        line-height: 1.35;
+      }
+      .c i {
+        flex: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #2a2a2a;
+        display: grid;
+        place-items: center;
+        font: 700 12px system-ui;
+        font-style: normal;
+      }
+      .c b {
+        display: block;
+        font-size: 12.5px;
+        color: var(--dim);
+      }
+      details {
+        margin-top: 10px;
+      }
+      summary {
+        color: var(--dim);
+        font-size: 13px;
+        cursor: pointer;
+      }
+      pre {
+        margin-top: 8px;
+        padding: 10px;
+        background: #000;
+        border-radius: 8px;
+        font-size: 11.5px;
+        overflow: auto;
+        white-space: pre;
+      }
+      #toast {
+        position: fixed;
+        left: 50%;
+        top: 70px;
+        transform: translateX(-50%);
+        background: rgb(255 255 255 / 0.94);
+        color: #000;
+        padding: 8px 16px;
+        border-radius: 99px;
+        font-size: 14px;
+        font-weight: 600;
+        z-index: 20;
+      }
+      #toast[hidden] {
+        display: none;
+      }
+      .empty {
+        height: 100dvh;
+        display: grid;
+        place-content: center;
+        text-align: center;
+        gap: 8px;
+        padding: 30px;
+        scroll-snap-align: start;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .clip > svg,
+        .song span {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="frame">
+      <div class="top">
+        <a href="../" aria-label="Back to the lab">&#8249;</a>
+        <div class="tabs">
+          <span class="on" id="t-wait">For review</span
+          ><span id="t-done">Approved</span>
+        </div>
+        <div class="logo" aria-label="plannertok">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <path
+              d="M4 15 16 5l12 10v12H4z"
+              fill="none"
+              stroke="#fff"
+              stroke-width="2.6"
+              stroke-linejoin="round"
+            />
+            <path d="M13 13.5v8l7-4z" fill="#fff" />
+          </svg>
+        </div>
+      </div>
+      <div id="feed"></div>
+      <div class="progress"><i id="bar"></i></div>
+      <div id="sheet" hidden>
+        <section
+          role="dialog"
+          aria-modal="true"
+          aria-label="Comments"
+        ></section>
+      </div>
+    </div>
+    <script src="../lab.js"></script>
+    <script>
+      ;(async () => {
+        const { el } = Lab
+        const feed = document.getElementById('feed'),
+          sheet = document.getElementById('sheet'),
+          bar = document.getElementById('bar')
+        const cards = await Lab.load()
+        const done = new Set()
+        const palette = {
+          paper: '#16222b',
+          ink: '#8fb7d1',
+          site: '#25f4ee',
+          road: '#31485a',
+          line: '#223645'
+        }
+        const heart =
+          '<svg viewBox="0 0 24 24"><path d="M12 21.6 3.4 13A5.6 5.6 0 0 1 11.3 5l.7.7.7-.7A5.6 5.6 0 0 1 20.6 13z"/></svg>'
+        const bubble =
+          '<svg viewBox="0 0 24 24"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></svg>'
+        const share =
+          '<svg viewBox="0 0 24 24"><path d="m22 3-9 18-2.4-8L3 10.6z"/></svg>'
+        const tag = (c) =>
+          '#' +
+          (c.type || 'planning').replace(/^pp\.full\./, '').replace(/\W+/g, '')
+
+        function clip(card) {
+          const likeBtn = el('button', { 'aria-label': 'Approve' })
+          likeBtn.innerHTML = heart + '<span>Approve</span>'
+          const big = el('div')
+          big.innerHTML =
+            '<svg class="bigheart" viewBox="0 0 24 24"><path d="M12 21.6 3.4 13A5.6 5.6 0 0 1 11.3 5l.7.7.7-.7A5.6 5.6 0 0 1 20.6 13z"/></svg>'
+          const bigSvg = big.firstElementChild
+
+          const setLiked = (on) => {
+            likeBtn.classList.toggle('liked', on)
+            on ? done.add(card.reference) : done.delete(card.reference)
+            progress()
+          }
+          const approve = () => {
+            if (done.has(card.reference)) return
+            setLiked(true)
+            bigSvg.classList.remove('go')
+            void bigSvg.getBoundingClientRect()
+            bigSvg.classList.add('go')
+            Lab.buzz(20)
+            Lab.approve(card).catch(() => {
+              setLiked(false)
+              Lab.toast('Could not save that approval')
+            })
+          }
+          likeBtn.onclick = (event) => {
+            event.stopPropagation()
+            if (done.has(card.reference)) {
+              setLiked(false)
+              Lab.unapprove(card)
+            } else approve()
+          }
+
+          const comments = el('button', {
+            'aria-label': 'Comments',
+            onclick: (event) => {
+              event.stopPropagation()
+              open(card)
+            }
+          })
+          comments.innerHTML =
+            bubble + `<span>${Lab.thread(card).length}</span>`
+          const shareBtn = el('button', {
+            'aria-label': 'Copy the reference',
+            onclick: (event) => {
+              event.stopPropagation()
+              navigator.clipboard?.writeText(card.reference)
+              Lab.toast('Reference copied')
+            }
+          })
+          shareBtn.innerHTML = share + '<span>Share</span>'
+
+          const node = el(
+            'section',
+            { class: 'clip', 'data-ref': card.reference },
+            el(
+              'div',
+              { class: 'rail' },
+              el(
+                'div',
+                { class: 'avatar' },
+                card.council.slice(0, 1).toUpperCase()
+              ),
+              likeBtn,
+              comments,
+              shareBtn
+            ),
+            el(
+              'div',
+              { class: 'caption' },
+              el('b', {}, '@' + card.council),
+              el('p', {}, card.description),
+              el(
+                'div',
+                { class: 'tags' },
+                `${tag(card)} ${card.decision ? '#' + card.decision : ''} ${
+                  card.flagged ? '#needsalook' : ''
+                }`
+              ),
+              el(
+                'div',
+                { class: 'song' },
+                el('span', {}, `♪ ${card.reference} · ${card.address}`)
+              )
+            ),
+            big
+          )
+          node.insertAdjacentHTML('afterbegin', Lab.plan(card, palette))
+
+          // A double tap anywhere on the clip approves it, as it would a video.
+          let last = 0
+          node.addEventListener('click', () => {
+            const now = Date.now()
+            if (now - last < 320) approve()
+            last = now
+          })
+          return node
+        }
+
+        function progress() {
+          bar.style.width = cards.length
+            ? `${(done.size / cards.length) * 100}%`
+            : '0'
+        }
+
+        async function open(card) {
+          const body = sheet.firstElementChild
+          body.replaceChildren(
+            el('h3', {}, `${Lab.thread(card).length} comments`),
+            ...Lab.thread(card).map(([who, text]) =>
+              el(
+                'div',
+                { class: 'c' },
+                el('i', {}, who.slice(0, 2)),
+                el('div', {}, el('b', {}, '@' + who), text)
+              )
+            ),
+            el(
+              'details',
+              {},
+              el('summary', {}, 'View the record as JSON'),
+              el('pre', {}, Lab.rawJson(card))
+            )
+          )
+          sheet.hidden = false
+          const ok = await Lab.specCheck(card)
+          if (ok !== null)
+            body
+              .querySelector('h3')
+              .after(
+                el(
+                  'div',
+                  { class: 'c' },
+                  el('i', {}, 'ok'),
+                  el(
+                    'div',
+                    {},
+                    el('b', {}, '@spec'),
+                    ok
+                      ? 'Matches the OpenAPI spec'
+                      : 'Does not match the OpenAPI spec'
+                  )
+                )
+              )
+        }
+        sheet.addEventListener('click', (event) => {
+          if (event.target === sheet) sheet.hidden = true
+        })
+
+        if (!cards.length)
+          feed.append(
+            el(
+              'div',
+              { class: 'empty' },
+              el('h2', {}, 'You are all caught up'),
+              el('p', {}, `Nothing is waiting in ${Lab.council()}.`)
+            )
+          )
+        cards.forEach((card) => feed.append(clip(card)))
+        document.getElementById('t-done').onclick = () =>
+          Lab.toast(`${done.size} approved this session`)
+
+        addEventListener('keydown', (event) => {
+          if (event.key === 'ArrowDown')
+            feed.scrollBy({ top: innerHeight, behavior: 'smooth' })
+          if (event.key === 'ArrowUp')
+            feed.scrollBy({ top: -innerHeight, behavior: 'smooth' })
+          if (event.key === 'Escape') sheet.hidden = true
+          if (event.key === 'l' || event.key === 'Enter') {
+            const index = Math.round(feed.scrollTop / innerHeight)
+            feed.children[index]?.querySelector('.rail button')?.click()
+          }
+        })
+      })()
+    </script>
+  </body>
+</html>

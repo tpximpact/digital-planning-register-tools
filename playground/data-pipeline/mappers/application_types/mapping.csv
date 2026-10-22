@@ -1,0 +1,78 @@
+mhclg_type,odp_type,notes
+advertising,advertConsent,
+approval-condition,approval.conditions,
+cert-alt-appropriate-dev,ldc.proposed,"[check] certificate of appropriate alternative development, placed with proposed lawful development"
+change-of-use,pp.full.minor,[check] a change of use needing permission; minor unless the site is major
+cho-agri-to-dwh,pa.part3.classQ,[check]
+cho-agri-to-flexcom,pa.part3.classR,[check]
+cho-agri-to-school,pa.part3.classS,[check]
+cho-amusements-to-dwh,pa.part3.classN,[check] casino or amusement arcade into a home
+cho-comm-to-school,pa.part3.classT,[check]
+cho-commercial-to-dwh,pa.part3.classMA,[check]
+cho-commercial-to-mixed,pa.part3.classG,[check] commercial building to mixed use
+cho-sui-to-dwh,pa.part3.classM,[check] sui generis uses such as betting offices or launderettes into a home
+consent-under-tpo,wtt.consent,[check]
+demolition-con-area,pp.full.demolition,[check]
+extend-duration-permission,pp.full.minor,[check] treated like a renewal of permission
+extraction-oil-gas,onshoreExtractionOilAndGas.other,[check] no bare onshoreExtractionOilAndGas; other is the general case
+footpath-diversion,rightsOfWayOrder,[check]
+full,pp.full.minor,[check] the post submission schema has no bare pp.full; minor stands in. Use pp.full.major for major applications
+haz-substance-consent,hazardousSubstanceConsent,
+hedgerow-removal,hedgerowRemovalNotice,
+hh,pp.full.householder,
+land-drainage-consent,landDrainageConsent,
+lbc,listed,
+ldc,ldc.existing,[check] generic certificate; could be existing or proposed
+ldc,ldc.proposed,[check] generic certificate; could be existing or proposed
+ldc-existing-use,ldc.existing,
+ldc-proposed-work-lb,ldc.listedBuildingWorks,
+ldc-prospective-use,ldc.proposed,
+mineral-app,pp.mineralExtraction,
+mineral-extraction,pp.mineralExtraction,[check]
+mod-construction-hours,amendment.minorMaterial,[check] varying a construction hours condition
+mod-discharge-s106,obligation.discharge,[check] also mapped to other
+mod-discharge-s106,obligation.modify,[check] also mapped to other
+non-material-amendment,amendment.nonMaterial,
+notice-trees-in-con-area,wtt.notice,[check]
+nsips,,"[no fit] nationally significant infrastructure is consented by development consent order, which the standard has no type for"
+outline,pp.outline,
+outline-all,pp.outline.all,
+outline-some,pp.outline.some,
+overhead-lines,,[no fit] overhead electricity line consent is not a planning application type in the standard
+pa-accom-defence,pa.part19.classTA,[check] closed defence site
+pa-build-agri-forest,pa.part6,"[check] agricultural or forestry buildings; class A, B or E not known"
+pa-col-fac-shop,pa.part7.classC,
+pa-demo-building,pa.part11.classB,
+pa-demo-replace-dwh,pa.part20.classZA,[check]
+pa-ecomms-network,pa.part16.classA,
+pa-excavate-agri,pa.part6,[check] agricultural development; the standard has no narrower value
+pa-extension,pa.part1.classA,[check]
+pa-fish-struct,pa.part6,[check] agricultural development; the standard has no narrower value
+pa-flats-de-blocks,pa.part20.classA,[check]
+pa-flats-de-comm,pa.part20.classAA,[check] homes on a detached commercial building
+pa-flats-de-dwh,pa.part20.classAD,[check] homes on a detached house
+pa-flats-terr-comm,pa.part20.classAB,[check] homes on an adjoining commercial or mixed use building
+pa-flats-terr-dwh,pa.part20.classAC,[check] homes on adjoining houses
+pa-movable-structure,pa.part4.classBB,[check] temporary structure
+pa-road-agri-forest,pa.part6,[check] agricultural or forestry development; the standard has no narrower value
+pa-roof-solar-nondom,pa.part14.classJ,
+pa-sa-solar-dom,pa.part14.classB,
+pa-sa-solar-nondom,pa.part14.classK,
+pa-solar-eq-dom,pa.part14.classA,
+pa-solar-nondom-park,pa.part14.classOA,
+pa-storey,pa.part1.classAA,[check]
+pa-tmp-school-vacant-comm,pa.part4.classCA,
+pa-tmp-use-comm-film,pa.part4.classE,
+pa-uni-building,pa.part7.classM,
+pip,pp.pip,
+prior-approval,pa.part1.classA,"[check] generic prior approval, class not known; there is no bare pa"
+psi-app,,[check] unclear what this type is; read MHCLG's description (dpr mappers fetch) before mapping
+reg-3,pp.full.minor,"[check] council's own development, size not known"
+reg-4,pp.full.minor,"[check] council's own development, size not known"
+reserved-matters,approval.reservedMatters,
+romp,onshoreExtractionOilAndGas.review,[check] the only review of mineral permissions value in the standard is the oil and gas one
+s73,amendment.minorMaterial,
+technical-details-consent,pp.full.major.technicalDetails,[check] also mapped to other
+technical-details-consent,pp.full.minor.technicalDetails,[check] also mapped to other
+twao,,[no fit] a Transport and Works Act order is not a planning application type in the standard
+waste-dev,pp.full.major.waste,[check]

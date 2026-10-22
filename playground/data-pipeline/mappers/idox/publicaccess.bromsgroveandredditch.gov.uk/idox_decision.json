@@ -1,0 +1,214 @@
+[
+  {
+    "value": "A21G",
+    "text": "A21 Granted"
+  },
+  {
+    "value": "A21R",
+    "text": "A21 Refusal"
+  },
+  {
+    "value": "ADVSD",
+    "text": "Advert Split Decision"
+  },
+  {
+    "value": "APEAL",
+    "text": "Appeal Dismissed"
+  },
+  {
+    "value": "APPL",
+    "text": "Approved at Appeal - Non-determination"
+  },
+  {
+    "value": "ART4",
+    "text": "Article 4(1) Direction"
+  },
+  {
+    "value": "C1",
+    "text": "C of L Existing Use - Approval"
+  },
+  {
+    "value": "C2",
+    "text": "C of L Existing Use - Refusal"
+  },
+  {
+    "value": "C3",
+    "text": "C of L Proposed Use - Approval"
+  },
+  {
+    "value": "C4",
+    "text": "C of L of Proposed Use - Refusal"
+  },
+  {
+    "value": "C5LB",
+    "text": "C of L Proposed Works (LB) - Approval"
+  },
+  {
+    "value": "C6",
+    "text": "C of L Proposed Use Revoked"
+  },
+  {
+    "value": "C7",
+    "text": "C of L of Proposed Use - Split"
+  },
+  {
+    "value": "EIANT",
+    "text": "EIA Not required"
+  },
+  {
+    "value": "EIAR",
+    "text": "EIA required"
+  },
+  {
+    "value": "FDO",
+    "text": "Finally Disposed Of"
+  },
+  {
+    "value": "FINR",
+    "text": "Further information not rec"
+  },
+  {
+    "value": "GRANT7",
+    "text": "Section73 Grant Planning Permission"
+  },
+  {
+    "value": "GRANTA",
+    "text": "Advertisement Consent Granted"
+  },
+  {
+    "value": "GRANTC",
+    "text": "Grant of Minor Commercial Development"
+  },
+  {
+    "value": "GRANTF",
+    "text": "Full Application Granted"
+  },
+  {
+    "value": "GRANTH",
+    "text": "Householder Granted"
+  },
+  {
+    "value": "GRANTL",
+    "text": "Listed Building Consent Granted"
+  },
+  {
+    "value": "GRANTO",
+    "text": "Outline Application Granted"
+  },
+  {
+    "value": "GRANTP",
+    "text": "Permission in Principle Granted"
+  },
+  {
+    "value": "GRANTR",
+    "text": "Grant Reserved Matters"
+  },
+  {
+    "value": "GRANTT",
+    "text": "Trees Granted"
+  },
+  {
+    "value": "GRANTX",
+    "text": "Hybrid Application"
+  },
+  {
+    "value": "NGA",
+    "text": "Notification GDO"
+  },
+  {
+    "value": "NOOBJC",
+    "text": "No Objection"
+  },
+  {
+    "value": "OBJECT",
+    "text": "Objection"
+  },
+  {
+    "value": "OPAC",
+    "text": "Opinion accepted"
+  },
+  {
+    "value": "OPVA",
+    "text": "Opinion varied"
+  },
+  {
+    "value": "PD",
+    "text": "Permitted Development"
+  },
+  {
+    "value": "PER106",
+    "text": "Granted Subject to S106 agreement"
+  },
+  {
+    "value": "PRIO4",
+    "text": "Prior Approval Deemed Consent"
+  },
+  {
+    "value": "PRIOR",
+    "text": "Prior Approval Required"
+  },
+  {
+    "value": "PRIOR1",
+    "text": "Prior Approval Not Required"
+  },
+  {
+    "value": "PRIOR2",
+    "text": "Prior Approval Required But Not Granted"
+  },
+  {
+    "value": "PRIOR3",
+    "text": "Prior Approval Required and Granted"
+  },
+  {
+    "value": "PRRQD",
+    "text": "Permission Required"
+  },
+  {
+    "value": "REFUS7",
+    "text": "Section73 Refuse Planning Permission"
+  },
+  {
+    "value": "REFUSA",
+    "text": "Advertisement Consent Refusal"
+  },
+  {
+    "value": "REFUSC",
+    "text": "Refusal of Minor Commercial Development"
+  },
+  {
+    "value": "REFUSE",
+    "text": "Application Refusal"
+  },
+  {
+    "value": "REFUSH",
+    "text": "Householder Refusal"
+  },
+  {
+    "value": "REFUSL",
+    "text": "Listed Building Consent Refusal"
+  },
+  {
+    "value": "REFUSO",
+    "text": "Outline Application Refusal"
+  },
+  {
+    "value": "REFUSP",
+    "text": "Permission in Principle Refusal"
+  },
+  {
+    "value": "REFUST",
+    "text": "Refusal Trees"
+  },
+  {
+    "value": "REFUSX",
+    "text": "Hybrid Application"
+  },
+  {
+    "value": "TRANS",
+    "text": "Transfered"
+  },
+  {
+    "value": "WDN",
+    "text": "Application Withdrawn"
+  }
+]

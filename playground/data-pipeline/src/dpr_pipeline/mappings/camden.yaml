@@ -1,0 +1,121 @@
+# Camden open data (NEC M3), one flat json object per application.
+#
+# Each entry says where a value lives in the council's record. The mapper in mappers/camden.py
+# does the rest, so a field Camden starts sending later is one more line here.
+#
+#   from      a field name, a dotted path into nested json, or a list of them to join
+#   join      what to put between a list of fields, default a space
+#   first     true, to take the first of a list of fields that has a value instead of joining
+#   as        date, to read it as a date
+#   upper     true, to compare codes in upper case
+#   lookup    a table below, to turn a code into the council's wording
+#
+# Names beginning with "opt_" are things the standard can carry that a source may or may not have.
+# Leave them out and the record simply has no such block.
+
+council: camden
+
+fields:
+  reference:      {from: application_number}
+  type:           {from: application_type}
+  status:         {from: system_status}
+  decision:       {from: decision_type}
+  # When the status last changed: the withdrawal date for a withdrawn application and, for lack of
+  # anything better, the date an appeal was lodged.
+  status_changed: {from: system_status_change_date, as: date}
+  # The statutory return code. It says whether a full or outline application was major or minor.
+  size_code:      {from: statutory_return_code, upper: true}
+  # When it arrived, not when it was registered: the two can be months apart. Registered is the
+  # fallback for older rows that have no received date.
+  received:       {from: [application_received_date, registered_date], first: true, as: date}
+  validated:      {from: valid_from_date, as: date}
+  registered:     {from: registered_date, as: date}
+  decided:        {from: decision_date, as: date}
+  officer:        {from: case_officer}
+  address:        {from: development_address}
+  description:    {from: development_description}
+  applicant:      {from: applicant_name}
+  # The point is in the flat columns. (In the extended dataset "location" is the site's polygon,
+  # not a point, so it is read as the boundary below. A {latitude, longitude} location from the
+  # older dataset is still understood.)
+  latitude:       {from: [latitude, location.latitude], first: true}
+  longitude:      {from: [longitude, location.longitude], first: true}
+  easting:        {from: easting}
+  northing:       {from: northing}
+
+  # The real site, as a GeoJSON Polygon. Camden's plotted sites only; rows with no spatial
+  # information have none, and fall back to a square around the point.
+  opt_boundary:   {from: location}
+
+  # The date by which Camden should have decided: the extended one when it was extended, otherwise
+  # the statutory one. Rows with neither are estimated (see expiry.py) and flagged.
+  opt_expiry:     {from: [extended_expiry_date, statutory_expiry_date], first: true, as: date}
+
+  # Not in Camden's open data today. Uncomment and name the source field when it appears.
+  # opt_recommendation:     {from: officer_recommendation}
+  # opt_committee_sent:     {from: committee_date, as: date}
+  # opt_notice_url:         {from: decision_notice_url}
+  # opt_withdrawn_reason:   {from: withdrawn_reason}
+
+lookups:
+  # What Camden's five system statuses mean here. Only withdrawn and the appeal stages change the
+  # record; the others are listed so a new status shows up as something to look at.
+  status_kind:
+    Registered: undetermined
+    Final Decision: determined
+    Withdrawn: withdrawn
+    Appeal Lodged: appeal-lodged
+    Appeal Decided: appeal-decided
+
+  # All 44 wordings Camden uses for a decision, sorted into what the standard can say. A wording
+  # that is not granted or refused is "none" and is reported rather than guessed: part granted and
+  # part refused is a split decision, "would have refused" on a non-determination is not a decision,
+  # and prior approval not being required is neither.
+  decision_outcome:
+    Granted: granted
+    Granted Subject to a Section 106 Legal Agreement: granted
+    Granted and Warning of Enforcement Action: granted
+    Granted and Enforcement Action to be Taken: granted
+    Granted subject to a Section 106 Legal Agreement and Warning of Enforcement Action: granted
+    Approve Works (TPO): granted
+    Approve Emergency Works (TPO): granted
+    No Objection to Works to Tree(s) in CA: granted
+    No Objection to Emergency Works (CA): granted
+    No objection: granted
+    Approval: granted
+    Grant Prior Approval: granted
+    Granted Prior approval subject to Section 106 Legal agreement: granted
+    Prior Approval Required - Approval Given: granted
+    Deemed Consent - No Objection: granted
+    Approve Heritage Partnership Agreement: granted
+    Agree S106 Deed of Variation: granted
+
+    Refused: refused
+    Refused and Warning of Enforcement Action to be Taken: refused
+    Refused and Warning of Prosecution Action to be Taken: refused
+    Refuse Works (TPO): refused
+    Refuse Emergency Works (TPO): refused
+    Prior Approval Required - Approval Refused: refused
+    Refuse Prior Approval: refused
+
+    Withdrawn Decision: withdrawn
+
+    Part Granted/Refused: none
+    Part Granted/Refused - warn of prosecution: none
+    Grant Certificate, Refuse Application: none
+    "Non-Determination: would have refused": none
+    "Non-Determination: would have granted": none
+    Prior Approval not required: none
+    Objection to Works to Tree(s) in a CA: none
+    Objection to Emergency Works (CA): none
+    Objection: none
+    Deemed Consent - Objection: none
+    EIA Not Required: none
+    EIA Required: none
+    Notified: none
+    Void: none
+    Complaint upheld: none
+    Complaint rejected: none
+    Pre-application Advice Issued: none
+    Limited Period: none
+    Listed as Asset of Community Value: none

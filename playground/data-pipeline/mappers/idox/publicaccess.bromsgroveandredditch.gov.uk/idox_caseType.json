@@ -1,0 +1,246 @@
+[
+  {
+    "value": "A21",
+    "text": "Article 21 Discharge of conditions (A21)"
+  },
+  {
+    "value": "ADV",
+    "text": "Application to Display Adverts (ADV)"
+  },
+  {
+    "value": "AGR",
+    "text": "Agricultural Notification (AGR)"
+  },
+  {
+    "value": "ART4",
+    "text": "Article 4 Direction (ART4)"
+  },
+  {
+    "value": "BDC",
+    "text": "bdc (BDC)"
+  },
+  {
+    "value": "CAD",
+    "text": "Cert. of appropriate alternative dev (CAD)"
+  },
+  {
+    "value": "CCS",
+    "text": "County Council Statement (CCS)"
+  },
+  {
+    "value": "CERTLB",
+    "text": "Listed Building Cert (CERTLB)"
+  },
+  {
+    "value": "COL",
+    "text": "Certificate of Lawfulness - Historic (COL)"
+  },
+  {
+    "value": "CON",
+    "text": "Conservation Area Consent (CON)"
+  },
+  {
+    "value": "CONSV",
+    "text": "Trees(Conservation Areas) (CONSV)"
+  },
+  {
+    "value": "COU",
+    "text": "Change of Use (COU)"
+  },
+  {
+    "value": "CPE",
+    "text": "Certificate Existing Lawful Use/Dev (CPE)"
+  },
+  {
+    "value": "CPL",
+    "text": "Certificate Proposed Lawful Use/Dev (CPL)"
+  },
+  {
+    "value": "CPO",
+    "text": "Consultation with County Planning (CPO)"
+  },
+  {
+    "value": "CUPRIO",
+    "text": "COU Prior Approval (CUPRIO)"
+  },
+  {
+    "value": "DEM",
+    "text": "Demolition Notification (DEM)"
+  },
+  {
+    "value": "DOE",
+    "text": "Dept of Environment Circ. (DOE)"
+  },
+  {
+    "value": "ENFGA",
+    "text": "Enforcement Ground Appeal (ENFGA)"
+  },
+  {
+    "value": "EOR",
+    "text": "Environmental Outcome Report - EIA (EOR)"
+  },
+  {
+    "value": "EXTIME",
+    "text": "Extension of time for permission (EXTIME)"
+  },
+  {
+    "value": "FUL",
+    "text": "Full Application (FUL)"
+  },
+  {
+    "value": "HAZ",
+    "text": "Hazardous Substance Consent (HAZ)"
+  },
+  {
+    "value": "HEDG",
+    "text": "Hedgerow Removal Notice under Regulation (HEDG)"
+  },
+  {
+    "value": "HHEDGE",
+    "text": "High Hedge (HHEDGE)"
+  },
+  {
+    "value": "HHPRIO",
+    "text": "Householder Prior Notification (HHPRIO)"
+  },
+  {
+    "value": "HIST",
+    "text": "Historic Record 5 digit counter (HIST)"
+  },
+  {
+    "value": "HIST1",
+    "text": "HIST1 (HIST1)"
+  },
+  {
+    "value": "HIST2",
+    "text": "HIST2 (HIST2)"
+  },
+  {
+    "value": "HIST3",
+    "text": "HIST3 (HIST3)"
+  },
+  {
+    "value": "HIST4",
+    "text": "HIST4 (HIST4)"
+  },
+  {
+    "value": "HIST5",
+    "text": "Historic record year and counter (HIST5)"
+  },
+  {
+    "value": "HIST6",
+    "text": "HIST6 - Historic Application No B (HIST6)"
+  },
+  {
+    "value": "HYB",
+    "text": "Hybrid (HYB)"
+  },
+  {
+    "value": "LBC",
+    "text": "Listed Building Consent (LBC)"
+  },
+  {
+    "value": "NMC",
+    "text": "Non-material change to permission (NMC)"
+  },
+  {
+    "value": "NONMAT",
+    "text": "Non Material Alteration of permission (NONMAT)"
+  },
+  {
+    "value": "NOT",
+    "text": "PD Notification (NOT)"
+  },
+  {
+    "value": "NSIP",
+    "text": "Nat Sig Inf Project (NSIP)"
+  },
+  {
+    "value": "NULL",
+    "text": "null (NULL)"
+  },
+  {
+    "value": "OHL",
+    "text": "Circular 14/90 Overhead Electricity Line (OHL)"
+  },
+  {
+    "value": "OUT",
+    "text": "Outline Application (OUT)"
+  },
+  {
+    "value": "PIP",
+    "text": "Permission in Principle (PIP)"
+  },
+  {
+    "value": "PRIOR",
+    "text": "Notification for Prior Approval (PRIOR)"
+  },
+  {
+    "value": "RBC1",
+    "text": "rbc (RBC1)"
+  },
+  {
+    "value": "REG3",
+    "text": "Local Authority app - Dev by others (REG3)"
+  },
+  {
+    "value": "REG4",
+    "text": "Local Authority app - Dev by LA (REG4)"
+  },
+  {
+    "value": "REM",
+    "text": "Approval of Reserved Matters (REM)"
+  },
+  {
+    "value": "RWPRIO",
+    "text": "Railway Prior Approval (RWPRIO)"
+  },
+  {
+    "value": "S106A",
+    "text": "Modification or Discharge of S.106 (S106A)"
+  },
+  {
+    "value": "S19",
+    "text": "Section 19 Application (S19)"
+  },
+  {
+    "value": "S211",
+    "text": "Section 211 Notice (S211)"
+  },
+  {
+    "value": "S52A",
+    "text": "Section 52 Agreement (S52A)"
+  },
+  {
+    "value": "S73",
+    "text": "Section 73 Application (S73)"
+  },
+  {
+    "value": "S73A",
+    "text": "Retrospective Planning Application (S73A)"
+  },
+  {
+    "value": "S96",
+    "text": "NON MATERIAL AMENDMENT (S96)"
+  },
+  {
+    "value": "SCOP",
+    "text": "Enviromental Scoping (SCOP)"
+  },
+  {
+    "value": "TDC",
+    "text": "Technical Details Consent (TDC)"
+  },
+  {
+    "value": "TEL",
+    "text": "Telecommunications Notification (TEL)"
+  },
+  {
+    "value": "TEMP",
+    "text": "Temporary Change of Use (TEMP)"
+  },
+  {
+    "value": "TPO",
+    "text": "Works to a tree with a TPO (TPO)"
+  }
+]

@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# local config and secrets, never committed
+.env
+config/config.yaml
+
+# Runtime data at the project root: the database, the raw pages we pulled. Never committed.
+# Anchored with a leading slash so it does not also catch src/dpr_pipeline/data, which
+# holds the vendored lists the package cannot start without.
+/data/
+*.duckdb
+*.duckdb.wal

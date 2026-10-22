@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Published applications</title>
+    <link rel="stylesheet" href="/admin/admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/addon/merge/merge.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="header-row">
+        <div>
+          <h1>Applications</h1>
+          <div class="sub">
+            <a href="/admin/mappers">Value mappers</a> &middot;
+            <a href="/lab/">Review lab</a> &middot; <a href="/docs">API docs</a>
+          </div>
+        </div>
+        <div class="sub" id="blurb"></div>
+      </div>
+      <div class="header-row">
+        <label class="council-pick"
+          >Council
+          <select id="council" aria-label="Council"></select
+        ></label>
+        <div class="layers" role="group" aria-label="Layer pipeline">
+          <button type="button" data-layer="bronze" aria-pressed="false">
+            <span class="layer-info">
+              <span class="layer-title">Bronze</span>
+              <span class="layer-sub">Raw input</span>
+            </span>
+            <small></small>
+          </button>
+          <div
+            class="pipeline-sep"
+            id="sepBronzeSilver"
+            title="Bronze records not yet in silver"
+          >
+            <span class="sep-arrow">&rarr;</span>
+            <span class="sep-text"
+              ><strong id="unmappedCount">0</strong> unmapped</span
+            >
+          </div>
+          <button type="button" data-layer="silver" aria-pressed="false">
+            <span class="layer-info">
+              <span class="layer-title">Silver</span>
+              <span class="layer-sub">Standardised</span>
+            </span>
+            <small></small>
+          </button>
+          <div
+            class="pipeline-sep"
+            id="sepSilverGold"
+            title="Silver records not yet in gold"
+          >
+            <span class="sep-arrow">&rarr;</span>
+            <span class="sep-text"
+              ><strong id="unpublishedCount">0</strong> unpublished</span
+            >
+          </div>
+          <button type="button" data-layer="gold" aria-pressed="true">
+            <span class="layer-info">
+              <span class="layer-title">Gold</span>
+              <span class="layer-sub">Published</span>
+            </span>
+            <small></small>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <details
+      class="progress"
+      id="progress"
+      hidden
+      aria-label="How much of this council's data got through"
+    >
+      <summary>Mapping progress</summary>
+      <div class="progress-grid" id="progressGrid"></div>
+    </details>
+
+    <div class="progress-detail" id="progressDetail" hidden></div>
+
+    <main>
+      <div id="message" role="status" hidden></div>
+
+      <div class="active-filter-banner" id="activeFilterBanner" hidden>
+        <span
+          >Filtering by missing field: <strong id="activeFilterName"></strong
+        ></span>
+        <button type="button" class="secondary" id="clearActiveFilter">
+          &times; Clear filter
+        </button>
+      </div>
+
+      <div class="controls">
+        <input
+          id="search"
+          type="search"
+          placeholder="Search by reference, address or description"
+          autocomplete="off"
+          aria-label="Search"
+        />
+        <select id="sort" aria-label="Sort by">
+          <option value="reference">Reference</option>
+          <option value="published_at">Published</option>
+          <option value="updated_at">Last edited</option>
+        </select>
+        <select id="order" aria-label="Order">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+        <select id="state" aria-label="State">
+          <option value="all">All</option>
+          <option value="waiting">Waiting for approval</option>
+          <option value="approved">Approved</option>
+          <option value="flagged">Needs a look</option>
+        </select>
+      </div>
+
+      <div class="bulk" id="bulk">
+        <span class="counts" id="counts">Counting…</span>
+        <button id="approveClean">Approve all clean</button>
+        <button class="secondary" id="approveSelected">Approve selected</button>
+        <button class="secondary" id="unapproveSelected">
+          Unapprove selected
+        </button>
+      </div>
+      <div class="bulk" id="layerNote" hidden>
+        <span class="counts" id="layerCounts"></span>
+      </div>
+
+      <table>
+        <thead>
+          <tr id="head"></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div id="empty" class="empty" hidden></div>
+
+      <div class="pager">
+        <button class="secondary" id="prev">Previous</button>
+        <button class="secondary" id="next">Next</button>
+        <span class="count" id="count"></span>
+      </div>
+    </main>
+
+    <dialog id="editor" aria-labelledby="editorTitle">
+      <form method="dialog" id="editorForm">
+        <div class="dialog-head">
+          <div class="dialog-title-row">
+            <div>
+              <strong id="editorTitle"></strong>
+              <span id="editorBadge" class="layer-badge"></span>
+            </div>
+            <div class="dialog-nav" id="dialogNav">
+              <button
+                type="button"
+                class="secondary"
+                id="editorPrev"
+                title="Previous record (Alt+[ or [)"
+              >
+                ← Prev
+              </button>
+              <span id="editorPos" class="desc"></span>
+              <button
+                type="button"
+                class="secondary"
+                id="editorNext"
+                title="Next record (Alt+] or ])"
+              >
+                Next →
+              </button>
+            </div>
+          </div>
+          <div class="sub" id="editorSub"></div>
+        </div>
+        <div class="dialog-body">
+          <div class="diff-container" id="diffViewContainer" hidden>
+            <div class="diff-head-split">
+              <div class="diff-head-col">
+                <strong>Silver (Standardised)</strong>
+                <span class="sub">Read-only original</span>
+              </div>
+              <div class="diff-head-col">
+                <strong>Gold (Published)</strong>
+                <span class="sub">Editable version</span>
+              </div>
+            </div>
+            <div id="diffMerge"></div>
+          </div>
+          <div id="singleViewContainer">
+            <textarea
+              id="record"
+              spellcheck="false"
+              aria-label="The record as JSON"
+            ></textarea>
+          </div>
+          <div class="checks" id="checks">
+            <button
+              type="button"
+              class="secondary"
+              id="formatJson"
+              title="Re-indent and format JSON cleanly"
+            >
+              Format JSON
+            </button>
+            <button
+              type="button"
+              class="secondary"
+              id="checkPrivate"
+              title="postSubmissionApplication, the unredacted application"
+            >
+              Validate: private schema
+            </button>
+            <button
+              type="button"
+              class="secondary"
+              id="checkPublic"
+              title="postSubmissionPublishedApplication, the published copy"
+            >
+              Validate: public schema
+            </button>
+            <span class="sub"
+              >Private is postSubmissionApplication. Public is
+              postSubmissionPublishedApplication. It checks what is in the box
+              above, edits included.</span
+            >
+          </div>
+          <div class="verdict" id="verdict" role="status" hidden></div>
+          <div class="history" id="history"></div>
+        </div>
+        <div class="dialog-foot">
+          <button
+            value="save"
+            id="save"
+            title="Save changes (Ctrl+Enter / Cmd+Enter)"
+          >
+            Save changes
+          </button>
+          <button value="cancel" class="secondary" id="cancel" formnovalidate>
+            Cancel
+          </button>
+          <button value="delete" class="danger" id="remove" formnovalidate>
+            Unpublish
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/addon/merge/merge.min.js"></script>
+
+    <script>
+      const LAYERS = {
+        bronze: {
+          blurb: 'Bronze: exactly what the council sent. Read only.',
+          editable: false
+        },
+        silver: {
+          blurb:
+            "Silver: the council's data in the standard's shape. Never edited.",
+          editable: false
+        },
+        gold: {
+          blurb:
+            'Gold: what is published. Editing here never changes what the council sent.',
+          editable: true
+        }
+      }
+      const params = new URLSearchParams(location.search)
+      const state = {
+        layer: LAYERS[params.get('layer')] ? params.get('layer') : 'gold',
+        page: 1,
+        size: 20,
+        current: null,
+        busy: false,
+        issue: null,
+        rows: [],
+        currentIndex: -1
+      }
+      const $ = (id) => document.getElementById(id)
+      const editor = $('editor')
+
+      // ---- CodeMirror Setup
+
+      const cmSingle = CodeMirror.fromTextArea($('record'), {
+        mode: { name: 'javascript', json: true },
+        lineNumbers: true,
+        tabSize: 2,
+        indentUnit: 2,
+        lineWrapping: false
+      })
+
+      const cmMerge = CodeMirror.MergeView($('diffMerge'), {
+        value: '',
+        origLeft: '',
+        lineNumbers: true,
+        mode: { name: 'javascript', json: true },
+        tabSize: 2,
+        indentUnit: 2,
+        lineWrapping: false,
+        highlightDifferences: true,
+        connect: 'align',
+        collapseIdentical: false,
+        revertButtons: true
+      })
+
+      function getActiveEditor() {
+        return state.layer === 'gold' ? cmMerge.editor() : cmSingle
+      }
+
+      function editorName() {
+        let name = localStorage.getItem('dpr-editor')
+        if (!name) {
+          name = prompt('Your email, so changes can be attributed:') || ''
+          if (name) localStorage.setItem('dpr-editor', name)
+        }
+        return name
+      }
+
+      let messageTimer
+      function say(text, bad) {
+        const box = $('message')
+        box.textContent = text
+        box.className = bad ? 'message bad' : 'message'
+        box.hidden = false
+        clearTimeout(messageTimer)
+        messageTimer = setTimeout(() => {
+          box.hidden = true
+        }, 4000)
+      }
+
+      const escapeHtml = (value) =>
+        String(value ?? '').replace(
+          /[&<>"]/g,
+          (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])
+        )
+      const council = () => $('council').value
+      const when = (iso) => (iso ? iso.slice(0, 16).replace('T', ' ') : '')
+
+      async function api(path, options = {}) {
+        const response = await fetch(path, options)
+        if (!response.ok) {
+          let detail = response.statusText
+          try {
+            detail = (await response.json())?.status?.message || detail
+          } catch {
+            /* no body */
+          }
+          throw new Error(detail)
+        }
+        return response.status === 204 ? null : response.json()
+      }
+
+      // ---- active filter banner
+
+      function updateActiveFilterBanner() {
+        const banner = $('activeFilterBanner')
+        if (!banner) return
+        if (state.issue) {
+          $('activeFilterName').textContent = state.issue
+          banner.hidden = false
+        } else {
+          banner.hidden = true
+        }
+      }
+
+      // ---- the layer switch
+
+      function setLayer(layer) {
+        state.layer = layer
+        state.page = 1
+        for (const button of document.querySelectorAll('.layers button')) {
+          button.setAttribute('aria-pressed', button.dataset.layer === layer)
+        }
+        $('blurb').textContent = LAYERS[layer].blurb
+        const gold = layer === 'gold'
+        $('bulk').hidden = !gold
+        $('layerNote').hidden = gold
+        $('state').hidden = !gold
+        $('sort').hidden = !gold
+        $('sort').value = 'reference'
+        const url = new URL(location.href)
+        url.searchParams.set('layer', layer)
+        history.replaceState(null, '', url)
+        updateActiveFilterBanner()
+        load()
+      }
+      for (const button of document.querySelectorAll('.layers button')) {
+        button.addEventListener('click', () => setLayer(button.dataset.layer))
+      }
+
+      // ---- the table, which has different columns in each layer
+
+      const COLUMNS = {
+        bronze: ['Council reference', 'Address', 'Mapped to', 'Pulled'],
+        silver: ['Reference', 'Address', 'Type', 'Status', 'Mapped'],
+        gold: ['', 'Reference', 'Address', 'Type', 'Decision', '']
+      }
+
+      function why(item) {
+        return (item.flags || [])
+          .map(
+            (f) =>
+              '<div class="why">' +
+              escapeHtml(f.field) +
+              ': ' +
+              escapeHtml(f.reason) +
+              ' <a href="/admin/mappers?table=' +
+              encodeURIComponent(f.field) +
+              '" class="fix-link">Fix in mappers &rarr;</a></div>'
+          )
+          .join('')
+      }
+
+      function rowHtml(item) {
+        const open =
+          '<td><button class="secondary" data-open>Open</button></td>'
+        const address =
+          '<td class="hide-small desc">' +
+          escapeHtml(item.address || '') +
+          '<div>' +
+          escapeHtml((item.description || '').slice(0, 90)) +
+          '</div></td>'
+
+        if (state.layer === 'bronze') {
+          return (
+            '<td><div class="ref">' +
+            escapeHtml(item.reference) +
+            '</div></td>' +
+            address +
+            '<td>' +
+            (item.mappedTo
+              ? '<span class="tag live">' +
+                escapeHtml(item.mappedTo) +
+                '</span>'
+              : '<span class="tag waiting">not mapped</span>') +
+            '</td><td class="desc">' +
+            when(item.pulledAt) +
+            '</td>' +
+            open
+          )
+        }
+
+        const type =
+          '<td><span class="tag">' +
+          escapeHtml(item.record?.applicationType || '') +
+          '</span></td>'
+
+        if (state.layer === 'silver') {
+          return (
+            '<td><div class="ref">' +
+            escapeHtml(item.reference) +
+            '</div><div class="desc">' +
+            (item.inGold
+              ? '<span class="tag live">in gold</span>'
+              : '<span class="tag waiting">not in gold</span>') +
+            (item.flagged
+              ? ' <span class="tag flagged">needs a look</span>'
+              : '') +
+            why(item) +
+            '</div></td>' +
+            address +
+            type +
+            '<td class="desc">' +
+            escapeHtml(item.status || '') +
+            '</td><td class="desc">' +
+            when(item.mappedAt) +
+            '</td>' +
+            open
+          )
+        }
+
+        return (
+          '<td class="pick"><input type="checkbox" class="pick-one" data-reference="' +
+          escapeHtml(item.reference) +
+          '" aria-label="Select ' +
+          escapeHtml(item.reference) +
+          '"></td><td><div class="ref">' +
+          escapeHtml(item.reference) +
+          '</div><div class="desc">' +
+          escapeHtml(item.council) +
+          ' ' +
+          (item.approved
+            ? '<span class="tag live">approved</span>'
+            : '<span class="tag waiting">waiting</span>') +
+          (item.flagged
+            ? ' <span class="tag flagged">needs a look</span>'
+            : '') +
+          (item.edited ? ' <span class="tag edited">edited</span>' : '') +
+          why(item) +
+          '</div></td>' +
+          address +
+          type +
+          '<td class="hide-small desc">' +
+          escapeHtml(item.decision || '') +
+          '</td>' +
+          open
+        )
+      }
+
+      async function load() {
+        if (!council()) return
+        const query = new URLSearchParams({
+          page: state.page,
+          size: state.size,
+          q: $('search').value.trim(),
+          order: $('order').value
+        })
+        if (state.layer === 'gold') {
+          query.set('sort', $('sort').value)
+          // The backend only accepts 'all', 'waiting', or 'approved'.
+          // When 'flagged' is chosen, request 'all' from the server and filter client-side.
+          const stateVal = $('state').value
+          query.set('state', stateVal === 'flagged' ? 'all' : stateVal)
+        }
+        if (state.issue && state.layer !== 'bronze')
+          query.set('issue', state.issue)
+
+        let body
+        try {
+          body = await api(
+            '/admin/data/' +
+              encodeURIComponent(council()) +
+              '/' +
+              state.layer +
+              '?' +
+              query
+          )
+        } catch (error) {
+          say('Could not load ' + state.layer + ': ' + error.message, true)
+          return
+        }
+
+        let rows = body.rows || []
+        if (state.layer === 'gold' && $('state').value === 'flagged') {
+          rows = rows.filter((r) => r.flagged)
+        }
+        state.rows = rows
+
+        $('head').innerHTML =
+          COLUMNS[state.layer]
+            .map(
+              (h, i) =>
+                '<th' +
+                (state.layer !== 'bronze' && [2].includes(i)
+                  ? ' class="hide-small"'
+                  : '') +
+                '>' +
+                h +
+                (state.layer === 'gold' && i === 0
+                  ? '<input type="checkbox" id="pickAll" aria-label="Select all on this page">'
+                  : '') +
+                '</th>'
+            )
+            .join('') + '<th></th>'
+        if (state.layer === 'gold') $('head').lastElementChild.remove()
+
+        const tbody = $('rows')
+        tbody.innerHTML = ''
+        for (const item of rows) {
+          const tr = document.createElement('tr')
+          tr.className = 'row'
+          tr.innerHTML = rowHtml(item)
+          tr.querySelector('[data-open]').addEventListener('click', () =>
+            open(item)
+          )
+          tbody.appendChild(tr)
+        }
+        const pickAll = $('pickAll')
+        if (pickAll)
+          pickAll.addEventListener('change', (event) => {
+            for (const box of document.querySelectorAll('.pick-one'))
+              box.checked = event.target.checked
+          })
+
+        $('empty').hidden = rows.length !== 0
+        $('empty').textContent = $('search').value.trim()
+          ? 'Nothing in this layer matches that search.'
+          : $('state').value === 'flagged'
+          ? 'No records needing a look found on this page.'
+          : state.layer === 'gold'
+          ? 'Nothing published yet. Run dpr publish.'
+          : 'Nothing in ' +
+            state.layer +
+            ' yet. Run the pipeline for ' +
+            council() +
+            '.'
+
+        if ($('state').value === 'flagged') {
+          $('count').textContent = rows.length
+            ? rows.length + ' needing a look on this page'
+            : ''
+        } else {
+          const from = (body.page - 1) * body.size + 1
+          $('count').textContent = body.total
+            ? from +
+              ' to ' +
+              Math.min(body.page * body.size, body.total) +
+              ' of ' +
+              body.total
+            : ''
+        }
+        $('prev').disabled = state.page <= 1
+        $('next').disabled = state.page >= body.pages
+      }
+
+      // ---- opening and navigating records
+
+      function updateEditorNav() {
+        const prevBtn = $('editorPrev')
+        const nextBtn = $('editorNext')
+        const pos = $('editorPos')
+        if (!prevBtn || !nextBtn || !pos) return
+        if (state.currentIndex >= 0 && state.rows.length) {
+          prevBtn.disabled = state.currentIndex <= 0
+          nextBtn.disabled = state.currentIndex >= state.rows.length - 1
+          pos.textContent = state.currentIndex + 1 + ' of ' + state.rows.length
+        } else {
+          prevBtn.disabled = true
+          nextBtn.disabled = true
+          pos.textContent = ''
+        }
+      }
+
+      function navigateRecord(delta) {
+        const targetIndex = state.currentIndex + delta
+        if (targetIndex >= 0 && targetIndex < state.rows.length) {
+          open(state.rows[targetIndex])
+        }
+      }
+
+      $('editorPrev').addEventListener('click', () => navigateRecord(-1))
+      $('editorNext').addEventListener('click', () => navigateRecord(1))
+
+      async function open(item) {
+        state.current = item
+        state.currentIndex = state.rows.findIndex(
+          (r) => r.reference === item.reference
+        )
+        updateEditorNav()
+
+        const editable = LAYERS[state.layer].editable
+        const isGold = state.layer === 'gold'
+
+        const stageNames = {
+          bronze: 'Raw input',
+          silver: 'Standardised',
+          gold: 'Published'
+        }
+        const badge = $('editorBadge')
+        if (badge) {
+          badge.textContent =
+            state.layer.toUpperCase() +
+            ' \u2022 ' +
+            (stageNames[state.layer] || state.layer)
+          badge.className = 'layer-badge layer-' + state.layer
+        }
+
+        $('editorTitle').textContent = item.reference
+        $('editorSub').textContent = editable
+          ? item.council +
+            (item.edited
+              ? ' \u00b7 edited here'
+              : ' \u00b7 as the council sent it')
+          : item.council + ' \u00b7 ' + state.layer + ', read only'
+
+        editor.classList.toggle('wide', isGold)
+        $('diffViewContainer').hidden = !isGold
+        $('singleViewContainer').hidden = isGold
+
+        if (isGold) {
+          cmMerge.editor().setValue(JSON.stringify(item.record, null, 2))
+          if (cmMerge.leftOriginal()) {
+            cmMerge.leftOriginal().setValue('Loading Silver record\u2026')
+          }
+          api(
+            '/admin/data/' +
+              encodeURIComponent(item.council) +
+              '/silver?q=' +
+              encodeURIComponent(item.reference)
+          )
+            .then((res) => {
+              const matched =
+                res?.rows?.find((r) => r.reference === item.reference) ||
+                res?.rows?.[0]
+              if (cmMerge.leftOriginal()) {
+                cmMerge.leftOriginal().setValue(
+                  matched?.record
+                    ? JSON.stringify(matched.record, null, 2)
+                    : 'Not found in Silver.'
+                )
+                cmMerge.editor().refresh()
+                cmMerge.leftOriginal().refresh()
+              }
+            })
+            .catch(() => {
+              if (cmMerge.leftOriginal()) {
+                cmMerge.leftOriginal().setValue('Could not load Silver record.')
+              }
+            })
+        } else {
+          cmSingle.setValue(JSON.stringify(item.record, null, 2))
+          cmSingle.setOption('readOnly', !editable ? 'nocursor' : false)
+        }
+
+        $('save').hidden = !editable
+        $('remove').hidden = !editable
+        $('formatJson').hidden = !editable
+        $('cancel').textContent = editable ? 'Cancel' : 'Close'
+        $('checks').hidden = state.layer === 'bronze'
+        $('verdict').hidden = true
+
+        $('history').textContent = ''
+        if (editable) {
+          try {
+            const entries = await api(
+              '/admin/data/' +
+                item.council +
+                '/' +
+                encodeURIComponent(item.reference) +
+                '/history'
+            )
+            $('history').textContent = entries.length
+              ? 'Changes: ' +
+                entries
+                  .map((h) => h.action + ' by ' + h.by + ' at ' + when(h.at))
+                  .join('; ')
+              : 'No changes yet.'
+          } catch {
+            $('history').textContent = ''
+          }
+        }
+        editor.showModal()
+        setTimeout(() => {
+          if (isGold) {
+            cmMerge.editor().refresh()
+            if (cmMerge.leftOriginal()) cmMerge.leftOriginal().refresh()
+          } else {
+            cmSingle.refresh()
+          }
+        }, 1)
+      }
+
+      // ---- formatting and schema error linking
+
+      $('formatJson').addEventListener('click', () => {
+        try {
+          const ed = getActiveEditor()
+          const parsed = JSON.parse(ed.getValue())
+          ed.setValue(JSON.stringify(parsed, null, 2))
+          $('verdict').hidden = true
+          say('JSON formatted.')
+        } catch (err) {
+          show({
+            ok: false,
+            title: 'Cannot format: Invalid JSON syntax (' + err.message + ').',
+            errors: []
+          })
+        }
+      })
+
+      function extractPropertyFromError(errText) {
+        const m1 = errText.match(/property ['"]?([a-zA-Z0-9_]+)['"]?/i)
+        if (m1) return m1[1]
+        const m2 = errText.match(/(?:\/|\.)([a-zA-Z0-9_]+)/)
+        if (m2) return m2[1]
+        return null
+      }
+
+      function highlightPropertyInTextarea(prop) {
+        const ed = getActiveEditor()
+        const text = ed.getValue()
+        const regex = new RegExp('"' + prop + '"\\s*:', 'i')
+        const match = text.match(regex)
+        if (match && match.index !== undefined) {
+          const fromPos = ed.posFromIndex(match.index + 1)
+          const toPos = ed.posFromIndex(match.index + 1 + prop.length)
+          ed.focus()
+          ed.setSelection(fromPos, toPos)
+          ed.scrollIntoView({ from: fromPos, to: toPos }, 50)
+        } else {
+          const idx = text.indexOf('"' + prop + '"')
+          if (idx !== -1) {
+            const fromPos = ed.posFromIndex(idx + 1)
+            const toPos = ed.posFromIndex(idx + 1 + prop.length)
+            ed.focus()
+            ed.setSelection(fromPos, toPos)
+            ed.scrollIntoView({ from: fromPos, to: toPos }, 50)
+          }
+        }
+      }
+
+      async function validateRecord(kind) {
+        let record
+        try {
+          record = JSON.parse(getActiveEditor().getValue())
+        } catch {
+          show({ ok: false, title: 'That is not valid JSON.', errors: [] })
+          return
+        }
+        show({ ok: null, title: 'Checking…', errors: [] })
+        try {
+          const result = await api('/admin/data/validate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ schema: kind, record })
+          })
+          show({
+            ok: result.valid,
+            title: result.valid
+              ? 'Valid against the ' + kind + ' schema (' + result.schema + ').'
+              : result.errors.length +
+                ' problem' +
+                (result.errors.length === 1 ? '' : 's') +
+                ' against the ' +
+                kind +
+                ' schema (' +
+                result.schema +
+                ').',
+            errors: result.errors,
+            known: result.knownGaps
+              ? result.knownGaps +
+                ' known gaps in the original submission, which a historic record cannot have:\n' +
+                (result.knownGapExamples || []).join('\n')
+              : ''
+          })
+        } catch (error) {
+          show({ ok: false, title: error.message, errors: [] })
+        }
+      }
+
+      function show({ ok, title, errors, known }) {
+        const box = $('verdict')
+        box.className =
+          'verdict' + (ok === true ? ' ok' : ok === false ? ' bad' : '')
+        box.innerHTML =
+          '<strong>' +
+          escapeHtml(title) +
+          '</strong>' +
+          (errors.length
+            ? '<ul>' +
+              errors
+                .map((e) => {
+                  const prop = extractPropertyFromError(e)
+                  return (
+                    '<li><span>' +
+                    escapeHtml(e) +
+                    '</span>' +
+                    (prop
+                      ? ' <button type="button" class="error-link" data-prop="' +
+                        escapeHtml(prop) +
+                        '">Locate "' +
+                        escapeHtml(prop) +
+                        '"</button>'
+                      : '') +
+                    '</li>'
+                  )
+                })
+                .join('') +
+              '</ul>'
+            : '') +
+          (known
+            ? '<details><summary>Known gaps</summary><pre>' +
+              escapeHtml(known) +
+              '</pre></details>'
+            : '')
+        box.hidden = false
+      }
+
+      $('verdict').addEventListener('click', (event) => {
+        const btn = event.target.closest('.error-link')
+        if (btn && btn.dataset.prop) {
+          highlightPropertyInTextarea(btn.dataset.prop)
+        }
+      })
+
+      $('checkPrivate').addEventListener('click', () =>
+        validateRecord('private')
+      )
+      $('checkPublic').addEventListener('click', () => validateRecord('public'))
+
+      $('editorForm').addEventListener('submit', async (event) => {
+        const action = event.submitter?.value
+        const item = state.current
+        if (!item || action === 'cancel') return
+
+        const name = editorName()
+        if (!name) {
+          say('A name is needed before a change can be saved.', true)
+          event.preventDefault()
+          return
+        }
+        const path =
+          '/admin/data/' +
+          item.council +
+          '/' +
+          encodeURIComponent(item.reference)
+
+        try {
+          if (action === 'delete') {
+            if (
+              !confirm(
+                'Unpublish ' +
+                  item.reference +
+                  '? It stays in silver and bronze.'
+              )
+            ) {
+              event.preventDefault()
+              return
+            }
+            await api(path, {
+              method: 'DELETE',
+              headers: { 'X-Edited-By': name }
+            })
+            say(item.reference + ' unpublished.')
+          } else {
+            let record
+            try {
+              record = JSON.parse(getActiveEditor().getValue())
+            } catch {
+              say('That is not valid JSON, so nothing was saved.', true)
+              event.preventDefault()
+              return
+            }
+            await api(path, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Edited-By': name
+              },
+              body: JSON.stringify(record)
+            })
+            say(item.reference + ' saved.')
+          }
+        } catch (error) {
+          say(error.message, true)
+        }
+        load()
+        loadCounts()
+        loadProgress()
+      })
+
+      // ---- keyboard shortcuts for modal row navigation & save
+
+      window.addEventListener('keydown', (event) => {
+        if (!editor.open) return
+
+        if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+          if (LAYERS[state.layer].editable && !$('save').hidden) {
+            event.preventDefault()
+            $('save').click()
+            return
+          }
+        }
+
+        const isInput =
+          event.target.tagName === 'TEXTAREA' ||
+          event.target.tagName === 'INPUT' ||
+          Boolean(event.target.closest('.CodeMirror'))
+
+        if (isInput) {
+          if (
+            event.altKey &&
+            (event.key === '[' || event.key === 'ArrowLeft')
+          ) {
+            event.preventDefault()
+            navigateRecord(-1)
+          } else if (
+            event.altKey &&
+            (event.key === ']' || event.key === 'ArrowRight')
+          ) {
+            event.preventDefault()
+            navigateRecord(1)
+          }
+        } else {
+          if (event.key === '[' || event.key === 'ArrowLeft') {
+            event.preventDefault()
+            navigateRecord(-1)
+          } else if (event.key === ']' || event.key === 'ArrowRight') {
+            event.preventDefault()
+            navigateRecord(1)
+          }
+        }
+      })
+
+      // ---- how much of a council's data got from bronze into silver
+
+      let progressFields = []
+      let progressOpen = null
+
+      async function loadProgress() {
+        const box = $('progress')
+        const detail = $('progressDetail')
+        if (!council()) {
+          box.hidden = true
+          detail.hidden = true
+          return
+        }
+        let data
+        try {
+          data = await api(
+            '/admin/data/mapping-progress?council=' +
+              encodeURIComponent(council())
+          )
+        } catch {
+          box.hidden = true
+          detail.hidden = true
+          return
+        }
+        if (!data.records) {
+          box.hidden = true
+          detail.hidden = true
+          return
+        }
+
+        progressFields = data.fields.sort((a, b) => b.records - a.records)
+        const settleable = progressFields.filter((f) => f.settleable)
+        const worst = settleable.reduce(
+          (most, f) => (f.records > most ? f.records : most),
+          0
+        )
+        const summary =
+          '<div class="progress-summary"><strong>' +
+          data.records +
+          '</strong> records in silver' +
+          (data.excluded
+            ? ', <strong>' + data.excluded + '</strong> left out'
+            : '') +
+          '<br>' +
+          (worst
+            ? 'biggest open issue affects <strong>' + worst + '</strong>'
+            : 'nothing needs settling') +
+          '<br><span class="legend settleable">green</span> fixed by mapping words &middot; <span class="legend missing">grey</span> not in the export</div>'
+
+        $('progressGrid').innerHTML =
+          summary +
+          progressFields
+            .map((f, i) => {
+              const share = Math.round((f.through / f.total) * 100)
+              const hint = f.settleable
+                ? 'Mismatch: the council uses a word nobody has mapped yet. Reading records settles it.'
+                : 'Missing: the export never held the value, so no amount of reading produces one.'
+              return (
+                '<button type="button" class="progress-cell ' +
+                (f.settleable ? 'settleable' : 'missing') +
+                '" data-index="' +
+                i +
+                '" title="' +
+                hint +
+                '" aria-expanded="false"><span class="progress-name">' +
+                escapeHtml(f.field) +
+                '</span><span class="progress-count">' +
+                f.through +
+                ' / ' +
+                f.total +
+                '</span><span class="bar"><span style="width:' +
+                share +
+                '%"></span></span></button>'
+              )
+            })
+            .join('')
+        box.hidden = false
+        if (progressOpen !== null) showProgressDetail(progressOpen)
+      }
+
+      function showProgressDetail(index) {
+        const detail = $('progressDetail')
+        const f = progressFields[index]
+        for (const cell of document.querySelectorAll('.progress-cell')) {
+          cell.setAttribute(
+            'aria-expanded',
+            String(Number(cell.dataset.index) === index)
+          )
+        }
+        if (!f) {
+          progressOpen = null
+          detail.hidden = true
+          return
+        }
+        progressOpen = index
+        const lost = f.total - f.through
+        const worstValues = f.worst
+          .map(
+            (w) =>
+              '<li>' +
+              escapeHtml(w.value) +
+              ' <strong>' +
+              w.records +
+              '</strong></li>'
+          )
+          .join('')
+        const listNote =
+          state.layer === 'bronze'
+            ? 'Bronze has no mapping, so the list below is not filtered.'
+            : 'The list below shows only these ' + lost + ' records.'
+        detail.innerHTML =
+          (f.settleable
+            ? '<strong>' +
+              escapeHtml(f.field) +
+              '</strong>: ' +
+              lost +
+              ' of ' +
+              f.total +
+              ' records use a word nobody has mapped yet. What it costs, by word:<ul class="worst">' +
+              worstValues +
+              '</ul><a href="/admin/mappers">Map the words</a> &middot; '
+            : '<strong>' +
+              escapeHtml(f.field) +
+              '</strong>: ' +
+              lost +
+              ' of ' +
+              f.total +
+              ' records never had this value in the export. Reading records does not produce it; the council would have to add it at source. ') +
+          '<span class="desc">' +
+          listNote +
+          '</span> <button type="button" class="secondary small" id="progressClear">Show all records</button>'
+        detail.hidden = false
+      }
+
+      function pickProgress(index) {
+        const field =
+          index === null ? null : progressFields[index]?.field || null
+        if (field === state.issue && index === progressOpen) return
+        state.issue = field
+        state.page = 1
+        showProgressDetail(index)
+        updateActiveFilterBanner()
+        load()
+      }
+
+      $('progressGrid').addEventListener('click', (event) => {
+        const cell = event.target.closest('.progress-cell')
+        if (!cell) return
+        const index = Number(cell.dataset.index)
+        pickProgress(progressOpen === index ? null : index)
+      })
+
+      $('progressDetail').addEventListener('click', (event) => {
+        if (event.target.closest('#progressClear')) pickProgress(null)
+      })
+      $('clearActiveFilter').addEventListener('click', () => pickProgress(null))
+
+      async function loadCounts() {
+        if (!council()) return
+        let counts
+        try {
+          counts = await api(
+            '/admin/data/summary?council=' + encodeURIComponent(council())
+          )
+        } catch {
+          return
+        }
+        for (const button of document.querySelectorAll('.layers button')) {
+          button.querySelector('small').textContent =
+            counts[button.dataset.layer]
+        }
+        $('unmappedCount').textContent = counts.unmapped ?? 0
+        $('unpublishedCount').textContent = counts.unpublished ?? 0
+        $('counts').innerHTML =
+          '<strong>' +
+          counts.approved +
+          '</strong> approved, <strong>' +
+          counts.clean +
+          '</strong> clean and waiting, <strong>' +
+          counts.flagged +
+          '</strong> need a look'
+        $('approveClean').disabled = counts.clean === 0
+        $('layerCounts').textContent =
+          state.layer === 'bronze'
+            ? counts.unmapped +
+              ' of ' +
+              counts.bronze +
+              ' bronze records are not in silver yet.'
+            : counts.unpublished +
+              ' of ' +
+              counts.silver +
+              ' silver records are not in gold yet.'
+      }
+
+      const picked = () =>
+        [...document.querySelectorAll('.pick-one:checked')].map(
+          (box) => box.dataset.reference
+        )
+
+      async function send(body) {
+        const name = editorName()
+        if (!name) {
+          say('A name is needed before anything can be approved.', true)
+          return null
+        }
+        try {
+          const result = await api('/admin/data/approve', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Edited-By': name
+            },
+            body: JSON.stringify({ council: council(), ...body })
+          })
+          return result.changed
+        } catch (error) {
+          say(error.message, true)
+          return null
+        }
+      }
+
+      $('approveSelected').addEventListener('click', async () => {
+        const references = picked()
+        if (!references.length) {
+          say('Nothing selected.', true)
+          return
+        }
+        const changed = await send({ references })
+        if (changed !== null) {
+          say(changed + ' approved.')
+          load()
+          loadCounts()
+          loadProgress()
+        }
+      })
+
+      $('unapproveSelected').addEventListener('click', async () => {
+        const references = picked()
+        if (!references.length) {
+          say('Nothing selected.', true)
+          return
+        }
+        if (
+          !confirm(
+            'Take ' + references.length + ' records back out of public view?'
+          )
+        )
+          return
+        const changed = await send({ references, undo: true })
+        if (changed !== null) {
+          say(changed + ' taken back out of public view.')
+          load()
+          loadCounts()
+          loadProgress()
+        }
+      })
+
+      $('approveClean').addEventListener('click', async () => {
+        const counts = await api(
+          '/admin/data/summary?council=' + encodeURIComponent(council())
+        )
+        if (
+          !confirm(
+            'Approve ' +
+              counts.clean +
+              ' records for ' +
+              council() +
+              '?\n\nThese have nothing flagged against them. ' +
+              counts.flagged +
+              ' others need a look and are left alone.'
+          )
+        )
+          return
+        const changed = await send({ all_clean: true })
+        if (changed !== null) {
+          say(changed + ' approved for ' + council() + '.')
+          load()
+          loadCounts()
+          loadProgress()
+        }
+      })
+
+      // ---- wiring
+
+      $('prev').addEventListener('click', () => {
+        state.page--
+        load()
+      })
+      $('next').addEventListener('click', () => {
+        state.page++
+        load()
+      })
+      for (const id of ['sort', 'order', 'state', 'council']) {
+        $(id).addEventListener('change', () => {
+          state.page = 1
+          load()
+          if (id === 'council') {
+            state.issue = null
+            progressOpen = null
+            $('progressDetail').hidden = true
+            updateActiveFilterBanner()
+            loadCounts()
+            loadProgress()
+          }
+        })
+      }
+      let searchTimer
+      $('search').addEventListener('input', () => {
+        clearTimeout(searchTimer)
+        searchTimer = setTimeout(() => {
+          state.page = 1
+          load()
+        }, 250)
+      })
+      ;(async function start() {
+        let names = []
+        try {
+          names = await api('/admin/data/councils')
+        } catch (error) {
+          say(error.message, true)
+        }
+        const select = $('council')
+        for (const name of names) {
+          const option = document.createElement('option')
+          option.value = option.textContent = name
+          select.appendChild(option)
+        }
+        if (params.get('council') && names.includes(params.get('council')))
+          select.value = params.get('council')
+        if (!names.length) {
+          $('empty').hidden = false
+          $('empty').textContent = 'Nothing here yet. Run the pipeline first.'
+          return
+        }
+        setLayer(state.layer)
+        loadCounts()
+        loadProgress()
+      })()
+    </script>
+  </body>
+</html>
