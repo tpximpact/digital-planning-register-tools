@@ -379,23 +379,28 @@ textarea {
 /* How much of a council's data got from bronze into silver. Lives in the header, between
    the title and the layer switch, as a small grid: a summary cell and one cell per field. */
 .progress {
-  flex: 1 1 520px;
-  max-width: 900px;
-  align-self: center;
-  font-size: 12px;
-  line-height: 1.3;
+  display: block;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px 16px 16px;
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 .progress-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 6px 14px;
+  /* Auto-fill the grid cleanly to prevent horizontal overflow */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px 20px;
+  margin-top: 12px;
 }
 
 .progress-summary {
-  grid-row: span 2;
-  align-self: center;
+  /* Let the summary span the full width at the top to stop grid collisions */
+  grid-column: 1 / -1;
   color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
 }
 
 .progress-cell {
@@ -463,10 +468,13 @@ textarea {
 
 /* What one cell costs, opened under the header. */
 .progress-detail {
-  padding: 10px 16px;
+  padding: 16px;
   font-size: 14px;
-  border-bottom: 1px solid var(--line);
   background: var(--panel);
+  max-width: 1100px;
+  margin: 0 auto 16px auto; /* Centered, with margin below to space it from <main> */
+  border: 1px solid var(--line);
+  border-top: 0;
 }
 
 .worst {
@@ -483,4 +491,31 @@ textarea {
   .worst {
     columns: 1;
   }
+}
+/* Additions for the header layout and details progress box */
+.header-row {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: end;
+  justify-content: space-between;
+}
+
+details.progress {
+  padding: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+details.progress summary {
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--ink);
+  padding-top: 16px;
+}
+
+details.progress .progress-grid {
+  margin-top: 12px;
 }

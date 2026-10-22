@@ -8,33 +8,39 @@
   </head>
   <body>
     <header>
-      <div>
+      <div class="header-row">
+        <div>
+          <h1>Applications</h1>
+          <div class="sub">
+            <a href="/admin/mappers">Value mappers</a> &middot;
+            <a href="/lab/">Review lab</a> &middot; <a href="/docs">API docs</a>
+          </div>
+        </div>
+        <div class="sub" id="blurb"></div>
+      </div>
+      <div class="header-row">
         <label class="council-pick"
           >Council
           <select id="council" aria-label="Council"></select
         ></label>
-        <h1>Applications</h1>
-        <div class="sub" id="blurb"></div>
-        <div class="sub">
-          <a href="/admin/mappers">Value mappers</a> &middot;
-          <a href="/lab/">Review lab</a> &middot; <a href="/docs">API docs</a>
+        <div class="layers" role="group" aria-label="Layer">
+          <button type="button" data-layer="bronze" aria-pressed="false">
+            Bronze <small></small>
+          </button>
+          <button type="button" data-layer="silver" aria-pressed="false">
+            Silver <small></small>
+          </button>
+          <button type="button" data-layer="gold" aria-pressed="true">
+            Gold <small></small>
+          </button>
         </div>
       </div>
-      <div class="progress" id="progress" hidden aria-label="How much of this council's data got through">
-        <div class="progress-grid" id="progressGrid"></div>
-      </div>
-      <div class="layers" role="group" aria-label="Layer">
-        <button type="button" data-layer="bronze" aria-pressed="false">
-          Bronze <small></small>
-        </button>
-        <button type="button" data-layer="silver" aria-pressed="false">
-          Silver <small></small>
-        </button>
-        <button type="button" data-layer="gold" aria-pressed="true">
-          Gold <small></small>
-        </button>
-      </div>
     </header>
+
+    <details class="progress" id="progress" hidden aria-label="How much of this council's data got through">
+      <summary>Mapping progress</summary>
+      <div class="progress-grid" id="progressGrid"></div>
+    </details>
 
     <div class="progress-detail" id="progressDetail" hidden></div>
 
