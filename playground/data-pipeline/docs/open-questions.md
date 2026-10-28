@@ -18,3 +18,8 @@ ask. Most came out of Dave's database schema work on 7 October 2026.
   them but not which are in use.
 - 23 of the 52 national public view fields have no source in the register format. Who would
   supply them?
+
+## Changes over time
+
+- How should a record the council deletes or withdraws be handled: marked as gone, or kept as
+  dated snapshots and compared? Raised by Dave on 6 October; no decision yet.
