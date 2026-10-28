@@ -107,6 +107,65 @@ def _validator(path: str):
     return Draft202012Validator(load_schema(path))
 
 
+# The schema is "any of 95 alternatives", one per application type, and each alternative's
+# submission is itself any of 95 forms. Left alone, jsonschema tries all 95 x 95 for every record
+# and collects every failure, about a minute a record. Every alternative and every form pins its
+# type with a const, so the record already says which one applies. Picking that alternative and
+# that form gives the same findings, known gaps included, in a few milliseconds. --strict still
+# runs the whole schema.
+
+def _definitions(schema: dict) -> tuple[str, dict]:
+    key = "definitions" if "definitions" in schema else "$defs"
+    return key, schema.get(key, {})
+
+
+def _by_type(alternatives: list, definitions: dict) -> dict[str, str]:
+    """Which alternative in a list belongs to which application type."""
+    found = {}
+    for branch in alternatives:
+        name = branch.get("$ref", "").rsplit("/", 1)[-1]
+        pinned = definitions.get(name, {}).get("properties", {}).get("applicationType", {})
+        if "const" in pinned:
+            found[pinned["const"]] = name
+    return found
+
+
+def _types(schema: dict) -> dict[str, str]:
+    return _by_type(schema.get("anyOf", []), _definitions(schema)[1])
+
+
+def _narrowed(schema: dict, application_type) -> dict | None:
+    """The one alternative for this application type, its submission held to the matching form."""
+    name = _types(schema).get(application_type)
+    if name is None:
+        return None
+    key, definitions = _definitions(schema)
+    branch = dict(definitions[name])
+    properties = dict(branch.get("properties", {}))
+    submission = properties.get("submission", {})
+    forms = definitions.get(submission.get("$ref", "").rsplit("/", 1)[-1], {}).get("anyOf")
+    if forms:
+        form = _by_type(forms, definitions).get(application_type)
+        # A type with no form of its own keeps the full list; only that record pays for it.
+        if form:
+            properties["submission"] = {"$ref": f"#/{key}/{form}"}
+    branch["properties"] = properties
+    return {"$schema": schema.get("$schema"), key: definitions, **branch}
+
+
+def _unknown_type(application_type, schema: dict) -> str:
+    return (f"applicationType: {application_type!r} is not one of the "
+            f"{len(_types(schema))} types in the schema")
+
+
+@lru_cache(maxsize=256)
+def _type_validator(path: str, application_type):
+    from jsonschema import Draft202012Validator
+
+    narrowed = _narrowed(load_schema(path), application_type)
+    return Draft202012Validator(narrowed) if narrowed else None
+
+
 def check_record(record, kind: str = "public", given: str | None = None) -> dict:
     """Validate one record against the private or public schema.
 
@@ -119,7 +178,13 @@ def check_record(record, kind: str = "public", given: str | None = None) -> dict
         raise NoSchema("no schema file found, set DPR_SCHEMAS")
     errors: list[str] = []
     known: list[str] = []
-    for error in _validator(str(path)).iter_errors(record):
+    application_type = record.get("applicationType") if isinstance(record, dict) else None
+    validator = _type_validator(str(path), application_type)
+    if validator is None:
+        return {"valid": False, "schema": path.name,
+                "errors": [_unknown_type(application_type, load_schema(path))],
+                "knownGaps": 0, "knownGapExamples": []}
+    for error in validator.iter_errors(record):
         for real in _deepest(error):
             where = "/".join(str(part) for part in real.absolute_path) or "(root)"
             line = f"{where}: {_shorten(real.message)}"
@@ -142,16 +207,28 @@ def against_schema(connection, schema: dict, council: str | None = None,
     """
     from jsonschema import Draft202012Validator
 
-    validator = Draft202012Validator(schema)
     where = "WHERE council = ?" if council else ""
     params = [council] if council else []
     rows = connection.execute(
         f"SELECT reference, record FROM silver.applications {where}", params
     ).fetchall()
 
+    whole = Draft202012Validator(schema) if strict else None
+    per_type: dict = {}
     problems: list[tuple[str, str]] = []
     for reference, raw in rows:
         record = json.loads(raw) if isinstance(raw, str) else raw
+        if strict:
+            validator = whole
+        else:
+            application_type = record.get("applicationType")
+            if application_type not in per_type:
+                narrowed = _narrowed(schema, application_type)
+                per_type[application_type] = Draft202012Validator(narrowed) if narrowed else None
+            validator = per_type[application_type]
+            if validator is None:
+                problems.append((reference, _unknown_type(application_type, schema)))
+                continue
         for error in validator.iter_errors(record):
             for real in _deepest(error):
                 if not strict and (any(gap in real.message for gap in LEGACY_GAPS)
