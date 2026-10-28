@@ -49,11 +49,11 @@ we could map and 74 did not. The biggest groups were tree works notifications, l
 consent and householder applications. That is a question for the standard, not something a mapper
 should paper over.
 
-## Camden's point is kept as a point
+## Camden's point becomes a small square, flagged as a gap
 
-Camden publishes a coordinate, not a site boundary. The earlier converter drew a small circle
-around the point and passed it off as a boundary. On a map that reads as a real site outline, so
-here the point stays a point and the missing boundary is recorded as a gap.
+Camden publishes a coordinate, not a site boundary. At first the point was kept as a point. Since
+17 October the mapper draws a 10m square around it so the record works with the DPR, and records
+"source has a point only" as a gap, so the square is not taken for the real site outline.
 
 ## Nothing is public until somebody approves it
 
@@ -87,6 +87,13 @@ with.
 It is the whole record or nothing. In practice what can be published varies by field and by
 council: one council publishes a comment without the author's name, another publishes both. So
 field level approval, with settings per council, is the next piece of work rather than a detail.
+
+## Editing in gold is meant for redaction
+
+The admin can change any field in a gold record. At the demo on 20 October the view was that this
+is not how it should be used: editing is for redaction, a real interface would only open the
+fields the mapper cannot fill, and wrong data should be fixed in the council's own system. This
+has not been logged as a decision, and the code does not limit it yet.
 
 ## Camden first
 
