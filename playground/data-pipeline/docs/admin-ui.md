@@ -64,7 +64,7 @@ first thing to argue about.
 | Approve | All clean at once, or a ticked selection |
 | Unapprove | Take records back out of public view |
 | Open | One record, as JSON |
-| Edit | Change anything and save |
+| Edit | Change anything and save. Meant for redaction, see decisions.md |
 | Unpublish | Remove it entirely, leaving silver and bronze untouched |
 | History | Who changed, approved or unapproved what, and when |
 | Marking | Approved, waiting, needs a look, and edited are each tagged |
